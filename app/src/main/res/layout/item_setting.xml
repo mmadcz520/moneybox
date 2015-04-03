@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="48dp"
+    android:orientation="horizontal"
+    android:background="@drawable/item_setting_selector">
+
+    <TextView
+        android:paddingLeft="24dp"
+        android:layout_centerVertical="true"
+        android:id="@+id/homepage_lv_text"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@color/ct_text_gray"/>
+
+    <ImageView
+        android:id = "@+id/homepage_lv_img"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/common_icon_arrow"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:contentDescription="设置"/>
+
+</RelativeLayout>

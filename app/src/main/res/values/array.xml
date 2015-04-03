@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="menu_pages">
+        <item>Photo Album</item>
+        <item>Share</item>
+        <item>Take Photo</item>
+        <item>Record</item>
+        <item>Play Video</item>
+        <item>Location</item>
+        <item>Calendar</item>
+    </string-array>
+    
+    <string-array name="menu_setting">
+        <item>Login</item>
+        <item>Push Setting</item>
+        <item>Feedback</item>
+    </string-array>
+    
+   	<string-array name="item_setting1">
+        <item>在线客服</item>
+        <item>致电客服</item>
+        <item>帮助中心</item>
+    </string-array>
+
+    <string-array name="item_setting2">
+        <item>关于长投</item>
+        <item>设置</item>
+    </string-array>
+
+</resources>

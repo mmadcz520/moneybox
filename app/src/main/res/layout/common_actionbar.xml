@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="44.0dp"
+    android:id="@+id/actionbarLayoutId"
+    android:background="@color/ct_white">
+    
+
+	<TextView
+	   android:id="@+id/titile"
+	   android:layout_centerInParent="true"
+	   android:text="CT_DEMO"
+	   android:gravity="center"
+       android:layout_gravity="center_vertical"
+       android:layout_width="150dp"
+       android:layout_height="40dp"
+       android:textSize="20sp"
+        />
+    <View
+        android:layout_below="@+id/titile"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@drawable/divider_line" />
+</RelativeLayout>

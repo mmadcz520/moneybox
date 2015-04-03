@@ -1,0 +1,19 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <com.changtou.moneybox.module.widget.ExProWidget
+        android:id="@+id/pro_list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="2"
+        android:verticalSpacing="1.0dp"
+        android:horizontalSpacing="1.0dp"
+        android:columnWidth="90dp"
+        android:stretchMode="columnWidth"
+        android:gravity="center"
+        />
+
+</LinearLayout>

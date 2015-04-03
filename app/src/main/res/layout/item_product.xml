@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android_custom="http://schemas.android.com/apk/res/com.changtou"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="100dp"
+    android:minHeight="120dp"
+    android:background="@drawable/list_product"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="4dp"
+            android:id="@+id/txt_bottomd"
+            android:layout_width="fill_parent"
+            android:layout_height="20dp"
+            android:text="[长投宝] - 信手易"/>
+
+     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:textColor="@color/ct_mainpage_txt_red"
+            android:textSize="30sp"
+            android:text="9.88"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/ct_mainpage_txt_red"
+            android:textSize="12sp"
+            android:text="%"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="80dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="3个月    等额本息"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="8万元"/>
+        </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:orientation="horizontal">
+
+        <com.changtou.moneybox.module.widget.RoundProgressBar
+            android:id="@+id/roundProgressBar"
+            android:layout_marginLeft="20dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignLeft="@+id/roundProgressBar"
+            android:layout_marginBottom="78dp"
+            android_custom:roundColor="@color/ct_item_gray"
+            android_custom:roundProgressColor="@color/ct_mainpage_txt_red"
+            android_custom:textColor="#9A32CD"
+            android_custom:roundWidth="3dp"
+            android_custom:textSize="18sp"
+            />
+    </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
