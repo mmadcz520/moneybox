@@ -2,6 +2,7 @@ package com.changtou.moneybox.module.page;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +34,8 @@ public class HomeFragment extends BaseFragment{
     private ExLoadingDialog mExLoading = null;
 
     private ExScrollView mExScrollView = null;
+
+    private SwipeRefreshLayout mSwipeRefreshLayout = null;
 
     /**
      * 初始化信息列表
