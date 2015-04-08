@@ -39,6 +39,8 @@ public class HomeFragment extends BaseFragment{
 
     /**
      * 初始化信息列表
+     *
+     * 版本一 12133
      */
     public void onInitList(){
         initParam();
