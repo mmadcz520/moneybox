@@ -12,6 +12,9 @@ import java.io.IOException;
  *
  * @author zhoulongfei
  * @since 2015-3-13
+ *
+ * //版本分支  developer zhou
+ *
  */
 public class CTMoneyApplication extends BaseApplication {
 
@@ -53,9 +56,19 @@ public class CTMoneyApplication extends BaseApplication {
         return HttpRequst.getInstance();
     }
 
+
     private void tes22()
     {
         //12313
     }
+
+
+    private void test(){
+        
+    }
+
+    private void test2222()
+    {}
+
 
 }
