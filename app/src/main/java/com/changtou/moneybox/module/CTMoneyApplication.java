@@ -52,4 +52,9 @@ public class CTMoneyApplication extends BaseApplication {
     protected BaseHttpRequest initBaseHttpRequest() {
         return HttpRequst.getInstance();
     }
+
+    private void test2()
+    {
+
+    }
 }
