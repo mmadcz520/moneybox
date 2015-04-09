@@ -58,8 +58,4 @@ public class CTMoneyApplication extends BaseApplication {
         //12313
     }
 
-    private void test33()
-    {
-
-    }
 }
