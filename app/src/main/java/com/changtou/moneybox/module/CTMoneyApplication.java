@@ -53,7 +53,7 @@ public class CTMoneyApplication extends BaseApplication {
         return HttpRequst.getInstance();
     }
 
-    private void test2()
+    private void tes22()
     {
 
     }
