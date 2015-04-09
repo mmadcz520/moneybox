@@ -25,6 +25,9 @@ import java.util.HashMap;
  */
 public class ProductFragment extends BaseFragment{
 
+    ///111111111111111111111111111111111
+    //12121212212
+
     private Context mContext = null;
     private ListView xList = null;
     private DemoAdapter adapter = null;

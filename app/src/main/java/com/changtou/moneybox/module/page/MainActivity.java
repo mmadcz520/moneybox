@@ -20,6 +20,7 @@ import java.util.List;
 public class MainActivity extends CTBaseActivity {
 
     //手势密码控件
+    //123
     private LocusPassWordView mPwdView = null;
 
     private ExViewPager mViewpager = null;
