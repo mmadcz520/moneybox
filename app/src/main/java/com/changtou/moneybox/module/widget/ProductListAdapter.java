@@ -13,7 +13,7 @@ import com.changtou.R;
 import com.changtou.moneybox.module.entity.ProductEntity;
 
 /**
- * ÃèÊö: ²úÆ·ÁĞ±íÊÊÅäÆ÷Àà
+ * æè¿°: äº§å“åˆ—è¡¨é€‚é…å™¨ç±»
  *
  * @author zhoulongfei
  * @since 2015-04-10
@@ -40,9 +40,9 @@ public class ProductListAdapter extends BaseAdapter
     }
 
     /**
-     *ÃèÊö: »ñÈ¡²úÆ·ÁĞ±í³¤¶È
+     *æè¿°: è·å–äº§å“åˆ—è¡¨é•¿åº¦
      *
-     * @return ²úÆ·ÁĞ±í³¤¶È
+     * @return äº§å“åˆ—è¡¨é•¿åº¦
      */
     public int getCount()
     {
@@ -54,10 +54,10 @@ public class ProductListAdapter extends BaseAdapter
     }
 
     /**
-     * ÃèÊö£º»ñÈ¡ÄÚÈİ
+     * æè¿°ï¼šè·å–å†…å®¹
      *
-     * @param position listÁĞ±íÎ»ÖÃ
-     * @return ²úÆ·ÊµÌå¶ÔÏó
+     * @param position liståˆ—è¡¨ä½ç½®
+     * @return äº§å“å®ä½“å¯¹è±¡
      * @see BaseAdapter#getItem(int)
      */
     public ProductEntity.ProListEntity getItem(int position)

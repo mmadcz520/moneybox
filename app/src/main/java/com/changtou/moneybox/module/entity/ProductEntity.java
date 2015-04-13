@@ -44,6 +44,8 @@ public class ProductEntity extends BaseEntity {
         public void paser(JSONObject json) throws Exception {
             id = json.optString("reply_count");
             name = json.optString("post_status");
+
+            Log.e("paser","ddddddddddddddddd" + id);
         }
     }
 }

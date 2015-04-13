@@ -1,7 +1,9 @@
 package com.changtou.moneybox.module.page;
 
+import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -122,9 +124,8 @@ public class CTBaseActivity extends BaseActivity{
 
     /**
      * 自定义Action Bar
-     * @param layoutId 布局Id
-     *
      * */
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public void initActionBarLayout()
     {
         ActionBar actionBar = this.getActionBar();
