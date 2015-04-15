@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:android_custom="http://schemas.android.com/apk/res/com.changtou.moneybox"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="100dp"
-    android:minHeight="120dp"
-    android:background="@drawable/list_product"
+    android:minHeight="110dp"
+    android:background="@color/ct_white"
     android:orientation="vertical">
 
     <LinearLayout

@@ -13,6 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:background="@drawable/tabwidget_item_left"
             android:gravity="center"/>
     </ScrollView>
 </android.support.v4.widget.SwipeRefreshLayout>

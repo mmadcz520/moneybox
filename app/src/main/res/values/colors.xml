@@ -5,7 +5,6 @@
     <color name="grid_line">#e5e5e5</color>
 
     <color name="ct_white">#ffffff</color>
-    <color name="ct_gold">#d5d10e</color>
     <color name="ct_text_gray">#6a737b</color>
 
     <color name="ct_item_gray">#ADADAD</color>
@@ -16,5 +15,7 @@
     <color name="ct_mainpage_txt_red"> #A52A2A</color>
     
     <color name="login_dialog_transparency">#00000000</color>
+
+    <color name="ct_bule">#5d9cec</color>
 
 </resources>

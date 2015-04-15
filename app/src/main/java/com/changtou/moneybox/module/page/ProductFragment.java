@@ -1,7 +1,8 @@
 package com.changtou.moneybox.module.page;
 
+import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,25 +11,19 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TabWidget;
-import android.widget.TextView;
 
 import com.changtou.R;
 import com.changtou.moneybox.common.activity.BaseFragment;
+import com.changtou.moneybox.module.entity.ProductEntity;
+import com.changtou.moneybox.module.http.HttpRequst;
+import com.changtou.moneybox.module.widget.CornerTabWidget;
 import com.changtou.moneybox.module.widget.DemoAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import com.changtou.moneybox.module.widget.ProductListAdapter;
 
 /**
  * 描述:产品页
@@ -45,105 +40,62 @@ public class ProductFragment extends BaseFragment{
 
     private ViewPager mViewPager;
     private PagerAdapter mPagerAdapter;
-    private TabWidget mTabWidget;
-    private String[] addresses = { "first", "second", "third" };
-    private Button[] mBtnTabs = new Button[addresses.length];
+    private CornerTabWidget mTabWidget;
 
-    @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View mView = inflater.inflate(R.layout.fragment_product, null);
         mContext = this.getActivity();
 
-        mTabWidget = (TabWidget) mView.findViewById(R.id.tabWidget1);
-        mTabWidget.setStripEnabled(false);
-        mBtnTabs[0] = new Button(mContext);
-        mBtnTabs[0].setFocusable(true);
-        mBtnTabs[0].setText(addresses[0]);
-//        mBtnTabs[0].setTextColor(getResources().getColorStateList(R.color.button_bg_color_selector));
-        mTabWidget.addView(mBtnTabs[0]);
-        /*
-         * Listener必须在mTabWidget.addView()之后再加入，用于覆盖默认的Listener，
-         * mTabWidget.addView()中默认的Listener没有NullPointer检测。
-         */
-        mBtnTabs[0].setOnClickListener(mTabClickListener);
-        mBtnTabs[1] = new Button(mContext);
-        mBtnTabs[1].setFocusable(true);
-        mBtnTabs[1].setText(addresses[1]);
-//        mBtnTabs[1].setTextColor(getResources().getColorStateList(R.color.button_bg_color_selector));
-        mTabWidget.addView(mBtnTabs[1]);
-        mBtnTabs[1].setOnClickListener(mTabClickListener);
-        mBtnTabs[2] = new Button(mContext);
-        mBtnTabs[2].setFocusable(true);
-        mBtnTabs[2].setText(addresses[2]);
-//        mBtnTabs[2].setTextColor(getResources().getColorStateList(R.color.button_bg_color_selector));
-        mTabWidget.addView(mBtnTabs[2]);
-        mBtnTabs[2].setOnClickListener(mTabClickListener);
+        mTabWidget = (CornerTabWidget) mView.findViewById(R.id.tabWidget1);
+        mTabWidget.setTabs(new String[]{"长投宝", "ZAMA宝", "精选债权", "转让专区"});
+        mTabWidget.setTabListener(new CornerTabWidget.TabListener()
+        {
+            public void changePage(int pageId)
+            {
+                mViewPager.setCurrentItem(pageId);
+            }
+        });
 
         mViewPager = (ViewPager) mView.findViewById(R.id.pager);
         mPagerAdapter = new MyPagerAdapter(getChildFragmentManager());
         mViewPager.setAdapter(mPagerAdapter);
-      //  mViewPager.setOnPageChangeListener(mPageChangeListener);
+        mViewPager.setOnPageChangeListener(mPageChangeListener);
 
 //        mTabWidget.setCurrentTab(0);
 
         return mView;
     }
 
-    @Override
     protected void initLisener() {
 
     }
 
-    @Override
     protected void initData(Bundle savedInstanceState) {
         //adapter=new DemoAdapter(mContext);
         //xList.setAdapter(adapter);
         //onInitList();
     }
 
-    @Override
     public void onSuccess(String content, Object object, int reqType) {
 
     }
 
-    @Override
     public void onFailure(Throwable error, String content, int reqType) {
 
     }
 
-    private OnClickListener mTabClickListener = new OnClickListener() {
-        @Override
-        public void onClick(View v)
-        {
-            if (v == mBtnTabs[0])
-            {
-                mViewPager.setCurrentItem(0);
-            } else if (v == mBtnTabs[1])
-            {
-                mViewPager.setCurrentItem(1);
-            } else if (v == mBtnTabs[2])
-            {
-                mViewPager.setCurrentItem(2);
-            }
-        }
-    };
-
     private OnPageChangeListener mPageChangeListener = new OnPageChangeListener() {
 
-        @Override
         public void onPageSelected(int arg0)
         {
-            Log.e("OnPageChangeListener", "in " + arg0);
             mTabWidget.setCurrentTab(arg0);
         }
 
-        @Override
         public void onPageScrolled(int arg0, float arg1, int arg2)
         {
 
         }
 
-        @Override
         public void onPageScrollStateChanged(int arg0)
         {
 
@@ -177,10 +129,14 @@ public class ProductFragment extends BaseFragment{
 
     /**
      * 描述: 产品分类子页面
-     *
+     * @author zhoulongfei
      */
     public static class SubPage extends BaseFragment
     {
+        private ProductListAdapter mAdapter = null;
+        private Context mContext = null;
+        private ListView mList = null;
+
         public static SubPage create(int type)
         {
             SubPage f = new SubPage();
@@ -192,29 +148,59 @@ public class ProductFragment extends BaseFragment{
 
         protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            TextView convertView = new TextView(getActivity());
-            convertView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
-            convertView.setGravity(Gravity.CENTER);
-            convertView.setTextSize(30);
-            convertView.setTextColor(Color.BLACK);
-            Bundle b = getArguments();
-            convertView.setText("Pagedddd " + b.getInt("productType"));
-            return convertView;
+            View mView = inflater.inflate(R.layout.tab_product, null);
+            mList = (ListView) mView.findViewById(R.id.product_list);
+            return mView;
         }
 
         protected void initLisener()
         {
+            final Activity activity = this.getActivity();
 
+            mList.setOnItemClickListener(new AdapterView.OnItemClickListener()
+            {
+                Intent intent = new Intent(activity, ProductDetailsActivity.class);
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+                {
+                    startActivity(intent);
+                }
+            });
+
+
+            mList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+            {
+                Intent intent = new Intent(activity, ProductDetailsActivity.class);
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+                {
+                    startActivity(intent);
+                }
+
+                public void onNothingSelected(AdapterView<?> parent)
+                {
+
+                }
+            });
         }
 
         protected void initData(Bundle savedInstanceState)
         {
+            mContext = this.getActivity();
+            mAdapter = new ProductListAdapter(mContext);
+            mList.setAdapter(mAdapter);
 
+            sendRequest(HttpRequst.REQ_TYPE_PRODUCT_HOME,
+                    HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_PRODUCT_HOME),
+                    mParams,
+                    mAct.getAsyncClient(), false);
         }
 
         public void onSuccess(String content, Object object, int reqType)
         {
-
+            if (reqType == HttpRequst.REQ_TYPE_PRODUCT_HOME)
+            {
+                ProductEntity entity = (ProductEntity) object;
+                mAdapter.setData(entity);
+            }
         }
 
         public void onFailure(Throwable error, String content, int reqType)

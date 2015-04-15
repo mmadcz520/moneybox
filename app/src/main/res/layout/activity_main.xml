@@ -12,7 +12,7 @@
         android:background="@color/ct_pager_bg" />
 
     <LinearLayout
-        android:background="@drawable/bg_pager"
+        android:background="@color/ct_white"
         android:id="@+id/layout_bottom"
         android:layout_width="fill_parent"
         android:layout_height="54dp"

@@ -2,8 +2,6 @@ package com.changtou.moneybox.module.page;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,8 +33,6 @@ public class HomeFragment extends BaseFragment
     private ExLoadingDialog mExLoading = null;
 
     private ExScrollView mExScrollView = null;
-
-    private SwipeRefreshLayout mSwipeRefreshLayout = null;
 
     /**
      * 初始化信息列表
@@ -71,22 +67,6 @@ public class HomeFragment extends BaseFragment
         //loading
         mExLoading = new ExLoadingDialog(getActivity(), R.style.dialog_loading);
         mExLoading.show();
-
-        //下拉刷新控件
-        mSwipeRefreshLayout = (SwipeRefreshLayout) mView.findViewById(R.id.swipe_container);
-
-        mExScrollView = (ExScrollView) mView.findViewById(R.id.homepage_scrollview);
-        mExScrollView.setRefreshAbleListener(new ExScrollView.RefreshAbleListener()
-        {
-            public void refreshAble()
-            {
-                if (!mSwipeRefreshLayout.isEnabled())
-                {
-                    mSwipeRefreshLayout.setEnabled(true);
-                    mSwipeRefreshLayout.setRefreshing(true);
-                }
-            }
-        });
 
         return mView;
     }

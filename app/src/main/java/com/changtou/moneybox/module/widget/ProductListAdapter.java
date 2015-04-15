@@ -91,8 +91,6 @@ public class ProductListAdapter extends BaseAdapter
             convertView = mInflater.inflate(R.layout.item_product, null);
             viewHolder.txt_top = (TextView) convertView.findViewById(R.id.pro_list_titile);
 //            viewHolder.txt_bottom = (TextView) convertView.findViewById(R.id.txt_bottom);
-            convertView.setBackgroundColor(Color.GRAY);
-
 //            RoundProgressBar mRoundProgressBar1 = (RoundProgressBar) convertView.findViewById(R.id.roundProgressBar);
 //            mRoundProgressBar1.setProgress(15);
 

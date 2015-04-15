@@ -1,11 +1,6 @@
 package com.changtou.moneybox.module.page;
 
-import android.app.ActionBar;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.changtou.R;

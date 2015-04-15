@@ -73,7 +73,6 @@ public abstract class BaseBootActivity extends BaseFragmentActivity {
                 // setCurrentDot(arg0);
             }
         });
-
     }
 
     /*
