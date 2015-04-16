@@ -16,6 +16,10 @@
     
     <color name="login_dialog_transparency">#00000000</color>
 
-    <color name="ct_bule">#5d9cec</color>
+    <color name="ct_blue">#5d9cec</color>
+    <color name="ct_bule_2">#b4cffa</color>
+    <color name="ct_font_red">#B22222</color>
+    <color name="ct_font_black">#000000</color>
+    <color name="ct_font_gray">#8a8a8a</color>
 
 </resources>

@@ -110,7 +110,7 @@ public class CornerTabWidget extends LinearLayout implements View.OnClickListene
         Paint localPaint;
         localPaint = new Paint();
         localPaint.setStyle(Paint.Style.STROKE);
-        localPaint.setColor(getContext().getResources().getColor(R.color.ct_bule));
+        localPaint.setColor(getContext().getResources().getColor(R.color.ct_blue));
         localPaint.setStrokeWidth((float) 4.0);
 
         for(int i = 1; i < count+1; i++)

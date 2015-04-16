@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:android_custom="http://schemas.android.com/apk/res/com.changtou.moneybox"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:background="@color/ct_white"
+              android:layout_height="match_parent">
+
+    <!--   利率 -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="360dp"
+        android:layout_height="160dp"
+        android:background="@color/ct_bule_2">
+
+        <RelativeLayout
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/revenue_hundred"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="40dp"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="15%"
+                android:textSize="45sp"
+                android:textColor="@color/ct_font_red"/>
+            <TextView
+                android:id="@+id/revenue_hundred_desct"
+                android:layout_below="@+id/revenue_hundred"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="预期年化收益"
+                android:textColor="@color/ct_font_black"/>
+
+        </RelativeLayout>
+
+        <View android:layout_width="1dp"
+              android:layout_height="150dp"
+              android:layout_gravity="center_vertical"
+              android:background="#ffffff"/>
+
+        <RelativeLayout
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/months"
+                android:layout_width="120dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="35dp"
+                android:layout_centerHorizontal="true"
+                android:gravity="center_vertical"
+                android:text="3个月"
+                android:textSize="30sp"
+                android:textColor="@color/ct_font_black"/>
+            <TextView
+                android:id="@+id/months_desct"
+                android:layout_below="@+id/months"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="项目期限"
+                android:textColor="@color/ct_font_black"/>
+            <TextView
+                android:id="@+id/qt_desct"
+                android:layout_below="@+id/months_desct"
+                android:layout_width="120dp"
+                android:layout_marginTop="15dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="100元起投"
+                android:textSize="12sp"
+                android:textColor="@color/ct_font_gray"/>
+            <TextView
+                android:id="@+id/xg_desct"
+                android:layout_below="@+id/qt_desct"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="每人限购1,000,000.00"
+                android:textSize="12sp"
+                android:textColor="@color/ct_font_gray"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <!--  投资剩余 -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="130dp"
+        android:background="@color/ct_white"
+        android:layout_gravity="center_horizontal">
+
+        <com.changtou.moneybox.module.widget.RoundProgressBar
+            android:id="@+id/roundProgressBar"
+            android:layout_marginLeft="20dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignLeft="@+id/roundProgressBar"
+            android_custom:roundColor="@color/ct_item_gray"
+            android_custom:roundProgressColor="@color/ct_mainpage_txt_red"
+            android_custom:textColor="#9A32CD"
+            android_custom:roundWidth="10dp"
+            android_custom:textSize="18sp"
+            android:layout_margin="30dp"
+            android:layout_gravity="center_vertical"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:textColor="#000000"
+                android:layout_marginTop="35dp"
+                android:text="15,800.00/1,000,000,000"
+                android:id="@+id/textView3"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:text="可投金额/融资金额"
+                android:textColor="#000000"
+                android:id="@+id/textView4"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- 协议 项目细节 -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="175dp"
+        android:background="@color/ct_bule_2"
+        android:layout_gravity="center_horizontal">
+    </LinearLayout>
+
+    <!-- 更多 -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:background="@color/ct_white"
+        android:layout_gravity="center_horizontal">
+
+        <ImageView
+            android:layout_marginTop="8dp"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_gravity="center"
+            android:src="@drawable/common_arrow"/>
+
+        <LinearLayout
+            android:layout_width="320dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <View android:layout_width="wrap_content"
+                  android:layout_height="1px"
+                  android:layout_weight="1"
+                  android:layout_gravity="center_vertical"
+                  android:background="@color/ct_font_gray"/>
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:text="继续拖动查看详情"
+                android:textSize="10sp"
+                android:textColor="@color/ct_font_gray"/>
+
+
+            <View android:layout_width="wrap_content"
+                  android:layout_height="1px"
+                  android:layout_weight="1"
+                  android:layout_gravity="center_vertical"
+                  android:background="@color/ct_font_gray"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

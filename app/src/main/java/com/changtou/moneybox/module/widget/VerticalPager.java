@@ -17,6 +17,8 @@ public class VerticalPager extends ViewGroup{
     private int startY = 0;
     private int endY = 0;
 
+    private boolean mIsIntercept = false;
+
     public VerticalPager(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.mContext=context;
@@ -62,8 +64,6 @@ public class VerticalPager extends ViewGroup{
 
     public boolean onTouchEvent(MotionEvent event) {
 
-        Log.e("onTouchEvent", "**********************************************");
-
         if(mVelocityTracker==null){
             mVelocityTracker=VelocityTracker.obtain();
         }
@@ -100,12 +100,16 @@ public class VerticalPager extends ViewGroup{
 
                 if(getScrollY()<0)
                 {
-                    mScroller.startScroll(0, -100, 0, 100);
+                    Log.e("eeeee", "666666666666666666666666666");
+                    mScroller.startScroll(0, 0, 0, 0);
                 }
                 else if(getScrollY()>(getHeight()*(getChildCount()-1))){
 
+                    Log.e("eeeee", "555555555555555555555555555");
+
                     View lastView=getChildAt(getChildCount()-1);
                     mScroller.startScroll(0,lastView.getTop()+0, 0, -0);
+                    mIsIntercept = false;
                 }
                 else
                 {
@@ -115,9 +119,16 @@ public class VerticalPager extends ViewGroup{
                     if((endY-startY)<0)
                     {
                         if(mod>getHeight()/6){
+
+                            Log.e("eeeee", "4444444444444444444444444444444444");
+
                             View positionView=getChildAt(position+1);
                             mScroller.startScroll(0, positionView.getTop()-mod, 0, mod);
                         }else{
+
+                            Log.e("eeeee", "333333333333333333333333333333");
+
+                            mIsIntercept = false;
                             View positionView=getChildAt(position);
                             mScroller.startScroll(0, positionView.getTop()+50, 0, -50);
                         }
@@ -125,12 +136,23 @@ public class VerticalPager extends ViewGroup{
                     else if((endY-startY)>0)
                     {
                         if(mod>getHeight()/6){
+
+                            Log.e("eeeee", "111111111111111111111111111111");
+
+                            mIsIntercept = false;
                             View positionView=getChildAt(position);
                             mScroller.startScroll(0, positionView.getTop()+mod, 0, -mod);
                         }else{
+
+                            Log.e("eeeee", "2222222222222222222222222222222222");
+
                             View positionView=getChildAt(position+1);
                             mScroller.startScroll(0, positionView.getTop()-mod, 0, mod);
                         }
+                    }
+                    else
+                    {
+                        Log.e("eeeee", "77777777777777777777777777777");
                     }
                 }
                 invalidate();
@@ -155,5 +177,17 @@ public class VerticalPager extends ViewGroup{
         }else{
 
         }
+    }
+
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev)
+    {
+        super.onInterceptTouchEvent(ev);
+        return mIsIntercept;
+    }
+
+    public void interceptEnable(boolean isIntercept)
+    {
+        this.mIsIntercept = isIntercept;
     }
 }

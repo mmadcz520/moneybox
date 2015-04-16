@@ -5,7 +5,8 @@ import android.os.Bundle;
 import android.widget.RelativeLayout;
 
 import com.changtou.R;
-import com.changtou.moneybox.module.widget.BomPanel;
+import com.changtou.moneybox.module.widget.MyScrollView;
+import com.changtou.moneybox.module.widget.VerticalPager;
 
 /**
  * 描述： 产品详情页
@@ -23,6 +24,9 @@ public class ProductDetailsActivity extends CTBaseActivity
      */
     protected void initView(Bundle bundle)
     {
-        setContentView(R.layout.pager_vertical_test);
+        setContentView(R.layout.product_details);
+
+        final VerticalPager vp = (VerticalPager)findViewById(R.id.vertyPager1);
+
     }
 }

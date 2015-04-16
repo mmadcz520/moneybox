@@ -125,7 +125,6 @@ public class CTBaseActivity extends BaseActivity{
     /**
      * 自定义Action Bar
      * */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public void initActionBarLayout()
     {
         ActionBar actionBar = this.getActionBar();

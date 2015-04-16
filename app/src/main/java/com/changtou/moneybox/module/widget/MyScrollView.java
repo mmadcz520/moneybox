@@ -1,15 +1,24 @@
 package com.changtou.moneybox.module.widget;
 
 import android.content.Context;
+import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.view.View;
 import android.widget.ScrollView;
 
 public class MyScrollView extends ScrollView
 {
     private int lastY = 0;
+
+    private boolean isDown = false;
+
+    private EventChanageListener mEventChanageListener = null;
+
+    public interface EventChanageListener
+    {
+        void change();
+    }
 
     public MyScrollView(Context context)
     {
@@ -48,26 +57,38 @@ public class MyScrollView extends ScrollView
                 break;
             case MotionEvent.ACTION_MOVE:
                 offset = lastY - (int)event.getY();
-                Log.e("offset", "--------------" + this.getScrollY() +"-------"+ getHeight() + "-------------------" + getMeasuredHeight());
-                if(getScrollY() + getHeight() >=  computeVerticalScrollRange())
+                break;
+            case MotionEvent.ACTION_UP:
+                if(getScrollY() + getHeight() >= computeVerticalScrollRange())
                 {
-                   return false;
+                    isDown = true;
+                }
+                else
+                {
+                    isDown = false;
                 }
                 break;
-
         }
 
-        if(offset > 0)
+        // 滑动到底部
+        if(isDown && (offset > 0))
         {
-            Log.e("CT_DEMO", " 向上");
-            return  false;
-        }
-        else
-        {
-            Log.e("CT_DEMO", " 向下");
+            if(mEventChanageListener != null)
+            {
+                mEventChanageListener.change();
+            }
         }
 
+        //滑动到顶部
+        if(this.getScrollY() == 0  && (offset < 0))
+        {
+
+        }
         return true;
     }
 
+    public void setEventChanageListener(EventChanageListener eventChanageListener)
+    {
+        this.mEventChanageListener = eventChanageListener;
+    }
 }
