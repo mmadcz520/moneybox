@@ -2,10 +2,12 @@
   <dictionary name="Administrator">
     <words>
       <w>desct</w>
+      <w>devide</w>
       <w>lisener</w>
       <w>paser</w>
       <w>redfont</w>
       <w>requst</w>
+      <w>timelimit</w>
       <w>verty</w>
     </words>
   </dictionary>

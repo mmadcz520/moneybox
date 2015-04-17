@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:background="@color/ct_blue"
         android:text="立即投资"
-        android:id="@+id/button"
+        android:id="@+id/confirm_button"
         android:layout_gravity="center_horizontal"/>
 
 </LinearLayout>
