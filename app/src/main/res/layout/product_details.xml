@@ -10,23 +10,22 @@
               android:layout_height="wrap_content"
               android:orientation="vertical" >
 
-          <com.changtou.moneybox.module.widget.VerticalPager
+          <com.changtou.moneybox.module.widget.DragTopLayout
                  android:id="@+id/vertyPager1"
-                 android:layout_width="fill_parent"
-                 android:layout_height="520dp" >
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent" >
 
-                <!--<com.changtou.moneybox.module.widget.MyScrollView-->
-                     <!--android:id="@+id/scrollview"-->
-                     <!--android:layout_width="fill_parent"-->
-                     <!--android:background="@color/ct_mainpage_txt_red"-->
-                     <!--android:layout_height="match_parent">-->
-                    <include layout="@layout/product_details_sub1"/>
-                <!--</com.changtou.moneybox.module.widget.MyScrollView>-->
+              <include layout="@layout/product_details_sub1"/>
 
-              <include layout="@layout/product_details_sub2"
+              <ScrollView
+                  android:layout_width="fill_parent"
+                  android:layout_height="fill_parent">
+                  <include layout="@layout/product_details_sub2"
                        android:layout_width="fill_parent"
                        android:layout_height="wrap_content"/>
-          </com.changtou.moneybox.module.widget.VerticalPager>
+              </ScrollView>
+
+          </com.changtou.moneybox.module.widget.DragTopLayout>
 
     </LinearLayout>
 

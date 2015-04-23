@@ -11,6 +11,9 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,11 +22,17 @@ import android.widget.ListView;
 
 import com.changtou.R;
 import com.changtou.moneybox.common.activity.BaseFragment;
+import com.changtou.moneybox.module.entity.Actor;
 import com.changtou.moneybox.module.entity.ProductEntity;
 import com.changtou.moneybox.module.http.HttpRequst;
 import com.changtou.moneybox.module.widget.CornerTabWidget;
 import com.changtou.moneybox.module.widget.DemoAdapter;
+import com.changtou.moneybox.module.widget.ProductAdapter;
 import com.changtou.moneybox.module.widget.ProductListAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * 描述:产品页
@@ -135,7 +144,13 @@ public class ProductFragment extends BaseFragment{
     {
         private ProductListAdapter mAdapter = null;
         private Context mContext = null;
-        private ListView mList = null;
+
+        private RecyclerView mRecyclerView;
+
+        private List<Actor> actors = new ArrayList<Actor>();
+        private String[] names = { "朱茵", "张柏芝", "张敏", "巩俐", "黄圣依", "赵薇", "莫文蔚", "如花" };
+        private String[] pics = { "p1", "p2", "p3", "p4", "p5", "p6", "p7", "p8" };
+        private ProductAdapter myAdapter;
 
         public static SubPage create(int type)
         {
@@ -149,7 +164,27 @@ public class ProductFragment extends BaseFragment{
         protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             View mView = inflater.inflate(R.layout.tab_product, null);
-            mList = (ListView) mView.findViewById(R.id.product_list);
+            mContext = this.getActivity();
+            actors.add(new Actor("朱茵", "p1"));
+            actors.add(new Actor("朱茵", "p1"));
+            actors.add(new Actor("朱茵", "p1"));
+            actors.add(new Actor("朱茵", "p1"));
+            actors.add(new Actor("朱茵", "p1"));
+            actors.add(new Actor("朱茵", "p1"));
+            actors.add(new Actor("朱茵", "p1"));
+
+            mRecyclerView = (RecyclerView) mView.findViewById(R.id.list);
+            // 设置LinearLayoutManager
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+            // 设置ItemAnimator
+            mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+            // 设置固定大小
+            mRecyclerView.setHasFixedSize(true);
+            // 初始化自定义的适配器
+            myAdapter = new ProductAdapter(mContext, actors);
+            // 为mRecyclerView设置适配器
+            mRecyclerView.setAdapter(myAdapter);
+
             return mView;
         }
 
@@ -157,36 +192,35 @@ public class ProductFragment extends BaseFragment{
         {
             final Activity activity = this.getActivity();
 
-            mList.setOnItemClickListener(new AdapterView.OnItemClickListener()
-            {
-                Intent intent = new Intent(activity, ProductDetailsActivity.class);
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-                {
-                    startActivity(intent);
-                }
-            });
-
-
-            mList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
-            {
-                Intent intent = new Intent(activity, ProductDetailsActivity.class);
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
-                {
-                    startActivity(intent);
-                }
-
-                public void onNothingSelected(AdapterView<?> parent)
-                {
-
-                }
-            });
+//            mList.setOnItemClickListener(new AdapterView.OnItemClickListener()
+//            {
+//                Intent intent = new Intent(activity, ProductDetailsActivity.class);
+//                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+//                {
+//                    startActivity(intent);
+//                }
+//            });
+//
+//
+//            mList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+//            {
+//                Intent intent = new Intent(activity, ProductDetailsActivity.class);
+//                public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+//                {
+//                    startActivity(intent);
+//                }
+//
+//                public void onNothingSelected(AdapterView<?> parent)
+//                {
+//
+//                }
+//            });
         }
 
         protected void initData(Bundle savedInstanceState)
         {
-            mContext = this.getActivity();
             mAdapter = new ProductListAdapter(mContext);
-            mList.setAdapter(mAdapter);
+//            mList.setAdapter(mAdapter);
 
             sendRequest(HttpRequst.REQ_TYPE_PRODUCT_HOME,
                     HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_PRODUCT_HOME),

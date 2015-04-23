@@ -17,6 +17,7 @@
 package com.changtou.moneybox.module.widget;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.os.Handler;
 import android.os.Parcelable;
 import android.support.v4.view.MotionEventCompat;
@@ -28,6 +29,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ScrollView;
+
+import com.changtou.R;
 
 /**
  * Created by chenupt@gmail.com on 2015/1/18.
@@ -107,6 +110,16 @@ public class DragTopLayout extends FrameLayout {
 
     private void init(AttributeSet attrs) {
         dragHelper = ViewDragHelper.create(this, 1.0f, callback);
+
+        // init from attrs
+        TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.DragTopLayout);
+        setCollapseOffset(a.getDimensionPixelSize(R.styleable.DragTopLayout_dtlCollapseOffset, collapseOffset));
+        overDrag = a.getBoolean(R.styleable.DragTopLayout_dtlOverDrag, overDrag);
+        dragContentViewId = a.getResourceId(R.styleable.DragTopLayout_dtlDragContentView, -1);
+        topViewId = a.getResourceId(R.styleable.DragTopLayout_dtlTopView, -1);
+        initOpen(a.getBoolean(R.styleable.DragTopLayout_dtlOpen, false));
+        captureTop = a.getBoolean(R.styleable.DragTopLayout_dtlCaptureTop, true);
+        a.recycle();
     }
 
     private void initOpen(boolean initOpen){
@@ -136,8 +149,8 @@ public class DragTopLayout extends FrameLayout {
         if (dragContentViewId != -1 && topViewId != -1) {
             bindId(this);
         } else {
-            topView = (ScrollView)getChildAt(0);
-            dragContentView = getChildAt(1);
+            topView = (ScrollView)getChildAt(1);
+            dragContentView = getChildAt(0);
         }
     }
 
@@ -191,7 +204,7 @@ public class DragTopLayout extends FrameLayout {
     private void resetTopViewHeight() {
         int newTopHeight = topView.getHeight();
         if (topViewHeight != newTopHeight) {
-        // Top layout is changed
+            // Top layout is changed
             if (panelState == PanelState.EXPANDED) {
                 contentTop = newTopHeight;
                 handleSlide(newTopHeight);
@@ -472,11 +485,11 @@ public class DragTopLayout extends FrameLayout {
     //================
     // public
     //================
-    
+
     public PanelState getState() {
         return panelState;
     }
-    
+
     public void openTopView(boolean anim) {
         // Before created
         if (dragContentView.getHeight() == 0) {

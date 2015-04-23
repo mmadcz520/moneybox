@@ -30,7 +30,6 @@ public class ProductDetailsActivity extends CTBaseActivity
     protected void initView(Bundle bundle)
     {
         setContentView(R.layout.product_details);
-        final VerticalPager vp = (VerticalPager)findViewById(R.id.vertyPager1);
 
         Button button = (Button)findViewById(R.id.confirm_button);
 

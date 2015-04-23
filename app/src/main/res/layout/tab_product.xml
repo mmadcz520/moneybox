@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context=".MyActivity">
 
-    <com.changtou.moneybox.module.widget.ExCornerListView
-        android:id="@+id/product_list"
-        android:layout_centerHorizontal="true"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:divider="#00000000"
-        android:cacheColorHint="#00000000"
-        android:dividerHeight="8dp"
-        android:fadingEdge="none"
-        android:headerDividersEnabled="false" />
-
-</LinearLayout>
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        />
+</FrameLayout>
