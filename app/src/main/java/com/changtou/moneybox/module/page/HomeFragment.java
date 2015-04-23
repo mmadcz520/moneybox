@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import com.changtou.R;
 import com.changtou.moneybox.common.activity.BaseFragment;
@@ -13,9 +12,7 @@ import com.changtou.moneybox.module.entity.ProductEntity;
 import com.changtou.moneybox.module.http.HttpRequst;
 import com.changtou.moneybox.module.widget.ExImageSwitcher;
 import com.changtou.moneybox.module.widget.ExLoadingDialog;
-import com.changtou.moneybox.module.widget.ExScrollView;
 import com.changtou.moneybox.module.widget.ProductListAdapter;
-import com.changtou.moneybox.module.widget.RoundProgressBar;
 
 /**
  * 描述： 主页面
@@ -27,12 +24,10 @@ public class HomeFragment extends BaseFragment
 {
 
     private Context mContext = null;
-    private ListView mList = null;
     private ProductListAdapter mAdapter = null;
 
     private ExLoadingDialog mExLoading = null;
 
-    private ExScrollView mExScrollView = null;
 
     /**
      * 初始化信息列表
@@ -62,8 +57,6 @@ public class HomeFragment extends BaseFragment
         ExImageSwitcher exImage = (ExImageSwitcher) mView.findViewById(R.id.hp_ad);
         exImage.setImage(new int[]{R.drawable.homepage_kv1});
 
-        mList = (ListView) mView.findViewById(R.id.homeListview);
-
         //loading
         mExLoading = new ExLoadingDialog(getActivity(), R.style.dialog_loading);
         mExLoading.show();
@@ -86,7 +79,6 @@ public class HomeFragment extends BaseFragment
     {
         mContext = this.getActivity();
         mAdapter = new ProductListAdapter(mContext);
-        mList.setAdapter(mAdapter);
         onInitList();
     }
 

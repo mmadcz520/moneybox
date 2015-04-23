@@ -12,66 +12,109 @@
         android:background="@color/ct_pager_bg" />
 
     <LinearLayout
-        android:background="@color/ct_white"
         android:id="@+id/layout_bottom"
         android:layout_width="fill_parent"
-        android:layout_height="54dp"
-        android:gravity="center_vertical" >
+        android:layout_height="52dp"
+        android:background="@color/ct_blue"
+        android:gravity="center_vertical">
 
         <LinearLayout
-            android:id="@+id/lay_action"
+            android:id="@+id/navbar_home"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:gravity="center" >
+            android:background="@drawable/navbar_selector"
+            android:gravity="center"
+            android:baselineAligned="true"
+            android:clickable="true"
+            android:orientation="vertical">
 
             <ImageButton
+                android:clickable="false"
                 android:id="@+id/btn_main"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:background="@drawable/btn_action_selector" />
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@mipmap/navbar_home" />
+            <TextView
+                android:clickable="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/ct_white"
+                android:text="首页"/>
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/lay_games"
+            android:id="@+id/navbar_product"
             android:layout_width="0dp"
-            android:layout_height="64dp"
+            android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:gravity="center" >
+            android:background="@drawable/navbar_selector"
+            android:gravity="center"
+            android:clickable="true"
+            android:orientation="vertical">
 
             <ImageButton
+                android:clickable="false"
                 android:id="@+id/btn_product"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:background="@drawable/btn_games_selector" />
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@mipmap/navbar_product" />
+            <TextView
+                android:clickable="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/ct_white"
+                android:text="投资"/>
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/lay_news"
+            android:id="@+id/navbar_user"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:gravity="center" >
+            android:background="@drawable/navbar_selector"
+            android:gravity="center"
+            android:clickable="true"
+            android:orientation="vertical">
 
             <ImageButton
+                android:clickable="false"
                 android:id="@+id/btn_riches"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:background="@drawable/btn_group_selector" />
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@mipmap/navbar_user" />
+
+            <TextView
+                android:clickable="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/ct_white"
+                android:text="我的"/>
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/lay_group"
+            android:id="@+id/navbar_more"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:gravity="center" >
+            android:background="@drawable/navbar_selector"
+            android:gravity="center"
+            android:clickable="true"
+            android:orientation="vertical">
 
             <ImageButton
+                android:clickable="false"
                 android:id="@+id/btn_setting"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:background="@drawable/btn_news_selector" />
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@mipmap/navbar_more" />
+
+            <TextView
+                android:clickable="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/ct_white"
+                android:text="更多"/>
         </LinearLayout>
     </LinearLayout>
 

@@ -1,16 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.SwipeRefreshLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/swipe_container"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-<com.changtou.moneybox.module.widget.ExScrollView
-    android:id="@+id/homepage_scrollview"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="#FFF4F4F4"
-    android:scrollbars="none" >
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -19,29 +7,42 @@
     <com.changtou.moneybox.module.widget.ExImageSwitcher
         android:id = "@+id/hp_ad"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="160dp"
         android:src="@drawable/homepage_kv1"
         android:layout_gravity="top"/>
 
     <LinearLayout
-        android:id="@+id/gap"
+        android:id="@+id/homepage_ll_income"
         android:layout_below="@+id/hp_ad"
         android:layout_width="fill_parent"
-        android:layout_height="40dp"
+        android:layout_height="80dp"
         android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="30dp"
-            android:gravity="center"
-            android:text="推荐项目"/>
-        
+        <LinearLayout
+            android:layout_height="fill_parent"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+        </LinearLayout>
+
+        <View android:layout_width="1dp"
+              android:layout_height="fill_parent"
+              android:layout_gravity="center_vertical"
+              android:background="#ffffff"/>
+
+        <LinearLayout
+            android:layout_height="fill_parent"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+        </LinearLayout>
+
     </LinearLayout>
     
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@+id/gap" >
+        android:layout_below="@+id/homepage_ll_income">
 
         <ProgressBar
             android:id="@+id/progress"
@@ -50,17 +51,5 @@
             android:layout_centerInParent="true"
             android:visibility="gone" />
 
-        <com.changtou.moneybox.module.widget.ExCornerListView
-            android:id="@+id/homeListview"
-            android:layout_centerHorizontal="true"
-            android:layout_width="340dp"
-            android:layout_height="wrap_content"
-            android:divider="#00000000"
-            android:cacheColorHint="#00000000"
-            android:dividerHeight="8dp"
-            android:fadingEdge="none"
-            android:headerDividersEnabled="false" />
     </RelativeLayout>
 </RelativeLayout>
-</com.changtou.moneybox.module.widget.ExScrollView>>
-</android.support.v4.widget.SwipeRefreshLayout>
