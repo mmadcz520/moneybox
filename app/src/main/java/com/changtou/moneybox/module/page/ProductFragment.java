@@ -18,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.changtou.R;
@@ -29,8 +30,11 @@ import com.changtou.moneybox.module.widget.CornerTabWidget;
 import com.changtou.moneybox.module.widget.DemoAdapter;
 import com.changtou.moneybox.module.widget.ProductAdapter;
 import com.changtou.moneybox.module.widget.ProductListAdapter;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -145,12 +149,11 @@ public class ProductFragment extends BaseFragment{
         private ProductListAdapter mAdapter = null;
         private Context mContext = null;
 
-        private RecyclerView mRecyclerView;
+        private PullToRefreshListView mPullRefreshListView;
+        private LinkedList<String> mListItems;
 
-        private List<Actor> actors = new ArrayList<Actor>();
-        private String[] names = { "朱茵", "张柏芝", "张敏", "巩俐", "黄圣依", "赵薇", "莫文蔚", "如花" };
-        private String[] pics = { "p1", "p2", "p3", "p4", "p5", "p6", "p7", "p8" };
-        private ProductAdapter myAdapter;
+
+        private ListView actualListView;
 
         public static SubPage create(int type)
         {
@@ -165,25 +168,23 @@ public class ProductFragment extends BaseFragment{
         {
             View mView = inflater.inflate(R.layout.tab_product, null);
             mContext = this.getActivity();
-            actors.add(new Actor("朱茵", "p1"));
-            actors.add(new Actor("朱茵", "p1"));
-            actors.add(new Actor("朱茵", "p1"));
-            actors.add(new Actor("朱茵", "p1"));
-            actors.add(new Actor("朱茵", "p1"));
-            actors.add(new Actor("朱茵", "p1"));
-            actors.add(new Actor("朱茵", "p1"));
 
-            mRecyclerView = (RecyclerView) mView.findViewById(R.id.list);
-            // 设置LinearLayoutManager
-            mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-            // 设置ItemAnimator
-            mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-            // 设置固定大小
-            mRecyclerView.setHasFixedSize(true);
-            // 初始化自定义的适配器
-            myAdapter = new ProductAdapter(mContext, actors);
-            // 为mRecyclerView设置适配器
-            mRecyclerView.setAdapter(myAdapter);
+            mPullRefreshListView = (PullToRefreshListView) mView.findViewById(R.id.product_list);
+            actualListView = mPullRefreshListView.getRefreshableView();
+            registerForContextMenu(actualListView);
+
+
+//            mRecyclerView = (RecyclerView) mView.findViewById(R.id.list);
+//            // 设置LinearLayoutManager
+//            mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+//            // 设置ItemAnimator
+//            mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+//            // 设置固定大小
+//            mRecyclerView.setHasFixedSize(true);
+//            // 初始化自定义的适配器
+//            myAdapter = new ProductAdapter(mContext, actors);
+//            // 为mRecyclerView设置适配器
+//            mRecyclerView.setAdapter(myAdapter);
 
             return mView;
         }
@@ -192,35 +193,35 @@ public class ProductFragment extends BaseFragment{
         {
             final Activity activity = this.getActivity();
 
-//            mList.setOnItemClickListener(new AdapterView.OnItemClickListener()
-//            {
-//                Intent intent = new Intent(activity, ProductDetailsActivity.class);
-//                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-//                {
-//                    startActivity(intent);
-//                }
-//            });
-//
-//
-//            mList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
-//            {
-//                Intent intent = new Intent(activity, ProductDetailsActivity.class);
-//                public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
-//                {
-//                    startActivity(intent);
-//                }
-//
-//                public void onNothingSelected(AdapterView<?> parent)
-//                {
-//
-//                }
-//            });
+            actualListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+            {
+                Intent intent = new Intent(activity, ProductDetailsActivity.class);
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+                {
+                    startActivity(intent);
+                }
+            });
+
+
+            actualListView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+            {
+                Intent intent = new Intent(activity, ProductDetailsActivity.class);
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+                {
+                    startActivity(intent);
+                }
+
+                public void onNothingSelected(AdapterView<?> parent)
+                {
+
+                }
+            });
         }
 
         protected void initData(Bundle savedInstanceState)
         {
             mAdapter = new ProductListAdapter(mContext);
-//            mList.setAdapter(mAdapter);
+            actualListView.setAdapter(mAdapter);
 
             sendRequest(HttpRequst.REQ_TYPE_PRODUCT_HOME,
                     HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_PRODUCT_HOME),

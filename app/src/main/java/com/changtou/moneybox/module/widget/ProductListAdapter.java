@@ -88,8 +88,8 @@ public class ProductListAdapter extends BaseAdapter
         if (convertView == null)
         {
             viewHolder = new ViewHolder();
-            convertView = mInflater.inflate(R.layout.item_product, null);
-            viewHolder.txt_top = (TextView) convertView.findViewById(R.id.pro_list_titile);
+            convertView = mInflater.inflate(R.layout.card_view_product, null);
+//            viewHolder.txt_top = (TextView) convertView.findViewById(R.id.pro_list_titile);
 //            viewHolder.txt_bottom = (TextView) convertView.findViewById(R.id.txt_bottom);
 //            RoundProgressBar mRoundProgressBar1 = (RoundProgressBar) convertView.findViewById(R.id.roundProgressBar);
 //            mRoundProgressBar1.setProgress(15);
@@ -98,9 +98,9 @@ public class ProductListAdapter extends BaseAdapter
         }
         else
         {
-            viewHolder = (ViewHolder) convertView.getTag();
+//            viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.txt_top.setText(entity.name);
+//        viewHolder.txt_top.setText(entity.name);
         return convertView;
     }
 
