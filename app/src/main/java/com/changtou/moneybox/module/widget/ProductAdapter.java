@@ -31,7 +31,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     @Override
     public ViewHolder onCreateViewHolder( ViewGroup viewGroup, int i )
     {
-        // 给ViewHolder设置布局文件
+        // 缁橵iewHolder璁剧疆甯冨眬鏂囦欢
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card_view_product, viewGroup, false);
         return new ViewHolder(v);
     }
@@ -39,7 +39,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     @Override
     public void onBindViewHolder( ViewHolder viewHolder, int i )
     {
-        // 给ViewHolder设置元素
+        // 缁橵iewHolder璁剧疆鍏冪礌
         Actor p = actors.get(i);
         viewHolder.mTextView.setText(p.name);
 //        viewHolder.mImageView.setImageDrawable(mContext.getDrawable(p.getImageResourceId(mContext)));
@@ -48,11 +48,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     @Override
     public int getItemCount()
     {
-        // 返回数据总数
+        // 杩斿洖鏁版嵁鎬绘暟
         return actors == null ? 0 : actors.size();
     }
 
-    // 重写的自定义ViewHolder
+    // 閲嶅啓鐨勮嚜瀹氫箟ViewHolder
     public static class ViewHolder
             extends RecyclerView.ViewHolder
     {

@@ -2,6 +2,7 @@ package com.changtou.moneybox.common.activity;
 
 import java.lang.ref.WeakReference;
 
+import android.app.Activity;
 import android.app.KeyguardManager;
 import android.content.Context;
 import android.os.Bundle;
@@ -25,7 +26,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
         private final WeakReference<BaseFragmentActivity> mActivityReference;
 
         public UiHandler(BaseFragmentActivity activity) {
-            mActivityReference = new WeakReference<>(activity);
+            mActivityReference = new WeakReference<BaseFragmentActivity>(activity);
         }
 
         public WeakReference<BaseFragmentActivity> getActivityReference() {

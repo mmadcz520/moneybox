@@ -1,10 +1,8 @@
 package com.changtou.moneybox.module.page;
 
-import android.annotation.TargetApi;
-import android.app.ActionBar;
 import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -127,17 +125,17 @@ public class CTBaseActivity extends BaseActivity{
      * */
     public void initActionBarLayout()
     {
-        ActionBar actionBar = this.getActionBar();
+        ActionBar actionBar = this.getSupportActionBar();
 
         if( null != actionBar)
         {
-            int layoutId = R.layout.common_actionbar;
-            actionBar.setDisplayShowHomeEnabled( false );
-            actionBar.setDisplayShowCustomEnabled(true);
-            LayoutInflater inflator = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View v = inflator.inflate(layoutId, null);
-            ActionBar.LayoutParams layout = new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT);
-            actionBar.setCustomView(v,layout);
+//            int layoutId = R.layout.common_actionbar;
+//            actionBar.setDisplayShowHomeEnabled( false );
+//            actionBar.setDisplayShowCustomEnabled(true);
+//            LayoutInflater inflator = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//            View v = inflator.inflate(layoutId, null);
+//            ActionBar.LayoutParams layout = new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT);
+//            actionBar.setCustomView(v,layout);
         }
     }
 }

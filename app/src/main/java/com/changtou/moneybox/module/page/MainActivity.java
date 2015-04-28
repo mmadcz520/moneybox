@@ -73,7 +73,7 @@ public class MainActivity extends CTBaseActivity {
      * @param bundle 保存页面状态
      */
     protected void initData(Bundle bundle) {
-        List<BaseFragment> viewList = new ArrayList<>();
+        List<BaseFragment> viewList = new ArrayList<BaseFragment>();
         viewList.add(new HomeFragment());
         viewList.add(new ProductFragment());
         viewList.add(new RichesFragment());

@@ -9,12 +9,12 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@color/ct_pager_bg" />
+        android:background="#ffffff"/>
 
     <LinearLayout
         android:id="@+id/layout_bottom"
         android:layout_width="fill_parent"
-        android:layout_height="52dp"
+        android:layout_height="56dp"
         android:background="@color/ct_blue"
         android:gravity="center_vertical">
 
@@ -32,8 +32,8 @@
             <ImageButton
                 android:clickable="false"
                 android:id="@+id/btn_main"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
                 android:background="@mipmap/navbar_home" />
             <TextView
                 android:clickable="false"
@@ -56,8 +56,8 @@
             <ImageButton
                 android:clickable="false"
                 android:id="@+id/btn_product"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
                 android:background="@mipmap/navbar_product" />
             <TextView
                 android:clickable="false"
@@ -80,8 +80,8 @@
             <ImageButton
                 android:clickable="false"
                 android:id="@+id/btn_riches"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
                 android:background="@mipmap/navbar_user" />
 
             <TextView
@@ -105,8 +105,8 @@
             <ImageButton
                 android:clickable="false"
                 android:id="@+id/btn_setting"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
                 android:background="@mipmap/navbar_more" />
 
             <TextView

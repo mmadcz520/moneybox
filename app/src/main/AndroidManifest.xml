@@ -34,17 +34,17 @@
         <activity android:name=".moneybox.module.widget.SplashActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".moneybox.module.widget.BootActivity"
-            android:theme="@style/ActivityTheme_Light" >
+
+             >
         </activity>
         <activity
             android:name=".moneybox.module.page.MainActivity"
-            android:theme="@style/ActivityTheme_Light" >
+            android:theme="@style/ActivityTheme_Light">
         </activity>
         <activity
             android:name=".moneybox.module.page.ProductDetailsActivity"
