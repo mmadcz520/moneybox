@@ -122,7 +122,7 @@ public class RoundProgressBar extends LinearLayout
     Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             if (msg.what == 1) {
-                playHeartbeatAnimation();
+//                playHeartbeatAnimation();
             }
             super.handleMessage(msg);
         }

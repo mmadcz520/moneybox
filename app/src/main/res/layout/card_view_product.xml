@@ -2,7 +2,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginTop="10dp"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:focusable="false"
@@ -11,28 +10,34 @@
 
     <FrameLayout
         android:layout_width="fill_parent"
-        android:layout_height="102dp">
+        android:layout_height="108dp"
+        android:background="#00000000">
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:layout_height="100dp"
+        android:layout_height="fill_parent"
+        android:background="#00000000"
         android:layout_gravity="center_horizontal">
 
         <android.support.v7.widget.CardView
                                             android:layout_width="match_parent"
-                                            android:layout_height="96dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="7dp"
+                                            android:layout_marginBottom="7dp"
+                                            android:layout_marginLeft="8dp"
+                                            android:layout_marginRight="8dp"
                                             android:layout_gravity="center"
                                             android:orientation="vertical"
-                                            card_view:cardCornerRadius="5dp">
+                                            android:background="@color/ct_white"
+                                            card_view:cardPreventCornerOverlap="false"
+                                            card_view:cardUseCompatPadding="false"
+                                            card_view:cardCornerRadius="4dp">
 
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                         xmlns:tools="http://schemas.android.com/tools"
+            <LinearLayout
                          android:layout_width="fill_parent"
                          android:orientation="vertical"
                          android:layout_height="fill_parent"
-                         tools:context=".MyActivity">
+                         android:background="#00000000">
                 <!-- title-->
                 <LinearLayout
                     android:layout_width="fill_parent"
@@ -66,7 +71,7 @@
                                 android:textColor="@color/ct_mainpage_txt_red"
                                 android:textSize="30sp"
                                 android:layout_gravity="top"
-                                android:text="9.88"/>
+                                android:text="--"/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
