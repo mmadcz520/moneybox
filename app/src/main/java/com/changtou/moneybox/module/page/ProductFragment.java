@@ -59,15 +59,15 @@ public class ProductFragment extends BaseFragment{
         View mView = inflater.inflate(R.layout.fragment_product, null);
         mContext = this.getActivity();
 
-        mTabWidget = (CornerTabWidget) mView.findViewById(R.id.tabWidget1);
-        mTabWidget.setTabs(new String[]{"长投宝", "ZAMA宝", "精选债权", "转让专区"});
-        mTabWidget.setTabListener(new CornerTabWidget.TabListener()
-        {
-            public void changePage(int pageId)
-            {
-                mViewPager.setCurrentItem(pageId);
-            }
-        });
+//        mTabWidget = (CornerTabWidget) mView.findViewById(R.id.tabWidget1);
+//        mTabWidget.setTabs(new String[]{"长投宝", "ZAMA宝", "精选债权", "转让专区"});
+//        mTabWidget.setTabListener(new CornerTabWidget.TabListener()
+//        {
+//            public void changePage(int pageId)
+//            {
+//                mViewPager.setCurrentItem(pageId);
+//            }
+//        });
 
         mViewPager = (ViewPager) mView.findViewById(R.id.pager);
         mPagerAdapter = new MyPagerAdapter(getChildFragmentManager());
@@ -101,7 +101,7 @@ public class ProductFragment extends BaseFragment{
 
         public void onPageSelected(int arg0)
         {
-            mTabWidget.setCurrentTab(arg0);
+//            mTabWidget.setCurrentTab(arg0);
         }
 
         public void onPageScrolled(int arg0, float arg1, int arg2)
@@ -172,19 +172,6 @@ public class ProductFragment extends BaseFragment{
             mPullRefreshListView = (PullToRefreshListView) mView.findViewById(R.id.product_list);
             actualListView = mPullRefreshListView.getRefreshableView();
             registerForContextMenu(actualListView);
-
-
-//            mRecyclerView = (RecyclerView) mView.findViewById(R.id.list);
-//            // 设置LinearLayoutManager
-//            mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-//            // 设置ItemAnimator
-//            mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-//            // 设置固定大小
-//            mRecyclerView.setHasFixedSize(true);
-//            // 初始化自定义的适配器
-//            myAdapter = new ProductAdapter(mContext, actors);
-//            // 为mRecyclerView设置适配器
-//            mRecyclerView.setAdapter(myAdapter);
 
             return mView;
         }

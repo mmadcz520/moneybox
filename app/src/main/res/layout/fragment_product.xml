@@ -3,13 +3,22 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical" >
-    <com.changtou.moneybox.module.widget.CornerTabWidget
-        android:id="@+id/tabWidget1"
-        android:layout_marginTop="16dp"
-        android:layout_width="297dp"
-        android:layout_height="27dp"
+
+    <com.changtou.moneybox.module.widget.SegmentControl
+        xmlns:segmentcontrol="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/sc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:gravity="right|center_vertical" />
+        android:layout_marginTop="16dp"
+        android:textSize="13sp"
+        segmentcontrol:texts="长投宝|ZAMA宝|精选债权|转让专区"
+        segmentcontrol:colors="@color/ct_blue"
+        segmentcontrol:cornerRadius="3dp"
+        segmentcontrol:direction="horizon"
+        segmentcontrol:verticalGap="12dp"
+        segmentcontrol:horizonGap="13dp"
+        />
 
     <LinearLayout
         android:layout_width="wrap_content"

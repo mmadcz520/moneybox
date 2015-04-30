@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.changtou.R;
 import com.changtou.moneybox.common.activity.BaseSplashActivity;
+import com.changtou.moneybox.module.page.BootActivity;
 import com.changtou.moneybox.module.page.MainActivity;
 
 /**
@@ -71,7 +72,7 @@ public class SplashActivity extends BaseSplashActivity {
      * @see BaseSplashActivity#setSplashImage()
      */
     public void setSplashImage() {
-        mImagebackgruand.setImageResource(R.drawable.splash_image);
+        mImagebackgruand.setImageResource(R.mipmap.splash_page);
     }
 
     /**

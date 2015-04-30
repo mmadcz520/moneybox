@@ -16,8 +16,7 @@
         android:id="@+id/describe_layout"
         android:layout_width="fill_parent"
         android:layout_height="180dp"
-        android:orientation="vertical"
-        android:background="@color/ct_blue">
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_height="30dp"

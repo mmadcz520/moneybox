@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import android.widget.BaseAdapter;
@@ -89,6 +90,8 @@ public class ProductListAdapter extends BaseAdapter
         {
             viewHolder = new ViewHolder();
             convertView = mInflater.inflate(R.layout.card_view_product, null);
+//            LinearLayout ll = (LinearLayout)convertView.findViewById(R.id.roundProgressBar);
+//            ll.setWillNotDraw(false);
 //            viewHolder.txt_top = (TextView) convertView.findViewById(R.id.pro_list_titile);
 //            viewHolder.txt_bottom = (TextView) convertView.findViewById(R.id.txt_bottom);
 //            RoundProgressBar mRoundProgressBar1 = (RoundProgressBar) convertView.findViewById(R.id.roundProgressBar);

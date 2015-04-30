@@ -127,7 +127,6 @@ public class HomeFragment extends BaseFragment
         }.start();
 
         mRPB = (RoundProgressBar)mView.findViewById(R.id.roundProgressBar2);
-        mRPB.setWillNotDraw(false);
         mRPB.setProgress(80);
 
         return mView;

@@ -158,6 +158,7 @@
             android:layout_height="120dp"
             android:layout_marginTop="10dp"
             android:layout_centerHorizontal="true"
+            android_custom:style="FILL"
             android_custom:roundColor="#ffffff"
             android_custom:roundProgressColor="@color/ct_progress_blue"
             android_custom:textColor="@color/ct_blue"

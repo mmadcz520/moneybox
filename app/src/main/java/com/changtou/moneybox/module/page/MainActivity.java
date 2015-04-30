@@ -48,7 +48,8 @@ public class MainActivity extends CTBaseActivity {
         LinearLayout navbar_product = (LinearLayout) this.findViewById(R.id.navbar_product);
         LinearLayout navbar_user = (LinearLayout) this.findViewById(R.id.navbar_user);
         LinearLayout navbar_more = (LinearLayout) this.findViewById(R.id.navbar_more);
-         mViewpager = (ExViewPager) findViewById(R.id.viewpager);
+        mViewpager = (ExViewPager) findViewById(R.id.viewpager);
+        mViewpager.setScanScroll(false);
 
         mBars[0] = navbar_home;
         mBars[1] = navbar_product;

@@ -12,19 +12,21 @@
     <color name="ct_pager_stroke">#8a8a8a</color>
     <color name="ct_pager_bg">#e5e5e5</color>
 
-    <color name="ct_mainpage_txt_red"> #A52A2A</color>
-    
+
     <color name="login_dialog_transparency">#00000000</color>
 
     <color name="ct_blue">#5c9dec</color>
     <color name="ct_blue_fouce">#3371c3</color>
     <color name="ct_bule_2">#b4cffa</color>
     <color name="ct_font_red">#B22222</color>
+    <color name="ct_font_hint">#cccccc</color>
     <color name="ct_font_black">#5e5e5e</color>
     <color name="ct_font_gray">#8a8a8a</color>
 
     <color name="ct_line_gray">#eeeeee</color>
 
     <color name="ct_progress_blue">#bfdcf9</color>
+
+    <color name="background">#f1f1f1</color>
 
 </resources>

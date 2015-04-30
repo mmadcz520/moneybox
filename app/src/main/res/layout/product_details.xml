@@ -2,18 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
-              android:background="@color/ct_white"
+              android:background="@color/background"
               android:orientation="vertical" >
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
               android:layout_width="fill_parent"
-              android:layout_height="wrap_content"
+              android:layout_height="0dp"
+              android:layout_weight="100"
               android:orientation="vertical" >
 
           <com.changtou.moneybox.module.widget.DragTopLayout
                  android:id="@+id/vertyPager1"
                  android:layout_width="match_parent"
-                 android:layout_height="match_parent" >
+                 android:layout_height="fill_parent" >
 
               <include layout="@layout/product_details_sub1"/>
 
@@ -30,7 +31,7 @@
     </LinearLayout>
 
     <Button
-        android:layout_width="340dp"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@color/ct_blue"
         android:text="立即投资"

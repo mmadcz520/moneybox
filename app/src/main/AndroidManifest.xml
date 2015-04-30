@@ -37,11 +37,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".moneybox.module.widget.BootActivity"
 
-             >
+        <activity android:name=".moneybox.module.page.BootActivity"
+            android:theme="@android:style/Theme.NoTitleBar">
         </activity>
+
         <activity
             android:name=".moneybox.module.page.MainActivity"
             android:theme="@style/ActivityTheme_Light">

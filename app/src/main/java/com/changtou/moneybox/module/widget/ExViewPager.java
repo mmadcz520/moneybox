@@ -30,4 +30,8 @@ public class ExViewPager extends ViewPager{
             return super.onInterceptTouchEvent(arg0);
         return false;
     }
+
+    public boolean onTouchEvent(MotionEvent arg0) {
+        return false;
+    }
 }

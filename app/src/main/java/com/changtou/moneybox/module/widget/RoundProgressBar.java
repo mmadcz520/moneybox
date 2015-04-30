@@ -12,7 +12,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AccelerateInterpolator;
@@ -22,7 +21,6 @@ import android.view.animation.AnimationSet;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.ScaleAnimation;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.changtou.R;
 import com.changtou.moneybox.common.utils.AppUtil;
@@ -95,7 +93,6 @@ public class RoundProgressBar extends LinearLayout
 
     //折线路径
     private final Path mPath1 = new Path();
-    private final Path mPath2 = new Path();
     private final Paint mGesturePaint = new Paint();
     int width = getWidth();
     int height = getHeight();
@@ -155,7 +152,9 @@ public class RoundProgressBar extends LinearLayout
         textIsDisplayable = mTypedArray.getBoolean(R.styleable.RoundProgressBar_textIsDisplayable, true);
         style = mTypedArray.getInt(R.styleable.RoundProgressBar_style, 0);
 
+
         mTypedArray.recycle();
+        this.setWillNotDraw(false);
 
         //路径绘制动画
         mGesturePaint.setAntiAlias(true);
@@ -185,6 +184,7 @@ public class RoundProgressBar extends LinearLayout
     protected void onDraw(Canvas canvas)
     {
         super.onDraw(canvas);
+
         width = getWidth();
         height = getHeight();
 
@@ -193,19 +193,14 @@ public class RoundProgressBar extends LinearLayout
          */
         int centre = height / 2; //获取圆心的x坐标
         int radius = (int) (centre - roundWidth / 2); //圆环的半径
-        paint.setColor(Color.WHITE); //设置圆环的颜色
-        paint.setStyle(Paint.Style.STROKE); //设置空心
-        paint.setStrokeWidth(roundWidth); //设置圆环的宽度
-        paint.setAntiAlias(true);  //消除锯齿
-        canvas.drawCircle(width, centre, radius, paint); //画出圆环
 
         /**
          * 画进度百分比
          */
-        paint.setStrokeWidth(0);
-        paint.setColor(textColor);
-        paint.setTextSize(textSize);
-        paint.setTypeface(Typeface.DEFAULT_BOLD); //设置字体
+//        paint.setStrokeWidth(0);
+//        paint.setColor(textColor);
+//        paint.setTextSize(textSize);
+//        paint.setTypeface(Typeface.DEFAULT_BOLD); //设置字体
 
 
         /**
@@ -218,7 +213,7 @@ public class RoundProgressBar extends LinearLayout
 
         switch (style)
         {
-            case STROKE:
+            case FILL:
             {
                 paint.setStyle(Paint.Style.STROKE);
                 paint.setAntiAlias(true);
@@ -234,11 +229,18 @@ public class RoundProgressBar extends LinearLayout
                 canvas.drawArc(new RectF(width/2 - (radius - roundWidth / 2), centre - (radius - roundWidth / 2), width/2 + (radius - roundWidth / 2), centre + (radius - roundWidth / 2)), 0, 360, true, paint);
                 break;
             }
-            case FILL:
+            case STROKE:
             {
-                paint.setStyle(Paint.Style.FILL_AND_STROKE);
-                if (progress != 0)
-                    canvas.drawArc(oval, 0, 360 * progress / max, true, paint);  //根据进度画圆弧
+                paint.setColor(roundColor); //设置圆环的颜色
+                paint.setStyle(Paint.Style.STROKE); //设置空心
+                paint.setStrokeWidth(roundWidth); //设置圆环的宽度
+                paint.setAntiAlias(true);  //消除锯齿
+                canvas.drawCircle(width / 2, width / 2, radius, paint); //画出圆环
+
+                paint.setColor(textColor);
+                paint.setStrokeCap(Paint.Cap.ROUND);
+//                if (progress != 0)
+                    canvas.drawArc(oval, 270, (360 * 80 + 270)  / max, false, paint);
                 break;
             }
         }
