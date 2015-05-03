@@ -1,14 +1,11 @@
-package com.changtou.moneybox.module.widget;
+package com.changtou.moneybox.module.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
 import com.changtou.R;
 import com.changtou.moneybox.module.entity.ProductEntity;

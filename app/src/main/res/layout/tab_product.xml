@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context=".MyActivity">
+<com.changtou.moneybox.module.widget.MultiStateView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/multiStateView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:msv_errorView="@layout/error_view"
+    app:msv_emptyView="@layout/empty_view"
+    app:msv_loadingView="@layout/loading_view"
+    app:msv_viewState="loading">
 
     <com.handmark.pulltorefresh.library.PullToRefreshListView
         android:id="@+id/product_list"
@@ -21,4 +26,4 @@
         android:smoothScrollbar="true"
         />
 
-</FrameLayout>
+</com.changtou.moneybox.module.widget.MultiStateView>

@@ -15,7 +15,8 @@
         <com.changtou.moneybox.module.widget.RoundProgressBar
             android:id="@+id/details_progressbar"
             android:layout_width="300dp"
-            android:layout_height="120dp"
+            android:layout_height="0dp"
+            android:layout_weight="4"
             android:layout_marginTop="20dp"
             android:layout_gravity="center_horizontal"
             android_custom:style="FILL"
@@ -68,8 +69,22 @@
                     android:textColor="@color/ct_blue"
                     android:text="项目期限"/>
             </LinearLayout>
-
         </com.changtou.moneybox.module.widget.RoundProgressBar>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/fillet_stroke"
+                android:text="100元起投 | 每人限购1,000,000.00   "/>
+
+        </RelativeLayout>
+
     </LinearLayout>
 
     <!--  投资剩余 -->
@@ -82,10 +97,13 @@
 
         <ListView
             android:id="@+id/lv_details"
-            android:layout_marginTop="3dp"
+            android:layout_marginTop="2dp"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:headerDividersEnabled="true">
+            android:layout_height="fill_parent"
+            android:divider="@color/ct_line_gray"
+            android:dividerHeight="1px"
+            android:headerDividersEnabled="true"
+            android:footerDividersEnabled="true">
         </ListView>
 
     </LinearLayout>
@@ -125,7 +143,6 @@
                 android:text="继续拖动查看详情"
                 android:textSize="10sp"
                 android:textColor="@color/ct_font_gray"/>
-
 
             <View android:layout_width="wrap_content"
                   android:layout_height="1px"

@@ -1,6 +1,7 @@
 package com.changtou.moneybox.module.page;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -13,16 +14,15 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.ScaleAnimation;
+import android.widget.Button;
 
 import com.changtou.R;
 import com.changtou.moneybox.common.activity.BaseFragment;
-import com.changtou.moneybox.module.entity.ProductEntity;
+import com.changtou.moneybox.module.adapter.ProductListAdapter;
 import com.changtou.moneybox.module.http.HttpRequst;
 import com.changtou.moneybox.module.widget.CountView;
 import com.changtou.moneybox.module.widget.ExImageSwitcher;
-import com.changtou.moneybox.module.widget.ExLoadingDialog;
 import com.changtou.moneybox.module.widget.LineView;
-import com.changtou.moneybox.module.widget.ProductListAdapter;
 import com.changtou.moneybox.module.widget.RoundProgressBar;
 
 /**
@@ -128,6 +128,15 @@ public class HomeFragment extends BaseFragment
 
         mRPB = (RoundProgressBar)mView.findViewById(R.id.roundProgressBar2);
         mRPB.setProgress(80);
+
+        Button btn = (Button)mView.findViewById(R.id.homepage_btn_invest);
+
+        final Intent intent = new Intent(this.getActivity(), ConfirmActivity.class);
+        btn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(intent);
+            }
+        });
 
         return mView;
     }

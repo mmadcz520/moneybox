@@ -1,7 +1,5 @@
 package com.changtou.moneybox.module.entity;
 
-import android.util.Log;
-
 import com.changtou.moneybox.common.http.base.BaseEntity;
 
 import org.json.JSONArray;
@@ -10,13 +8,12 @@ import org.json.JSONObject;
 import java.util.LinkedList;
 
 /**
- * 描述: 产品实体类
+ * 产品详细信息实体类
  *
- * @since 2015-3-30
- * @author zhoulongfei
+ * Created by Administrator on 2015/5/3 0003.
  */
-public class ProductEntity extends BaseEntity {
-
+public class ProductDetailsEntity extends BaseEntity
+{
     public LinkedList mList = null;
 
     /**

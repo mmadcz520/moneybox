@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/adapter/ProductDetailsAdapter.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/adapter/ProductListAdapter.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/entity/ProductDetailsEntity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/page/BootActivity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/page/ConfirmActivity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/page/ProductDetailsActivity.java" charset="UTF-8" />

@@ -2,6 +2,7 @@ package com.changtou.moneybox.module.http;
 
 import com.changtou.moneybox.common.http.base.BaseEntity;
 import com.changtou.moneybox.common.http.base.BaseHttpRequest;
+import com.changtou.moneybox.module.entity.ProductDetailsEntity;
 import com.changtou.moneybox.module.entity.ProductEntity;
 
 /**
@@ -22,6 +23,8 @@ public class HttpRequst extends BaseHttpRequest
 
     // get请求的reqType<1000;
     public final static int REQ_TYPE_PRODUCT_HOME = 21;
+
+    public final static int REQ_TYPE_PRODUCT_DETAILS = 22;
 
     //主页推荐产品列表
     public static String REQ_URL_PRODUCT_HOME = BASE_URL + "products";
@@ -79,6 +82,9 @@ public class HttpRequst extends BaseHttpRequest
         {
             case REQ_TYPE_PRODUCT_HOME:
                 paser = new ProductEntity();
+                break;
+            case REQ_TYPE_PRODUCT_DETAILS:
+                paser = new ProductDetailsEntity();
                 break;
         }
         return paser;

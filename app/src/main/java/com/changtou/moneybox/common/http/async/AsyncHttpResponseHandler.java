@@ -13,6 +13,7 @@ import org.apache.http.util.EntityUtils;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.util.Log;
 
 /**
  * Used to intercept and handle the responses from requests made using
@@ -244,15 +245,22 @@ public class AsyncHttpResponseHandler {
 
     // Interface to AsyncHttpRequest
     void sendResponseMessage(HttpResponse response,int reqType) {
+
         StatusLine status = response.getStatusLine();
+        Log.e("CT_DEMO", "sendResponseMessagesendResponseMessagesendResponseMessage" + status.getStatusCode());
         try {
             HttpEntity entity = null;
             HttpEntity temp = response.getEntity();
             if (temp != null) {
                 entity = new BufferedHttpEntity(temp);
+                Log.e("CT_DEMO", "sendResponseMessagesendResponseMessagesendResponseMessage" + EntityUtils.toString(entity, "UTF-8"));
             }
             if (status.getStatusCode() != 200) {
+
                 String responseBody = EntityUtils.toString(entity, "UTF-8");
+
+                Log.e("CT_DEMO", "sendResponseMessage" + "responseBody" + responseBody);
+
                 sendFailureMessage(
                         new HttpResponseException(status.getStatusCode(),
                                 status.getReasonPhrase()), responseBody,reqType);

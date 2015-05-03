@@ -1,9 +1,9 @@
 package com.changtou.moneybox.module.page;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewStub;
 import android.widget.Button;
@@ -12,9 +12,13 @@ import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 
 import com.changtou.R;
-import com.changtou.moneybox.module.widget.MyScrollView;
+import com.changtou.moneybox.module.adapter.ProductDetailsAdapter;
+import com.changtou.moneybox.module.adapter.ProductListAdapter;
+import com.changtou.moneybox.module.entity.ProductDetailsEntity;
+import com.changtou.moneybox.module.entity.ProductEntity;
+import com.changtou.moneybox.module.http.HttpRequst;
+import com.changtou.moneybox.module.widget.MultiStateView;
 import com.changtou.moneybox.module.widget.RoundProgressBar;
-import com.changtou.moneybox.module.widget.VerticalPager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,6 +35,9 @@ public class ProductDetailsActivity extends CTBaseActivity
 {
     RelativeLayout.LayoutParams parentParams;
     RelativeLayout.LayoutParams paneBomParams;
+
+    private ProductDetailsAdapter mAdapter = null;
+    private ListView mProdList = null;
 
 
     /**
@@ -51,32 +58,43 @@ public class ProductDetailsActivity extends CTBaseActivity
             }
         });
 
-        ListView prodList = (ListView)findViewById(R.id.lv_details);
-        initSettingList(prodList, R.array.item_setting1);
+        mProdList = (ListView)findViewById(R.id.lv_details);
+        ViewStub viewStub= new ViewStub(this);
+        mProdList.addHeaderView(viewStub);
 
         RoundProgressBar rpb = (RoundProgressBar)findViewById(R.id.details_progressbar);
         rpb.setProgress(60);
     }
 
-    /*
-* 初始化设置列表
-*/
-    private void initSettingList(ListView listView, int resId) {
-        List<Map<String, Object>> list = new ArrayList();
-        String[] titleList = this.getResources().getStringArray(resId);
-        for (int i = 0; i < titleList.length; i++) {
-            Map<String, Object> map = new HashMap();
-            map.put("text", titleList[i]);
-            map.put("img", R.drawable.common_icon_arrow);
-            list.add(map);
-        }
 
-        SimpleAdapter adapter = new SimpleAdapter(this, list, R.layout.item_setting,
-                new String[] {"text", "img"}, new int[] {
-                R.id.homepage_lv_text, R.id.homepage_lv_img
-        });
-        ViewStub viewStub= new ViewStub(this);
-        listView.addHeaderView(viewStub);
-        listView.setAdapter(adapter);
+    /**
+     * 网络数据请求， 初始化数据
+     *
+     * @param bundle
+     */
+    protected void initData(Bundle bundle)
+    {
+        mAdapter = new ProductDetailsAdapter(this);
+        mProdList.setAdapter(mAdapter);
+
+        sendRequest(HttpRequst.REQ_TYPE_PRODUCT_DETAILS,
+                HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_PRODUCT_HOME),
+                mParams,
+                getAsyncClient(), false);
+    }
+
+    /**
+     *
+     * @param content   返回值
+     * @param object    返回的转化对象
+     * @param reqType   请求的唯一识别
+     */
+    public void onSuccess(String content, Object object, int reqType)
+    {
+        if (reqType == HttpRequst.REQ_TYPE_PRODUCT_DETAILS)
+        {
+            ProductDetailsEntity entity = (ProductDetailsEntity) object;
+            mAdapter.setData(entity);
+        }
     }
 }

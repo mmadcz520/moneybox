@@ -52,7 +52,7 @@ public class SegmentControl extends View
     private Paint mPaint;
 
     public enum Direction{
-        HORIZON(0), VERTICAL(1);
+        HORIZON(0), VERTICAL(1), OTHER(2);
 
         int mV;
 
@@ -124,7 +124,7 @@ public class SegmentControl extends View
         mPaint.setColor(mColors.getDefaultColor());
 
         //here's the tricky thing, when you doing a click detect on a capacitive touch screen,
-        //sometimes the touch points of touchDown and touchUp are different(it's call slop) even when you didn't actually move your finger,
+        //sometimes the touch poi   nts of touchDown and touchUp are different(it's call slop) even when you didn't actually move your finger,
         //so we set a distance limit for the distance of this two touch points to create a better user experience;
         int touchSlop = 0;
 

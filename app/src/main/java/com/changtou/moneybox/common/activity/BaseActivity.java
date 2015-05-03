@@ -164,7 +164,6 @@ public abstract class BaseActivity extends ActionBarActivity implements HttpCall
      * @see android.app.Activity#onResume()
      */
     protected void onResume() {
-        Log.e("ChangTou", "onResume++++++++++++++++++++++++++");
         super.onResume();
     }
 }

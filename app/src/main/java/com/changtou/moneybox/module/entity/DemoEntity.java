@@ -21,7 +21,7 @@ public class DemoEntity extends BaseEntity {
             entity = new DemoListEntity();
             entity.paser(array.getJSONObject(i));
             mList.add(entity);
-    }
+        }
 
     }
 
