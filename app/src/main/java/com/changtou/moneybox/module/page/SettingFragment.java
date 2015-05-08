@@ -27,7 +27,7 @@ public class SettingFragment extends BaseFragment{
     private Context mContext = null;
 
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.fragment_setting, null);
+        mView = inflater.inflate(R.layout.setting_fragment, null);
         mContext=this.getActivity();
 
         ListView pageList1 = (ListView) mView.findViewById(R.id.lv_setting1);
@@ -67,7 +67,7 @@ public class SettingFragment extends BaseFragment{
             list.add(map);
         }
 
-        SimpleAdapter adapter = new SimpleAdapter(mContext, list, R.layout.item_setting,
+        SimpleAdapter adapter = new SimpleAdapter(mContext, list, R.layout.setting_item,
                 new String[] {"text", "img"}, new int[] {
                 R.id.homepage_lv_text, R.id.homepage_lv_img
         });

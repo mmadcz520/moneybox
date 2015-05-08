@@ -3,17 +3,23 @@ package com.changtou.moneybox.common.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.changtou.R;
 import com.changtou.moneybox.common.http.base.BaseHttpClient;
 import com.changtou.moneybox.common.http.base.HttpCallback;
 import com.changtou.moneybox.common.http.async.RequestParams;
 import com.changtou.moneybox.common.utils.DeviceInfo;
+import com.changtou.moneybox.module.widget.MultiStateView;
 
 public abstract class BaseFragment extends Fragment implements
         HttpCallback {
+
+    public final static String LOGTAG = "CT_MONEY";
+
     protected boolean bQuit;
 
     //httpClient
@@ -25,6 +31,8 @@ public abstract class BaseFragment extends Fragment implements
     protected RequestParams mParams = null;
 
     public FragmentClick click;
+
+    private MultiStateView mMultiStateView = null;
 
     /**
      * @see BaseFragment#onAttach(Activity)
@@ -48,8 +56,14 @@ public abstract class BaseFragment extends Fragment implements
      */
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return initView(inflater,container,
-                savedInstanceState);
+
+        ViewGroup view = (ViewGroup)inflater.inflate(R.layout.base_fragment, null);
+        View childView = initView(inflater, container, savedInstanceState);
+        view.addView(childView);
+
+        mMultiStateView = (MultiStateView)view.findViewById(R.id.base_fragment);
+
+        return view;
     }
 
 
@@ -131,6 +145,7 @@ public abstract class BaseFragment extends Fragment implements
      */
     public void sendRequest(int reqType, String url, RequestParams params,
                             BaseHttpClient baseHttpClient, boolean showDialog) {
+
         if (DeviceInfo.isNetWorkEnable(this.getActivity())) {
             if(baseHttpClient!=null){
                 if (reqType > 10000) {
@@ -140,7 +155,18 @@ public abstract class BaseFragment extends Fragment implements
                 }
             }
         }
-
+        else
+        {
+            mMultiStateView.setViewState(MultiStateView.ViewState.ERROR);
+        }
     }
 
+    /**
+     * app 调试信息
+     * @param log
+     */
+    protected void printLog(String log)
+    {
+        Log.e(LOGTAG, this.toString() + "-" + log);
+    }
 }

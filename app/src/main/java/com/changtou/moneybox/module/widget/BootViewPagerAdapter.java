@@ -41,7 +41,6 @@ public class BootViewPagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         // TODO Auto-generated method stub
-
         container.addView(mListViews.get(position));
         return mListViews.get(position);
     }

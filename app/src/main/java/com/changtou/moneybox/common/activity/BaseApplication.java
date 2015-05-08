@@ -16,7 +16,6 @@ import android.content.pm.PackageManager.NameNotFoundException;
 
 import com.changtou.moneybox.common.http.base.BaseHttpRequest;
 import com.changtou.moneybox.common.http.impl.AsyncHttpClientImpl;
-import com.changtou.moneybox.common.manager.FolderManager;
 import com.changtou.moneybox.common.utils.DeviceInfo;
 import com.changtou.moneybox.common.utils.MySharedPreferencesMgr;
 
@@ -70,7 +69,7 @@ public abstract class BaseApplication extends Application implements UncaughtExc
 
 		super.onCreate();
 		mApplication = this;
-        FolderManager.initSystemFolder();
+//        FolderManager.initSystemFolder();
 		mAppParamsHolder = new Hashtable<String, Object>();
 	}
 

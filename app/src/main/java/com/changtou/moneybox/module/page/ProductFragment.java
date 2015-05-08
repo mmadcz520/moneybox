@@ -3,12 +3,8 @@ package com.changtou.moneybox.module.page;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 
@@ -23,11 +19,14 @@ import com.changtou.moneybox.common.activity.BaseFragment;
 import com.changtou.moneybox.module.adapter.ProductListAdapter;
 import com.changtou.moneybox.module.entity.ProductEntity;
 import com.changtou.moneybox.module.http.HttpRequst;
-import com.changtou.moneybox.module.widget.DemoAdapter;
+import com.changtou.moneybox.module.widget.ExFPAdapter;
 import com.changtou.moneybox.module.widget.MultiStateView;
+import com.changtou.moneybox.module.widget.SlidingTabLayout;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -39,21 +38,32 @@ import java.util.LinkedList;
  */
 public class ProductFragment extends BaseFragment{
 
-    private Context mContext = null;
-    private ListView xList = null;
-    private DemoAdapter adapter = null;
-
     private ViewPager mViewPager;
-    private PagerAdapter mPagerAdapter;
+    SlidingTabLayout mSlidingTabLayout;
 
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View mView = inflater.inflate(R.layout.fragment_product, null);
-        mContext = this.getActivity();
+        View mView = inflater.inflate(R.layout.product_fragment, container, false);
+
+        mSlidingTabLayout = (SlidingTabLayout) mView.findViewById(R.id.sliding_tabs);
+        Resources res = getResources();
+        mSlidingTabLayout.setCustomTabView(R.layout.product_tabpage_indicator, android.R.id.text1);
+        mSlidingTabLayout.setSelectedIndicatorColors(res.getColor(R.color.tab_indicator_color));
+
+        //根据产品分类列表初始化界面
+        List<BaseFragment> viewList = new ArrayList<>();
+        viewList.add(new SubPage());
+        viewList.add(new SubPage());
+        viewList.add(new SubPage());
+        viewList.add(new SubPage());
 
         mViewPager = (ViewPager) mView.findViewById(R.id.pager);
-        mPagerAdapter = new MyPagerAdapter(getChildFragmentManager());
-        mViewPager.setAdapter(mPagerAdapter);
+        ExFPAdapter pagerAdapter = new ExFPAdapter(getChildFragmentManager(), viewList);
+        pagerAdapter.setTitles(new String[]{"长投宝", "ZAMA宝", "精选债权", "转让专区"});
+        mViewPager.setAdapter(pagerAdapter);
+        mViewPager.setCurrentItem(0);
         mViewPager.setOnPageChangeListener(mPageChangeListener);
+        mViewPager.setOffscreenPageLimit(viewList.size());
+        mSlidingTabLayout.setViewPager(mViewPager);
 
         return mView;
     }
@@ -63,9 +73,7 @@ public class ProductFragment extends BaseFragment{
     }
 
     protected void initData(Bundle savedInstanceState) {
-        //adapter=new DemoAdapter(mContext);
-        //xList.setAdapter(adapter);
-        //onInitList();
+
     }
 
     public void onSuccess(String content, Object object, int reqType) {
@@ -80,7 +88,7 @@ public class ProductFragment extends BaseFragment{
 
         public void onPageSelected(int arg0)
         {
-//            mTabWidget.setCurrentTab(arg0);
+//            mSegmentControl.setSelectIndex(arg0);
         }
 
         public void onPageScrolled(int arg0, float arg1, int arg2)
@@ -93,67 +101,30 @@ public class ProductFragment extends BaseFragment{
 
         }
     };
-    private class MyPagerAdapter extends FragmentStatePagerAdapter
-    {
-        public MyPagerAdapter(FragmentManager fm)
-        {
-            super(fm);
-        }
-
-        /**
-         * @see FragmentPagerAdapter#getItem(int)
-         * @param position 第几项
-         * @return
-         */
-        public Fragment getItem( int position)
-        {
-            return SubPage.create(position);
-        }
-        /**
-         * @see FragmentPagerAdapter#getCount()
-         * @return
-         */
-        public int getCount()
-        {
-            return 3;
-        }
-    }
 
     /**
      * 描述: 产品分类子页面
      * @author zhoulongfei
      */
-    public static class SubPage extends BaseFragment
+    public class SubPage extends BaseFragment implements PullToRefreshBase.OnRefreshListener
     {
         private ProductListAdapter mAdapter = null;
         private Context mContext = null;
 
         private PullToRefreshListView mPullRefreshListView;
-        private LinkedList<String> mListItems;
 
         private ListView actualListView;
-
         private MultiStateView mMultiStateView;
-
-        public static SubPage create(int type)
-        {
-            SubPage f = new SubPage();
-            Bundle b = new Bundle();
-            b.putInt("productType", type);
-            f.setArguments(b);
-            return f;
-        }
 
         protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            View mView = inflater.inflate(R.layout.tab_product, null);
+            View mView = inflater.inflate(R.layout.product_tabpage_layout, null);
+
             mContext = this.getActivity();
-
             mMultiStateView = (MultiStateView) mView.findViewById(R.id.multiStateView);
-
             mPullRefreshListView = (PullToRefreshListView) mView.findViewById(R.id.product_list);
             actualListView = mPullRefreshListView.getRefreshableView();
-            registerForContextMenu(actualListView);
+            mPullRefreshListView.setOnRefreshListener(this);
 
             return mView;
         }
@@ -177,6 +148,7 @@ public class ProductFragment extends BaseFragment{
                 Intent intent = new Intent(activity, ProductDetailsActivity.class);
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
                 {
+                    // 跳转到详情页
                     startActivity(intent);
                 }
 
@@ -192,8 +164,8 @@ public class ProductFragment extends BaseFragment{
             mAdapter = new ProductListAdapter(mContext);
             actualListView.setAdapter(mAdapter);
 
-            sendRequest(HttpRequst.REQ_TYPE_PRODUCT_HOME,
-                    HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_PRODUCT_HOME),
+            sendRequest(HttpRequst.REQ_TYPE_PRODUCT_LIST,
+                    HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_PRODUCT_LIST),
                     mParams,
                     mAct.getAsyncClient(), false);
         }
@@ -205,12 +177,26 @@ public class ProductFragment extends BaseFragment{
                 mMultiStateView.setViewState(MultiStateView.ViewState.CONTENT);
                 ProductEntity entity = (ProductEntity) object;
                 mAdapter.setData(entity);
+
+                mPullRefreshListView.onRefreshComplete();
             }
         }
 
         public void onFailure(Throwable error, String content, int reqType)
         {
             mMultiStateView.setViewState(MultiStateView.ViewState.ERROR);
+        }
+
+        /**
+         * 刷新函数
+         * @param refreshView
+         */
+        public void onRefresh(PullToRefreshBase refreshView)
+        {
+            sendRequest(HttpRequst.REQ_TYPE_PRODUCT_HOME,
+                    HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_PRODUCT_HOME),
+                    mParams,
+                    mAct.getAsyncClient(), false);
         }
     }
 }

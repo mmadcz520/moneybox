@@ -8,34 +8,28 @@
     <LinearLayout
               android:layout_width="fill_parent"
               android:layout_height="0dp"
-              android:layout_weight="100"
+              android:layout_weight="11"
               android:orientation="vertical" >
-
-          <com.changtou.moneybox.module.widget.DragTopLayout
-                 android:id="@+id/vertyPager1"
-                 android:layout_width="match_parent"
-                 android:layout_height="fill_parent" >
-
-              <include layout="@layout/product_details_sub1"/>
-
-              <ScrollView
-                  android:layout_width="fill_parent"
-                  android:layout_height="fill_parent">
-                  <include layout="@layout/product_details_sub2"
-                       android:layout_width="match_parent"
-                       android:layout_height="fill_parent"/>
-              </ScrollView>
-
-          </com.changtou.moneybox.module.widget.DragTopLayout>
+        <com.changtou.moneybox.module.widget.PullToNextLayout
+        android:id="@+id/pullToNextLayout"
+        android:background="@color/background"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"/>
 
     </LinearLayout>
 
-    <Button
+    <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@color/ct_blue"
-        android:text="立即投资"
-        android:id="@+id/confirm_button"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <Button
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:background="@color/ct_blue"
+            android:text="立即投资"
+            android:id="@+id/confirm_button"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
 
 </LinearLayout>

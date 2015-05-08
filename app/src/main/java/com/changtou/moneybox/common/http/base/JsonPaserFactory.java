@@ -24,6 +24,8 @@ public class JsonPaserFactory
      */
     public static BaseEntity paserObj(String data, int reqType)
     {
+        Log.e("CT_MONEY", "paserObj" + data);
+        Log.e("CT_MONEY", "paserObj" + reqType);
 
         if ((data == null) || data.trim().toString().equals("")) return null;
         BaseEntity entity = (BaseEntity) BaseApplication.mHttpRequest.getPaser(reqType);

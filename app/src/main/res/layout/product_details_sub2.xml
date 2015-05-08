@@ -1,3 +1,10 @@
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/scrollView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/background"
+            android:fillViewport="true">
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="800dp"
@@ -20,16 +27,17 @@
             segmentcontrol:cornerRadius="3dp"
             segmentcontrol:direction="horizon"
             segmentcontrol:verticalGap="12dp"
-            segmentcontrol:horizonGap="13dp"/>
+            segmentcontrol:horizonGap="20dp"/>
         </LinearLayout>
 
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/intoror"
+        android:id="@+id/product_introduction"
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+    </android.support.v4.view.ViewPager>
 
-        </android.support.v4.view.ViewPager>
 
-
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>

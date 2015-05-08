@@ -1,18 +1,6 @@
 <resources>
 
     <color name="black_overlay">#66000000</color>
-    <color name="app_background">#e5e5e5</color>
-    <color name="grid_line">#e5e5e5</color>
-
-    <color name="ct_white">#ffffff</color>
-    <color name="ct_text_gray">#6a737b</color>
-
-    <color name="ct_item_gray">#eeeeee</color>
-
-    <color name="ct_pager_stroke">#8a8a8a</color>
-    <color name="ct_pager_bg">#e5e5e5</color>
-
-
     <color name="login_dialog_transparency">#00000000</color>
 
     <color name="ct_blue">#5c9dec</color>
@@ -28,5 +16,9 @@
     <color name="ct_progress_blue">#bfdcf9</color>
 
     <color name="background">#f1f1f1</color>
+    <color name="text_white">#ffffff</color>
+    <color name="tab_indicator_color">#FFF</color>
+
+    <color name="background_white">#ffffff</color>
 
 </resources>

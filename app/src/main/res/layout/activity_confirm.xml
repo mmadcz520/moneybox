@@ -1,98 +1,24 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
-                android:background="@color/ct_pager_bg">
-
-    <View
-          android:id="@+id/split_line"
-          android:layout_width="match_parent"
-          android:layout_height="3dp"
-          android:layout_weight="1"
-          android:layout_gravity="center_vertical"
-          android:background="@color/ct_pager_bg"/>
-
+                android:orientation="vertical"
+                android:background="@color/background">
     <LinearLayout
         android:layout_below="@+id/split_line"
         android:id="@+id/describe_layout"
         android:layout_width="fill_parent"
-        android:layout_height="180dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_height="30dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="10dp"
+        <ListView
+            android:id="@+id/confirm_product_details"
+            android:layout_marginTop="2dp"
             android:layout_width="fill_parent"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="[长投宝] 上手易第256期"
-                android:textSize="20sp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_height="30dp"
-            android:layout_width="fill_parent"
-            android:layout_marginLeft="10dp"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:text="投资期限 ："
-                android:textSize="15sp"/>
-            <TextView
-                android:id = "@+id/tx_timelimit"
-                android:layout_width="200dp"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:text="三个月"
-                android:textSize="15sp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_height="30dp"
-            android:layout_width="fill_parent"
-            android:layout_marginLeft="10dp"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:text="年化利率 ："
-                android:textSize="15sp"/>
-            <TextView
-                android:id="@+id/tx_interest"
-                android:layout_width="200dp"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:text="11%"
-                android:textSize="15sp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_height="30dp"
-            android:layout_width="fill_parent"
-            android:layout_marginLeft="10dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:text="剩余可投金额 ："
-                android:textSize="15sp"/>
-
-            <TextView
-                android:id="@+id/tx_limit"
-                android:layout_width="200dp"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:text="100,000,000.00"
-                android:textSize="15sp"/>
-
-        </LinearLayout>
+            android:layout_height="fill_parent"
+            android:divider="@color/ct_line_gray"
+            android:dividerHeight="1px"
+            android:headerDividersEnabled="true"
+            android:footerDividersEnabled="true"/>
     </LinearLayout>
     
     <RelativeLayout
@@ -111,21 +37,13 @@
                   android:hint="至少投 100 元"
                   android:background="@null"/>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/ct_blue"
-            android:layout_alignParentRight="true"
-            android:text="全投"/>
-
     </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/balance_layout"
         android:paddingTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/input_layout">
+        android:layout_height="wrap_content">
 
         <TextView
             android:layout_width="wrap_content"
@@ -135,11 +53,10 @@
     </LinearLayout>
 
     <Button
-        android:layout_below="@+id/balance_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/ct_blue"
         android:layout_marginTop="10dp"
         android:text="立即投资"/>
 
-</RelativeLayout>
+</LinearLayout>

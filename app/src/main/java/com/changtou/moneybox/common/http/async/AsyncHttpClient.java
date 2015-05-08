@@ -50,6 +50,7 @@ import org.apache.http.protocol.HttpContext;
 import org.apache.http.protocol.SyncBasicHttpContext;
 
 import android.content.Context;
+import android.util.Log;
 
 /**
  * The AsyncHttpClient can be used to make asynchronous GET, POST, PUT and
@@ -261,9 +262,6 @@ public class AsyncHttpClient {
     /**
      * Sets basic authentication for the request. Uses AuthScope.ANY. This is
      * the same as setBasicAuth('username','password',AuthScope.ANY)
-     *
-     * @param username
-     * @param password
      */
     public void setBasicAuth(String user, String pass) {
         AuthScope scope = AuthScope.ANY;
@@ -437,6 +435,9 @@ public class AsyncHttpClient {
      */
     public void post(String url, RequestParams params,
                      AsyncHttpResponseHandler responseHandler, int reqType) {
+
+        Log.e("CT_MONEY", "post");
+
         post(null, url, params, responseHandler, reqType);
     }
 

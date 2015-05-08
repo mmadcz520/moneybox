@@ -22,6 +22,8 @@ import com.changtou.moneybox.common.http.impl.AsyncHttpClientImpl;
  */
 public abstract class BaseActivity extends ActionBarActivity implements HttpCallback {
 
+    public final static String LOGTAG = "CT_MONEY";
+
     public RequestParams mParams;
     public Click click;
     HashMap<String, String> UMENG_MAP = new HashMap<String, String>();
@@ -35,9 +37,6 @@ public abstract class BaseActivity extends ActionBarActivity implements HttpCall
      * @param bundle
      */
     protected void onCreate(Bundle bundle) {
-
-        //分支
-
         super.onCreate(bundle);
         click = new Click();
         mcontext=this.getApplicationContext();
@@ -47,7 +46,6 @@ public abstract class BaseActivity extends ActionBarActivity implements HttpCall
         mDeviceId =app.mDeviceId;
         initView(bundle);
         initLisener();
-        initData(bundle);
     }
 
     /**
@@ -127,7 +125,7 @@ public abstract class BaseActivity extends ActionBarActivity implements HttpCall
     /**
      * 初始化数据
      */
-    protected abstract void initData(Bundle bundle);
+    protected abstract void initData();
 
 
 
@@ -165,5 +163,15 @@ public abstract class BaseActivity extends ActionBarActivity implements HttpCall
      */
     protected void onResume() {
         super.onResume();
+        initData();
+    }
+
+    /**
+     * app 调试信息
+     * @param log
+     */
+    protected void printLog(String log)
+    {
+        Log.v(LOGTAG, this.toString()+"-"+log);
     }
 }

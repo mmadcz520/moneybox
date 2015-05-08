@@ -4,6 +4,14 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <!-- 产品列表布局相关参数 -->
-    <dimen name="product_list_textsize_normal">12sp</dimen>
+    <dimen name="font_size_normal">12sp</dimen>
+    <dimen name="font_size_big">21sp</dimen>
+    <dimen name="app_actionbar_height">48dp</dimen>
+
+    <!-- dialog-->
+    <dimen name="spot_size">6dp</dimen>
+    <dimen name="title_margin">10dp</dimen>
+    <dimen name="progress_margin">24dp</dimen>
+    <dimen name="progress_width">250dp</dimen>
 
 </resources>

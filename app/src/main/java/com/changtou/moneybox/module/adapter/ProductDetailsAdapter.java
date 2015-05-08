@@ -1,7 +1,6 @@
 package com.changtou.moneybox.module.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,7 +56,7 @@ public class ProductDetailsAdapter extends BaseAdapter
         if (convertView == null)
         {
             viewHolder = new ViewHolder();
-            convertView = mInflater.inflate(R.layout.item_prod_details, null);
+            convertView = mInflater.inflate(R.layout.product_details_list_item, null);
 
             viewHolder.mKey = (TextView) convertView.findViewById(R.id.pro_key);
             viewHolder.mValue = (TextView) convertView.findViewById(R.id.pro_value);

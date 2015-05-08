@@ -11,7 +11,7 @@
 	   android:id="@+id/titile"
 	   android:layout_centerInParent="true"
 	   android:text="长投在线"
-       android:textColor="@color/ct_white"
+       android:textColor="@color/text_white"
 	   android:gravity="center"
        android:layout_gravity="center_vertical"
        android:layout_width="150dp"

@@ -82,10 +82,9 @@ public class CTBaseActivity extends BaseActivity{
     }
 
     /**
-     * @see BaseActivity#initData(Bundle)
-     * @param bundle
+     * @see BaseActivity#initData()
      */
-    protected void initData(Bundle bundle) {
+    protected void initData() {
 
     }
 
@@ -126,16 +125,17 @@ public class CTBaseActivity extends BaseActivity{
     public void initActionBarLayout()
     {
         ActionBar actionBar = this.getSupportActionBar();
+        actionBar.setElevation(0);
 
         if( null != actionBar)
         {
-//            int layoutId = R.layout.common_actionbar;
-//            actionBar.setDisplayShowHomeEnabled( false );
-//            actionBar.setDisplayShowCustomEnabled(true);
-//            LayoutInflater inflator = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//            View v = inflator.inflate(layoutId, null);
-//            ActionBar.LayoutParams layout = new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT);
-//            actionBar.setCustomView(v,layout);
+            int layoutId = R.layout.common_actionbar;
+            actionBar.setDisplayShowHomeEnabled( false );
+            actionBar.setDisplayShowCustomEnabled(true);
+            LayoutInflater inflator = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View v = inflator.inflate(layoutId, null);
+            ActionBar.LayoutParams layout = new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT);
+            actionBar.setCustomView(v,layout);
         }
     }
 }

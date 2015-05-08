@@ -1,5 +1,5 @@
 <resources>
-
-
+    <dimen name="app_actionbar_height">40dp</dimen>
+    <dimen name="app_bottomtab_height">44dp</dimen>
 </resources>
 

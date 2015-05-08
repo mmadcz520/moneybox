@@ -12,6 +12,14 @@ import com.changtou.moneybox.module.widget.ExViewPager;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 描述 : App主界面
+ * 1. 手势密码功能
+ * 2. 四个子页面的切换
+ *
+ * @author zhoulongfei
+ *
+ */
 public class MainActivity extends CTBaseActivity {
 
     //手势密码控件
@@ -57,6 +65,18 @@ public class MainActivity extends CTBaseActivity {
         mBars[3] = navbar_more;
 
         switchNavBar(0);
+
+        List<BaseFragment> viewList = new ArrayList<>();
+        viewList.add(new HomeFragment());
+        viewList.add(new ProductFragment());
+        viewList.add(new RichesFragment());
+        viewList.add(new SettingFragment());
+
+        ExFPAdapter fPAdapter = new ExFPAdapter(getSupportFragmentManager(), viewList);
+        mViewpager.setAdapter(fPAdapter);
+        mViewpager.setScanScroll(false);
+        mViewpager.setCurrentItem(0, false);
+        mViewpager.setOffscreenPageLimit(viewList.size());
     }
 
     /**
@@ -70,21 +90,10 @@ public class MainActivity extends CTBaseActivity {
     }
 
     /**
-     * @see com.changtou.moneybox.common.activity.BaseActivity#initData(Bundle)
-     * @param bundle 保存页面状态
+     * @see com.changtou.moneybox.common.activity.BaseActivity#initData()
      */
-    protected void initData(Bundle bundle) {
-        List<BaseFragment> viewList = new ArrayList<BaseFragment>();
-        viewList.add(new HomeFragment());
-        viewList.add(new ProductFragment());
-        viewList.add(new RichesFragment());
-        viewList.add(new SettingFragment());
+    protected void initData() {
 
-        ExFPAdapter fPAdapter = new ExFPAdapter(getSupportFragmentManager(), viewList);
-        mViewpager.setAdapter(fPAdapter);
-        mViewpager.setScanScroll(false);
-        mViewpager.setCurrentItem(0, false);
-        mViewpager.setOffscreenPageLimit(viewList.size());
     }
 
     /**

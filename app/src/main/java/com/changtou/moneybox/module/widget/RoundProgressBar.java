@@ -195,15 +195,6 @@ public class RoundProgressBar extends LinearLayout
         int radius = (int) (centre - roundWidth / 2); //圆环的半径
 
         /**
-         * 画进度百分比
-         */
-//        paint.setStrokeWidth(0);
-//        paint.setColor(textColor);
-//        paint.setTextSize(textSize);
-//        paint.setTypeface(Typeface.DEFAULT_BOLD); //设置字体
-
-
-        /**
          * 画圆弧 ，画圆环的进度
          */
         paint.setStrokeWidth(roundWidth); //设置圆环的宽度
@@ -267,23 +258,22 @@ public class RoundProgressBar extends LinearLayout
         int startX1 = width/2 + AppUtil.dip2px(mContext,70);
 
         //绘制折线
-        mGesturePaint.setStrokeWidth(AppUtil.dip2px(mContext,1));
-        mPath1.moveTo(startX,startY);
-        mPath1.lineTo(startX-AppUtil.dip2px(mContext,10),startY - AppUtil.dip2px(mContext,16));
+        mGesturePaint.setStrokeWidth(AppUtil.dip2px(mContext, 1));
+        mPath1.moveTo(startX, startY);
+        mPath1.lineTo(startX - AppUtil.dip2px(mContext, 10), startY - AppUtil.dip2px(mContext, 16));
         mPath1.lineTo(0, startY - AppUtil.dip2px(mContext, 16));
         canvas.drawPath(mPath1, mGesturePaint);
 
         mPath1.moveTo(startX1, startY);
-        mPath1.lineTo(startX1+AppUtil.dip2px(mContext,10), startY+AppUtil.dip2px(mContext,16));
-        mPath1.lineTo(width, startY+AppUtil.dip2px(mContext,16));
+        mPath1.lineTo(startX1 + AppUtil.dip2px(mContext, 10), startY + AppUtil.dip2px(mContext, 16));
+        mPath1.lineTo(width, startY + AppUtil.dip2px(mContext, 16));
         canvas.drawPath(mPath1, mGesturePaint);
 
         //绘制点
-        paint.setStrokeWidth(AppUtil.dip2px(mContext,5));
+        paint.setStrokeWidth(AppUtil.dip2px(mContext, 5));
         canvas.drawPoint(startX, startY, paint);
         canvas.drawPoint(startX1,startY, paint);
     }
-
 
     public synchronized int getMax()
     {
@@ -413,7 +403,6 @@ public class RoundProgressBar extends LinearLayout
             {
                 isDrawLine = true;
                 postInvalidate();
-
                 playHeartbeatAnimation();
             }
         });
@@ -428,20 +417,6 @@ public class RoundProgressBar extends LinearLayout
         postInvalidate();
     }
 
-    /**
-     * 绘制进度条周边路径
-     * @param path
-     */
-    public void setPath(float path)
-    {
-//        mPath.lineTo((getWidth()/2)-250-path, mPointY-50);
-        postInvalidate();
-//        setProgress((int) path);
-//        if(path == 80)
-//        {
-//            playHeartbeatAnimation();
-//        }
-    }
 
     //动画效果
     private void playHeartbeatAnimation() {

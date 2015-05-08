@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:baselineAligned="false"
     android:orientation="vertical" >
 
     <com.changtou.moneybox.module.widget.ExViewPager
@@ -14,7 +15,8 @@
     <LinearLayout
         android:id="@+id/layout_bottom"
         android:layout_width="fill_parent"
-        android:layout_height="56dp"
+        android:baselineAligned="false"
+        android:layout_height="@dimen/app_bottomtab_height"
         android:gravity="center_vertical">
 
         <LinearLayout
@@ -33,13 +35,15 @@
                 android:id="@+id/btn_main"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
+                android:contentDescription="@null"
                 android:background="@mipmap/navbar_home" />
             <TextView
                 android:clickable="false"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/ct_white"
-                android:text="首页"/>
+                android:textSize="@dimen/font_size_normal"
+                android:textColor="@color/text_white"
+                android:text="@string/tab_homepage"/>
         </LinearLayout>
 
         <LinearLayout
@@ -57,13 +61,15 @@
                 android:id="@+id/btn_product"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
+                android:contentDescription="@null"
                 android:background="@mipmap/navbar_product" />
             <TextView
                 android:clickable="false"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/ct_white"
-                android:text="投资"/>
+                android:textSize="@dimen/font_size_normal"
+                android:textColor="@color/text_white"
+                android:text="@string/tab_productpage"/>
         </LinearLayout>
 
         <LinearLayout
@@ -79,6 +85,7 @@
             <ImageButton
                 android:clickable="false"
                 android:id="@+id/btn_riches"
+                android:contentDescription="@null"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:background="@mipmap/navbar_user" />
@@ -87,8 +94,9 @@
                 android:clickable="false"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/ct_white"
-                android:text="我的"/>
+                android:textSize="@dimen/font_size_normal"
+                android:textColor="@color/text_white"
+                android:text="@string/tab_richespage"/>
         </LinearLayout>
 
         <LinearLayout
@@ -102,6 +110,7 @@
             android:orientation="vertical">
 
             <ImageButton
+                android:contentDescription="@null"
                 android:clickable="false"
                 android:id="@+id/btn_setting"
                 android:layout_width="22dp"
@@ -112,8 +121,9 @@
                 android:clickable="false"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/ct_white"
-                android:text="更多"/>
+                android:textColor="@color/text_white"
+                android:textSize="@dimen/font_size_normal"
+                android:text="@string/tab_setttingpage"/>
         </LinearLayout>
     </LinearLayout>
 

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.changtou.moneybox.module.widget.MultiStateView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/multiStateView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:msv_errorView="@layout/state_layout_error"
+    app:msv_emptyView="@layout/state_layout_empty"
+    app:msv_loadingView="@layout/state_layout_loading"
+    app:msv_viewState="loading">
+
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+        android:id="@+id/product_list"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:cacheColorHint="#00000000"
+        android:divider="#00000000"
+        android:background="#00000000"
+        android:dividerHeight="0dp"
+        android:fadingEdge="none"
+        android:fastScrollEnabled="false"
+        android:footerDividersEnabled="false"
+        android:headerDividersEnabled="true"
+        android:smoothScrollbar="true"
+        />
+
+</com.changtou.moneybox.module.widget.MultiStateView>

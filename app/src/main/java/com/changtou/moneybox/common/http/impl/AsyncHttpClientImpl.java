@@ -1,6 +1,7 @@
 package com.changtou.moneybox.common.http.impl;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.changtou.moneybox.common.http.base.BaseHttpClient;
 import com.changtou.moneybox.common.http.base.BaseHttpHandler;
@@ -50,6 +51,7 @@ public class AsyncHttpClientImpl implements BaseHttpClient {
     public void get(int reqType, Context context, String url,
                     RequestParams cacheParams, HttpCallback callback) {
         // TODO Auto-generated method stub
+        Log.e("CT_MONEY", "get+++++++++++++++++++++");
         client.get(url, cacheParams,new BaseHttpHandler(callback), reqType);
     }
 

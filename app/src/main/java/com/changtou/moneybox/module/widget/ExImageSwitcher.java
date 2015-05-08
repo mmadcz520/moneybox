@@ -26,7 +26,7 @@ import java.util.ArrayList;
 
 /**
  * 自定义图片滑动组件
- * 
+ *
  * @author Jone
  */
 public class ExImageSwitcher extends FrameLayout implements OnTouchListener,AsyncImageLoader.ImageCallback,
@@ -62,6 +62,8 @@ public class ExImageSwitcher extends FrameLayout implements OnTouchListener,Asyn
 
 	private ArrayList<Bitmap> mBannerImage = null;
 
+	private ImageView mCurrentImageView = null;
+
 	public ExImageSwitcher(Context context) {
 		this(context, null);
 		this.mContext = context;
@@ -77,6 +79,8 @@ public class ExImageSwitcher extends FrameLayout implements OnTouchListener,Asyn
 		mImageSwitcher.setOnTouchListener(this);
 		mImageSwitcher.setFactory(this);
 
+		mBannerImage = new ArrayList<>();
+
 		SwitchTask st = new SwitchTask();
 		st.execute();
 	}
@@ -85,11 +89,7 @@ public class ExImageSwitcher extends FrameLayout implements OnTouchListener,Asyn
 	 * 设置显示的图片
 	 */
 	public void setImage(int[] res) {
-		bannerCnt = res.length;
 		linearLayout = (LinearLayout) findViewById(R.id.viewGroup);
-
-		mBannerImage = new ArrayList<>();
-
 		tips = new ImageView[bannerCnt];
 		for (int i = 0; i < bannerCnt; i++) {
 			ImageView mImageView = new ImageView(mContext);
@@ -114,10 +114,11 @@ public class ExImageSwitcher extends FrameLayout implements OnTouchListener,Asyn
 	 * 设置显示的图片
 	 */
 	public void setImage(String[] url) {
+
+		bannerCnt = url.length;
+
 		linearLayout = (LinearLayout) findViewById(R.id.viewGroup);
 		tips = new ImageView[url.length];
-
-		mBannerImage = new ArrayList<>();
 
 		for (int i = 0; i < url.length; i++) {
 			ImageView mImageView = new ImageView(mContext);
@@ -134,7 +135,7 @@ public class ExImageSwitcher extends FrameLayout implements OnTouchListener,Asyn
 			linearLayout.addView(mImageView, layoutParams);
 
 			AsyncImageLoader asyncImageLoader = new AsyncImageLoader();
-			asyncImageLoader.loadImageAsyn("http://appt.changtounet.com/Img/home_default_banner.png", this);
+			asyncImageLoader.loadImageAsyn(url[i], this);
 		}
 
 		setImageBackground(currentPosition);
@@ -162,7 +163,7 @@ public class ExImageSwitcher extends FrameLayout implements OnTouchListener,Asyn
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see android.widget.ViewSwitcher.ViewFactory#makeView()
 	 */
 	public View makeView()
@@ -198,7 +199,6 @@ public class ExImageSwitcher extends FrameLayout implements OnTouchListener,Asyn
 							mContext, R.anim.switcher_right_out));
 					if (currentPosition > 0)
 					{
-						// 设置动画，这里的动画比较简单，不明白的去网上看看相关内容
 						currentPosition--;
 					}
 					else
@@ -222,9 +222,8 @@ public class ExImageSwitcher extends FrameLayout implements OnTouchListener,Asyn
 					{
 						currentPosition = 0;
 					}
-
-					setImage();
 				}
+				setImage();
 			}
 			break;
 		}
@@ -234,11 +233,11 @@ public class ExImageSwitcher extends FrameLayout implements OnTouchListener,Asyn
 
 	private void setImage()
 	{
-		ImageView imageView = (ImageView)mImageSwitcher.getNextView();
-		imageView.setImageBitmap(mBannerImage.get(currentPosition));
-		imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+		if(mBannerImage.size() == 0 || currentPosition > mBannerImage.size()-1) return;
+		mCurrentImageView = (ImageView)mImageSwitcher.getNextView();
+		mCurrentImageView.setImageBitmap(mBannerImage.get(currentPosition));
+		mCurrentImageView.setScaleType(ImageView.ScaleType.FIT_XY);
 		mImageSwitcher.showNext();
-		setImageBackground(currentPosition);
 	}
 
 	/**
@@ -250,14 +249,17 @@ public class ExImageSwitcher extends FrameLayout implements OnTouchListener,Asyn
 	public void loadImage(String path, Bitmap bitmap)
 	{
 		mBannerImage.add(bitmap);
-		setImageBackground(currentPosition);
+		mCurrentImageView = (ImageView)mImageSwitcher.getNextView();
+		mCurrentImageView.setImageBitmap(mBannerImage.get(currentPosition));
+		mCurrentImageView.setScaleType(ImageView.ScaleType.FIT_XY);
+		mImageSwitcher.showNext();
 	}
 
 	private class SwitchTask extends AsyncTask<String, Integer, String> {
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see android.os.AsyncTask#onProgressUpdate(Progress[])
 		 */
 		protected void onProgressUpdate(Integer... values) {
@@ -288,13 +290,12 @@ public class ExImageSwitcher extends FrameLayout implements OnTouchListener,Asyn
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see android.os.AsyncTask#doInBackground(Params[])
 		 */
 		protected String doInBackground(String... arg0) {
 
 			new Thread(new Runnable() {
-
 				public void run() {
 					while (true) {
 						try {

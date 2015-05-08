@@ -17,6 +17,8 @@ public class ExFPAdapter extends FragmentPagerAdapter{
 
     private List<BaseFragment> mBaseFragmentList;
 
+    private String[] mTitles = null;
+
     public ExFPAdapter(FragmentManager fm, List<BaseFragment> list) {
         super(fm);
         this.mBaseFragmentList = list;
@@ -28,8 +30,6 @@ public class ExFPAdapter extends FragmentPagerAdapter{
      * @return
      */
     public Fragment getItem(int position) {
-
-        Log.e("get item", "+++++++++++++++ == "+position);
         return mBaseFragmentList.get(position);
     }
 
@@ -39,5 +39,19 @@ public class ExFPAdapter extends FragmentPagerAdapter{
      */
     public int getCount() {
         return mBaseFragmentList.size();
+    }
+
+    public CharSequence getPageTitle(int position)
+    {
+        if(mTitles != null && position < mTitles.length)
+        {
+            return mTitles[position];
+        }
+        return "page 1";
+    }
+
+    public void setTitles(String[] titles)
+    {
+        this.mTitles = titles;
     }
 }

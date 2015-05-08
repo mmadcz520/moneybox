@@ -3,7 +3,7 @@
 
     <style name="FullscreenTheme" parent="android:Theme.NoTitleBar">
         <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowBackground">@color/app_background</item>
+        <item name="android:windowBackground">@color/background</item>
         <item name="metaButtonBarStyle">@style/ButtonBar</item>
         <item name="metaButtonBarButtonStyle">@style/ButtonBarButton</item>
     </style>
@@ -24,7 +24,8 @@
         <!-- 在样式里面直接替换掉actionbar的背景，避免在有的窗口进入慢时导致进入时显示系统默认的actionbar -->
         <item name="android:windowNoTitle">true</item>
         <item name="background">@color/ct_blue</item>
-        <item name="height">48dp</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="height">@dimen/app_actionbar_height</item>
     </style>
 
     <style name="AnimActivity">
@@ -43,6 +44,26 @@
         <item name="android:windowBackground">@color/login_dialog_transparency</item>
         <item name="android:windowIsFloating">true</item>
         <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <item type="id" name="contentFL1"/>
+    <item type="id" name="contentFL2"/>
+    <item type="id" name="contentFL3"/>
+    <color name="gray">#606060</color>
+    <color name="bg">#dddddd</color>
+    <style name="CommonTextAppearance_Small_Gray" parent="@android:style/TextAppearance">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/gray</item>
+    </style>
+
+    <style name="TabIndicator" />
+
+
+    <!--dialog-->
+    <style name="SpotsDialogDefault" parent="android:Theme.DeviceDefault.Light.Dialog">
+        <!--<item name="DialogTitleAppearance">@android:style/TextAppearance.Medium</item>-->
+        <!--<item name="DialogTitleText">Loading…</item>-->
+        <!--<item name="DialogSpotCount">5</item>-->
     </style>
 
 </resources>

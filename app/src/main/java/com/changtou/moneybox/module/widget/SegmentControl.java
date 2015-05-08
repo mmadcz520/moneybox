@@ -425,4 +425,10 @@ public class SegmentControl extends View
         }
 
     }
+
+    public void setSelectIndex(int index)
+    {
+        mCurrentIndex = index;
+        postInvalidate();
+    }
 }
