@@ -5,6 +5,7 @@
     android:id="@+id/pull_refresh_scrollview"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="@color/background"
     android:fillViewport="true"
     ptr:ptrAnimationStyle="flip"
     ptr:ptrMode="pullDownFromTop">
@@ -19,14 +20,14 @@
             android:id="@+id/homepage_banner"
             android:layout_width="match_parent"
             android:layout_height="115dp"
-            android:layout_gravity="top" />
+            android:layout_gravity="top"/>
 
         <LinearLayout
             android:id="@+id/homepage_ll_count"
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_below="@+id/homepage_banner"
-            android:layout_weight="70"
+            android:layout_weight="65"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -68,13 +69,11 @@
                     android:layout_weight="1"
                     android:baselineAligned="true"
                     android:orientation="horizontal">
-
                     <ImageView
                         android:layout_width="17dp"
                         android:layout_height="17dp"
                         android:layout_gravity="center_vertical"
                         android:src="@mipmap/home_icon_income1" />
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -91,7 +90,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
-                android:background="@color/ct_line_gray" />
+                android:background="@color/text_white" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -176,83 +175,109 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="今日优选[上投宝] 上首易第256期"
+                android:text=""
                 android:textColor="@color/ct_font_black" />
-
         </RelativeLayout>
 
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/homepage_progress"
             android:layout_width="fill_parent"
             android:layout_height="0dp"
-            android:layout_below="@+id/homepage_title"
-            android:layout_weight="170">
+            android:layout_below="@+id/homepage_product_title"
+            android:layout_weight="185"
+            android:orientation="vertical">
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/widget_progress_height">
 
-            <com.changtou.moneybox.module.widget.RoundProgressBar
-                android:id="@+id/homepage_invest_progress"
-                android:layout_width="300dp"
-                android:layout_height="120dp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
-                android_custom:roundColor="#ffffff"
-                android_custom:roundProgressColor="@color/ct_progress_blue"
-                android_custom:roundWidth="11dp"
-                android_custom:style="FILL"
-                android_custom:textColor="@color/ct_blue"
-                android_custom:textSize="18sp">
+                <com.changtou.moneybox.module.widget.RoundProgressBar
+                    android:id="@+id/homepage_invest_progress"
+                    android:layout_width="300dp"
+                    android:layout_height="120dp"
+                    android:layout_centerInParent="true"
+                    android_custom:roundColor="#ffffff"
+                    android_custom:roundProgressColor="@color/ct_progress_blue"
+                    android_custom:roundWidth="11dp"
+                    android_custom:style="FILL"
+                    android_custom:textColor="@color/ct_blue"
+                    android_custom:textSize="18sp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/homepage_income_percentage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="32dp"
+                            android:layout_gravity="center_horizontal"
+                            android:text=""
+                            android:textColor="@color/ct_font_red"
+                            android:textSize="30dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="14dp"
+                            android:layout_marginTop="2dp"
+                            android:text="预期年化收益"
+                            android:textColor="@color/ct_blue"
+                            android:textSize="12dp" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="168dp"
+                        android:layout_marginTop="50dp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/homepage_timelimit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="16dp"
+                            android:text=""
+                            android:textColor="@color/ct_font_red"
+                            android:textSize="14dp" />
+
+                        <TextView
+                            android:id="@+id/xiangmuqixiang"
+                            android:layout_width="wrap_content"
+                            android:layout_height="14dp"
+                            android:text="项目期限"
+                            android:textColor="@color/ct_blue"
+                            android:textSize="12dp" />
+                    </LinearLayout>
+                </com.changtou.moneybox.module.widget.RoundProgressBar>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/shouyi"
-                        android:layout_width="wrap_content"
-                        android:layout_height="32dp"
-                        android:layout_gravity="center_horizontal"
-                        android:text=""
-                        android:textColor="@color/ct_font_red"
-                        android:textSize="30dp" />
-
-                    <TextView
-                        android:id="@+id/miaoshu"
-                        android:layout_width="wrap_content"
-                        android:layout_height="14dp"
-                        android:layout_marginTop="2dp"
-                        android:text="预期年化收益"
-                        android:textColor="@color/ct_blue"
-                        android:textSize="12dp" />
-                </LinearLayout>
-
-                <LinearLayout
+                    android:layout_height="fill_parent"
+                    android:layout_centerInParent="true"
+                    android:orientation="horizontal">
+                <com.changtou.moneybox.module.widget.CountView
+                    android:id="@+id/invest_progress_percent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="168dp"
-                    android:layout_marginTop="50dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/yueshu"
-                        android:layout_width="wrap_content"
-                        android:layout_height="16dp"
-                        android:text=""
-                        android:textColor="@color/ct_font_red"
-                        android:textSize="14dp" />
-
-                    <TextView
-                        android:id="@+id/xiangmuqixiang"
-                        android:layout_width="wrap_content"
-                        android:layout_height="14dp"
-                        android:text="项目期限"
-                        android:textColor="@color/ct_blue"
-                        android:textSize="12dp" />
+                    android:layout_gravity="center"
+                    android:text=""
+                    android:textColor="@color/text_white"
+                    android:textSize="@dimen/font_size_big" />
                 </LinearLayout>
 
-            </com.changtou.moneybox.module.widget.RoundProgressBar>
+            </RelativeLayout>
 
-        </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_below="@+id/homepage_invest_progress">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/fillet_stroke"
+                    android:text="100元起投 | 每人限购1,000,000.00   " />
+            </RelativeLayout>
+        </LinearLayout>
 
         <RelativeLayout
             android:layout_width="fill_parent"
@@ -294,5 +319,4 @@
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>
-
 </com.handmark.pulltorefresh.library.PullToRefreshScrollView>

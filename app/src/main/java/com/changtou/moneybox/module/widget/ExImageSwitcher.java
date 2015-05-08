@@ -116,6 +116,8 @@ public class ExImageSwitcher extends FrameLayout implements OnTouchListener,Asyn
 	public void setImage(String[] url) {
 
 		bannerCnt = url.length;
+		mBannerImage.clear();
+		currentPosition = 0;
 
 		linearLayout = (LinearLayout) findViewById(R.id.viewGroup);
 		tips = new ImageView[url.length];
@@ -189,7 +191,6 @@ public class ExImageSwitcher extends FrameLayout implements OnTouchListener,Asyn
 			case MotionEvent.ACTION_UP:
 			{
 				float lastX = event.getX();
-				// 抬起的时候的X坐标大于按下的时候就显示上一张图片
 				if (lastX > downX)
 				{
 					mSFlag = 0;
@@ -207,7 +208,7 @@ public class ExImageSwitcher extends FrameLayout implements OnTouchListener,Asyn
 					}
 				}
 
-				if (lastX < downX)
+				if (lastX <= downX)
 				{
 					mSFlag = 1;
 					mImageSwitcher.setInAnimation(AnimationUtils.loadAnimation(
@@ -248,6 +249,7 @@ public class ExImageSwitcher extends FrameLayout implements OnTouchListener,Asyn
 	 */
 	public void loadImage(String path, Bitmap bitmap)
 	{
+		currentPosition = 0;
 		mBannerImage.add(bitmap);
 		mCurrentImageView = (ImageView)mImageSwitcher.getNextView();
 		mCurrentImageView.setImageBitmap(mBannerImage.get(currentPosition));

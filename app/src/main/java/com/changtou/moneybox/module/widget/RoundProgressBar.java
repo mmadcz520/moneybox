@@ -236,14 +236,14 @@ public class RoundProgressBar extends LinearLayout
             }
         }
 
-        if (textIsDisplayable && mPercent != 0 && style == STROKE)
-        {
-            float textWidth = paint.measureText(mPercent + "%");
-            paint.setTextSize(AppUtil.dip2px(mContext, 24));
-            paint.setStrokeWidth(1);
-            paint.setColor(Color.WHITE);
-            canvas.drawText(mPercent + "%", width / 2 - textWidth / 2, centre + textSize / 2, paint); //画出进度百分比
-        }
+//        if (mPercent != 0)
+//        {
+//            float textWidth = paint.measureText(mPercent + "%");
+//            paint.setTextSize(AppUtil.dip2px(mContext, 18));
+//            paint.setStrokeWidth(0.5f);
+//            paint.setColor(Color.WHITE);
+//            canvas.drawText(mPercent + "%", width / 2 - textWidth / 2, centre, paint); //画出进度百分比
+//        }
 
         if(isDrawLine) drawLine(canvas);
     }
