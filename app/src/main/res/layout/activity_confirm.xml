@@ -1,21 +1,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:background="@color/background">
+                android:orientation="vertical">
     <LinearLayout
         android:layout_below="@+id/split_line"
         android:id="@+id/describe_layout"
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
         <ListView
             android:id="@+id/confirm_product_details"
             android:layout_marginTop="2dp"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:divider="@color/ct_line_gray"
+            android:divider="@color/ct_divide_line"
             android:dividerHeight="1px"
             android:headerDividersEnabled="true"
             android:footerDividersEnabled="true"/>
@@ -26,37 +24,38 @@
         android:layout_marginTop="10dp"
         android:layout_below="@+id/describe_layout"
         android:layout_width="fill_parent"
-        android:background="#ffffff"
         android:layout_height="50dp">
 
         <EditText android:layout_height="40dp"
                   android:layout_marginLeft="20dp"
-                  android:textSize="18dp"
-                  android:layout_centerVertical="true"
+                  android:textSize="@dimen/font_size_normal"
+                  android:layout_centerInParent="true"
                   android:layout_width="match_parent"
-                  android:hint="至少投 100 元"
-                  android:background="@null"/>
+                  android:hint="请输入100的整数倍,不超过100万元"
+                  android:background="@drawable/fillet_stroke"/>
 
     </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/balance_layout"
-        android:paddingTop="10dp"
+        android:paddingLeft="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="@dimen/font_size_normal"
             android:text="你当前可以余额：10,000元  充值"/>
 
     </LinearLayout>
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="42dp"
+        android:layout_gravity="center_horizontal"
         android:background="@color/ct_blue"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="50dp"
         android:text="立即投资"/>
 
 </LinearLayout>

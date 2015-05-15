@@ -157,7 +157,7 @@ public class PullToNextLayout extends FrameLayout
         FrameLayout frameLayout = new FrameLayout(getContext());
         frameLayout.setId(frameLayoutId);
         pullToNextView.setContentView(frameLayout);
-        pullToNextView.setBackgroundColor(getResources().getColor(R.color.background));
+        pullToNextView.setBackgroundColor(getResources().getColor(R.color.ct_background));
         pullToNextView.setPullToNextI(mPullToNextI);
         pullToNextView.setTag(frameLayoutId);
         entity.setFrameId(frameLayoutId);

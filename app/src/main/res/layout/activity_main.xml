@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@color/background"/>
+        android:background="@color/ct_background"/>
 
     <LinearLayout
         android:id="@+id/layout_bottom"
@@ -42,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/font_size_normal"
-                android:textColor="@color/text_white"
+                android:textColor="@color/font_white"
                 android:text="@string/tab_homepage"/>
         </LinearLayout>
 
@@ -68,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/font_size_normal"
-                android:textColor="@color/text_white"
+                android:textColor="@color/font_white"
                 android:text="@string/tab_productpage"/>
         </LinearLayout>
 
@@ -95,7 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/font_size_normal"
-                android:textColor="@color/text_white"
+                android:textColor="@color/font_white"
                 android:text="@string/tab_richespage"/>
         </LinearLayout>
 
@@ -121,7 +121,7 @@
                 android:clickable="false"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/text_white"
+                android:textColor="@color/font_white"
                 android:textSize="@dimen/font_size_normal"
                 android:text="@string/tab_setttingpage"/>
         </LinearLayout>

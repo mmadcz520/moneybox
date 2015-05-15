@@ -1,37 +1,147 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/swipe_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <View
+        android:id="@+id/riches_line1"
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:background="@color/ct_divide_line" />
+
     <LinearLayout
         android:id="@+id/riches_userinfo"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
+        android:layout_weight="3"
+        android:background="@color/ct_blue"
         android:orientation="vertical">
+
+
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/riches_more"
-        android:layout_width="match_parent"
+    <View
+        android:id="@+id/riches_line2"
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:background="@color/ct_divide_line" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="3"
-        android:orientation="vertical">
-        <GridView
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/brainheroall"
-            android:background="#FFeff1ef"
+        android:layout_weight="5">
+
+        <LinearLayout
+            android:id="@+id/riches_ll_touyuan"
             android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:background="@color/ct_white">
+
+            <LinearLayout android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="fill_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="fill_parent"
+                    android:gravity="center_vertical|right"
+                    android:textSize="@dimen/font_size_normal"
+                    android:textColor="@color/font_importance"
+                    android:text="礼金: "/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="fill_parent"
+                    android:gravity="center_vertical|left"
+                    android:textSize="@dimen/font_size_normal"
+                    android:textColor="@color/font_importance"
+                    android:text="0.00"/>
+
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="fill_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="fill_parent"
+                    android:gravity="center_vertical|right"
+                    android:textSize="@dimen/font_size_normal"
+                    android:textColor="@color/font_importance"
+                    android:text="投园: "/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="fill_parent"
+                    android:gravity="center_vertical|left"
+                    android:textSize="@dimen/font_size_normal"
+                    android:textColor="@color/font_importance"
+                    android:text="0.00"/>
+
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="fill_parent"
+                android:orientation="horizontal">
+
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_marginLeft="20dp"
+                          android:layout_gravity="center_vertical"
+                          android:textSize="@dimen/font_size_normal"
+                          android:textColor="@color/font_importance"
+                          android:text="乐享投园" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/riches_line3"
+            android:layout_below="@+id/riches_ll_touyuan"
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:background="@color/ct_divide_line" />
+
+        <LinearLayout
+            android:id="@+id/riches_more"
+            android:layout_below="@+id/riches_line3"
+            android:layout_width="match_parent"
             android:layout_height="fill_parent"
-            android:numColumns="3"
-            android:verticalSpacing="10dp"
-            android:horizontalSpacing="10dp"
-            android:columnWidth="90dp"
-            android:stretchMode="columnWidth"
-            android:gravity="center"
-            />
-    </LinearLayout>
+            android:orientation="vertical">
+
+            <GridView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/brainheroall"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:columnWidth="90dp"
+                android:gravity="center"
+                android:horizontalSpacing="10dp"
+                android:listSelector="#00000000"
+                android:numColumns="3"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="10dp" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/riches_signbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="18dp"
+            android:src="@mipmap/riches_icon_qiandao" />
+
+    </RelativeLayout>
 
 </LinearLayout>

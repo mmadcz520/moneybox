@@ -435,9 +435,6 @@ public class AsyncHttpClient {
      */
     public void post(String url, RequestParams params,
                      AsyncHttpResponseHandler responseHandler, int reqType) {
-
-        Log.e("CT_MONEY", "post");
-
         post(null, url, params, responseHandler, reqType);
     }
 

@@ -1,7 +1,5 @@
 package com.changtou.moneybox.common.http.base;
 
-import android.util.Log;
-
 import com.changtou.moneybox.common.activity.BaseApplication;
 
 import org.apache.http.HttpEntity;
@@ -24,9 +22,6 @@ public class JsonPaserFactory
      */
     public static BaseEntity paserObj(String data, int reqType)
     {
-        Log.e("CT_MONEY", "paserObj" + data);
-        Log.e("CT_MONEY", "paserObj" + reqType);
-
         if ((data == null) || data.trim().toString().equals("")) return null;
         BaseEntity entity = (BaseEntity) BaseApplication.mHttpRequest.getPaser(reqType);
         try

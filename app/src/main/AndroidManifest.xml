@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.changtou" >
 
-    <supports-screens android:anyDensity="true"/>
+    <supports-screens android:anyDensity="true" />
 
     <!-- Push service 运行需要的权限 -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -28,28 +28,36 @@
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
 
+    <!--
+     To retrieve OAuth 2.0 tokens or invalidate tokens to disconnect a user. This disconnect
+     option is required to comply with the Google+ Sign-In developer policies
+    -->
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" /> <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <application
         android:name=".moneybox.module.CTMoneyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:screenOrientation="portrait"
-        android:label="@string/app_name" >
-        <activity android:name=".moneybox.module.widget.SplashActivity"
-            android:theme="@android:style/Theme.NoTitleBar">
+        android:label="@string/app_name"
+        android:screenOrientation="portrait" >
+        <activity
+            android:name=".moneybox.module.widget.SplashActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".moneybox.module.page.BootActivity"
-            android:theme="@android:style/Theme.NoTitleBar">
+        <activity
+            android:name=".moneybox.module.page.BootActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
-
         <activity
             android:name=".moneybox.module.page.MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/ActivityTheme_Light">
+            android:theme="@style/ActivityTheme_Light" >
         </activity>
         <activity
             android:name=".moneybox.module.page.ProductDetailsActivity"
@@ -59,6 +67,14 @@
             android:name=".moneybox.module.page.ConfirmActivity"
             android:theme="@style/ActivityTheme_Light" >
         </activity>
+        <activity
+            android:name=".moneybox.module.page.LoginActivity"
+            android:theme="@style/ActivityTheme_Light" >
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
     </application>
 
 </manifest>

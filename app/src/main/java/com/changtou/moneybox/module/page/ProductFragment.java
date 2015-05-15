@@ -28,7 +28,6 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * 描述:产品页
  *     1. tab view
@@ -39,7 +38,7 @@ import java.util.List;
 public class ProductFragment extends BaseFragment{
 
     private ViewPager mViewPager;
-    SlidingTabLayout mSlidingTabLayout;
+    private SlidingTabLayout mSlidingTabLayout;
 
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View mView = inflater.inflate(R.layout.product_fragment, container, false);
@@ -47,7 +46,7 @@ public class ProductFragment extends BaseFragment{
         mSlidingTabLayout = (SlidingTabLayout) mView.findViewById(R.id.sliding_tabs);
         Resources res = getResources();
         mSlidingTabLayout.setCustomTabView(R.layout.product_tabpage_indicator, android.R.id.text1);
-        mSlidingTabLayout.setSelectedIndicatorColors(res.getColor(R.color.tab_indicator_color));
+//        mSlidingTabLayout.setSelectedIndicatorColors(res.getColor(R.color.tab_indicator_color));
 
         //根据产品分类列表初始化界面
         List<BaseFragment> viewList = new ArrayList<>();
@@ -124,6 +123,7 @@ public class ProductFragment extends BaseFragment{
             mMultiStateView = (MultiStateView) mView.findViewById(R.id.multiStateView);
             mPullRefreshListView = (PullToRefreshListView) mView.findViewById(R.id.product_list);
             actualListView = mPullRefreshListView.getRefreshableView();
+            actualListView.setEnabled(true);
             mPullRefreshListView.setOnRefreshListener(this);
 
             return mView;
@@ -172,7 +172,7 @@ public class ProductFragment extends BaseFragment{
 
         public void onSuccess(String content, Object object, int reqType)
         {
-            if (reqType == HttpRequst.REQ_TYPE_PRODUCT_HOME)
+            if (reqType == HttpRequst.REQ_TYPE_PRODUCT_LIST)
             {
                 mMultiStateView.setViewState(MultiStateView.ViewState.CONTENT);
                 ProductEntity entity = (ProductEntity) object;
@@ -193,10 +193,10 @@ public class ProductFragment extends BaseFragment{
          */
         public void onRefresh(PullToRefreshBase refreshView)
         {
-            sendRequest(HttpRequst.REQ_TYPE_PRODUCT_HOME,
-                    HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_PRODUCT_HOME),
+            sendRequest(HttpRequst.REQ_TYPE_PRODUCT_LIST,
+                    HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_PRODUCT_LIST),
                     mParams,
-                    mAct.getAsyncClient(), false);
+                    mAct.getAsyncClient(), true);
         }
     }
 }

@@ -9,15 +9,15 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:orientation="horizontal"
-        android:background="@color/background_white">
+        android:background="@color/ct_white">
 
         <TextView
             android:id="@+id/investlist_user"
             android:layout_height="fill_parent"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:textColor="@color/ct_font_gray"
-            android:textSize="@dimen/font_size_big"
+            android:textColor="@color/font_invalid"
+            android:textSize="@dimen/font_size_normal"
             android:gravity="center"
             android:text="用户"/>
 
@@ -26,8 +26,8 @@
             android:layout_height="fill_parent"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:textColor="@color/ct_font_gray"
-            android:textSize="@dimen/font_size_big"
+            android:textColor="@color/font_invalid"
+            android:textSize="@dimen/font_size_normal"
             android:gravity="center"
             android:text="投资金额"/>
 
@@ -36,8 +36,8 @@
             android:layout_height="fill_parent"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:textColor="@color/ct_font_gray"
-            android:textSize="@dimen/font_size_big"
+            android:textColor="@color/font_invalid"
+            android:textSize="@dimen/font_size_normal"
             android:gravity="center"
             android:text="投资时间"/>
 
@@ -49,7 +49,7 @@
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:divider="@color/ct_line_gray"
+        android:divider="@color/ct_divide_line"
         android:dividerHeight="1px"
         android:headerDividersEnabled="true"
         android:footerDividersEnabled="true">

@@ -1,5 +1,6 @@
 package com.changtou.moneybox.module.page;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.LinearLayout;
@@ -112,8 +113,12 @@ public class MainActivity extends CTBaseActivity {
                 switchNavBar(1);
                 break;
             case R.id.navbar_user:
-                mViewpager.setCurrentItem(2);
-                switchNavBar(2);
+//                mViewpager.setCurrentItem(2);
+//                switchNavBar(2);
+
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+
                 break;
             case R.id.navbar_more:
                 mViewpager.setCurrentItem(3);

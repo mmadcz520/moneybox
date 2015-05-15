@@ -4,6 +4,7 @@ import android.content.Context;
 
 
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.TextView;
 
@@ -29,12 +30,32 @@ public class CountView extends TextView
         objectAnimator.start();
     }
 
+    /**
+     * 百分数显示动画
+     */
+    public void showPercentWithAnimation(int percent)
+    {
+        Log.e("CT_MONEY", "showPercentWithAnimation");
+        //修改number属性，会调用setNumber方法
+        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(this, "percent", 0, (float)percent);
+        objectAnimator.setDuration(duration);
+        //加速器，从慢到快到再到慢
+        objectAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
+        objectAnimator.start();
+    }
+
     public float getNumber() {
         return number;
     }
 
     public void setNumber(float number) {
         this.number = number;
-        setText(String.format("%1$07.2f",number));
+        setText(String.format("%1$1.2f",number));
+    }
+
+    public void setPercent(float percent)
+    {
+        String str = String.format("%1$1.2f", percent) + "%";
+        setText(str);
     }
 }

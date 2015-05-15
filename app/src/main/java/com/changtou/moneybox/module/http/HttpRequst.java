@@ -29,6 +29,7 @@ public class HttpRequst extends BaseHttpRequest
 
     //主页推荐产品列表
     public static String REQ_URL_PRODUCT_LIST = BASE_URL + "products";
+    public static String REQ_URL_PRODUCT_DETAILS = BASE_URL + "products";
 
     public static synchronized HttpRequst getInstance()
     {
@@ -51,6 +52,8 @@ public class HttpRequst extends BaseHttpRequest
                 return "http://autoapp.hsxiang.com/wp-admin/admin-ajax.php?action=";
             case REQ_TYPE_PRODUCT_LIST:
                 return REQ_URL_PRODUCT_LIST;
+            case REQ_TYPE_PRODUCT_DETAILS:
+                return REQ_URL_PRODUCT_DETAILS;
             default:
                 break;
         }
@@ -86,6 +89,11 @@ public class HttpRequst extends BaseHttpRequest
             case REQ_TYPE_PRODUCT_HOME:
                 paser = new PromotionEntity();
                 break;
+
+            case REQ_TYPE_PRODUCT_LIST:
+                paser = new ProductEntity();
+                break;
+
             case REQ_TYPE_PRODUCT_DETAILS:
                 paser = new ProductDetailsEntity();
                 break;

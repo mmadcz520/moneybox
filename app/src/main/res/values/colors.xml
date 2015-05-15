@@ -1,24 +1,20 @@
 <resources>
 
-    <color name="black_overlay">#66000000</color>
-    <color name="login_dialog_transparency">#00000000</color>
-
+    <color name="ct_white">#ffffff</color>
     <color name="ct_blue">#5c9dec</color>
     <color name="ct_blue_fouce">#3371c3</color>
-    <color name="ct_bule_2">#b4cffa</color>
-    <color name="ct_font_red">#B22222</color>
-    <color name="ct_font_hint">#cccccc</color>
-    <color name="ct_font_black">#5e5e5e</color>
-    <color name="ct_font_gray">#8a8a8a</color>
+    <color name="ct_blue_hint">#bfdcf9</color>
+    <color name="ct_red">#fc6e51</color>
+    <color name="ct_green">#9fd468</color>
+    <color name="ct_invalid">#dddddd</color>
+    <color name="ct_background">#f9f9f9</color>
+    <color name="ct_divide_line">#cccccc</color>
 
-    <color name="ct_line_gray">#eeeeee</color>
-
-    <color name="ct_progress_blue">#bfdcf9</color>
-
-    <color name="background">#f1f1f1</color>
-    <color name="text_white">#ffffff</color>
-    <color name="tab_indicator_color">#FFF</color>
-
-    <color name="background_white">#ffffff</color>
+    <!-- 文字颜色-->
+    <color name="font_white">#ffffff</color>
+    <color name="font_invalid">#b3b3b3</color>
+    <color name="font_black">#5e5e5e</color>
+    <color name="font_prompt">#fc6e51</color>
+    <color name="font_importance">#5c9dec</color>
 
 </resources>

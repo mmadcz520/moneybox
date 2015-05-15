@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.handmark.pulltorefresh.library.PullToRefreshScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.handmark.pulltorefresh.library.PullToRefreshScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:android_custom="http://schemas.android.com/apk/res-auto"
     xmlns:ptr="http://schemas.android.com/apk/res-auto"
     android:id="@+id/pull_refresh_scrollview"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/background"
+    android:background="@color/ct_background"
     android:fillViewport="true"
     ptr:ptrAnimationStyle="flip"
     ptr:ptrMode="pullDownFromTop">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:android_custom="http://schemas.android.com/apk/res-auto"
         android:layout_width="fill_parent"
         android:layout_height="500dp"
         android:orientation="vertical">
@@ -20,7 +20,7 @@
             android:id="@+id/homepage_banner"
             android:layout_width="match_parent"
             android:layout_height="115dp"
-            android:layout_gravity="top"/>
+            android:layout_gravity="top" />
 
         <LinearLayout
             android:id="@+id/homepage_ll_count"
@@ -28,6 +28,7 @@
             android:layout_height="0dp"
             android:layout_below="@+id/homepage_banner"
             android:layout_weight="65"
+            android:background="@color/ct_white"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -47,19 +48,21 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
+                        android:layout_gravity="bottom"
+                        android:gravity="bottom"
                         android:text="￥"
-                        android:textColor="@color/ct_font_black"
+                        android:textColor="@color/font_black"
                         android:textSize="@dimen/font_size_normal" />
 
                     <com.changtou.moneybox.module.widget.CountView
                         android:id="@+id/homepage_investsum"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
+                        android:layout_gravity="bottom"
+                        android:gravity="bottom"
                         android:text="0"
                         android:textColor="@color/ct_blue"
-                        android:textSize="@dimen/font_size_big" />
+                        android:textSize="@dimen/font_size_number" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -69,28 +72,32 @@
                     android:layout_weight="1"
                     android:baselineAligned="true"
                     android:orientation="horizontal">
+
                     <ImageView
                         android:layout_width="17dp"
                         android:layout_height="17dp"
-                        android:layout_gravity="center_vertical"
+                        android:layout_gravity="top"
+                        android:gravity="top"
                         android:src="@mipmap/home_icon_income1" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
+                        android:layout_gravity="top"
+                        android:gravity="top"
                         android:paddingLeft="4dp"
                         android:text="@string/invest_total"
-                        android:textColor="@color/ct_font_black"
+                        android:textColor="@color/font_black"
                         android:textSize="@dimen/font_size_normal" />
                 </LinearLayout>
             </LinearLayout>
 
             <View
-                android:layout_width="1dp"
+                android:layout_width="1px"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
-                android:background="@color/text_white" />
+                android:background="@color/ct_divide_line"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -109,42 +116,46 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
+                        android:layout_gravity="bottom"
+                        android:gravity="bottom"
                         android:text="￥"
-                        android:textColor="@color/ct_font_black"
+                        android:textColor="@color/font_black"
                         android:textSize="@dimen/font_size_normal" />
 
                     <com.changtou.moneybox.module.widget.CountView
                         android:id="@+id/homepage_makemoney"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
+                        android:layout_gravity="bottom"
+                        android:gravity="bottom"
                         android:paddingLeft="4dp"
                         android:text="0"
                         android:textColor="@color/ct_blue"
-                        android:textSize="@dimen/font_size_big" />
+                        android:textSize="@dimen/font_size_number"/>
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
+                    android:layout_gravity="center|top"
                     android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <ImageView
                         android:layout_width="17dp"
                         android:layout_height="17dp"
-                        android:layout_gravity="center_vertical"
+                        android:layout_gravity="top"
+                        android:gravity="top"
                         android:src="@mipmap/home_icon_income2" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
+                        android:layout_gravity="top"
+                        android:gravity="top"
                         android:paddingLeft="4dp"
                         android:text="@string/income_total"
-                        android:textColor="@color/ct_font_black"
+                        android:textColor="@color/font_black"
                         android:textSize="@dimen/font_size_normal" />
                 </LinearLayout>
             </LinearLayout>
@@ -153,9 +164,9 @@
         <View
             android:id="@+id/homepage_line2"
             android:layout_width="fill_parent"
-            android:layout_height="1dp"
+            android:layout_height="1px"
             android:layout_below="@+id/homepage_ll_income"
-            android:background="@color/ct_line_gray" />
+            android:background="@color/ct_divide_line" />
 
         <RelativeLayout
             android:id="@+id/homepage_title"
@@ -165,125 +176,37 @@
             android:layout_weight="38"
             android:background="#f9f9f9">
 
-            <ImageView
-                android:id="@+id/homepage_title_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
             <TextView
                 android:id="@+id/homepage_title_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text=""
-                android:textColor="@color/ct_font_black" />
+                android:textColor="@color/font_black" />
+
+            <ImageView
+                android:id="@+id/homepage_title_icon"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:scaleType="centerInside"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/homepage_title_text"
+                android:src="@mipmap/home_icon_title"/>
         </RelativeLayout>
 
-        <LinearLayout
-            android:id="@+id/homepage_progress"
+        <View
+            android:id="@+id/homepage_line3"
             android:layout_width="fill_parent"
-            android:layout_height="0dp"
+            android:layout_height="1px"
             android:layout_below="@+id/homepage_product_title"
-            android:layout_weight="185"
-            android:orientation="vertical">
+            android:background="@color/ct_divide_line" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/widget_progress_height">
-
-                <com.changtou.moneybox.module.widget.RoundProgressBar
-                    android:id="@+id/homepage_invest_progress"
-                    android:layout_width="300dp"
-                    android:layout_height="120dp"
-                    android:layout_centerInParent="true"
-                    android_custom:roundColor="#ffffff"
-                    android_custom:roundProgressColor="@color/ct_progress_blue"
-                    android_custom:roundWidth="11dp"
-                    android_custom:style="FILL"
-                    android_custom:textColor="@color/ct_blue"
-                    android_custom:textSize="18sp">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:orientation="vertical">
-                        <TextView
-                            android:id="@+id/homepage_income_percentage"
-                            android:layout_width="wrap_content"
-                            android:layout_height="32dp"
-                            android:layout_gravity="center_horizontal"
-                            android:text=""
-                            android:textColor="@color/ct_font_red"
-                            android:textSize="30dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="14dp"
-                            android:layout_marginTop="2dp"
-                            android:text="预期年化收益"
-                            android:textColor="@color/ct_blue"
-                            android:textSize="12dp" />
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="168dp"
-                        android:layout_marginTop="50dp"
-                        android:orientation="vertical">
-                        <TextView
-                            android:id="@+id/homepage_timelimit"
-                            android:layout_width="wrap_content"
-                            android:layout_height="16dp"
-                            android:text=""
-                            android:textColor="@color/ct_font_red"
-                            android:textSize="14dp" />
-
-                        <TextView
-                            android:id="@+id/xiangmuqixiang"
-                            android:layout_width="wrap_content"
-                            android:layout_height="14dp"
-                            android:text="项目期限"
-                            android:textColor="@color/ct_blue"
-                            android:textSize="12dp" />
-                    </LinearLayout>
-                </com.changtou.moneybox.module.widget.RoundProgressBar>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-                    android:layout_centerInParent="true"
-                    android:orientation="horizontal">
-                <com.changtou.moneybox.module.widget.CountView
-                    android:id="@+id/invest_progress_percent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text=""
-                    android:textColor="@color/text_white"
-                    android:textSize="@dimen/font_size_big" />
-                </LinearLayout>
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:layout_below="@+id/homepage_invest_progress">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:background="@drawable/fillet_stroke"
-                    android:text="100元起投 | 每人限购1,000,000.00   " />
-            </RelativeLayout>
-        </LinearLayout>
+        <include layout="@layout/invest_progress_layout"/>
 
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="0dp"
-            android:layout_weight="90"
-            android:background="@color/background_white">
+            android:layout_weight="90">
 
             <Button
                 android:id="@+id/homepage_btn_invest"
@@ -293,7 +216,7 @@
                 android:layout_marginTop="31dp"
                 android:background="@color/ct_blue"
                 android:text="立即投资"
-                android:textColor="@color/text_white"
+                android:textColor="@color/font_white"
                 android:textSize="19dp" />
 
             <LinearLayout
@@ -314,8 +237,8 @@
                     android:layout_gravity="bottom"
                     android:layout_marginLeft="4dp"
                     android:text="按月付息,到期还本,本息保障,灵活转让"
-                    android:textColor="@color/ct_font_black"
-                    android:textSize="11dp" />
+                    android:textColor="@color/font_black"
+                    android:textSize="@dimen/font_size_hint"/>
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>

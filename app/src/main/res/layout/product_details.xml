@@ -1,35 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
-              android:background="@color/background"
-              android:orientation="vertical" >
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/ct_background"
+    android:orientation="vertical">
 
     <LinearLayout
-              android:layout_width="fill_parent"
-              android:layout_height="0dp"
-              android:layout_weight="11"
-              android:orientation="vertical" >
-        <com.changtou.moneybox.module.widget.PullToNextLayout
-        android:id="@+id/pullToNextLayout"
-        android:background="@color/background"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"/>
+        android:layout_height="0dp"
+        android:layout_weight="11"
+        android:orientation="vertical">
+
+        <com.changtou.moneybox.module.widget.PullToNextLayout
+            android:id="@+id/pullToNextLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/ct_background" />
 
     </LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
+    <!--<RelativeLayout-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="1"-->
+        <!--android:orientation="vertical">-->
+
         <Button
-            android:layout_width="200dp"
-            android:layout_height="40dp"
-            android:background="@color/ct_blue"
-            android:text="立即投资"
             android:id="@+id/confirm_button"
-            android:layout_centerInParent="true"/>
-    </RelativeLayout>
+            android:layout_width="fill_parent"
+            android:layout_height="42dp"
+            android:layout_centerInParent="true"
+            android:background="@color/ct_blue"
+            android:text="立即投资" />
+    <!--</RelativeLayout>-->
 
 </LinearLayout>

@@ -4,26 +4,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.changtou.R;
 import com.changtou.moneybox.common.activity.BaseFragment;
 import com.changtou.moneybox.module.adapter.ProductDetailsAdapter;
 import com.changtou.moneybox.module.entity.ProductDetailsEntity;
 import com.changtou.moneybox.module.http.HttpRequst;
+import com.changtou.moneybox.module.widget.CountView;
 import com.changtou.moneybox.module.widget.ExFPAdapter;
-import com.changtou.moneybox.module.widget.MultiStateView;
 import com.changtou.moneybox.module.widget.PullToNextAdapter;
 import com.changtou.moneybox.module.widget.PullToNextLayout;
 import com.changtou.moneybox.module.widget.RoundProgressBar;
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import java.util.ArrayList;
 
@@ -72,7 +70,6 @@ public class ProductDetailsActivity extends CTBaseActivity
         pullToNextLayout.setAdapter(new PullToNextAdapter(getSupportFragmentManager(), mPageList));
     }
 
-
     /**
      * 网络数据请求， 初始化数据
      *
@@ -86,7 +83,7 @@ public class ProductDetailsActivity extends CTBaseActivity
         mProdList.setAdapter(mAdapter);
 
         sendRequest(HttpRequst.REQ_TYPE_PRODUCT_DETAILS,
-                HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_PRODUCT_HOME),
+                HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_PRODUCT_DETAILS),
                 mParams,
                 getAsyncClient(), false);
     }
@@ -109,6 +106,11 @@ public class ProductDetailsActivity extends CTBaseActivity
             ProductDetailsEntity entity = (ProductDetailsEntity) object;
             mAdapter.setData(entity);
             mDetailsPage.getProgressBar().setProgress(50);
+            mDetailsPage.getInvestPercent().showPercentWithAnimation(50);
+            mDetailsPage.getIcomeText().setText("14");
+            mDetailsPage.getTagTextView().setText("%");
+            mDetailsPage.getInvestNum().setText("25.5万/100万");
+            mDetailsPage.getTimeLimit().setText("三个月");
         }
     }
 
@@ -122,12 +124,26 @@ public class ProductDetailsActivity extends CTBaseActivity
 
         private RoundProgressBar mProgressBar = null;
 
+        private TextView  mTimeLimit = null;
+        private TextView  mIcomeText = null;
+        private TextView mTagTextView = null;
+        private CountView mInvestPercent = null;
+        private TextView mInvestNum = null;      //投资进度数值
+
+
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
 
             View v = inflater.inflate(R.layout.product_details_sub1, container, false);
-            mProgressBar = (RoundProgressBar)v.findViewById(R.id.details_progressbar);
+            mProgressBar = (RoundProgressBar)v.findViewById(R.id.homepage_invest_progress);
             mListView = (ListView)v.findViewById(R.id.lv_details);
+
+            mTimeLimit = (TextView)v.findViewById(R.id.homepage_timelimit);
+            mIcomeText = (TextView)v.findViewById(R.id.homepage_income_percent);
+            mTagTextView = (TextView)v.findViewById(R.id.homepage_income_percenttag);
+            mInvestPercent = (CountView)v.findViewById(R.id.invest_progress_percent);
+            mInvestNum = (TextView)v.findViewById(R.id.invest_progress_num);
+
             return v;
         }
 
@@ -139,6 +155,31 @@ public class ProductDetailsActivity extends CTBaseActivity
         public RoundProgressBar getProgressBar()
         {
             return mProgressBar;
+        }
+
+        public TextView getIcomeText()
+        {
+            return mIcomeText;
+        }
+
+        public TextView getTagTextView()
+        {
+            return mTagTextView;
+        }
+
+        public CountView getInvestPercent()
+        {
+            return mInvestPercent;
+        }
+
+        public TextView getInvestNum()
+        {
+            return mInvestNum;
+        }
+
+        public TextView getTimeLimit()
+        {
+            return mTimeLimit;
         }
     }
 

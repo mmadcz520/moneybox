@@ -1,9 +1,7 @@
 package com.changtou.moneybox.module.widget;
 
-import android.animation.ValueAnimator;
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -21,6 +19,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.changtou.R;
+import com.nineoldandroids.animation.ValueAnimator;
 
 
 /**
@@ -68,6 +67,7 @@ public class PullToNextView extends LinearLayout {
         init();
     }
 
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public PullToNextView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
@@ -293,7 +293,6 @@ public class PullToNextView extends LinearLayout {
                     moveTo(-mHeadViewHeight, ANIMATION_DURATION);
                 }
 
-
                 break;
         }
         return super.onTouchEvent(event);
@@ -308,14 +307,9 @@ public class PullToNextView extends LinearLayout {
         mPullStateE = PullStateE.PULL_STATE_NONE;
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener()
         {
-
-
-            @TargetApi(Build.VERSION_CODES.HONEYCOMB)
             public void onAnimationUpdate(ValueAnimator valueAnimator)
             {
-
                 float temp = (Float) valueAnimator.getAnimatedValue();
-
                 if (temp == i)
                 {
                     mPullStateE = PullStateE.PULL_STATE_NONE;
@@ -427,13 +421,15 @@ public class PullToNextView extends LinearLayout {
             }
 
         } else {
-            moveTo(-mHeadViewHeight, ANIMATION_DURATION);
+//            moveTo(-mHeadViewHeight, ANIMATION_DURATION);
         }
 
         if(!isTop)
         {
             params.topMargin = (int) newTopMargin;
+            Log.e("moneybox", "+++++++++++++++++++++++++++++++++++++++++++++++++++++" + newTopMargin);
             mHeaderView.setLayoutParams(params);
+            mHeaderView.invalidate();
         }
 
         invalidate();

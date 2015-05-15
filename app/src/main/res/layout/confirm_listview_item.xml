@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="48dp"
+    android:orientation="horizontal"
+    android:background="@color/ct_white">
+
+   <TextView
+       android:paddingLeft="24dp"
+       android:layout_centerVertical="true"
+       android:id="@+id/confirm_lv_text"
+       android:layout_width="200dp"
+       android:layout_height="wrap_content"
+       android:textSize="@dimen/font_size_normal"
+       android:textColor="@color/font_black"/>
+
+</RelativeLayout>

@@ -51,7 +51,6 @@ public class AsyncHttpClientImpl implements BaseHttpClient {
     public void get(int reqType, Context context, String url,
                     RequestParams cacheParams, HttpCallback callback) {
         // TODO Auto-generated method stub
-        Log.e("CT_MONEY", "get+++++++++++++++++++++");
         client.get(url, cacheParams,new BaseHttpHandler(callback), reqType);
     }
 
