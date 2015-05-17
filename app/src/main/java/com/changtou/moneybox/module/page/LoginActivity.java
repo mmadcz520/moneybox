@@ -24,9 +24,11 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.changtou.moneybox.common.activity.BaseActivity;
+import com.changtou.moneybox.module.widget.ValidateImageView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.SignInButton;
@@ -39,10 +41,21 @@ import com.changtou.R;
 
 public class LoginActivity extends CTBaseActivity {
 
+    ImageView vc_image; //Í¼±ê
 
     @Override
     protected void initView(Bundle bundle) {
         setContentView(R.layout.riches_login_layout);
+
+        vc_image=(ImageView)findViewById(R.id.vc_image);
+        vc_image.setImageBitmap(ValidateImageView.getInstance().getBitmap());
+
+        vc_image.setOnClickListener(new OnClickListener() {
+            public void onClick(View v)
+            {
+                vc_image.setImageBitmap(ValidateImageView.getInstance().getBitmap());
+            }
+        });
     }
 
     @Override

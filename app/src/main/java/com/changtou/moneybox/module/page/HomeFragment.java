@@ -43,6 +43,7 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
     private CountView mInvestPercent = null;
     private TextView mInvestNum = null;      //投资进度数值
 
+
     private ProductListAdapter mAdapter = null;
 
     private PullToRefreshScrollView mPullToRefreshScrollView = null;
