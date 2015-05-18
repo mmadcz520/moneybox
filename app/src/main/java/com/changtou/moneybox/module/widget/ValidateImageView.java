@@ -34,8 +34,8 @@ public class ValidateImageView {
     private static final int DEFAULT_CODE_LENGTH = 4;//验证码的长度  这里是4位
     private static final int DEFAULT_FONT_SIZE = 60;//字体大小
     private static final int DEFAULT_LINE_NUMBER = 3;//多少条干扰线
-    private static final int BASE_PADDING_LEFT = 40; //左边距
-    private static final int RANGE_PADDING_LEFT = 15;//左边距范围值
+    private static final int BASE_PADDING_LEFT = 30; //左边距
+    private static final int RANGE_PADDING_LEFT = 10;//左边距范围值
     private static final int BASE_PADDING_TOP = 42;//上边距
     private static final int RANGE_PADDING_TOP = 15;//上边距范围值
     private static final int DEFAULT_WIDTH = 200;//默认宽度.图片的总宽

@@ -79,4 +79,12 @@
         <attr name="DialogSpotCount" format="integer"/>
     </declare-styleable>
 
+    <declare-styleable name="ExEditView">
+        <attr name="hintText" format="string|reference" />
+        <attr name="hintTextColor" format="reference|color"/>
+        <attr name="hintTextSize" format="dimension" />
+        <attr name="editType" format="integer"/>
+        <attr name="imgSrc" format="reference" />
+    </declare-styleable>
+
 </resources>

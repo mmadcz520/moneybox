@@ -11,8 +11,6 @@
     <dimen name="font_size_navigation">17dp</dimen>
     <dimen name="font_size_percent">30sp</dimen>
 
-
-
     <dimen name="app_actionbar_height">48dp</dimen>
 
     <!-- dialog-->
@@ -22,6 +20,8 @@
     <dimen name="progress_width">250dp</dimen>
 
     <!-- Edit -->
+    <dimen name="edit_img_paddingLeft">50dp</dimen>
+    <dimen name="edit_edit_paddingLeft">20dp</dimen>
     <dimen name="edit_width_normal">280dp</dimen>
     <dimen name="edit_height_normal">40dp</dimen>
 

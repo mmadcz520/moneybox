@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <EditText
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:background="@drawable/stroke_edit_null"
+        android:hint="请输入验证码"
+        android:textCursorDrawable="@drawable/ex_edit_cursor"
+        android:inputType="phone"
+        android:focusableInTouchMode="true"
+        android:textColorHint="@color/font_invalid"
+        android:typeface="monospace"
+        android:textSize="@dimen/font_size_number" />
+

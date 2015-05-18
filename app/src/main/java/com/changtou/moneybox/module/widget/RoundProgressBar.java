@@ -152,7 +152,6 @@ public class RoundProgressBar extends LinearLayout
         textIsDisplayable = mTypedArray.getBoolean(R.styleable.RoundProgressBar_textIsDisplayable, true);
         style = mTypedArray.getInt(R.styleable.RoundProgressBar_style, 0);
 
-
         mTypedArray.recycle();
         this.setWillNotDraw(false);
 

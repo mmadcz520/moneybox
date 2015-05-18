@@ -71,6 +71,18 @@
             android:name=".moneybox.module.page.LoginActivity"
             android:theme="@style/ActivityTheme_Light" >
         </activity>
+        <activity
+            android:name=".moneybox.module.page.RegisterActivity"
+            android:theme="@style/ActivityTheme_Light" >
+        </activity>
+        <activity
+            android:name=".moneybox.module.page.RegisterNextActivity"
+            android:theme="@style/ActivityTheme_Light" >
+        </activity>
+        <activity
+            android:name=".moneybox.module.page.RegisterPasswordActivity"
+            android:theme="@style/ActivityTheme_Light" >
+        </activity>
 
         <meta-data
             android:name="com.google.android.gms.version"

@@ -2,6 +2,7 @@ package com.changtou.moneybox.module.page;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.util.Log;
 import android.widget.LinearLayout;
 
@@ -113,11 +114,11 @@ public class MainActivity extends CTBaseActivity {
                 switchNavBar(1);
                 break;
             case R.id.navbar_user:
-//                mViewpager.setCurrentItem(2);
-//                switchNavBar(2);
+                mViewpager.setCurrentItem(2);
+                switchNavBar(2);
 
                 Intent intent = new Intent(this, LoginActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 0);
 
                 break;
             case R.id.navbar_more:
@@ -137,9 +138,26 @@ public class MainActivity extends CTBaseActivity {
         for(int i = 0; i < 4; i++)
         {
             boolean a = (i==pageId);
-            Log.e("CT_DEMO", "pageId=" + pageId + "i=" +i + "    " + a);
             mBars[i].setSelected(i==pageId);
         }
     }
 
+    /**
+     * 保存app 状态
+     *
+     * @param outState
+     * @param outPersistentState
+     */
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+//                mViewpager.setCurrentItem(2);
+//                switchNavBar(2);
+        Log.e("CT_MONEY", "onActivityResultonActivityResultonActivityResult");
+    }
 }
