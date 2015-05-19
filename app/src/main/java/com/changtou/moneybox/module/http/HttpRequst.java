@@ -5,6 +5,7 @@ import com.changtou.moneybox.common.http.base.BaseHttpRequest;
 import com.changtou.moneybox.module.entity.ProductDetailsEntity;
 import com.changtou.moneybox.module.entity.ProductEntity;
 import com.changtou.moneybox.module.entity.PromotionEntity;
+import com.changtou.moneybox.module.entity.UserEntity;
 
 /**
  * 描述:http Api 工具类
@@ -27,9 +28,14 @@ public class HttpRequst extends BaseHttpRequest
     public final static int REQ_TYPE_PRODUCT_LIST = 22;
     public final static int REQ_TYPE_PRODUCT_DETAILS = 23;
 
+    public final static int REQ_TYPE_LOGIN = 1001;
+
     //主页推荐产品列表
     public static String REQ_URL_PRODUCT_LIST = BASE_URL + "products";
     public static String REQ_URL_PRODUCT_DETAILS = BASE_URL + "products";
+
+    //登陆相关接口
+    public static String REQ_URL_LOGIN = "http://autoapp.hsxiang.com/wp-admin/admin-ajax.php?action=app_user_login";
 
     public static synchronized HttpRequst getInstance()
     {
@@ -54,6 +60,8 @@ public class HttpRequst extends BaseHttpRequest
                 return REQ_URL_PRODUCT_LIST;
             case REQ_TYPE_PRODUCT_DETAILS:
                 return REQ_URL_PRODUCT_DETAILS;
+            case REQ_TYPE_LOGIN:
+                return REQ_URL_LOGIN;
             default:
                 break;
         }
@@ -96,6 +104,11 @@ public class HttpRequst extends BaseHttpRequest
 
             case REQ_TYPE_PRODUCT_DETAILS:
                 paser = new ProductDetailsEntity();
+                break;
+            case REQ_TYPE_LOGIN:
+                paser = new UserEntity();
+                break;
+            default:
                 break;
         }
         return paser;

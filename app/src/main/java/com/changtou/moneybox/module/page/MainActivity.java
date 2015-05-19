@@ -8,9 +8,12 @@ import android.widget.LinearLayout;
 
 import com.changtou.R;
 import com.changtou.moneybox.common.activity.BaseFragment;
+import com.changtou.moneybox.common.utils.ACache;
+import com.changtou.moneybox.module.usermodule.UserManager;
 import com.changtou.moneybox.module.widget.ExFPAdapter;
 import com.changtou.moneybox.module.widget.ExViewPager;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -114,12 +117,15 @@ public class MainActivity extends CTBaseActivity {
                 switchNavBar(1);
                 break;
             case R.id.navbar_user:
+
+//                ACache cache = ACache.get(this);
+//                String token = cache.getAsString("token");
+
                 mViewpager.setCurrentItem(2);
                 switchNavBar(2);
 
                 Intent intent = new Intent(this, LoginActivity.class);
                 startActivityForResult(intent, 0);
-
                 break;
             case R.id.navbar_more:
                 mViewpager.setCurrentItem(3);

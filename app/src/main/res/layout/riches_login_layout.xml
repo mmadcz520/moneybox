@@ -14,6 +14,7 @@
         android:src="@mipmap/login_logo"/>
 
     <com.changtou.moneybox.module.widget.ExEditView
+        android:id="@+id/login_username"
         android:focusableInTouchMode="true"
         android:focusable="true"
         android:layout_width="fill_parent"
@@ -25,6 +26,7 @@
     </com.changtou.moneybox.module.widget.ExEditView>
 
     <com.changtou.moneybox.module.widget.ExEditView
+        android:id="@+id/login_password"
         android:layout_width="fill_parent"
         android:layout_height="52dp"
         android_custom:hintText="请输入登录密码"

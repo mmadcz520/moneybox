@@ -3,6 +3,7 @@ package com.changtou.moneybox.module;
 import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.http.base.BaseHttpRequest;
 import com.changtou.moneybox.module.http.HttpRequst;
+import com.changtou.moneybox.module.usermodule.UserManager;
 //import com.changtou.moneybox.module.usermodule.UserManager;
 
 import java.io.IOException;
@@ -18,27 +19,9 @@ import java.io.IOException;
  */
 public class CTMoneyApplication extends BaseApplication {
 
-    //用户模块
-//    private UserManager mUserManager = null;
-
     public void onCreate() {
         super.onCreate();
-
-//        try {
-//            mUserManager = new UserManager();
-//            mUserManager.init(this);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
     }
-
-    /**
-     * 获取用户模块
-     * @return mUserManager
-     */
-//    public UserManager getUserModule() {
-//        return mUserManager;
-//    }
 
 //    /**
 //     *获取cookieStore
@@ -55,20 +38,5 @@ public class CTMoneyApplication extends BaseApplication {
     protected BaseHttpRequest initBaseHttpRequest() {
         return HttpRequst.getInstance();
     }
-
-
-    private void tes22()
-    {
-        //12313
-    }
-
-
-    private void test(){
-        
-    }
-
-    private void test2222()
-    {}
-
 
 }

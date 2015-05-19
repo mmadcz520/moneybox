@@ -1,5 +1,6 @@
 package com.changtou.moneybox.common.activity;
 
+import java.io.IOException;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -18,6 +19,7 @@ import com.changtou.moneybox.common.http.base.BaseHttpRequest;
 import com.changtou.moneybox.common.http.impl.AsyncHttpClientImpl;
 import com.changtou.moneybox.common.utils.DeviceInfo;
 import com.changtou.moneybox.common.utils.MySharedPreferencesMgr;
+import com.changtou.moneybox.module.usermodule.UserManager;
 
 /**
  * 描述:全局Application
@@ -49,6 +51,8 @@ public abstract class BaseApplication extends Application implements UncaughtExc
     //程序意外终止异常
     private UncaughtExceptionHandler mDefaultHandler = null;
 
+    private UserManager mUserManager = null;
+
     public BaseApplication()
     {
         DeviceInfo.init(this);
@@ -71,6 +75,13 @@ public abstract class BaseApplication extends Application implements UncaughtExc
 		mApplication = this;
 //        FolderManager.initSystemFolder();
 		mAppParamsHolder = new Hashtable<String, Object>();
+
+        try {
+            mUserManager = new UserManager();
+            mUserManager.init(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 	}
 
 	public static BaseApplication getInstance() {
@@ -240,5 +251,14 @@ public abstract class BaseApplication extends Application implements UncaughtExc
      */
     public void onForeground(){
         //todo
+    }
+
+
+    /**
+     * 获取用户模块
+     * @return mUserManager
+     */
+    public UserManager getUserModule() {
+        return mUserManager;
     }
 }

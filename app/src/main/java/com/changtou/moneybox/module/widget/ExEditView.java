@@ -28,6 +28,8 @@ public class ExEditView extends LinearLayout
 
     private int mImgSrc = -1;
 
+    private EditText mEditText = null;
+
     public ExEditView(Context context, AttributeSet attrs)
     {
         super(context, attrs);
@@ -65,24 +67,29 @@ public class ExEditView extends LinearLayout
     private void initEditView()
     {
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        EditText view = (EditText)inflater.inflate(R.layout.ex_editview, this, false);
+        mEditText = (EditText)inflater.inflate(R.layout.ex_editview, this, false);
         float paddingleft = getResources().getDimension(R.dimen.edit_edit_paddingLeft);
         LayoutParams layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         layoutParams.gravity =  Gravity.CENTER_VERTICAL;
         layoutParams.leftMargin = (int)paddingleft;
-        view.setLayoutParams(layoutParams);
-        view.setHint(mDefaultHit);
+        mEditText.setLayoutParams(layoutParams);
+        mEditText.setHint(mDefaultHit);
 
         switch (mInputType)
         {
             case 0:
-                view.setInputType(InputType.TYPE_CLASS_TEXT);
+                mEditText.setInputType(InputType.TYPE_CLASS_TEXT);
                 break;
             case 1:
-                view.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                mEditText.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_PASSWORD);
                 break;
         }
 
-        this.addView(view);
+        this.addView(mEditText);
+    }
+
+    public String getEditValue()
+    {
+        return  mEditText.getText().toString().trim();
     }
 }
