@@ -136,6 +136,7 @@ public class CTBaseActivity extends BaseActivity{
             View v = inflator.inflate(layoutId, null);
             ActionBar.LayoutParams layout = new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT);
             actionBar.setCustomView(v,layout);
+
         }
     }
 }

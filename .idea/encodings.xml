@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/adapter/ProductDetailsAdapter.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/adapter/ProductListAdapter.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/entity/ProductDetailsEntity.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/page/BootActivity.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/page/ConfirmActivity.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/page/ProductDetailsActivity.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/widget/BomPanel.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/widget/CornerTabWidget.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/widget/CountView.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/widget/DragTopLayout.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/widget/MyScrollView.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/widget/ProductAdapter.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/widget/RoundProgressBar.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/page/LoginActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/page/RegisterActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/page/RegisterNextActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/page/RegisterPasswordActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/page/RichesFragment.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/widget/ExEditView.java" charset="UTF-8" />
   </component>
 </project>

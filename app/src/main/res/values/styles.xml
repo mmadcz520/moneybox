@@ -25,6 +25,7 @@
         <item name="android:windowNoTitle">true</item>
         <item name="background">@color/ct_blue</item>
         <item name="android:windowContentOverlay">@null</item>
+        <item name="displayOptions">useLogo</item>
         <item name="height">@dimen/app_actionbar_height</item>
     </style>
 

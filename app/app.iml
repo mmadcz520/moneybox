@@ -113,5 +113,6 @@
     <orderEntry type="library" exported="" name="play-services-games-7.0.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-wallet-7.0.0" level="project" />
     <orderEntry type="module" module-name="pull_library" exported="" />
+    <orderEntry type="module" module-name="sweet_alert" exported="" />
   </component>
 </module>
