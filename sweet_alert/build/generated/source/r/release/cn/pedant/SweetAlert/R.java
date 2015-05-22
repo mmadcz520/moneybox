@@ -1465,11 +1465,10 @@ containing a value of this type.
         public static int gray_button_background=0x7f020037;
         public static int ic_launcher=0x7f020038;
         public static int red_button_background=0x7f020039;
-        public static int stroke_edit_fillpraent=0x7f02003a;
-        public static int success_bow=0x7f02003b;
-        public static int success_circle=0x7f02003c;
-        public static int warning_circle=0x7f02003d;
-        public static int warning_sigh=0x7f02003e;
+        public static int success_bow=0x7f02003a;
+        public static int success_circle=0x7f02003b;
+        public static int warning_circle=0x7f02003c;
+        public static int warning_sigh=0x7f02003d;
     }
     public static final class id {
         public static int action_bar=0x7f070036;
