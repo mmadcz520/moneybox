@@ -44,7 +44,6 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
                         break;
                     case 3:
                         break;
-
                     case 4:
                         final Intent intent1 = new Intent(RichesFragment.this.getActivity(), RichesWithdrawActivity.class);
                         startActivity(intent1);
