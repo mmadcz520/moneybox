@@ -1,8 +1,8 @@
 package com.changtou.moneybox.module.page;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -124,8 +124,7 @@ public class CTBaseActivity extends BaseActivity{
      * */
     public void initActionBarLayout()
     {
-        ActionBar actionBar = this.getSupportActionBar();
-        actionBar.setElevation(0);
+        ActionBar actionBar = this.getActionBar();
 
         if( null != actionBar)
         {

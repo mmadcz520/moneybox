@@ -6,6 +6,7 @@
     <!-- 产品列表布局相关参数 -->
     <dimen name="font_size_small">8dp</dimen>
     <dimen name="font_size_hint">10dp</dimen>
+    <dimen name="font_size_hint2">12dp</dimen>
     <dimen name="font_size_normal">14dp</dimen>
     <dimen name="font_size_number">16dp</dimen>
     <dimen name="font_size_navigation">17dp</dimen>
@@ -20,9 +21,16 @@
     <dimen name="progress_width">250dp</dimen>
 
     <!-- Edit -->
-    <dimen name="edit_img_paddingLeft">50dp</dimen>
-    <dimen name="edit_edit_paddingLeft">20dp</dimen>
+    <dimen name="edit_img_paddingLeft">31dp</dimen>
+    <dimen name="edit_edit_paddingLeft">13dp</dimen>
     <dimen name="edit_width_normal">280dp</dimen>
-    <dimen name="edit_height_normal">40dp</dimen>
+    <dimen name="edit_height_normal">46dp</dimen>
+    <dimen name="exedit_height">52dp</dimen>
+
+    <!-- Button -->
+    <dimen name="button_height_fillparent">40dp</dimen>
+
+    <!--text-->
+    <dimen name="extext_height">46dp</dimen>
 
 </resources>

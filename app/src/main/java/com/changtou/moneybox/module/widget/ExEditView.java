@@ -4,13 +4,17 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.text.InputType;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.changtou.R;
+import com.changtou.moneybox.common.utils.AppUtil;
 
 /**
  *
@@ -27,8 +31,30 @@ public class ExEditView extends LinearLayout
     private int mInputType = -1;
 
     private int mImgSrc = -1;
+    private int mIcon = -1;
+    private String mTitle;
+    private String mMessage;
 
-    private EditText mEditText = null;
+    private LinearLayout mEditView = null;
+
+    private Location mLocation;
+    public enum Location{
+        TOP(0), MIDDLE(1), BOTTOM(2);
+        int mV;
+        Location(int v){
+            mV = v;
+        }
+    }
+
+    public ViewType mViewType;
+    public enum ViewType{
+        EDIT(0), TEXT(1), OTHER(2);
+        int mV;
+        ViewType(int v){
+            mV = v;
+        }
+    }
+
 
     public ExEditView(Context context, AttributeSet attrs)
     {
@@ -40,13 +66,34 @@ public class ExEditView extends LinearLayout
         mDefaultHit = mTypedArray.getString(R.styleable.ExEditView_hintText);
         mImgSrc = mTypedArray.getResourceId(R.styleable.ExEditView_imgSrc, -1);
         mInputType = mTypedArray.getInt(R.styleable.ExEditView_editType, InputType.TYPE_CLASS_TEXT);
+        mLocation = Location.values()[mTypedArray.getInt(R.styleable.ExEditView_position, 0)];
+        mViewType = ViewType.values()[mTypedArray.getInt(R.styleable.ExEditView_viewType, 0)];
+
+        mIcon = mTypedArray.getResourceId(R.styleable.ExEditView_ex_icon, -1);
+        mTitle =  mTypedArray.getString(R.styleable.ExEditView_ex_title);
+        mMessage =  mTypedArray.getString(R.styleable.ExEditView_ex_message);
+
         mTypedArray.recycle();
 
-        this.setBackgroundResource(R.drawable.stroke_edit_fillpraent);
-        this.setOrientation(LinearLayout.HORIZONTAL);
+//        if(mLocation == Location.BOTTOM)
+//        {
+//            this.setBackgroundResource(R.drawable.stroke_edit_fillpraent_bottom);
+//        }
+//        else
+//        {
+//            this.setBackgroundResource(R.drawable.stroke_edit_fillpraent);
+//        }
+//        this.setOrientation(LinearLayout.HORIZONTAL);
 
-        initImgView();
-        initEditView();
+//        initImgView();
+        if(mViewType == ViewType.EDIT)
+        {
+            initEditView();
+        }
+        else
+        {
+            initTextView();
+        }
     }
 
     private void initImgView()
@@ -55,8 +102,8 @@ public class ExEditView extends LinearLayout
         iv.setImageResource(mImgSrc);
         float paddingleft = getResources().getDimension(R.dimen.edit_img_paddingLeft);
         LayoutParams layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-        layoutParams.height = 60;
-        layoutParams.width = 60;
+        layoutParams.height = AppUtil.dip2px(mContext, 20);
+        layoutParams.width = AppUtil.dip2px(mContext,20);
         layoutParams.leftMargin = (int)paddingleft;
         layoutParams.gravity =  Gravity.CENTER_VERTICAL;
         iv.setLayoutParams(layoutParams);
@@ -64,32 +111,69 @@ public class ExEditView extends LinearLayout
         this.addView(iv);
     }
 
+    private void initTextView()
+    {
+        LayoutInflater inflater = LayoutInflater.from(mContext);
+        RelativeLayout view = (RelativeLayout)inflater.inflate(R.layout.ex_editview_text, this, false);
+
+        ImageView imageView = (ImageView)view.findViewById(R.id.ex_img);
+        TextView title = (TextView)view.findViewById(R.id.ex_text);
+        TextView message = (TextView)view.findViewById(R.id.ex_msg);
+
+        if(mLocation == Location.BOTTOM)
+        {
+            view.setBackgroundResource(R.drawable.stroke_edit_fillpraent_bottom);
+        }
+        else
+        {
+            view.setBackgroundResource(R.drawable.stroke_edit_fillpraent);
+        }
+        imageView.setImageResource(mIcon);
+        title.setText(mTitle);
+        message.setText(mMessage);
+
+        this.addView(view);
+    }
+
     private void initEditView()
     {
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        mEditText = (EditText)inflater.inflate(R.layout.ex_editview, this, false);
-        float paddingleft = getResources().getDimension(R.dimen.edit_edit_paddingLeft);
-        LayoutParams layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-        layoutParams.gravity =  Gravity.CENTER_VERTICAL;
-        layoutParams.leftMargin = (int)paddingleft;
-        mEditText.setLayoutParams(layoutParams);
-        mEditText.setHint(mDefaultHit);
+        mEditView = (LinearLayout)inflater.inflate(R.layout.ex_editview, this, false);
+
+        EditText editText = (EditText)mEditView.findViewById(R.id.edit_text);
+        editText.setHint(mDefaultHit);
+
+        ImageView iv = (ImageView)mEditView.findViewById(R.id.edit_img);
+        iv.setImageResource(mImgSrc);
+
+        if(mLocation == Location.BOTTOM)
+        {
+            mEditView.setBackgroundResource(R.drawable.stroke_edit_fillpraent_bottom);
+        }
+        else
+        {
+            mEditView.setBackgroundResource(R.drawable.stroke_edit_fillpraent);
+        }
 
         switch (mInputType)
         {
             case 0:
-                mEditText.setInputType(InputType.TYPE_CLASS_TEXT);
+                editText.setInputType(InputType.TYPE_CLASS_TEXT);
                 break;
             case 1:
-                mEditText.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                editText.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                break;
+            case 2:
+                editText.setInputType(InputType.TYPE_CLASS_PHONE);
                 break;
         }
 
-        this.addView(mEditText);
+        this.addView(mEditView);
     }
 
     public String getEditValue()
     {
-        return  mEditText.getText().toString().trim();
+//        return  mEditText.getText().toString().trim();
+        return "sss";
     }
 }

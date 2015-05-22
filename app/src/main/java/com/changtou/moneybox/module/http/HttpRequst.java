@@ -2,6 +2,7 @@ package com.changtou.moneybox.module.http;
 
 import com.changtou.moneybox.common.http.base.BaseEntity;
 import com.changtou.moneybox.common.http.base.BaseHttpRequest;
+import com.changtou.moneybox.module.entity.BankCardEntity;
 import com.changtou.moneybox.module.entity.ProductDetailsEntity;
 import com.changtou.moneybox.module.entity.ProductEntity;
 import com.changtou.moneybox.module.entity.PromotionEntity;
@@ -27,12 +28,16 @@ public class HttpRequst extends BaseHttpRequest
     public final static int REQ_TYPE_PRODUCT_HOME = 21;
     public final static int REQ_TYPE_PRODUCT_LIST = 22;
     public final static int REQ_TYPE_PRODUCT_DETAILS = 23;
+    public final static int REQ_TYPE_BANKCARD = 24;
 
     public final static int REQ_TYPE_LOGIN = 1001;
 
     //主页推荐产品列表
     public static String REQ_URL_PRODUCT_LIST = BASE_URL + "products";
     public static String REQ_URL_PRODUCT_DETAILS = BASE_URL + "products";
+
+    //银行卡列表
+    public static String REQ_URL_BANKCARD = BASE_URL + "products";
 
     //登陆相关接口
     public static String REQ_URL_LOGIN = "http://autoapp.hsxiang.com/wp-admin/admin-ajax.php?action=app_user_login";
@@ -62,6 +67,8 @@ public class HttpRequst extends BaseHttpRequest
                 return REQ_URL_PRODUCT_DETAILS;
             case REQ_TYPE_LOGIN:
                 return REQ_URL_LOGIN;
+            case REQ_TYPE_BANKCARD:
+                return REQ_URL_BANKCARD;
             default:
                 break;
         }
@@ -107,6 +114,9 @@ public class HttpRequst extends BaseHttpRequest
                 break;
             case REQ_TYPE_LOGIN:
                 paser = new UserEntity();
+                break;
+            case REQ_TYPE_BANKCARD:
+                paser = new BankCardEntity();
                 break;
             default:
                 break;

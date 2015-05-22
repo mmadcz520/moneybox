@@ -1,5 +1,6 @@
 package com.changtou.moneybox.module.page;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +23,7 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         int[] mImgRes = {R.drawable.riches_btn_adf_selector, R.mipmap.name02, R.mipmap.name03,
-                R.mipmap.name04, R.mipmap.name05, R.mipmap.name06};
+                R.mipmap.name04, R.drawable.riches_btn_wd_selector, R.drawable.riches_btn_safe_selector};
         String[] titleList = this.getActivity().getResources().getStringArray(R.array.riches_modules);
 
         View view = inflater.inflate(R.layout.riches_fragment, null);
@@ -31,8 +32,27 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
         ExGridAdapter sa = new ExGridAdapter(this.getActivity(), mImgRes, titleList);
         gv.setAdapter(sa);
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                printLog("selected sub page position=" + position);
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                switch (position)
+                {
+                    case 0:
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        final Intent intent1 = new Intent(RichesFragment.this.getActivity(), RichesWithdrawActivity.class);
+                        startActivity(intent1);
+                        break;
+                    case 5:
+                        final Intent intent2 = new Intent(RichesFragment.this.getActivity(), RichesSafeActivity.class);
+                        startActivity(intent2);
+                        break;
+                }
             }
         });
 
@@ -43,13 +63,6 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
         translateAnimation.setRepeatMode(Animation.REVERSE);
         imageView.setAnimation(translateAnimation); //这里iv就是我们要执行动画的item，例如一个imageView
         translateAnimation.start();
-
-//        Animation operatingAnim = AnimationUtils.loadAnimation(this.getActivity(), R.anim.tip);
-//        LinearInterpolator lin = new LinearInterpolator();
-//        operatingAnim.setInterpolator(lin);
-//        if (operatingAnim != null) {
-//            imageView.startAnimation(operatingAnim);
-//        }
 
         return view;
     }

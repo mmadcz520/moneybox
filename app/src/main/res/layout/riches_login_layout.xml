@@ -18,7 +18,7 @@
         android:focusableInTouchMode="true"
         android:focusable="true"
         android:layout_width="fill_parent"
-        android:layout_height="52dp"
+        android:layout_height="@dimen/exedit_height"
         android:layout_marginTop="47dp"
         android_custom:hintText="请输入手机号码/邮箱"
         android_custom:editType="0"
@@ -28,10 +28,11 @@
     <com.changtou.moneybox.module.widget.ExEditView
         android:id="@+id/login_password"
         android:layout_width="fill_parent"
-        android:layout_height="52dp"
+        android:layout_height="@dimen/exedit_height"
         android_custom:hintText="请输入登录密码"
         android_custom:imgSrc="@mipmap/riches_register_pass"
-        android_custom:editType="1">
+        android_custom:editType="1"
+        android_custom:position="bottom">
 
     </com.changtou.moneybox.module.widget.ExEditView>
 
@@ -41,7 +42,7 @@
         android:layout_width="fill_parent"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="65dp"
-        android:layout_height="40dp"
+        android:layout_height="@dimen/button_height_fillparent"
         android:textColor="@color/ct_white"
         android:background="@color/ct_blue"
         android:typeface="monospace"

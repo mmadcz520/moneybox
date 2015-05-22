@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android_custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/ct_background"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/riches_line1"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/ct_divide_line" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/extext_height"
+        android:background="@color/ct_blue">
+
+        <ImageView
+            android:id="@+id/ex_img"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="23dp"
+            android:src="@mipmap/riches_safe_icon"/>
+
+        <TextView
+            android:id="@+id/ex_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_toRightOf="@+id/ex_img"
+            android:layout_marginLeft="17dp"
+            android:focusableInTouchMode="true"
+            android:textSize="@dimen/font_size_normal"
+            android:textColor="@color/font_white"
+            android:typeface="monospace"
+            android:text="180****5591"/>
+
+    </LinearLayout>
+
+    <com.changtou.moneybox.module.widget.ExEditView
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/extext_height"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android_custom:viewType="text"
+        android_custom:ex_icon="@mipmap/riches_safe_phone"
+        android_custom:ex_title="手机认证"
+        android_custom:ex_message="认证送10元"/>
+
+    <com.changtou.moneybox.module.widget.ExEditView
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/extext_height"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android_custom:viewType="text"
+        android_custom:position="bottom"
+        android_custom:ex_icon="@mipmap/riches_safe_mail"
+        android_custom:ex_title="邮箱认证"
+        android_custom:ex_message="认证送10元"/>
+
+    <com.changtou.moneybox.module.widget.ExEditView
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/extext_height"
+        android_custom:viewType="text"
+        android_custom:position="bottom"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android_custom:ex_icon="@mipmap/riches_safe_real"
+        android_custom:ex_title="实名认证"
+        android_custom:ex_message="认证送10元"/>
+
+    <com.changtou.moneybox.module.widget.ExEditView
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/extext_height"
+        android_custom:viewType="text"
+        android:layout_marginTop="18dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android_custom:ex_icon="@mipmap/riches_safe_bank"
+        android_custom:ex_title="银行卡管理"/>
+
+    <com.changtou.moneybox.module.widget.ExEditView
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/extext_height"
+        android_custom:viewType="text"
+        android:focusable="true"
+        android_custom:position="bottom"
+        android:focusableInTouchMode="true"
+        android_custom:ex_icon="@mipmap/riches_safe_lock"
+        android_custom:ex_title="密码管理"/>
+
+</LinearLayout>

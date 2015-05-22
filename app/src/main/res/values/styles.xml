@@ -20,21 +20,19 @@
     <!-- Backward-compatible version of ?android:attr/buttonBarButtonStyle -->
     <style name="ButtonBarButton" />
 
-    <style name="actionbar_def_style" parent="@style/Widget.AppCompat.ActionBar">
+    <style name="actionbar_def_style" parent="@android:style/Widget.Holo.Light.ActionBar">
         <!-- 在样式里面直接替换掉actionbar的背景，避免在有的窗口进入慢时导致进入时显示系统默认的actionbar -->
-        <item name="android:windowNoTitle">true</item>
-        <item name="background">@color/ct_blue</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="displayOptions">useLogo</item>
-        <item name="height">@dimen/app_actionbar_height</item>
+        <item name="android:background">@color/ct_blue</item>
+        <item name="android:height">@dimen/app_actionbar_height</item>
+        <item name="android:displayOptions">useLogo</item>
     </style>
 
     <style name="AnimActivity">
     </style>
 
-    <style name="ActivityTheme_Light" parent="@style/Theme.AppCompat.Light">
+    <style name="ActivityTheme_Light" parent="android:Theme.Holo.Light">
         <item name="android:layout_width">fill_parent</item>
-        <item name="actionBarStyle">@style/actionbar_def_style</item>
+        <item name="android:actionBarStyle">@style/actionbar_def_style</item>
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
@@ -58,13 +56,5 @@
     </style>
 
     <style name="TabIndicator" />
-
-
-    <!--dialog-->
-    <style name="SpotsDialogDefault" parent="android:Theme.DeviceDefault.Light.Dialog">
-        <!--<item name="DialogTitleAppearance">@android:style/TextAppearance.Medium</item>-->
-        <!--<item name="DialogTitleText">Loading…</item>-->
-        <!--<item name="DialogSpotCount">5</item>-->
-    </style>
 
 </resources>

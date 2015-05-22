@@ -8,26 +8,28 @@
 
     <TextView
         android:layout_width="fill_parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="30dp"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/font_size_normal"
+        android:textSize="@dimen/font_size_hint2"
         android:textColor="@color/font_black"
         android:text="已向您的手机186****2861发送短信验证码"/>
 
     <com.changtou.moneybox.module.widget.ExEditView
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_width="fill_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/exedit_height"
         android_custom:hintText="请输入验证码"
-        android_custom:imgSrc="@mipmap/home_icon_income1">
+        android_custom:imgSrc="@mipmap/riches_register_checknum">
 
         <Button
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="@dimen/button_height_fillparent"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="50dp"
-            android:background="@color/ct_blue"
+            android:layout_marginLeft="130dp"
+            android:background="@drawable/fillet_stroke_button"
+            android:textSize="@dimen/font_size_small"
+            android:textColor="@color/ct_white"
             android:text="获取验证码"/>
 
     </com.changtou.moneybox.module.widget.ExEditView>
@@ -35,11 +37,11 @@
     <Button
         android:id="@+id/register_next_btn"
         android:layout_width="fill_parent"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="59dp"
         android:background="@color/ct_blue"
         android:textColor="@color/ct_white"
         android:text="下一步"
         android:textSize="@dimen/font_size_normal"
-        android:layout_height="50dp" />
+        android:layout_height="@dimen/button_height_fillparent" />
 
 </LinearLayout>

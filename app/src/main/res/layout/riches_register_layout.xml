@@ -9,20 +9,37 @@
     <com.changtou.moneybox.module.widget.ExEditView
         android:layout_marginTop="20dp"
         android:layout_width="fill_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/exedit_height"
+        android_custom:editType="2"
         android_custom:hintText="请输入手机号码"
-        android_custom:imgSrc="@mipmap/home_icon_income1">
+        android_custom:imgSrc="@mipmap/riches_register_user">
 
     </com.changtou.moneybox.module.widget.ExEditView>
 
     <Button
         android:id="@+id/register_btn"
         android:layout_width="fill_parent"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="35dp"
+        android:layout_height="@dimen/button_height_fillparent"
         android:background="@color/ct_blue"
         android:textColor="@color/ct_white"
         android:text="注 册"
-        android:textSize="@dimen/font_size_normal"
-        android:layout_height="50dp" />
+        android:textSize="@dimen/font_size_normal" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="@dimen/font_size_hint"
+        android:textColor="@color/font_invalid"
+        android:text="注册即代表您已经阅读并同意《注册协议》及《投资咨询与管理协议》"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@mipmap/riches_register_banner2"/>
 
 </LinearLayout>

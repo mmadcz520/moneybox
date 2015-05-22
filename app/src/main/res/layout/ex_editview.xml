@@ -1,15 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/exedit_height"
+    android:background="@color/ct_white">
+
+    <ImageView
+        android:id="@+id/edit_img"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="20dp" />
+
     <EditText
-        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/edit_text"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="20dp"
         android:background="@drawable/stroke_edit_null"
-        android:hint="请输入验证码"
-        android:textCursorDrawable="@drawable/ex_edit_cursor"
-        android:inputType="phone"
         android:focusableInTouchMode="true"
+        android:hint="请输入验证码"
+        android:inputType="phone"
         android:textColorHint="@color/font_invalid"
-        android:typeface="monospace"
-        android:textSize="@dimen/font_size_number" />
+        android:textCursorDrawable="@drawable/ex_edit_cursor"
+        android:textSize="@dimen/font_size_number"
+        android:typeface="monospace" />
+</LinearLayout>
 

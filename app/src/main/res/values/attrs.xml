@@ -85,6 +85,19 @@
         <attr name="hintTextSize" format="dimension" />
         <attr name="editType" format="integer"/>
         <attr name="imgSrc" format="reference" />
+        <attr name="position" format="enum">
+            <enum name="top" value="0" />
+            <enum name="middle" value="1" />
+            <enum name="bottom" value="2" />
+        </attr>
+        <attr name="viewType" format="enum">
+            <enum name="edit" value="0" />
+            <enum name="text" value="1" />
+            <enum name="other" value="2" />
+        </attr>
+        <attr name="ex_icon" format="reference"/>
+        <attr name="ex_title" format="string"/>
+        <attr name="ex_message" format="string"/>
     </declare-styleable>
 
 </resources>

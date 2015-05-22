@@ -10,8 +10,6 @@ import android.widget.TextView;
 
 import com.changtou.R;
 
-import org.w3c.dom.Text;
-
 /**
  * Created by Administrator on 2015/5/12.
  */
