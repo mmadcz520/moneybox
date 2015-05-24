@@ -23,7 +23,7 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         int[] mImgRes = {R.drawable.riches_btn_adf_selector, R.mipmap.name02, R.mipmap.name03,
-                R.mipmap.name04, R.drawable.riches_btn_wd_selector, R.drawable.riches_btn_safe_selector};
+                R.mipmap.name04, R.drawable.riches_btn_wd_selector, R.mipmap.name04};
         String[] titleList = this.getActivity().getResources().getStringArray(R.array.riches_modules);
 
         View view = inflater.inflate(R.layout.riches_fragment, null);
@@ -39,14 +39,16 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
                     case 0:
                         break;
                     case 1:
+                        final Intent intent1 = new Intent(RichesFragment.this.getActivity(), RichesInvestListActivity.class);
+                        startActivity(intent1);
                         break;
                     case 2:
                         break;
                     case 3:
                         break;
                     case 4:
-                        final Intent intent1 = new Intent(RichesFragment.this.getActivity(), RichesWithdrawActivity.class);
-                        startActivity(intent1);
+//                        final Intent intent1 = new Intent(RichesFragment.this.getActivity(), RichesWithdrawActivity.class);
+//                        startActivity(intent1);
                         break;
                     case 5:
                         final Intent intent2 = new Intent(RichesFragment.this.getActivity(), RichesSafeActivity.class);
@@ -62,6 +64,7 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
         translateAnimation.setRepeatCount(Animation.INFINITE);
         translateAnimation.setRepeatMode(Animation.REVERSE);
         imageView.setAnimation(translateAnimation); //这里iv就是我们要执行动画的item，例如一个imageView
+
         translateAnimation.start();
 
         return view;

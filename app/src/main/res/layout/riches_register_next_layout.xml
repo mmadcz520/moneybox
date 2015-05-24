@@ -20,7 +20,7 @@
         android:layout_width="fill_parent"
         android:layout_height="@dimen/exedit_height"
         android_custom:hintText="请输入验证码"
-        android_custom:imgSrc="@mipmap/riches_register_checknum">
+        android_custom:imgSrc="@mipmap/riches_register_pass">
 
         <Button
             android:layout_width="wrap_content"

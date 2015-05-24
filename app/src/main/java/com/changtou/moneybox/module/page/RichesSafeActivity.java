@@ -7,7 +7,7 @@ import com.changtou.R;
 /**
  * Created by Administrator on 2015/5/22.
  *
- * 用户中心  安全管理
+ * 鐢ㄦ埛涓績  瀹夊叏绠＄悊
  */
 public class RichesSafeActivity extends CTBaseActivity
 {

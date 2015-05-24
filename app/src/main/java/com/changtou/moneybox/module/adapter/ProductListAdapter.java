@@ -86,7 +86,7 @@ public class ProductListAdapter extends BaseAdapter
         if (convertView == null)
         {
             viewHolder = new ViewHolder();
-            convertView = mInflater.inflate(R.layout.product_list_item, null);
+            convertView = mInflater.inflate(R.layout.riches_invest_list_item, null);
 //            LinearLayout ll = (LinearLayout)convertView.findViewById(R.id.roundProgressBar);
 //            ll.setWillNotDraw(false);
 //            viewHolder.txt_top = (TextView) convertView.findViewById(R.id.pro_list_titile);

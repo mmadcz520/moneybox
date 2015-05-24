@@ -2,7 +2,7 @@ package com.changtou.moneybox.module.http;
 
 import com.changtou.moneybox.common.http.base.BaseEntity;
 import com.changtou.moneybox.common.http.base.BaseHttpRequest;
-import com.changtou.moneybox.module.entity.BankCardEntity;
+//import com.changtou.moneybox.module.entity.BankCardEntity;
 import com.changtou.moneybox.module.entity.ProductDetailsEntity;
 import com.changtou.moneybox.module.entity.ProductEntity;
 import com.changtou.moneybox.module.entity.PromotionEntity;
@@ -116,7 +116,7 @@ public class HttpRequst extends BaseHttpRequest
                 paser = new UserEntity();
                 break;
             case REQ_TYPE_BANKCARD:
-                paser = new BankCardEntity();
+//                paser = new BankCardEntity();
                 break;
             default:
                 break;

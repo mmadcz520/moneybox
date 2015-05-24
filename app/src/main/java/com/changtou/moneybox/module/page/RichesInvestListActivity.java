@@ -3,11 +3,8 @@ package com.changtou.moneybox.module.page;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +18,6 @@ import com.changtou.moneybox.module.entity.ProductEntity;
 import com.changtou.moneybox.module.http.HttpRequst;
 import com.changtou.moneybox.module.widget.ExFPAdapter;
 import com.changtou.moneybox.module.widget.MultiStateView;
-import com.changtou.moneybox.module.widget.SlidingTabLayout;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
@@ -29,80 +25,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * æè¿°:äº§å“é¡µ
- *     1. tab view
+ * Created by Administrator on 2015/5/23 0023.
  *
- * @author zhoulongfei
- * @since 2015-3-26
+ * Í¶×ÊÁĞ±íÒ³Ãæ
+ *
  */
-public class ProductFragment extends BaseFragment{
+public class RichesInvestListActivity extends CTBaseActivity
+{
+    private ViewPager mViewPager = null;
 
-    private ViewPager mViewPager;
-    private SlidingTabLayout mSlidingTabLayout;
+    protected void initView(Bundle bundle) {
 
-    protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View mView = inflater.inflate(R.layout.product_fragment, container, false);
+        setContentView(R.layout.riches_invest_layout);
 
-        mSlidingTabLayout = (SlidingTabLayout) mView.findViewById(R.id.sliding_tabs);
-        Resources res = getResources();
-        mSlidingTabLayout.setCustomTabView(R.layout.product_tabpage_indicator, android.R.id.text1);
-//        mSlidingTabLayout.setSelectedIndicatorColors(res.getColor(R.color.tab_indicator_color));
-
-        //æ ¹æ®äº§å“åˆ†ç±»åˆ—è¡¨åˆå§‹åŒ–ç•Œé¢
         List<BaseFragment> viewList = new ArrayList<>();
         viewList.add(new SubPage());
         viewList.add(new SubPage());
         viewList.add(new SubPage());
         viewList.add(new SubPage());
 
-        mViewPager = (ViewPager) mView.findViewById(R.id.pager);
-        ExFPAdapter pagerAdapter = new ExFPAdapter(getChildFragmentManager(), viewList);
-        pagerAdapter.setTitles(new String[]{"é•¿æŠ•å®", "ZAMAå®", "ç²¾é€‰å€ºæƒ", "è½¬è®©ä¸“åŒº"});
+        mViewPager = (ViewPager)findViewById(R.id.riches_invest_pager);
+        ExFPAdapter pagerAdapter = new ExFPAdapter(getSupportFragmentManager(), viewList);
+
         mViewPager.setAdapter(pagerAdapter);
         mViewPager.setCurrentItem(0);
-        mViewPager.setOnPageChangeListener(mPageChangeListener);
         mViewPager.setOffscreenPageLimit(viewList.size());
-        mSlidingTabLayout.setViewPager(mViewPager);
-
-        return mView;
-    }
-
-    protected void initLisener() {
 
     }
-
-    protected void initData(Bundle savedInstanceState) {
-
-    }
-
-    public void onSuccess(String content, Object object, int reqType) {
-
-    }
-
-    public void onFailure(Throwable error, String content, int reqType) {
-
-    }
-
-    private OnPageChangeListener mPageChangeListener = new OnPageChangeListener() {
-
-        public void onPageSelected(int arg0)
-        {
-//            mSegmentControl.setSelectIndex(arg0);
-        }
-
-        public void onPageScrolled(int arg0, float arg1, int arg2)
-        {
-
-        }
-
-        public void onPageScrollStateChanged(int arg0)
-        {
-
-        }
-    };
 
     /**
-     * æè¿°: äº§å“åˆ†ç±»å­é¡µé¢
+     * ÃèÊö: ²úÆ··ÖÀà×ÓÒ³Ãæ
      * @author zhoulongfei
      */
     public static class SubPage extends BaseFragment implements PullToRefreshBase.OnRefreshListener
@@ -147,7 +99,7 @@ public class ProductFragment extends BaseFragment{
                 Intent intent = new Intent(activity, ProductDetailsActivity.class);
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
                 {
-                    // è·³è½¬åˆ°è¯¦æƒ…é¡µ
+                    // Ìø×ªµ½ÏêÇéÒ³
                     startActivity(intent);
                 }
 
@@ -187,7 +139,7 @@ public class ProductFragment extends BaseFragment{
         }
 
         /**
-         * åˆ·æ–°å‡½æ•°
+         * Ë¢ĞÂº¯Êı
          * @param refreshView
          */
         public void onRefresh(PullToRefreshBase refreshView)

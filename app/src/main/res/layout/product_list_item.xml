@@ -1,193 +1,170 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android_custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:background="#00000000">
 
-    <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:android_custom="http://schemas.android.com/apk/res-auto"
+    <LinearLayout
+        android:id="@+id/lld"
         android:layout_width="fill_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/stroke_list_item"
+        android:orientation="vertical">
 
-        <!--<android.support.v7.widget.CardView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:layout_marginBottom="3dp"-->
-            <!--android:layout_marginLeft="8dp"-->
-            <!--android:layout_marginRight="8dp"-->
-            <!--android:layout_marginTop="3dp"-->
-            <!--android:orientation="horizontal"-->
-            <!--card_view:cardCornerRadius="4dp"-->
-            <!--card_view:cardElevation="1dp"-->
-            <!--card_view:cardPreventCornerOverlap="true">-->
+        <TextView
+            android:id="@+id/pro_list_titile"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="15dp"
+            android:text="[长投宝] 上手易第256期"
+            android:textColor="@color/font_black"
+            android:textSize="@dimen/font_size_normal"
+            android:textStyle="bold" />
 
-            <!--<LinearLayout-->
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="66dp"
+            android:orientation="horizontal">
 
-                <!--android:background="@color/ct_white"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent">-->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="3"
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/lld"
-                    android:background="@drawable/stroke_list_item"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_centerVertical="true"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:layout_gravity="center_horizontal"
+                    android:baselineAligned="true"
+                    android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/pro_list_titile"
                         android:layout_width="wrap_content"
-                        android:layout_height="18dp"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
-                        android:layout_marginLeft="15dp"
-                        android:text="[长投宝] 上手易第256期"
-                        android:textColor="@color/font_black"
-                        android:textSize="@dimen/font_size_normal"
-                        android:textStyle="bold" />
+                        android:text="15"
+                        android:textColor="@color/font_prompt"
+                        android:textSize="@dimen/font_size_percent" />
 
-                    <LinearLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="66dp"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="fill_parent"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="38dp"
-                                android:layout_gravity="center_horizontal"
-                                android:baselineAligned="true"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="bottom"
-                                    android:text="15"
-                                    android:textColor="@color/font_prompt"
-                                    android:textSize="@dimen/font_size_percent"/>
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="bottom"
-                                    android:text="%"
-                                    android:textColor="@color/font_prompt"
-                                    android:textSize="@dimen/font_size_normal" />
-                            </LinearLayout>
-
-                            <TextView
-                                android:layout_width="fill_parent"
-                                android:layout_height="fill_parent"
-                                android:gravity="center_horizontal"
-                                android:text="年化收益"
-                                android:textColor="@color/font_invalid"
-                                android:textSize="@dimen/font_size_normal" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="fill_parent"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="38dp"
-                                android:layout_gravity="center_horizontal"
-                                android:gravity="bottom"
-                                android:text="3个月"
-                                android:textColor="@color/font_black"
-                                android:textSize="@dimen/font_size_normal" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:text="投资期限"
-                                android:textColor="@color/font_invalid"
-                                android:textSize="@dimen/font_size_normal" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="fill_parent"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="38dp"
-                                android:layout_gravity="center_horizontal"
-                                android:gravity="bottom"
-                                android:text="100元"
-                                android:textColor="@color/font_black"
-                                android:textSize="@dimen/font_size_normal" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:text="起投金额"
-                                android:textColor="@color/font_invalid"
-                                android:textSize="@dimen/font_size_normal" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="fill_parent"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="38dp"
-                                android:layout_gravity="center_horizontal"
-                                android:gravity="bottom"
-                                android:text="100万"
-                                android:textColor="@color/font_black"
-                                android:textSize="@dimen/font_size_normal" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:text="融资金额"
-                                android:textColor="@color/font_invalid"
-                                android:textSize="@dimen/font_size_normal" />
-                        </LinearLayout>
-
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:layout_centerVertical="true"
-                            android:layout_toRightOf="@+id/lld">
-
-                            <com.changtou.moneybox.module.widget.RoundProgressBar
-                                android:id="@+id/roundProgressBar"
-                                android:layout_width="48dp"
-                                android:layout_height="48dp"
-                                android:layout_centerInParent="true"
-                                android_custom:roundColor="@color/ct_red"
-                                android_custom:roundProgressColor="@color/ct_blue"
-                                android_custom:roundWidth="3dp"
-                                android_custom:style="STROKE"
-                                android_custom:textColor="@color/ct_blue"
-                                android_custom:textSize="18sp" />
-                        </RelativeLayout>
-
-                    </LinearLayout>
-
-
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:text="%"
+                        android:textColor="@color/font_prompt"
+                        android:textSize="@dimen/font_size_normal" />
                 </LinearLayout>
-        <!--</android.support.v7.widget.CardView>-->
-    </RelativeLayout>
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:gravity="center_horizontal"
+                    android:text="年化收益"
+                    android:textColor="@color/font_invalid"
+                    android:textSize="@dimen/font_size_normal" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="3"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="bottom"
+                    android:text="3个月"
+                    android:textColor="@color/font_black"
+                    android:textSize="@dimen/font_size_normal" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="投资期限"
+                    android:textColor="@color/font_invalid"
+                    android:textSize="@dimen/font_size_normal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="3"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="bottom"
+                    android:text="100元"
+                    android:textColor="@color/font_black"
+                    android:textSize="@dimen/font_size_normal" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="起投金额"
+                    android:textColor="@color/font_invalid"
+                    android:textSize="@dimen/font_size_normal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="3"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="bottom"
+                    android:text="100万"
+                    android:textColor="@color/font_black"
+                    android:textSize="@dimen/font_size_normal" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="融资金额"
+                    android:textColor="@color/font_invalid"
+                    android:textSize="@dimen/font_size_normal" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="80dp"
+                android:layout_height="fill_parent"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/lld">
+
+                <com.changtou.moneybox.module.widget.RoundProgressBar
+                    android:id="@+id/roundProgressBar"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_centerInParent="true"
+                    android_custom:roundColor="@color/ct_red"
+                    android_custom:roundProgressColor="@color/ct_blue"
+                    android_custom:roundWidth="3dp"
+                    android_custom:style="STROKE"
+                    android_custom:textColor="@color/ct_blue"
+                    android_custom:textSize="18sp" />
+            </RelativeLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>
 
 

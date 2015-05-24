@@ -114,25 +114,25 @@ public class ExEditView extends LinearLayout
     private void initTextView()
     {
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        RelativeLayout view = (RelativeLayout)inflater.inflate(R.layout.ex_editview_text, this, false);
+//        RelativeLayout view = (RelativeLayout)inflater.inflate(R.layout.ex_editview_text, this, false);
 
-        ImageView imageView = (ImageView)view.findViewById(R.id.ex_img);
-        TextView title = (TextView)view.findViewById(R.id.ex_text);
-        TextView message = (TextView)view.findViewById(R.id.ex_msg);
+//        ImageView imageView = (ImageView)view.findViewById(R.id.ex_img);
+//        TextView title = (TextView)view.findViewById(R.id.ex_text);
+//        TextView message = (TextView)view.findViewById(R.id.ex_msg);
 
         if(mLocation == Location.BOTTOM)
         {
-            view.setBackgroundResource(R.drawable.stroke_edit_fillpraent_bottom);
+//            view.setBackgroundResource(R.drawable.stroke_edit_fillpraent_bottom);
         }
-        else
-        {
-            view.setBackgroundResource(R.drawable.stroke_edit_fillpraent);
-        }
-        imageView.setImageResource(mIcon);
-        title.setText(mTitle);
-        message.setText(mMessage);
+//        else
+//        {
+//            view.setBackgroundResource(R.drawable.stroke_edit_fillpraent);
+//        }
+//        imageView.setImageResource(mIcon);
+//        title.setText(mTitle);
+//        message.setText(mMessage);
 
-        this.addView(view);
+//        this.addView(view);
     }
 
     private void initEditView()
@@ -148,7 +148,7 @@ public class ExEditView extends LinearLayout
 
         if(mLocation == Location.BOTTOM)
         {
-            mEditView.setBackgroundResource(R.drawable.stroke_edit_fillpraent_bottom);
+//            mEditView.setBackgroundResource(R.drawable.stroke_edit_fillpraent_bottom);
         }
         else
         {
