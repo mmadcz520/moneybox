@@ -19,4 +19,4 @@
     android:duration="@android:integer/config_longAnimTime"
     android:fromYDelta="0"
     android:toYDelta="-100%p" />
-<!-- From: file:/E:/新建文件夹/moneybox/moneybox/pull_library/src/main/res/anim/slide_out_to_top.xml -->
+<!-- From: file:/E:/新建文件夹/moneybox_0525/moneybox/moneybox/pull_library/src/main/res/anim/slide_out_to_top.xml -->

@@ -1,2 +1,2 @@
-include ':app', ':sweet_alert'
+include ':app', ':sweet_alert', ':Demo', ':DatePicker'
 include ':pull_library'

@@ -41,6 +41,8 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
                 switch (position)
                 {
                     case 0:
+                        final Intent intent0 = new Intent(RichesFragment.this.getActivity(), RichesFlowActivity.class);
+                        startActivity(intent0);
                         break;
                     case 1:
                         final Intent intent1 = new Intent(RichesFragment.this.getActivity(), RichesInvestListActivity.class);

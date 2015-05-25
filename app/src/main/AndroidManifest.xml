@@ -102,7 +102,7 @@
         </activity>
 
         <activity
-            android:name=".moneybox.module.page.RichesInvestListActivity"
+            android:name=".moneybox.module.page.RichesFlowActivity"
             android:theme="@style/ActivityTheme_Light" >
         </activity>
 

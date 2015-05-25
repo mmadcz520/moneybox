@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/E:/新建文件夹/moneybox/moneybox/pull_library/src/main/res/values-it/pull_refresh_strings.xml -->
+    <!-- From: file:/E:/新建文件夹/moneybox_0525/moneybox/moneybox/pull_library/src/main/res/values-it/pull_refresh_strings.xml -->
     <eat-comment/>
     <string name="pull_to_refresh_pull_label">Tira per aggiornare…</string>
     <string name="pull_to_refresh_refreshing_label">Caricamento…</string>
