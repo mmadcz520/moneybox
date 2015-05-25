@@ -3,21 +3,26 @@ package com.changtou.moneybox.module.page;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
 
 import com.changtou.R;
 import com.changtou.moneybox.common.activity.BaseFragment;
-import com.changtou.moneybox.module.adapter.ProductListAdapter;
-import com.changtou.moneybox.module.entity.ProductEntity;
+import com.changtou.moneybox.module.adapter.InvestListAdapter;
+import com.changtou.moneybox.module.adapter.TransferListAdapter;
+import com.changtou.moneybox.module.entity.InvestListEntity;
+import com.changtou.moneybox.module.entity.TransferListEntity;
 import com.changtou.moneybox.module.http.HttpRequst;
 import com.changtou.moneybox.module.widget.ExFPAdapter;
 import com.changtou.moneybox.module.widget.MultiStateView;
+import com.changtou.moneybox.module.widget.SlidingTabLayout;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
@@ -27,39 +32,47 @@ import java.util.List;
 /**
  * Created by Administrator on 2015/5/23 0023.
  *
- * Õ∂◊ ¡–±Ì“≥√Ê
+ * ÊäïËµÑÂàóË°®È°µÈù¢
  *
  */
 public class RichesInvestListActivity extends CTBaseActivity
 {
     private ViewPager mViewPager = null;
+    private SlidingTabLayout mSlidingTabLayout;
 
     protected void initView(Bundle bundle) {
 
         setContentView(R.layout.riches_invest_layout);
 
+        mSlidingTabLayout = (SlidingTabLayout)findViewById(R.id.riches_invest_sliding_tabs);
+        Resources res = getResources();
+        mSlidingTabLayout.setCustomTabView(R.layout.product_tabpage_indicator, android.R.id.text1);
+        mSlidingTabLayout.setSelectedIndicatorColors(res.getColor(R.color.ct_blue));
+
         List<BaseFragment> viewList = new ArrayList<>();
-        viewList.add(new SubPage());
-        viewList.add(new SubPage());
-        viewList.add(new SubPage());
-        viewList.add(new SubPage());
+        viewList.add(SubPage.create(0));
+        viewList.add(SubPage.create(1));
+        viewList.add(SubPage.create(2));
+        viewList.add(SubPage.create(3));
 
         mViewPager = (ViewPager)findViewById(R.id.riches_invest_pager);
         ExFPAdapter pagerAdapter = new ExFPAdapter(getSupportFragmentManager(), viewList);
+        pagerAdapter.setTitles(new String[]{"ËøòÊ¨æ‰∏≠", "Â∑≤ÁªìÊùü", "ËΩ¨ËÆ©‰∏≠", "Â∑≤ËΩ¨ËÆ©"});
 
         mViewPager.setAdapter(pagerAdapter);
         mViewPager.setCurrentItem(0);
         mViewPager.setOffscreenPageLimit(viewList.size());
+        mSlidingTabLayout.setViewPager(mViewPager);
 
     }
 
     /**
-     * √Ë ˆ: ≤˙∆∑∑÷¿‡◊”“≥√Ê
+     * ÊèèËø∞: ‰∫ßÂìÅÂàÜÁ±ªÂ≠êÈ°µÈù¢
      * @author zhoulongfei
      */
     public static class SubPage extends BaseFragment implements PullToRefreshBase.OnRefreshListener
     {
-        private ProductListAdapter mAdapter = null;
+        private BaseAdapter mAdapter = null;
         private Context mContext = null;
 
         private PullToRefreshListView mPullRefreshListView;
@@ -67,9 +80,28 @@ public class RichesInvestListActivity extends CTBaseActivity
         private ListView actualListView;
         private MultiStateView mMultiStateView;
 
+        private int[] mType = {HttpRequst.REQ_TYPE_INVEST_LIST,
+                0 ,
+                HttpRequst.RFQ_TYPE_TRANSFER_LIST ,
+                0};
+
+        private String[] mUrl = { HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_INVEST_LIST),
+                HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_INVEST_LIST) ,
+                HttpRequst.getInstance().getUrl(HttpRequst.RFQ_TYPE_TRANSFER_LIST) ,
+                HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_INVEST_LIST)};
+
+        public static SubPage create(int type)
+        {
+            SubPage subPage = new SubPage();
+            Bundle bundle = new Bundle();
+            bundle.putInt("invest", type);
+            subPage.setArguments(bundle);
+            return subPage;
+        }
+
         protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            View mView = inflater.inflate(R.layout.product_tabpage_layout, null);
+            View mView = inflater.inflate(R.layout.product_tabpage_layout, container, false);
 
             mContext = this.getActivity();
             mMultiStateView = (MultiStateView) mView.findViewById(R.id.multiStateView);
@@ -85,26 +117,23 @@ public class RichesInvestListActivity extends CTBaseActivity
         {
             final Activity activity = this.getActivity();
 
-            actualListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
-            {
+            actualListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 Intent intent = new Intent(activity, ProductDetailsActivity.class);
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-                {
+
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     startActivity(intent);
                 }
             });
 
-            actualListView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
-            {
+            actualListView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 Intent intent = new Intent(activity, ProductDetailsActivity.class);
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
-                {
-                    // Ã¯◊™µΩœÍ«È“≥
+
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    // Ë∑≥ËΩ¨Âà∞ËØ¶ÊÉÖÈ°µ
                     startActivity(intent);
                 }
 
-                public void onNothingSelected(AdapterView<?> parent)
-                {
+                public void onNothingSelected(AdapterView<?> parent) {
 
                 }
             });
@@ -112,24 +141,42 @@ public class RichesInvestListActivity extends CTBaseActivity
 
         protected void initData(Bundle savedInstanceState)
         {
-            mAdapter = new ProductListAdapter(mContext);
-            actualListView.setAdapter(mAdapter);
-
-            sendRequest(HttpRequst.REQ_TYPE_PRODUCT_LIST,
-                    HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_PRODUCT_LIST),
-                    mParams,
-                    mAct.getAsyncClient(), false);
+            int page = getArguments().getInt("invest");
+            sendRequest(mType[page], mUrl[page], mParams, mAct.getAsyncClient(), false);
+            switch (page)
+            {
+                case 0:
+                    mAdapter = new InvestListAdapter(mContext);
+                    actualListView.setAdapter(mAdapter);
+                    break;
+                case 1:
+                    mAdapter = new InvestListAdapter(mContext);
+                    break;
+                case 2:
+                    mAdapter = new TransferListAdapter(mContext);
+                    actualListView.setAdapter(mAdapter);
+                    break;
+                case 3:
+                    mAdapter = new InvestListAdapter(mContext);
+                    break;
+            }
         }
 
         public void onSuccess(String content, Object object, int reqType)
         {
-            if (reqType == HttpRequst.REQ_TYPE_PRODUCT_LIST)
+            if (reqType == HttpRequst.REQ_TYPE_INVEST_LIST)
             {
                 mMultiStateView.setViewState(MultiStateView.ViewState.CONTENT);
-                ProductEntity entity = (ProductEntity) object;
-                mAdapter.setData(entity);
+                InvestListEntity entity = (InvestListEntity) object;
+                ((InvestListAdapter)mAdapter).setData(entity);
 
                 mPullRefreshListView.onRefreshComplete();
+            }
+            else if(reqType == HttpRequst.RFQ_TYPE_TRANSFER_LIST)
+            {
+                mMultiStateView.setViewState(MultiStateView.ViewState.CONTENT);
+                TransferListEntity entity = (TransferListEntity) object;
+                ((TransferListAdapter)mAdapter).setData(entity);
             }
         }
 
@@ -139,13 +186,13 @@ public class RichesInvestListActivity extends CTBaseActivity
         }
 
         /**
-         * À¢–¬∫Ø ˝
+         * Âà∑Êñ∞ÂáΩÊï∞
          * @param refreshView
          */
         public void onRefresh(PullToRefreshBase refreshView)
         {
-            sendRequest(HttpRequst.REQ_TYPE_PRODUCT_LIST,
-                    HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_PRODUCT_LIST),
+            sendRequest(HttpRequst.REQ_TYPE_INVEST_LIST,
+                    HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_INVEST_LIST),
                     mParams,
                     mAct.getAsyncClient(), true);
         }

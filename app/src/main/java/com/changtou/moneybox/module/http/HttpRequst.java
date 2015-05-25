@@ -2,10 +2,12 @@ package com.changtou.moneybox.module.http;
 
 import com.changtou.moneybox.common.http.base.BaseEntity;
 import com.changtou.moneybox.common.http.base.BaseHttpRequest;
-//import com.changtou.moneybox.module.entity.BankCardEntity;
+import com.changtou.moneybox.module.entity.BankCardEntity;
+import com.changtou.moneybox.module.entity.InvestListEntity;
 import com.changtou.moneybox.module.entity.ProductDetailsEntity;
 import com.changtou.moneybox.module.entity.ProductEntity;
 import com.changtou.moneybox.module.entity.PromotionEntity;
+import com.changtou.moneybox.module.entity.TransferListEntity;
 import com.changtou.moneybox.module.entity.UserEntity;
 
 /**
@@ -29,6 +31,8 @@ public class HttpRequst extends BaseHttpRequest
     public final static int REQ_TYPE_PRODUCT_LIST = 22;
     public final static int REQ_TYPE_PRODUCT_DETAILS = 23;
     public final static int REQ_TYPE_BANKCARD = 24;
+    public final static int REQ_TYPE_INVEST_LIST=25;
+    public final static int RFQ_TYPE_TRANSFER_LIST = 26;
 
     public final static int REQ_TYPE_LOGIN = 1001;
 
@@ -41,6 +45,12 @@ public class HttpRequst extends BaseHttpRequest
 
     //登陆相关接口
     public static String REQ_URL_LOGIN = "http://autoapp.hsxiang.com/wp-admin/admin-ajax.php?action=app_user_login";
+
+    //获取投资列表
+    public static String REQ_URL_INVEST_LIST = BASE_URL + "products";
+
+    //获取站内转让列表
+    public static String REQ_URL_TRANSFER_LIST = BASE_URL + "products";
 
     public static synchronized HttpRequst getInstance()
     {
@@ -69,6 +79,10 @@ public class HttpRequst extends BaseHttpRequest
                 return REQ_URL_LOGIN;
             case REQ_TYPE_BANKCARD:
                 return REQ_URL_BANKCARD;
+            case REQ_TYPE_INVEST_LIST:
+                return REQ_URL_INVEST_LIST;
+            case RFQ_TYPE_TRANSFER_LIST:
+                return REQ_URL_TRANSFER_LIST;
             default:
                 break;
         }
@@ -104,11 +118,9 @@ public class HttpRequst extends BaseHttpRequest
             case REQ_TYPE_PRODUCT_HOME:
                 paser = new PromotionEntity();
                 break;
-
             case REQ_TYPE_PRODUCT_LIST:
                 paser = new ProductEntity();
                 break;
-
             case REQ_TYPE_PRODUCT_DETAILS:
                 paser = new ProductDetailsEntity();
                 break;
@@ -116,8 +128,13 @@ public class HttpRequst extends BaseHttpRequest
                 paser = new UserEntity();
                 break;
             case REQ_TYPE_BANKCARD:
-//                paser = new BankCardEntity();
+                paser = new BankCardEntity();
                 break;
+            case REQ_TYPE_INVEST_LIST:
+                paser = new InvestListEntity();
+                break;
+            case RFQ_TYPE_TRANSFER_LIST:
+                paser = new TransferListEntity();
             default:
                 break;
         }

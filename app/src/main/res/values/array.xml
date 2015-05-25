@@ -4,7 +4,7 @@
         <item>推荐好友</item>
         <item>投资记录</item>
         <item>交易记录</item>
-        <item>充值</item>
+        <!--<item>充值</item>-->
         <item>提现</item>
         <item>安全设置</item>
     </string-array>

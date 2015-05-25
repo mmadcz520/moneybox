@@ -46,7 +46,7 @@ public class ProductFragment extends BaseFragment{
         mSlidingTabLayout = (SlidingTabLayout) mView.findViewById(R.id.sliding_tabs);
         Resources res = getResources();
         mSlidingTabLayout.setCustomTabView(R.layout.product_tabpage_indicator, android.R.id.text1);
-//        mSlidingTabLayout.setSelectedIndicatorColors(res.getColor(R.color.tab_indicator_color));
+        mSlidingTabLayout.setSelectedIndicatorColors(res.getColor(R.color.ct_blue));
 
         //根据产品分类列表初始化界面
         List<BaseFragment> viewList = new ArrayList<>();

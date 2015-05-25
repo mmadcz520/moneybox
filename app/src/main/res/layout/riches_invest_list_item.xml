@@ -102,7 +102,6 @@
                     android:textColor="@color/font_invalid"
                     android:textSize="@dimen/font_size_hint" />
             </LinearLayout>
-
         </LinearLayout>
 
         <View
@@ -112,7 +111,7 @@
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="27dp"
+            android:layout_height="35dp"
             android:orientation="horizontal">
 
             <ImageView android:layout_width="20dp"
