@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ct_background"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/extext_height"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/stroke_edit_fillpraent">
+        <TextView android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="26dp"
+            android:layout_gravity="center_vertical"
+            android:textSize="@dimen/font_size_normal"
+            android:textColor="@color/font_black"
+            android:text="持卡人"/>
+        <EditText
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/stroke_edit_null"
+            android:textColorHint="@color/font_invalid"
+            android:textSize="@dimen/font_size_normal"
+            android:hint="请输入持卡人姓名" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/extext_height"
+        android:background="@drawable/stroke_edit_fillpraent">
+        <TextView android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="26dp"
+            android:layout_gravity="center_vertical"
+            android:textSize="@dimen/font_size_normal"
+            android:textColor="@color/font_black"
+            android:text="所属银行"/>
+        <com.changtou.moneybox.module.widget.BetterSpinner
+            android:id="@+id/spinner1"
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/stroke_edit_null"
+            android:textColorHint="@color/font_invalid"
+            android:textSize="@dimen/font_size_normal"
+            android:hint="请选择开户行" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/extext_height"
+        android:background="@drawable/stroke_edit_fillpraent">
+        <TextView android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="26dp"
+            android:layout_gravity="center_vertical"
+            android:textSize="@dimen/font_size_normal"
+            android:textColor="@color/font_black"
+            android:text="银行卡号"/>
+        <EditText
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/stroke_edit_null"
+            android:textColorHint="@color/font_invalid"
+            android:textSize="@dimen/font_size_normal"
+            android:inputType="number"
+            android:hint="请输入银行卡卡号" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/extext_height"
+        android:background="@drawable/stroke_edit_fillpraent">
+        <TextView android:layout_width="80dp"
+            android:id="@+id/text_kaihuyinghang"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="26dp"
+            android:layout_gravity="center_vertical"
+            android:textSize="@dimen/font_size_normal"
+            android:textColor="@color/font_black"
+            android:text="开户城市"/>
+        <com.changtou.moneybox.module.widget.BetterSpinner
+            android:id="@+id/riches_safe_add_province"
+            android:layout_gravity="center_vertical"
+            android:layout_width="60dp"
+            android:layout_height="44dp"
+            android:background="@drawable/stroke_edit_null"
+            android:textColorHint="@color/font_invalid"
+            android:textSize="@dimen/font_size_normal"
+            android:hint="中文" />
+        <TextView android:layout_width="60dp"
+            android:id="@+id/riches_safe_add_rank"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textSize="@dimen/font_size_normal"
+            android:textColor="@color/font_black"
+            android:text="省"/>
+        <com.changtou.moneybox.module.widget.BetterSpinner
+            android:id="@+id/riches_safe_add_city"
+            android:layout_gravity="center_vertical"
+            android:layout_width="60dp"
+            android:layout_height="44dp"
+            android:background="@drawable/stroke_edit_null"
+            android:textColorHint="@color/font_invalid"
+            android:textSize="@dimen/font_size_normal"
+            android:hint="中文" />
+        <TextView
+            android:id="@+id/riches_safe_add_rank2"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textSize="@dimen/font_size_normal"
+            android:textColor="@color/font_black"
+            android:text="市"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/extext_height"
+        android:background="@drawable/stroke_edit_fillpraent">
+        <TextView android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="26dp"
+            android:layout_gravity="center_vertical"
+            android:textSize="@dimen/font_size_normal"
+            android:textColor="@color/font_black"
+            android:text="开户支行"/>
+        <EditText
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/stroke_edit_null"
+            android:textColorHint="@color/font_invalid"
+            android:textSize="@dimen/font_size_normal"
+            android:hint="请输入开户支行" />
+    </LinearLayout>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="42dp"
+        android:layout_height="@dimen/button_height_fillparent"
+        android:textColor="@color/ct_white"
+        android:background="@color/ct_blue"
+        android:typeface="monospace"
+        android:text="确认"/>
+
+</LinearLayout>

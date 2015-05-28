@@ -174,6 +174,6 @@ public abstract class BaseActivity extends FragmentActivity implements HttpCallb
      */
     protected void printLog(String log)
     {
-        Log.v(LOGTAG, this.toString()+"-"+log);
+        Log.e(LOGTAG, this.toString()+"-"+log);
     }
 }

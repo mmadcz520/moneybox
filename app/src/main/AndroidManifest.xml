@@ -101,8 +101,9 @@
             android:theme="@style/ActivityTheme_Light" >
         </activity>
 
+
         <activity
-            android:name=".moneybox.module.page.RichesFlowActivity"
+            android:name=".moneybox.module.page.RichesBankAddActivity"
             android:theme="@style/ActivityTheme_Light" >
         </activity>
 
