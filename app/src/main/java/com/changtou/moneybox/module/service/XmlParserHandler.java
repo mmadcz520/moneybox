@@ -70,5 +70,4 @@ public class XmlParserHandler extends DefaultHandler {
 	public void characters(char[] ch, int start, int length)
 			throws SAXException {
 	}
-
 }

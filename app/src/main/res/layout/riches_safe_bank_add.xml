@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     android:background="@color/ct_background"
     android:orientation="vertical">
-
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="@dimen/extext_height"
@@ -39,7 +38,7 @@
             android:textColor="@color/font_black"
             android:text="所属银行"/>
         <com.changtou.moneybox.module.widget.BetterSpinner
-            android:id="@+id/spinner1"
+            android:id="@+id/riches_safe_add_bank"
             android:layout_gravity="center_vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

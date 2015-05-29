@@ -13,6 +13,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 
+import com.changtou.R;
+
 import java.util.Calendar;
 
 public class BetterSpinner extends AutoCompleteTextView implements AdapterView.OnItemClickListener {
@@ -38,7 +40,7 @@ public class BetterSpinner extends AutoCompleteTextView implements AdapterView.O
 
     @Override
     public boolean enoughToFilter() {
-        return false;
+        return true;
     }
 
     @Override
@@ -89,11 +91,11 @@ public class BetterSpinner extends AutoCompleteTextView implements AdapterView.O
 
     @Override
     public void setCompoundDrawablesWithIntrinsicBounds(Drawable left, Drawable top, Drawable right, Drawable bottom) {
-//        Drawable dropdownIcon = ContextCompat.getDrawable(getContext(), R.drawable.ic_expand_more_black_18dp);
-//        if (dropdownIcon != null) {
-//            right = dropdownIcon;
-//            right.mutate().setAlpha(128);
-//        }
+        Drawable dropdownIcon = ContextCompat.getDrawable(getContext(), R.drawable.icon_more);
+        if (dropdownIcon != null) {
+            right = dropdownIcon;
+            right.mutate().setAlpha(128);
+        }
 //        super.setCompoundDrawablesWithIntrinsicBounds(left, top, right, bottom);
     }
 

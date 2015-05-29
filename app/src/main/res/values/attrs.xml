@@ -98,6 +98,11 @@
         <attr name="ex_icon" format="reference"/>
         <attr name="ex_title" format="string"/>
         <attr name="ex_message" format="string"/>
+        <attr name="ex_message_color" format="reference|color"/>
+        <attr name="ex_hide_indicator" format="enum">
+            <enum name="show" value="0" />
+            <enum name="hide" value="1" />
+        </attr>
     </declare-styleable>
 
 </resources>

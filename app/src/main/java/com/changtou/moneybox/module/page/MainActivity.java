@@ -8,12 +8,9 @@ import android.widget.LinearLayout;
 
 import com.changtou.R;
 import com.changtou.moneybox.common.activity.BaseFragment;
-import com.changtou.moneybox.common.utils.ACache;
-import com.changtou.moneybox.module.usermodule.UserManager;
 import com.changtou.moneybox.module.widget.ExFPAdapter;
 import com.changtou.moneybox.module.widget.ExViewPager;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,7 +72,7 @@ public class MainActivity extends CTBaseActivity {
         viewList.add(new HomeFragment());
         viewList.add(new ProductFragment());
         viewList.add(new RichesFragment());
-        viewList.add(new SettingFragment());
+        viewList.add(new MoreFragment());
 
         ExFPAdapter fPAdapter = new ExFPAdapter(getSupportFragmentManager(), viewList);
         mViewpager.setAdapter(fPAdapter);

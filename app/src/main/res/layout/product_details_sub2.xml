@@ -1,43 +1,41 @@
-
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/scrollView"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:background="@color/ct_background"
-            android:fillViewport="true">
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="800dp"
-    android:layout_width="fill_parent"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/details_scrollView2"
         android:layout_width="fill_parent"
-        android:layout_height="50dp"
-        android:orientation="vertical">
-        <com.changtou.moneybox.module.widget.SegmentControl
-            xmlns:segmentcontrol="http://schemas.android.com/apk/res-auto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="16dp"
-            android:textSize="13sp"
-            segmentcontrol:texts="项目详情|风险控制|投资列表"
-            segmentcontrol:colors="@color/ct_blue"
-            segmentcontrol:cornerRadius="3dp"
-            segmentcontrol:direction="horizon"
-            segmentcontrol:verticalGap="12dp"
-            segmentcontrol:horizonGap="20dp"/>
-        </LinearLayout>
+        android:layout_height="fill_parent"
+        android:background="@color/ct_background"
+        android:fillViewport="true">
 
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/product_introduction"
-        android:layout_marginTop="20dp"
+        <com.changtou.moneybox.module.widget.CustomViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/product_introduction"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+        </com.changtou.moneybox.module.widget.CustomViewPager>
+
+    </ScrollView>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </android.support.v4.view.ViewPager>
-
-
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/ct_white"
+        android:elevation="5dp">
+        <com.changtou.moneybox.module.widget.SlidingTabLayout
+            android:id="@+id/product_details_sliding_tabs"
+            android:background="@color/ct_white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:layout_marginTop="2dp"
+            android:background="@color/ct_divide_line"/>
     </LinearLayout>
-</ScrollView>
+</FrameLayout>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="48dp"
+    android:minHeight="40dp"
+    android:orientation="horizontal"
+    android:background="@color/ct_white">
+
+    <TextView
+        android:id="@+id/investor_user"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:text="用户"
+        android:gravity="center"
+        android:textColor="@color/font_black"
+        android:textSize="@dimen/font_size_normal" />
+
+    <TextView
+        android:layout_gravity="center_vertical"
+        android:id="@+id/investor_sum"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_size_normal"
+        android:textColor="@color/font_black"
+        android:gravity="center"
+        android:text="投资金额"/>
+
+    <TextView
+        android:layout_gravity="center_vertical"
+        android:id="@+id/investor_time"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_size_normal"
+        android:textColor="@color/font_black"
+        android:gravity="center"
+        android:text="投资时间"/>
+
+</LinearLayout>

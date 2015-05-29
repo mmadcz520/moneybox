@@ -1,7 +1,7 @@
 package com.changtou.moneybox.module.adapter;
 
 import android.content.Context;
-import android.util.Log;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,31 +9,25 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.changtou.R;
-import com.changtou.moneybox.module.entity.ProductEntity;
+import com.changtou.moneybox.module.entity.InvestorEntity;
 
-/**
- * 描述: 产品列表适配器类
- *
- * @author zhoulongfei
- * @since 2015-04-10
- */
-public class ProductListAdapter extends BaseAdapter
+public class ProductInvestorAdapter extends BaseAdapter
 {
     private LayoutInflater mInflater = null;
-    private ProductEntity  mEntity   = null;
+    private InvestorEntity mEntity   = null;
 
-    public ProductListAdapter(Context context)
+    public ProductInvestorAdapter(Context context)
     {
         mInflater = LayoutInflater.from(context);
     }
 
-    public void setData(ProductEntity entity)
+    public void setData(InvestorEntity entity)
     {
         this.mEntity = entity;
         notifyDataSetChanged();
     }
 
-    public ProductEntity getData()
+    public InvestorEntity getData()
     {
         return mEntity;
     }
@@ -59,11 +53,11 @@ public class ProductListAdapter extends BaseAdapter
      * @return 产品实体对象
      * @see BaseAdapter#getItem(int)
      */
-    public ProductEntity.ProListEntity getItem(int position)
+    public InvestorEntity.ListEntity getItem(int position)
     {
         if (mEntity.mList != null && mEntity.mList.size() > 0)
         {
-            return (ProductEntity.ProListEntity) mEntity.mList.get(position);
+            return (InvestorEntity.ListEntity) mEntity.mList.get(position);
         }
         return null;
     }
@@ -81,33 +75,33 @@ public class ProductListAdapter extends BaseAdapter
      */
     public View getView(int position, View convertView, ViewGroup parent)
     {
-        ProductEntity.ProListEntity entity = getItem(position);
+        InvestorEntity.ListEntity entity = getItem(position);
         ViewHolder viewHolder;
 
         if (convertView == null)
         {
             viewHolder = new ViewHolder();
-            convertView = mInflater.inflate(R.layout.product_list_item, null);
-//            LinearLayout ll = (LinearLayout)convertView.findViewById(R.id.roundProgressBar);
-//            ll.setWillNotDraw(false);
-//            viewHolder.txt_top = (TextView) convertView.findViewById(R.id.pro_list_titile);
-//            viewHolder.txt_bottom = (TextView) convertView.findViewById(R.id.txt_bottom);
-//            RoundProgressBar mRoundProgressBar1 = (RoundProgressBar) convertView.findViewById(R.id.roundProgressBar);
-//            mRoundProgressBar1.setProgress(15);
+            convertView = mInflater.inflate(R.layout.product_investor_item, parent, false);
+            viewHolder.investor_name = (TextView) convertView.findViewById(R.id.investor_user);
+            viewHolder.investor_sum = (TextView) convertView.findViewById(R.id.investor_sum);
+            viewHolder.investor_time = (TextView) convertView.findViewById(R.id.investor_time);
 
             convertView.setTag(viewHolder);
         }
         else
         {
-//            viewHolder = (ViewHolder) convertView.getTag();
+            viewHolder = (ViewHolder) convertView.getTag();
         }
-//        viewHolder.txt_top.setText(entity.name);
+        viewHolder.investor_name.setText(entity.mInvestorName);
+        viewHolder.investor_sum.setText(entity.mInvestorMoney);
+        viewHolder.investor_time.setText(entity.mInvestorTime);
         return convertView;
     }
 
     private class ViewHolder
     {
-        public TextView txt_top;
-//        public TextView txt_bottom;
+        public TextView investor_name;
+        public TextView investor_sum;
+        public TextView investor_time;
     }
 }

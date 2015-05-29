@@ -63,7 +63,6 @@ public class RichesInvestListActivity extends CTBaseActivity
         mViewPager.setCurrentItem(0);
         mViewPager.setOffscreenPageLimit(viewList.size());
         mSlidingTabLayout.setViewPager(mViewPager);
-
     }
 
     /**

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/ct_background"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/product_details_content"
+        android:layout_marginTop="50dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:padding="10dp"
+        android:text="    借款人***集团有限公司, 是一家专业从事房地产开发的公司,具备丰富的房地产开发经验及专业开发团队,因公司经验周转需要,特向xx个人申请贷款。xx个人现将部分债权向长投在线投资人进行转让。同时,xx个人承若全额本息回购。"
+        android:textColor="@color/font_black"
+        android:textSize="@dimen/font_size_hint2" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="27dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/ct_invalid"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="20dp"
+        android:text="还款来源"
+        android:textColor="@color/font_black"
+        android:textSize="@dimen/font_size_normal" />
+
+    <TextView
+        android:id="@+id/product_details_repayingSrc"
+        android:layout_width="fill_parent"
+        android:layout_height="38dp"
+        android:gravity="left|center_vertical"
+        android:padding="10dp"
+        android:text="***集团有限公司经营收入"
+        android:textColor="@color/font_black"
+        android:textSize="@dimen/font_size_hint2" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="27dp"
+        android:background="@color/ct_invalid"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="20dp"
+        android:text="保证方式"
+        android:textColor="@color/font_black"
+        android:textSize="@dimen/font_size_normal" />
+
+    <TextView
+        android:id="@+id/product_details_safeguard"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left|center_vertical"
+        android:padding="10dp"
+        android:text="1.原债权人全额本息回购承若。\n2.项目公司关联企业承担连带责任担保。\n3.平台已对项目进行实地考察,通过专业尽调认为可保障本息按时还款。"
+        android:textColor="@color/font_black"
+        android:textSize="@dimen/font_size_hint2" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="27dp"
+        android:background="@color/ct_invalid"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="20dp"
+        android:text="审核资料"
+        android:textColor="@color/font_black"
+        android:textSize="@dimen/font_size_normal" />
+
+    <ListView
+        android:id="@+id/product_details_contract_list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:headerDividersEnabled="true"
+        android:footerDividersEnabled="true">
+    </ListView>
+
+</LinearLayout>

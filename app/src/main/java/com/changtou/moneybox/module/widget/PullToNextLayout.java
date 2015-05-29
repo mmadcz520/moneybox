@@ -7,6 +7,7 @@ import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -117,8 +118,6 @@ public class PullToNextLayout extends FrameLayout
 
     private void invalidateView(int mCurItem)
     {
-
-
         if (mCurItem - 1 >= 0)
         {
             //前面的 Fragment

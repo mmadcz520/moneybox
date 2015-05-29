@@ -427,7 +427,6 @@ public class PullToNextView extends LinearLayout {
         if(!isTop)
         {
             params.topMargin = (int) newTopMargin;
-            Log.e("moneybox", "+++++++++++++++++++++++++++++++++++++++++++++++++++++" + newTopMargin);
             mHeaderView.setLayoutParams(params);
             mHeaderView.invalidate();
         }

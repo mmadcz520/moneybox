@@ -1,6 +1,8 @@
 package com.changtou.moneybox.module.page;
 
+import android.annotation.TargetApi;
 import android.content.res.AssetManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +14,7 @@ import com.changtou.R;
 import com.changtou.moneybox.module.entity.CityModel;
 import com.changtou.moneybox.module.entity.DistrictModel;
 import com.changtou.moneybox.module.entity.ProvinceModel;
+import com.changtou.moneybox.module.service.BankParserHandler;
 import com.changtou.moneybox.module.service.XmlParserHandler;
 import com.changtou.moneybox.module.widget.BetterSpinner;
 
@@ -32,16 +35,24 @@ import javax.xml.parsers.SAXParserFactory;
  */
 public class RichesBankAddActivity extends CTBaseActivity
 {
-    BetterSpinner spinner1;
+    private BetterSpinner mBankSpinner = null;
     private BetterSpinner mProvinceSpinner = null;
-    private TextView mRankTextView = null;
     private BetterSpinner mCitySpinner = null;
+
+    private TextView mRankTextView = null;
     private TextView mRank2TextView = null;
+
+    /**
+     * 银行
+     */
+    protected String[] mBankDatas;
 
     /**
      * 所有省
      */
     protected String[] mProvinceDatas;
+
+    protected String[] mCitisDatas = {""};
     /**
      * key - 省 value - 市
      */
@@ -78,7 +89,7 @@ public class RichesBankAddActivity extends CTBaseActivity
     protected void initView(Bundle bundle)
     {
         setContentView(R.layout.riches_safe_bank_add);
-        spinner1 = (BetterSpinner)findViewById(R.id.spinner1);
+        mBankSpinner = (BetterSpinner)findViewById(R.id.riches_safe_add_bank);
         mProvinceSpinner = (BetterSpinner)findViewById(R.id.riches_safe_add_province);
         mCitySpinner = (BetterSpinner)findViewById(R.id.riches_safe_add_city);
 
@@ -88,18 +99,32 @@ public class RichesBankAddActivity extends CTBaseActivity
         mProvinceSpinner.setDropDownWidth(500);
         mCitySpinner.setDropDownWidth(500);
 
+        initBankDatas();
         initProvinceDatas();
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                R.layout.spinner_item_layout, mProvinceDatas);
-        spinner1.setAdapter(adapter);
-        mProvinceSpinner.setAdapter(adapter);
-        mCitySpinner.setAdapter(adapter);
+
+        if(mBankDatas==null || mProvinceDatas==null) return;
+
+        ArrayAdapter<String> bankAdapter = new ArrayAdapter<String>(this,
+                R.layout.spinner_item_layout, mBankDatas);
+        ArrayAdapter<String> provinceAdapter = new ArrayAdapter<String>(this,
+            R.layout.spinner_item_layout, mProvinceDatas);
+        ArrayAdapter<String> citisAdapter = new ArrayAdapter<String>(this,
+                R.layout.spinner_item_layout, mCitisDatas);
+        mBankSpinner.setAdapter(bankAdapter);
+        mProvinceSpinner.setAdapter(provinceAdapter);
+        mCitySpinner.setAdapter(citisAdapter);
 
         //填入用户开户行所在省
         mProvinceSpinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (mProvinceDatas != null) {
                     filterText(mProvinceDatas[position]);
+
+                    mCitisDatas = mCitisDatasMap.get(mProvinceDatas[position]);
+                    ArrayAdapter<String> citisAdapter = new ArrayAdapter<String>(RichesBankAddActivity.this,
+                            R.layout.spinner_item_layout, mCitisDatas);
+                    mCitySpinner.setAdapter(citisAdapter);
+                    citisAdapter.notifyDataSetChanged();
                 }
             }
         });
@@ -109,6 +134,39 @@ public class RichesBankAddActivity extends CTBaseActivity
                 mProvinceSpinner.showDropDown();
             }
         });
+    }
+
+    /**
+     * 解析省市区的XML数据
+     */
+    protected void initBankDatas()
+    {
+        List<String> bankList = null;
+
+        AssetManager asset = getAssets();
+        try {
+            InputStream input = asset.open("bank_data.xml");
+
+            // 创建一个解析xml的工厂对象
+            SAXParserFactory spf = SAXParserFactory.newInstance();
+            // 解析xml
+            SAXParser parser = spf.newSAXParser();
+            BankParserHandler handler = new BankParserHandler();
+            parser.parse(input, handler);
+            input.close();
+            // 获取解析出来的数据
+            bankList = handler.getDataList();
+            mBankDatas = new String[bankList.size()];
+
+            for(int i = 0; i < bankList.size(); i++)
+            {
+                mBankDatas[i] = bankList.get(i);
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -180,6 +238,7 @@ public class RichesBankAddActivity extends CTBaseActivity
     /**
      * 过滤所填内容
      */
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     private void filterText(String seleText)
     {
         if(seleText == null) return;
@@ -191,6 +250,7 @@ public class RichesBankAddActivity extends CTBaseActivity
 
         mRank2TextView.setVisibility(View.VISIBLE);
         mCitySpinner.setVisibility(View.VISIBLE);
+        mCitySpinner.setText("", false);
         mRankTextView.setText(cs);
 
         if(seleText.contains(cs))
@@ -211,6 +271,6 @@ public class RichesBankAddActivity extends CTBaseActivity
             mRankTextView.setText(cs2);
         }
 
-        mProvinceSpinner.setText(filter);
+        mProvinceSpinner.setText(filter, false);
     }
 }

@@ -1,0 +1,19 @@
+<root>
+  <bank name="中国银行"></bank>
+  <bank name="中国工商银行"></bank>
+  <bank name="中国建设银行"></bank>
+  <bank name="中国农业银行"></bank>
+  <bank name="中国邮政"></bank>
+  <bank name="招商银行"></bank>
+  <bank name="交通银行"></bank>
+  <bank name="华夏银行"></bank>
+  <bank name="中信银行"></bank>
+  <bank name="兴业银行"></bank>
+  <bank name="中国光大银行"></bank>
+  <bank name="广发银行"></bank>
+  <bank name="平安银行"></bank>
+  <bank name="汉口银行"></bank>
+  <bank name="中国民生银行"></bank>
+  <bank name="武汉农村商业银行"></bank>
+  <bank name="上海浦东发展银行"></bank>
+</root>

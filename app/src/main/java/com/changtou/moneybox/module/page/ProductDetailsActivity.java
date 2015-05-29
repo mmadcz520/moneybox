@@ -3,7 +3,6 @@ package com.changtou.moneybox.module.page;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +12,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.changtou.R;
-import com.changtou.moneybox.common.activity.BaseFragment;
 import com.changtou.moneybox.module.adapter.ProductDetailsAdapter;
 import com.changtou.moneybox.module.entity.ProductDetailsEntity;
 import com.changtou.moneybox.module.http.HttpRequst;
 import com.changtou.moneybox.module.widget.CountView;
-import com.changtou.moneybox.module.widget.ExFPAdapter;
+import com.changtou.moneybox.module.widget.OnItemSelectListener;
 import com.changtou.moneybox.module.widget.PullToNextAdapter;
 import com.changtou.moneybox.module.widget.PullToNextLayout;
 import com.changtou.moneybox.module.widget.RoundProgressBar;
@@ -41,7 +39,7 @@ public class ProductDetailsActivity extends CTBaseActivity
     private ArrayList<Fragment> mPageList = null;
 
     public DetailsPage mDetailsPage = null;
-    public AgreementPage mAgreementPage = null;
+    public ProductDetailsMorePage mAgreementPage = null;
 
     /**
      * @see CTBaseActivity#initView(Bundle)
@@ -64,10 +62,18 @@ public class ProductDetailsActivity extends CTBaseActivity
 
         mPageList = new ArrayList<>();
         mDetailsPage = new DetailsPage();
-        mAgreementPage = new AgreementPage();
+        mAgreementPage = new ProductDetailsMorePage();
         mPageList.add(mDetailsPage);
         mPageList.add(mAgreementPage);
         pullToNextLayout.setAdapter(new PullToNextAdapter(getSupportFragmentManager(), mPageList));
+
+        pullToNextLayout.setOnItemSelectListener(new OnItemSelectListener()
+        {
+            public void onSelectItem(int position, View view)
+            {
+                mAgreementPage.initScroll();
+            }
+        });
     }
 
     /**
@@ -118,7 +124,7 @@ public class ProductDetailsActivity extends CTBaseActivity
      * 描述: 产品详情页
      * @author zhoulongfei
      */
-    public class DetailsPage extends Fragment
+    public static class  DetailsPage extends Fragment
     {
         private ListView mListView = null;
 
@@ -180,55 +186,6 @@ public class ProductDetailsActivity extends CTBaseActivity
         public TextView getTimeLimit()
         {
             return mTimeLimit;
-        }
-    }
-
-    /**
-     * 描述:产品协议页
-     * @author zhoulongfei
-     */
-    public class AgreementPage extends Fragment
-    {
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-
-            View v = inflater.inflate(R.layout.product_details_sub2, container, false);
-
-            ViewPager viewPage = (ViewPager)v.findViewById(R.id.product_introduction);
-            ArrayList<BaseFragment> pageList = new ArrayList<>();
-            pageList.add(new SubPage());
-            ExFPAdapter pagerAdapter = new ExFPAdapter(this.getChildFragmentManager(), pageList);
-            viewPage.setAdapter(pagerAdapter);
-
-            return v;
-        }
-
-        /**
-         * 产品协议子页面
-         */
-        public class SubPage extends BaseFragment
-        {
-            protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-            {
-                View mView = inflater.inflate(R.layout.product_details_investlist, container, false);
-                return mView;
-            }
-
-            protected void initLisener()
-            {
-            }
-
-            protected void initData(Bundle savedInstanceState)
-            {
-            }
-
-            public void onSuccess(String content, Object object, int reqType)
-            {
-            }
-
-            public void onFailure(Throwable error, String content, int reqType)
-            {
-            }
         }
     }
 }

@@ -30,11 +30,13 @@ public class ProductEntity extends BaseEntity {
         mList = new LinkedList();
         ProListEntity entity;
         int size = array.length();
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 10; i++) {
             entity = new ProListEntity();
-            entity.paser(array.getJSONObject(i));
+//            entity.paser(array.getJSONObject(i));
             mList.add(entity);
         }
+
+        Log.e("CT_MONEY", "mList len=" + mList.size());
     }
 
     public  class ProListEntity {

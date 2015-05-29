@@ -20,7 +20,7 @@ import java.util.Map;
 /**
  * Created by Administrator on 2015/3/26.
  */
-public class SettingFragment extends BaseFragment{
+public class MoreFragment extends BaseFragment{
 
     private View mView = null;
 
@@ -30,10 +30,10 @@ public class SettingFragment extends BaseFragment{
         mView = inflater.inflate(R.layout.setting_fragment, null);
         mContext=this.getActivity();
 
-        ListView pageList1 = (ListView) mView.findViewById(R.id.lv_setting1);
-        ListView pageList2 = (ListView) mView.findViewById(R.id.lv_setting2);
-        initSettingList(pageList1, R.array.item_setting1);
-        initSettingList(pageList2, R.array.item_setting2);
+//        ListView pageList1 = (ListView) mView.findViewById(R.id.lv_setting1);
+//        ListView pageList2 = (ListView) mView.findViewById(R.id.lv_setting2);
+//        initSettingList(pageList1, R.array.item_setting1);
+//        initSettingList(pageList2, R.array.item_setting2);
         return mView;
     }
 

@@ -4,6 +4,8 @@ import com.changtou.moneybox.common.http.base.BaseEntity;
 import com.changtou.moneybox.common.http.base.BaseHttpRequest;
 import com.changtou.moneybox.module.entity.BankCardEntity;
 import com.changtou.moneybox.module.entity.InvestListEntity;
+import com.changtou.moneybox.module.entity.InvestorEntity;
+import com.changtou.moneybox.module.entity.ProductContractEntity;
 import com.changtou.moneybox.module.entity.ProductDetailsEntity;
 import com.changtou.moneybox.module.entity.ProductEntity;
 import com.changtou.moneybox.module.entity.PromotionEntity;
@@ -30,15 +32,22 @@ public class HttpRequst extends BaseHttpRequest
     public final static int REQ_TYPE_PRODUCT_HOME = 21;
     public final static int REQ_TYPE_PRODUCT_LIST = 22;
     public final static int REQ_TYPE_PRODUCT_DETAILS = 23;
-    public final static int REQ_TYPE_BANKCARD = 24;
-    public final static int REQ_TYPE_INVEST_LIST=25;
-    public final static int RFQ_TYPE_TRANSFER_LIST = 26;
+    public final static int REQ_TYPE_PRODUCT_CONTRACT = 24;
+    public final static int REQ_TYPE_PRODUCT_INVESTOR = 25;
+
+
+    public final static int REQ_TYPE_BANKCARD = 26;
+    public final static int REQ_TYPE_INVEST_LIST = 27;
+    public final static int RFQ_TYPE_TRANSFER_LIST = 28;
 
     public final static int REQ_TYPE_LOGIN = 1001;
 
     //主页推荐产品列表
     public static String REQ_URL_PRODUCT_LIST = BASE_URL + "products";
     public static String REQ_URL_PRODUCT_DETAILS = BASE_URL + "products";
+
+    public static String REQ_URL_PRODUCT_CONTRACT = BASE_URL + "products";
+    public static String REQ_URL_PRODUCT_INVESTOR = BASE_URL + "products";
 
     //银行卡列表
     public static String REQ_URL_BANKCARD = BASE_URL + "products";
@@ -75,6 +84,10 @@ public class HttpRequst extends BaseHttpRequest
                 return REQ_URL_PRODUCT_LIST;
             case REQ_TYPE_PRODUCT_DETAILS:
                 return REQ_URL_PRODUCT_DETAILS;
+            case REQ_TYPE_PRODUCT_CONTRACT:
+                return REQ_URL_PRODUCT_CONTRACT;
+            case REQ_TYPE_PRODUCT_INVESTOR:
+                return REQ_URL_PRODUCT_INVESTOR;
             case REQ_TYPE_LOGIN:
                 return REQ_URL_LOGIN;
             case REQ_TYPE_BANKCARD:
@@ -123,6 +136,12 @@ public class HttpRequst extends BaseHttpRequest
                 break;
             case REQ_TYPE_PRODUCT_DETAILS:
                 paser = new ProductDetailsEntity();
+                break;
+            case REQ_TYPE_PRODUCT_CONTRACT:
+                paser = new ProductContractEntity();
+                break;
+            case REQ_TYPE_PRODUCT_INVESTOR:
+                paser = new InvestorEntity();
                 break;
             case REQ_TYPE_LOGIN:
                 paser = new UserEntity();
