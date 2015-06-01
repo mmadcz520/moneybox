@@ -80,30 +80,28 @@
             android:name=".moneybox.module.page.RegisterPasswordActivity"
             android:theme="@style/ActivityTheme_Light" >
         </activity>
-
         <activity
             android:name=".moneybox.module.page.RichesInvestListActivity"
             android:theme="@style/ActivityTheme_Light" >
         </activity>
-
         <activity
             android:name=".moneybox.module.page.RichesBankActivity"
             android:theme="@style/ActivityTheme_Light" >
         </activity>
-
         <activity
             android:name=".moneybox.module.page.RichesWithdrawActivity"
             android:theme="@style/ActivityTheme_Light" >
         </activity>
-
         <activity
             android:name=".moneybox.module.page.RichesSafeActivity"
             android:theme="@style/ActivityTheme_Light" >
         </activity>
-
-
         <activity
             android:name=".moneybox.module.page.RichesBankAddActivity"
+            android:theme="@style/ActivityTheme_Light" >
+        </activity>
+        <activity
+            android:name=".moneybox.module.page.PdManagerActivity"
             android:theme="@style/ActivityTheme_Light" >
         </activity>
 

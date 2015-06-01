@@ -35,7 +35,6 @@ public class HttpRequst extends BaseHttpRequest
     public final static int REQ_TYPE_PRODUCT_CONTRACT = 24;
     public final static int REQ_TYPE_PRODUCT_INVESTOR = 25;
 
-
     public final static int REQ_TYPE_BANKCARD = 26;
     public final static int REQ_TYPE_INVEST_LIST = 27;
     public final static int RFQ_TYPE_TRANSFER_LIST = 28;

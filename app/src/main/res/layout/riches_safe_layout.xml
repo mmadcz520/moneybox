@@ -83,6 +83,7 @@
         android_custom:ex_title="银行卡管理"/>
 
     <com.changtou.moneybox.module.widget.ExEditView
+        android:id = "@+id/btn_pd_manager"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/extext_height"
         android_custom:viewType="text"

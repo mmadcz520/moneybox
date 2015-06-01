@@ -4,7 +4,6 @@ import android.annotation.TargetApi;
 import android.content.res.AssetManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,8 +16,6 @@ import com.changtou.moneybox.module.entity.ProvinceModel;
 import com.changtou.moneybox.module.service.BankParserHandler;
 import com.changtou.moneybox.module.service.XmlParserHandler;
 import com.changtou.moneybox.module.widget.BetterSpinner;
-
-import org.w3c.dom.Text;
 
 import java.io.InputStream;
 import java.util.HashMap;
@@ -56,16 +53,16 @@ public class RichesBankAddActivity extends CTBaseActivity
     /**
      * key - 省 value - 市
      */
-    protected Map<String, String[]> mCitisDatasMap = new HashMap<String, String[]>();
+    protected Map<String, String[]> mCitisDatasMap = new HashMap<>();
     /**
      * key - 市 values - 区
      */
-    protected Map<String, String[]> mDistrictDatasMap = new HashMap<String, String[]>();
+    protected Map<String, String[]> mDistrictDatasMap = new HashMap<>();
 
     /**
      * key - 区 values - 邮编
      */
-    protected Map<String, String> mZipcodeDatasMap = new HashMap<String, String>();
+    protected Map<String, String> mZipcodeDatasMap = new HashMap<>();
 
     /**
      * 当前省的名称
@@ -104,11 +101,11 @@ public class RichesBankAddActivity extends CTBaseActivity
 
         if(mBankDatas==null || mProvinceDatas==null) return;
 
-        ArrayAdapter<String> bankAdapter = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> bankAdapter = new ArrayAdapter<>(this,
                 R.layout.spinner_item_layout, mBankDatas);
-        ArrayAdapter<String> provinceAdapter = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> provinceAdapter = new ArrayAdapter<>(this,
             R.layout.spinner_item_layout, mProvinceDatas);
-        ArrayAdapter<String> citisAdapter = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> citisAdapter = new ArrayAdapter<>(this,
                 R.layout.spinner_item_layout, mCitisDatas);
         mBankSpinner.setAdapter(bankAdapter);
         mProvinceSpinner.setAdapter(provinceAdapter);
@@ -121,7 +118,7 @@ public class RichesBankAddActivity extends CTBaseActivity
                     filterText(mProvinceDatas[position]);
 
                     mCitisDatas = mCitisDatasMap.get(mProvinceDatas[position]);
-                    ArrayAdapter<String> citisAdapter = new ArrayAdapter<String>(RichesBankAddActivity.this,
+                    ArrayAdapter<String> citisAdapter = new ArrayAdapter<>(RichesBankAddActivity.this,
                             R.layout.spinner_item_layout, mCitisDatas);
                     mCitySpinner.setAdapter(citisAdapter);
                     citisAdapter.notifyDataSetChanged();
@@ -141,7 +138,7 @@ public class RichesBankAddActivity extends CTBaseActivity
      */
     protected void initBankDatas()
     {
-        List<String> bankList = null;
+        List<String> bankList;
 
         AssetManager asset = getAssets();
         try {
@@ -175,7 +172,7 @@ public class RichesBankAddActivity extends CTBaseActivity
 
     protected void initProvinceDatas()
     {
-        List<ProvinceModel> provinceList = null;
+        List<ProvinceModel> provinceList;
 
         AssetManager asset = getAssets();
         try {
