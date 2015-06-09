@@ -157,11 +157,11 @@ public class ExEditView extends LinearLayout
 
         if(mLocation == Location.BOTTOM)
         {
-            mEditView.setBackgroundResource(R.drawable.stroke_edit_fillpraent_bottom);
+            this.setBackgroundResource(R.drawable.stroke_edit_fillpraent_bottom);
         }
         else
         {
-            mEditView.setBackgroundResource(R.drawable.stroke_edit_fillpraent);
+            this.setBackgroundResource(R.drawable.stroke_edit_fillpraent);
         }
 
         switch (mInputType)

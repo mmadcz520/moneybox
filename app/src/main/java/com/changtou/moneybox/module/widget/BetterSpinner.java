@@ -5,7 +5,6 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.CompletionInfo;
@@ -58,9 +57,7 @@ public class BetterSpinner extends AutoCompleteTextView implements AdapterView.O
         }
     }
 
-    @Override
     public boolean onTouchEvent(MotionEvent event) {
-
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN: {
                 startClickTime = Calendar.getInstance().getTimeInMillis();
@@ -99,10 +96,7 @@ public class BetterSpinner extends AutoCompleteTextView implements AdapterView.O
 //        super.setCompoundDrawablesWithIntrinsicBounds(left, top, right, bottom);
     }
 
-    @Override
     public void onCommitCompletion(CompletionInfo completion) {
-
-        Log.e("CT_MONEY", "on commmmmmmmmmmmmot " + completion.getText());
 
 //        super.onCommitCompletion(completion);
     }

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@color/ct_white"
+    android:minHeight="50dp">
+
+    <LinearLayout android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="22dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:orientation="horizontal">
+            <ImageView android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/flow_cash"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/ct_blue"
+                android:textSize="@dimen/font_size_hint2"
+                android:text="2015-4-10"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/font_black"
+            android:textSize="@dimen/font_size_hint2"
+            android:text="[长投宝]上手易256期"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="50dp"
+        android:textColor="@color/ct_blue"
+        android:textSize="@dimen/font_size_navigation"
+        android:layout_centerInParent="true"
+        android:text="5000.00"/>
+
+</RelativeLayout>

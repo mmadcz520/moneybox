@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.changtou.moneybox.common.activity.BaseApplication;
+import com.changtou.moneybox.common.utils.SharedPreferencesHelper;
+import com.changtou.moneybox.module.appcfg.AppCfg;
 import com.changtou.moneybox.module.usermodule.LoginNotifier;
 import com.changtou.moneybox.module.usermodule.UserManager;
 import com.changtou.moneybox.module.widget.ExEditView;
@@ -32,6 +34,12 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
 
     private SweetAlertDialog mDialog = null;
 
+    //忘记密码
+    private TextView mForgetPd = null;
+
+    //记录是否登录
+    private SharedPreferencesHelper sph = null;
+
     @Override
     protected void initView(Bundle bundle) {
         setContentView(R.layout.riches_login_layout);
@@ -41,12 +49,14 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
         mUserNameView = (ExEditView)findViewById(R.id.login_username);
         mPassWordView = (ExEditView)findViewById(R.id.login_password);
 
+        mForgetPd = (TextView)findViewById(R.id.forgot_password);
+
         mUserManager = BaseApplication.getInstance().getUserModule();
         mUserManager.setLoginNotifier(this);
 
 //        TextView loginBtn = (TextView)findViewById(R.id.login_btn);
 //        final Intent intent = new Intent(this, MainActivity.class);
-//        loginBtn.setOnClickListener(new OnClickListener() {
+//        mForgetPd.setOnClickListener(new View.OnClickListener() {
 //            public void onClick(View v) {
 //                UserManager um = BaseApplication.getInstance().getUserModule();
 //                um.logIn("", "");
@@ -64,20 +74,22 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
                 startActivity(intent2);
             }
         });
+
+        sph = SharedPreferencesHelper.getInstance(getApplicationContext());
     }
 
-    protected void initLisener() {
+    protected void initListener() {
         setOnClickListener(R.id.login_btn);
+        setOnClickListener(R.id.forgot_password);
     }
 
     public void treatClickEvent(int id) {
         switch (id) {
-            case R.id.login_btn:
+            case R.id.login_btn: {
                 String username = mUserNameView.getEditValue();
                 String password = mPassWordView.getEditValue();
 
-                if(username.equals("") || password.equals(""))
-                {
+                if (username.equals("") || password.equals("")) {
 
                     //注册成功后弹窗
 //                    ColorStateList redColors = ColorStateList.valueOf(0xffff0000);
@@ -96,9 +108,7 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
 //                            .show();
 
 //                    mUserManager.logIn(username, password);
-                }
-                else
-                {
+                } else {
                     mUserManager.logIn(username, password);
                     mDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE).setTitleText("登陆");
                     mDialog.getProgressHelper().setBarColor(getResources().getColor(R.color.ct_blue));
@@ -106,9 +116,22 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
                     mDialog.setCancelText("取消");
                     mDialog.setContentText("努力加载中...");
                     mDialog.show();
-                    mDialog.setCancelable(false);
+                    mDialog.setCancelable(true);
+
+                    sph.putString(AppCfg.CFG_LOGIN, AppCfg.LOGIN_STATE.LOGIN.toString());
+
+                    //清空手势密码
+                    sph.putString(AppCfg.GSPD, "");
                 }
                 break;
+            }
+
+            case R.id.forgot_password:
+            {
+                final Intent intent = new Intent(this, PdFrogetActivity.class);
+                startActivity(intent);
+                break;
+            }
         }
     }
 
@@ -140,4 +163,17 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
     public void logoutNotify() {
 
     }
+
+    protected void onStop() {
+        super.onStop();
+    }
+
+    /**
+     * 禁用back按键
+     */
+    public void onBackPressed()
+    {
+//        super.onBackPressed();
+    }
+
 }

@@ -12,13 +12,18 @@ import android.app.ActivityManager;
 import android.app.ActivityManager.RunningAppProcessInfo;
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.util.Log;
 
 import com.changtou.moneybox.common.http.base.BaseHttpRequest;
 import com.changtou.moneybox.common.http.impl.AsyncHttpClientImpl;
 import com.changtou.moneybox.common.utils.DeviceInfo;
 import com.changtou.moneybox.common.utils.MySharedPreferencesMgr;
+import com.changtou.moneybox.common.utils.SharedPreferencesHelper;
+import com.changtou.moneybox.module.appcfg.AppCfg;
+import com.changtou.moneybox.module.page.GesturePWActivity;
 import com.changtou.moneybox.module.usermodule.UserManager;
 
 /**
@@ -53,6 +58,10 @@ public abstract class BaseApplication extends Application implements UncaughtExc
 
     private UserManager mUserManager = null;
 
+    private boolean isBack = false;
+
+    private SharedPreferencesHelper sph = null;
+
     public BaseApplication()
     {
         DeviceInfo.init(this);
@@ -60,6 +69,8 @@ public abstract class BaseApplication extends Application implements UncaughtExc
         mActivityList = new ArrayList<Activity>();
         mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();
         Thread.setDefaultUncaughtExceptionHandler(this);
+
+        sph = SharedPreferencesHelper.getInstance(this);
     }
 
     /**
@@ -244,13 +255,28 @@ public abstract class BaseApplication extends Application implements UncaughtExc
      */
     public void onBackground(){
         //todo
+
+        isBack = false;
     }
 
     /**
      * App 回到前台
+     *
+     *
+     * 1. 手势密码
+     *
      */
-    public void onForeground(){
-        //todo
+    public void onForeground()
+    {
+        if(!isBack && (sph.getString(AppCfg.CFG_LOGIN, "").equals(AppCfg.LOGIN_STATE.LOGIN.toString())))
+        {
+            Intent intent = new Intent(this, GesturePWActivity.class);
+            intent.putExtra("action", "login");
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+
+            isBack = true;
+        }
     }
 
 
@@ -260,5 +286,10 @@ public abstract class BaseApplication extends Application implements UncaughtExc
      */
     public UserManager getUserModule() {
         return mUserManager;
+    }
+
+    public void resetBackFlag()
+    {
+        isBack = true;
     }
 }

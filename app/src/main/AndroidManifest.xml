@@ -4,6 +4,9 @@
 
     <supports-screens android:anyDensity="true" />
 
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+
     <!-- Push service 运行需要的权限 -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
@@ -102,6 +105,26 @@
         </activity>
         <activity
             android:name=".moneybox.module.page.PdManagerActivity"
+            android:theme="@style/ActivityTheme_Light" >
+        </activity>
+        <activity
+            android:name=".moneybox.module.page.PdFrogetActivity"
+            android:theme="@style/ActivityTheme_Light" >
+        </activity>
+        <activity
+            android:name=".moneybox.module.page.RichesFlowActivity"
+            android:theme="@style/ActivityTheme_Light" >
+        </activity>
+        <activity
+            android:name=".moneybox.module.page.RichesTradeActivity"
+            android:theme="@style/ActivityTheme_Light" >
+        </activity>
+        <activity
+            android:name=".moneybox.module.page.RichesCalendarActivity"
+            android:theme="@style/ActivityTheme_Light" >
+        </activity>
+        <activity
+            android:name=".moneybox.module.page.GesturePWActivity"
             android:theme="@style/ActivityTheme_Light" >
         </activity>
 

@@ -1,0 +1,74 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android_custom="http://schemas.android.com/apk/res-auto"
+    android:background="@color/ct_white"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:minHeight="@dimen/extext_height">
+
+    <ImageView
+        android:id="@+id/riches_trade_icon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="22dp"
+        android:src="@mipmap/trade_cash_expend"/>
+
+    <View
+        android:id="@+id/divide"
+        android:layout_width="1px"
+        android:layout_height="25dp"
+        android:layout_toRightOf="@+id/riches_trade_icon"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:background="@color/ct_divide_line" />
+
+    <TextView
+        android:id="@+id/riches_trade_type"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/divide"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:textSize="12dp"
+        android:textColor="@color/font_invalid"
+        android:gravity="center"
+        android:text="现金"/>
+
+    <LinearLayout
+        android:layout_marginLeft="13dp"
+        android:layout_toRightOf="@+id/riches_trade_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp"
+            android:textColor="@color/font_black"
+            android:gravity="bottom"
+            android:text="投资放款"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/font_black"
+            android:textSize="12dp"
+            android:text="04-16 14:10:20"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        android:layout_marginRight="20dp"
+        android:text="-5000.00"
+        android:textSize="16dp"
+        android:textColor="@color/ct_blue"/>
+
+</RelativeLayout>
+
+

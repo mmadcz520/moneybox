@@ -81,12 +81,12 @@ public class RichesInvestListActivity extends CTBaseActivity
 
         private int[] mType = {HttpRequst.REQ_TYPE_INVEST_LIST,
                 0 ,
-                HttpRequst.RFQ_TYPE_TRANSFER_LIST ,
+                HttpRequst.REQ_TYPE_TRANSFER_LIST ,
                 0};
 
         private String[] mUrl = { HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_INVEST_LIST),
                 HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_INVEST_LIST) ,
-                HttpRequst.getInstance().getUrl(HttpRequst.RFQ_TYPE_TRANSFER_LIST) ,
+                HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_TRANSFER_LIST) ,
                 HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_INVEST_LIST)};
 
         public static SubPage create(int type)
@@ -112,7 +112,7 @@ public class RichesInvestListActivity extends CTBaseActivity
             return mView;
         }
 
-        protected void initLisener()
+        protected void initListener()
         {
             final Activity activity = this.getActivity();
 
@@ -171,7 +171,7 @@ public class RichesInvestListActivity extends CTBaseActivity
 
                 mPullRefreshListView.onRefreshComplete();
             }
-            else if(reqType == HttpRequst.RFQ_TYPE_TRANSFER_LIST)
+            else if(reqType == HttpRequst.REQ_TYPE_TRANSFER_LIST)
             {
                 mMultiStateView.setViewState(MultiStateView.ViewState.CONTENT);
                 TransferListEntity entity = (TransferListEntity) object;

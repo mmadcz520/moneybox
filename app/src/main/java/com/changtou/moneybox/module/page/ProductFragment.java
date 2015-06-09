@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,16 +37,13 @@ import java.util.List;
  */
 public class ProductFragment extends BaseFragment{
 
-    private ViewPager mViewPager;
-    private SlidingTabLayout mSlidingTabLayout;
-
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View mView = inflater.inflate(R.layout.product_fragment, container, false);
 
-        mSlidingTabLayout = (SlidingTabLayout) mView.findViewById(R.id.sliding_tabs);
+        SlidingTabLayout slidingTabLayout = (SlidingTabLayout) mView.findViewById(R.id.sliding_tabs);
         Resources res = getResources();
-        mSlidingTabLayout.setCustomTabView(R.layout.product_tabpage_indicator, android.R.id.text1);
-        mSlidingTabLayout.setSelectedIndicatorColors(res.getColor(R.color.ct_blue));
+        slidingTabLayout.setCustomTabView(R.layout.product_tabpage_indicator, android.R.id.text1);
+        slidingTabLayout.setSelectedIndicatorColors(res.getColor(R.color.ct_blue));
 
         //根据产品分类列表初始化界面
         List<BaseFragment> viewList = new ArrayList<>();
@@ -56,19 +52,19 @@ public class ProductFragment extends BaseFragment{
         viewList.add(new SubPage());
         viewList.add(new SubPage());
 
-        mViewPager = (ViewPager) mView.findViewById(R.id.pager);
+        ViewPager viewPager = (ViewPager) mView.findViewById(R.id.pager);
         ExFPAdapter pagerAdapter = new ExFPAdapter(getChildFragmentManager(), viewList);
         pagerAdapter.setTitles(new String[]{"长投宝", "ZAMA宝", "精选债权", "转让专区"});
-        mViewPager.setAdapter(pagerAdapter);
-        mViewPager.setCurrentItem(0);
-        mViewPager.setOnPageChangeListener(mPageChangeListener);
-        mViewPager.setOffscreenPageLimit(viewList.size());
-        mSlidingTabLayout.setViewPager(mViewPager);
+        viewPager.setAdapter(pagerAdapter);
+        viewPager.setCurrentItem(0);
+        viewPager.setOnPageChangeListener(mPageChangeListener);
+        viewPager.setOffscreenPageLimit(viewList.size());
+        slidingTabLayout.setViewPager(viewPager);
 
         return mView;
     }
 
-    protected void initLisener() {
+    protected void initListener() {
 
     }
 
@@ -106,7 +102,7 @@ public class ProductFragment extends BaseFragment{
      * 描述: 产品分类子页面
      * @author zhoulongfei
      */
-    public static class SubPage extends BaseFragment implements PullToRefreshBase.OnRefreshListener
+    public static class SubPage extends BaseFragment implements PullToRefreshBase.OnRefreshListener<ListView>
     {
         private ProductListAdapter mAdapter = null;
         private Context mContext = null;
@@ -118,7 +114,7 @@ public class ProductFragment extends BaseFragment{
 
         protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            View mView = inflater.inflate(R.layout.product_tabpage_layout, null);
+            View mView = inflater.inflate(R.layout.product_tabpage_layout, container, false);
 
             mContext = this.getActivity();
             mMultiStateView = (MultiStateView) mView.findViewById(R.id.multiStateView);
@@ -130,7 +126,7 @@ public class ProductFragment extends BaseFragment{
             return mView;
         }
 
-        protected void initLisener()
+        protected void initListener()
         {
             final Activity activity = this.getActivity();
 
@@ -189,7 +185,7 @@ public class ProductFragment extends BaseFragment{
 
         /**
          * 刷新函数
-         * @param refreshView
+         * @param refreshView 刷新控件
          */
         public void onRefresh(PullToRefreshBase refreshView)
         {

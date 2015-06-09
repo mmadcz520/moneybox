@@ -74,7 +74,7 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
         return mView;
     }
 
-    protected void initLisener()
+    protected void initListener()
     {
 
     }

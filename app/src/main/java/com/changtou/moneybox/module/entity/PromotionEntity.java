@@ -20,8 +20,8 @@ public class PromotionEntity extends BaseEntity
      * @param data
      * @throws Exception
      */
-    public void paser(String data) throws Exception {
-
+    public void paser(String data) throws Exception
+    {
         Log.e("CT_MONEY", "paser+++" + data);
 
         JSONObject json = new JSONObject(data);

@@ -47,7 +47,7 @@ public abstract class BaseActivity extends FragmentActivity implements HttpCallb
         app=(BaseApplication) getApplication();
         mDeviceId =app.mDeviceId;
         initView(bundle);
-        initLisener();
+        initListener();
     }
 
     /**
@@ -122,7 +122,7 @@ public abstract class BaseActivity extends FragmentActivity implements HttpCallb
     /**
      * 初始化监听
      */
-    protected abstract void initLisener();
+    protected abstract void initListener();
 
     /**
      * 初始化数据

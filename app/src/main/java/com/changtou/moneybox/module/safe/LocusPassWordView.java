@@ -2,6 +2,7 @@ package com.changtou.moneybox.module.safe;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
@@ -10,6 +11,10 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
+
+import com.changtou.R;
+import com.changtou.moneybox.common.utils.AppUtil;
+import com.changtou.moneybox.module.CTMoneyApplication;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,16 +25,11 @@ public class LocusPassWordView extends View {
     private float width = 0;
     private float height = 0;
 
-    //
     private boolean isCache = false;
-    //
     private Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
-    //
     private Point[][] mPoints = new Point[3][3];
-    //
     private float dotRadius = 0;
-    //
     private List<Point> sPoints = new ArrayList<Point>();
     private boolean checking = false;
     private long CLEAR_TIME = 1000;
@@ -37,16 +37,16 @@ public class LocusPassWordView extends View {
     private int pwdMinLen = 4;
     private boolean isTouch = true;
 
-    private Paint arrowPaint;
+//    private Paint arrowPaint;
     private Paint linePaint;
     private Paint selectedPaint;
     private Paint errorPaint;
     private Paint normalPaint;
 
-    private int errorColor = 0xffea0945;
-    private int selectedColor = 0xff0596f6;
-    private int outterSelectedColor = 0xff8cbad8;
-    private int outterErrorColor = 0xff901032;
+    private int errorColor = getResources().getColor(R.color.ct_red);
+    private int selectedColor = getResources().getColor(R.color.ct_white);
+    private int outterSelectedColor = getResources().getColor(R.color.ct_white);;
+    private int outterErrorColor = getResources().getColor(R.color.ct_red);
     private int dotColor = 0xffd9d9d9;
     private int outterDotColor = 0xff929292;
 
@@ -89,19 +89,19 @@ public class LocusPassWordView extends View {
                     errorPaint.setColor(errorColor);
                     canvas.drawCircle(p.x, p.y, dotRadius/4, errorPaint);
                 } else {
-                    normalPaint.setColor(dotColor);
-                    canvas.drawCircle(p.x, p.y, dotRadius, normalPaint);
-                    normalPaint.setColor(outterDotColor);
-                    canvas.drawCircle(p.x, p.y, dotRadius/4, normalPaint);
+                    normalPaint.setColor(Color.WHITE);
+                    canvas.drawCircle(p.x, p.y, dotRadius*(0.8f), normalPaint);
+//                    normalPaint.setColor(Color.RED);
+//                    canvas.drawCircle(p.x, p.y, dotRadius/4, normalPaint);
                 }
             }
         }
 
         if (inErrorState) {
-            arrowPaint.setColor(errorColor);
+//            arrowPaint.setColor(errorColor);
             linePaint.setColor(errorColor);
         } else {
-            arrowPaint.setColor(selectedColor);
+//            arrowPaint.setColor(selectedColor);
             linePaint.setColor(selectedColor);
         }
 
@@ -111,7 +111,7 @@ public class LocusPassWordView extends View {
             for (int i = 1; i < sPoints.size(); i++) {
                 Point p = sPoints.get(i);
                 drawLine(tp, p, canvas, linePaint);
-                drawArrow(canvas, arrowPaint, tp, p, dotRadius/4, 38);
+//                drawArrow(canvas, arrowPaint, tp, p, dotRadius/4, 38);
                 tp = p;
             }
             if (this.movingNoPoint) {
@@ -190,31 +190,31 @@ public class LocusPassWordView extends View {
     }
 
     private void initPaints() {
-        arrowPaint = new Paint();
-        arrowPaint.setColor(selectedColor);
-        arrowPaint.setStyle(Style.FILL);
-        arrowPaint.setAntiAlias(true);
+//        arrowPaint = new Paint();
+//        arrowPaint.setColor(selectedColor);
+//        arrowPaint.setStyle(Style.FILL);
+//        arrowPaint.setAntiAlias(true);
 
         linePaint = new Paint();
         linePaint.setColor(selectedColor);
         linePaint.setStyle(Style.STROKE);
         linePaint.setAntiAlias(true);
-        linePaint.setStrokeWidth(dotRadius / 9);
+        linePaint.setStrokeWidth(getResources().getDimension(R.dimen.circular_ring_width));
 
         selectedPaint = new Paint();
         selectedPaint.setStyle(Style.STROKE);
         selectedPaint.setAntiAlias(true);
-        selectedPaint.setStrokeWidth(dotRadius / 6);
+        selectedPaint.setStrokeWidth(getResources().getDimension(R.dimen.circular_ring_width));
 
         errorPaint = new Paint();
         errorPaint.setStyle(Style.STROKE);
         errorPaint.setAntiAlias(true);
-        errorPaint.setStrokeWidth(dotRadius / 6);
+        errorPaint.setStrokeWidth(getResources().getDimension(R.dimen.circular_ring_width));
 
         normalPaint = new Paint();
         normalPaint.setStyle(Style.STROKE);
         normalPaint.setAntiAlias(true);
-        normalPaint.setStrokeWidth(dotRadius / 9);
+        normalPaint.setStrokeWidth(getResources().getDimension(R.dimen.circular_ring_width));
     }
 
     /**
@@ -259,8 +259,6 @@ public class LocusPassWordView extends View {
     }
 
     /**
-     *
-     *
      * @param p
      * @return
      */
@@ -399,8 +397,12 @@ public class LocusPassWordView extends View {
                 // mCompleteListener.onPasswordTooMin(sPoints.size());
                 error();
                 clearPassword();
-                Toast.makeText(this.getContext(), "password too short or too long, cannot be saved!",
+
+                Toast.makeText(this.getContext(), getResources().getText(R.string.pd_gesture_prompt_error),
                         Toast.LENGTH_SHORT).show();
+
+                mCompleteListener.onTooShort();
+
             } else if (mCompleteListener != null) {
                 this.disableTouch();
                 mCompleteListener.onComplete(toPointString());
@@ -477,6 +479,10 @@ public class LocusPassWordView extends View {
 
     public interface OnCompleteListener {
 
+        //设置密码完成
         public void onComplete(String password);
+
+        //密码太短回调
+        public void onTooShort();
     }
 }

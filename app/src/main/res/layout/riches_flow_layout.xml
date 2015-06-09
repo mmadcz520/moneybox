@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@color/ct_background">
+
+    <LinearLayout android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/font_invalid"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:textSize="@dimen/font_size_normal"
+            android:text="时间"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:textColor="@color/font_invalid"
+            android:textSize="@dimen/font_size_normal"
+            android:text="待收（元）"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:textColor="@color/font_invalid"
+            android:textSize="@dimen/font_size_normal"
+            android:text="未还（元）"/>
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/riches_flow_listview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:divider="@color/ct_divide_line"
+        android:dividerHeight="1px"
+        android:headerDividersEnabled="true"
+        android:footerDividersEnabled="true">
+    </ListView>
+
+</LinearLayout>

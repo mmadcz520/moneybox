@@ -28,6 +28,7 @@ public class ProductContractEntity extends BaseEntity {
      */
     public void paser(String data) throws Exception {
 
+
         JSONArray array = new JSONArray(data);
         mAuditImg = new LinkedList();
 

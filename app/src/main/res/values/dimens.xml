@@ -33,4 +33,7 @@
     <!--text-->
     <dimen name="extext_height">46dp</dimen>
 
+    <!-- gesture pd-->
+    <dimen name="circular_ring_width">2dp</dimen>
+
 </resources>

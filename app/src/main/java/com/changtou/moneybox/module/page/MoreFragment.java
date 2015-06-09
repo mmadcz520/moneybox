@@ -38,7 +38,7 @@ public class MoreFragment extends BaseFragment{
     }
 
 
-    protected void initLisener() {
+    protected void initListener() {
 
     }
 

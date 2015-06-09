@@ -89,9 +89,9 @@ public class ProductDetailsActivity extends CTBaseActivity
         mProdList.setAdapter(mAdapter);
 
         sendRequest(HttpRequst.REQ_TYPE_PRODUCT_DETAILS,
-                HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_PRODUCT_DETAILS),
-                mParams,
-                getAsyncClient(), false);
+            HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_PRODUCT_DETAILS),
+            mParams,
+            getAsyncClient(), false);
     }
 
     protected void onResume()

@@ -56,8 +56,10 @@ public class CTBaseActivity extends BaseActivity{
     /**
      * @see android.app.Activity#onResume()
      */
-    protected void onResume() {
-        if (mCtApp.isAppOnForeground()) {
+    protected void onResume()
+    {
+        if (mCtApp.isAppOnForeground())
+        {
             bBackGround = false;
             onForeground();
         }
@@ -75,9 +77,9 @@ public class CTBaseActivity extends BaseActivity{
 
 
     /**
-     * @see BaseActivity#initLisener()
+     * @see BaseActivity#initListener()
      */
-    protected void initLisener() {
+    protected void initListener() {
 
     }
 

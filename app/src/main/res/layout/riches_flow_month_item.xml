@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@color/ct_white"
+    android:minHeight="40dp"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/flow_time"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textColor="@color/font_black"
+        android:layout_gravity="center_vertical"
+        android:gravity="center"
+        android:textSize="@dimen/font_size_normal"
+        android:text="2015年4月"/>
+
+    <TextView
+        android:id="@+id/flow_dueIn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_gravity="center_vertical"
+        android:gravity="center"
+        android:textColor="@color/font_black"
+        android:textSize="@dimen/font_size_normal"
+        android:text="5000.00"/>
+
+
+    <TextView
+        android:id="@+id/flow_received"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_gravity="center_vertical"
+        android:gravity="center"
+        android:textColor="@color/font_black"
+        android:textSize="@dimen/font_size_normal"
+        android:text="5000.00"/>
+
+</LinearLayout>

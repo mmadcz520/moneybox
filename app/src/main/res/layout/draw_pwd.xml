@@ -1,0 +1,68 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/ct_blue"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/riches_line1"
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:background="@color/ct_divide_line" />
+
+    <TextView
+        android:id="@+id/multi_tv_token_time_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:text="欢迎您，180****8661"
+        android:textColor="@color/font_white"
+        android:textSize="@dimen/font_size_normal" />
+
+    <TextView
+        android:id="@+id/pd_gesture_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_weight="1"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/pd_gesture_set"
+        android:textColor="@color/font_white"
+        android:textSize="@dimen/font_size_normal" />
+
+    <com.changtou.moneybox.module.safe.LocusPassWordView
+        android:id="@+id/mPassWordView"
+        android:layout_weight="10"
+        android:layout_width="fill_parent"
+        android:layout_height="200dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_weight="5">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_alignParentLeft="true"
+            android:text="@string/pd_gesture_forget"
+            android:textColor="@color/font_white"
+            android:textSize="@dimen/font_size_hint2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="30dp"
+            android:text="@string/pd_gesture_otheruser"
+            android:textColor="@color/font_white"
+            android:textSize="@dimen/font_size_hint2" />
+
+    </RelativeLayout>
+
+</LinearLayout>

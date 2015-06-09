@@ -44,7 +44,8 @@
         android:layout_marginTop="65dp"
         android:layout_height="@dimen/button_height_fillparent"
         android:textColor="@color/ct_white"
-        android:background="@color/ct_blue"
+        android:textSize="@dimen/font_size_normal"
+        android:background="@drawable/btn_selector"
         android:typeface="monospace"
         android:text="登陆"/>
 

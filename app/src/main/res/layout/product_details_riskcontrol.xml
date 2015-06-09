@@ -14,7 +14,7 @@
         android:padding="10dp"
         android:text="    借款人***集团有限公司, 是一家专业从事房地产开发的公司,具备丰富的房地产开发经验及专业开发团队,因公司经验周转需要,特向xx个人申请贷款。xx个人现将部分债权向长投在线投资人进行转让。同时,xx个人承若全额本息回购。"
         android:textColor="@color/font_black"
-        android:textSize="@dimen/font_size_hint2" />
+        android:textSize="@dimen/font_size_normal" />
 
 
 </LinearLayout>

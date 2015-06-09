@@ -36,5 +36,4 @@ public class ProvinceModel {
 	public String toString() {
 		return "ProvinceModel [name=" + name + ", cityList=" + cityList + "]";
 	}
-	
 }

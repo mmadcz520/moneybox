@@ -8,6 +8,8 @@ import android.widget.LinearLayout;
 
 import com.changtou.R;
 import com.changtou.moneybox.common.activity.BaseFragment;
+import com.changtou.moneybox.common.utils.SharedPreferencesHelper;
+import com.changtou.moneybox.module.appcfg.AppCfg;
 import com.changtou.moneybox.module.widget.ExFPAdapter;
 import com.changtou.moneybox.module.widget.ExViewPager;
 
@@ -24,29 +26,12 @@ import java.util.List;
  */
 public class MainActivity extends CTBaseActivity {
 
-    //手势密码控件
-//    private LocusPassWordView mPwdView = null;
-
     private ExViewPager mViewpager = null;
 
     //页面底部导航控件
     private LinearLayout[] mBars = new LinearLayout[4];
 
-//    /**
-//     * @param savedInstanceState
-//     */
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.draw_pwd);
-//        mPwdView = (LocusPassWordView) this.findViewById(R.id.mPassWordView);
-//        mPwdView.setOnCompleteListener(new LocusPassWordView.OnCompleteListener() {
-//
-//            public void onComplete(String mPassword) {
-//                //TODO 校验密码好进行跳转
-//                //finish();
-//            }
-//        });
-//    }
+    private SharedPreferencesHelper sph = null;
 
     /**
      * @see com.changtou.moneybox.common.activity.BaseActivity#initView(Bundle)
@@ -79,12 +64,14 @@ public class MainActivity extends CTBaseActivity {
         mViewpager.setScanScroll(false);
         mViewpager.setCurrentItem(0, false);
         mViewpager.setOffscreenPageLimit(viewList.size());
+
+        sph = SharedPreferencesHelper.getInstance(this);
     }
 
     /**
-     * @see com.changtou.moneybox.common.activity.BaseActivity#initLisener()
+     * @see com.changtou.moneybox.common.activity.BaseActivity#initListener()
      */
-    protected void initLisener() {
+    protected void initListener() {
         setOnClickListener(R.id.navbar_home);
         setOnClickListener(R.id.navbar_product);
         setOnClickListener(R.id.navbar_user);
@@ -121,8 +108,15 @@ public class MainActivity extends CTBaseActivity {
                 mViewpager.setCurrentItem(2);
                 switchNavBar(2);
 
-                Intent intent = new Intent(this, LoginActivity.class);
-                startActivityForResult(intent, 0);
+                Log.e("CT_MONEY", "sssss ==" + sph.getString(AppCfg.CFG_LOGIN, ""));
+
+                //已经登录
+                if((sph.getString(AppCfg.CFG_LOGIN, "").equals(AppCfg.LOGIN_STATE.EN_LOGIN.toString())))
+                {
+                    Intent intent = new Intent(this, LoginActivity.class);
+                    startActivityForResult(intent, 0);
+                }
+
                 break;
             case R.id.navbar_more:
                 mViewpager.setCurrentItem(3);
@@ -161,6 +155,6 @@ public class MainActivity extends CTBaseActivity {
 
 //                mViewpager.setCurrentItem(2);
 //                switchNavBar(2);
-        Log.e("CT_MONEY", "onActivityResultonActivityResultonActivityResult");
+//        Log.e("CT_MONEY", "onActivityResultonActivityResultonActivityResult");
     }
 }

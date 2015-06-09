@@ -78,7 +78,7 @@ public abstract class BaseFragment extends Fragment implements
     /**
      * 初始化监听
      */
-    protected abstract void initLisener();
+    protected abstract void initListener();
 
     /**
      * 初始化数据
@@ -91,7 +91,7 @@ public abstract class BaseFragment extends Fragment implements
             // ((BaseActivity)getActivity()).quit();
             bBlank = true;
         initData(savedInstanceState);
-        initLisener();
+        initListener();
     }
 
     public void entry() {

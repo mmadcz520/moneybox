@@ -3,12 +3,14 @@ package com.changtou.moneybox.module.http;
 import com.changtou.moneybox.common.http.base.BaseEntity;
 import com.changtou.moneybox.common.http.base.BaseHttpRequest;
 import com.changtou.moneybox.module.entity.BankCardEntity;
+import com.changtou.moneybox.module.entity.FlowEntity;
 import com.changtou.moneybox.module.entity.InvestListEntity;
 import com.changtou.moneybox.module.entity.InvestorEntity;
 import com.changtou.moneybox.module.entity.ProductContractEntity;
 import com.changtou.moneybox.module.entity.ProductDetailsEntity;
 import com.changtou.moneybox.module.entity.ProductEntity;
 import com.changtou.moneybox.module.entity.PromotionEntity;
+import com.changtou.moneybox.module.entity.TradeEntity;
 import com.changtou.moneybox.module.entity.TransferListEntity;
 import com.changtou.moneybox.module.entity.UserEntity;
 
@@ -37,7 +39,10 @@ public class HttpRequst extends BaseHttpRequest
 
     public final static int REQ_TYPE_BANKCARD = 26;
     public final static int REQ_TYPE_INVEST_LIST = 27;
-    public final static int RFQ_TYPE_TRANSFER_LIST = 28;
+    public final static int REQ_TYPE_TRANSFER_LIST = 28;
+    public final static int REQ_TYPE_TRADE_LIST = 29;
+
+    public final static int REQ_TYPE_FLOW = 30;
 
     public final static int REQ_TYPE_LOGIN = 1001;
 
@@ -59,6 +64,11 @@ public class HttpRequst extends BaseHttpRequest
 
     //获取站内转让列表
     public static String REQ_URL_TRANSFER_LIST = BASE_URL + "products";
+
+    //获取交易记录列表
+    public static String REQ_URL_TRADE_LIST = BASE_URL + "products";
+
+    public static String FEQ_URL_FLOW = BASE_URL + "products";
 
     public static synchronized HttpRequst getInstance()
     {
@@ -93,8 +103,12 @@ public class HttpRequst extends BaseHttpRequest
                 return REQ_URL_BANKCARD;
             case REQ_TYPE_INVEST_LIST:
                 return REQ_URL_INVEST_LIST;
-            case RFQ_TYPE_TRANSFER_LIST:
+            case REQ_TYPE_TRANSFER_LIST:
                 return REQ_URL_TRANSFER_LIST;
+            case REQ_TYPE_TRADE_LIST:
+                return REQ_URL_TRADE_LIST;
+            case REQ_TYPE_FLOW:
+                return FEQ_URL_FLOW;
             default:
                 break;
         }
@@ -151,8 +165,15 @@ public class HttpRequst extends BaseHttpRequest
             case REQ_TYPE_INVEST_LIST:
                 paser = new InvestListEntity();
                 break;
-            case RFQ_TYPE_TRANSFER_LIST:
+            case REQ_TYPE_TRANSFER_LIST:
                 paser = new TransferListEntity();
+                break;
+            case REQ_TYPE_TRADE_LIST:
+                paser = new TradeEntity();
+                break;
+            case REQ_TYPE_FLOW:
+                paser = new FlowEntity();
+                break;
             default:
                 break;
         }

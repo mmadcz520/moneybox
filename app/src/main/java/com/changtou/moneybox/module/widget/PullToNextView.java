@@ -6,7 +6,6 @@ import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -53,9 +52,8 @@ public class PullToNextView extends LinearLayout {
 
     private PullStateE mPullStateE = PullStateE.PULL_STATE_NONE;
 
-    private View mFootView;
 
-    private boolean isTop = false;
+    private View mFootView;
 
     public PullToNextView(Context context) {
         super(context);
@@ -67,7 +65,6 @@ public class PullToNextView extends LinearLayout {
         init();
     }
 
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public PullToNextView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
@@ -79,6 +76,9 @@ public class PullToNextView extends LinearLayout {
         init();
     }
 
+    /**
+     * init
+     */
     private void init() {
         // 需要设置成vertical
         setOrientation(LinearLayout.VERTICAL);
@@ -86,6 +86,7 @@ public class PullToNextView extends LinearLayout {
 
     }
 
+    // 计算大小
     private void measureView(View child) {
         ViewGroup.LayoutParams p = child.getLayoutParams();
         if (p == null) {
@@ -105,6 +106,7 @@ public class PullToNextView extends LinearLayout {
         }
         child.measure(childWidthSpec, childHeightSpec);
     }
+
 
     private int mHeadViewHeight;
 
@@ -143,6 +145,7 @@ public class PullToNextView extends LinearLayout {
         );
 
         footPromptTV = (TextView) mFootView.findViewById(R.id.promptTV);
+
         addView(mFootView, footParams);
     }
 
@@ -151,11 +154,13 @@ public class PullToNextView extends LinearLayout {
         measureView(mHeaderView);
         headPromptTV = (TextView) mHeaderView.findViewById(R.id.promptTV);
 
+
         mHeadViewHeight = mHeaderView.getMeasuredHeight();
         addView(mHeaderView);
         //隐藏了头部
         setHeaderTopMargin(-mHeadViewHeight);
     }
+
 
     /**
      * 设置header view 的topMargin的值
@@ -169,24 +174,42 @@ public class PullToNextView extends LinearLayout {
         invalidate();
     }
 
+
     public void initContentView(final FragmentManager fm, final int position) {
+
+
         if (contentView != null) {
+
+
 
             contentView.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     Fragment f = fm.findFragmentByTag("position" + position);
+
+
+
                     FrameLayout frameLayout = (FrameLayout) contentView;
+
+
                     ViewGroup v = (ViewGroup) frameLayout.getRootView();
                     if (f != null) {
                         a(f.getView());
+
                     }
                 }
             },20);
         }
+
+
+
+
+
     }
 
     public void a(Object o) {
+
+
         if (o instanceof ViewGroup) {
 
             ViewGroup vp = (ViewGroup) o;
@@ -201,7 +224,11 @@ public class PullToNextView extends LinearLayout {
                 mWebView.setOverScrollMode(OVER_SCROLL_NEVER);
             }
 
+
+
             for (int i = 0; i < vp.getChildCount(); i++) {
+
+
                 a(vp.getChildAt(i));
             }
         }
@@ -209,11 +236,16 @@ public class PullToNextView extends LinearLayout {
 
     }
 
+
     public void initContentAdapterView(ViewGroup contentView) {
+
+
         if (contentView == null) {
             contentView = this;
         }
         int count = contentView.getChildCount();
+
+
         View view = null;
         for (int i = 0; i < count; ++i) {
             view = contentView.getChildAt(i);
@@ -226,7 +258,9 @@ public class PullToNextView extends LinearLayout {
         }
     }
 
+
     boolean isBlock = false;
+
 
     int downy;
 
@@ -275,7 +309,10 @@ public class PullToNextView extends LinearLayout {
             case MotionEvent.ACTION_CANCEL:
                 int topMargin = getHeaderTopMargin();
 
+
                 if (topMargin < -3 * mHeadViewHeight) {
+
+
                     if (isHashNext) {
                         pullToNextI.next();
                     } else {
@@ -283,8 +320,11 @@ public class PullToNextView extends LinearLayout {
                     }
 
                 } else if (topMargin > mHeadViewHeight) {
+
+
                     if (isHashPrevious) {
                         pullToNextI.previous();
+
                     } else {
                         moveTo(-mHeadViewHeight, ANIMATION_DURATION);
                     }
@@ -292,6 +332,7 @@ public class PullToNextView extends LinearLayout {
                 } else {
                     moveTo(-mHeadViewHeight, ANIMATION_DURATION);
                 }
+
 
                 break;
         }
@@ -305,13 +346,15 @@ public class PullToNextView extends LinearLayout {
         animator.setDuration(duration);
         animator.setInterpolator(new DecelerateInterpolator());
         mPullStateE = PullStateE.PULL_STATE_NONE;
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener()
-        {
-            public void onAnimationUpdate(ValueAnimator valueAnimator)
-            {
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+
+            @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+
                 float temp = (Float) valueAnimator.getAnimatedValue();
-                if (temp == i)
-                {
+
+                if (temp == i) {
                     mPullStateE = PullStateE.PULL_STATE_NONE;
                 }
                 setHeaderTopMargin((int) temp);
@@ -330,7 +373,10 @@ public class PullToNextView extends LinearLayout {
 
 
     private boolean isRefreshViewScroll(int deltaY) {
+
         if (PullStateE.PULL_STATE_REFRESH == mPullStateE) {
+
+
             return false;
         }
         LayoutParams params = (LayoutParams) mHeaderView.getLayoutParams();
@@ -362,7 +408,7 @@ public class PullToNextView extends LinearLayout {
             }else if (deltaY < -12 &&
                     (int)(mWebView.getContentHeight()*mWebView.getScale())-mWebView.getHeight()-mWebView.getScrollY( ) == 0
 
-                   ) {
+                    ) {
                 //向上
 
                 mPullStateE = PullStateE.PULL_STATE_UP;
@@ -373,6 +419,8 @@ public class PullToNextView extends LinearLayout {
         }else{
             return true;
         }
+
+
         return false;
     }
 
@@ -383,6 +431,8 @@ public class PullToNextView extends LinearLayout {
      * @param deltaY
      */
     private int changingHeaderViewTopMargin(int deltaY) {
+
+
         LayoutParams params = (LayoutParams) mHeaderView.getLayoutParams();
         float newTopMargin = params.topMargin + deltaY * 0.5f;
 
@@ -391,45 +441,42 @@ public class PullToNextView extends LinearLayout {
         } else if (PullStateE.PULL_STATE_DOWN == mPullStateE) {
             newTopMargin = Math.max(newTopMargin, -mHeadViewHeight);
         }
-//        params.topMargin = (int) newTopMargin;
-//        mHeaderView.setLayoutParams(params);
-        isTop = false;
+        params.topMargin = (int) newTopMargin;
+        mHeaderView.setLayoutParams(params);
 
         if (newTopMargin < -mHeadViewHeight) {
             //下一个
+
+
             if (!isHashNext) {
                 footPromptTV.setText("没有更多信息");
             } else if (newTopMargin < -3 * mHeadViewHeight) {
 
-//                footPromptTV.setText("放手查看下一个");
+                footPromptTV.setText("放手查看下一个");
             } else {
-                footPromptTV.setText("上拉查看项目详情");
+                footPromptTV.setText("上拉查看下一个");
 
             }
+
+
         } else if (newTopMargin > -mHeadViewHeight) {
 
             //前一个
             if (!isHashPrevious) {
-                isTop = true;
-                headPromptTV.setText("aaaaa");
-
+                headPromptTV.setText("已经是第一个了");
             } else if (newTopMargin > mHeadViewHeight) {
-//                headPromptTV.setText("放手查看前一个");
+
+                headPromptTV.setText("放手查看前一个");
             } else {
-//                headPromptTV.setText("下拉查看前一个");
+                headPromptTV.setText("下拉查看前一个");
 
             }
 
+
         } else {
-//            moveTo(-mHeadViewHeight, ANIMATION_DURATION);
+            moveTo(-mHeadViewHeight, ANIMATION_DURATION);
         }
 
-        if(!isTop)
-        {
-            params.topMargin = (int) newTopMargin;
-            mHeaderView.setLayoutParams(params);
-            mHeaderView.invalidate();
-        }
 
         invalidate();
         return params.topMargin;

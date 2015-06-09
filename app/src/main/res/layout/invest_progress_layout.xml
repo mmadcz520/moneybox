@@ -3,11 +3,13 @@
     xmlns:android_custom="http://schemas.android.com/apk/res-auto"
     android:id="@+id/homepage_progress"
     android:layout_width="fill_parent"
+    android:minHeight="190dp"
     android:layout_height="wrap_content"
     android:background="@color/ct_white"
     android:orientation="vertical">
 
     <RelativeLayout
+        android:layout_marginTop="18dp"
         android:layout_width="match_parent"
         android:layout_height="@dimen/widget_progress_height">
 

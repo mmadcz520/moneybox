@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--xmlns:android_custom="http://schemas.android.com/apk/res-auto"-->
-    <!--android:id="@+id/scrollView"-->
-    <!--android:layout_width="fill_parent"-->
-    <!--android:layout_height="fill_parent"-->
-    <!--android:background="@color/ct_background"-->
-    <!--android:fillViewport="true">-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android_custom="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/scrollView"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/ct_background"
+    android:fillViewport="true">
 
     <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical">
@@ -83,8 +83,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
                     android:background="@color/ct_divide_line" />
-
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-<!--</ScrollView>-->
+</ScrollView>

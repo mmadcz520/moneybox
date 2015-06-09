@@ -1,6 +1,9 @@
 package com.changtou.moneybox.module.page;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.widget.Button;
 
 import com.changtou.R;
 
@@ -10,8 +13,24 @@ import com.changtou.R;
  */
 public class RegisterPasswordActivity extends CTBaseActivity
 {
-    @Override
     protected void initView(Bundle bundle) {
         setContentView(R.layout.riches_register_password_layout);
     }
+
+    protected void initListener()
+    {
+        setOnClickListener(R.id.riches_register_do);
+    }
+
+    public void treatClickEvent(int id)
+    {
+        switch (id)
+        {
+            case R.id.riches_register_do:
+                Intent intent = new Intent(this, GesturePWActivity.class);
+                startActivity(intent);
+                break;
+        }
+    }
+
 }

@@ -21,8 +21,8 @@ public class ProductDetailsEntity extends BaseEntity
      * @param data
      * @throws Exception
      */
-    public void paser(String data) throws Exception {
-
+    public void paser(String data) throws Exception
+    {
         JSONArray array = new JSONArray(data);
         mList = new LinkedList();
         ProListEntity entity;
@@ -34,7 +34,8 @@ public class ProductDetailsEntity extends BaseEntity
         }
     }
 
-    public  class ProListEntity {
+    public  class ProListEntity
+    {
         public String id;
         public String name;
 
