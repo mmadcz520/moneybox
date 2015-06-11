@@ -10,6 +10,7 @@ import com.changtou.moneybox.module.entity.ProductContractEntity;
 import com.changtou.moneybox.module.entity.ProductDetailsEntity;
 import com.changtou.moneybox.module.entity.ProductEntity;
 import com.changtou.moneybox.module.entity.PromotionEntity;
+import com.changtou.moneybox.module.entity.RewardsEntity;
 import com.changtou.moneybox.module.entity.TradeEntity;
 import com.changtou.moneybox.module.entity.TransferListEntity;
 import com.changtou.moneybox.module.entity.UserEntity;
@@ -41,8 +42,8 @@ public class HttpRequst extends BaseHttpRequest
     public final static int REQ_TYPE_INVEST_LIST = 27;
     public final static int REQ_TYPE_TRANSFER_LIST = 28;
     public final static int REQ_TYPE_TRADE_LIST = 29;
-
     public final static int REQ_TYPE_FLOW = 30;
+    public final static int REQ_TYPE_REWARDS_LIST= 31;
 
     public final static int REQ_TYPE_LOGIN = 1001;
 
@@ -68,7 +69,11 @@ public class HttpRequst extends BaseHttpRequest
     //获取交易记录列表
     public static String REQ_URL_TRADE_LIST = BASE_URL + "products";
 
+    //资金流接口
     public static String FEQ_URL_FLOW = BASE_URL + "products";
+
+    //推荐好友列表接口
+    public static String FEQ_URL_REWARDS_LIST = BASE_URL + "products";
 
     public static synchronized HttpRequst getInstance()
     {
@@ -109,6 +114,8 @@ public class HttpRequst extends BaseHttpRequest
                 return REQ_URL_TRADE_LIST;
             case REQ_TYPE_FLOW:
                 return FEQ_URL_FLOW;
+            case REQ_TYPE_REWARDS_LIST:
+                return FEQ_URL_REWARDS_LIST;
             default:
                 break;
         }
@@ -173,6 +180,9 @@ public class HttpRequst extends BaseHttpRequest
                 break;
             case REQ_TYPE_FLOW:
                 paser = new FlowEntity();
+                break;
+            case REQ_TYPE_REWARDS_LIST:
+                paser = new RewardsEntity();
                 break;
             default:
                 break;

@@ -40,6 +40,9 @@ public abstract class BaseActivity extends FragmentActivity implements HttpCallb
      */
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
+
+        BaseApplication.getInstance().addActivity(this);
+
         click = new Click();
         mcontext=this.getApplicationContext();
         if (mParams == null)

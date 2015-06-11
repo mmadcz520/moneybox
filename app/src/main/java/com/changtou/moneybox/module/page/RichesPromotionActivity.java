@@ -7,6 +7,8 @@ import com.changtou.R;
 import com.changtou.moneybox.module.phonebook.RichesPhoneBookActivity;
 
 /**
+ * ÍÆ¼öºÃÓÑÒ³Ãæ
+ *
  * Created by Administrator on 2015/6/10.
  */
 public class RichesPromotionActivity extends CTBaseActivity
@@ -22,6 +24,7 @@ public class RichesPromotionActivity extends CTBaseActivity
     protected void initListener()
     {
         setOnClickListener(R.id.riches_pro_phonenum);
+        setOnClickListener(R.id.riches_rewards);
     }
 
     public void treatClickEvent(int id)
@@ -29,8 +32,13 @@ public class RichesPromotionActivity extends CTBaseActivity
         switch (id)
         {
             case R.id.riches_pro_phonenum:
-                final Intent intent = new Intent(this, RichesPhoneBookActivity.class);
-                startActivity(intent);
+                final Intent intent1 = new Intent(this, RichesPhoneBookActivity.class);
+                startActivity(intent1);
+                break;
+
+            case R.id.riches_rewards:
+                final Intent intent2 = new Intent(this, RichesRewardsActivity.class);
+                startActivity(intent2);
                 break;
         }
     }

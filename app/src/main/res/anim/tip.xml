@@ -5,6 +5,7 @@
         android:toDegrees="10"
         android:duration="200"
         android:repeatCount="-1"
+        android:interpolator="@anim/custom_cycle"
         android:pivotX="50%"
         android:pivotY="0" />
 </set>

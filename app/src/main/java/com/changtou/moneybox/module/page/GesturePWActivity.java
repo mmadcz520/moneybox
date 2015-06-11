@@ -2,12 +2,15 @@ package com.changtou.moneybox.module.page;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.changtou.R;
+import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.utils.SharedPreferencesHelper;
 import com.changtou.moneybox.module.appcfg.AppCfg;
 import com.changtou.moneybox.module.safe.LocusPassWordView;
@@ -31,10 +34,13 @@ public class GesturePWActivity extends Activity implements LocusPassWordView.OnC
     private SharedPreferencesHelper sph = null;
     private Md5Utils md5 = null;
 
+    private long exitTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        BaseApplication.getInstance().addActivity(this);
 
         setContentView(R.layout.draw_pwd);
         mPwdView = (LocusPassWordView) this.findViewById(R.id.mPassWordView);
@@ -105,7 +111,7 @@ public class GesturePWActivity extends Activity implements LocusPassWordView.OnC
      */
     public void onBackPressed()
     {
-//        super.onBackPressed();
+//        BaseApplication.getInstance().AppExit();
     }
 
     /**
@@ -115,5 +121,25 @@ public class GesturePWActivity extends Activity implements LocusPassWordView.OnC
     public void onClick(View v)
     {
 
+    }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN)
+        {
+            if((System.currentTimeMillis()-exitTime) > 2000)
+            {
+                Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
+                exitTime = System.currentTimeMillis();
+            }
+            else
+            {
+                finish();
+                BaseApplication.getInstance().AppExit();
+                System.exit(0);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

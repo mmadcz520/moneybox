@@ -198,6 +198,7 @@
                     android:background="@color/ct_divide_line" />
 
                 <TextView
+                    android:id="@+id/riches_rewards"
                     android:layout_width="fill_parent"
                     android:layout_height="36dp"
                     android:gravity="center"

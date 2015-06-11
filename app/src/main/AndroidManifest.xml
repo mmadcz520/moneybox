@@ -137,6 +137,11 @@
             android:theme="@style/ActivityTheme_Light" >
         </activity>
 
+        <activity
+            android:name=".moneybox.module.page.RichesRewardsActivity"
+            android:theme="@style/ActivityTheme_Light" >
+        </activity>
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />

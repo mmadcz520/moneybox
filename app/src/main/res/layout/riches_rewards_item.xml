@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="46dp"
+        android:background="@drawable/selector_list_item"
+        android:minHeight="46dp">
+
+        <LinearLayout
+            android:id="@+id/title"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:orientation="vertical"
+            android:paddingLeft="44dp">
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="#333333"
+                android:text="熊老师"/>
+
+            <TextView
+                android:id="@+id/number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:textColor="#999999"
+                android:text="1858945147"/>
+        </LinearLayout>
+
+        <Button
+            android:layout_width="75dp"
+            android:layout_height="30dp"
+            android:background="@mipmap/riches_rewards_btn"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="44dp"
+            android:layout_centerVertical="true"/>
+
+    </RelativeLayout>
+</LinearLayout>

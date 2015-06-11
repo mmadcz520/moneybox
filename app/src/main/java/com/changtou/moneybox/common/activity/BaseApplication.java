@@ -5,6 +5,7 @@ import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Stack;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -48,7 +49,7 @@ public abstract class BaseApplication extends Application implements UncaughtExc
     public static BaseHttpRequest mHttpRequest = null;
 
     //Activity列表, 全局退出App
-    private ArrayList<Activity> mActivityList = null;
+    private static Stack<Activity> activityStack;
 
     //设备编号
     public static String mDeviceId = null;
@@ -66,7 +67,6 @@ public abstract class BaseApplication extends Application implements UncaughtExc
     {
         DeviceInfo.init(this);
         mHttpRequest = initBaseHttpRequest();
-        mActivityList = new ArrayList<Activity>();
         mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();
         Thread.setDefaultUncaughtExceptionHandler(this);
 
@@ -291,5 +291,74 @@ public abstract class BaseApplication extends Application implements UncaughtExc
     public void resetBackFlag()
     {
         isBack = true;
+    }
+
+    /**
+     * add Activity 添加Activity到栈
+     */
+    public void addActivity(Activity activity){
+        if(activityStack ==null){
+            activityStack =new Stack<Activity>();
+        }
+        activityStack.add(activity);
+    }
+
+    /**
+     * get current Activity 获取当前Activity（栈中最后一个压入的）
+     */
+    public Activity currentActivity() {
+        Activity activity = activityStack.lastElement();
+        return activity;
+    }
+    /**
+     * 结束当前Activity（栈中最后一个压入的）
+     */
+    public void finishActivity() {
+        Activity activity = activityStack.lastElement();
+        finishActivity(activity);
+    }
+
+    /**
+     * 结束指定的Activity
+     */
+    public void finishActivity(Activity activity) {
+        if (activity != null) {
+            activityStack.remove(activity);
+            activity.finish();
+            activity = null;
+        }
+    }
+
+    /**
+     * 结束指定类名的Activity
+     */
+    public void finishActivity(Class<?> cls) {
+        for (Activity activity : activityStack) {
+            if (activity.getClass().equals(cls)) {
+                finishActivity(activity);
+            }
+        }
+    }
+
+    /**
+     * 结束所有Activity
+     */
+    public void finishAllActivity() {
+        for (int i = 0, size = activityStack.size(); i < size; i++) {
+            if (null != activityStack.get(i)) {
+                activityStack.get(i).finish();
+            }
+        }
+        activityStack.clear();
+    }
+
+    /**
+     * 退出应用程序
+     */
+    public void AppExit() {
+        try {
+            finishAllActivity();
+        } catch (Exception e) {
+        }
     }
 }
