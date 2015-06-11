@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:textColor="@color/font_invalid"
+        android:textSize="@dimen/font_size_hint2"
+        android:text="选择提现银行卡"/>
+
+    <com.changtou.moneybox.common.widget.swipeMenuListView.SwipeMenuListView
+        android:layout_marginTop="10dp"
+        android:id="@+id/riches_safe_bank_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:dividerHeight="18dp"
+        android:divider="#00000000"/>
+
+        <TextView
+            android:id="@+id/riches_bank_add"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_width="fill_parent"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/stroke_edit_fillpraent"
+            android:gravity="center"
+            android:textColor="@color/ct_blue"
+            android:text="+ 添加一张银行卡"/>
+
+</LinearLayout>

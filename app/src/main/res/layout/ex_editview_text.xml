@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/extext_height"
+    android:background="@drawable/stroke_edit_fillpraent">
+
+    <ImageView
+        android:id="@+id/ex_img"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="23dp"
+        android:src="@mipmap/riches_safe_phone"/>
+
+    <TextView
+        android:id="@+id/ex_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/ex_img"
+        android:layout_marginLeft="17dp"
+        android:background="@drawable/stroke_edit_null"
+        android:focusableInTouchMode="true"
+        android:textSize="@dimen/font_size_normal"
+        android:textColor="@color/font_black"
+        android:typeface="monospace"
+        android:text="手机认证"/>
+
+    <ImageView android:id="@+id/ex_indicator"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@mipmap/indicator"
+        android:layout_marginRight="23dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"/>
+
+    <TextView android:id="@+id/ex_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_toLeftOf="@+id/ex_indicator"
+        android:layout_marginRight="8dp"
+        android:layout_centerVertical="true"
+        android:textColor="@color/ct_red"
+        android:text="认证送10元"
+        android:textSize="@dimen/font_size_hint2"/>
+
+</RelativeLayout>

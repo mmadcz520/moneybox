@@ -1,0 +1,198 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android_custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:minHeight="100dp">
+
+    <LinearLayout
+        android:id="@+id/lld"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/stroke_list_item"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/pro_list_titile"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="8dp"
+            android:text="[长投宝] 上手易第256期"
+            android:textColor="@color/font_black"
+            android:textSize="@dimen/font_size_normal"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:layout_marginTop="5dp"
+            android:background="@color/ct_divide_line" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
+                    android:text="2000.00"
+                    android:textColor="@color/ct_red"
+                    android:textSize="@dimen/font_size_normal" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:text="转入金额(元)"
+                    android:textColor="@color/font_invalid"
+                    android:textSize="@dimen/font_size_hint" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:gravity="center_vertical"
+                        android:text="15%"
+                        android:textColor="@color/font_prompt"
+                        android:textSize="@dimen/font_size_normal" />
+
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="代扣手续费"
+                    android:textColor="@color/font_invalid"
+                    android:textSize="@dimen/font_size_hint" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
+                    android:text="55.00"
+                    android:textColor="@color/font_prompt"
+                    android:textSize="@dimen/font_size_normal" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:text="未收利息(元)"
+                    android:textColor="@color/font_invalid"
+                    android:textSize="@dimen/font_size_hint" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="12dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="5dp">
+            <ProgressBar android:id="@+id/progress_horizontal"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="12dp"
+                android:progressDrawable="@drawable/backgroud_progressbar"
+                android:max="100"
+                android:secondaryProgress="70" />
+            <TextView
+                android:layout_marginLeft="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/font_size_small"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/font_white"
+                android:text="50% 已转让1000.00元"/>
+
+        </FrameLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:background="@color/ct_divide_line" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="35dp"
+            android:orientation="horizontal">
+
+            <ImageView android:layout_width="20dp"
+                android:id="@+id/invest_time"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:src="@mipmap/riches_invest_time"/>
+
+            <TextView android:layout_width="wrap_content"
+                android:id="@+id/invest_start"
+                android:layout_toRightOf="@+id/invest_time"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="5dp"
+                android:gravity="center"
+                android:text="2015-04-19起投"
+                android:textColor="@color/font_importance"
+                android:textSize="@dimen/font_size_hint"/>
+
+            <TextView android:layout_width="wrap_content"
+                android:id="@+id/invest_line"
+                android:layout_toRightOf="@+id/invest_start"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="5dp"
+                android:gravity="center"
+                android:text="-"
+                android:textColor="@color/font_importance"
+                android:textSize="@dimen/font_size_navigation"/>
+
+            <TextView android:layout_width="wrap_content"
+                android:layout_toRightOf="@+id/invest_line"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="5dp"
+                android:gravity="center"
+                android:text="2015-07-180到期"
+                android:textColor="@color/font_importance"
+                android:textSize="@dimen/font_size_hint"/>
+
+            <TextView android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginRight="15dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/fillet_stroke"
+                android:gravity="center"
+                android:text="转让天数：29"
+                android:textColor="@color/font_importance"
+                android:textSize="@dimen/font_size_hint"/>
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>
+
+

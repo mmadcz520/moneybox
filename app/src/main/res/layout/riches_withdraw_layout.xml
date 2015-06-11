@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android_custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/ct_background">
+
+    <include layout="@layout/riches_safe_bank_item"
+        android:id="@+id/riches_bank_item"
+        android:layout_marginTop="20dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout android:layout_width="fill_parent"
+        android:layout_height="@dimen/edit_height_normal"
+        android:layout_marginTop="17dp"
+        android:orientation="horizontal"
+        android:background="@drawable/stroke_edit_fillpraent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/font_black"
+            android:textSize="@dimen/font_size_normal"
+            android:layout_marginLeft="20dp"
+            android:background="@color/ct_white"
+            android:layout_gravity="center"
+            android:text="账号可用余额(元)"/>
+    </LinearLayout>
+
+    <LinearLayout android:layout_width="fill_parent"
+        android:layout_height="@dimen/edit_height_normal"
+        android:orientation="horizontal"
+        android:background="@color/ct_white">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/font_black"
+            android:textSize="@dimen/font_size_normal"
+            android:layout_marginLeft="20dp"
+            android:background="@color/ct_white"
+            android:layout_gravity="center"
+            android:text="提现手续费(元)"/>
+    </LinearLayout>
+
+    <LinearLayout android:layout_width="fill_parent"
+        android:layout_height="@dimen/edit_height_normal"
+        android:orientation="horizontal"
+        android:background="@drawable/stroke_edit_fillpraent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/font_black"
+            android:background="@color/ct_white"
+            android:textSize="@dimen/font_size_normal"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="center"
+            android:text="到账金额(元)"/>
+    </LinearLayout>
+
+    <LinearLayout android:layout_width="fill_parent"
+        android:layout_height="@dimen/edit_height_normal"
+        android:orientation="horizontal"
+        android:layout_marginTop="17dp"
+        android:background="@drawable/stroke_edit_fillpraent">
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/font_invalid"
+            android:textColor="@color/font_black"
+            android:textSize="@dimen/font_size_normal"
+            android:background="@color/ct_white"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="center"
+            android:hint="请输入提现金额(元)"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/register_btn"
+        android:layout_width="fill_parent"
+        android:layout_marginTop="35dp"
+        android:layout_height="@dimen/button_height_fillparent"
+        android:background="@color/ct_blue"
+        android:textColor="@color/ct_white"
+        android:text="确认提现"
+        android:textSize="@dimen/font_size_normal" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="@dimen/font_size_hint"
+        android:textColor="@color/font_invalid"
+        android:text="注册即代表您已经阅读并同意《注册协议》及《投资咨询与管理协议》"/>
+
+</LinearLayout>

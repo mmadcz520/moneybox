@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="60dp"
+    android:minHeight="60dp"
+    android:orientation="horizontal"
+    android:background="@drawable/stroke_edit_fillpraent">
+
+    <ImageView android:id="@+id/riches_bank_item_logo"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="19dp"
+        android:layout_centerVertical="true"
+        android:src="@mipmap/riches_bank_jianhang"/>
+
+   <TextView
+       android:id="@+id/riches_bank_item_no"
+       android:layout_marginLeft="24dp"
+       android:layout_toLeftOf="@+id/riches_bank_item_check"
+       android:layout_centerVertical="true"
+       android:layout_width="150dp"
+       android:layout_height="wrap_content"
+       android:textSize="@dimen/font_size_navigation"
+       android:textColor="@color/font_black"
+       android:text="6225 **** 2345"/>
+
+    <ImageView android:id="@+id/riches_bank_item_check"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:layout_centerVertical="true"
+        android:src="@mipmap/indicator"/>
+
+</RelativeLayout>
