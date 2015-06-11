@@ -55,7 +55,7 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
         mUserManager.setLoginNotifier(this);
 
 //        TextView loginBtn = (TextView)findViewById(R.id.login_btn);
-//        final Intent intent = new Intent(this, MainActivity.class);
+//        final Intent intent = new Intent(this, RichesPhoneBookActivity.class);
 //        mForgetPd.setOnClickListener(new View.OnClickListener() {
 //            public void onClick(View v) {
 //                UserManager um = BaseApplication.getInstance().getUserModule();

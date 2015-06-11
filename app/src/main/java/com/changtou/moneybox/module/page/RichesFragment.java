@@ -44,8 +44,8 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
                 switch (position)
                 {
                     case 0:
-//                        final Intent intent0 = new Intent(RichesFragment.this.getActivity(), RichesFlowActivity.class);
-//                        startActivity(intent0);
+                        final Intent intent0 = new Intent(RichesFragment.this.getActivity(), RichesPromotionActivity.class);
+                        startActivity(intent0);
                         break;
                     case 1:
                         final Intent intent1 = new Intent(RichesFragment.this.getActivity(), RichesInvestListActivity.class);
@@ -80,52 +80,52 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
         translateAnimation.start();
 
 
-        getAllCallRecords(this.getActivity());
+//        getAllCallRecords(this.getActivity());
 
         return view;
     }
 
-    public static Map<String, String> getAllCallRecords(Context context) {
-
-        Map<String, String> temp = new HashMap<>();
-        Cursor c = context.getContentResolver().query(
-                ContactsContract.Contacts.CONTENT_URI, null, null, null,
-                ContactsContract.Contacts.DISPLAY_NAME + " COLLATE LOCALIZED ASC");
-        if (c.moveToFirst()) {
-            do {
-                // 获得联系人的ID号
-                String contactId = c.getString(c
-                        .getColumnIndex(ContactsContract.Contacts._ID));
-                // 获得联系人姓名
-                String name = c
-                        .getString(c
-                                .getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
-
-                // 查看该联系人有多少个电话号码。如果没有这返回值为0
-                int phoneCount = c
-                        .getInt(c
-                                .getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER));
-                String number = null;
-                if (phoneCount > 0) {
-                    // 获得联系人的电话号码
-                    Cursor phones = context.getContentResolver().query(
-                            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-                            null,
-                            ContactsContract.CommonDataKinds.Phone.CONTACT_ID
-                                    + " = " + contactId, null, null);
-                    if (phones.moveToFirst()) {
-                        number = phones
-                                .getString(phones
-                                        .getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                    }
-                    phones.close();
-                }
-                temp.put(name, number);
-            } while (c.moveToNext());
-        }
-        c.close();
-        return temp;
-    }
+//    public static Map<String, String> getAllCallRecords(Context context) {
+//
+//        Map<String, String> temp = new HashMap<>();
+//        Cursor c = context.getContentResolver().query(
+//                ContactsContract.Contacts.CONTENT_URI, null, null, null,
+//                ContactsContract.Contacts.DISPLAY_NAME + " COLLATE LOCALIZED ASC");
+//        if (c.moveToFirst()) {
+//            do {
+//                // 获得联系人的ID号
+//                String contactId = c.getString(c
+//                        .getColumnIndex(ContactsContract.Contacts._ID));
+//                // 获得联系人姓名
+//                String name = c
+//                        .getString(c
+//                                .getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+//
+//                // 查看该联系人有多少个电话号码。如果没有这返回值为0
+//                int phoneCount = c
+//                        .getInt(c
+//                                .getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER));
+//                String number = null;
+//                if (phoneCount > 0) {
+//                    // 获得联系人的电话号码
+//                    Cursor phones = context.getContentResolver().query(
+//                            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+//                            null,
+//                            ContactsContract.CommonDataKinds.Phone.CONTACT_ID
+//                                    + " = " + contactId, null, null);
+//                    if (phones.moveToFirst()) {
+//                        number = phones
+//                                .getString(phones
+//                                        .getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+//                    }
+//                    phones.close();
+//                }
+//                temp.put(name, number);
+//            } while (c.moveToNext());
+//        }
+//        c.close();
+//        return temp;
+//    }
 
 
 

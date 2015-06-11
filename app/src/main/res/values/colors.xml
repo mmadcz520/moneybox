@@ -9,6 +9,7 @@
     <color name="ct_invalid">#dddddd</color>
     <color name="ct_background">#f9f9f9</color>
     <color name="ct_divide_line">#cccccc</color>
+    <color name="ct_background_promotion">#fcecd2</color>
 
     <!-- 文字颜色-->
     <color name="font_white">#ffffff</color>
