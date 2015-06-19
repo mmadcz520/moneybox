@@ -36,7 +36,7 @@
             android:textSize="@dimen/font_size_normal"
             android:textColor="@color/font_white"
             android:typeface="monospace"
-            android:text="180****5591"/>
+            android:text=""/>
 
     </LinearLayout>
 
@@ -51,6 +51,7 @@
         android_custom:ex_message="认证送10元"/>
 
     <com.changtou.moneybox.module.widget.ExEditView
+        android:id = "@+id/btn_certification_manager"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/extext_height"
         android_custom:viewType="text"
@@ -62,6 +63,7 @@
         android_custom:ex_message="认证送10元"/>
 
     <com.changtou.moneybox.module.widget.ExEditView
+        android:id = "@+id/btn_bank_manager"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/extext_height"
         android_custom:viewType="text"
@@ -87,6 +89,8 @@
         android:layout_marginTop="10dp"
         android:paddingLeft="25dp"
         android:paddingRight="25dp"
+        android:textColor="@color/font_black"
+        android:textSize="@dimen/font_size_normal"
         android:text="@string/safe_page_prompt"/>
     
     <Button

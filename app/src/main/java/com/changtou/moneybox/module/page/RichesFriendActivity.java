@@ -15,4 +15,9 @@ public class RichesFriendActivity extends CTBaseActivity
     {
         setContentView(R.layout.riches_friend_layout);
     }
+
+    @Override
+    protected int setPageType() {
+        return 0;
+    }
 }

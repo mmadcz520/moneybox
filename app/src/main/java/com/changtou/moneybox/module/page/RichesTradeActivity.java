@@ -35,6 +35,11 @@ public class RichesTradeActivity extends CTBaseActivity
                 getAsyncClient(), false);
     }
 
+    @Override
+    protected int setPageType() {
+        return 0;
+    }
+
     public void onSuccess(String content, Object object, int reqType)
     {
         if (reqType == HttpRequst.REQ_TYPE_TRADE_LIST)

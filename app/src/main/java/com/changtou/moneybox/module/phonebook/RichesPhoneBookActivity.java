@@ -76,6 +76,11 @@ public class RichesPhoneBookActivity extends CTBaseActivity {
         initViews();
     }
 
+    @Override
+    protected int setPageType() {
+        return 0;
+    }
+
     private void initViews() {
 
         //实例化汉字转拼音类

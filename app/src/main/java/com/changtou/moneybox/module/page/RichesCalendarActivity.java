@@ -1,11 +1,13 @@
 package com.changtou.moneybox.module.page;
 
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 
 import com.changtou.R;
+import com.changtou.moneybox.module.adapter.FlowItemAdapter;
 import com.changtou.moneybox.module.entity.FlowEntity;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
@@ -15,83 +17,119 @@ import com.prolificinteractive.materialcalendarview.decorator.OneDayDecorator;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.Executors;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2015/5/25.
- * œ÷Ω¡˜ΩÁ√Ê
+ * Áé∞ÈáëÊµÅÁïåÈù¢
  */
 public class RichesCalendarActivity extends CTBaseActivity implements OnDateChangedListener
 {
     private OneDayDecorator oneDayDecorator = new OneDayDecorator();
     private MaterialCalendarView widget;
 
+    private FlowEntity mFlowEntity = null;
+    private int mSelectMonth = 0;
+    private List<FlowEntity.DayEntity> mDayList = null;
+
+    private Map<CalendarDay, ArrayList<Map<String, Object>>> mLabelData = null;
+
+    private ListView mItemListView = null;
+
+    private FlowItemAdapter mFlowItemAdapter = null;
+
     protected void initView(Bundle bundle)
     {
         super.setContentView(R.layout.riches_datapicker);
 
-        FlowEntity data = (FlowEntity)getIntent().getSerializableExtra("month");
-        String dueIn = data.mMonth.get(0).mDay.get(0).item.get(0)[0];
-        Log.e("CT_MONEY", "+++++++++++++++++++++++++++++dueIn" + dueIn);
+        mFlowEntity = (FlowEntity)getIntent().getSerializableExtra("flow");
+        mSelectMonth = getIntent().getIntExtra("selected_month",0);
+
+        FlowEntity.MonthEntity sMonth = mFlowEntity.mMonth.get(mSelectMonth);
+        String time = sMonth.time;
 
         widget = (MaterialCalendarView) findViewById(R.id.calendarView);
         widget.setOnDateChangedListener(this);
         widget.setShowOtherDates(true);
         widget.setArrowColor(getResources().getColor(R.color.ct_blue));
         widget.setSelectionColor(getResources().getColor(R.color.ct_blue));
-
         widget.addDecorators(
                 oneDayDecorator
         );
+        widget.setSelectedDate(Calendar.getInstance());
 
-        //…Ë÷√µ±»’»’∆⁄
+
+        //ËÆæÁΩÆÂΩìÊó•Êó•Êúü
+        String[] time_arr = time.split("-");
+        if(time_arr.length != 2) return;
         Calendar calendar = Calendar.getInstance();
-        widget.setSelectedDate(calendar.getTime());
+        calendar.set(Calendar.YEAR, Integer.parseInt(time_arr[0]));
+        calendar.set(Calendar.MONTH, (Integer.parseInt(time_arr[1])-1));
+        widget.setCurrentDate(calendar);
 
-        new ApiSimulator().executeOnExecutor(Executors.newSingleThreadExecutor());
+        mFlowItemAdapter = new FlowItemAdapter(this);
+        mItemListView = (ListView)findViewById(R.id.riches_flow_day_listview);
+        mItemListView.setAdapter(mFlowItemAdapter);
+
+        setLabelDays();
+    }
+
+    protected void initData() {
+        super.initData();
+        setPageTitle("ËøòÊ¨æÊó•ÂéÜ");
+    }
+
+    protected int setPageType() {
+        return PAGE_TYPE_SUB;
     }
 
     public void onDateChanged(MaterialCalendarView widget, CalendarDay date)
     {
         oneDayDecorator.setDate(date.getDate());
         widget.invalidateDecorators();
+
+        //Êó•ÂéÜÈÄâÊã©ÁõëÂê¨
+        ArrayList<Map<String, Object>> item = mLabelData.get(date);
+        mFlowItemAdapter.setData(item);
     }
 
-    /**
-     * Simulate an API call to show how to add decorators
-     */
-    private class ApiSimulator extends AsyncTask<Void, Void, List<CalendarDay>> {
+    private void setLabelDays()
+    {
+        Calendar calendar = Calendar.getInstance();
+        ArrayList<CalendarDay> dates = new ArrayList<>();
+        int monthSize =  mFlowEntity.mMonth.size();
 
-        protected List<CalendarDay> doInBackground(Void... voids) {
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        mLabelData = new HashMap<>();
+
+        for(int i = 0; i < monthSize; i++)
+        {
+            FlowEntity.MonthEntity monthEntity = mFlowEntity.mMonth.get(i);
+            String time = monthEntity.time;
+            mDayList = monthEntity.mDay;
+
+            String[] timeArr = time.split("-");
+            if(timeArr.length != 2) return;
+            int year = Integer.parseInt(timeArr[0]);
+            int month = Integer.parseInt(timeArr[1]) - 1;
+
+            calendar.set(Calendar.YEAR, year);
+            calendar.set(Calendar.MONTH, month);
+
+            int daySize = mDayList.size();
+            for (int m = 0; m < daySize; m++)
+            {
+                FlowEntity.DayEntity dayEntity = mDayList.get(m);
+                calendar.set(Calendar.DATE, Integer.parseInt(dayEntity.dayNum));
+                CalendarDay day = new CalendarDay(calendar);
+                dates.add(day);
+
+                mLabelData.put(day, dayEntity.item);
             }
-            Calendar calendar = Calendar.getInstance();
-//            calendar.add(Calendar.MONTH, -2);
-            ArrayList<CalendarDay> dates = new ArrayList<>();
-//            for (int i = 0; i < 30; i++) {
-            calendar.set(Calendar.MONTH, 5);
-            calendar.set(Calendar.DATE, 8);
-            CalendarDay day = new CalendarDay(calendar);
-            dates.add(day);
-//                calendar.add(Calendar.DATE, 5);
-//            }
-            return dates;
         }
 
-        @Override
-        protected void onPostExecute(List<CalendarDay> calendarDays) {
-            super.onPostExecute(calendarDays);
-
-            if(isFinishing()) {
-                return;
-            }
-
-            widget.addDecorator(new EventDecorator(Color.BLUE, calendarDays));
-            widget.addDecorators();
-        }
+        widget.addDecorator(new EventDecorator(Color.RED, dates));
+        widget.addDecorators();
     }
 }

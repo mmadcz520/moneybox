@@ -1,10 +1,7 @@
 package com.changtou.moneybox.module.page;
 
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,15 +10,27 @@ import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.changtou.R;
+import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.activity.BaseFragment;
+import com.changtou.moneybox.common.utils.ACache;
 import com.changtou.moneybox.module.adapter.ExGridAdapter;
-
-import java.util.HashMap;
-import java.util.Map;
+import com.changtou.moneybox.module.entity.UserInfoEntity;
+import com.changtou.moneybox.module.http.HttpRequst;
+import com.changtou.moneybox.module.widget.CountView;
+import com.changtou.moneybox.module.widget.MultiStateView;
 
 public class RichesFragment extends BaseFragment implements AdapterView.OnItemClickListener {
+
+    private TextView mMobileTextView = null;
+    private CountView mTotalAssetsTextView = null;
+    private TextView mInvestAssetsTextView = null;
+    private TextView mProfitTextView = null;
+    private TextView mOverageTextView = null;
+    private TextView mGiftsTextView = null;
+    private TextView mTouYuanTextView = null;
 
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -79,78 +88,77 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
         imageView.setAnimation(translateAnimation); //这里iv就是我们要执行动画的item，例如一个imageView
         translateAnimation.start();
 
-
-//        getAllCallRecords(this.getActivity());
+        mMobileTextView = (TextView)view.findViewById(R.id.riches_text_mobile);
+        mTotalAssetsTextView = (CountView)view.findViewById(R.id.riches_text_totalassets);
+        mInvestAssetsTextView = (TextView)view.findViewById(R.id.riches_text_investassets);
+        mProfitTextView = (TextView)view.findViewById(R.id.riches_text_profit);
+        mOverageTextView = (TextView)view.findViewById(R.id.riches_text_overage);
+        mGiftsTextView = (TextView)view.findViewById(R.id.riches_text_gifts);
+        mTouYuanTextView = (TextView)view.findViewById(R.id.riches_text_touyuan);
 
         return view;
     }
 
-//    public static Map<String, String> getAllCallRecords(Context context) {
-//
-//        Map<String, String> temp = new HashMap<>();
-//        Cursor c = context.getContentResolver().query(
-//                ContactsContract.Contacts.CONTENT_URI, null, null, null,
-//                ContactsContract.Contacts.DISPLAY_NAME + " COLLATE LOCALIZED ASC");
-//        if (c.moveToFirst()) {
-//            do {
-//                // 获得联系人的ID号
-//                String contactId = c.getString(c
-//                        .getColumnIndex(ContactsContract.Contacts._ID));
-//                // 获得联系人姓名
-//                String name = c
-//                        .getString(c
-//                                .getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
-//
-//                // 查看该联系人有多少个电话号码。如果没有这返回值为0
-//                int phoneCount = c
-//                        .getInt(c
-//                                .getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER));
-//                String number = null;
-//                if (phoneCount > 0) {
-//                    // 获得联系人的电话号码
-//                    Cursor phones = context.getContentResolver().query(
-//                            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-//                            null,
-//                            ContactsContract.CommonDataKinds.Phone.CONTACT_ID
-//                                    + " = " + contactId, null, null);
-//                    if (phones.moveToFirst()) {
-//                        number = phones
-//                                .getString(phones
-//                                        .getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-//                    }
-//                    phones.close();
-//                }
-//                temp.put(name, number);
-//            } while (c.moveToNext());
-//        }
-//        c.close();
-//        return temp;
-//    }
+    public void onResume()
+    {
+        //请求userinfo
+        getUserInfo();
+        super.onResume();
+    }
 
-
-
-    @Override
-    protected void initListener() {
+    protected void initListener()
+    {
 
     }
 
-    @Override
-    protected void initData(Bundle savedInstanceState) {
+    protected void initData(Bundle savedInstanceState)
+    {
 
     }
 
-    @Override
-    public void onSuccess(String content, Object object, int reqType) {
+    public void onSuccess(String content, Object object, int reqType)
+    {
+        if(reqType == HttpRequst.REQ_TYPE_USERINFO)
+        {
+            mTotalAssetsTextView.showNumberWithAnimation(22167.57f);
+
+            UserInfoEntity userInfo = UserInfoEntity.getInstance();
+            mMobileTextView.setText(userInfo.getMobile());
+            mTotalAssetsTextView.setText(userInfo.getTotalAssets());
+            mInvestAssetsTextView.setText(userInfo.getInvestAssets());
+            mProfitTextView.setText(userInfo.getProfit());
+            mOverageTextView.setText(userInfo.getOverage());
+            mGiftsTextView.setText(userInfo.getGifts());
+            mTouYuanTextView.setText(userInfo.getTouYuan());
+
+            mMultiStateView.setViewForState(R.layout.state_layout_content, MultiStateView.ViewState.LOADING);
+        }
+    }
+
+    public void onFailure(Throwable error, String content, int reqType)
+    {
+//        mMultiStateView.setViewState(MultiStateView.ViewState.ERROR);
+    }
+
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+    {
 
     }
 
-    @Override
-    public void onFailure(Throwable error, String content, int reqType) {
+    /**
+     * 获取用户信息
+     */
+    private void getUserInfo()
+    {
+        String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_USERINFO) +
+                "userid=" + ACache.get(BaseApplication.getInstance()).getAsString("userid") +
+                "&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token");
 
-    }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        sendRequest(HttpRequst.REQ_TYPE_USERINFO, url, mParams,
+                mAct.getAsyncClient(), false);
+
+        mMultiStateView.setViewForState(R.layout.state_layout_loading, MultiStateView.ViewState.LOADING);
 
     }
 }

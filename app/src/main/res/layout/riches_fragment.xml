@@ -25,34 +25,38 @@
             android:layout_weight="5"
             android:orientation="vertical">
 
-            <TextView android:layout_width="fill_parent"
+            <TextView
+                android:layout_width="fill_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
                 android:layout_marginTop="5dp"
+                android:layout_weight="1"
                 android:gravity="bottom|center_horizontal"
+                android:text="总资产(元)"
                 android:textColor="@color/font_white"
-                android:textSize="@dimen/font_size_normal"
-                android:text="总资产(元)"/>
+                android:textSize="@dimen/font_size_normal" />
 
-            <TextView android:layout_width="fill_parent"
+            <com.changtou.moneybox.module.widget.CountView
+                android:id="@+id/riches_text_totalassets"
+                android:layout_width="fill_parent"
                 android:layout_height="0dp"
                 android:layout_weight="2"
-                android:text="8356.55"
-                android:gravity="center"
+                android:gravity="top|center"
+                android:text="0.00"
                 android:textColor="@color/font_white"
-                android:textSize="@dimen/font_size_percent"/>
+                android:textSize="@dimen/font_size_percent" />
 
-            <TextView android:layout_width="200dp"
+            <TextView
+                android:id="@+id/riches_text_mobile"
+                android:layout_width="200dp"
                 android:layout_height="0dp"
-                android:layout_weight="1"
                 android:layout_gravity="center_horizontal"
-                android:gravity="center"
-                android:background="@drawable/fillet_stroke_bule"
-                android:textColor="@color/font_white"
-                android:textSize="@dimen/font_size_normal"
-                android:text="用户名：180****5591"
                 android:layout_marginBottom="15dp"
-                />
+                android:layout_weight="1"
+                android:background="@drawable/fillet_stroke_bule"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/font_white"
+                android:textSize="@dimen/font_size_normal" />
 
         </LinearLayout>
 
@@ -73,22 +77,25 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-                <TextView android:layout_height="0dp"
-                    android:layout_weight="1"
+                <TextView
+                    android:id="@+id/riches_text_investassets"
                     android:layout_width="fill_parent"
+                    android:layout_height="0dp"
                     android:layout_gravity="center"
-                    android:gravity="bottom|center_horizontal"
-                    android:textSize="@dimen/font_size_navigation"
-                    android:textColor="@color/ct_white"
-                    android:text="0.00"/>
-
-                <TextView android:layout_height="0dp"
-                    android:layout_width="fill_parent"
-                    android:gravity="center"
                     android:layout_weight="1"
-                    android:textSize="@dimen/font_size_normal"
+                    android:gravity="bottom|center_horizontal"
+                    android:text="0.00"
                     android:textColor="@color/ct_white"
-                    android:text="在投本金(元)"/>
+                    android:textSize="@dimen/font_size_navigation" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="在投本金(元)"
+                    android:textColor="@color/ct_white"
+                    android:textSize="@dimen/font_size_normal" />
 
             </LinearLayout>
 
@@ -103,22 +110,25 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-                <TextView android:layout_height="0dp"
-                    android:layout_weight="1"
+                <TextView
+                    android:id="@+id/riches_text_profit"
                     android:layout_width="fill_parent"
+                    android:layout_height="0dp"
                     android:layout_gravity="center"
-                    android:gravity="bottom|center_horizontal"
-                    android:textSize="@dimen/font_size_navigation"
-                    android:textColor="@color/ct_white"
-                    android:text="0.00"/>
-
-                <TextView android:layout_height="0dp"
-                    android:layout_width="fill_parent"
-                    android:gravity="center"
                     android:layout_weight="1"
-                    android:textSize="@dimen/font_size_normal"
+                    android:gravity="bottom|center_horizontal"
+                    android:text="0.00"
                     android:textColor="@color/ct_white"
-                    android:text="待收收益(元)"/>
+                    android:textSize="@dimen/font_size_navigation" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="待收收益(元)"
+                    android:textColor="@color/ct_white"
+                    android:textSize="@dimen/font_size_normal" />
 
             </LinearLayout>
 
@@ -133,22 +143,25 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-                <TextView android:layout_height="0dp"
-                    android:layout_weight="1"
+                <TextView
+                    android:id="@+id/riches_text_overage"
                     android:layout_width="fill_parent"
+                    android:layout_height="0dp"
                     android:layout_gravity="center"
-                    android:gravity="bottom|center_horizontal"
-                    android:textSize="@dimen/font_size_navigation"
-                    android:textColor="@color/ct_white"
-                    android:text="0.00"/>
-
-                <TextView android:layout_height="0dp"
-                    android:layout_width="fill_parent"
-                    android:gravity="center"
                     android:layout_weight="1"
-                    android:textSize="@dimen/font_size_normal"
+                    android:gravity="bottom|center_horizontal"
+                    android:text="0.00"
                     android:textColor="@color/ct_white"
-                    android:text="可用余额(元)"/>
+                    android:textSize="@dimen/font_size_navigation" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="可用余额(元)"
+                    android:textColor="@color/ct_white"
+                    android:textSize="@dimen/font_size_normal" />
 
             </LinearLayout>
 
@@ -190,6 +203,7 @@
                     android:textSize="@dimen/font_size_normal" />
 
                 <TextView
+                    android:id="@+id/riches_text_gifts"
                     android:layout_width="0dp"
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
@@ -216,6 +230,7 @@
                     android:textSize="@dimen/font_size_normal" />
 
                 <TextView
+                    android:id="@+id/riches_text_touyuan"
                     android:layout_width="0dp"
                     android:layout_height="fill_parent"
                     android:layout_weight="1"

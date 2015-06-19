@@ -28,9 +28,10 @@
         <Button
             android:id="@+id/confirm_button"
             android:layout_width="fill_parent"
-            android:layout_height="42dp"
+            android:layout_height="@dimen/button_height_fillparent"
             android:layout_centerInParent="true"
             android:background="@color/ct_blue"
+            android:textColor="@color/ct_white"
             android:text="立即投资" />
     <!--</RelativeLayout>-->
 

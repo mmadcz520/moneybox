@@ -46,4 +46,9 @@ public class ConfirmActivity extends CTBaseActivity
         mConfirmDetails.addHeaderView(viewStub);
         mConfirmDetails.setAdapter(adapter);
     }
+
+    @Override
+    protected int setPageType() {
+        return 0;
+    }
 }

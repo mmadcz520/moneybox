@@ -22,6 +22,11 @@ public class RegisterPasswordActivity extends CTBaseActivity
         setOnClickListener(R.id.riches_register_do);
     }
 
+    @Override
+    protected int setPageType() {
+        return 0;
+    }
+
     public void treatClickEvent(int id)
     {
         switch (id)

@@ -15,7 +15,7 @@ public interface LoginNotifier {
 	void loginIngNotify();
 
 	// 登陆出错通知
-	void loginErrNotify();
+	void loginErrNotify(int errcode);
 
 	// 登出通知
 	void logoutNotify();

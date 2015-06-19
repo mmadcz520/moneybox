@@ -5,11 +5,15 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.changtou.R;
 import com.changtou.moneybox.common.activity.BaseActivity;
 import com.changtou.moneybox.common.http.async.RequestParams;
 import com.changtou.moneybox.module.CTMoneyApplication;
+import com.changtou.moneybox.module.widget.ZProgressHUD;
 
 /**
  * 描述: CT钱包app 页面基类
@@ -17,15 +21,16 @@ import com.changtou.moneybox.module.CTMoneyApplication;
  * @author zhoulongfei
  * @since 2015-3-23
  */
-public class CTBaseActivity extends BaseActivity{
+abstract public class CTBaseActivity extends BaseActivity{
 
     public CTMoneyApplication mCtApp = null;
-
-    private static String mToken = null;
-
     public CTBaseActivity mBaseAct = null;
 
-    public int i_curReqTimes;
+    private TextView mPageTitleView = null;
+
+    public static final int PAGE_TYPE_HOME = 0;
+    public static final int PAGE_TYPE_SUB  = 1;
+    private int mPageType = 0;
 
     /**
      * @see android.app.Activity#onCreate(Bundle)
@@ -38,6 +43,7 @@ public class CTBaseActivity extends BaseActivity{
         if (mParams == null)
             mParams = new RequestParams();
         mBaseAct = this;
+        mPageType = setPageType();
         initActionBarLayout();
     }
 
@@ -138,6 +144,39 @@ public class CTBaseActivity extends BaseActivity{
             ActionBar.LayoutParams layout = new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT);
             actionBar.setCustomView(v,layout);
 
+            mPageTitleView = (TextView)v.findViewById(R.id.page_title);
+            LinearLayout lefttouc = (LinearLayout) findViewById(R.id.touchLeft);
+            ImageView leftBtn = (ImageView)findViewById(R.id.menuBtn);
+
+            if(mPageType == PAGE_TYPE_SUB)
+            {
+                leftBtn.setVisibility(View.VISIBLE);
+                lefttouc.setOnClickListener(new View.OnClickListener()
+                {
+                    /*
+                     * (non-Javadoc)
+                     * @see android.view.View.OnClickListener#onClick(android.view.View)
+                     */
+                    public void onClick(View arg0)
+                    {
+                        CTBaseActivity.this.finish();
+                    }
+                });
+            }
         }
     }
+
+    /**
+     * 设置页面标题
+     */
+    public void setPageTitle(String pageTitle)
+    {
+        mPageTitleView.setText(pageTitle);
+    }
+
+    /**
+     * 设置页面类型
+     */
+    abstract protected int setPageType();
+
 }

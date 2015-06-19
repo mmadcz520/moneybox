@@ -251,6 +251,8 @@ public class AsyncHttpResponseHandler {
             if (temp != null) {
                 entity = new BufferedHttpEntity(temp);
             }
+
+//            Log.e("CT_MONEY", "  re= " +  EntityUtils.toString(entity, "UTF-8"));
             if (status.getStatusCode() != 200) {
 
                 String responseBody = EntityUtils.toString(entity, "UTF-8");

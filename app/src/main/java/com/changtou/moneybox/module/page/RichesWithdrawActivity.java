@@ -30,4 +30,9 @@ public class RichesWithdrawActivity extends CTBaseActivity
             }
         });
     }
+
+    @Override
+    protected int setPageType() {
+        return 0;
+    }
 }

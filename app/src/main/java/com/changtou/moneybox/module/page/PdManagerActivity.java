@@ -23,6 +23,11 @@ public class PdManagerActivity extends CTBaseActivity
         setOnClickListener(R.id.btn_pd_gesture);
     }
 
+    @Override
+    protected int setPageType() {
+        return 0;
+    }
+
     public void treatClickEvent(int id)
     {
         switch (id)

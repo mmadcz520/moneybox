@@ -1,0 +1,35 @@
+<component name="ProjectDictionaryState">
+  <dictionary name="Administrator">
+    <words>
+      <w>addbank</w>
+      <w>autoinvest</w>
+      <w>bankinfo</w>
+      <w>createtime</w>
+      <w>delbank</w>
+      <w>errcode</w>
+      <w>fillpraent</w>
+      <w>fullname</w>
+      <w>gdyh</w>
+      <w>getbanklistinfo</w>
+      <w>idcard</w>
+      <w>inflator</w>
+      <w>investassets</w>
+      <w>isdefault</w>
+      <w>jianhang</w>
+      <w>lefttouc</w>
+      <w>phonebook</w>
+      <w>phonenum</w>
+      <w>popo</w>
+      <w>postaddbankcard</w>
+      <w>postdeletebankcard</w>
+      <w>postlogin</w>
+      <w>regist</w>
+      <w>resmsg</w>
+      <w>totalassets</w>
+      <w>userid</w>
+      <w>usertoken</w>
+      <w>wealthinfo</w>
+      <w>zgyh</w>
+    </words>
+  </dictionary>
+</component>

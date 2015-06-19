@@ -94,6 +94,11 @@ public class ProductDetailsActivity extends CTBaseActivity
             getAsyncClient(), false);
     }
 
+    @Override
+    protected int setPageType() {
+        return 0;
+    }
+
     protected void onResume()
     {
         super.onResume();

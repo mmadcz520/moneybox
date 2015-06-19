@@ -1,22 +1,30 @@
 package com.changtou.moneybox.module.service;
 
+import android.util.Log;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class BankParserHandler extends DefaultHandler {
-
+public class BankParserHandler extends DefaultHandler
+{
 	/**
 	 * 存储所有的解析对象
 	 */
 	private List<String> mBankList = new ArrayList<String>();
 
-	private String mBankName = "";
+	private Map<String, String> mBankInfoList = new HashMap<>();
 
-	public BankParserHandler() {
+	private String mBankName = "";
+	private String mBankIcon = "";
+
+	public BankParserHandler()
+	{
 		
 	}
 
@@ -24,8 +32,17 @@ public class BankParserHandler extends DefaultHandler {
 		return mBankList;
 	}
 
+	/**
+	 * 获取银行卡基本信息
+	 * @return
+	 */
+	public  Map<String, String> getBankInfoList() {
+		return mBankInfoList;
+	}
+
 	@Override
-	public void startDocument() throws SAXException {
+	public void startDocument() throws SAXException
+	{
 		// 当读到第一个开始标签的时候，会触发这个方法
 	}
 
@@ -35,6 +52,7 @@ public class BankParserHandler extends DefaultHandler {
 		// 当遇到开始标记的时候，调用这个方法
 		if (qName.equals("bank")) {
 			mBankName = attributes.getValue(0);
+			mBankIcon = attributes.getValue(1);
 		}
 	}
 
@@ -44,8 +62,8 @@ public class BankParserHandler extends DefaultHandler {
 		// 遇到结束标记的时候，会调用这个方法
 		if (qName.equals("bank")) {
 			mBankList.add(mBankName);
+			mBankInfoList.put(mBankName,mBankIcon);
 		}
-
 	}
 	
 	@Override

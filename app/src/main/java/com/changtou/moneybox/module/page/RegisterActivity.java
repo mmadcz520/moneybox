@@ -28,4 +28,9 @@ public class RegisterActivity extends CTBaseActivity
             }
         });
     }
+
+    @Override
+    protected int setPageType() {
+        return 0;
+    }
 }

@@ -2,6 +2,7 @@ package com.changtou.moneybox.module.page;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -9,11 +10,12 @@ import android.widget.ListView;
 import com.changtou.R;
 import com.changtou.moneybox.module.adapter.FlowAdapter;
 import com.changtou.moneybox.module.entity.FlowEntity;
+import com.changtou.moneybox.module.entity.UserInfoEntity;
 import com.changtou.moneybox.module.http.HttpRequst;
 
 /**
  * Created by Administrator on 2015/5/25.
- * ÏÖ½ğÁ÷½çÃæ
+ * ç°é‡‘æµç•Œé¢
  */
 public class RichesFlowActivity extends CTBaseActivity implements AdapterView.OnItemClickListener
 {
@@ -31,6 +33,8 @@ public class RichesFlowActivity extends CTBaseActivity implements AdapterView.On
 
     protected void initData()
     {
+        setPageTitle("æˆ‘çš„ç°é‡‘æµ");
+
         mAdapter = new FlowAdapter(this);
         mFlowListView.setAdapter(mAdapter);
 
@@ -38,30 +42,41 @@ public class RichesFlowActivity extends CTBaseActivity implements AdapterView.On
                 HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_FLOW),
                 mParams,
                 getAsyncClient(), false);
+
+
+        UserInfoEntity userInfoEntity = UserInfoEntity.getInstance();
+        mEntity = userInfoEntity.getFlowEntity();
+        mAdapter.setData(mEntity);
+    }
+
+    @Override
+    protected int setPageType() {
+        return PAGE_TYPE_SUB;
     }
 
     /**
-     * http ÇëÇó³É¹¦»Øµ÷
+     * http è¯·æ±‚æˆåŠŸå›è°ƒ
      *
-     * @param content   ·µ»ØÖµ
-     * @param object    ·µ»ØµÄ×ª»¯¶ÔÏó
-     * @param reqType   ÇëÇóµÄÎ¨Ò»Ê¶±ğ
+     * @param content   è¿”å›å€¼
+     * @param object    è¿”å›çš„è½¬åŒ–å¯¹è±¡
+     * @param reqType   è¯·æ±‚çš„å”¯ä¸€è¯†åˆ«
      */
     public void onSuccess(String content, Object object, int reqType)
     {
         if(reqType == HttpRequst.REQ_TYPE_FLOW)
         {
             mEntity = (FlowEntity) object;
-            mAdapter.setData(mEntity);
+            UserInfoEntity userInfoEntity = UserInfoEntity.getInstance();
+            mAdapter.setData(userInfoEntity.getFlowEntity());
         }
     }
 
     /**
-     * http ÇëÇóÊ§°Ü»Øµ÷
+     * http è¯·æ±‚å¤±è´¥å›è°ƒ
      *
-     * @param error      ´íÎóÂë
-     * @param content    ´íÎóÄÚÈİ
-     * @param reqType    ÇëÇóÀàĞÍ
+     * @param error      é”™è¯¯ç 
+     * @param content    é”™è¯¯å†…å®¹
+     * @param reqType    è¯·æ±‚ç±»å‹
      */
     public void onFailure(Throwable error, String content, int reqType)
     {
@@ -74,10 +89,11 @@ public class RichesFlowActivity extends CTBaseActivity implements AdapterView.On
         final Intent intent = new Intent(RichesFlowActivity.this, RichesCalendarActivity.class);
 
         Bundle bundle = new Bundle();
-        bundle.putString("selected_month", "5");
-        bundle.putSerializable("month", mEntity);
+        bundle.putInt("selected_month", position);
+        bundle.putSerializable("flow", mEntity);
         intent.putExtras(bundle);
 
         startActivity(intent);
     }
+
 }

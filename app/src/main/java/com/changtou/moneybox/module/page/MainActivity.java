@@ -7,9 +7,13 @@ import android.util.Log;
 import android.widget.LinearLayout;
 
 import com.changtou.R;
+import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.activity.BaseFragment;
+import com.changtou.moneybox.common.utils.ACache;
 import com.changtou.moneybox.common.utils.SharedPreferencesHelper;
 import com.changtou.moneybox.module.appcfg.AppCfg;
+import com.changtou.moneybox.module.entity.UserInfoEntity;
+import com.changtou.moneybox.module.http.HttpRequst;
 import com.changtou.moneybox.module.widget.ExFPAdapter;
 import com.changtou.moneybox.module.widget.ExViewPager;
 
@@ -71,18 +75,50 @@ public class MainActivity extends CTBaseActivity {
     /**
      * @see com.changtou.moneybox.common.activity.BaseActivity#initListener()
      */
-    protected void initListener() {
+    protected void initListener()
+    {
         setOnClickListener(R.id.navbar_home);
         setOnClickListener(R.id.navbar_product);
         setOnClickListener(R.id.navbar_user);
         setOnClickListener(R.id.navbar_more);
     }
 
-    /**
-     * @see com.changtou.moneybox.common.activity.BaseActivity#initData()
-     */
-    protected void initData() {
+    @Override
+    protected int setPageType() {
+        return 0;
+    }
 
+    /***
+     * http 请求 成功
+     *
+     * @param content   返回值
+     * @param object    返回的转化对象
+     * @param reqType   请求的唯一识别
+     */
+    public void onSuccess(String content, Object object, int reqType)
+    {
+//        if(reqType == HttpRequst.REQ_TYPE_USERINFO)
+//        {
+//            UserInfoEntity userInfo = UserInfoEntity.getInstance();
+//            Log.e("CT_MONEY", "userInfo" + userInfo.getEmail());
+//            Log.e("CT_MONEY", "userInfo" + userInfo.getFullName());
+//            Log.e("CT_MONEY", "userInfo" + userInfo.getIdCard());
+//            Log.e("CT_MONEY", "userInfo" + userInfo.getCreatetime());
+//            Log.e("CT_MONEY", "userInfo" + userInfo.getMobile());
+//        }
+    }
+
+    /**
+     *
+     * http 请求 失败
+     *
+     * @param error
+     * @param content
+     * @param reqType
+     */
+    public void onFailure(Throwable error, String content, int reqType)
+    {
+        super.onFailure(error, content, reqType);
     }
 
     /**
@@ -108,10 +144,8 @@ public class MainActivity extends CTBaseActivity {
                 mViewpager.setCurrentItem(2);
                 switchNavBar(2);
 
-                Log.e("CT_MONEY", "sssss ==" + sph.getString(AppCfg.CFG_LOGIN, ""));
-
                 //已经登录
-                if((sph.getString(AppCfg.CFG_LOGIN, "").equals(AppCfg.LOGIN_STATE.EN_LOGIN.toString())))
+                if((sph.getString(AppCfg.CFG_LOGIN, "").equals(AppCfg.LOGIN_STATE.EN_LOGIN.toString())) || (sph.getString(AppCfg.CFG_LOGIN, "").equals("")))
                 {
                     Intent intent = new Intent(this, LoginActivity.class);
                     startActivityForResult(intent, 0);
@@ -134,7 +168,6 @@ public class MainActivity extends CTBaseActivity {
     {
         for(int i = 0; i < 4; i++)
         {
-            boolean a = (i==pageId);
             mBars[i].setSelected(i==pageId);
         }
     }
@@ -149,12 +182,12 @@ public class MainActivity extends CTBaseActivity {
         super.onSaveInstanceState(outState, outPersistentState);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-//                mViewpager.setCurrentItem(2);
-//                switchNavBar(2);
-//        Log.e("CT_MONEY", "onActivityResultonActivityResultonActivityResult");
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+//        Intent intent = new Intent(this, GesturePWActivity.class);
+//        intent.putExtra("action", "login");
+//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        startActivity(intent);
+        BaseApplication.getInstance().onBackground();
     }
 }

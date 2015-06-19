@@ -2,10 +2,8 @@ package com.changtou.moneybox.module.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Color;
 import android.text.InputType;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.widget.EditText;
@@ -36,6 +34,8 @@ public class ExEditView extends LinearLayout
     private int mIcon = -1;
     private String mTitle;
     private String mMessage;
+
+    private EditText mEditText;
 
     private LinearLayout mEditView = null;
 
@@ -149,8 +149,8 @@ public class ExEditView extends LinearLayout
         LayoutInflater inflater = LayoutInflater.from(mContext);
         mEditView = (LinearLayout)inflater.inflate(R.layout.ex_editview, this, false);
 
-        EditText editText = (EditText)mEditView.findViewById(R.id.edit_text);
-        editText.setHint(mDefaultHit);
+        mEditText = (EditText)mEditView.findViewById(R.id.edit_text);
+        mEditText.setHint(mDefaultHit);
 
         ImageView iv = (ImageView)mEditView.findViewById(R.id.edit_img);
         iv.setImageResource(mImgSrc);
@@ -167,13 +167,13 @@ public class ExEditView extends LinearLayout
         switch (mInputType)
         {
             case 0:
-                editText.setInputType(InputType.TYPE_CLASS_TEXT);
+                mEditText.setInputType(InputType.TYPE_CLASS_TEXT);
                 break;
             case 1:
-                editText.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                mEditText.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_PASSWORD);
                 break;
             case 2:
-                editText.setInputType(InputType.TYPE_CLASS_PHONE);
+                mEditText.setInputType(InputType.TYPE_CLASS_PHONE);
                 break;
         }
 
@@ -182,7 +182,6 @@ public class ExEditView extends LinearLayout
 
     public String getEditValue()
     {
-//        return  mEditText.getText().toString().trim();
-        return "sss";
+        return  mEditText.getText().toString().trim();
     }
 }

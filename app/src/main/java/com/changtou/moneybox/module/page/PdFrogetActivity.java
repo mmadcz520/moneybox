@@ -53,6 +53,11 @@ public class PdFrogetActivity extends CTBaseActivity
         setOnClickListener(R.id.password_forget_submit);
     }
 
+    @Override
+    protected int setPageType() {
+        return 0;
+    }
+
     public void treatClickEvent(int id)
     {
         switch (id)

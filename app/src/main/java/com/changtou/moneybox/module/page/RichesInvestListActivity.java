@@ -65,6 +65,11 @@ public class RichesInvestListActivity extends CTBaseActivity
         mSlidingTabLayout.setViewPager(mViewPager);
     }
 
+    @Override
+    protected int setPageType() {
+        return 0;
+    }
+
     /**
      * 描述: 产品分类子页面
      * @author zhoulongfei

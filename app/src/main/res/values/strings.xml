@@ -13,6 +13,9 @@
     <string name="tab_richespage">我的</string>
     <string name="tab_setttingpage">更多</string>
 
+    <!-- 登陆页面 -->
+    <string name="login__hint_user">请输入手机号码</string>
+
     <!-- home page-->
     <string name="invest_total">累计投资</string>
     <string name="income_total">累计赚取</string>

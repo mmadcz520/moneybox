@@ -16,6 +16,7 @@ import com.changtou.moneybox.common.http.base.BaseHttpClient;
 import com.changtou.moneybox.common.http.base.HttpCallback;
 import com.changtou.moneybox.common.http.async.RequestParams;
 import com.changtou.moneybox.common.http.impl.AsyncHttpClientImpl;
+import com.changtou.moneybox.module.widget.ZProgressHUD;
 
 /**
  * 描述: Tab页，导航栏在底部
@@ -34,6 +35,9 @@ public abstract class BaseActivity extends FragmentActivity implements HttpCallb
     public BaseApplication app;
     public String mDeviceId;
 
+    //载入进度条
+    public ZProgressHUD mZProgressHUD = null;
+
     /**
      * @see android.app.Activity#onCreate(Bundle)
      * @param bundle
@@ -51,6 +55,8 @@ public abstract class BaseActivity extends FragmentActivity implements HttpCallb
         mDeviceId =app.mDeviceId;
         initView(bundle);
         initListener();
+
+        mZProgressHUD = new ZProgressHUD(this);
     }
 
     /**
@@ -59,8 +65,9 @@ public abstract class BaseActivity extends FragmentActivity implements HttpCallb
      * @param object    返回的转化对象
      * @param reqType   请求的唯一识别
      */
-    public void onSuccess(String content, Object object, int reqType) {
-        // TODO Auto-generated method stub
+    public void onSuccess(String content, Object object, int reqType)
+    {
+        mZProgressHUD.cancel();
     }
 
     /**
@@ -135,21 +142,22 @@ public abstract class BaseActivity extends FragmentActivity implements HttpCallb
 
 
     @Override
-    public void onFailure(Throwable error, String content, int reqType) {
-        // TODO Auto-generated method stub
-
+    public void onFailure(Throwable error, String content, int reqType)
+    {
+        mZProgressHUD.cancel();
     }
 
     public void sendRequest(int reqType, String url, RequestParams params,
                             BaseHttpClient baseHttpClient, boolean showDialog) {
-        // TODO Auto-generated method stub
         if(baseHttpClient!=null){
-            if (reqType > 10000) {
+            if (reqType > 1000) {
                 baseHttpClient.post(reqType, this, url, params, this);
             } else {
                 baseHttpClient.get(reqType, url, params, this);
             }
         }
+
+        mZProgressHUD.show();
     }
 
 

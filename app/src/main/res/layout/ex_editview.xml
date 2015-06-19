@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="fill_parent"
     android:layout_height="50dp"
     android:layout_gravity="center_vertical"
     android:background="@color/ct_white">
@@ -14,8 +14,8 @@
 
     <EditText
         android:id="@+id/edit_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="20dp"
         android:background="@drawable/stroke_edit_null"
@@ -25,6 +25,7 @@
         android:textColorHint="@color/font_invalid"
         android:textCursorDrawable="@drawable/ex_edit_cursor"
         android:textSize="@dimen/font_size_number"
+        android:textColor="@color/font_black"
         android:typeface="monospace" />
 </LinearLayout>
 

@@ -78,6 +78,8 @@ class AsyncHttpRequest implements Runnable {
             try {
                 HttpResponse response = client.execute(request, context);
 
+                Log.e("CT_MONEY", "response " + response.getStatusLine().toString());
+
                 if(!Thread.currentThread().isInterrupted()) {
                     if(responseHandler != null) {
                         responseHandler.sendResponseMessage(response,reqType);

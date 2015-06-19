@@ -4,18 +4,34 @@ import android.annotation.TargetApi;
 import android.content.res.AssetManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.Selection;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.changtou.R;
+import com.changtou.moneybox.common.activity.BaseApplication;
+import com.changtou.moneybox.common.http.async.RequestParams;
+import com.changtou.moneybox.common.http.impl.AsyncHttpClientImpl;
+import com.changtou.moneybox.common.utils.ACache;
+import com.changtou.moneybox.module.appcfg.AppCfg;
+import com.changtou.moneybox.module.entity.BankCardEntity;
 import com.changtou.moneybox.module.entity.CityModel;
 import com.changtou.moneybox.module.entity.DistrictModel;
 import com.changtou.moneybox.module.entity.ProvinceModel;
+import com.changtou.moneybox.module.entity.UserInfoEntity;
+import com.changtou.moneybox.module.http.HttpRequst;
 import com.changtou.moneybox.module.service.BankParserHandler;
 import com.changtou.moneybox.module.service.XmlParserHandler;
 import com.changtou.moneybox.module.widget.BetterSpinner;
+
+import org.json.JSONObject;
 
 import java.io.InputStream;
 import java.util.HashMap;
@@ -38,6 +54,9 @@ public class RichesBankAddActivity extends CTBaseActivity
 
     private TextView mRankTextView = null;
     private TextView mRank2TextView = null;
+
+    private EditText mBankNoEdit = null;
+    private EditText mBranchEdit = null;
 
     /**
      * 银行
@@ -82,7 +101,6 @@ public class RichesBankAddActivity extends CTBaseActivity
      */
     protected String mCurrentZipCode ="";
 
-
     protected void initView(Bundle bundle)
     {
         setContentView(R.layout.riches_safe_bank_add);
@@ -95,6 +113,11 @@ public class RichesBankAddActivity extends CTBaseActivity
 
         mProvinceSpinner.setDropDownWidth(500);
         mCitySpinner.setDropDownWidth(500);
+
+        mBankNoEdit = (EditText)findViewById(R.id.riches_bank_add_bankno);
+        bankCardNumAddSpace(mBankNoEdit);
+
+        mBranchEdit = (EditText)findViewById(R.id.riches_bank_add_branch);
 
         initBankDatas();
         initProvinceDatas();
@@ -131,10 +154,37 @@ public class RichesBankAddActivity extends CTBaseActivity
                 mProvinceSpinner.showDropDown();
             }
         });
+
+        mCitySpinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                filterText2(mCitisDatas[position]);
+            }
+        });
+    }
+
+    protected void initListener() {
+        setOnClickListener(R.id.btn_bank_add);
+    }
+
+    public void treatClickEvent(int id)
+    {
+        requestAddBank();
+    }
+
+    @Override
+    protected int setPageType()
+    {
+        return PAGE_TYPE_SUB;
+    }
+
+    @Override
+    protected void initData() {
+        setPageTitle("添加提现银行卡");
     }
 
     /**
-     * 解析省市区的XML数据
+     * 解析银行卡信息
      */
     protected void initBankDatas()
     {
@@ -269,5 +319,163 @@ public class RichesBankAddActivity extends CTBaseActivity
         }
 
         mProvinceSpinner.setText(filter, false);
+    }
+
+
+    /**
+     * 过滤市
+     * @param seleText
+     */
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+    private void filterText2(String seleText)
+    {
+        if(seleText == null) return;
+
+        CharSequence cs = "市";
+        CharSequence filter = seleText;
+
+        if(seleText.contains(cs))
+        {
+            filter = seleText.replace(cs, "");
+        }
+
+        mCitySpinner.setText(filter, false);
+    }
+
+
+    /** * 银行卡四位加空格 * * @param mEditText */
+    public static void bankCardNumAddSpace(final EditText mEditText) {
+        mEditText.addTextChangedListener(new TextWatcher() {
+            int beforeTextLength = 0;
+            int onTextLength = 0;
+            boolean isChanged = false;
+            int location = 0;
+            // 记录光标的位置
+            private char[] tempChar;
+            private StringBuffer buffer = new StringBuffer();
+            int konggeNumberB = 0;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                beforeTextLength = s.length();
+                if (buffer.length() > 0) {
+                    buffer.delete(0, buffer.length());
+                }
+                konggeNumberB = 0;
+                for (int i = 0; i < s.length(); i++) {
+                    if (s.charAt(i) == ' ') {
+                        konggeNumberB++;
+                    }
+                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                onTextLength = s.length();
+                buffer.append(s.toString());
+                if (onTextLength == beforeTextLength || onTextLength <= 3 || isChanged) {
+                    isChanged = false;
+                    return;
+                }
+                isChanged = true;
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (isChanged) {
+                    location = mEditText.getSelectionEnd();
+                    int index = 0;
+                    while (index < buffer.length()) {
+                        if (buffer.charAt(index) == ' ') {
+                            buffer.deleteCharAt(index);
+                        } else {
+                            index++;
+                        }
+                    }
+                    index = 0;
+                    int konggeNumberC = 0;
+                    while (index < buffer.length()) {
+                        if ((index == 4 || index == 9 || index == 14 || index == 19)) {
+                            buffer.insert(index, ' ');
+                            konggeNumberC++;
+                        }
+                        index++;
+                    }
+                    if (konggeNumberC > konggeNumberB) {
+                        location += (konggeNumberC - konggeNumberB);
+                    }
+                    tempChar = new char[buffer.length()];
+                    buffer.getChars(0, buffer.length(), tempChar, 0);
+                    String str = buffer.toString();
+                    if (location > str.length()) {
+                        location = str.length();
+                    } else if (location < 0) {
+                        location = 0;
+                    }
+                    mEditText.setText(str);
+                    Editable etable = mEditText.getText();
+                    Selection.setSelection(etable, location);
+                    isChanged = false;
+                }
+            }
+        });
+    }
+
+    /**
+     * 添加银行卡 服务器请求
+     */
+    private void requestAddBank()
+    {
+        String bank = mBankSpinner.getText().toString().trim();
+        String account = mBankNoEdit.getText().toString().trim().replaceAll(" ","");
+        String place = mProvinceSpinner.getText().toString().trim() + mCitySpinner.getText().toString().trim();
+        String branch = mBranchEdit.getText().toString().trim();
+
+        String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_ADDBANK) +
+                "userid=" + ACache.get(BaseApplication.getInstance()).getAsString("userid") +
+                "&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token");
+
+        try
+        {
+            RequestParams params = new RequestParams();
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("cardholder", "周龙飞");
+            jsonObject.put("bank", bank);
+            jsonObject.put("account", account);
+            jsonObject.put("place", place);
+            jsonObject.put("branch", branch);
+            params.put("data", jsonObject.toString());
+
+            sendRequest(HttpRequst.REQ_TYPE_ADDBANK,
+                    url,
+                    params,
+                    getAsyncClient(), false);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void onSuccess(String content, Object object, int reqType)
+    {
+        super.onSuccess(content, object, reqType);
+        try
+        {
+            JSONObject json = new JSONObject(content);
+            String errorCode = json.getString("errcode");
+
+            Toast.makeText(this,AppCfg.MAP_MSG_ERROR.get(errorCode), Toast.LENGTH_LONG).show();
+        }
+        catch (Exception e)
+        {
+
+        }
+    }
+
+    public void onFailure(Throwable error, String content, int reqType)
+    {
+        super.onFailure(error, content, reqType);
+        Toast.makeText(this,"内部错误", Toast.LENGTH_LONG).show();
     }
 }

@@ -1,0 +1,41 @@
+apply plugin: 'com.android.library'
+apply plugin: 'maven'
+apply plugin: 'signing'
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion "21.1.2"
+      lintOptions {
+          abortOnError false
+      }
+    defaultConfig {
+        minSdkVersion 11
+        targetSdkVersion 21
+    }
+}
+
+dependencies {
+    compile 'com.android.support:support-v4:21.0.3'
+}
+
+task sourcesJar(type: Jar) {
+  from android.sourceSets.main.java.srcDirs
+  classifier = 'sources'
+}
+
+artifacts {
+  archives sourcesJar
+}
+
+signing {
+   required { gradle.taskGraph.hasTask("uploadArchives") }
+   sign configurations.archives
+}
+
+def getRepositoryUsername() {
+  return hasProperty('sonatypeUsername') ? sonatypeUsername : ""
+}
+
+def getRepositoryPassword() {
+  return hasProperty('sonatypePassword') ? sonatypePassword : ""
+}

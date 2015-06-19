@@ -25,15 +25,42 @@ public class RichesSafeActivity extends CTBaseActivity
         setContentView(R.layout.riches_safe_layout);
     }
 
-    protected void initData() {
+    protected void initListener()
+    {
+        setOnClickListener(R.id.btn_certification_manager);
         setOnClickListener(R.id.safe_page_quit);
+        setOnClickListener(R.id.btn_bank_manager);
         setOnClickListener(R.id.btn_pd_manager);
+    }
+
+    @Override
+    protected int setPageType() {
+        return PAGE_TYPE_SUB;
+    }
+
+    @Override
+    protected void initData() {
+        setPageTitle("安全设置");
     }
 
     public void treatClickEvent(int id)
     {
         switch (id)
         {
+            case R.id.btn_certification_manager:
+            {
+                final Intent intent = new Intent(this, RichesCertificationActivity.class);
+                startActivity(intent);
+                break;
+            }
+
+            case R.id.btn_bank_manager:
+            {
+                final Intent intent = new Intent(this, RichesBankActivity.class);
+                startActivity(intent);
+                break;
+            }
+
             case R.id.btn_pd_manager:
             {
                 final Intent intent0 = new Intent(this, PdManagerActivity.class);
@@ -45,6 +72,7 @@ public class RichesSafeActivity extends CTBaseActivity
             case R.id.safe_page_quit:
             {
                 sph.putString(AppCfg.CFG_LOGIN, AppCfg.LOGIN_STATE.EN_LOGIN.toString());
+                sph.putString(AppCfg.GSPD, "");
                 final Intent intent0 = new Intent(this, MainActivity.class);
                 startActivity(intent0);
                 BaseApplication.getInstance().resetBackFlag();

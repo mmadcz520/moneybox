@@ -57,4 +57,9 @@
 
     <style name="TabIndicator" />
 
+    <style name="MyDialogTheme" parent="android:Theme.Dialog">
+        <item name="android:windowBackground">@drawable/loading_dialog_background</item>
+    </style>
+
+
 </resources>

@@ -1,15 +1,11 @@
 package com.changtou.moneybox.module.page;
 
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.os.Bundle;
-import android.text.SpannableStringBuilder;
-import android.text.Spanned;
-import android.text.style.TextAppearanceSpan;
+import android.view.Gravity;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.utils.SharedPreferencesHelper;
@@ -23,10 +19,6 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class LoginActivity extends CTBaseActivity implements LoginNotifier{
 
-    ImageView vc_image; //图标
-
-    private Button mLoginButton = null;
-
     private ExEditView mUserNameView = null;
     private ExEditView mPassWordView = null;
 
@@ -34,22 +26,17 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
 
     private SweetAlertDialog mDialog = null;
 
-    //忘记密码
-    private TextView mForgetPd = null;
-
     //记录是否登录
     private SharedPreferencesHelper sph = null;
+
+    private String[] mErrorContent = {"","用户名格式不正确", "不存在该用户名", "密码错误", "邮箱未激活", " 手机未激活", "服务器故障"};
 
     @Override
     protected void initView(Bundle bundle) {
         setContentView(R.layout.riches_login_layout);
 
-        mLoginButton = (Button)findViewById(R.id.login_btn);
-
         mUserNameView = (ExEditView)findViewById(R.id.login_username);
         mPassWordView = (ExEditView)findViewById(R.id.login_password);
-
-        mForgetPd = (TextView)findViewById(R.id.forgot_password);
 
         mUserManager = BaseApplication.getInstance().getUserModule();
         mUserManager.setLoginNotifier(this);
@@ -75,6 +62,9 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
             }
         });
 
+        mDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE).setTitleText("登陆");
+        mDialog.getProgressHelper().setBarColor(getResources().getColor(R.color.ct_blue));
+        mDialog.getProgressHelper().setRimColor(getResources().getColor(R.color.ct_blue_hint));
         sph = SharedPreferencesHelper.getInstance(getApplicationContext());
     }
 
@@ -89,9 +79,95 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
                 String username = mUserNameView.getEditValue();
                 String password = mPassWordView.getEditValue();
 
-                if (username.equals("") || password.equals("")) {
 
-                    //注册成功后弹窗
+                if (username.equals("") || password.equals(""))
+                {
+                    popoErrorDialog();
+                } else {
+                    mUserManager.logIn(username, password);
+//                    mDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE).setTitleText("登陆");
+//                    mDialog.getProgressHelper().setBarColor(getResources().getColor(R.color.ct_blue));
+//                    mDialog.getProgressHelper().setRimColor(getResources().getColor(R.color.ct_blue_hint));
+//                    mDialog.setCancelText("取消");
+//                    mDialog.setContentText("努力加载中...");
+//                    mDialog.show();
+//                    mDialog.setCancelable(true);
+                }
+                break;
+            }
+
+            case R.id.forgot_password:
+            {
+                final Intent intent = new Intent(this, PdFrogetActivity.class);
+                startActivity(intent);
+                break;
+            }
+        }
+    }
+
+    protected void initData()
+    {
+
+    }
+
+    @Override
+    protected int setPageType() {
+        return 0;
+    }
+
+    /**
+     * 登陆成功回调函数
+     */
+    public void loginSucNotify()
+    {
+        //清空手势密码
+        sph.putString(AppCfg.CFG_LOGIN, AppCfg.LOGIN_STATE.LOGIN.toString());
+        sph.putString(AppCfg.GSPD, "");
+
+        Intent intent = new Intent(this, MainActivity.class);
+        LoginActivity.this.setResult(RESULT_OK, intent);
+        LoginActivity.this.finish();
+    }
+
+    public void loginIngNotify()
+    {
+
+    }
+
+    public void loginErrNotify(int errcode)
+    {
+        int code = (errcode < mErrorContent.length) ? errcode : (mErrorContent.length - 1);
+        Toast toast = Toast.makeText(getApplicationContext(),
+                mErrorContent[code], Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
+    }
+
+    public void logoutNotify()
+    {
+
+    }
+
+    protected void onStop()
+    {
+        super.onStop();
+    }
+
+    /**
+     * 禁用back按键
+     */
+    public void onBackPressed()
+    {
+//        super.onBackPressed();
+    }
+
+
+    /**
+     * 注册成功后弹框
+     */
+    private void popoSuccDialog()
+    {
+        //注册成功后弹窗
 //                    ColorStateList redColors = ColorStateList.valueOf(0xffff0000);
 //                    SpannableStringBuilder spanBuilder = new SpannableStringBuilder("恭喜你注册成功！获得10元礼金\n 完善认证信息你将在获得20元礼金");
 //                    //style 为0 即是正常的，还有Typeface.BOLD(粗体) Typeface.ITALIC(斜体)等
@@ -106,74 +182,27 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
 //                            .setConfirmText(spanBuilder1) .setContentText(spanBuilder)
 //                            .setCancelText("先逛逛")
 //                            .show();
-
-//                    mUserManager.logIn(username, password);
-                } else {
-                    mUserManager.logIn(username, password);
-                    mDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE).setTitleText("登陆");
-                    mDialog.getProgressHelper().setBarColor(getResources().getColor(R.color.ct_blue));
-                    mDialog.getProgressHelper().setRimColor(getResources().getColor(R.color.ct_blue_hint));
-                    mDialog.setCancelText("取消");
-                    mDialog.setContentText("努力加载中...");
-                    mDialog.show();
-                    mDialog.setCancelable(true);
-
-                    sph.putString(AppCfg.CFG_LOGIN, AppCfg.LOGIN_STATE.LOGIN.toString());
-
-                    //清空手势密码
-                    sph.putString(AppCfg.GSPD, "");
-                }
-                break;
-            }
-
-            case R.id.forgot_password:
-            {
-                final Intent intent = new Intent(this, PdFrogetActivity.class);
-                startActivity(intent);
-                break;
-            }
-        }
-    }
-
-    protected void initData() {
-
     }
 
     /**
-     * 登陆成功回调函数
+     * 弹出错误对话框
      */
-    public void loginSucNotify() {
-        Intent intent = new Intent(this, MainActivity.class);
-        LoginActivity.this.setResult(RESULT_OK, intent);
-        LoginActivity.this.finish();
-    }
-
-    @Override
-    public void loginIngNotify() {
-
-    }
-
-    @Override
-    public void loginErrNotify() {
-        mDialog.setContentText("账号密码错误");
-        mDialog.changeAlertType(SweetAlertDialog.ERROR_TYPE);
-    }
-
-    @Override
-    public void logoutNotify() {
-
-    }
-
-    protected void onStop() {
-        super.onStop();
-    }
-
-    /**
-     * 禁用back按键
-     */
-    public void onBackPressed()
+    private void popoErrorDialog()
     {
-//        super.onBackPressed();
+//        mDialog = new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE).setTitleText("错误");
+//        mDialog.getProgressHelper().setBarColor(getResources().getColor(R.color.ct_blue));
+//        mDialog.getProgressHelper().setRimColor(getResources().getColor(R.color.ct_blue_hint));
+//        mDialog.setCancelText("取 消");
+//        mDialog.setContentText("用户密码错误");
+//        mDialog.show();
+//        mDialog.setCancelable(true);
+
+
+        Toast toast = Toast.makeText(getApplicationContext(),
+                "输入格式错误", Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
     }
+
 
 }

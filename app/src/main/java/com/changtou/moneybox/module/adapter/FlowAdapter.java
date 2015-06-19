@@ -11,7 +11,7 @@ import com.changtou.R;
 import com.changtou.moneybox.module.entity.FlowEntity;
 
 /**
- * ÏÖ½ğÁ÷list ÊÊÅäÆ÷
+ * ç°é‡‘æµlist é€‚é…å™¨
  *
  * Created by Administrator on 2015/6/2.
  */
@@ -37,9 +37,9 @@ public class FlowAdapter extends BaseAdapter{
     }
 
     /**
-     *ÃèÊö: »ñÈ¡²úÆ·ÁĞ±í³¤¶È
+     *æè¿°: è·å–äº§å“åˆ—è¡¨é•¿åº¦
      *
-     * @return ²úÆ·ÁĞ±í³¤¶È
+     * @return äº§å“åˆ—è¡¨é•¿åº¦
      */
     public int getCount()
     {
@@ -51,10 +51,10 @@ public class FlowAdapter extends BaseAdapter{
     }
 
     /**
-     * ÃèÊö£º»ñÈ¡ÄÚÈİ
+     * æè¿°ï¼šè·å–å†…å®¹
      *
-     * @param position listÁĞ±íÎ»ÖÃ
-     * @return ²úÆ·ÊµÌå¶ÔÏó
+     * @param position liståˆ—è¡¨ä½ç½®
+     * @return äº§å“å®ä½“å¯¹è±¡
      * @see BaseAdapter#getItem(int)
      */
     public FlowEntity.MonthEntity getItem(int position)
@@ -97,7 +97,7 @@ public class FlowAdapter extends BaseAdapter{
         {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.mTimeView.setText(entity.month);
+        viewHolder.mTimeView.setText(entity.time);
         viewHolder.mDueInView.setText(entity.dueIn);
         viewHolder.mReceivedView.setText(entity.received);
 

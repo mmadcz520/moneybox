@@ -1,14 +1,23 @@
 package com.changtou.moneybox.module.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.changtou.R;
 import com.changtou.moneybox.module.entity.BankCardEntity;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2015/5/21.
@@ -18,11 +27,26 @@ public class BankCardAdapter extends BaseAdapter{
     private LayoutInflater mInflater = null;
     private BankCardEntity mEntity   = null;
 
-    private int mDefaultCard = 0;
+    private String[] list_image = null;
 
-    public BankCardAdapter(Context context)
+    private Context mContext = null;
+
+    private Map<String, String> mBankInfoList = null;
+
+    public BankCardAdapter(Context context, Map<String, String> bank)
     {
-        mInflater = LayoutInflater.from(context);
+        try
+        {
+            mInflater = LayoutInflater.from(context);
+            list_image =  context.getAssets().list("bank_icon");
+            this.mContext = context;
+
+            this.mBankInfoList = bank;
+        }
+        catch (Exception e)
+        {
+
+        }
     }
 
     /**
@@ -61,39 +85,47 @@ public class BankCardAdapter extends BaseAdapter{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         BankCardEntity.BankListEntity entity = getItem(position);
-        ViewHolder viewHolder = null;
+        ViewHolder viewHolder;
 
         if (convertView == null)
         {
             viewHolder = new ViewHolder();
             convertView = mInflater.inflate(R.layout.riches_safe_bank_item, null);
-//            LinearLayout ll = (LinearLayout)convertView.findViewById(R.id.roundProgressBar);
-//            ll.setWillNotDraw(false);
-            viewHolder.txt_top = (TextView) convertView.findViewById(R.id.riches_bank_item_no);
-//            viewHolder.txt_bottom = (TextView) convertView.findViewById(R.id.txt_bottom);
-//            RoundProgressBar mRoundProgressBar1 = (RoundProgressBar) convertView.findViewById(R.id.roundProgressBar);
-//            mRoundProgressBar1.setProgress(15);
+            viewHolder.mBankNum = (TextView) convertView.findViewById(R.id.riches_bank_item_no);
+            viewHolder.mBankIcon = (ImageView) convertView.findViewById(R.id.riches_bank_item_logo);
 
             convertView.setTag(viewHolder);
-//            viewHolder.txt_top.setText(entity.name);
         }
         else
         {
-//            viewHolder = (ViewHolder) convertView.getTag();
+            viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        if(entity.deFlag == mDefaultCard)
+        String account = entity.account;
+        if(account.length()>10)
+        {
+            account = account.substring(0,4) + " **** " + account.substring(account.length()-4,account.length());
+        }
+
+        viewHolder.mBankNum.setText(account);
+
+        if(entity.isdefault.equals("是"))
         {
             convertView.setBackgroundResource(R.drawable.stroke_bankcard_default);
         }
+        else
+        {
+            convertView.setBackgroundResource(R.color.ct_white);
+        }
+        setBankIcon(viewHolder.mBankIcon, entity.bank);
 
         return convertView;
     }
 
     private class ViewHolder
     {
-        public TextView txt_top;
-//        public TextView txt_bottom;
+        public ImageView mBankIcon = null;
+        public TextView mBankNum = null;
     }
 
     /**
@@ -101,7 +133,30 @@ public class BankCardAdapter extends BaseAdapter{
      */
     public void changeDefaultCard(int cardId)
     {
-        this.mDefaultCard = cardId;
         notifyDataSetChanged();
+    }
+
+    private void setBankIcon(ImageView imageView, String bankName) {
+        InputStream open = null;
+        try {
+            if (mBankInfoList == null) return;
+            String temp = mBankInfoList.get(bankName);
+            if (temp == null || !temp.startsWith("bank_icon")) return;
+
+            open = mContext.getAssets().open(temp);
+            Bitmap bitmap = BitmapFactory.decodeStream(open);
+
+            imageView.setImageBitmap(bitmap);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (open != null) {
+                try {
+                    open.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }

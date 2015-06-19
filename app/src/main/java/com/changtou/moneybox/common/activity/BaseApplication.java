@@ -2,7 +2,6 @@ package com.changtou.moneybox.common.activity;
 
 import java.io.IOException;
 import java.lang.Thread.UncaughtExceptionHandler;
-import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Stack;
@@ -33,8 +32,8 @@ import com.changtou.moneybox.module.usermodule.UserManager;
  * @author zhoulongfei
  * @since 2015-3-13
  */
-public abstract class BaseApplication extends Application implements UncaughtExceptionHandler {
-
+public abstract class BaseApplication extends Application implements UncaughtExceptionHandler
+{
 	private static BaseApplication mApplication = null;
 
 	// 应用全局变量存储在这里
@@ -261,13 +260,13 @@ public abstract class BaseApplication extends Application implements UncaughtExc
 
     /**
      * App 回到前台
-     *
-     *
      * 1. 手势密码
      *
      */
     public void onForeground()
     {
+        Log.e("CT_MONEY", "isBack=" + isBack);
+
         if(!isBack && (sph.getString(AppCfg.CFG_LOGIN, "").equals(AppCfg.LOGIN_STATE.LOGIN.toString())))
         {
             Intent intent = new Intent(this, GesturePWActivity.class);

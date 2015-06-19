@@ -7,7 +7,7 @@
     android:background="@color/ct_background">
 
     <LinearLayout android:layout_width="fill_parent"
-        android:layout_height="50dp"
+        android:layout_height="33dp"
         android:orientation="horizontal">
         <TextView
             android:layout_width="0dp"
@@ -37,9 +37,20 @@
             android:gravity="center"
             android:textColor="@color/font_invalid"
             android:textSize="@dimen/font_size_normal"
-            android:text="未还（元）"/>
+            android:text="已收（元）"/>
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:textColor="@color/font_invalid"
+            android:textSize="@dimen/font_size_normal"/>
     </LinearLayout>
 
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:background="@color/ct_divide_line" />
     <ListView
         android:id="@+id/riches_flow_listview"
         android:layout_width="fill_parent"

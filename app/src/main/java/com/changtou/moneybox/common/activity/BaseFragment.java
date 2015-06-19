@@ -32,7 +32,7 @@ public abstract class BaseFragment extends Fragment implements
 
     public FragmentClick click;
 
-    private MultiStateView mMultiStateView = null;
+    public MultiStateView mMultiStateView = null;
 
     /**
      * @see BaseFragment#onAttach(Activity)

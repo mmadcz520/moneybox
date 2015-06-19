@@ -14,6 +14,7 @@ import com.changtou.moneybox.module.entity.RewardsEntity;
 import com.changtou.moneybox.module.entity.TradeEntity;
 import com.changtou.moneybox.module.entity.TransferListEntity;
 import com.changtou.moneybox.module.entity.UserEntity;
+import com.changtou.moneybox.module.entity.UserInfoEntity;
 
 /**
  * 描述:http Api 工具类
@@ -44,8 +45,12 @@ public class HttpRequst extends BaseHttpRequest
     public final static int REQ_TYPE_TRADE_LIST = 29;
     public final static int REQ_TYPE_FLOW = 30;
     public final static int REQ_TYPE_REWARDS_LIST= 31;
+    public final static int REQ_TYPE_USERINFO = 32;
 
     public final static int REQ_TYPE_LOGIN = 1001;
+    public final static int REQ_TYPE_ADDBANK = 1010;
+    public final static int REQ_TYPE_DELBANK = 1011;
+    public final static int REQ_TYPE_CHANGEBANK = 1012;
 
     //主页推荐产品列表
     public static String REQ_URL_PRODUCT_LIST = BASE_URL + "products";
@@ -55,10 +60,21 @@ public class HttpRequst extends BaseHttpRequest
     public static String REQ_URL_PRODUCT_INVESTOR = BASE_URL + "products";
 
     //银行卡列表
-    public static String REQ_URL_BANKCARD = BASE_URL + "products";
+    public static String REQ_URL_BANKCARD = BASE_URL + "bankcard/getbanklistinfo?";
+
+    //添加银行卡
+    public static String REQ_URL_ADDBANK = BASE_URL + "bankcard/postaddbankcard?";
+
+    //删除银行卡
+    public static String REQ_URL_DELBANK = BASE_URL + "bankcard/postdeletebankcard?";
+
+    //更换默认取现银行卡
+    public static String REQ_URL_CHANGEBANK = BASE_URL + "bankcard/postsetbankcard?";
 
     //登陆相关接口
-    public static String REQ_URL_LOGIN = "http://autoapp.hsxiang.com/wp-admin/admin-ajax.php?action=app_user_login";
+    public static final String REQ_URL_LOGIN = BASE_URL + "usertoken/postlogin";
+
+    public static final String FEQ_URL_USERINFO = BASE_URL + "usertoken/GetUserInfo?";
 
     //获取投资列表
     public static String REQ_URL_INVEST_LIST = BASE_URL + "products";
@@ -116,6 +132,14 @@ public class HttpRequst extends BaseHttpRequest
                 return FEQ_URL_FLOW;
             case REQ_TYPE_REWARDS_LIST:
                 return FEQ_URL_REWARDS_LIST;
+            case REQ_TYPE_USERINFO:
+                return FEQ_URL_USERINFO;
+            case REQ_TYPE_ADDBANK:
+                return REQ_URL_ADDBANK;
+            case REQ_TYPE_DELBANK:
+                return REQ_URL_DELBANK;
+            case REQ_TYPE_CHANGEBANK:
+                return REQ_URL_CHANGEBANK;
             default:
                 break;
         }
@@ -183,6 +207,9 @@ public class HttpRequst extends BaseHttpRequest
                 break;
             case REQ_TYPE_REWARDS_LIST:
                 paser = new RewardsEntity();
+                break;
+            case REQ_TYPE_USERINFO:
+                paser = UserInfoEntity.getInstance();
                 break;
             default:
                 break;

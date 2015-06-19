@@ -60,6 +60,7 @@
             android:textColor="@color/font_black"
             android:text="银行卡号"/>
         <EditText
+            android:id="@+id/riches_bank_add_bankno"
             android:layout_gravity="center_vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -67,6 +68,7 @@
             android:textColorHint="@color/font_invalid"
             android:textSize="@dimen/font_size_normal"
             android:inputType="number"
+            android:textColor="@color/font_black"
             android:hint="请输入银行卡卡号" />
     </LinearLayout>
 
@@ -129,6 +131,7 @@
             android:textColor="@color/font_black"
             android:text="开户支行"/>
         <EditText
+            android:id="@+id/riches_bank_add_branch"
             android:layout_gravity="center_vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -139,6 +142,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/btn_bank_add"
         android:layout_width="fill_parent"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="42dp"

@@ -51,6 +51,11 @@ public class GesturePWActivity extends Activity implements LocusPassWordView.OnC
         md5 = new Md5Utils();
         mGSWD = sph.getString(AppCfg.GSPD, "");
 
+        if(!mGSWD.equals(""))
+        {
+            mGesturePrompt.setText("请输入手势密码");
+        }
+
         mPwdView.setOnCompleteListener(this);
     }
 

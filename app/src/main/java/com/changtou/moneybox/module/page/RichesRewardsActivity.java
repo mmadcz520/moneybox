@@ -4,7 +4,7 @@ import android.os.Bundle;
 import com.changtou.R;
 
 /**
- * ÍÆ¼ö½±ÀøÒ³Ãæ
+ * æ¨èå¥–åŠ±é¡µé¢
  *
  * Created by Administrator on 2015/6/11.
  */
@@ -16,5 +16,10 @@ public class RichesRewardsActivity extends CTBaseActivity
     protected void initView(Bundle bundle)
     {
         setContentView(R.layout.riches_rewards_layout);
+    }
+
+    @Override
+    protected int setPageType() {
+        return 0;
     }
 }

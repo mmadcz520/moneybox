@@ -38,7 +38,6 @@ public class BootActivity extends AbsGuideActivity
         page04.mCustomFragment = new EntryFragment();
         guideContent.add(page04);
 
-
         return guideContent;
     }
 

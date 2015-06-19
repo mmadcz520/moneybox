@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.nineoldandroids.animation.ObjectAnimator;
 
+import java.text.DecimalFormat;
+
 /**
  * Created by Administrator on 2015/4/27.
  */
@@ -50,12 +52,20 @@ public class CountView extends TextView
 
     public void setNumber(float number) {
         this.number = number;
-        setText(String.format("%1$1.2f",number));
+//        setText(String.format("%1$1.2f",number));
+        setText(customFormat("###,###.##",number));
     }
 
     public void setPercent(float percent)
     {
         String str = String.format("%1$1.2f", percent) + "%";
         setText(str);
+    }
+
+
+    static public String customFormat(String pattern, double value) {
+        DecimalFormat myFormatter = new DecimalFormat(pattern);
+        String output = myFormatter.format(value);
+        return output;
     }
 }

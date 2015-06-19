@@ -27,6 +27,11 @@ public class RichesPromotionActivity extends CTBaseActivity
         setOnClickListener(R.id.riches_rewards);
     }
 
+    @Override
+    protected int setPageType() {
+        return 0;
+    }
+
     public void treatClickEvent(int id)
     {
         switch (id)
