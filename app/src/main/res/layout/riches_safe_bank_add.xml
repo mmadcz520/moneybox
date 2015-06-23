@@ -17,11 +17,14 @@
             android:textColor="@color/font_black"
             android:text="持卡人"/>
         <EditText
+            android:id="@+id/riches_safe_add_username"
             android:layout_gravity="center_vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/stroke_edit_null"
             android:textColorHint="@color/font_invalid"
+            android:editable="false"
+            android:textColor="@color/font_black"
             android:textSize="@dimen/font_size_normal"
             android:hint="请输入持卡人姓名" />
     </LinearLayout>
@@ -44,6 +47,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/stroke_edit_null"
             android:textColorHint="@color/font_invalid"
+            android:textColor="@color/font_black"
             android:textSize="@dimen/font_size_normal"
             android:hint="请选择开户行" />
     </LinearLayout>
@@ -90,6 +94,7 @@
             android:layout_width="60dp"
             android:layout_height="44dp"
             android:background="@drawable/stroke_edit_null"
+            android:textColor="@color/font_black"
             android:textColorHint="@color/font_invalid"
             android:textSize="@dimen/font_size_normal"
             android:hint="中文" />
@@ -107,6 +112,7 @@
             android:layout_height="44dp"
             android:background="@drawable/stroke_edit_null"
             android:textColorHint="@color/font_invalid"
+            android:textColor="@color/font_black"
             android:textSize="@dimen/font_size_normal"
             android:hint="中文" />
         <TextView
@@ -137,6 +143,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/stroke_edit_null"
             android:textColorHint="@color/font_invalid"
+            android:textColor="@color/font_black"
             android:textSize="@dimen/font_size_normal"
             android:hint="请输入开户支行" />
     </LinearLayout>

@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.changtou.R;
@@ -50,11 +51,6 @@ public class RichesBankActivity extends CTBaseActivity
     private BankCardEntity mEntity = null;
 
     /**
-     * 银行列表
-     */
-    protected String[] mBankDatas;
-
-    /**
      * 银行基本信列表
      */
     protected Map<String, String> mBankInfoList = null;
@@ -63,7 +59,6 @@ public class RichesBankActivity extends CTBaseActivity
 
         setContentView(R.layout.riches_safe_bank);
 
-        initBankDatas();
         mBankListView = (SwipeMenuListView)findViewById(R.id.riches_safe_bank_list);
 
         SwipeMenuCreator creator = new SwipeMenuCreator() {
@@ -139,6 +134,13 @@ public class RichesBankActivity extends CTBaseActivity
         });
 
 
+        mBankListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                mBankListView.smoothOpenMenu(position);
+            }
+        });
+
         final Intent intent3 = new Intent(this, RichesBankAddActivity.class);
         View view = findViewById(R.id.riches_bank_add);
         view.setOnClickListener(new View.OnClickListener()
@@ -148,6 +150,8 @@ public class RichesBankActivity extends CTBaseActivity
                 startActivity(intent3);
             }
         });
+
+        mBankInfoList = BaseApplication.getInstance().getBankInfoList();
     }
 
     protected void initData()
@@ -210,39 +214,7 @@ public class RichesBankActivity extends CTBaseActivity
         super.onFailure(error,content,  reqType);
     }
 
-    /**
-     * 解析银行卡信息
-     */
-    protected void initBankDatas()
-    {
-        List<String> bankList;
 
-        AssetManager asset = getAssets();
-        try {
-            InputStream input = asset.open("bank_data.xml");
-
-            // 创建一个解析xml的工厂对象
-            SAXParserFactory spf = SAXParserFactory.newInstance();
-            // 解析xml
-            SAXParser parser = spf.newSAXParser();
-            BankParserHandler handler = new BankParserHandler();
-            parser.parse(input, handler);
-            input.close();
-            // 获取解析出来的数据
-            bankList = handler.getDataList();
-            mBankInfoList = handler.getBankInfoList();
-            mBankDatas = new String[bankList.size()];
-
-            for(int i = 0; i < bankList.size(); i++)
-            {
-                mBankDatas[i] = bankList.get(i);
-            }
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
 
     /**
      * 删除银行卡

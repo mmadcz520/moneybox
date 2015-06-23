@@ -120,10 +120,13 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
     {
         if(reqType == HttpRequst.REQ_TYPE_USERINFO)
         {
-            mTotalAssetsTextView.showNumberWithAnimation(22167.57f);
+//            mTotalAssetsTextView.showNumberWithAnimation(Integer.parseInt(userInfo.getTotalAssets()));
 
             UserInfoEntity userInfo = UserInfoEntity.getInstance();
             mMobileTextView.setText(userInfo.getMobile());
+            String total = userInfo.getTotalAssets();
+            total = total.replace(",","");
+            mTotalAssetsTextView.showNumberWithAnimation(Float.parseFloat(total));
             mTotalAssetsTextView.setText(userInfo.getTotalAssets());
             mInvestAssetsTextView.setText(userInfo.getInvestAssets());
             mProfitTextView.setText(userInfo.getProfit());

@@ -12,7 +12,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"/>
 
-    <LinearLayout android:layout_width="fill_parent"
+    <RelativeLayout android:layout_width="fill_parent"
         android:layout_height="@dimen/edit_height_normal"
         android:layout_marginTop="17dp"
         android:orientation="horizontal"
@@ -24,11 +24,23 @@
             android:textSize="@dimen/font_size_normal"
             android:layout_marginLeft="20dp"
             android:background="@color/ct_white"
-            android:layout_gravity="center"
+            android:layout_centerVertical="true"
             android:text="账号可用余额(元)"/>
-    </LinearLayout>
 
-    <LinearLayout android:layout_width="fill_parent"
+        <TextView
+            android:id = "@+id/riches_withdraw_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/font_black"
+            android:background="@color/ct_white"
+            android:textSize="@dimen/font_size_number"
+            android:layout_marginRight="20dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout android:layout_width="fill_parent"
         android:layout_height="@dimen/edit_height_normal"
         android:orientation="horizontal"
         android:background="@color/ct_white">
@@ -39,11 +51,25 @@
             android:textSize="@dimen/font_size_normal"
             android:layout_marginLeft="20dp"
             android:background="@color/ct_white"
-            android:layout_gravity="center"
+            android:layout_centerVertical="true"
             android:text="提现手续费(元)"/>
-    </LinearLayout>
 
-    <LinearLayout android:layout_width="fill_parent"
+
+        <TextView
+            android:id = "@+id/riches_withdraw_handling"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/font_black"
+            android:background="@color/ct_white"
+            android:textSize="@dimen/font_size_number"
+            android:layout_marginRight="20dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:text="0.00"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout android:layout_width="fill_parent"
         android:layout_height="@dimen/edit_height_normal"
         android:orientation="horizontal"
         android:background="@drawable/stroke_edit_fillpraent">
@@ -54,9 +80,21 @@
             android:background="@color/ct_white"
             android:textSize="@dimen/font_size_normal"
             android:layout_marginLeft="20dp"
-            android:layout_gravity="center"
+            android:layout_centerVertical="true"
             android:text="到账金额(元)"/>
-    </LinearLayout>
+
+        <TextView
+            android:id = "@+id/riches_withdraw_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/font_black"
+            android:background="@color/ct_white"
+            android:textSize="@dimen/font_size_number"
+            android:layout_marginRight="20dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:text=""/>
+    </RelativeLayout>
 
     <LinearLayout android:layout_width="fill_parent"
         android:layout_height="@dimen/edit_height_normal"
@@ -64,7 +102,8 @@
         android:layout_marginTop="17dp"
         android:background="@drawable/stroke_edit_fillpraent">
         <EditText
-            android:layout_width="wrap_content"
+            android:id="@+id/riches_withdraw_number"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@color/font_invalid"
             android:textColor="@color/font_black"
@@ -72,15 +111,15 @@
             android:background="@color/ct_white"
             android:layout_marginLeft="20dp"
             android:layout_gravity="center"
+            android:inputType="numberDecimal"
             android:hint="请输入提现金额(元)"/>
     </LinearLayout>
 
     <Button
-        android:id="@+id/register_btn"
         android:layout_width="fill_parent"
         android:layout_marginTop="35dp"
         android:layout_height="@dimen/button_height_fillparent"
-        android:background="@color/ct_blue"
+        android:background="@drawable/btn_selector"
         android:textColor="@color/ct_white"
         android:text="确认提现"
         android:textSize="@dimen/font_size_normal" />

@@ -96,6 +96,8 @@ public class RichesBankAddActivity extends CTBaseActivity
      */
     protected String mCurrentDistrictName ="";
 
+    private EditText mUserNameEdit = null;
+
     /**
      * 当前区的邮政编码
      */
@@ -104,6 +106,12 @@ public class RichesBankAddActivity extends CTBaseActivity
     protected void initView(Bundle bundle)
     {
         setContentView(R.layout.riches_safe_bank_add);
+
+        mUserNameEdit = (EditText)findViewById(R.id.riches_safe_add_username);
+
+        UserInfoEntity userInfoEntity = UserInfoEntity.getInstance();
+        mUserNameEdit.setText(userInfoEntity.getFullName());
+
         mBankSpinner = (BetterSpinner)findViewById(R.id.riches_safe_add_bank);
         mProvinceSpinner = (BetterSpinner)findViewById(R.id.riches_safe_add_province);
         mCitySpinner = (BetterSpinner)findViewById(R.id.riches_safe_add_city);

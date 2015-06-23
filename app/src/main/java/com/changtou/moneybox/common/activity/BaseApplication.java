@@ -1,9 +1,12 @@
 package com.changtou.moneybox.common.activity;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 import java.util.Stack;
 
 import android.annotation.SuppressLint;
@@ -15,6 +18,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.AssetManager;
 import android.util.Log;
 
 import com.changtou.moneybox.common.http.base.BaseHttpRequest;
@@ -24,7 +28,11 @@ import com.changtou.moneybox.common.utils.MySharedPreferencesMgr;
 import com.changtou.moneybox.common.utils.SharedPreferencesHelper;
 import com.changtou.moneybox.module.appcfg.AppCfg;
 import com.changtou.moneybox.module.page.GesturePWActivity;
+import com.changtou.moneybox.module.service.BankParserHandler;
 import com.changtou.moneybox.module.usermodule.UserManager;
+
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 
 /**
  * 描述:全局Application
@@ -62,6 +70,16 @@ public abstract class BaseApplication extends Application implements UncaughtExc
 
     private SharedPreferencesHelper sph = null;
 
+    /**
+     * 银行列表
+     */
+    protected String[] mBankDatas;
+
+    /**
+     * 银行基本信列表
+     */
+    protected Map<String, String> mBankInfoList = null;
+
     public BaseApplication()
     {
         DeviceInfo.init(this);
@@ -70,6 +88,8 @@ public abstract class BaseApplication extends Application implements UncaughtExc
         Thread.setDefaultUncaughtExceptionHandler(this);
 
         sph = SharedPreferencesHelper.getInstance(this);
+
+        initBankDatas();
     }
 
     /**
@@ -359,5 +379,45 @@ public abstract class BaseApplication extends Application implements UncaughtExc
             finishAllActivity();
         } catch (Exception e) {
         }
+    }
+
+
+    /**
+     * 解析银行卡信息
+     */
+    protected void initBankDatas()
+    {
+        List<String> bankList;
+
+        try {
+            InputStream input = getClass().getResourceAsStream("/assets/bank_data.xml");
+//                    new FileInputStream("assets/bank_data.xml");
+
+            // 创建一个解析xml的工厂对象
+            SAXParserFactory spf = SAXParserFactory.newInstance();
+            // 解析xml
+            SAXParser parser = spf.newSAXParser();
+            BankParserHandler handler = new BankParserHandler();
+            parser.parse(input, handler);
+            input.close();
+            // 获取解析出来的数据
+            bankList = handler.getDataList();
+            mBankInfoList = handler.getBankInfoList();
+            mBankDatas = new String[bankList.size()];
+
+            for(int i = 0; i < bankList.size(); i++)
+            {
+                mBankDatas[i] = bankList.get(i);
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public Map<String, String> getBankInfoList()
+    {
+        return mBankInfoList;
     }
 }
