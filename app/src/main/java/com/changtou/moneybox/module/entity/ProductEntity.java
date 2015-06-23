@@ -26,11 +26,11 @@ public class ProductEntity extends BaseEntity {
      */
     public void paser(String data) throws Exception {
 
-        JSONArray array = new JSONArray(data);
+//        JSONArray array = new JSONArray(data);
         mList = new LinkedList();
         ProListEntity entity;
-        int size = array.length();
-        for (int i = 0; i < 10; i++) {
+//        int size = array.length();
+        for (int i = 0; i < 300; i++) {
             entity = new ProListEntity();
 //            entity.paser(array.getJSONObject(i));
             mList.add(entity);

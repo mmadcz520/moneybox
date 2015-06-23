@@ -210,7 +210,6 @@ public class RichesBankActivity extends CTBaseActivity
      */
     public void onFailure(Throwable error, String content, int reqType)
     {
-        Log.e("CT_MONEY", "onFailure" + content);
         super.onFailure(error,content,  reqType);
     }
 

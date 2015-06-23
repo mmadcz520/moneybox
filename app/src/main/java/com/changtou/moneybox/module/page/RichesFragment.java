@@ -2,6 +2,7 @@ package com.changtou.moneybox.module.page;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import com.changtou.moneybox.module.entity.UserInfoEntity;
 import com.changtou.moneybox.module.http.HttpRequst;
 import com.changtou.moneybox.module.widget.CountView;
 import com.changtou.moneybox.module.widget.MultiStateView;
+import com.changtou.moneybox.module.widget.SignInHUD;
 
 public class RichesFragment extends BaseFragment implements AdapterView.OnItemClickListener {
 
@@ -108,7 +110,7 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
 
     protected void initListener()
     {
-
+        setOnClickListener(R.id.riches_signbar);
     }
 
     protected void initData(Bundle savedInstanceState)
@@ -158,10 +160,17 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
                 "&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token");
 
 
+        Log.e("CT_MONEY", ACache.get(BaseApplication.getInstance()).getAsString("userid") +  "&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token") );
+
         sendRequest(HttpRequst.REQ_TYPE_USERINFO, url, mParams,
                 mAct.getAsyncClient(), false);
 
         mMultiStateView.setViewForState(R.layout.state_layout_loading, MultiStateView.ViewState.LOADING);
+    }
 
+    public void treatClickEvent(int id)
+    {
+        SignInHUD sHUD = SignInHUD.getInstance(this.getActivity());
+        sHUD.show();
     }
 }

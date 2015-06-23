@@ -4,6 +4,7 @@
       <w>addbank</w>
       <w>autoinvest</w>
       <w>bankinfo</w>
+      <w>changebank</w>
       <w>createtime</w>
       <w>delbank</w>
       <w>errcode</w>

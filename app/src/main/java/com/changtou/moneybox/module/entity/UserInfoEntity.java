@@ -42,8 +42,6 @@ public class UserInfoEntity extends BaseEntity
 
     public void paser(String data) throws Exception
     {
-        Log.e("CT_MONEY", "----------------------------------" +data);
-
         JSONObject jsonObject = new JSONObject(data);
         JSONObject userinfo = jsonObject.getJSONObject("userinfo");
         mEmail = userinfo.getString("email");

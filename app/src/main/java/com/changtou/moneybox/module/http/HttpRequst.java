@@ -53,7 +53,7 @@ public class HttpRequst extends BaseHttpRequest
     public final static int REQ_TYPE_CHANGEBANK = 1012;
 
     //主页推荐产品列表
-    public static String REQ_URL_PRODUCT_LIST = BASE_URL + "products";
+    public static String REQ_URL_PRODUCT_LIST = BASE_URL + "bankcard/getbanklistinfo?";
     public static String REQ_URL_PRODUCT_DETAILS = BASE_URL + "products";
 
     public static String REQ_URL_PRODUCT_CONTRACT = BASE_URL + "products";
@@ -77,7 +77,7 @@ public class HttpRequst extends BaseHttpRequest
     public static final String FEQ_URL_USERINFO = BASE_URL + "usertoken/GetUserInfo?";
 
     //获取投资列表
-    public static String REQ_URL_INVEST_LIST = BASE_URL + "products";
+    public static String REQ_URL_INVEST_LIST = BASE_URL + "bankcard/getbanklistinfo?";
 
     //获取站内转让列表
     public static String REQ_URL_TRANSFER_LIST = BASE_URL + "products";
@@ -111,7 +111,7 @@ public class HttpRequst extends BaseHttpRequest
             case REQ_TYPE_PRODUCT_HOME:
                 return "http://autoapp.hsxiang.com/wp-admin/admin-ajax.php?action=";
             case REQ_TYPE_PRODUCT_LIST:
-                return REQ_URL_PRODUCT_LIST;
+                return "http://autoapp.hsxiang.com/wp-admin/admin-ajax.php?action=";
             case REQ_TYPE_PRODUCT_DETAILS:
                 return REQ_URL_PRODUCT_DETAILS;
             case REQ_TYPE_PRODUCT_CONTRACT:
