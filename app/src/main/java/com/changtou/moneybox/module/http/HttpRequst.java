@@ -33,6 +33,9 @@ public class HttpRequst extends BaseHttpRequest
 //    public static int REQ_METHOD_POST = 10000;
 
     // get请求的reqType<1000;
+    public final static int REQ_TYPE_PRODUCT_TYPE = 17;
+
+
     public final static int REQ_TYPE_PRODUCT_HOME = 21;
     public final static int REQ_TYPE_PRODUCT_LIST = 22;
     public final static int REQ_TYPE_PRODUCT_DETAILS = 23;
@@ -52,8 +55,9 @@ public class HttpRequst extends BaseHttpRequest
     public final static int REQ_TYPE_DELBANK = 1011;
     public final static int REQ_TYPE_CHANGEBANK = 1012;
 
-    //主页推荐产品列表
-    public static String REQ_URL_PRODUCT_LIST = BASE_URL + "bankcard/getbanklistinfo?";
+    //产品
+    public static String REQ_URL_PRODUCT_TYPE = BASE_URL + "product/GetProductType";
+    public static String REQ_URL_PRODUCT_LIST = BASE_URL + "product/GetProductList?";
     public static String REQ_URL_PRODUCT_DETAILS = BASE_URL + "products";
 
     public static String REQ_URL_PRODUCT_CONTRACT = BASE_URL + "products";
@@ -108,10 +112,12 @@ public class HttpRequst extends BaseHttpRequest
     {
         switch (reqType)
         {
+            case REQ_TYPE_PRODUCT_TYPE:
+                return REQ_URL_PRODUCT_TYPE;
             case REQ_TYPE_PRODUCT_HOME:
                 return "http://autoapp.hsxiang.com/wp-admin/admin-ajax.php?action=";
             case REQ_TYPE_PRODUCT_LIST:
-                return "http://autoapp.hsxiang.com/wp-admin/admin-ajax.php?action=";
+                return REQ_URL_PRODUCT_LIST;
             case REQ_TYPE_PRODUCT_DETAILS:
                 return REQ_URL_PRODUCT_DETAILS;
             case REQ_TYPE_PRODUCT_CONTRACT:

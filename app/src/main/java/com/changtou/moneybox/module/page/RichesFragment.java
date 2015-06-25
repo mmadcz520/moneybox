@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -170,7 +171,13 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
 
     public void treatClickEvent(int id)
     {
-        SignInHUD sHUD = SignInHUD.getInstance(this.getActivity());
-        sHUD.show();
+
+//        SignInHUD sHUD = SignInHUD.getInstance(this.getActivity());
+//        sHUD.show();
+        SignInHUD mSignInHUD = (SignInHUD)getActivity().findViewById(R.id.signin_fragment);
+        mSignInHUD.setVisibility(View.VISIBLE);
+        mSignInHUD.changeNum();
     }
+
+
 }

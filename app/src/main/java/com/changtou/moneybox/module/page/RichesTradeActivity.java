@@ -2,6 +2,7 @@ package com.changtou.moneybox.module.page;
 
 import android.os.Bundle;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import com.changtou.R;
 import com.changtou.moneybox.module.adapter.ProductDetailsAdapter;
@@ -9,6 +10,7 @@ import com.changtou.moneybox.module.adapter.TradeAdapter;
 import com.changtou.moneybox.module.entity.ProductDetailsEntity;
 import com.changtou.moneybox.module.entity.TradeEntity;
 import com.changtou.moneybox.module.http.HttpRequst;
+import com.changtou.moneybox.module.widget.NumberWheel;
 
 /**
  * Created by Administrator on 2015/6/2.
@@ -21,6 +23,15 @@ public class RichesTradeActivity extends CTBaseActivity
     protected void initView(Bundle bundle)
     {
         setContentView(R.layout.riches_trade_layout);
+
+        NumberWheel.NumberBean nBean=new NumberWheel.NumberBean();
+        nBean.setStartShowNumString("0000");
+        nBean.setEndShowNumString("1998");
+        RelativeLayout.LayoutParams rl = new RelativeLayout.LayoutParams(338,130);
+        NumberWheel nw = new NumberWheel(this,nBean,rl,500);
+        RelativeLayout r = (RelativeLayout)findViewById(R.id.tredd);
+        r.addView(nw);
+
         mTradeListView = (ListView)findViewById(R.id.riches_trade_listview);
     }
 

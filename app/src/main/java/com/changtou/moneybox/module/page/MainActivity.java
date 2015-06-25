@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.LinearLayout;
 
 import com.changtou.R;
@@ -16,6 +17,7 @@ import com.changtou.moneybox.module.entity.UserInfoEntity;
 import com.changtou.moneybox.module.http.HttpRequst;
 import com.changtou.moneybox.module.widget.ExFPAdapter;
 import com.changtou.moneybox.module.widget.ExViewPager;
+import com.changtou.moneybox.module.widget.SignInHUD;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +38,8 @@ public class MainActivity extends CTBaseActivity {
     private LinearLayout[] mBars = new LinearLayout[4];
 
     private SharedPreferencesHelper sph = null;
+
+    private SignInHUD mSignInHUD = null;
 
     /**
      * @see com.changtou.moneybox.common.activity.BaseActivity#initView(Bundle)
@@ -70,6 +74,8 @@ public class MainActivity extends CTBaseActivity {
         mViewpager.setOffscreenPageLimit(viewList.size());
 
         sph = SharedPreferencesHelper.getInstance(this);
+
+        mSignInHUD = (SignInHUD)this.findViewById(R.id.signin_fragment);
     }
 
     /**
@@ -189,5 +195,17 @@ public class MainActivity extends CTBaseActivity {
 //        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //        startActivity(intent);
         BaseApplication.getInstance().onBackground();
+    }
+
+    public void onBackPressed()
+    {
+        if(mSignInHUD.getVisibility() == View.VISIBLE)
+        {
+            mSignInHUD.setVisibility(View.INVISIBLE);
+        }
+        else
+        {
+            super.onBackPressed();
+        }
     }
 }

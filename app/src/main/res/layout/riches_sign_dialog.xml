@@ -1,20 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="#99000000"
     android:gravity="center"
-    android:background="@android:color/transparent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
-    <LinearLayout
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="450dp"
+        android:scaleType="centerInside"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/riches_touyuan_banner" />
+
+    <TextView android:layout_height="wrap_content"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_marginTop="280dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="再接再励,本月再签到18次，在送50投园"
+        android:textColor="@color/font_white"
+        android:textSize="@dimen/font_size_navigation"
+        android:textStyle="bold"/>
+
+    <RelativeLayout
+        android:id="@+id/number_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="330dp"
         android:background="@drawable/loading_dialog_background"
         android:gravity="center"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
+    </RelativeLayout>
 
-
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>

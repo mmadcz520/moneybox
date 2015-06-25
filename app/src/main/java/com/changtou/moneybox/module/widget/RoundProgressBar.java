@@ -231,7 +231,7 @@ public class RoundProgressBar extends LinearLayout
                 paint.setColor(textColor);
                 paint.setStrokeCap(Paint.Cap.ROUND);
 //                if (progress != 0)
-                    canvas.drawArc(oval, 270, (360 * 80 + 270)  / max, false, paint);
+                    canvas.drawArc(oval, 270, (360 * mPercent + 270)  / max, false, paint);
                 break;
             }
         }
@@ -460,7 +460,7 @@ public class RoundProgressBar extends LinearLayout
 
         // 实现心跳的View
         LinearLayout ll =  (LinearLayout)mThisView.getChildAt(0);
-        ll.getChildAt(0).startAnimation(animationSet);
+//        ll.getChildAt(0).startAnimation(animationSet);
     }
 
     private synchronized void setPercent(int progress)

@@ -1,130 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:baselineAligned="false"
-    android:orientation="vertical" >
+    android:layout_height="match_parent">
 
-    <com.changtou.moneybox.module.widget.ExViewPager
-        android:id="@+id/viewpager"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/ct_background"/>
-
-    <LinearLayout
-        android:id="@+id/layout_bottom"
-        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
         android:baselineAligned="false"
-        android:layout_height="@dimen/app_bottomtab_height"
-        android:gravity="center_vertical">
+        android:orientation="vertical">
+
+        <com.changtou.moneybox.module.widget.ExViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/ct_background" />
 
         <LinearLayout
-            android:id="@+id/navbar_home"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:background="@drawable/navbar_selector"
-            android:gravity="center"
-            android:baselineAligned="true"
-            android:clickable="true"
-            android:orientation="vertical">
+            android:id="@+id/layout_bottom"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/app_bottomtab_height"
+            android:baselineAligned="false"
+            android:gravity="center_vertical">
 
-            <ImageButton
-                android:clickable="false"
-                android:id="@+id/btn_main"
-                android:layout_width="22dp"
-                android:layout_height="22dp"
-                android:contentDescription="@null"
-                android:background="@mipmap/navbar_home" />
-            <TextView
-                android:clickable="false"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/font_size_normal"
-                android:textColor="@color/font_white"
-                android:text="@string/tab_homepage"/>
+            <LinearLayout
+                android:id="@+id/navbar_home"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@drawable/navbar_selector"
+                android:baselineAligned="true"
+                android:clickable="true"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/btn_main"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:background="@mipmap/navbar_home"
+                    android:clickable="false"
+                    android:contentDescription="@null" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:text="@string/tab_homepage"
+                    android:textColor="@color/font_white"
+                    android:textSize="@dimen/font_size_normal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/navbar_product"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@drawable/navbar_selector"
+                android:clickable="true"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/btn_product"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:background="@mipmap/navbar_product"
+                    android:clickable="false"
+                    android:contentDescription="@null" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:text="@string/tab_productpage"
+                    android:textColor="@color/font_white"
+                    android:textSize="@dimen/font_size_normal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/navbar_user"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@drawable/navbar_selector"
+                android:clickable="true"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/btn_riches"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:background="@mipmap/navbar_user"
+                    android:clickable="false"
+                    android:contentDescription="@null" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:text="@string/tab_richespage"
+                    android:textColor="@color/font_white"
+                    android:textSize="@dimen/font_size_normal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/navbar_more"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@drawable/navbar_selector"
+                android:clickable="true"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/btn_setting"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:background="@mipmap/navbar_more"
+                    android:clickable="false"
+                    android:contentDescription="@null" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:text="@string/tab_setttingpage"
+                    android:textColor="@color/font_white"
+                    android:textSize="@dimen/font_size_normal" />
+            </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/navbar_product"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:background="@drawable/navbar_selector"
-            android:gravity="center"
-            android:clickable="true"
-            android:orientation="vertical">
-
-            <ImageButton
-                android:clickable="false"
-                android:id="@+id/btn_product"
-                android:layout_width="22dp"
-                android:layout_height="22dp"
-                android:contentDescription="@null"
-                android:background="@mipmap/navbar_product" />
-            <TextView
-                android:clickable="false"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/font_size_normal"
-                android:textColor="@color/font_white"
-                android:text="@string/tab_productpage"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/navbar_user"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:background="@drawable/navbar_selector"
-            android:gravity="center"
-            android:clickable="true"
-            android:orientation="vertical">
-
-            <ImageButton
-                android:clickable="false"
-                android:id="@+id/btn_riches"
-                android:contentDescription="@null"
-                android:layout_width="22dp"
-                android:layout_height="22dp"
-                android:background="@mipmap/navbar_user" />
-
-            <TextView
-                android:clickable="false"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/font_size_normal"
-                android:textColor="@color/font_white"
-                android:text="@string/tab_richespage"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/navbar_more"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:background="@drawable/navbar_selector"
-            android:gravity="center"
-            android:clickable="true"
-            android:orientation="vertical">
-
-            <ImageButton
-                android:contentDescription="@null"
-                android:clickable="false"
-                android:id="@+id/btn_setting"
-                android:layout_width="22dp"
-                android:layout_height="22dp"
-                android:background="@mipmap/navbar_more" />
-
-            <TextView
-                android:clickable="false"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/font_white"
-                android:textSize="@dimen/font_size_normal"
-                android:text="@string/tab_setttingpage"/>
-        </LinearLayout>
     </LinearLayout>
 
-</LinearLayout>
+    <com.changtou.moneybox.module.widget.SignInHUD
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/signin_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#00000000"
+        android:visibility="invisible"
+        app:msv_viewState="content">
+
+    </com.changtou.moneybox.module.widget.SignInHUD>
+
+</RelativeLayout>

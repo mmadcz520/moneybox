@@ -158,7 +158,7 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
      */
     public void onBackPressed()
     {
-//        super.onBackPressed();
+        super.onBackPressed();
     }
 
 

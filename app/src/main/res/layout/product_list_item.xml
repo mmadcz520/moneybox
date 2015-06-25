@@ -2,6 +2,7 @@
     xmlns:android_custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
+    android:minHeight="80dp"
     android:background="#00000000">
 
     <LinearLayout
@@ -19,10 +20,10 @@
         <TextView
             android:id="@+id/pro_list_titile"
             android:layout_width="wrap_content"
-            android:layout_height="18dp"
-            android:layout_gravity="bottom"
+            android:layout_height="28dp"
+            android:gravity="center"
             android:layout_marginLeft="15dp"
-            android:text="[长投宝] 上手易第256期"
+            android:text=""
             android:textColor="@color/font_black"
             android:textSize="@dimen/font_size_normal"
             android:textStyle="bold" />
@@ -46,10 +47,11 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/pro_list_interest"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
-                        android:text="15"
+                        android:text=""
                         android:textColor="@color/font_prompt"
                         android:textSize="@dimen/font_size_percent" />
 
@@ -79,11 +81,12 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/pro_list_maturity"
                     android:layout_width="wrap_content"
                     android:layout_height="38dp"
                     android:layout_gravity="center_horizontal"
                     android:gravity="bottom"
-                    android:text="3个月"
+                    android:text=""
                     android:textColor="@color/font_black"
                     android:textSize="@dimen/font_size_normal" />
 
@@ -103,11 +106,12 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/pro_list_minamount"
                     android:layout_width="wrap_content"
                     android:layout_height="38dp"
                     android:layout_gravity="center_horizontal"
                     android:gravity="bottom"
-                    android:text="100元"
+                    android:text=""
                     android:textColor="@color/font_black"
                     android:textSize="@dimen/font_size_normal" />
 
@@ -127,11 +131,12 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/pro_list_amount"
                     android:layout_width="wrap_content"
                     android:layout_height="38dp"
                     android:layout_gravity="center_horizontal"
                     android:gravity="bottom"
-                    android:text="100万"
+                    android:text=""
                     android:textColor="@color/font_black"
                     android:textSize="@dimen/font_size_normal" />
 
@@ -139,7 +144,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="融资金额"
+                    android:text="可投金额"
                     android:textColor="@color/font_invalid"
                     android:textSize="@dimen/font_size_normal" />
             </LinearLayout>
@@ -151,16 +156,38 @@
                 android:layout_toRightOf="@+id/lld">
 
                 <com.changtou.moneybox.module.widget.RoundProgressBar
-                    android:id="@+id/roundProgressBar"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                    android:id="@+id/pro_list_schedule"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
                     android:layout_centerInParent="true"
-                    android_custom:roundColor="@color/ct_red"
+                    android_custom:roundColor="@color/ct_invalid"
                     android_custom:roundProgressColor="@color/ct_blue"
                     android_custom:roundWidth="3dp"
                     android_custom:style="STROKE"
                     android_custom:textColor="@color/ct_blue"
                     android_custom:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/pro_list_schedule_describe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_centerInParent="true"
+                    android:textSize="@dimen/font_size_navigation"
+                    android:textColor="@color/ct_blue"
+                    android:text="50%"/>
+
+                <!--<TextView-->
+                    <!--android:id="@+id/pro_list_schedule_syje"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:gravity="center"-->
+                    <!--android:layout_centerHorizontal="true"-->
+                    <!--android:layout_marginTop="30dp"-->
+                    <!--android:textSize="@dimen/font_size_hint"-->
+                    <!--android:textColor="@color/ct_blue"-->
+                    <!--android:text="50%"/>-->
+
             </RelativeLayout>
         </LinearLayout>
 

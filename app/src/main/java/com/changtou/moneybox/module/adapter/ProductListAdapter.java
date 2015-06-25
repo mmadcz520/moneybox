@@ -1,7 +1,6 @@
 package com.changtou.moneybox.module.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +9,9 @@ import android.widget.TextView;
 
 import com.changtou.R;
 import com.changtou.moneybox.module.entity.ProductEntity;
+import com.changtou.moneybox.module.widget.RoundProgressBar;
+
+import java.util.LinkedList;
 
 /**
  * 描述: 产品列表适配器类
@@ -20,23 +22,20 @@ import com.changtou.moneybox.module.entity.ProductEntity;
 public class ProductListAdapter extends BaseAdapter
 {
     private LayoutInflater mInflater = null;
-    private ProductEntity  mEntity   = null;
+
+    private LinkedList mData = null;
 
     public ProductListAdapter(Context context)
     {
         mInflater = LayoutInflater.from(context);
     }
 
-    public void setData(ProductEntity entity)
+    public void setData(LinkedList data)
     {
-        this.mEntity = entity;
+        this.mData = data;
         notifyDataSetChanged();
     }
 
-    public ProductEntity getData()
-    {
-        return mEntity;
-    }
 
     /**
      *描述: 获取产品列表长度
@@ -45,9 +44,9 @@ public class ProductListAdapter extends BaseAdapter
      */
     public int getCount()
     {
-        if (mEntity != null && mEntity.mList != null && mEntity.mList.size() > 0)
+        if (mData != null)
         {
-            return mEntity.mList.size();
+            return mData.size();
         }
         return 0;
     }
@@ -59,11 +58,11 @@ public class ProductListAdapter extends BaseAdapter
      * @return 产品实体对象
      * @see BaseAdapter#getItem(int)
      */
-    public ProductEntity.ProListEntity getItem(int position)
+    public Object getItem(int position)
     {
-        if (mEntity.mList != null && mEntity.mList.size() > 0)
+        if (mData != null)
         {
-            return (ProductEntity.ProListEntity) mEntity.mList.get(position);
+            return mData.get(position);
         }
         return null;
     }
@@ -81,33 +80,54 @@ public class ProductListAdapter extends BaseAdapter
      */
     public View getView(int position, View convertView, ViewGroup parent)
     {
-        ProductEntity.ProListEntity entity = getItem(position);
+        ProductEntity.ItemEntity item = (ProductEntity.ItemEntity)getItem(position);
         ViewHolder viewHolder;
 
         if (convertView == null)
         {
             viewHolder = new ViewHolder();
             convertView = mInflater.inflate(R.layout.product_list_item, null);
-//            LinearLayout ll = (LinearLayout)convertView.findViewById(R.id.roundProgressBar);
-//            ll.setWillNotDraw(false);
-//            viewHolder.txt_top = (TextView) convertView.findViewById(R.id.pro_list_titile);
-//            viewHolder.txt_bottom = (TextView) convertView.findViewById(R.id.txt_bottom);
-//            RoundProgressBar mRoundProgressBar1 = (RoundProgressBar) convertView.findViewById(R.id.roundProgressBar);
-//            mRoundProgressBar1.setProgress(15);
+
+            viewHolder.mTitleTextView = (TextView) convertView.findViewById(R.id.pro_list_titile);
+            viewHolder.interestTextView = (TextView) convertView.findViewById(R.id.pro_list_interest);
+            viewHolder.maturityTextView = (TextView) convertView.findViewById(R.id.pro_list_maturity);
+            viewHolder.minamountTextView = (TextView) convertView.findViewById(R.id.pro_list_minamount);
+            viewHolder.amountTextView = (TextView) convertView.findViewById(R.id.pro_list_amount);
+
+            viewHolder.scheduleView = (RoundProgressBar)convertView.findViewById(R.id.pro_list_schedule);
+            viewHolder.describeTextView = (TextView)convertView.findViewById(R.id.pro_list_schedule_describe);
 
             convertView.setTag(viewHolder);
         }
         else
         {
-//            viewHolder = (ViewHolder) convertView.getTag();
+            viewHolder = (ViewHolder) convertView.getTag();
         }
-//        viewHolder.txt_top.setText(entity.name);
+
+        viewHolder.mTitleTextView.setText(item.projectname);
+        viewHolder.interestTextView.setText(item.interest);
+        viewHolder.maturityTextView.setText(item.maturity);
+        viewHolder.minamountTextView.setText(item.minamount);
+        viewHolder.amountTextView.setText(item.syje);
+
+        String jd = item.jd;
+        Float schedule = Float.parseFloat(jd);
+        int schedule_int = (int)(schedule*100);
+        viewHolder.scheduleView.setProgress(schedule_int);
+        viewHolder.describeTextView.setText(schedule_int + "%");
+
         return convertView;
     }
 
     private class ViewHolder
     {
-        public TextView txt_top;
-//        public TextView txt_bottom;
+        public TextView mTitleTextView;
+        public TextView interestTextView;
+        public TextView maturityTextView;
+        public TextView minamountTextView;
+        public TextView amountTextView;
+
+        public RoundProgressBar scheduleView;
+        public TextView  describeTextView;
     }
 }

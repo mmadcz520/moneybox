@@ -18,34 +18,78 @@ import java.util.LinkedList;
 public class ProductEntity extends BaseEntity {
 
     public LinkedList mList = null;
+    public LinkedList mProductTypeList = null;
 
     /**
      * @see BaseEntity#paser(String)
      * @param data
      * @throws Exception
      */
-    public void paser(String data) throws Exception {
+    public void paser(String data) throws Exception
+    {
+        Log.e("CT_MONEY", "data=" + data);
 
-//        JSONArray array = new JSONArray(data);
-        mList = new LinkedList();
-        ProListEntity entity;
-//        int size = array.length();
-        for (int i = 0; i < 300; i++) {
-            entity = new ProListEntity();
-//            entity.paser(array.getJSONObject(i));
-            mList.add(entity);
+        JSONObject productList = new JSONObject(data);
+        JSONArray allData = productList.getJSONArray("productList");
+
+        JSONObject typeData;
+        ItemEntity itemEntity = null;
+        JSONArray listByType;
+
+        mProductTypeList = new LinkedList();
+
+        for(int i = 0; i < allData.length(); i++)
+        {
+            typeData = allData.getJSONObject(i);
+//            int type = typeData.getInt("type");
+            listByType = typeData.getJSONArray("data");
+
+            mList = new LinkedList();
+
+            for(int m = 0; m < listByType.length(); m++)
+            {
+                JSONObject itemData = listByType.getJSONObject(m);
+                itemEntity = new ItemEntity();
+                itemEntity.paser(itemData);
+                mList.add(itemEntity);
+            }
+            mProductTypeList.add(mList);
         }
-
-        Log.e("CT_MONEY", "mList len=" + mList.size());
     }
 
-    public  class ProListEntity {
+    public LinkedList getProductTypeList()
+    {
+        return mProductTypeList;
+    }
+
+    public  class ItemEntity
+    {
         public String id;
-        public String name;
+        public String projectname;
+        public String amount;
+        public String interest;
+        public String maturity;
+        public String minamount;
+        public String type;
+        public String repaytime;
+        public String sold;
+        public String createtime;
+        public String jd;
+        public String syje;
 
         public void paser(JSONObject json) throws Exception {
-            id = json.optString("reply_count");
-            name = json.optString("post_status");
+            id = json.optString("id");
+            projectname = json.optString("projectname");
+            amount = json.optString("amount");
+            interest = json.optString("interest");
+            maturity = json.optString("maturity");
+            minamount = json.optString("minamount");
+            type = json.optString("type");
+            repaytime = json.optString("repaytime");
+            sold = json.optString("sold");
+            createtime = json.optString("createtime");
+            jd = json.optString("jd");
+            syje = json.optString("syje");
         }
     }
 }

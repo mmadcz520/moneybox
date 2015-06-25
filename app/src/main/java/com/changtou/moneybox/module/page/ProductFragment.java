@@ -26,7 +26,11 @@ import com.changtou.moneybox.module.widget.SlidingTabLayout;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -38,29 +42,24 @@ import java.util.List;
  */
 public class ProductFragment extends BaseFragment{
 
-    protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    private ViewPager mViewPager = null;
+
+    private List<BaseFragment> mViewList = new ArrayList<>();
+
+    private SlidingTabLayout mSlidingTabLayout;
+
+    protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
         View mView = inflater.inflate(R.layout.product_fragment, container, false);
 
-        SlidingTabLayout slidingTabLayout = (SlidingTabLayout) mView.findViewById(R.id.sliding_tabs);
+        mSlidingTabLayout = (SlidingTabLayout) mView.findViewById(R.id.sliding_tabs);
         Resources res = getResources();
-        slidingTabLayout.setCustomTabView(R.layout.product_tabpage_indicator, android.R.id.text1);
-        slidingTabLayout.setSelectedIndicatorColors(res.getColor(R.color.ct_blue));
+        mSlidingTabLayout.setCustomTabView(R.layout.product_tabpage_indicator, android.R.id.text1);
+        mSlidingTabLayout.setSelectedIndicatorColors(res.getColor(R.color.ct_blue));
 
-        //根据产品分类列表初始化界面
-        List<BaseFragment> viewList = new ArrayList<>();
-        viewList.add(new SubPage());
-        viewList.add(new SubPage());
-        viewList.add(new SubPage());
-        viewList.add(new SubPage());
-
-        ViewPager viewPager = (ViewPager) mView.findViewById(R.id.pager);
-        ExFPAdapter pagerAdapter = new ExFPAdapter(getChildFragmentManager(), viewList);
-        pagerAdapter.setTitles(new String[]{"长投宝", "ZAMA宝", "精选债权", "转让专区"});
-        viewPager.setAdapter(pagerAdapter);
-        viewPager.setCurrentItem(0);
-        viewPager.setOnPageChangeListener(mPageChangeListener);
-        viewPager.setOffscreenPageLimit(viewList.size());
-        slidingTabLayout.setViewPager(viewPager);
+        mViewPager = (ViewPager) mView.findViewById(R.id.pager);
+        mViewPager.setCurrentItem(0);
+        mViewPager.setOnPageChangeListener(mPageChangeListener);
 
         return mView;
     }
@@ -69,20 +68,53 @@ public class ProductFragment extends BaseFragment{
 
     }
 
-    protected void initData(Bundle savedInstanceState) {
-
+    protected void initData(Bundle savedInstanceState)
+    {
+        sendRequest(HttpRequst.REQ_TYPE_PRODUCT_TYPE,
+                HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_PRODUCT_TYPE),
+                mParams,
+                mAct.getAsyncClient(), false);
     }
 
-    public void onSuccess(String content, Object object, int reqType) {
+    public void onSuccess(String content, Object object, int reqType)
+    {
+        if(reqType == HttpRequst.REQ_TYPE_PRODUCT_TYPE)
+        {
+            try
+            {
+                JSONObject json = new JSONObject(content);
+                JSONArray array = json.getJSONArray("productType");
 
+                int len = array.length();
+                String[] titles = new String[len];
+                for(int i = 0; i < array.length();i++)
+                {
+                    titles[i] = array.getString(i);
+                    mViewList.add(SubPage.create(i));
+                }
+
+                ExFPAdapter pagerAdapter = new ExFPAdapter(getChildFragmentManager(), mViewList);
+                pagerAdapter.setTitles(titles);
+                mViewPager.setAdapter(pagerAdapter);
+                mViewPager.setOffscreenPageLimit(mViewList.size());
+                mSlidingTabLayout.setViewPager(mViewPager);
+
+            }
+            catch (Exception e)
+            {
+
+            }
+
+        }
     }
 
-    public void onFailure(Throwable error, String content, int reqType) {
-
+    public void onFailure(Throwable error, String content, int reqType)
+    {
+        printLog("onFailure--->" + content);
     }
 
-    private OnPageChangeListener mPageChangeListener = new OnPageChangeListener() {
-
+    private OnPageChangeListener mPageChangeListener = new OnPageChangeListener()
+    {
         public void onPageSelected(int arg0)
         {
 //            mSegmentControl.setSelectIndex(arg0);
@@ -112,6 +144,15 @@ public class ProductFragment extends BaseFragment{
 
         private ListView actualListView;
         private MultiStateView mMultiStateView;
+
+        public static SubPage create(int type)
+        {
+            SubPage f = new SubPage();
+            Bundle b = new Bundle();
+            b.putInt("productType", type);
+            f.setArguments(b);
+            return f;
+        }
 
         protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -161,6 +202,8 @@ public class ProductFragment extends BaseFragment{
             mAdapter = new ProductListAdapter(mContext);
             actualListView.setAdapter(mAdapter);
 
+            Log.e("CT_MONEY", "------------------------------->> initData");
+
             sendRequest(HttpRequst.REQ_TYPE_PRODUCT_LIST,
                     HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_PRODUCT_LIST),
                     mParams,
@@ -171,10 +214,19 @@ public class ProductFragment extends BaseFragment{
         {
             if (reqType == HttpRequst.REQ_TYPE_PRODUCT_LIST)
             {
-
                 mMultiStateView.setViewState(MultiStateView.ViewState.CONTENT);
                 ProductEntity entity = (ProductEntity) object;
-                mAdapter.setData(entity);
+
+                int productType = getArguments().getInt("productType");
+                int len = entity.getProductTypeList().size();
+                if(productType > (len -1)) return;
+                LinkedList data = (LinkedList)entity.getProductTypeList().get(productType);
+                mAdapter.setData(data);
+
+                if(data.size() == 0)
+                {
+                    mMultiStateView.setViewState(MultiStateView.ViewState.EMPTY);
+                }
 
                 mPullRefreshListView.onRefreshComplete();
             }
