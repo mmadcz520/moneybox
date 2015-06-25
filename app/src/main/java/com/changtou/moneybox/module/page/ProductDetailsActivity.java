@@ -3,6 +3,7 @@ package com.changtou.moneybox.module.page;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.changtou.R;
+import com.changtou.moneybox.common.activity.BaseApplication;
+import com.changtou.moneybox.common.http.async.RequestParams;
+import com.changtou.moneybox.common.utils.ACache;
 import com.changtou.moneybox.module.adapter.ProductDetailsAdapter;
+import com.changtou.moneybox.module.entity.BankCardEntity;
 import com.changtou.moneybox.module.entity.ProductDetailsEntity;
 import com.changtou.moneybox.module.http.HttpRequst;
 import com.changtou.moneybox.module.widget.CountView;
@@ -20,6 +25,8 @@ import com.changtou.moneybox.module.widget.OnItemSelectListener;
 import com.changtou.moneybox.module.widget.PullToNextAdapter;
 import com.changtou.moneybox.module.widget.PullToNextLayout;
 import com.changtou.moneybox.module.widget.RoundProgressBar;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -40,6 +47,9 @@ public class ProductDetailsActivity extends CTBaseActivity
 
     public DetailsPage mDetailsPage = null;
     public ProductDetailsMorePage mAgreementPage = null;
+
+    public int    mProductType = 0;
+    public String mProductId = "";
 
     /**
      * @see CTBaseActivity#initView(Bundle)
@@ -74,6 +84,10 @@ public class ProductDetailsActivity extends CTBaseActivity
                 mAgreementPage.initScroll();
             }
         });
+
+        Intent pro_intent = getIntent();
+        mProductType = pro_intent.getIntExtra("type", 0);
+        mProductId = pro_intent.getStringExtra("id");
     }
 
     /**
@@ -88,10 +102,8 @@ public class ProductDetailsActivity extends CTBaseActivity
         mAdapter = new ProductDetailsAdapter(this);
         mProdList.setAdapter(mAdapter);
 
-        sendRequest(HttpRequst.REQ_TYPE_PRODUCT_DETAILS,
-            HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_PRODUCT_DETAILS),
-            mParams,
-            getAsyncClient(), false);
+        getProductDetailsRequest();
+
     }
 
     @Override
@@ -191,6 +203,26 @@ public class ProductDetailsActivity extends CTBaseActivity
         public TextView getTimeLimit()
         {
             return mTimeLimit;
+        }
+    }
+
+
+    private void getProductDetailsRequest()
+    {
+        try {
+            String url = HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_PRODUCT_DETAILS);
+
+            RequestParams params = new RequestParams();
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("id", mProductId);
+            jsonObject.put("type", mProductType);
+            params.put("data", jsonObject.toString());
+
+            sendRequest(HttpRequst.REQ_TYPE_PRODUCT_DETAILS, url, params, getAsyncClient(), false);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
         }
     }
 }

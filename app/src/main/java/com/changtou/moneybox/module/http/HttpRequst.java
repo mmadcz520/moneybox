@@ -38,7 +38,7 @@ public class HttpRequst extends BaseHttpRequest
 
     public final static int REQ_TYPE_PRODUCT_HOME = 21;
     public final static int REQ_TYPE_PRODUCT_LIST = 22;
-    public final static int REQ_TYPE_PRODUCT_DETAILS = 23;
+    public final static int REQ_TYPE_PRODUCT_DETAILS = 1023;
     public final static int REQ_TYPE_PRODUCT_CONTRACT = 24;
     public final static int REQ_TYPE_PRODUCT_INVESTOR = 25;
 
@@ -58,7 +58,7 @@ public class HttpRequst extends BaseHttpRequest
     //产品
     public static String REQ_URL_PRODUCT_TYPE = BASE_URL + "product/GetProductType";
     public static String REQ_URL_PRODUCT_LIST = BASE_URL + "product/GetProductList?";
-    public static String REQ_URL_PRODUCT_DETAILS = BASE_URL + "products";
+    public static String REQ_URL_PRODUCT_DETAILS = BASE_URL + "product/PostProductDetail";
 
     public static String REQ_URL_PRODUCT_CONTRACT = BASE_URL + "products";
     public static String REQ_URL_PRODUCT_INVESTOR = BASE_URL + "products";

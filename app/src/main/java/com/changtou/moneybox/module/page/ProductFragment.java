@@ -145,6 +145,11 @@ public class ProductFragment extends BaseFragment{
         private ListView actualListView;
         private MultiStateView mMultiStateView;
 
+        private int mProductType = 0;
+        private String mSelectedProdId   = null;
+
+        private LinkedList mData = null;
+
         public static SubPage create(int type)
         {
             SubPage f = new SubPage();
@@ -170,29 +175,13 @@ public class ProductFragment extends BaseFragment{
 
         protected void initListener()
         {
-            final Activity activity = this.getActivity();
-
             actualListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
             {
-                Intent intent = new Intent(activity, ProductDetailsActivity.class);
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id)
                 {
-                    startActivity(intent);
-                }
-            });
-
-            actualListView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
-            {
-                Intent intent = new Intent(activity, ProductDetailsActivity.class);
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
-                {
-                    // 跳转到详情页
-                    startActivity(intent);
-                }
-
-                public void onNothingSelected(AdapterView<?> parent)
-                {
-
+                    ProductEntity.ItemEntity item = (ProductEntity.ItemEntity)mData.get(position-1);
+                    mSelectedProdId = item.id;
+                    goToProductDetails(mSelectedProdId);
                 }
             });
         }
@@ -201,8 +190,6 @@ public class ProductFragment extends BaseFragment{
         {
             mAdapter = new ProductListAdapter(mContext);
             actualListView.setAdapter(mAdapter);
-
-            Log.e("CT_MONEY", "------------------------------->> initData");
 
             sendRequest(HttpRequst.REQ_TYPE_PRODUCT_LIST,
                     HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_PRODUCT_LIST),
@@ -217,13 +204,13 @@ public class ProductFragment extends BaseFragment{
                 mMultiStateView.setViewState(MultiStateView.ViewState.CONTENT);
                 ProductEntity entity = (ProductEntity) object;
 
-                int productType = getArguments().getInt("productType");
+                mProductType = getArguments().getInt("productType");
                 int len = entity.getProductTypeList().size();
-                if(productType > (len -1)) return;
-                LinkedList data = (LinkedList)entity.getProductTypeList().get(productType);
-                mAdapter.setData(data);
+                if(mProductType > (len -1)) return;
+                mData = (LinkedList)entity.getProductTypeList().get(mProductType);
+                mAdapter.setData(mData);
 
-                if(data.size() == 0)
+                if(mData.size() == 0)
                 {
                     mMultiStateView.setViewState(MultiStateView.ViewState.EMPTY);
                 }
@@ -247,6 +234,17 @@ public class ProductFragment extends BaseFragment{
                     HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_PRODUCT_LIST),
                     mParams,
                     mAct.getAsyncClient(), true);
+        }
+
+        /**
+         * 跳转到详情页
+         */
+        private void goToProductDetails(String id)
+        {
+            Intent intent = new Intent(this.getActivity(), ProductDetailsActivity.class);
+            intent.putExtra("id", id);
+            intent.putExtra("type", mProductType);
+            startActivity(intent);
         }
     }
 }

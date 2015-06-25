@@ -16,6 +16,13 @@ public class ProductDetailsEntity extends BaseEntity
 {
     public LinkedList mList = null;
 
+    private String yqsy = null;
+    private String cpqx = null;
+    private String jd = null;
+    private String jrtj = null;
+    private String syje = null;
+    private String yzje = null;
+
     /**
      * @see BaseEntity#paser(String)
      * @param data
@@ -23,15 +30,25 @@ public class ProductDetailsEntity extends BaseEntity
      */
     public void paser(String data) throws Exception
     {
-        JSONArray array = new JSONArray(data);
-        mList = new LinkedList();
-        ProListEntity entity;
-        int size = array.length();
-        for (int i = 0; i < 3; i++) {
-            entity = new ProListEntity();
-            entity.paser(array.getJSONObject(i));
-            mList.add(entity);
-        }
+        JSONObject object = new JSONObject(data);
+        JSONObject productDetail = object.getJSONObject("productDetail");
+
+        yqsy = productDetail.getString("yqsy");
+        cpqx = productDetail.getString("cpqx");
+        jd = productDetail.getString("jd");
+        jrtj = productDetail.getString("jrtj");
+        syje = productDetail.getString("syje");
+        yzje = productDetail.getString("yzje");
+
+//        JSONArray array = new JSONArray(data);
+//        mList = new LinkedList();
+//        ProListEntity entity;
+//        int size = array.length();
+//        for (int i = 0; i < 3; i++) {
+//            entity = new ProListEntity();
+//            entity.paser(array.getJSONObject(i));
+//            mList.add(entity);
+//        }
     }
 
     public  class ProListEntity
