@@ -27,11 +27,15 @@ import com.changtou.moneybox.module.widget.ExFPAdapter;
 import com.changtou.moneybox.module.widget.SlidingTabLayout;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 
 public class ProductDetailsMorePage extends Fragment
 {
     private SlidingTabLayout mSlidingTabLayout;
+
+    private InvestorPage mInvestorPage;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -44,9 +48,10 @@ public class ProductDetailsMorePage extends Fragment
 
         CustomViewPager viewPage = (CustomViewPager)v.findViewById(R.id.product_introduction);
         ArrayList<BaseFragment> pageList = new ArrayList<>();
+        mInvestorPage = new InvestorPage();
         pageList.add(new ContractPage());
         pageList.add(new RiskControlPage());
-        pageList.add(new InvestorPage());
+        pageList.add(mInvestorPage);
         ExFPAdapter pagerAdapter = new ExFPAdapter(this.getChildFragmentManager(), pageList);
         viewPage.setOffscreenPageLimit(3);
         pagerAdapter.setTitles(new String[]{"项目详情", "风险控制", "投资列表"});
@@ -73,6 +78,14 @@ public class ProductDetailsMorePage extends Fragment
     public void onResume()
     {
         super.onResume();
+    }
+
+    /**
+     * 初始化联系人列表数据
+     */
+    public void initTzListData(LinkedList tzList)
+    {
+        mInvestorPage.initTzList(tzList);
     }
 
     /**
@@ -108,9 +121,9 @@ public class ProductDetailsMorePage extends Fragment
         public void onSuccess(String content, Object object, int reqType) {
             if (reqType == HttpRequst.REQ_TYPE_PRODUCT_INVESTOR) {
 //                mMultiStateView.setViewState(MultiStateView.ViewState.CONTENT);
-                InvestorEntity entity = (InvestorEntity) object;
-                mAdapter.setData(entity);
-                setListViewHeightBasedOnChildren(actualListView);
+//                InvestorEntity entity = (InvestorEntity) object;
+//                mAdapter.setData(entity);
+//                setListViewHeightBasedOnChildren(actualListView);
 //
 //                mPullRefreshListView.onRefreshComplete();
             }
@@ -118,6 +131,11 @@ public class ProductDetailsMorePage extends Fragment
 
         public void onFailure(Throwable error, String content, int reqType) {
 
+        }
+
+        public void initTzList(LinkedList data)
+        {
+            mAdapter.setData(data);
         }
     }
 

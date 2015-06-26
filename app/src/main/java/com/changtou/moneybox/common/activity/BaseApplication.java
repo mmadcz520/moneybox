@@ -369,6 +369,7 @@ public abstract class BaseApplication extends Application implements UncaughtExc
             }
         }
         activityStack.clear();
+        System.exit(0);
     }
 
     /**
@@ -420,4 +421,11 @@ public abstract class BaseApplication extends Application implements UncaughtExc
     {
         return mBankInfoList;
     }
+
+    public boolean isUserLogin()
+    {
+        return !((sph.getString(AppCfg.CFG_LOGIN, "").equals(AppCfg.LOGIN_STATE.EN_LOGIN.toString()))
+                || (sph.getString(AppCfg.CFG_LOGIN, "").equals("")));
+    }
+
 }

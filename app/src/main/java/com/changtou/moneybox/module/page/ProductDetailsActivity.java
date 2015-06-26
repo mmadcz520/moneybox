@@ -3,7 +3,6 @@ package com.changtou.moneybox.module.page;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +12,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.changtou.R;
-import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.http.async.RequestParams;
-import com.changtou.moneybox.common.utils.ACache;
 import com.changtou.moneybox.module.adapter.ProductDetailsAdapter;
-import com.changtou.moneybox.module.entity.BankCardEntity;
 import com.changtou.moneybox.module.entity.ProductDetailsEntity;
 import com.changtou.moneybox.module.http.HttpRequst;
 import com.changtou.moneybox.module.widget.CountView;
@@ -96,6 +92,8 @@ public class ProductDetailsActivity extends CTBaseActivity
      */
     protected void initData()
     {
+        setPageTitle("项目详情");
+
         mProdList = mDetailsPage.getListView();
         ViewStub viewStub = new ViewStub(this);
         mProdList.addHeaderView(viewStub);
@@ -103,12 +101,11 @@ public class ProductDetailsActivity extends CTBaseActivity
         mProdList.setAdapter(mAdapter);
 
         getProductDetailsRequest();
-
     }
 
     @Override
     protected int setPageType() {
-        return 0;
+        return PAGE_TYPE_SUB;
     }
 
     protected void onResume()
@@ -126,14 +123,23 @@ public class ProductDetailsActivity extends CTBaseActivity
     {
         if (reqType == HttpRequst.REQ_TYPE_PRODUCT_DETAILS)
         {
+            super.onSuccess(content, object, reqType);
             ProductDetailsEntity entity = (ProductDetailsEntity) object;
-            mAdapter.setData(entity);
-            mDetailsPage.getProgressBar().setProgress(50);
-            mDetailsPage.getInvestPercent().showPercentWithAnimation(50);
-            mDetailsPage.getIcomeText().setText("14");
+            String[] keys = {"项目名称", "还款方式", "还款时间"};
+            String[] mValues = {entity.projectname, entity.hkfs, entity.hksj};
+            mAdapter.setData(keys, mValues);
+
+            float jd = Float.parseFloat(entity.jd);
+            mDetailsPage.getProgressBar().setProgress((int)jd);
+            mDetailsPage.getInvestPercent().showPercentWithAnimation((int)jd);
+            mDetailsPage.getIcomeText().setText(entity.nhsy);
             mDetailsPage.getTagTextView().setText("%");
-            mDetailsPage.getInvestNum().setText("25.5万/100万");
-            mDetailsPage.getTimeLimit().setText("三个月");
+            mDetailsPage.getInvestNum().setText(entity.syje + "/" + entity.rzje);
+            mDetailsPage.getTimeLimit().setText(entity.cpqx);
+            mDetailsPage.getQtjeTextView().setText(entity.qtje + "起投 | " + "每人限购100万元");
+
+
+            mAgreementPage.initTzListData(entity.mTzList);
         }
     }
 
@@ -153,6 +159,8 @@ public class ProductDetailsActivity extends CTBaseActivity
         private CountView mInvestPercent = null;
         private TextView mInvestNum = null;      //投资进度数值
 
+        private TextView mQtjeTextView = null;   //起投金额
+
 
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
@@ -166,6 +174,8 @@ public class ProductDetailsActivity extends CTBaseActivity
             mTagTextView = (TextView)v.findViewById(R.id.homepage_income_percenttag);
             mInvestPercent = (CountView)v.findViewById(R.id.invest_progress_percent);
             mInvestNum = (TextView)v.findViewById(R.id.invest_progress_num);
+
+            mQtjeTextView = (TextView)v.findViewById(R.id.invest_progress_qtje);
 
             return v;
         }
@@ -203,6 +213,11 @@ public class ProductDetailsActivity extends CTBaseActivity
         public TextView getTimeLimit()
         {
             return mTimeLimit;
+        }
+
+        public TextView getQtjeTextView()
+        {
+            return mQtjeTextView;
         }
     }
 

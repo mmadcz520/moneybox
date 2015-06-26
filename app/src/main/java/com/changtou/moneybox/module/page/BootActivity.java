@@ -1,5 +1,6 @@
 package com.changtou.moneybox.module.page;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
@@ -66,8 +67,9 @@ public class BootActivity extends AbsGuideActivity
 
     public void entryApp()
     {
-        // Time to entry your app! We just finish the activity, replace it with
-        // your code.
+        Intent intent = new Intent();
+        intent.setClass(BootActivity.this, MainActivity.class);
+        startActivity(intent);
         finish();
     }
 }

@@ -10,26 +10,34 @@ import android.widget.TextView;
 
 import com.changtou.R;
 import com.changtou.moneybox.module.entity.InvestorEntity;
+import com.changtou.moneybox.module.entity.ProductDetailsEntity;
 
+import java.util.LinkedList;
+
+/**
+ * 产品详情 ->  投资人列表
+ *
+ *
+ */
 public class ProductInvestorAdapter extends BaseAdapter
 {
     private LayoutInflater mInflater = null;
-    private InvestorEntity mEntity   = null;
+    private LinkedList mData = new LinkedList();
 
     public ProductInvestorAdapter(Context context)
     {
         mInflater = LayoutInflater.from(context);
     }
 
-    public void setData(InvestorEntity entity)
+    public void setData(LinkedList data)
     {
-        this.mEntity = entity;
+        this.mData = data;
         notifyDataSetChanged();
     }
 
-    public InvestorEntity getData()
+    public LinkedList getData()
     {
-        return mEntity;
+        return mData;
     }
 
     /**
@@ -39,11 +47,7 @@ public class ProductInvestorAdapter extends BaseAdapter
      */
     public int getCount()
     {
-        if (mEntity != null && mEntity.mList != null && mEntity.mList.size() > 0)
-        {
-            return mEntity.mList.size();
-        }
-        return 0;
+        return mData.size();
     }
 
     /**
@@ -53,11 +57,11 @@ public class ProductInvestorAdapter extends BaseAdapter
      * @return 产品实体对象
      * @see BaseAdapter#getItem(int)
      */
-    public InvestorEntity.ListEntity getItem(int position)
+    public Object getItem(int position)
     {
-        if (mEntity.mList != null && mEntity.mList.size() > 0)
+        if (mData != null)
         {
-            return (InvestorEntity.ListEntity) mEntity.mList.get(position);
+            return mData.get(position);
         }
         return null;
     }
@@ -67,7 +71,7 @@ public class ProductInvestorAdapter extends BaseAdapter
      */
     public long getItemId(int position)
     {
-        return 0;
+        return position;
     }
 
     /**
@@ -75,7 +79,7 @@ public class ProductInvestorAdapter extends BaseAdapter
      */
     public View getView(int position, View convertView, ViewGroup parent)
     {
-        InvestorEntity.ListEntity entity = getItem(position);
+        ProductDetailsEntity.TzListEntity entity = (ProductDetailsEntity.TzListEntity)getItem(position);
         ViewHolder viewHolder;
 
         if (convertView == null)
@@ -92,9 +96,10 @@ public class ProductInvestorAdapter extends BaseAdapter
         {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.investor_name.setText(entity.mInvestorName);
-        viewHolder.investor_sum.setText(entity.mInvestorMoney);
-        viewHolder.investor_time.setText(entity.mInvestorTime);
+
+        viewHolder.investor_name.setText(entity.username);
+        viewHolder.investor_sum.setText(entity.withdrawAmount);
+        viewHolder.investor_time.setText(entity.createTime);
         return convertView;
     }
 

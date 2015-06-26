@@ -7,17 +7,16 @@
         android:layout_below="@+id/split_line"
         android:id="@+id/describe_layout"
         android:layout_width="fill_parent"
-        android:layout_height="300dp"
+        android:layout_height="150dp"
         android:orientation="vertical">
         <ListView
             android:id="@+id/confirm_product_details"
             android:layout_marginTop="2dp"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="320dp"
             android:divider="@color/ct_divide_line"
             android:dividerHeight="1px"
-            android:headerDividersEnabled="true"
-            android:footerDividersEnabled="true"/>
+            android:headerDividersEnabled="true" />
 
     </LinearLayout>
 

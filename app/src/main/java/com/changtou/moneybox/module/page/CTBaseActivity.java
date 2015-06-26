@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.changtou.R;
 import com.changtou.moneybox.common.activity.BaseActivity;
+import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.http.async.RequestParams;
 import com.changtou.moneybox.module.CTMoneyApplication;
 import com.changtou.moneybox.module.widget.ZProgressHUD;
@@ -179,4 +180,13 @@ abstract public class CTBaseActivity extends BaseActivity{
      */
     abstract protected int setPageType();
 
+    protected void onDestroy()
+    {
+        if(mPageType != PAGE_TYPE_SUB)
+        {
+            BaseApplication.getInstance().AppExit();
+        }
+
+        super.onDestroy();
+    }
 }

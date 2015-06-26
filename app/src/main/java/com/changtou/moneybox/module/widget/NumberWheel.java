@@ -13,6 +13,7 @@ import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.RelativeLayout;
 
 import com.changtou.R;
 
@@ -44,11 +45,22 @@ public class NumberWheel extends SurfaceView implements Callback,Runnable {
 	private boolean isSurfaveCreated = false;
 
 	private NumberBean nBean=null;
-	public NumberWheel(Context context,NumberBean nBean,LayoutParams rl,int millisecond) {
+
+	static NumberWheel instance;
+
+	public static NumberWheel getInstance(Context context) {
+		if (instance == null) {
+			instance = new NumberWheel(context);
+		}
+		return instance;
+	}
+
+	private NumberWheel(Context context) {
 		super(context);
 		// TODO Auto-generated constructor stub
-		this.nBean=nBean;
-		this.millisecond=millisecond;
+		nBean=new NumberWheel.NumberBean();
+		nBean.setStartShowNumString("0000");
+		RelativeLayout.LayoutParams rl = new RelativeLayout.LayoutParams(338,130);
 		setLayoutParams(rl);
 		init();
 	}

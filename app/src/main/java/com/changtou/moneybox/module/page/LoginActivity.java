@@ -158,7 +158,9 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
      */
     public void onBackPressed()
     {
-        super.onBackPressed();
+        Intent intent = new Intent(this, MainActivity.class);
+        LoginActivity.this.setResult(RESULT_CANCELED, intent);
+        LoginActivity.this.finish();
     }
 
 

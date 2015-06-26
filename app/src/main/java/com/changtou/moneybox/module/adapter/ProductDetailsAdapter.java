@@ -8,7 +8,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.changtou.R;
-import com.changtou.moneybox.module.entity.ProductDetailsEntity;
 
 /**
  * Created by Administrator on 2015/5/3 0003.
@@ -16,10 +15,9 @@ import com.changtou.moneybox.module.entity.ProductDetailsEntity;
 public class ProductDetailsAdapter extends BaseAdapter
 {
     private LayoutInflater mInflater = null;
-    private ProductDetailsEntity mEntity   = null;
 
-    private String[] keys = {"项目名称", "还款方式", "还款时间"};
-    private String[] values = {"[长投宝]上手易第256期", "按月付息,到期还本", "2015-07-17"};
+    private String[] mKeys = {"项目名称", "还款方式", "还款时间"};
+    private String[] mValues = {"[长投宝]上手易第256期", "按月付息,到期还本", "2015-07-17"};
 
     public ProductDetailsAdapter(Context context)
     {
@@ -27,26 +25,19 @@ public class ProductDetailsAdapter extends BaseAdapter
     }
 
     @Override
-    public int getCount() {
-        if (mEntity != null && mEntity.mList != null && mEntity.mList.size() > 0)
-        {
-            return mEntity.mList.size();
-        }
-        return 0;
+    public int getCount()
+    {
+        return mKeys.length;
     }
 
     @Override
-    public ProductDetailsEntity.ProListEntity getItem(int position) {
-        if (mEntity.mList != null && mEntity.mList.size() > 0)
-        {
-            return (ProductDetailsEntity.ProListEntity) mEntity.mList.get(position);
-        }
-        return null;
+    public String getItem(int position) {
+        return mValues[position];
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override
@@ -61,22 +52,23 @@ public class ProductDetailsAdapter extends BaseAdapter
             viewHolder.mKey = (TextView) convertView.findViewById(R.id.pro_key);
             viewHolder.mValue = (TextView) convertView.findViewById(R.id.pro_value);
 
-
             convertView.setTag(viewHolder);
         }
         else
         {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.mKey.setText(keys[position]);
-        viewHolder.mValue.setText(values[position]);
+        viewHolder.mKey.setText(mKeys[position]);
+        viewHolder.mValue.setText(mValues[position]);
 
         return convertView;
     }
 
-    public void setData(ProductDetailsEntity entity)
+    public void setData(String[] keys, String[] values)
     {
-        this.mEntity = entity;
+        mKeys = keys;
+        mValues = values;
+
         notifyDataSetChanged();
     }
 

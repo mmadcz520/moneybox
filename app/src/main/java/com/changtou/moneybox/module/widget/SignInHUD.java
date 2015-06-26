@@ -79,8 +79,9 @@ public class SignInHUD extends FrameLayout {
 		nBean=new NumberWheel.NumberBean();
 		nBean.setStartShowNumString("0000");
 		RelativeLayout.LayoutParams rl = new RelativeLayout.LayoutParams(338,130);
-		nw = new NumberWheel(getContext(),nBean,rl,500);
+		nw = NumberWheel.getInstance(getContext());
 		RelativeLayout r = (RelativeLayout)mContentView.findViewById(R.id.number_count);
+		r.removeView(nw);
 		r.addView(nw);
 
 		addView(mContentView, mContentView.getLayoutParams());

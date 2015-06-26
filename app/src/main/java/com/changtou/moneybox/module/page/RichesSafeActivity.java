@@ -73,9 +73,10 @@ public class RichesSafeActivity extends CTBaseActivity
             {
                 sph.putString(AppCfg.CFG_LOGIN, AppCfg.LOGIN_STATE.EN_LOGIN.toString());
                 sph.putString(AppCfg.GSPD, "");
-                final Intent intent0 = new Intent(this, MainActivity.class);
-                startActivity(intent0);
-                BaseApplication.getInstance().resetBackFlag();
+//                final Intent intent0 = new Intent(this, MainActivity.class);
+//                startActivity(intent0);
+//                BaseApplication.getInstance().resetBackFlag();
+                BaseApplication.getInstance().AppExit();
                 break;
             }
         }

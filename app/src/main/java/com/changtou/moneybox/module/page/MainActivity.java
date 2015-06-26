@@ -3,18 +3,12 @@ package com.changtou.moneybox.module.page;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import com.changtou.R;
 import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.activity.BaseFragment;
-import com.changtou.moneybox.common.utils.ACache;
-import com.changtou.moneybox.common.utils.SharedPreferencesHelper;
-import com.changtou.moneybox.module.appcfg.AppCfg;
-import com.changtou.moneybox.module.entity.UserInfoEntity;
-import com.changtou.moneybox.module.http.HttpRequst;
 import com.changtou.moneybox.module.widget.ExFPAdapter;
 import com.changtou.moneybox.module.widget.ExViewPager;
 import com.changtou.moneybox.module.widget.SignInHUD;
@@ -36,8 +30,6 @@ public class MainActivity extends CTBaseActivity {
 
     //页面底部导航控件
     private LinearLayout[] mBars = new LinearLayout[4];
-
-    private SharedPreferencesHelper sph = null;
 
     private SignInHUD mSignInHUD = null;
 
@@ -72,8 +64,6 @@ public class MainActivity extends CTBaseActivity {
         mViewpager.setScanScroll(false);
         mViewpager.setCurrentItem(0, false);
         mViewpager.setOffscreenPageLimit(viewList.size());
-
-        sph = SharedPreferencesHelper.getInstance(this);
 
         mSignInHUD = (SignInHUD)this.findViewById(R.id.signin_fragment);
     }
@@ -151,7 +141,7 @@ public class MainActivity extends CTBaseActivity {
                 switchNavBar(2);
 
                 //已经登录
-                if((sph.getString(AppCfg.CFG_LOGIN, "").equals(AppCfg.LOGIN_STATE.EN_LOGIN.toString())) || (sph.getString(AppCfg.CFG_LOGIN, "").equals("")))
+                if(!BaseApplication.getInstance().isUserLogin())
                 {
                     Intent intent = new Intent(this, LoginActivity.class);
                     startActivityForResult(intent, 0);
@@ -190,11 +180,16 @@ public class MainActivity extends CTBaseActivity {
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-//        Intent intent = new Intent(this, GesturePWActivity.class);
-//        intent.putExtra("action", "login");
-//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//        startActivity(intent);
-        BaseApplication.getInstance().onBackground();
+        if(resultCode == RESULT_OK)
+        {
+            //设置手势密码
+            BaseApplication.getInstance().onBackground();
+        }
+        else
+        {
+            mViewpager.setCurrentItem(0);
+            switchNavBar(0);
+        }
     }
 
     public void onBackPressed()

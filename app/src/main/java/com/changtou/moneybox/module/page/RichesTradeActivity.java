@@ -24,13 +24,13 @@ public class RichesTradeActivity extends CTBaseActivity
     {
         setContentView(R.layout.riches_trade_layout);
 
-        NumberWheel.NumberBean nBean=new NumberWheel.NumberBean();
-        nBean.setStartShowNumString("0000");
-        nBean.setEndShowNumString("1998");
-        RelativeLayout.LayoutParams rl = new RelativeLayout.LayoutParams(338,130);
-        NumberWheel nw = new NumberWheel(this,nBean,rl,500);
-        RelativeLayout r = (RelativeLayout)findViewById(R.id.tredd);
-        r.addView(nw);
+//        NumberWheel.NumberBean nBean=new NumberWheel.NumberBean();
+//        nBean.setStartShowNumString("0000");
+//        nBean.setEndShowNumString("1998");
+//        RelativeLayout.LayoutParams rl = new RelativeLayout.LayoutParams(338,130);
+//        NumberWheel nw = new NumberWheel(this,nBean,rl,500);
+//        RelativeLayout r = (RelativeLayout)findViewById(R.id.tredd);
+//        r.addView(nw);
 
         mTradeListView = (ListView)findViewById(R.id.riches_trade_listview);
     }

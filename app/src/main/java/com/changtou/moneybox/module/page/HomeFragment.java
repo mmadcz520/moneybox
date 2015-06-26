@@ -1,6 +1,7 @@
 package com.changtou.moneybox.module.page;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,10 +9,14 @@ import android.view.ViewGroup;
 
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.changtou.R;
+import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.activity.BaseFragment;
+import com.changtou.moneybox.common.utils.SharedPreferencesHelper;
 import com.changtou.moneybox.module.adapter.ProductListAdapter;
+import com.changtou.moneybox.module.appcfg.AppCfg;
 import com.changtou.moneybox.module.entity.PromotionEntity;
 import com.changtou.moneybox.module.http.HttpRequst;
 import com.changtou.moneybox.module.widget.CountView;
@@ -43,6 +48,7 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
     private CountView mInvestPercent = null;
     private TextView mInvestNum = null;      //投资进度数值
 
+    private SharedPreferencesHelper sph = null;
 
     private ProductListAdapter mAdapter = null;
 
@@ -71,12 +77,14 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
 
         mPullToRefreshScrollView.setOnRefreshListener(this);
 
+        sph = SharedPreferencesHelper.getInstance(this.getActivity());
+
         return mView;
     }
 
     protected void initListener()
     {
-
+        setOnClickListener(R.id.homepage_btn_invest);
     }
 
     /**
@@ -145,6 +153,19 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
                 HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_PRODUCT_HOME),
                 mParams,
                 mAct.getAsyncClient(), false);
+    }
 
+    public void treatClickEvent(int id)
+    {
+        //
+        if(BaseApplication.getInstance().isUserLogin())
+        {
+            Intent intent = new Intent(this.getActivity(), ConfirmActivity.class);
+            startActivity(intent);
+        }
+        else
+        {
+            Toast.makeText(this.getActivity(), "请先登录", Toast.LENGTH_LONG).show();
+        }
     }
 }

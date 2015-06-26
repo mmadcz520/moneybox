@@ -1,5 +1,7 @@
 package com.changtou.moneybox.module.entity;
 
+import android.util.Log;
+
 import com.changtou.moneybox.common.http.base.BaseEntity;
 
 import org.json.JSONArray;
@@ -14,14 +16,26 @@ import java.util.LinkedList;
  */
 public class ProductDetailsEntity extends BaseEntity
 {
-    public LinkedList mList = null;
+    //投资列表
+    public LinkedList mTzList = null;
 
-    private String yqsy = null;
-    private String cpqx = null;
-    private String jd = null;
-    private String jrtj = null;
-    private String syje = null;
-    private String yzje = null;
+    public String nhsy = ""; //年化收益
+    public String jd = "";   //还款进度
+    public String rzje = ""; //融资金额
+    public String syje = ""; //剩余金额
+    public String cpqx = ""; //项目期限
+
+    public String qtje = ""; //起投金额
+
+    public String projectname = ""; //项目名称
+    public String hkfs = "";        //还款方式
+    public String hksj = "";        //还款时间
+
+
+    public String yqsy = "";
+
+    public String jrtj = "";
+    public String yzje = "";
 
     /**
      * @see BaseEntity#paser(String)
@@ -30,35 +44,58 @@ public class ProductDetailsEntity extends BaseEntity
      */
     public void paser(String data) throws Exception
     {
+        Log.e("CT_MONEY", "productDetail = " + data);
+
         JSONObject object = new JSONObject(data);
         JSONObject productDetail = object.getJSONObject("productDetail");
 
-        yqsy = productDetail.getString("yqsy");
-        cpqx = productDetail.getString("cpqx");
+        nhsy = productDetail.getString("nhsy");
         jd = productDetail.getString("jd");
-        jrtj = productDetail.getString("jrtj");
+        rzje = productDetail.getString("rzje");
         syje = productDetail.getString("syje");
-        yzje = productDetail.getString("yzje");
+        cpqx = productDetail.getString("cpqx");
 
-//        JSONArray array = new JSONArray(data);
-//        mList = new LinkedList();
-//        ProListEntity entity;
-//        int size = array.length();
-//        for (int i = 0; i < 3; i++) {
-//            entity = new ProListEntity();
-//            entity.paser(array.getJSONObject(i));
-//            mList.add(entity);
-//        }
+        qtje = productDetail.getString("qtje");
+
+        projectname = productDetail.getString("projectname");
+        hkfs = productDetail.getString("hkfs");
+        hksj = productDetail.getString("hksj");
+
+//        Log.e("CT_MONEY", nhsy + "-" + jd + "-"+ rzje + "-" + syje + "-" +  cpqx + "-" + qtje
+//        + "-" + projectname + "-" + hkfs + "-" + hksj);
+
+        JSONArray tzlist = object.getJSONArray("tzlist");
+        int  count = tzlist.length();
+
+        mTzList = new LinkedList();
+        TzListEntity entity;
+
+        for (int i = 0; i < count; i++)
+        {
+            entity = new TzListEntity();
+            entity.paser(tzlist.getJSONObject(i));
+            mTzList.add(entity);
+        }
     }
 
-    public  class ProListEntity
+    /**
+     * 投资列表实体类
+     *
+     * [{"id":206747,"username":"359239537@qq.com","withdrawAmount":10000,"createTime":"\/Date(1434269638433)\/"},
+     */
+    public  class TzListEntity
     {
         public String id;
-        public String name;
+        public String username;
+        public String withdrawAmount;
+        public String createTime;
 
-        public void paser(JSONObject json) throws Exception {
-            id = json.optString("reply_count");
-            name = json.optString("post_status");
+        public void paser(JSONObject json) throws Exception
+        {
+            id = json.optString("id");
+            username = json.optString("username");
+            withdrawAmount = json.optString("withdrawAmount");
+            createTime = json.optString("createTime");
         }
     }
 }

@@ -5,6 +5,7 @@ import android.graphics.Typeface;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.SparseArray;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -178,6 +179,11 @@ public class SlidingTabLayout extends HorizontalScrollView {
                 // If there is a custom tab view layout id set, try and inflate it
                 tabView = LayoutInflater.from(getContext()).inflate(mTabViewLayoutId, mTabStrip,
                         false);
+
+                DisplayMetrics metric = new DisplayMetrics();
+                int width = metric.widthPixels;
+//                getContext().getWindowManager().getDefaultDisplay().getMetrics(metric);
+                tabView.setMinimumWidth(width/3);
                 tabTitleView = (TextView) tabView.findViewById(mTabViewTextViewId);
             }
 
