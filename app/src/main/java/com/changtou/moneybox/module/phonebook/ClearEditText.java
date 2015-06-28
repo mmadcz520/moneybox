@@ -18,7 +18,7 @@ import com.changtou.R;
 public class ClearEditText extends EditText implements OnFocusChangeListener,
 		TextWatcher {
 	
-	//É¾³ı°´Å¥µÄÒıÓÃ
+	//åˆ é™¤æŒ‰é’®çš„å¼•ç”¨
 	private Drawable mClearDrawable;
 	
 	
@@ -31,24 +31,24 @@ public class ClearEditText extends EditText implements OnFocusChangeListener,
 	}
 
 	private void init() {
-		//»ñÈ¡EditTextµÄDrawableRight,¼ÙÈçÃ»ÓĞÉèÖÃÎÒÃÇ¾ÍÊ¹ÓÃÄ¬ÈÏµÄÍ¼Æ¬
-	    // »ñÈ¡EditTextµÄDrawableRight,¼ÙÈçÃ»ÓĞÉèÖÃÎÒÃÇ¾ÍÊ¹ÓÃÄ¬ÈÏµÄÍ¼Æ¬,2ÊÇ»ñµÃÓÒ±ßµÄÍ¼Æ¬  Ë³ĞòÊÇ×óÉÏÓÒÏÂ£¨0,1,2,3,£©
+		//è·å–EditTextçš„DrawableRight,å‡å¦‚æ²¡æœ‰è®¾ç½®æˆ‘ä»¬å°±ä½¿ç”¨é»˜è®¤çš„å›¾ç‰‡
+	    // è·å–EditTextçš„DrawableRight,å‡å¦‚æ²¡æœ‰è®¾ç½®æˆ‘ä»¬å°±ä½¿ç”¨é»˜è®¤çš„å›¾ç‰‡,2æ˜¯è·å¾—å³è¾¹çš„å›¾ç‰‡  é¡ºåºæ˜¯å·¦ä¸Šå³ä¸‹ï¼ˆ0,1,2,3,ï¼‰
 		mClearDrawable = getCompoundDrawables()[2];
 		if (mClearDrawable == null) {
 			mClearDrawable = getResources().getDrawable(R.mipmap.emotionstore_progresscancelbtn);
 		}
 		mClearDrawable.setBounds(0, 0, mClearDrawable.getIntrinsicWidth(), mClearDrawable.getIntrinsicHeight());
-		 // Ä¬ÈÏÉèÖÃÒş²ØÍ¼±ê
+		 // é»˜è®¤è®¾ç½®éšè—å›¾æ ‡
 	    setClearIconVisible(false);
-	    // ÉèÖÃ½¹µã¸Ä±äµÄ¼àÌı
+	    // è®¾ç½®ç„¦ç‚¹æ”¹å˜çš„ç›‘å¬
 	    setOnFocusChangeListener(this);
-	    // ÉèÖÃÊäÈë¿òÀïÃæÄÚÈİ·¢Éú¸Ä±äµÄ¼àÌı
+	    // è®¾ç½®è¾“å…¥æ¡†é‡Œé¢å†…å®¹å‘ç”Ÿæ”¹å˜çš„ç›‘å¬
 	    addTextChangedListener(this);
 	}
 	 /**
-     * ÒòÎªÎÒÃÇ²»ÄÜÖ±½Ó¸øEditTextÉèÖÃµã»÷ÊÂ¼ş£¬ËùÒÔÎÒÃÇÓÃ¼Ç×¡ÎÒÃÇ°´ÏÂµÄÎ»ÖÃÀ´Ä£Äâµã»÷ÊÂ¼ş
-     * µ±ÎÒÃÇ°´ÏÂµÄÎ»ÖÃ ÔÚ  EditTextµÄ¿í¶È - Í¼±êµ½¿Ø¼şÓÒ±ßµÄ¼ä¾à - Í¼±êµÄ¿í¶È  ºÍ
-     * EditTextµÄ¿í¶È - Í¼±êµ½¿Ø¼şÓÒ±ßµÄ¼ä¾àÖ®¼äÎÒÃÇ¾ÍËãµã»÷ÁËÍ¼±ê£¬ÊúÖ±·½ÏòÃ»ÓĞ¿¼ÂÇ
+     * å› ä¸ºæˆ‘ä»¬ä¸èƒ½ç›´æ¥ç»™EditTextè®¾ç½®ç‚¹å‡»äº‹ä»¶ï¼Œæ‰€ä»¥æˆ‘ä»¬ç”¨è®°ä½æˆ‘ä»¬æŒ‰ä¸‹çš„ä½ç½®æ¥æ¨¡æ‹Ÿç‚¹å‡»äº‹ä»¶
+     * å½“æˆ‘ä»¬æŒ‰ä¸‹çš„ä½ç½® åœ¨  EditTextçš„å®½åº¦ - å›¾æ ‡åˆ°æ§ä»¶å³è¾¹çš„é—´è· - å›¾æ ‡çš„å®½åº¦  å’Œ
+     * EditTextçš„å®½åº¦ - å›¾æ ‡åˆ°æ§ä»¶å³è¾¹çš„é—´è·ä¹‹é—´æˆ‘ä»¬å°±ç®—ç‚¹å‡»äº†å›¾æ ‡ï¼Œç«–ç›´æ–¹å‘æ²¡æœ‰è€ƒè™‘
      */
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
@@ -90,7 +90,7 @@ public class ClearEditText extends EditText implements OnFocusChangeListener,
 
 	}
 	/**
-     * µ±ClearEditText½¹µã·¢Éú±ä»¯µÄÊ±ºò£¬ÅĞ¶ÏÀïÃæ×Ö·û´®³¤¶ÈÉèÖÃÇå³ıÍ¼±êµÄÏÔÊ¾ÓëÒş²Ø
+     * å½“ClearEditTextç„¦ç‚¹å‘ç”Ÿå˜åŒ–çš„æ—¶å€™ï¼Œåˆ¤æ–­é‡Œé¢å­—ç¬¦ä¸²é•¿åº¦è®¾ç½®æ¸…é™¤å›¾æ ‡çš„æ˜¾ç¤ºä¸éšè—
      */
 	@Override
 	public void onFocusChange(View v, boolean hasFocus) {
@@ -101,7 +101,7 @@ public class ClearEditText extends EditText implements OnFocusChangeListener,
 	        } 
 	}
 	 /**
-     * ÉèÖÃÇå³ıÍ¼±êµÄÏÔÊ¾ÓëÒş²Ø£¬µ÷ÓÃsetCompoundDrawablesÎªEditText»æÖÆÉÏÈ¥
+     * è®¾ç½®æ¸…é™¤å›¾æ ‡çš„æ˜¾ç¤ºä¸éšè—ï¼Œè°ƒç”¨setCompoundDrawablesä¸ºEditTextç»˜åˆ¶ä¸Šå»
      * @param visible
      */
     protected void setClearIconVisible(boolean visible) { 
@@ -110,7 +110,7 @@ public class ClearEditText extends EditText implements OnFocusChangeListener,
                 getCompoundDrawables()[1], right, getCompoundDrawables()[3]); 
     } 
     /**
-     * ÉèÖÃ»Î¶¯¶¯»­
+     * è®¾ç½®æ™ƒåŠ¨åŠ¨ç”»
      */
     public void setShakeAnimation(){
     	this.setAnimation(shakeAnimation(5));
@@ -118,8 +118,8 @@ public class ClearEditText extends EditText implements OnFocusChangeListener,
     
     
     /**
-     * »Î¶¯¶¯»­
-     * @param counts 1ÃëÖÓ»Î¶¯¶àÉÙÏÂ
+     * æ™ƒåŠ¨åŠ¨ç”»
+     * @param counts 1ç§’é’Ÿæ™ƒåŠ¨å¤šå°‘ä¸‹
      * @return
      */
     public static Animation shakeAnimation(int counts){

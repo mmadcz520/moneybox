@@ -8,10 +8,12 @@ import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.SparseArray;
 import android.util.TypedValue;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -180,8 +182,10 @@ public class SlidingTabLayout extends HorizontalScrollView {
                 tabView = LayoutInflater.from(getContext()).inflate(mTabViewLayoutId, mTabStrip,
                         false);
 
-                DisplayMetrics metric = new DisplayMetrics();
-                int width = metric.widthPixels;
+                WindowManager manager = (WindowManager) getContext()
+                        .getSystemService(Context.WINDOW_SERVICE);
+                Display display = manager.getDefaultDisplay();
+                int width = display.getWidth();
 //                getContext().getWindowManager().getDefaultDisplay().getMetrics(metric);
                 tabView.setMinimumWidth(width/3);
                 tabTitleView = (TextView) tabView.findViewById(mTabViewTextViewId);

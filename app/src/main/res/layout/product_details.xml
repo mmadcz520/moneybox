@@ -30,8 +30,9 @@
             android:layout_width="fill_parent"
             android:layout_height="@dimen/button_height_fillparent"
             android:layout_centerInParent="true"
-            android:background="@color/ct_blue"
+            android:background="@drawable/btn_selector"
             android:textColor="@color/ct_white"
+            android:enabled="false"
             android:text="立即投资" />
     <!--</RelativeLayout>-->
 

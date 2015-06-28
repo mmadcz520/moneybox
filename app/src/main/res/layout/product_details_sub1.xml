@@ -18,6 +18,12 @@
             android:layout_weight="2"/>
 
         <!--  投资剩余 -->
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:background="@color/ct_divide_line" />
+
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="0dp"

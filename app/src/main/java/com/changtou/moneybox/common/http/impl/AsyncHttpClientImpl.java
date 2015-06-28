@@ -37,8 +37,12 @@ public class AsyncHttpClientImpl implements BaseHttpClient {
         return instance;
     }
 
-    private AsyncHttpClientImpl() {
+    private AsyncHttpClientImpl()
+    {
         client = new AsyncHttpClient();
+
+        //设置链接超时
+        client.setTimeout(2000);
     }
 
     @Override

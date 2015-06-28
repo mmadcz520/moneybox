@@ -70,6 +70,9 @@ public class ProductFragment extends BaseFragment{
 
     protected void initData(Bundle savedInstanceState)
     {
+
+        mZProgressHUD.show();
+
         sendRequest(HttpRequst.REQ_TYPE_PRODUCT_TYPE,
                 HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_PRODUCT_TYPE),
                 mParams,
@@ -80,6 +83,8 @@ public class ProductFragment extends BaseFragment{
     {
         if(reqType == HttpRequst.REQ_TYPE_PRODUCT_TYPE)
         {
+            mZProgressHUD.cancel();
+
             try
             {
                 JSONObject json = new JSONObject(content);
@@ -110,7 +115,7 @@ public class ProductFragment extends BaseFragment{
 
     public void onFailure(Throwable error, String content, int reqType)
     {
-        printLog("onFailure--->" + content);
+        mZProgressHUD.cancel();
     }
 
     private OnPageChangeListener mPageChangeListener = new OnPageChangeListener()

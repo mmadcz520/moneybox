@@ -47,8 +47,13 @@ public class RichesCalendarActivity extends CTBaseActivity implements OnDateChan
         mFlowEntity = (FlowEntity)getIntent().getSerializableExtra("flow");
         mSelectMonth = getIntent().getIntExtra("selected_month",0);
 
-        FlowEntity.MonthEntity sMonth = mFlowEntity.mMonth.get(mSelectMonth);
-        String time = sMonth.time;
+        String time="";
+        if(mFlowEntity != null)
+        {
+            FlowEntity.MonthEntity sMonth = mFlowEntity.mMonth.get(mSelectMonth);
+            time = sMonth.time;
+        }
+
 
         widget = (MaterialCalendarView) findViewById(R.id.calendarView);
         widget.setOnDateChangedListener(this);

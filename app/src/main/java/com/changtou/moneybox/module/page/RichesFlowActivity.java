@@ -65,7 +65,11 @@ public class RichesFlowActivity extends CTBaseActivity implements AdapterView.On
     {
         if(reqType == HttpRequst.REQ_TYPE_FLOW)
         {
-            mEntity = (FlowEntity) object;
+            super.onSuccess(content, object, reqType);
+            if(object != null)
+            {
+                mEntity = (FlowEntity) object;
+            }
             UserInfoEntity userInfoEntity = UserInfoEntity.getInstance();
             mAdapter.setData(userInfoEntity.getFlowEntity());
         }

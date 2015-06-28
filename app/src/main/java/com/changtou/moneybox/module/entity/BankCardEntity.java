@@ -8,7 +8,7 @@ import org.json.JSONObject;
 import java.util.LinkedList;
 
 /**
- * "bankinfo":[{"id":240,"account":"6217857600003237158","bank":"ÖĞ¹úÒøĞĞ","branch":"Ãñ×å´óµÀÖ§ĞĞ","isdefault":"ÊÇ","place":"ºş±±Îäºº","type":"","createtime":"2015-06-08"}],
+ * "bankinfo":[{"id":240,"account":"6217857600003237158","bank":"ä¸­å›½é“¶è¡Œ","branch":"æ°‘æ—å¤§é“æ”¯è¡Œ","isdefault":"æ˜¯","place":"æ¹–åŒ—æ­¦æ±‰","type":"","createtime":"2015-06-08"}],
  *
  * Created by Administrator on 2015/5/21.
  */

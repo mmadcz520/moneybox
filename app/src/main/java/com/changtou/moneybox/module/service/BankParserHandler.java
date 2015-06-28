@@ -14,7 +14,7 @@ import java.util.Map;
 public class BankParserHandler extends DefaultHandler
 {
 	/**
-	 * ´æ´¢ËùÓĞµÄ½âÎö¶ÔÏó
+	 * å­˜å‚¨æ‰€æœ‰çš„è§£æå¯¹è±¡
 	 */
 	private List<String> mBankList = new ArrayList<String>();
 
@@ -33,7 +33,7 @@ public class BankParserHandler extends DefaultHandler
 	}
 
 	/**
-	 * »ñÈ¡ÒøĞĞ¿¨»ù±¾ĞÅÏ¢
+	 * è·å–é“¶è¡Œå¡åŸºæœ¬ä¿¡æ¯
 	 * @return
 	 */
 	public  Map<String, String> getBankInfoList() {
@@ -43,13 +43,13 @@ public class BankParserHandler extends DefaultHandler
 	@Override
 	public void startDocument() throws SAXException
 	{
-		// µ±¶Áµ½µÚÒ»¸ö¿ªÊ¼±êÇ©µÄÊ±ºò£¬»á´¥·¢Õâ¸ö·½·¨
+		// å½“è¯»åˆ°ç¬¬ä¸€ä¸ªå¼€å§‹æ ‡ç­¾çš„æ—¶å€™ï¼Œä¼šè§¦å‘è¿™ä¸ªæ–¹æ³•
 	}
 
 	@Override
 	public void startElement(String uri, String localName, String qName,
 			Attributes attributes) throws SAXException {
-		// µ±Óöµ½¿ªÊ¼±ê¼ÇµÄÊ±ºò£¬µ÷ÓÃÕâ¸ö·½·¨
+		// å½“é‡åˆ°å¼€å§‹æ ‡è®°çš„æ—¶å€™ï¼Œè°ƒç”¨è¿™ä¸ªæ–¹æ³•
 		if (qName.equals("bank")) {
 			mBankName = attributes.getValue(0);
 			mBankIcon = attributes.getValue(1);
@@ -59,7 +59,7 @@ public class BankParserHandler extends DefaultHandler
 	@Override
 	public void endElement(String uri, String localName, String qName)
 			throws SAXException {
-		// Óöµ½½áÊø±ê¼ÇµÄÊ±ºò£¬»áµ÷ÓÃÕâ¸ö·½·¨
+		// é‡åˆ°ç»“æŸæ ‡è®°çš„æ—¶å€™ï¼Œä¼šè°ƒç”¨è¿™ä¸ªæ–¹æ³•
 		if (qName.equals("bank")) {
 			mBankList.add(mBankName);
 			mBankInfoList.put(mBankName,mBankIcon);

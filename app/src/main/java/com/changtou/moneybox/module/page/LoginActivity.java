@@ -107,12 +107,13 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
 
     protected void initData()
     {
+        setPageTitle("登录");
 
     }
 
     @Override
     protected int setPageType() {
-        return 0;
+        return PAGE_TYPE_SUB;
     }
 
     /**

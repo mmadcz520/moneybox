@@ -28,7 +28,7 @@
 //        super.onCreate(savedInstanceState);
 //        setContentView(R.layout.add_user);
 //
-//        //µÃµ½Ò³Ãæ¿Ø¼ş
+//        //å¾—åˆ°é¡µé¢æ§ä»¶
 //        name=(EditText)findViewById(R.id.addUserTextName);
 //        phoneNum=(EditText)findViewById(R.id.addUserTextNum);
 //        birthday=(EditText)findViewById(R.id.addUserTextBirthday);
@@ -47,18 +47,18 @@
 //    public void addUserClick(View view){
 //        int viewId=view.getId();
 //        switch(viewId){
-//            case R.id.addUserOkBut://È·¶¨
+//            case R.id.addUserOkBut://ç¡®å®š
 //
-//                //ÑéÖ¤
+//                //éªŒè¯
 //                String name=this.name.getText().toString();
 //                String phoneNum=this.phoneNum.getText().toString();
 //                String birthday=this.birthday.getText().toString();
 //
-//                //Ìá½» ±£´æÊı¾İ¿â
+//                //æäº¤ ä¿å­˜æ•°æ®åº“
 //                friendsDao.insertData(name, phoneNum,birthday,sexText);
 //                Log.d("test", "addUserClick " + name+"|"+phoneNum+"|"+birthday+"|"+sexText.toString());
 //                break;
-//            case R.id.addUserNoBut://È¡Ïû
+//            case R.id.addUserNoBut://å–æ¶ˆ
 //
 //                break;
 //            case R.id.addUserFromTXId:
@@ -70,7 +70,7 @@
 //        }
 //    }
 //
-//    //ÖØĞ´µÄ½á¹û·µ»Ø·½·¨
+//    //é‡å†™çš„ç»“æœè¿”å›æ–¹æ³•
 //    @Override
 //    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 //        super.onActivityResult(requestCode, resultCode, data);
@@ -85,7 +85,7 @@
 //                String name = "";
 //                String phone = "";
 //
-//                //µÃµ½Ãû³Æ
+//                //å¾—åˆ°åç§°
 //                String[] projection = new String[] { People._ID, People.NAME ,People.NUMBER};
 //                Cursor cursor = getContentResolver().query(People.CONTENT_URI,
 //                        projection, // select sentence
@@ -97,7 +97,7 @@
 //                    name = cursor.getString(cursor.getColumnIndex(People.NAME));
 //                }
 //
-//                //µÃµ½ µç»°
+//                //å¾—åˆ° ç”µè¯
 //                projection = new String[] { Contacts.Phones.PERSON_ID, Contacts.Phones.NUMBER};
 //                cursor = getContentResolver().query(Contacts.Phones.CONTENT_URI,
 //                        projection, // select sentence
@@ -109,7 +109,7 @@
 //                    phone = cursor.getString(cursor.getColumnIndex(Contacts.Phones.NUMBER));
 //                }
 //
-//                //ÏÔÊ¾
+//                //æ˜¾ç¤º
 //                showPhone.setText(name+":"+phone);
 //                break;
 //        }

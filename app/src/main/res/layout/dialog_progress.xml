@@ -51,9 +51,9 @@
             android:padding="10dp"
             android:singleLine="true"
             android:ellipsize="end"
-            android:text="Loading ..."
+            android:text="载入中 ..."
             android:textColor="@android:color/white"
-            android:textSize="@dimen/font_size_small"/>
+            android:textSize="@dimen/font_size_hint2"/>
     </LinearLayout>
 
 </LinearLayout>

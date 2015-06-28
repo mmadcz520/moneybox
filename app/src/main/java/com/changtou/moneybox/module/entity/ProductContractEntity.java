@@ -29,7 +29,7 @@ public class ProductContractEntity extends BaseEntity {
     public void paser(String data) throws Exception {
 
 
-        JSONArray array = new JSONArray(data);
+//        JSONArray array = new JSONArray(data);
         mAuditImg = new LinkedList();
 
         mContent = "借款人***集团有限公司, 是一家专业从事房地产开发的公司," +
@@ -42,12 +42,12 @@ public class ProductContractEntity extends BaseEntity {
         mSafeguard = "1.原债权人全额本息回购承若。\n2.项目公司关联企业承担连带责任担保。\n3.平台已对项目进行实地考察,通过专业尽调认为可保障本息按时还款。";
 
         mAuditImg = new LinkedList();
-        mAuditImg.add("http://appt.changtounet.com/Img/home_default_banner.png");
-        mAuditImg.add("http://appt.changtounet.com/Img/index002_02.png");
-        mAuditImg.add("http://appt.changtounet.com/Img/home_default_banner.png");
-        mAuditImg.add("http://appt.changtounet.com/Img/index002_02.png");
-        mAuditImg.add("http://appt.changtounet.com/Img/home_default_banner.png");
-        mAuditImg.add("http://appt.changtounet.com/Img/index002_02.png");
+        mAuditImg.add("https://www.baidu.com/img/bd_logo1.png");
+        mAuditImg.add("https://www.baidu.com/img/bd_logo1.png");
+        mAuditImg.add("https://www.baidu.com/img/bd_logo1.png");
+        mAuditImg.add("https://www.baidu.com/img/bd_logo1.png");
+        mAuditImg.add("https://www.baidu.com/img/bd_logo1.png");
+        mAuditImg.add("https://www.baidu.com/img/bd_logo1.png");
     }
 
     public String getRepayingSrc() {

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +37,8 @@ public class ProductDetailsMorePage extends Fragment
 
     private InvestorPage mInvestorPage;
 
+    private ContractPage mContractPage;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -49,7 +52,8 @@ public class ProductDetailsMorePage extends Fragment
         CustomViewPager viewPage = (CustomViewPager)v.findViewById(R.id.product_introduction);
         ArrayList<BaseFragment> pageList = new ArrayList<>();
         mInvestorPage = new InvestorPage();
-        pageList.add(new ContractPage());
+        mContractPage = new ContractPage();
+        pageList.add(mContractPage);
         pageList.add(new RiskControlPage());
         pageList.add(mInvestorPage);
         ExFPAdapter pagerAdapter = new ExFPAdapter(this.getChildFragmentManager(), pageList);
@@ -88,6 +92,11 @@ public class ProductDetailsMorePage extends Fragment
         mInvestorPage.initTzList(tzList);
     }
 
+    public void initContractText(String text)
+    {
+        mContractPage.setContractText(text);
+    }
+
     /**
      * 投资人列表
      */
@@ -112,10 +121,10 @@ public class ProductDetailsMorePage extends Fragment
             mAdapter = new ProductInvestorAdapter(mContext);
             actualListView.setAdapter(mAdapter);
 
-            sendRequest(HttpRequst.REQ_TYPE_PRODUCT_INVESTOR,
-                    HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_PRODUCT_INVESTOR),
-                    mParams,
-                    mAct.getAsyncClient(), false);
+//            sendRequest(HttpRequst.REQ_TYPE_PRODUCT_INVESTOR,
+//                    HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_PRODUCT_INVESTOR),
+//                    mParams,
+//                    mAct.getAsyncClient(), false);
         }
 
         public void onSuccess(String content, Object object, int reqType) {
@@ -160,8 +169,8 @@ public class ProductDetailsMorePage extends Fragment
             mContext = this.getActivity();
 
             mContentView = (TextView)mView.findViewById(R.id.product_details_content);
-            mRepayingSrcView = (TextView)mView.findViewById(R.id.product_details_repayingSrc);
-            mSafeguardView = (TextView)mView.findViewById(R.id.product_details_safeguard);
+//            mRepayingSrcView = (TextView)mView.findViewById(R.id.product_details_repayingSrc);
+//            mSafeguardView = (TextView)mView.findViewById(R.id.product_details_safeguard);
             mAuditImgListView = (ListView)mView.findViewById(R.id.product_details_contract_list);
 
             return mView;
@@ -187,18 +196,23 @@ public class ProductDetailsMorePage extends Fragment
         {
             if (reqType == HttpRequst.REQ_TYPE_PRODUCT_CONTRACT)
             {
-                ProductContractEntity entity = (ProductContractEntity)object;
-                mContentView.setText(entity.getContent());
-                mRepayingSrcView.setText(entity.getRepayingSrc());
-                mSafeguardView.setText(entity.getSafeguard());
-                mAdapter.setData(entity.getAuditImg());
-                setListViewHeightBasedOnChildren(mAuditImgListView);
+//                ProductContractEntity entity = (ProductContractEntity)object;
+//                mContentView.setText(entity.getContent());
+//                mRepayingSrcView.setText(entity.getRepayingSrc());
+//                mSafeguardView.setText(entity.getSafeguard());
+//                mAdapter.setData(entity.getAuditImg());
+//                setListViewHeightBasedOnChildren(mAuditImgListView);
             }
         }
 
         public void onFailure(Throwable error, String content, int reqType)
         {
 
+        }
+
+        public void setContractText(String text)
+        {
+            mContentView.setText(Html.fromHtml(text));
         }
     }
 

@@ -26,6 +26,7 @@
         android:layout_marginTop="17dp"
         android:background="@drawable/stroke_edit_fillpraent">
         <EditText
+            android:id="@+id/confirm_input_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColorHint="@color/font_invalid"
@@ -42,26 +43,47 @@
         android:id="@+id/balance_layout"
         android:layout_marginLeft="20dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/font_invalid"
+        android:layout_marginTop="8dp"
+        android:textSize="@dimen/font_size_hint2"
+        android:text="你当前可以余额："/>
+
+        <TextView
+            android:id="@+id/confirm_text_overage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/font_invalid"
+            android:layout_marginTop="8dp"
+            android:textSize="@dimen/font_size_hint2"
+            android:text="0.00"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/font_invalid"
             android:layout_marginTop="8dp"
+            android:layout_marginLeft="5dp"
             android:textSize="@dimen/font_size_hint2"
-            android:text="你当前可以余额：10,000元"/>
+            android:text="元"/>
 
     </LinearLayout>
 
     <Button
+        android:id="@+id/confirm_button_do"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/button_height_fillparent"
         android:layout_gravity="center_horizontal"
-        android:background="@color/ct_blue"
+        android:background="@drawable/btn_selector"
         android:layout_marginTop="20dp"
         android:textColor="@color/font_white"
         android:textSize="@dimen/font_size_navigation"
+        android:enabled="false"
         android:text="立即投资"/>
 
 </LinearLayout>

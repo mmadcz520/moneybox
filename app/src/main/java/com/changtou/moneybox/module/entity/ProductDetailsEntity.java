@@ -37,6 +37,8 @@ public class ProductDetailsEntity extends BaseEntity
     public String jrtj = "";
     public String yzje = "";
 
+    public String xmqk = "";
+
     /**
      * @see BaseEntity#paser(String)
      * @param data
@@ -76,6 +78,8 @@ public class ProductDetailsEntity extends BaseEntity
             entity.paser(tzlist.getJSONObject(i));
             mTzList.add(entity);
         }
+
+        xmqk = productDetail.getString("xmqk");
     }
 
     /**

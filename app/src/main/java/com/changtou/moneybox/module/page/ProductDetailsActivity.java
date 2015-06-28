@@ -6,10 +6,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewStub;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.changtou.R;
 import com.changtou.moneybox.common.http.async.RequestParams;
@@ -47,22 +47,16 @@ public class ProductDetailsActivity extends CTBaseActivity
     public int    mProductType = 0;
     public String mProductId = "";
 
+    public String[] mDetails = null;
+
+    private Button mConfirmBtn = null;
+
     /**
      * @see CTBaseActivity#initView(Bundle)
      */
     protected void initView(Bundle bundle)
     {
         setContentView(R.layout.product_details);
-        Button button = (Button)findViewById(R.id.confirm_button);
-
-        final Intent intent = new Intent(this, ConfirmActivity.class);
-        button.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View v)
-            {
-                startActivity(intent);
-            }
-        });
 
         pullToNextLayout = (PullToNextLayout) findViewById(R.id.pullToNextLayout);
 
@@ -84,6 +78,8 @@ public class ProductDetailsActivity extends CTBaseActivity
         Intent pro_intent = getIntent();
         mProductType = pro_intent.getIntExtra("type", 0);
         mProductId = pro_intent.getStringExtra("id");
+
+        mConfirmBtn = (Button)findViewById(R.id.confirm_button);
     }
 
     /**
@@ -95,8 +91,6 @@ public class ProductDetailsActivity extends CTBaseActivity
         setPageTitle("项目详情");
 
         mProdList = mDetailsPage.getListView();
-        ViewStub viewStub = new ViewStub(this);
-        mProdList.addHeaderView(viewStub);
         mAdapter = new ProductDetailsAdapter(this);
         mProdList.setAdapter(mAdapter);
 
@@ -138,8 +132,19 @@ public class ProductDetailsActivity extends CTBaseActivity
             mDetailsPage.getTimeLimit().setText(entity.cpqx);
             mDetailsPage.getQtjeTextView().setText(entity.qtje + "起投 | " + "每人限购100万元");
 
-
             mAgreementPage.initTzListData(entity.mTzList);
+            if(mProductType != 0)
+            {
+                mAgreementPage.initContractText(entity.xmqk);
+            }
+
+            mDetails = new String[4];
+            mDetails[0] = entity.projectname;
+            mDetails[1] = "投资期限：  " + entity.cpqx;
+            mDetails[2] = "年化利率：  " + entity.nhsy + "%";
+            mDetails[3] = "剩余可投金：  " + entity.syje;
+
+            mConfirmBtn.setEnabled(true);
         }
     }
 
@@ -233,11 +238,31 @@ public class ProductDetailsActivity extends CTBaseActivity
             jsonObject.put("type", mProductType);
             params.put("data", jsonObject.toString());
 
-            sendRequest(HttpRequst.REQ_TYPE_PRODUCT_DETAILS, url, params, getAsyncClient(), false);
+            sendRequest(HttpRequst.REQ_TYPE_PRODUCT_DETAILS, url, params, getAsyncClient(), true);
         }
         catch (Exception e)
         {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onFailure(Throwable error, String content, int reqType)
+    {
+        super.onFailure(error, content, reqType);
+        Toast.makeText(this, "网络连接超时", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    protected void initListener()
+    {
+        setOnClickListener(R.id.confirm_button);
+    }
+
+    public void treatClickEvent(int id)
+    {
+        Intent intent = new Intent(this, ConfirmActivity.class);
+        intent.putExtra("details",mDetails);
+        startActivity(intent);
     }
 }

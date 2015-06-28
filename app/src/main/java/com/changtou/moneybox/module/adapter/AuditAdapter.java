@@ -16,7 +16,7 @@ import java.util.LinkedList;
 /**
  * Created by Administrator on 2015/5/29.
  * <p/>
- * ºÏÍ¬Í¼Æ¬ÊÊÅäÆ÷
+ * åˆåŒå›¾ç‰‡é€‚é…å™¨
  */
 public class AuditAdapter extends BaseAdapter {
     private LayoutInflater mInflater = null;
@@ -30,7 +30,7 @@ public class AuditAdapter extends BaseAdapter {
     }
 
     /**
-     * ÉèÖÃÊı¾İ
+     * è®¾ç½®æ•°æ®
      *
      * @param list
      */

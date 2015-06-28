@@ -6,6 +6,9 @@
     <item android:state_enabled="true" android:state_pressed="true" android:drawable="@color/ct_blue_fouce" />
     <!-- 按下时的背景图片 -->
     <item android:state_enabled="true" android:state_checked="true" android:drawable="@color/ct_blue_fouce" />
+
+    <item android:state_enabled="false" android:drawable="@color/ct_invalid" />
+
     <!-- 默认时的背景图片 -->
     <item android:drawable="@color/ct_blue" />
 </selector> 

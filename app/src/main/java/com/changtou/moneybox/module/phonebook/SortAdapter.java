@@ -58,9 +58,9 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer {
 		}else {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
-		//¸ù¾İposition»ñÈ¡·ÖÀàµÄÊ××ÖÄ¸µÄChar asciiÖµ
+		//æ ¹æ®positionè·å–åˆ†ç±»çš„é¦–å­—æ¯çš„Char asciiå€¼
 		int section = getSectionForPosition(position);
-		//Èç¹ûµ±Ç°Î»ÖÃµÈÓÚ¸Ã·ÖÀàÊ××ÖÄ¸µÄCharµÄÎ»ÖÃ £¬ÔòÈÏÎªÊÇµÚÒ»´Î³öÏÖ
+		//å¦‚æœå½“å‰ä½ç½®ç­‰äºè¯¥åˆ†ç±»é¦–å­—æ¯çš„Charçš„ä½ç½® ï¼Œåˆ™è®¤ä¸ºæ˜¯ç¬¬ä¸€æ¬¡å‡ºç°
 		if (position == getPositionForSection(section)) {
 			viewHolder.tvLetter.setVisibility(View.VISIBLE);
 			viewHolder.tvLetter.setText(mContent.getSortLetters());
@@ -76,7 +76,7 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer {
 		return null;
 	}
 	/**
-	 * ¸ù¾İ·ÖÀàµÄÊ××ÖÄ¸µÄChar asciiÖµ»ñÈ¡ÆäµÚÒ»´Î³öÏÖ¸ÃÊ××ÖÄ¸µÄÎ»ÖÃ
+	 * æ ¹æ®åˆ†ç±»çš„é¦–å­—æ¯çš„Char asciiå€¼è·å–å…¶ç¬¬ä¸€æ¬¡å‡ºç°è¯¥é¦–å­—æ¯çš„ä½ç½®
 	 */
 	@Override
 	public int getPositionForSection(int sectionIndex) {
@@ -92,7 +92,7 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer {
 	}
 
 	/**
-	 * ¸ù¾İListViewµÄµ±Ç°Î»ÖÃ»ñÈ¡·ÖÀàµÄÊ××ÖÄ¸µÄChar asciiÖµ
+	 * æ ¹æ®ListViewçš„å½“å‰ä½ç½®è·å–åˆ†ç±»çš„é¦–å­—æ¯çš„Char asciiå€¼
 	 */
 	@Override
 	public int getSectionForPosition(int position) {
@@ -105,14 +105,14 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer {
 		TextView tvTitle;
 	}
 	/**
-	 * ÌáÈ¡Ó¢ÎÄµÄÊ××ÖÄ¸£¬·ÇÓ¢ÎÄ×ÖÄ¸ÓÃ#´úÌæ¡£
+	 * æå–è‹±æ–‡çš„é¦–å­—æ¯ï¼Œéè‹±æ–‡å­—æ¯ç”¨#ä»£æ›¿ã€‚
 	 * 
 	 * @param str
 	 * @return
 	 */
 	private String getAlpha(String str) {
 		String  sortStr = str.trim().substring(0, 1).toUpperCase();
-		// ÕıÔò±í´ïÊ½£¬ÅĞ¶ÏÊ××ÖÄ¸ÊÇ·ñÊÇÓ¢ÎÄ×ÖÄ¸
+		// æ­£åˆ™è¡¨è¾¾å¼ï¼Œåˆ¤æ–­é¦–å­—æ¯æ˜¯å¦æ˜¯è‹±æ–‡å­—æ¯
 		if (sortStr.matches("[A-Z]")) {
 			return sortStr;
 		} else {

@@ -99,6 +99,8 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
         mParams.put("page", 1 + "");
         mParams.put("per_page", 10 + "");// 1表示资讯 2表示攻略
 
+        mZProgressHUD.show();
+
         sendRequest(HttpRequst.REQ_TYPE_PRODUCT_HOME,
                 HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_PRODUCT_HOME),
                 mParams,
@@ -115,6 +117,8 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
     {
         if (reqType == HttpRequst.REQ_TYPE_PRODUCT_HOME)
         {
+            mZProgressHUD.cancel();
+
             PromotionEntity entity = (PromotionEntity)object;
             mBannerSwitcher.setImage(new String[]{"http://appt.changtounet.com/Img/index002_02.png", "http://appt.changtounet.com/Img/home_default_banner.png"});
             mInvestProgress.setProgress(60);
@@ -139,7 +143,8 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
      */
     public void onFailure(Throwable error, String content, int reqType)
     {
-
+        mZProgressHUD.cancel();
+        Toast.makeText(this.getActivity(), "网络连接超时", Toast.LENGTH_LONG).show();
     }
 
     public void onRefresh(PullToRefreshBase refreshView) {

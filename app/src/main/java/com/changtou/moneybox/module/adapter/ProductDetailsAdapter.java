@@ -17,7 +17,7 @@ public class ProductDetailsAdapter extends BaseAdapter
     private LayoutInflater mInflater = null;
 
     private String[] mKeys = {"项目名称", "还款方式", "还款时间"};
-    private String[] mValues = {"[长投宝]上手易第256期", "按月付息,到期还本", "2015-07-17"};
+    private String[] mValues = {"", "", ""};
 
     public ProductDetailsAdapter(Context context)
     {

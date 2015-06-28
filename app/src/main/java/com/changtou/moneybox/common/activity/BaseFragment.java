@@ -14,6 +14,7 @@ import com.changtou.moneybox.common.http.base.HttpCallback;
 import com.changtou.moneybox.common.http.async.RequestParams;
 import com.changtou.moneybox.common.utils.DeviceInfo;
 import com.changtou.moneybox.module.widget.MultiStateView;
+import com.changtou.moneybox.module.widget.ZProgressHUD;
 
 public abstract class BaseFragment extends Fragment implements
         HttpCallback {
@@ -34,6 +35,9 @@ public abstract class BaseFragment extends Fragment implements
 
     public MultiStateView mMultiStateView = null;
 
+    //载入进度条
+    public ZProgressHUD mZProgressHUD = null;
+
     /**
      * @see BaseFragment#onAttach(Activity)
      * @param activity
@@ -45,6 +49,8 @@ public abstract class BaseFragment extends Fragment implements
         if (activity instanceof BaseActivity)
             mAct = (BaseActivity) activity;
         click = new FragmentClick();
+
+        mZProgressHUD = new ZProgressHUD(this.getActivity());
     }
 
     /**
