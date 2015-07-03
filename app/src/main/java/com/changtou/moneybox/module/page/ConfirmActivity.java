@@ -4,16 +4,25 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.ViewStub;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.changtou.R;
+import com.changtou.moneybox.common.activity.BaseApplication;
+import com.changtou.moneybox.common.http.async.RequestParams;
+import com.changtou.moneybox.common.utils.ACache;
+import com.changtou.moneybox.module.entity.BankCardEntity;
 import com.changtou.moneybox.module.entity.UserEntity;
 import com.changtou.moneybox.module.entity.UserInfoEntity;
+import com.changtou.moneybox.module.http.HttpRequst;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,12 +48,26 @@ public class ConfirmActivity extends CTBaseActivity
 
     private SweetAlertDialog mDialog = null;
 
+    private int mProductType = 0;
+
+    private String mProductId = "";
+
+    private EditText mNumInput = null;
+
+    private String[] mError = {"投资成功", "参数为空", "不存在该产品",  " 产品类型参数错误",
+                "用户ID参数错误", "产品ID参数错误", "投资金额参数错误", "不存在该用户",
+                "找不到原始转让产品", "投资必须是投资金额的整数倍", "已经不是新手不能投资新手标",
+                "此项目为专属项目", "投资额不能小于起投金额", "该项目融资已满或者尚未发布",
+                "余额不足", "输入金额大于项目剩余金额", " 系统错误", "参数名错误", " 产品不在可投资时间内"};
+
     protected void initView(Bundle savedInstanceState)
     {
         setContentView(R.layout.activity_confirm);
 
         Intent intent = getIntent();
         mContent = intent.getStringArrayExtra("details");
+        mProductType = intent.getIntExtra("type",0);
+        mProductId = intent.getStringExtra("id");
 
         if(mContent == null) return;
 
@@ -65,15 +88,14 @@ public class ConfirmActivity extends CTBaseActivity
         mConfirmDetails.setAdapter(adapter);
 
         mConfirmBtn = (Button)findViewById(R.id.confirm_button_do);
-        EditText input = (EditText)findViewById(R.id.confirm_input_edit);
-        input.addTextChangedListener(mTextWatcher);
+        mNumInput = (EditText)findViewById(R.id.confirm_input_edit);
+        mNumInput.addTextChangedListener(mTextWatcher);
 
         //显示余额
         UserInfoEntity userInfoEntity = UserInfoEntity.getInstance();
         String overage = userInfoEntity.getOverage();
         TextView textView = (TextView)findViewById(R.id.confirm_text_overage);
         textView.setText(overage);
-
     }
 
     @Override
@@ -101,12 +123,46 @@ public class ConfirmActivity extends CTBaseActivity
      */
     public void treatClickEvent(int id)
     {
-        mDialog = new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE).setTitleText("登陆");
-        mDialog.setConfirmText("确认");
-        mDialog.setCancelText("取消");
-        mDialog.setContentText("投资成功！！！！！！！！！！！！！！");
+        String mum = mNumInput.getEditableText().toString();
+        postInvestRequest(mProductType, mProductId, mum);
+    }
 
-        mDialog.show();
+    public void onSuccess(String content, Object object, int reqType)
+    {
+        if(reqType == HttpRequst.REQ_TYPE_INVEST)
+        {
+            try
+            {
+                JSONObject data = new JSONObject(content);
+                int result = data.getInt("result");
+
+                if(result == 0)
+                {
+                    mDialog = new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE).setTitleText("投资");
+                    mDialog.setConfirmText("确认");
+                    mDialog.setContentText("投资成功");
+
+                    mDialog.show();
+                }
+                else
+                {
+                    int code = (result < mError.length) ? result : (mError.length - 1);
+                    Toast.makeText(this, mError[code], Toast.LENGTH_LONG).show();
+                }
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+
+        }
+        super.onSuccess(content, object, reqType);
+    }
+
+    public void onFailure(Throwable error, String content, int reqType)
+    {
+        Toast.makeText(this, "网络异常", Toast.LENGTH_LONG).show();
+        super.onFailure(error, content, reqType);
     }
 
     /**
@@ -129,7 +185,7 @@ public class ConfirmActivity extends CTBaseActivity
         public void afterTextChanged(Editable s)
         {
             String str = s.toString();
-            int num = 0;
+            int num;
             try
             {
                 num = Integer.parseInt(str);
@@ -149,4 +205,38 @@ public class ConfirmActivity extends CTBaseActivity
             }
         }
     };
+
+    /**
+     * 投资请求
+     */
+    private void postInvestRequest(int type, String projid, String money)
+    {
+        try
+        {
+            String url = HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_INVEST) +
+                    "userid=" + ACache.get(BaseApplication.getInstance()).getAsString("userid") +
+                    "&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token");
+
+            Log.e("CT_MONEY",  "userid=" + ACache.get(BaseApplication.getInstance()).getAsString("userid") +
+                    "&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token"));
+
+            RequestParams params = new RequestParams();
+
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("type", type);
+            jsonObject.put("projid", projid);
+            jsonObject.put("investmoney", money);
+            jsonObject.put("ly", 0);
+            params.put("data", jsonObject.toString());
+
+            Log.e("CT_MONEY",  "type=" + type +
+                    "&projid=" + projid);
+
+            sendRequest(HttpRequst.REQ_TYPE_INVEST, url, params, getAsyncClient(), false);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
 }

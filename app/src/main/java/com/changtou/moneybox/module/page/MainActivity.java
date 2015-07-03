@@ -2,7 +2,6 @@ package com.changtou.moneybox.module.page;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -168,15 +167,6 @@ public class MainActivity extends CTBaseActivity {
         }
     }
 
-    /**
-     * 保存app 状态
-     *
-     * @param outState
-     * @param outPersistentState
-     */
-    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
-        super.onSaveInstanceState(outState, outPersistentState);
-    }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {

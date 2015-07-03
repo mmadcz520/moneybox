@@ -121,6 +121,8 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
 
     public void onSuccess(String content, Object object, int reqType)
     {
+        Log.e("CT_MONEY", "content " + content);
+
         if(reqType == HttpRequst.REQ_TYPE_USERINFO)
         {
 //            mTotalAssetsTextView.showNumberWithAnimation(Integer.parseInt(userInfo.getTotalAssets()));
@@ -160,9 +162,6 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
                 "userid=" + ACache.get(BaseApplication.getInstance()).getAsString("userid") +
                 "&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token");
 
-
-        Log.e("CT_MONEY", ACache.get(BaseApplication.getInstance()).getAsString("userid") +  "&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token") );
-
         sendRequest(HttpRequst.REQ_TYPE_USERINFO, url, mParams,
                 mAct.getAsyncClient(), false);
 
@@ -171,13 +170,11 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
 
     public void treatClickEvent(int id)
     {
-
 //        SignInHUD sHUD = SignInHUD.getInstance(this.getActivity());
 //        sHUD.show();
         SignInHUD mSignInHUD = (SignInHUD)getActivity().findViewById(R.id.signin_fragment);
         mSignInHUD.setVisibility(View.VISIBLE);
         mSignInHUD.changeNum();
     }
-
 
 }

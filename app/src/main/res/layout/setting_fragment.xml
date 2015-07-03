@@ -6,16 +6,16 @@
     android:orientation="vertical">
 
 
-    <com.changtou.moneybox.module.widget.ExEditView
-        android:layout_width="fill_parent"
-        android:layout_height="@dimen/extext_height"
-        android:layout_marginTop="20dp"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android_custom:ex_icon="@mipmap/more_message"
-        android_custom:ex_message_color="@color/font_black"
-        android_custom:ex_title="站内信"
-        android_custom:viewType="text" />
+    <!--<com.changtou.moneybox.module.widget.ExEditView-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="@dimen/extext_height"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:focusable="true"-->
+        <!--android:focusableInTouchMode="true"-->
+        <!--android_custom:ex_icon="@mipmap/more_message"-->
+        <!--android_custom:ex_message_color="@color/font_black"-->
+        <!--android_custom:ex_title="站内信"-->
+        <!--android_custom:viewType="text" />-->
 
     <com.changtou.moneybox.module.widget.ExEditView
         android:layout_width="fill_parent"

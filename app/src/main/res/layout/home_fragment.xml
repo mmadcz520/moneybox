@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.handmark.pulltorefresh.library.PullToRefreshScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:android_custom="http://schemas.android.com/apk/res-auto"
     xmlns:ptr="http://schemas.android.com/apk/res-auto"
     android:id="@+id/pull_refresh_scrollview"
     android:layout_width="fill_parent"
@@ -47,9 +46,9 @@
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dp"
                         android:layout_gravity="bottom"
-                        android:gravity="bottom"
+                        android:gravity="center"
                         android:text="￥"
                         android:textColor="@color/font_black"
                         android:textSize="@dimen/font_size_normal" />
@@ -115,9 +114,9 @@
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dp"
                         android:layout_gravity="bottom"
-                        android:gravity="bottom"
+                        android:gravity="center"
                         android:text="￥"
                         android:textColor="@color/font_black"
                         android:textSize="@dimen/font_size_normal" />
@@ -130,7 +129,7 @@
                         android:gravity="bottom"
                         android:paddingLeft="4dp"
                         android:text="0"
-                        android:textColor="@color/ct_blue"
+                        android:textColor="@color/ct_red"
                         android:textSize="@dimen/font_size_number"/>
                 </LinearLayout>
 

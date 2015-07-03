@@ -21,7 +21,7 @@
         android:layout_height="@dimen/exedit_height"
         android:layout_marginTop="47dp"
         android_custom:hintText="@string/login__hint_user"
-        android_custom:editType="2"
+        android_custom:editType="0"
         android_custom:imgSrc="@mipmap/riches_register_user">
     </com.changtou.moneybox.module.widget.ExEditView>
 

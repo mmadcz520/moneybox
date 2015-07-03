@@ -5,7 +5,6 @@ import android.graphics.Typeface;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
 import android.util.SparseArray;
 import android.util.TypedValue;
 import android.view.Display;
@@ -61,6 +60,8 @@ public class SlidingTabLayout extends HorizontalScrollView {
     private ViewPager mViewPager;
     private SparseArray<String> mContentDescriptions = new SparseArray<String>();
     private ViewPager.OnPageChangeListener mViewPagerPageChangeListener;
+
+    private int mCount = 4;
 
     private final SlidingTabStrip mTabStrip;
 
@@ -169,6 +170,11 @@ public class SlidingTabLayout extends HorizontalScrollView {
         return textView;
     }
 
+    public void setTabCount(int count)
+    {
+        this.mCount = count;
+    }
+
     private void populateTabStrip() {
         final PagerAdapter adapter = mViewPager.getAdapter();
         final OnClickListener tabClickListener = new TabClickListener();
@@ -187,7 +193,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
                 Display display = manager.getDefaultDisplay();
                 int width = display.getWidth();
 //                getContext().getWindowManager().getDefaultDisplay().getMetrics(metric);
-                tabView.setMinimumWidth(width/3);
+                tabView.setMinimumWidth(width/mCount);
                 tabTitleView = (TextView) tabView.findViewById(mTabViewTextViewId);
             }
 

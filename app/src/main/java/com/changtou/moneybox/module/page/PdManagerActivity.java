@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.changtou.R;
+import com.changtou.moneybox.common.activity.BaseApplication;
 
 /**
  * 1. 密码管理页面
@@ -25,7 +26,7 @@ public class PdManagerActivity extends CTBaseActivity
 
     @Override
     protected int setPageType() {
-        return 0;
+        return PAGE_TYPE_SUB;
     }
 
     public void treatClickEvent(int id)
@@ -40,11 +41,24 @@ public class PdManagerActivity extends CTBaseActivity
 
             case R.id.btn_pd_gesture:
             {
-                Intent intent = new Intent(this, GesturePWActivity.class);
-                startActivity(intent);
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivityForResult(intent, 0);
 
                 break;
             }
+        }
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        if(resultCode == RESULT_OK)
+        {
+            //设置手势密码
+            BaseApplication.getInstance().onBackground();
+        }
+        else
+        {
+
         }
     }
 }

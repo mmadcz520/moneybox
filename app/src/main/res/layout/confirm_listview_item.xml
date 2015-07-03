@@ -9,7 +9,7 @@
        android:paddingLeft="24dp"
        android:layout_centerVertical="true"
        android:id="@+id/confirm_lv_text"
-       android:layout_width="200dp"
+       android:layout_width="fill_parent"
        android:layout_height="wrap_content"
        android:textSize="@dimen/font_size_normal"
        android:textColor="@color/font_black"/>

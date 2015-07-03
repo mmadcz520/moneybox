@@ -70,7 +70,6 @@ public class ProductFragment extends BaseFragment{
 
     protected void initData(Bundle savedInstanceState)
     {
-
         mZProgressHUD.show();
 
         sendRequest(HttpRequst.REQ_TYPE_PRODUCT_TYPE,
@@ -81,6 +80,8 @@ public class ProductFragment extends BaseFragment{
 
     public void onSuccess(String content, Object object, int reqType)
     {
+        Log.e("CT_MONEY", "ProductFragmentProductFragmentProductFragment*************************" + content);
+
         if(reqType == HttpRequst.REQ_TYPE_PRODUCT_TYPE)
         {
             mZProgressHUD.cancel();
@@ -88,6 +89,9 @@ public class ProductFragment extends BaseFragment{
             try
             {
                 JSONObject json = new JSONObject(content);
+
+                Log.e("CT_MONEY", "ProductFragmentProductFragmentProductFragment*************************" + json);
+
                 JSONArray array = json.getJSONArray("productType");
 
                 int len = array.length();
@@ -102,8 +106,8 @@ public class ProductFragment extends BaseFragment{
                 pagerAdapter.setTitles(titles);
                 mViewPager.setAdapter(pagerAdapter);
                 mViewPager.setOffscreenPageLimit(mViewList.size());
+                mSlidingTabLayout.setTabCount(len);
                 mSlidingTabLayout.setViewPager(mViewPager);
-
             }
             catch (Exception e)
             {
@@ -115,6 +119,7 @@ public class ProductFragment extends BaseFragment{
 
     public void onFailure(Throwable error, String content, int reqType)
     {
+        Log.e("CT_MONEY", "ProductFragmentProductFragmentProductFragment*************************" + "onFailureonFailureonFailure" + content);
         mZProgressHUD.cancel();
     }
 

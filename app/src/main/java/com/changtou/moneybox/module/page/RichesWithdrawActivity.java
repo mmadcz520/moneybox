@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -16,12 +17,18 @@ import android.widget.Toast;
 
 import com.changtou.R;
 import com.changtou.moneybox.common.activity.BaseApplication;
+import com.changtou.moneybox.common.http.async.RequestParams;
+import com.changtou.moneybox.common.utils.ACache;
 import com.changtou.moneybox.module.entity.BankCardEntity;
 import com.changtou.moneybox.module.entity.UserInfoEntity;
+import com.changtou.moneybox.module.http.HttpRequst;
+
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.Map;
 
 /**
@@ -40,8 +47,13 @@ public class RichesWithdrawActivity extends CTBaseActivity
     private TextView mWithdrawTotle = null;
     private TextView mWithdrawHandling = null;
 
-    private String mTotalAssets = null;
+    private String mOverage = null;
     private String mHandling = "5";
+
+    //默认银行卡号
+    private String mDefaultBankNo = "";
+
+    private String[] mError = {"取现成功", "取现失败", "没有绑定银行卡", "没有绑定支行信息", "用户设置银行卡有问题", "没有实名认证", "余额不足"};
 
     @Override
     protected void initView(Bundle bundle)
@@ -76,12 +88,14 @@ public class RichesWithdrawActivity extends CTBaseActivity
     protected void initData()
     {
         initBankInfo();
+        setPageTitle("提现");
 
         UserInfoEntity userInfoEntity = UserInfoEntity.getInstance();
-        mTotalAssets = userInfoEntity.getTotalAssets();
-        mWithdrawTotle.setText(customFormat(mTotalAssets));
+        mOverage = userInfoEntity.getOverage();
+        mWithdrawTotle.setText(customFormat(mOverage));
+        mWithdrawHandling.setText("-" + customFormat("5"));
 
-        mWithdrawHandling.setText(customFormat("5"));
+        makeWithdrawInfoRequest();
 
         super.initData();
     }
@@ -104,14 +118,17 @@ public class RichesWithdrawActivity extends CTBaseActivity
             }
             if(bList.isdefault.equals("是"))
             {
+                mDefaultBankNo = bList.account;
+
                 mBankNoView.setText(account);
                 setBankIcon(mBankIconView, bList.bank);
             }
         }
     }
 
-    protected int setPageType() {
-        return 0;
+    protected int setPageType()
+    {
+        return PAGE_TYPE_SUB;
     }
 
     private void setBankIcon(ImageView imageView, String bankName) {
@@ -156,41 +173,46 @@ public class RichesWithdrawActivity extends CTBaseActivity
 
         @Override
         public void afterTextChanged(Editable s) {
-            try
-            {
-                mHandling = mHandling.replace(",","");
-                Float money_f = Float.parseFloat(mHandling);
+
+            Float input_f;
+            Float money_f;
+
+            try {
+                mHandling = mHandling.replace(",", "");
+                money_f = Float.parseFloat(mHandling);
 
                 String input = s.toString();
-                input = input.replace(",","");
-                Float input_f = Float.parseFloat(input);
-
-                Float m = input_f - money_f;
-                if(m > 0)
-                {
-                    mWithdrawMoney.setText(customFormat(m.toString()));
-                }
-                else
-                {
-                    mWithdrawMoney.setText("");
-                }
+                input = input.replace(",", "");
+                input_f = Float.parseFloat(input);
             }
             catch (Exception e)
             {
-                return;
+                money_f = 0f;
+                input_f = 0f;
             }
 
-
+            Float m = input_f - money_f;
+            if(m > 0)
+            {
+                mWithdrawMoney.setText(customFormat(m.toString()));
+            }
+            else
+            {
+                mWithdrawMoney.setText("");
+            }
         }
     };
 
     public String customFormat(String value) {
-        DecimalFormat myFormatter = new DecimalFormat("###,###.00");
         try
         {
             value = value.replace(",","");
-            Float f = Float.parseFloat(value);
-            String output = myFormatter.format(f);
+            double f = Double.parseDouble(value);
+
+            NumberFormat nf = NumberFormat.getNumberInstance();
+            nf.setMinimumFractionDigits(2);
+            nf.setMaximumFractionDigits(2);
+            String output =  nf.format(f);
             return output;
         }
         catch (Exception e)
@@ -198,5 +220,122 @@ public class RichesWithdrawActivity extends CTBaseActivity
             Toast.makeText(RichesWithdrawActivity.this,"请输入正确格式", Toast.LENGTH_LONG).show();
             return "";
         }
+    }
+
+    @Override
+    protected void initListener()
+    {
+        setOnClickListener(R.id.affirm_withdraw_btn);
+    }
+
+    @Override
+    public void treatClickEvent(int id)
+    {
+        makeWithdrawRequest();
+    }
+
+    /**
+     * id
+     * token
+     * 投资金额
+     * 银行卡号
+     *
+     * 提现请求
+     */
+    private void makeWithdrawRequest()
+    {
+        try
+        {
+            String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_WITHDRAW) +
+                    "userid=" + ACache.get(BaseApplication.getInstance()).getAsString("userid") +
+                    "&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token");
+
+            String num = mWithdrawNum.getEditableText().toString();
+
+            Log.e("CT_MONEY", "-------" + url + "--------------------------" + num + "---------------" + mDefaultBankNo);
+
+            RequestParams params = new RequestParams();
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("num", num);
+            jsonObject.put("account", mDefaultBankNo);
+            params.put("data", jsonObject.toString());
+
+            Log.e("CT_MONEY", "-------" + params);
+
+            sendRequest(HttpRequst.REQ_TYPE_WITHDRAW, url, params, getAsyncClient(), false);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    private void  makeWithdrawInfoRequest()
+    {
+        String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_WITHDRAWINFO) +
+                "userid=" + ACache.get(BaseApplication.getInstance()).getAsString("userid") +
+                "&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token");
+
+        sendRequest(HttpRequst.REQ_TYPE_WITHDRAWINFO, url, mParams, getAsyncClient(), false);
+    }
+
+    /**
+     *
+     * @param content   返回值
+     * @param object    返回的转化对象
+     * @param reqType   请求的唯一识别
+     */
+    public void onSuccess(String content, Object object, int reqType)
+    {
+        super.onSuccess(content, object, reqType);
+
+        if(reqType == HttpRequst.REQ_TYPE_WITHDRAW)
+        {
+            try
+            {
+                JSONObject json = new JSONObject(content);
+                int errcode = json.getInt("errorcode");
+
+                int code = (errcode < mError.length) ? errcode : (mError.length - 1);
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        mError[code], Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+
+                makeWithdrawInfoRequest();
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+        else if(reqType == HttpRequst.REQ_TYPE_WITHDRAWINFO)
+        {
+            try
+            {
+                JSONObject json = new JSONObject(content);
+
+                String fee = json.getString("fee");
+                String yue = json.getString("yue");
+
+                mWithdrawTotle.setText(customFormat(yue));
+                mWithdrawHandling.setText("-" + customFormat(fee));
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     *
+     * @param error
+     * @param content
+     * @param reqType
+     */
+    public void onFailure(Throwable error, String content, int reqType)
+    {
+        super.onFailure(error, content, reqType);
     }
 }

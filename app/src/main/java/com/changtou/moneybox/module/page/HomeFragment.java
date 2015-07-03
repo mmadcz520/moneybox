@@ -123,8 +123,8 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
             mBannerSwitcher.setImage(new String[]{"http://appt.changtounet.com/Img/index002_02.png", "http://appt.changtounet.com/Img/home_default_banner.png"});
             mInvestProgress.setProgress(60);
 
-            mInvestSum.showNumberWithAnimation(158);
-            mMakeMoney.showNumberWithAnimation(259);
+            mInvestSum.showNumberWithAnimation(1309476000);
+            mMakeMoney.showNumberWithAnimation(3882519);
 
             mProductTitle.setText("今日优选[上投宝]上手易第256期");
             mIcomeText.setText("14");

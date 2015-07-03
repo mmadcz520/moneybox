@@ -20,6 +20,6 @@ public class RichesRewardsActivity extends CTBaseActivity
 
     @Override
     protected int setPageType() {
-        return 0;
+        return PAGE_TYPE_SUB;
     }
 }

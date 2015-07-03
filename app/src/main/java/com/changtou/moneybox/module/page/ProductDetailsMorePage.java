@@ -5,7 +5,6 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +18,8 @@ import com.changtou.moneybox.common.activity.BaseFragment;
 import com.changtou.moneybox.common.utils.AppUtil;
 import com.changtou.moneybox.module.CTMoneyApplication;
 import com.changtou.moneybox.module.adapter.AuditAdapter;
+import com.changtou.moneybox.module.adapter.ProductContractAdapter;
 import com.changtou.moneybox.module.adapter.ProductInvestorAdapter;
-import com.changtou.moneybox.module.entity.InvestorEntity;
 import com.changtou.moneybox.module.entity.ProductContractEntity;
 import com.changtou.moneybox.module.http.HttpRequst;
 import com.changtou.moneybox.module.widget.CustomViewPager;
@@ -36,14 +35,23 @@ public class ProductDetailsMorePage extends Fragment
     private SlidingTabLayout mSlidingTabLayout;
 
     private InvestorPage mInvestorPage;
-
     private ContractPage mContractPage;
+    private ContractCTBPage mContractCTBPage;
+
+    public static ProductDetailsMorePage create(int type)
+    {
+        ProductDetailsMorePage page = new ProductDetailsMorePage();
+        Bundle b = new Bundle();
+        b.putInt("productType", type);
+        page.setArguments(b);
+        return page;
+    }
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.product_details_sub2, container, false);
-
         mSlidingTabLayout = (SlidingTabLayout) v.findViewById(R.id.product_details_sliding_tabs);
         Resources res = getResources();
         mSlidingTabLayout.setCustomTabView(R.layout.product_tabpage_indicator, android.R.id.text1);
@@ -51,14 +59,35 @@ public class ProductDetailsMorePage extends Fragment
 
         CustomViewPager viewPage = (CustomViewPager)v.findViewById(R.id.product_introduction);
         ArrayList<BaseFragment> pageList = new ArrayList<>();
-        mInvestorPage = new InvestorPage();
-        mContractPage = new ContractPage();
-        pageList.add(mContractPage);
-        pageList.add(new RiskControlPage());
-        pageList.add(mInvestorPage);
+
         ExFPAdapter pagerAdapter = new ExFPAdapter(this.getChildFragmentManager(), pageList);
-        viewPage.setOffscreenPageLimit(3);
-        pagerAdapter.setTitles(new String[]{"项目详情", "风险控制", "投资列表"});
+        String[] titles = {"项目详情", "风险控制", "投资列表"};
+
+        int type = getArguments().getInt("productType",0);
+        if(type == 0)
+        {
+            viewPage.setOffscreenPageLimit(2);
+            mSlidingTabLayout.setTabCount(2);
+            titles = new String[]{"项目详情", "投资列表"};
+
+            mContractCTBPage = new ContractCTBPage();
+            mInvestorPage = new InvestorPage();
+            pageList.add(mContractCTBPage);
+            pageList.add(mInvestorPage);
+        }
+        else
+        {
+            viewPage.setOffscreenPageLimit(3);
+            mSlidingTabLayout.setTabCount(3);
+
+            mInvestorPage = new InvestorPage();
+            mContractPage = new ContractPage();
+            pageList.add(mContractPage);
+            pageList.add(new RiskControlPage());
+            pageList.add(mInvestorPage);
+        }
+
+        pagerAdapter.setTitles(titles);
         viewPage.setAdapter(pagerAdapter);
 
         mSlidingTabLayout.setViewPager(viewPage);
@@ -70,6 +99,14 @@ public class ProductDetailsMorePage extends Fragment
         mSlidingTabLayout.requestFocus();
 
         return v;
+    }
+
+    /**
+     * 初始化更多页控件
+     */
+    private void initPageMore(int type)
+    {
+
     }
 
     public void initScroll()
@@ -92,9 +129,27 @@ public class ProductDetailsMorePage extends Fragment
         mInvestorPage.initTzList(tzList);
     }
 
+    /**
+     * 初始化合同
+     * @param text
+     */
     public void initContractText(String text)
     {
         mContractPage.setContractText(text);
+    }
+
+    /**
+     *初始化长投宝合同列表
+     *@param data
+     */
+    public void initContractCTB(String[] data)
+    {
+        mContractCTBPage.setContractList(data);
+    }
+
+    public void initContractImgList(LinkedList list)
+    {
+        mContractPage.setContractImgList(list);
     }
 
     /**
@@ -157,8 +212,6 @@ public class ProductDetailsMorePage extends Fragment
         private Context mContext = null;
 
         private TextView mContentView = null;
-        private TextView mRepayingSrcView = null;
-        private TextView mSafeguardView = null;
         private ListView mAuditImgListView = null;
 
         private AuditAdapter mAdapter = null;
@@ -169,8 +222,6 @@ public class ProductDetailsMorePage extends Fragment
             mContext = this.getActivity();
 
             mContentView = (TextView)mView.findViewById(R.id.product_details_content);
-//            mRepayingSrcView = (TextView)mView.findViewById(R.id.product_details_repayingSrc);
-//            mSafeguardView = (TextView)mView.findViewById(R.id.product_details_safeguard);
             mAuditImgListView = (ListView)mView.findViewById(R.id.product_details_contract_list);
 
             return mView;
@@ -186,23 +237,15 @@ public class ProductDetailsMorePage extends Fragment
             mAdapter = new AuditAdapter(mContext);
             mAuditImgListView.setAdapter(mAdapter);
 
-            sendRequest(HttpRequst.REQ_TYPE_PRODUCT_CONTRACT,
-                    HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_PRODUCT_CONTRACT),
-                    mParams,
-                    mAct.getAsyncClient(), false);
+//            sendRequest(HttpRequst.REQ_TYPE_PRODUCT_CONTRACT,
+//                    HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_PRODUCT_CONTRACT),
+//                    mParams,
+//                    mAct.getAsyncClient(), false);
         }
 
         public void onSuccess(String content, Object object, int reqType)
         {
-            if (reqType == HttpRequst.REQ_TYPE_PRODUCT_CONTRACT)
-            {
-//                ProductContractEntity entity = (ProductContractEntity)object;
-//                mContentView.setText(entity.getContent());
-//                mRepayingSrcView.setText(entity.getRepayingSrc());
-//                mSafeguardView.setText(entity.getSafeguard());
-//                mAdapter.setData(entity.getAuditImg());
-//                setListViewHeightBasedOnChildren(mAuditImgListView);
-            }
+
         }
 
         public void onFailure(Throwable error, String content, int reqType)
@@ -210,9 +253,64 @@ public class ProductDetailsMorePage extends Fragment
 
         }
 
-        public void setContractText(String text)
-        {
+         public void setContractText(String text)
+         {
             mContentView.setText(Html.fromHtml(text));
+         }
+
+        public void setContractImgList(LinkedList list)
+        {
+            mAdapter.setData(list);
+//            setListViewHeightBasedOnChildren(mAuditImgListView);
+        }
+    }
+
+
+    /**
+     * 长投宝
+     * 合同页
+     */
+    public static class ContractCTBPage extends BaseFragment
+    {
+        private Context mContext = null;
+        private ProductContractAdapter mAdapter = null;
+
+        protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+        {
+            View mView = inflater.inflate(R.layout.product_details_contract_ctb, container, false);
+            mContext = this.getActivity();
+
+            ListView listview = (ListView)mView.findViewById(R.id.product_details_contract_ctb_list);
+
+            mAdapter = new ProductContractAdapter(mContext);
+            listview.setAdapter(mAdapter);
+
+            return mView;
+        }
+
+        protected void initListener()
+        {
+
+        }
+
+        protected void initData(Bundle savedInstanceState)
+        {
+
+        }
+
+        public void onSuccess(String content, Object object, int reqType)
+        {
+
+        }
+
+        public void onFailure(Throwable error, String content, int reqType)
+        {
+
+        }
+
+        public void setContractList(String[] data)
+        {
+            mAdapter.setData(data);
         }
     }
 
@@ -271,7 +369,8 @@ public class ProductDetailsMorePage extends Fragment
             // 计算子项View 的宽高
             listItem.measure(0, 0);
             // 统计所有子项的总高度
-            totalHeight += (listItem.getMeasuredHeight() + AppUtil.dip2px(CTMoneyApplication.getInstance(),150));
+
+            totalHeight += (listItem.getMeasuredHeight() + AppUtil.dip2px(CTMoneyApplication.getInstance(),0));
         }
 
         ViewGroup.LayoutParams params = listView.getLayoutParams();

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:android_custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -31,7 +30,7 @@
             android:id = "@+id/riches_withdraw_total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/font_black"
+            android:textColor="@color/ct_invalid"
             android:background="@color/ct_white"
             android:textSize="@dimen/font_size_number"
             android:layout_marginRight="20dp"
@@ -59,7 +58,7 @@
             android:id = "@+id/riches_withdraw_handling"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/font_black"
+            android:textColor="@color/ct_invalid"
             android:background="@color/ct_white"
             android:textSize="@dimen/font_size_number"
             android:layout_marginRight="20dp"
@@ -87,9 +86,9 @@
             android:id = "@+id/riches_withdraw_money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/font_black"
+            android:textColor="@color/ct_invalid"
             android:background="@color/ct_white"
-            android:textSize="@dimen/font_size_number"
+            android:textSize="@dimen/font_size_navigation"
             android:layout_marginRight="20dp"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
@@ -116,6 +115,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/affirm_withdraw_btn"
         android:layout_width="fill_parent"
         android:layout_marginTop="35dp"
         android:layout_height="@dimen/button_height_fillparent"

@@ -42,10 +42,22 @@ public class HttpRequst extends BaseHttpRequest
     public final static int REQ_TYPE_PRODUCT_CONTRACT = 24;
     public final static int REQ_TYPE_PRODUCT_INVESTOR = 25;
 
+    //投资
+    public final static int REQ_TYPE_INVEST = 1030;
+
+
+    //获取提现信息
+    public final static int REQ_TYPE_WITHDRAWINFO = 50;
+
+    public final static int REQ_TYPE_WITHDRAW = 1050;
+
     public final static int REQ_TYPE_BANKCARD = 26;
     public final static int REQ_TYPE_INVEST_LIST = 27;
     public final static int REQ_TYPE_TRANSFER_LIST = 28;
+
+    //交易记录
     public final static int REQ_TYPE_TRADE_LIST = 29;
+
     public final static int REQ_TYPE_FLOW = 30;
     public final static int REQ_TYPE_REWARDS_LIST= 31;
     public final static int REQ_TYPE_USERINFO = 32;
@@ -60,8 +72,17 @@ public class HttpRequst extends BaseHttpRequest
     public static String REQ_URL_PRODUCT_LIST = BASE_URL + "product/GetProductList?";
     public static String REQ_URL_PRODUCT_DETAILS = BASE_URL + "product/PostProductDetail";
 
+    public static String REQ_URL_INVEST = BASE_URL + "Invest/PostInvest?";
+
+    //投资post
     public static String REQ_URL_PRODUCT_CONTRACT = BASE_URL + "products";
     public static String REQ_URL_PRODUCT_INVESTOR = BASE_URL + "products";
+
+    //获取提现信息
+    public static String REQ_URL_WITHDRAWINFO = BASE_URL + "Withdraw/GetWithdrawDataBinds?";
+
+    //提现操作
+    public static String REQ_URL_WITHDRAW = BASE_URL + "Withdraw/PostWithdrawInfo?";
 
     //银行卡列表
     public static String REQ_URL_BANKCARD = BASE_URL + "bankcard/getbanklistinfo?";
@@ -86,14 +107,14 @@ public class HttpRequst extends BaseHttpRequest
     //获取站内转让列表
     public static String REQ_URL_TRANSFER_LIST = BASE_URL + "products";
 
-    //获取交易记录列表
-    public static String REQ_URL_TRADE_LIST = BASE_URL + "products";
-
     //资金流接口
     public static String FEQ_URL_FLOW = BASE_URL + "products";
 
     //推荐好友列表接口
     public static String FEQ_URL_REWARDS_LIST = BASE_URL + "products";
+
+    //交易记录
+    public static String REQ_URL_TRADE_LIST = BASE_URL + "investrecord/getinvestlist?";
 
     public static synchronized HttpRequst getInstance()
     {
@@ -146,6 +167,12 @@ public class HttpRequst extends BaseHttpRequest
                 return REQ_URL_DELBANK;
             case REQ_TYPE_CHANGEBANK:
                 return REQ_URL_CHANGEBANK;
+            case REQ_TYPE_INVEST:
+                return REQ_URL_INVEST;
+            case REQ_TYPE_WITHDRAW:
+                return REQ_URL_WITHDRAW;
+            case REQ_TYPE_WITHDRAWINFO:
+                return REQ_URL_WITHDRAWINFO;
             default:
                 break;
         }

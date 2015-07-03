@@ -78,7 +78,7 @@ public class RichesPhoneBookActivity extends CTBaseActivity {
 
     @Override
     protected int setPageType() {
-        return 0;
+        return PAGE_TYPE_SUB;
     }
 
     private void initViews() {

@@ -3,6 +3,7 @@ package com.changtou.moneybox.module.page;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.changtou.R;
+import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.http.async.RequestParams;
 import com.changtou.moneybox.module.adapter.ProductDetailsAdapter;
 import com.changtou.moneybox.module.entity.ProductDetailsEntity;
@@ -60,9 +62,13 @@ public class ProductDetailsActivity extends CTBaseActivity
 
         pullToNextLayout = (PullToNextLayout) findViewById(R.id.pullToNextLayout);
 
+        Intent pro_intent = getIntent();
+        mProductType = pro_intent.getIntExtra("type", 0);
+        mProductId = pro_intent.getStringExtra("id");
+
         mPageList = new ArrayList<>();
         mDetailsPage = new DetailsPage();
-        mAgreementPage = new ProductDetailsMorePage();
+        mAgreementPage = ProductDetailsMorePage.create(mProductType);
         mPageList.add(mDetailsPage);
         mPageList.add(mAgreementPage);
         pullToNextLayout.setAdapter(new PullToNextAdapter(getSupportFragmentManager(), mPageList));
@@ -74,10 +80,6 @@ public class ProductDetailsActivity extends CTBaseActivity
                 mAgreementPage.initScroll();
             }
         });
-
-        Intent pro_intent = getIntent();
-        mProductType = pro_intent.getIntExtra("type", 0);
-        mProductId = pro_intent.getStringExtra("id");
 
         mConfirmBtn = (Button)findViewById(R.id.confirm_button);
     }
@@ -123,7 +125,15 @@ public class ProductDetailsActivity extends CTBaseActivity
             String[] mValues = {entity.projectname, entity.hkfs, entity.hksj};
             mAdapter.setData(keys, mValues);
 
-            float jd = Float.parseFloat(entity.jd);
+            float jd;
+            try
+            {
+                jd = Float.parseFloat(entity.jd);
+            }
+            catch (Exception e)
+            {
+                jd = 0.0f;
+            }
             mDetailsPage.getProgressBar().setProgress((int)jd);
             mDetailsPage.getInvestPercent().showPercentWithAnimation((int)jd);
             mDetailsPage.getIcomeText().setText(entity.nhsy);
@@ -135,7 +145,28 @@ public class ProductDetailsActivity extends CTBaseActivity
             mAgreementPage.initTzListData(entity.mTzList);
             if(mProductType != 0)
             {
-                mAgreementPage.initContractText(entity.xmqk);
+                mAgreementPage.initContractText(entity.mDetailsOther.xmqk);
+                mAgreementPage.initContractImgList(entity.mImgList);
+            }
+            else
+            {
+                String[] contractList = new String[14];
+                contractList[0] = entity.mDetailsCTB.projectname;
+                contractList[1] = entity.mDetailsCTB.tbfw;
+                contractList[2] = entity.mDetailsCTB.cpqx;
+                contractList[3] = entity.mDetailsCTB.hkfs;
+                contractList[4] = entity.mDetailsCTB.nhsy + "%";
+                contractList[5] = entity.mDetailsCTB.jrtj;
+                contractList[6] = entity.mDetailsCTB.jrsx;
+                contractList[7] = entity.mDetailsCTB.sdjzrq;
+                contractList[8] = entity.mDetailsCTB.tcfs;
+                contractList[9] = entity.mDetailsCTB.tqtcfs;
+                contractList[10] = entity.mDetailsCTB.glfy;
+                contractList[11] = entity.mDetailsCTB.jrfwf;
+                contractList[12] = entity.mDetailsCTB.tqtcfy;
+                contractList[13] = entity.mDetailsCTB.bzfs;
+
+                mAgreementPage.initContractCTB(contractList);
             }
 
             mDetails = new String[4];
@@ -238,6 +269,8 @@ public class ProductDetailsActivity extends CTBaseActivity
             jsonObject.put("type", mProductType);
             params.put("data", jsonObject.toString());
 
+            Log.e("CT_MONEY", "--------------------------------" + mProductId + "----------------------" +mProductType);
+
             sendRequest(HttpRequst.REQ_TYPE_PRODUCT_DETAILS, url, params, getAsyncClient(), true);
         }
         catch (Exception e)
@@ -250,7 +283,6 @@ public class ProductDetailsActivity extends CTBaseActivity
     public void onFailure(Throwable error, String content, int reqType)
     {
         super.onFailure(error, content, reqType);
-        Toast.makeText(this, "网络连接超时", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -261,8 +293,23 @@ public class ProductDetailsActivity extends CTBaseActivity
 
     public void treatClickEvent(int id)
     {
-        Intent intent = new Intent(this, ConfirmActivity.class);
-        intent.putExtra("details",mDetails);
-        startActivity(intent);
+        if(BaseApplication.getInstance().isUserLogin())
+        {
+            Intent intent = new Intent(this, ConfirmActivity.class);
+            intent.putExtra("details",mDetails);
+            intent.putExtra("id",mProductId);
+            intent.putExtra("type",mProductType);
+
+            Log.e("CT_MONEY", "--------------------------------------------------" + mProductType);
+
+            startActivity(intent);
+        }
+        else
+        {
+            Toast.makeText(this, "请先登录", Toast.LENGTH_LONG).show();
+
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        }
     }
 }

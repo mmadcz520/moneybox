@@ -48,16 +48,16 @@ public class RichesInvestListActivity extends CTBaseActivity
         Resources res = getResources();
         mSlidingTabLayout.setCustomTabView(R.layout.product_tabpage_indicator, android.R.id.text1);
         mSlidingTabLayout.setSelectedIndicatorColors(res.getColor(R.color.ct_blue));
+        mSlidingTabLayout.setTabCount(3);
 
         List<BaseFragment> viewList = new ArrayList<>();
         viewList.add(SubPage.create(0));
         viewList.add(SubPage.create(1));
         viewList.add(SubPage.create(2));
-        viewList.add(SubPage.create(3));
 
         mViewPager = (ViewPager)findViewById(R.id.riches_invest_pager);
         ExFPAdapter pagerAdapter = new ExFPAdapter(getSupportFragmentManager(), viewList);
-        pagerAdapter.setTitles(new String[]{"还款中", "已结束", "转让中", "已转让"});
+        pagerAdapter.setTitles(new String[]{"还款中", "已结束", "已退出"});
 
         mViewPager.setAdapter(pagerAdapter);
         mViewPager.setCurrentItem(0);
@@ -67,7 +67,7 @@ public class RichesInvestListActivity extends CTBaseActivity
 
     @Override
     protected int setPageType() {
-        return 0;
+        return PAGE_TYPE_SUB;
     }
 
     /**

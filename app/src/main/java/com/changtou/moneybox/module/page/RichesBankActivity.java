@@ -156,6 +156,8 @@ public class RichesBankActivity extends CTBaseActivity
 
     protected void initData()
     {
+        setPageTitle("银行卡管理");
+
         mAdapter = new BankCardAdapter(this, mBankInfoList);
         mBankListView.setAdapter(mAdapter);
 
@@ -168,8 +170,9 @@ public class RichesBankActivity extends CTBaseActivity
     }
 
     @Override
-    protected int setPageType() {
-        return 0;
+    protected int setPageType()
+    {
+        return PAGE_TYPE_SUB;
     }
 
     /**

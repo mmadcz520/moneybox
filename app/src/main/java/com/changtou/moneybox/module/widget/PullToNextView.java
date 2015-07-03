@@ -452,9 +452,9 @@ public class PullToNextView extends LinearLayout {
                 footPromptTV.setText("没有更多信息");
             } else if (newTopMargin < -3 * mHeadViewHeight) {
 
-                footPromptTV.setText("放手查看下一个");
+                footPromptTV.setText("放手查看详情");
             } else {
-                footPromptTV.setText("上拉查看下一个");
+                footPromptTV.setText("上拉查看详情");
 
             }
 
@@ -463,7 +463,7 @@ public class PullToNextView extends LinearLayout {
 
             //前一个
             if (!isHashPrevious) {
-                headPromptTV.setText("已经是第一个了");
+                headPromptTV.setText("");
             } else if (newTopMargin > mHeadViewHeight) {
 
                 headPromptTV.setText("放手查看前一个");
