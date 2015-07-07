@@ -7,6 +7,7 @@
     android:background="@color/ct_background">
 
     <com.changtou.moneybox.module.widget.ExEditView
+        android:id="@+id/register_phone_no"
         android:layout_marginTop="20dp"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/exedit_height"
@@ -21,19 +22,49 @@
         android:layout_width="fill_parent"
         android:layout_marginTop="35dp"
         android:layout_height="@dimen/button_height_fillparent"
-        android:background="@color/ct_blue"
+        android:background="@drawable/btn_selector"
         android:textColor="@color/ct_white"
         android:text="注 册"
         android:textSize="@dimen/font_size_normal" />
 
-    <TextView
+    <LinearLayout android:layout_height="wrap_content"
         android:layout_width="fill_parent"
+        android:orientation="horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:textSize="@dimen/font_size_hint"
         android:textColor="@color/font_invalid"
-        android:text="注册即代表您已经阅读并同意《注册协议》及《投资咨询与管理协议》"/>
+        android:text="注册即代表您已经阅读并同意"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="@dimen/font_size_hint"
+        android:textColor="@color/font_importance"
+        android:text="《注册协议》"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="@dimen/font_size_hint"
+        android:textColor="@color/font_invalid"
+        android:text="及"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="@dimen/font_size_hint"
+        android:textColor="@color/font_importance"
+        android:text="《投资咨询与管理协议》"/>
+
+    </LinearLayout>
 
     <ImageView
         android:layout_width="wrap_content"

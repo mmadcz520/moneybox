@@ -172,9 +172,9 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
     {
 //        SignInHUD sHUD = SignInHUD.getInstance(this.getActivity());
 //        sHUD.show();
-        SignInHUD mSignInHUD = (SignInHUD)getActivity().findViewById(R.id.signin_fragment);
-        mSignInHUD.setVisibility(View.VISIBLE);
-        mSignInHUD.changeNum();
+//        SignInHUD mSignInHUD = (SignInHUD)getActivity().findViewById(R.id.signin_fragment);
+//        mSignInHUD.setVisibility(View.VISIBLE);
+//        mSignInHUD.changeNum();
     }
 
 }

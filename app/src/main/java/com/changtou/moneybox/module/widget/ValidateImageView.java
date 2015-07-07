@@ -142,5 +142,4 @@ public class ValidateImageView {
         padding_left += base_padding_left + random.nextInt(range_padding_left);
         padding_top = base_padding_top + random.nextInt(range_padding_top);
     }
-
 }

@@ -30,13 +30,14 @@ public class MainActivity extends CTBaseActivity {
     //页面底部导航控件
     private LinearLayout[] mBars = new LinearLayout[4];
 
-    private SignInHUD mSignInHUD = null;
+//    private SignInHUD mSignInHUD = null;
 
     /**
      * @see com.changtou.moneybox.common.activity.BaseActivity#initView(Bundle)
      * @param bundle 保存页面参数
      */
-    protected void initView(Bundle bundle) {
+    protected void initView(Bundle bundle)
+    {
         setContentView(R.layout.activity_main);
         LinearLayout navbar_home = (LinearLayout) this.findViewById(R.id.navbar_home);
         LinearLayout navbar_product = (LinearLayout) this.findViewById(R.id.navbar_product);
@@ -64,7 +65,7 @@ public class MainActivity extends CTBaseActivity {
         mViewpager.setCurrentItem(0, false);
         mViewpager.setOffscreenPageLimit(viewList.size());
 
-        mSignInHUD = (SignInHUD)this.findViewById(R.id.signin_fragment);
+//        mSignInHUD = (SignInHUD)this.findViewById(R.id.signin_fragment);
     }
 
     /**
@@ -184,13 +185,13 @@ public class MainActivity extends CTBaseActivity {
 
     public void onBackPressed()
     {
-        if(mSignInHUD.getVisibility() == View.VISIBLE)
-        {
-            mSignInHUD.setVisibility(View.INVISIBLE);
-        }
-        else
-        {
-            super.onBackPressed();
-        }
+//        if(mSignInHUD.getVisibility() == View.VISIBLE)
+//        {
+//            mSignInHUD.setVisibility(View.INVISIBLE);
+//        }
+//        else
+//        {
+//            super.onBackPressed();
+//        }
     }
 }

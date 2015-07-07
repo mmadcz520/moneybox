@@ -67,6 +67,12 @@ public class HttpRequst extends BaseHttpRequest
     public final static int REQ_TYPE_DELBANK = 1011;
     public final static int REQ_TYPE_CHANGEBANK = 1012;
 
+
+    //注册相关
+    public final static int REQ_TYPE_SENDMSG = 1080;
+    public final static int REQ_TYPE_CHECKCODE = 1081;
+    public final static int REQ_TYPE_POSTREG = 1082;
+
     //产品
     public static String REQ_URL_PRODUCT_TYPE = BASE_URL + "product/GetProductType";
     public static String REQ_URL_PRODUCT_LIST = BASE_URL + "product/GetProductList?";
@@ -115,6 +121,15 @@ public class HttpRequst extends BaseHttpRequest
 
     //交易记录
     public static String REQ_URL_TRADE_LIST = BASE_URL + "investrecord/getinvestlist?";
+
+    //发送短信
+    public static String REQ_URL_SENDMSG = BASE_URL + "usertoken/postsendmsg?";
+
+    //校验验证码
+    public static String REQ_URL_CHECKCODE = BASE_URL + "usertoken/postcheckcode?";
+
+    //注册用户
+    public static String REQ_URL_POSTREG = BASE_URL + "usertoken/postreg?";
 
     public static synchronized HttpRequst getInstance()
     {
@@ -173,6 +188,12 @@ public class HttpRequst extends BaseHttpRequest
                 return REQ_URL_WITHDRAW;
             case REQ_TYPE_WITHDRAWINFO:
                 return REQ_URL_WITHDRAWINFO;
+            case REQ_TYPE_SENDMSG:
+                return REQ_URL_SENDMSG;
+            case REQ_TYPE_CHECKCODE:
+                return REQ_URL_CHECKCODE;
+            case REQ_TYPE_POSTREG:
+                return REQ_URL_POSTREG;
             default:
                 break;
         }
