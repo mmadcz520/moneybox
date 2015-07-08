@@ -36,6 +36,9 @@ public class HttpRequst extends BaseHttpRequest
     public final static int REQ_TYPE_PRODUCT_TYPE = 17;
 
 
+    //app banner 图接口
+    public final static int REQ_TYPE_PRODUCT_BANNER = 10;
+
     public final static int REQ_TYPE_PRODUCT_HOME = 21;
     public final static int REQ_TYPE_PRODUCT_LIST = 22;
     public final static int REQ_TYPE_PRODUCT_DETAILS = 1023;
@@ -72,6 +75,9 @@ public class HttpRequst extends BaseHttpRequest
     public final static int REQ_TYPE_SENDMSG = 1080;
     public final static int REQ_TYPE_CHECKCODE = 1081;
     public final static int REQ_TYPE_POSTREG = 1082;
+
+    //banner
+    public final String REQ_URL_PRODUCT_BANNER = BASE_URL + "product/GetFocusImg";
 
     //产品
     public static String REQ_URL_PRODUCT_TYPE = BASE_URL + "product/GetProductType";
@@ -148,6 +154,8 @@ public class HttpRequst extends BaseHttpRequest
     {
         switch (reqType)
         {
+            case REQ_TYPE_PRODUCT_BANNER:
+                return REQ_URL_PRODUCT_BANNER;
             case REQ_TYPE_PRODUCT_TYPE:
                 return REQ_URL_PRODUCT_TYPE;
             case REQ_TYPE_PRODUCT_HOME:

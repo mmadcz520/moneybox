@@ -191,7 +191,7 @@ public class MainActivity extends CTBaseActivity {
 //        }
 //        else
 //        {
-//            super.onBackPressed();
+            super.onBackPressed();
 //        }
     }
 }

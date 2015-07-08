@@ -3,6 +3,7 @@ package com.changtou.moneybox.module.page;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,14 +17,17 @@ import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.activity.BaseFragment;
 import com.changtou.moneybox.common.utils.SharedPreferencesHelper;
 import com.changtou.moneybox.module.adapter.ProductListAdapter;
-import com.changtou.moneybox.module.appcfg.AppCfg;
 import com.changtou.moneybox.module.entity.PromotionEntity;
 import com.changtou.moneybox.module.http.HttpRequst;
 import com.changtou.moneybox.module.widget.CountView;
+import com.changtou.moneybox.module.widget.ExEditView;
 import com.changtou.moneybox.module.widget.ExImageSwitcher;
 import com.changtou.moneybox.module.widget.RoundProgressBar;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  * 描述： home 页面
@@ -106,6 +110,11 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
                 mParams,
                 mAct.getAsyncClient(), false);
 
+        sendRequest(HttpRequst.REQ_TYPE_PRODUCT_BANNER,
+                HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_PRODUCT_BANNER),
+                mParams,
+                mAct.getAsyncClient(), false);
+
     }
 
     /**
@@ -120,7 +129,7 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
             mZProgressHUD.cancel();
 
             PromotionEntity entity = (PromotionEntity)object;
-            mBannerSwitcher.setImage(new String[]{"http://appt.changtounet.com/Img/index002_02.png", "http://appt.changtounet.com/Img/home_default_banner.png"});
+            //mBannerSwitcher.setImage(new String[]{"http://www.changtounet.com/manage/news/uploadimages/50758017-9051-4838-ac09-f764bb5bfa4b.png.png", "http://www.changtounet.com/manage/news/uploadimages/50758017-9051-4838-ac09-f764bb5bfa4b.png.png"});
             mInvestProgress.setProgress(60);
 
             mInvestSum.showNumberWithAnimation(1309476000);
@@ -133,6 +142,35 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
             mInvestPercent.showPercentWithAnimation(60);
             mInvestNum.setText("25.5万/100万");
             mPullToRefreshScrollView.onRefreshComplete();
+        }
+
+        if(reqType == HttpRequst.REQ_TYPE_PRODUCT_BANNER)
+        {
+            try
+            {
+                JSONObject data = new JSONObject(content);
+                JSONArray array = data.getJSONArray("imglist");
+
+                int len = array.length();
+                String[] imgs = new String[len];
+
+                for(int i = 0; i < len; i++)
+                {
+                    JSONObject j = array.getJSONObject(i);
+                    String id = j.getString("id");
+                    String url = j.getString("url");
+                    String title = j.getString("title");
+
+                    imgs[i] = j.getString("img");
+                    Log.e("CT_MONEY", imgs[i]);
+                }
+
+                mBannerSwitcher.setImage(imgs);
+            }
+            catch (Exception e)
+            {
+
+            }
         }
     }
 
@@ -165,12 +203,13 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
         //
         if(BaseApplication.getInstance().isUserLogin())
         {
-            Intent intent = new Intent(this.getActivity(), ConfirmActivity.class);
+            Intent intent = new Intent(this.getActivity(), ProductDetailsActivity.class);
             startActivity(intent);
         }
         else
         {
-            Toast.makeText(this.getActivity(), "请先登录", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this.getActivity(), LoginActivity.class);
+            startActivityForResult(intent, 0);
         }
     }
 }

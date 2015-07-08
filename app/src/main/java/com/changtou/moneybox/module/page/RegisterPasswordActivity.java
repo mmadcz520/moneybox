@@ -62,7 +62,8 @@ public class RegisterPasswordActivity extends CTBaseActivity implements LoginNot
     }
 
     @Override
-    protected int setPageType() {
+    protected int setPageType()
+    {
         return PAGE_TYPE_SUB;
     }
 

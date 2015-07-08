@@ -257,7 +257,6 @@ public class ProductDetailsActivity extends CTBaseActivity
         }
     }
 
-
     private void getProductDetailsRequest()
     {
         try {

@@ -54,8 +54,14 @@ public class PdFrogetActivity extends CTBaseActivity
     }
 
     @Override
+    protected void initData()
+    {
+        setPageTitle("忘记密码");
+    }
+
+    @Override
     protected int setPageType() {
-        return 0;
+        return PAGE_TYPE_SUB;
     }
 
     public void treatClickEvent(int id)

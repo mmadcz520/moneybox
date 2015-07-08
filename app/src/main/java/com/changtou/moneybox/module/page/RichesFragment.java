@@ -18,7 +18,9 @@ import com.changtou.R;
 import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.activity.BaseFragment;
 import com.changtou.moneybox.common.utils.ACache;
+import com.changtou.moneybox.common.utils.SharedPreferencesHelper;
 import com.changtou.moneybox.module.adapter.ExGridAdapter;
+import com.changtou.moneybox.module.appcfg.AppCfg;
 import com.changtou.moneybox.module.entity.UserInfoEntity;
 import com.changtou.moneybox.module.http.HttpRequst;
 import com.changtou.moneybox.module.widget.CountView;
@@ -35,7 +37,11 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
     private TextView mGiftsTextView = null;
     private TextView mTouYuanTextView = null;
 
+    private SharedPreferencesHelper sph = null;
+
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        sph = SharedPreferencesHelper.getInstance(this.getActivity().getApplicationContext());
 
         int[] mImgRes = {R.drawable.riches_btn_adf_selector,
                 R.drawable.riches_btn_invest_selector,
@@ -145,7 +151,8 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
 
     public void onFailure(Throwable error, String content, int reqType)
     {
-//        mMultiStateView.setViewState(MultiStateView.ViewState.ERROR);
+        sph.putString(AppCfg.CFG_LOGIN, AppCfg.LOGIN_STATE.EN_LOGIN.toString());
+        sph.putString(AppCfg.GSPD, "");
     }
 
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
@@ -164,6 +171,9 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
 
         sendRequest(HttpRequst.REQ_TYPE_USERINFO, url, mParams,
                 mAct.getAsyncClient(), false);
+
+
+        Log.e("CT_MONEY", "ussssssssssssssssssssssssssss + onFailureonFailureonFailureonFailureonFailure" + url);
 
         mMultiStateView.setViewForState(R.layout.state_layout_loading, MultiStateView.ViewState.LOADING);
     }

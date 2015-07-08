@@ -1,11 +1,14 @@
 package com.changtou.moneybox.module.widget;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -21,6 +24,8 @@ import android.widget.ViewSwitcher.ViewFactory;
 import com.changtou.R;
 import com.changtou.moneybox.common.utils.AppUtil;
 import com.changtou.moneybox.common.utils.AsyncImageLoader;
+import com.changtou.moneybox.module.page.LoginActivity;
+import com.changtou.moneybox.module.page.WebActivity;
 
 import java.util.ArrayList;
 
@@ -63,6 +68,8 @@ public class ExImageSwitcher extends FrameLayout implements OnTouchListener,Asyn
 	private ArrayList<Bitmap> mBannerImage = null;
 
 	private ImageView mCurrentImageView = null;
+
+	private static int FLOW = 10;
 
 	public ExImageSwitcher(Context context) {
 		this(context, null);
@@ -133,7 +140,7 @@ public class ExImageSwitcher extends FrameLayout implements OnTouchListener,Asyn
 			layoutParams.width = AppUtil.dip2px(mContext, 7);
 			layoutParams.height = AppUtil.dip2px(mContext, 7);
 
-//			mImageView.setBackgroundResource(R.drawable.page_indicator_unfocused);
+			mImageView.setBackgroundResource(R.drawable.page_indicator_unfocused);
 			linearLayout.addView(mImageView, layoutParams);
 
 			AsyncImageLoader asyncImageLoader = new AsyncImageLoader();
@@ -154,11 +161,11 @@ public class ExImageSwitcher extends FrameLayout implements OnTouchListener,Asyn
 		{
 			if (i == selectItems)
 			{
-//				tips[i].setBackgroundResource(R.drawable.page_indicator_focused);
+				tips[i].setBackgroundResource(R.drawable.page_indicator_focused);
 			}
 			else
 			{
-//				tips[i].setBackgroundResource(R.drawable.page_indicator_unfocused);
+				tips[i].setBackgroundResource(R.drawable.page_indicator_unfocused);
 			}
 		}
 	}
@@ -191,40 +198,51 @@ public class ExImageSwitcher extends FrameLayout implements OnTouchListener,Asyn
 			case MotionEvent.ACTION_UP:
 			{
 				float lastX = event.getX();
-				if (lastX > downX)
-				{
-					mSFlag = 0;
-					mImageSwitcher.setInAnimation(AnimationUtils.loadAnimation(
-							mContext, R.anim.switcher_left_in));
-					mImageSwitcher.setOutAnimation(AnimationUtils.loadAnimation(
-							mContext, R.anim.switcher_right_out));
-					if (currentPosition > 0)
-					{
-						currentPosition--;
-					}
-					else
-					{
-						currentPosition = bannerCnt - 1;
-					}
-				}
+				float flow = Math.abs(lastX - downX);
 
-				if (lastX <= downX)
+				if(flow > FLOW)
 				{
-					mSFlag = 1;
-					mImageSwitcher.setInAnimation(AnimationUtils.loadAnimation(
-							mContext, R.anim.switcher_right_in));
-					mImageSwitcher.setOutAnimation(AnimationUtils.loadAnimation(
-							mContext, R.anim.switcher_left_out));
-					if (currentPosition < bannerCnt - 1)
+					if (lastX > downX)
 					{
-						currentPosition++;
+						mSFlag = 0;
+						mImageSwitcher.setInAnimation(AnimationUtils.loadAnimation(
+								mContext, R.anim.switcher_left_in));
+						mImageSwitcher.setOutAnimation(AnimationUtils.loadAnimation(
+								mContext, R.anim.switcher_right_out));
+						if (currentPosition > 0)
+						{
+							currentPosition--;
+						}
+						else
+						{
+							currentPosition = bannerCnt - 1;
+						}
 					}
-					else
+
+					if (lastX < downX)
 					{
-						currentPosition = 0;
+						mSFlag = 1;
+						mImageSwitcher.setInAnimation(AnimationUtils.loadAnimation(
+								mContext, R.anim.switcher_right_in));
+						mImageSwitcher.setOutAnimation(AnimationUtils.loadAnimation(
+								mContext, R.anim.switcher_left_out));
+						if (currentPosition < bannerCnt - 1)
+						{
+							currentPosition++;
+						}
+						else
+						{
+							currentPosition = 0;
+						}
 					}
+
+					setImage();
 				}
-				setImage();
+				else
+				{
+					Intent it = new Intent(this.getContext(), WebActivity.class);
+					getContext().startActivity(it);
+				}
 			}
 			break;
 		}
@@ -239,6 +257,7 @@ public class ExImageSwitcher extends FrameLayout implements OnTouchListener,Asyn
 		mCurrentImageView.setImageBitmap(mBannerImage.get(currentPosition));
 		mCurrentImageView.setScaleType(ImageView.ScaleType.FIT_XY);
 		mImageSwitcher.showNext();
+		setImageBackground(currentPosition);
 	}
 
 	/**
