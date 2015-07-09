@@ -30,7 +30,7 @@ public class WebActivity extends Activity
         myWebView.setWebViewClient(new WebViewClient()
         {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                //  重写此方法表明点击网页里面的链接还是在当前的webview里跳转，不跳到浏览器那边
+                //  閲嶅啓姝ゆ柟娉曡〃鏄庣偣鍑荤綉椤甸噷闈㈢殑閾炬帴杩樻槸鍦ㄥ綋鍓嶇殑webview閲岃烦杞紝涓嶈烦鍒版祻瑙堝櫒閭ｈ竟
                 view.loadUrl(url);
                 return true;
             }
@@ -46,7 +46,7 @@ public class WebActivity extends Activity
                 super.onProgressChanged(view, newProgress);
 
                 if (newProgress == 100) {
-                    // 网页加载完成
+                    // 缃戦〉鍔犺浇瀹屾垚
 
                 } else {
                     Log.e("CT_MONEY", "newProgress" + newProgress);
@@ -62,7 +62,7 @@ public class WebActivity extends Activity
         {
             if(myWebView.canGoBack())
             {
-                myWebView.goBack();//返回上一页面
+                myWebView.goBack();//杩斿洖涓婁竴椤甸潰
                 return true;
             }
             else

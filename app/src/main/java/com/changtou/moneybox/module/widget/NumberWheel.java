@@ -18,16 +18,16 @@ import android.widget.RelativeLayout;
 import com.changtou.R;
 
 /**
- * 1280*720 ÃÜ¶È2£»Ôİ²»Ö§³ÖÊÊÅä
- * ÔËĞĞSDK android4.4.2
+ * 1280*720 å¯†åº¦2ï¼›æš‚ä¸æ”¯æŒé€‚é…
+ * è¿è¡ŒSDK android4.4.2
  * @author Administrator
  *
  */
 public class NumberWheel extends SurfaceView implements Callback,Runnable {
-	private int oldms=500;//²»¸üĞÂUIÊ±Ïß³ÌĞİÃßÊ±¼ä
-	private int ms= 9;//¸üĞÂUIÊ±Ïß³ÌĞİÃßÊ±¼ä(Ö¡)
-	private int mvingDistance= 50;//¸üĞÂUIÊ±Êı×ÖÃ¿´Î¹ö¶¯¾àÀë
-	private long millisecond=500;//¸Õ´´½¨Ê±ÑÓ³ÙÔËĞĞºÁÃëÊı
+	private int oldms=500;//ä¸æ›´æ–°UIæ—¶çº¿ç¨‹ä¼‘çœ æ—¶é—´
+	private int ms= 9;//æ›´æ–°UIæ—¶çº¿ç¨‹ä¼‘çœ æ—¶é—´(å¸§)
+	private int mvingDistance= 50;//æ›´æ–°UIæ—¶æ•°å­—æ¯æ¬¡æ»šåŠ¨è·ç¦»
+	private long millisecond=500;//åˆšåˆ›å»ºæ—¶å»¶è¿Ÿè¿è¡Œæ¯«ç§’æ•°
 
 	private boolean isRunnable=false;
 	private Drawable down=null;
@@ -36,10 +36,10 @@ public class NumberWheel extends SurfaceView implements Callback,Runnable {
 	private Drawable background=null;
 	private SurfaceHolder holder = null;
 
-	private int width=0;//¿Ø¼ş¿í
-	private int height=0;//¿Ø¼ş¸ß
+	private int width=0;//æ§ä»¶å®½
+	private int height=0;//æ§ä»¶é«˜
 
-	//»Øµ÷º¯Êı
+	//å›è°ƒå‡½æ•°
 	private CallBackListener cbl;
 
 	private boolean isSurfaveCreated = false;
@@ -64,7 +64,7 @@ public class NumberWheel extends SurfaceView implements Callback,Runnable {
 		setLayoutParams(rl);
 		init();
 	}
-	//¿Ø¼ş³õÊ¼»¯
+	//æ§ä»¶åˆå§‹åŒ–
 	public void init(){
 		background=getResources().getDrawable(nBean.getBackgroundImage());
 		ViewGroup.LayoutParams lp=getLayoutParams();
@@ -80,7 +80,7 @@ public class NumberWheel extends SurfaceView implements Callback,Runnable {
 
 		holder = getHolder();
 		holder.setFormat(PixelFormat.TRANSPARENT);
-		holder.addCallback(this); //ÉèÖÃSurfaceÉúÃüÖÜÆÚ»Øµ÷
+		holder.addCallback(this); //è®¾ç½®Surfaceç”Ÿå‘½å‘¨æœŸå›è°ƒ
 	}
 
 
@@ -126,14 +126,14 @@ public class NumberWheel extends SurfaceView implements Callback,Runnable {
 		isRunnable=false;
 	}
 
-	//Ïß³ÌÔËĞĞ
+	//çº¿ç¨‹è¿è¡Œ
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
 		while(isRunnable){
 			try {
 				if(millisecond<System.currentTimeMillis()&&ms!=oldms){
-					if(nBean.endByOrder(nBean.getRunningNum().length)){//ÊÇ·ñ½áÊø±¾ÂÖ¸üĞÂ
+					if(nBean.endByOrder(nBean.getRunningNum().length)){//æ˜¯å¦ç»“æŸæœ¬è½®æ›´æ–°
 						ms=oldms;
 						nBean.setStartShowNum(nBean.getEndShowNum());
 						nBean.setStartShowNumString(nBean.getEndShowNumString());
@@ -169,12 +169,12 @@ public class NumberWheel extends SurfaceView implements Callback,Runnable {
 					d.draw(canvas);
 					continue;
 				}
-				if(temp2[2]>height){//×ø±êÖØÖÃµ½¶¥¶Ë
+				if(temp2[2]>height){//åæ ‡é‡ç½®åˆ°é¡¶ç«¯
 					temp2[2]=temp2[2]-d.getMinimumHeight()*3;
 					temp2[0]=temp2[0]+3>9?temp2[0]+3-10:temp2[0]+3;
 					d=getResources().getDrawable(nBean.getNumberImages()[temp2[0]]);
 				}
-				int location=0;//ËùÔÚÎ»ÖÃ0ÉÏ1ÖĞ2ÏÂ
+				int location=0;//æ‰€åœ¨ä½ç½®0ä¸Š1ä¸­2ä¸‹
 				int y=(height-d.getMinimumHeight())/2;
 				if(temp2[2]>=(y+d.getMinimumHeight())){
 					location=2;
@@ -286,7 +286,7 @@ public class NumberWheel extends SurfaceView implements Callback,Runnable {
 		}
 		holder.unlockCanvasAndPost(canvas);
 	}
-	//»­³õÊ¹ÊıÖµÇ°¸³Öµ¸ß¶È
+	//ç”»åˆä½¿æ•°å€¼å‰èµ‹å€¼é«˜åº¦
 	private void drawStatic(String num){
 		Canvas canvas=holder.lockCanvas(null);
 		canvas.drawColor(Color.GRAY);
@@ -304,30 +304,30 @@ public class NumberWheel extends SurfaceView implements Callback,Runnable {
 		}
 		holder.unlockCanvasAndPost(canvas);
 	}
-	//»­±³¾°
+	//ç”»èƒŒæ™¯
 	private void drawbackground(Canvas canvas){
 		background.setBounds(0, 0, background.getMinimumWidth(), background.getMinimumHeight());
 		background.draw(canvas);
 	}
-	//»Øµ÷
+	//å›è°ƒ
 	public interface CallBackListener{
 		public void start();
 		public void end();
 	}
 
 	public static class NumberBean{
-		private int [] numberImages=null;//Êı×ÖÍ¼Æ¬×ÊÔ´,Ë³Ğò´Ó0-9
-		private int [] notWheelImages=null;//²»¹ö¶¯×ÊÔ´£¬Òª¸ø¹ö¶¯×ÊÔ´Áô³öÎ»ÖÃ²¢ÇÒÖµ±ØĞëÎª0
-		private int [][] locations=null;//Ã¿¸öÎ»ÖÃµÄx,y×ø±ê
-		private float startShowNum=0f;//¿ªÊ¼Ê±ÏÔÊ¾ÊıÖµ
-		private float endShowNum=0f;//×îÖÕÏÔÊ¾ÊıÖµ
-		private String startShowNumString=null;//³õÊ¼Êı×Ö×Ö·û´®
-		private String endShowNumString=null;//½áÊøÊı×Ö×Ö·û´®
-		private int [][] runningNum;//ÕıÔÚÔËĞĞµÄ×ø±ê¼ÇÂ¼
-		private int backgroundImage=0;//±³¾°×ÊÔ´
+		private int [] numberImages=null;//æ•°å­—å›¾ç‰‡èµ„æº,é¡ºåºä»0-9
+		private int [] notWheelImages=null;//ä¸æ»šåŠ¨èµ„æºï¼Œè¦ç»™æ»šåŠ¨èµ„æºç•™å‡ºä½ç½®å¹¶ä¸”å€¼å¿…é¡»ä¸º0
+		private int [][] locations=null;//æ¯ä¸ªä½ç½®çš„x,yåæ ‡
+		private float startShowNum=0f;//å¼€å§‹æ—¶æ˜¾ç¤ºæ•°å€¼
+		private float endShowNum=0f;//æœ€ç»ˆæ˜¾ç¤ºæ•°å€¼
+		private String startShowNumString=null;//åˆå§‹æ•°å­—å­—ç¬¦ä¸²
+		private String endShowNumString=null;//ç»“æŸæ•°å­—å­—ç¬¦ä¸²
+		private int [][] runningNum;//æ­£åœ¨è¿è¡Œçš„åæ ‡è®°å½•
+		private int backgroundImage=0;//èƒŒæ™¯èµ„æº
 
-		private int integerDigits=4;//ÕûÊıÎ»¸öÊı
-		private int fractionDigits=0;//Ğ¡ÊıÎ»¸öÊı
+		private int integerDigits=4;//æ•´æ•°ä½ä¸ªæ•°
+		private int fractionDigits=0;//å°æ•°ä½ä¸ªæ•°
 
 		public NumberBean(int [] numberImages,int [] notWheelImages,float startShowNum,float endShowNum,int backgroundImage){
 			this.numberImages=numberImages;
@@ -374,7 +374,7 @@ public class NumberWheel extends SurfaceView implements Callback,Runnable {
 
 			init();
 		}
-		//³õÊ¹»¯»ù±¾ĞÅÏ¢
+		//åˆä½¿åŒ–åŸºæœ¬ä¿¡æ¯
 		public void init(){
 			NumberFormat nf=NumberFormat.getNumberInstance();
 			nf.setMaximumIntegerDigits(integerDigits);
@@ -466,7 +466,7 @@ public class NumberWheel extends SurfaceView implements Callback,Runnable {
 		public void setRunningNum(int[][] runningNum) {
 			this.runningNum = runningNum;
 		}
-		//°´Ë³Ğò½áÊø¹ö¶¯
+		//æŒ‰é¡ºåºç»“æŸæ»šåŠ¨
 		private boolean endByOrder(int j){
 			for (int i = 0; i < j; i++) {
 				int [] temp=getRunningNum()[i];
@@ -475,7 +475,7 @@ public class NumberWheel extends SurfaceView implements Callback,Runnable {
 			}
 			return true;
 		}
-		//¸³ÖµÎ»ÖÃ×ø±ê
+		//èµ‹å€¼ä½ç½®åæ ‡
 		public void doLocations(Context context,int width,int height){
 			locations=new int[notWheelImages.length][];
 			for(int i=0,j=0;i<notWheelImages.length;i++){

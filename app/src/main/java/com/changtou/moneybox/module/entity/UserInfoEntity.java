@@ -32,7 +32,7 @@ public class UserInfoEntity extends BaseEntity
     private BankCardEntity mBankCardEntity = null;
 
     private static UserInfoEntity single=null;
-    //¾²Ì¬¹¤³§·½·¨
+    //é™æ€å·¥å‚æ–¹æ³•
     public static UserInfoEntity getInstance() {
         if (single == null) {
             single = new UserInfoEntity();
@@ -59,12 +59,12 @@ public class UserInfoEntity extends BaseEntity
         mGifts = wealthinfo.getString("Gifts");
         mTouYuan = wealthinfo.getString("TouYuan");
 
-        //ÏÖ½ğÁ÷
+        //ç°é‡‘æµ
         JSONArray flowInfo = jsonObject.getJSONArray("calender");
         mFlowEntity = new FlowEntity();
         mFlowEntity.paser(flowInfo.toString());
 
-        //ÒøĞĞ¿¨
+        //é“¶è¡Œå¡
         JSONArray bankInfo = jsonObject.getJSONArray("bankinfo");
         mBankCardEntity = new BankCardEntity();
         mBankCardEntity.paser(bankInfo.toString());

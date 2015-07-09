@@ -3,7 +3,7 @@ package com.changtou.moneybox.module.entity;
 import com.changtou.moneybox.common.http.base.BaseEntity;
 
 /**
- * ÍÆ¼öºÃÓÑÊµÌåÀà
+ * æ¨èå¥½å‹å®ä½“ç±»
  *
  * Created by Administrator on 2015/6/11.
  */

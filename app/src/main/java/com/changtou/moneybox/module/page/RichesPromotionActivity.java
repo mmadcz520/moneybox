@@ -7,7 +7,7 @@ import com.changtou.R;
 import com.changtou.moneybox.module.phonebook.RichesPhoneBookActivity;
 
 /**
- * ÍÆ¼öºÃÓÑÒ³Ãæ
+ * æ¨èå¥½å‹é¡µé¢
  *
  * Created by Administrator on 2015/6/10.
  */

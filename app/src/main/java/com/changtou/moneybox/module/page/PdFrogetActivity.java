@@ -60,7 +60,8 @@ public class PdFrogetActivity extends CTBaseActivity
     }
 
     @Override
-    protected int setPageType() {
+    protected int setPageType()
+    {
         return PAGE_TYPE_SUB;
     }
 

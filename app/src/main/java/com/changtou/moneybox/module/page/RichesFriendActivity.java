@@ -5,7 +5,7 @@ import android.os.Bundle;
 import com.changtou.R;
 
 /**
- * 好友推荐列表
+ * 濂藉弸鎺ㄨ崘鍒楄〃
  *
  * Created by Administrator on 2015/6/2.
  */

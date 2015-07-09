@@ -7,7 +7,7 @@ import com.changtou.R;
 import com.changtou.moneybox.common.activity.BaseApplication;
 
 /**
- * 1. 密码管理页面
+ * 1. 瀵嗙爜绠＄悊椤甸潰
  *
  * Created by Administrator on 2015/6/1.
  */
@@ -53,7 +53,7 @@ public class PdManagerActivity extends CTBaseActivity
     {
         if(resultCode == RESULT_OK)
         {
-            //设置手势密码
+            //璁剧疆鎵嬪娍瀵嗙爜
             BaseApplication.getInstance().onBackground();
         }
         else

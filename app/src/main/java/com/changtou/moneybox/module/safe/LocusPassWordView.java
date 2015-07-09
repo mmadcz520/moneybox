@@ -479,10 +479,10 @@ public class LocusPassWordView extends View {
 
     public interface OnCompleteListener {
 
-        //设置密码完成
+        //璁剧疆瀵嗙爜瀹屾垚
         public void onComplete(String password);
 
-        //密码太短回调
+        //瀵嗙爜澶煭鍥炶皟
         public void onTooShort();
     }
 }

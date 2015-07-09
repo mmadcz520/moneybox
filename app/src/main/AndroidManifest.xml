@@ -36,6 +36,10 @@
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
+    <meta-data
+        android:name="UMENG_CHANNEL"
+        android:value="${UMENG_CHANNEL_VALUE}" />
+
     <application
         android:name=".moneybox.module.CTMoneyApplication"
         android:allowBackup="true"
