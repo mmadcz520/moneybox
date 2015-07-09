@@ -4,11 +4,21 @@
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/adapter/FlowAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/adapter/FlowItemAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/appcfg/AppCfg.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/entity/RewardsEntity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/entity/TradeEntity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/entity/UserInfoEntity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/page/PdManagerActivity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/page/RichesCalendarActivity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/page/RichesCertificationActivity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/page/RichesFlowActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/page/RichesFriendActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/page/RichesPromotionActivity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/page/RichesRewardsActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/page/RichesTradeActivity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/page/RichesWithdrawActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/page/WebActivity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/phonebook/RichesPhoneBookActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/safe/LocusPassWordView.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/widget/NumberWheel.java" charset="UTF-8" />
   </component>
 </project>

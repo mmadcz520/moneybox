@@ -164,11 +164,11 @@
             android:visibility="gone"
             android:text="@string/dialog_cancel" />
 
-        <View
-            android:id="@+id/riches_line2"
-            android:layout_width="1dp"
-            android:layout_height="fill_parent"
-            android:background="@color/ct_divide_line" />
+        <!--<View-->
+            <!--android:id="@+id/riches_line2"-->
+            <!--android:layout_width="1dp"-->
+            <!--android:layout_height="fill_parent"-->
+            <!--android:background="@color/ct_divide_line" />-->
 
         <Button
             android:id="@+id/confirm_button"

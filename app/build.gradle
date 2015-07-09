@@ -42,5 +42,6 @@ dependencies {
     compile project(':sweet_alert')
     compile project(':calendarview')
     compile files('libs/pinyin4j-2.5.0.jar')
+    compile files('libs/umeng-update-v2.6.0.1.jar')
 }
 

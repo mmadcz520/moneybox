@@ -406,7 +406,7 @@ int id bottom 0x7f070019
 int id cancel_button 0x7f070051
 int id checkbox 0x7f07002e
 int id collapseActionView 0x7f070011
-int id confirm_button 0x7f070053
+int id confirm_button 0x7f070052
 int id content_text 0x7f07004f
 int id custom_image 0x7f070045
 int id decor_content_parent 0x7f070034
@@ -440,7 +440,6 @@ int id progress_dialog 0x7f07004d
 int id progress_horizontal 0x7f070020
 int id radio 0x7f070030
 int id riches_line1 0x7f070050
-int id riches_line2 0x7f070052
 int id search_badge 0x7f07003a
 int id search_bar 0x7f070039
 int id search_button 0x7f07003b
