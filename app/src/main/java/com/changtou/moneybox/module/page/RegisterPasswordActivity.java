@@ -208,6 +208,7 @@ public class RegisterPasswordActivity extends CTBaseActivity implements LoginNot
             jsonObject.put("pwd", password);
             params.put("data", jsonObject.toString());
 
+
             sendRequest(HttpRequst.REQ_TYPE_POSTREG, url, params, getAsyncClient(), false);
         }
         catch (Exception e)
