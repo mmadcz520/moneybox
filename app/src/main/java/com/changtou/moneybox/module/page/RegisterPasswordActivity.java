@@ -213,6 +213,7 @@ public class RegisterPasswordActivity extends CTBaseActivity implements LoginNot
         catch (Exception e)
         {
             e.printStackTrace();
+
         }
     }
 
