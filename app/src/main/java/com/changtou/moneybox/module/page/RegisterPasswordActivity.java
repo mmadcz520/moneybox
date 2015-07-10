@@ -204,7 +204,7 @@ public class RegisterPasswordActivity extends CTBaseActivity implements LoginNot
 
             RequestParams params = new RequestParams();
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("mobile", "13428642451");
+            jsonObject.put("mobile", mobiles);
             jsonObject.put("pwd", password);
             params.put("data", jsonObject.toString());
 
