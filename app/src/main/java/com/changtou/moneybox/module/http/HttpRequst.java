@@ -75,6 +75,7 @@ public class HttpRequst extends BaseHttpRequest
     public final static int REQ_TYPE_SENDMSG = 1080;
     public final static int REQ_TYPE_CHECKCODE = 1081;
     public final static int REQ_TYPE_POSTREG = 1082;
+    public final static int REQ_TYPE_NEWPWD = 1083;   //更改新密码
 
     //banner
     public final String REQ_URL_PRODUCT_BANNER = BASE_URL + "product/GetFocusImg";
@@ -136,6 +137,9 @@ public class HttpRequst extends BaseHttpRequest
 
     //注册用户
     public static String REQ_URL_POSTREG = BASE_URL + "usertoken/postreg?";
+
+    //更改密码
+    public static String REQ_URL_NEWPWD = BASE_URL + "usertoken/postnewpwd?";
 
     public static synchronized HttpRequst getInstance()
     {
@@ -202,6 +206,8 @@ public class HttpRequst extends BaseHttpRequest
                 return REQ_URL_CHECKCODE;
             case REQ_TYPE_POSTREG:
                 return REQ_URL_POSTREG;
+            case REQ_TYPE_NEWPWD:
+                return REQ_URL_NEWPWD;
             default:
                 break;
         }

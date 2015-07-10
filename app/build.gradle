@@ -7,8 +7,8 @@ android {
         applicationId "com.changtou.moneybox"
         minSdkVersion 11
         targetSdkVersion 21
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "1.3"
     }
     buildTypes {
         release {
@@ -43,5 +43,6 @@ dependencies {
     compile project(':calendarview')
     compile files('libs/pinyin4j-2.5.0.jar')
     compile files('libs/umeng-update-v2.6.0.1.jar')
+    compile 'com.umeng.analytics:analytics:latest.integration'
 }
 

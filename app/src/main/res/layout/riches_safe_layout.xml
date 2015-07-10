@@ -41,6 +41,7 @@
     </LinearLayout>
 
     <com.changtou.moneybox.module.widget.ExEditView
+        android:id = "@+id/btn_phoneauth"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/extext_height"
         android:focusable="true"

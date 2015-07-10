@@ -17,6 +17,7 @@ import com.changtou.moneybox.common.http.base.HttpCallback;
 import com.changtou.moneybox.common.http.async.RequestParams;
 import com.changtou.moneybox.common.http.impl.AsyncHttpClientImpl;
 import com.changtou.moneybox.module.widget.ZProgressHUD;
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * 描述: Tab页，导航栏在底部
@@ -176,6 +177,7 @@ public abstract class BaseActivity extends FragmentActivity implements HttpCallb
      */
     protected void onResume() {
         super.onResume();
+        MobclickAgent.onResume(this);
         initData();
     }
 
@@ -186,5 +188,11 @@ public abstract class BaseActivity extends FragmentActivity implements HttpCallb
     protected void printLog(String log)
     {
         Log.e(LOGTAG, this.toString()+"-"+log);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }

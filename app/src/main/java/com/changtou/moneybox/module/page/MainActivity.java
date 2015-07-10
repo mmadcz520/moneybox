@@ -11,6 +11,8 @@ import com.changtou.moneybox.common.activity.BaseFragment;
 import com.changtou.moneybox.module.widget.ExFPAdapter;
 import com.changtou.moneybox.module.widget.ExViewPager;
 import com.changtou.moneybox.module.widget.SignInHUD;
+import com.umeng.update.UmengUpdateAgent;
+import com.umeng.update.UpdateConfig;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,6 +68,8 @@ public class MainActivity extends CTBaseActivity {
         mViewpager.setOffscreenPageLimit(viewList.size());
 
 //        mSignInHUD = (SignInHUD)this.findViewById(R.id.signin_fragment);
+        UpdateConfig.setDebug(true);
+        UmengUpdateAgent.update(this);
     }
 
     /**

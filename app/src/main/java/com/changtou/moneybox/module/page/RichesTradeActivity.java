@@ -58,7 +58,7 @@ public class RichesTradeActivity extends CTBaseActivity
     {
         if (reqType == HttpRequst.REQ_TYPE_TRADE_LIST)
         {
-            printLog(content);
+            printLog("dfffffffffffffffffffffffffffffffffffffffffff" + content);
 
             super.onSuccess(content, object, reqType);
             TradeEntity entity = (TradeEntity) object;

@@ -27,6 +27,7 @@ public class RichesSafeActivity extends CTBaseActivity
 
     protected void initListener()
     {
+        setOnClickListener(R.id.btn_phoneauth);
         setOnClickListener(R.id.btn_certification_manager);
         setOnClickListener(R.id.safe_page_quit);
         setOnClickListener(R.id.btn_bank_manager);
@@ -47,6 +48,13 @@ public class RichesSafeActivity extends CTBaseActivity
     {
         switch (id)
         {
+            case R.id.btn_phoneauth:
+            {
+                final Intent intent = new Intent(this, PhoneAuthActivity.class);
+                startActivity(intent);
+                break;
+            }
+
             case R.id.btn_certification_manager:
             {
                 final Intent intent = new Intent(this, RichesCertificationActivity.class);

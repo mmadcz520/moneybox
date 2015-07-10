@@ -19,6 +19,7 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.AssetManager;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.changtou.moneybox.common.http.base.BaseHttpRequest;
@@ -105,6 +106,8 @@ public abstract class BaseApplication extends Application implements UncaughtExc
 		mApplication = this;
 //        FolderManager.initSystemFolder();
 		mAppParamsHolder = new Hashtable<String, Object>();
+
+        Log.e("CT_MONEY", " ----------------- "+getDeviceInfo(mApplication));
 
         try {
             mUserManager = new UserManager();
@@ -426,6 +429,37 @@ public abstract class BaseApplication extends Application implements UncaughtExc
     {
         return !((sph.getString(AppCfg.CFG_LOGIN, "").equals(AppCfg.LOGIN_STATE.EN_LOGIN.toString()))
                 || (sph.getString(AppCfg.CFG_LOGIN, "").equals("")));
+    }
+
+
+    public static String getDeviceInfo(Context context) {
+        try{
+            org.json.JSONObject json = new org.json.JSONObject();
+            android.telephony.TelephonyManager tm = (android.telephony.TelephonyManager) context
+                    .getSystemService(Context.TELEPHONY_SERVICE);
+
+            String device_id = tm.getDeviceId();
+
+            android.net.wifi.WifiManager wifi = (android.net.wifi.WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+
+            String mac = wifi.getConnectionInfo().getMacAddress();
+            json.put("mac", mac);
+
+            if( TextUtils.isEmpty(device_id) ){
+                device_id = mac;
+            }
+
+            if( TextUtils.isEmpty(device_id) ){
+                device_id = android.provider.Settings.Secure.getString(context.getContentResolver(),android.provider.Settings.Secure.ANDROID_ID);
+            }
+
+            json.put("device_id", device_id);
+
+            return json.toString();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

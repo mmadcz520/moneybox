@@ -163,7 +163,7 @@ public abstract class BaseFragment extends Fragment implements
         }
         else
         {
-            mMultiStateView.setViewState(MultiStateView.ViewState.ERROR);
+//            mMultiStateView.setViewState(MultiStateView.ViewState.ERROR);
         }
     }
 

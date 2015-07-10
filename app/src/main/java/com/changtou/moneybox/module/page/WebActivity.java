@@ -11,6 +11,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.changtou.R;
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * Created by Administrator on 2015/7/8.
@@ -71,5 +72,14 @@ public class WebActivity extends Activity
             }
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }

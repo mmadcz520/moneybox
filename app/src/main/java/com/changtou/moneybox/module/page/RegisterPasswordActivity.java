@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.TextAppearanceSpan;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.Button;
 import android.widget.Toast;
@@ -41,11 +42,20 @@ public class RegisterPasswordActivity extends CTBaseActivity implements LoginNot
 
     private SharedPreferencesHelper sph = null;
 
+    private int mPageType = 0;
+    private String mCheckSum = "";
+
     protected void initView(Bundle bundle)
     {
         setContentView(R.layout.riches_register_password_layout);
 
         Intent intent = this.getIntent();
+        mPageType = intent.getIntExtra("type", 0);
+        if(mPageType == 1)
+        {
+            mCheckSum = intent.getStringExtra("code");
+        }
+
         mPhoneNum = intent.getStringExtra("phoneNum");
 
         mPasswordText = (ExEditView)findViewById(R.id.register_password);
@@ -88,7 +98,15 @@ public class RegisterPasswordActivity extends CTBaseActivity implements LoginNot
                     return;
                 }
 
-                postregRequest(mPhoneNum, mPassword);
+                if(mPageType == 0)
+                {
+                    postregRequest(mPhoneNum, mPassword);
+                }
+                else
+                {
+                    postnewpwdRequest(mPhoneNum, mPassword);
+                }
+
                 break;
         }
     }
@@ -121,10 +139,56 @@ public class RegisterPasswordActivity extends CTBaseActivity implements LoginNot
                 Toast.makeText(this, "内部错误", Toast.LENGTH_LONG).show();
             }
         }
+
+        if(reqType == HttpRequst.REQ_TYPE_NEWPWD)
+        {
+            try
+            {
+                JSONObject data = new JSONObject(content);
+                int error = data.getInt("errcode");
+                if(error == 0)
+                {
+                    Toast.makeText(this, "修改密码成功", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(this, LoginActivity.class);
+                    startActivity(intent);
+                }
+            }
+            catch (Exception e)
+            {
+                Toast.makeText(this, "内部错误", Toast.LENGTH_LONG).show();
+            }
+
+        }
     }
 
-    public void onFailure(Throwable error, String content, int reqType) {
+    public void onFailure(Throwable error, String content, int reqType)
+    {
         super.onFailure(error, content, reqType);
+    }
+
+    /**
+     * 注册请求
+     */
+    private void  postnewpwdRequest(String mobiles, String password)
+    {
+        try
+        {
+            String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_NEWPWD) +
+                    "userid=" + ACache.get(BaseApplication.getInstance()).getAsString("userid") +
+                    "&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token");
+
+            RequestParams params = new RequestParams();
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("mobile", mobiles);
+            jsonObject.put("pwd", password);
+            params.put("data", jsonObject.toString());
+
+            sendRequest(HttpRequst.REQ_TYPE_NEWPWD, url, params, getAsyncClient(), false);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     /**

@@ -15,6 +15,7 @@ import com.changtou.moneybox.common.utils.SharedPreferencesHelper;
 import com.changtou.moneybox.module.appcfg.AppCfg;
 import com.changtou.moneybox.module.safe.LocusPassWordView;
 import com.changtou.moneybox.module.safe.Md5Utils;
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * 手势密码页
@@ -146,5 +147,14 @@ public class GesturePWActivity extends Activity implements LocusPassWordView.OnC
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }
