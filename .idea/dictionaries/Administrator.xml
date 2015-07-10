@@ -16,6 +16,7 @@
       <w>errorcode</w>
       <w>exedit</w>
       <w>fillpraent</w>
+      <w>forgetpwd</w>
       <w>fullname</w>
       <w>fxfs</w>
       <w>gdyh</w>
@@ -39,6 +40,7 @@
       <w>lefttouc</w>
       <w>minamount</w>
       <w>nhsy</w>
+      <w>phoneauth</w>
       <w>phonebook</w>
       <w>phonenum</w>
       <w>popo</w>
@@ -46,6 +48,7 @@
       <w>postcheckcode</w>
       <w>postdeletebankcard</w>
       <w>postlogin</w>
+      <w>postnewpwd</w>
       <w>postreg</w>
       <w>postsendmsg</w>
       <w>projectname</w>

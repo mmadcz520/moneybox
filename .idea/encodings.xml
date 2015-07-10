@@ -8,6 +8,7 @@
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/entity/TradeEntity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/entity/UserInfoEntity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/page/PdManagerActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/page/PhoneAuthActivity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/page/RichesCalendarActivity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/page/RichesCertificationActivity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/changtou/moneybox/module/page/RichesFlowActivity.java" charset="UTF-8" />
