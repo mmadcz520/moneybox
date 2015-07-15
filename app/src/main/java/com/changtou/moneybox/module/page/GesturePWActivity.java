@@ -1,6 +1,7 @@
 package com.changtou.moneybox.module.page;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -37,6 +38,8 @@ public class GesturePWActivity extends Activity implements LocusPassWordView.OnC
 
     private long exitTime = 0;
 
+    private TextView forgetPdView = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +49,9 @@ public class GesturePWActivity extends Activity implements LocusPassWordView.OnC
         setContentView(R.layout.draw_pwd);
         mPwdView = (LocusPassWordView) this.findViewById(R.id.mPassWordView);
         mGesturePrompt = (TextView)this.findViewById(R.id.pd_gesture_prompt);
+
+        forgetPdView = (TextView)this.findViewById(R.id.pd_gesture_forget);
+        forgetPdView.setOnClickListener(this);
 
         //保存密码
         sph = SharedPreferencesHelper.getInstance(getApplicationContext());
@@ -126,7 +132,9 @@ public class GesturePWActivity extends Activity implements LocusPassWordView.OnC
      */
     public void onClick(View v)
     {
-
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        this.finish();
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event)

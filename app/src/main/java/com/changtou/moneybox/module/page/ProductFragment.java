@@ -1,6 +1,5 @@
 package com.changtou.moneybox.module.page;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -8,7 +7,6 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +38,8 @@ import java.util.List;
  * @author zhoulongfei
  * @since 2015-3-26
  */
-public class ProductFragment extends BaseFragment{
+public class ProductFragment extends BaseFragment
+{
 
     private ViewPager mViewPager = null;
 
@@ -87,7 +86,6 @@ public class ProductFragment extends BaseFragment{
             try
             {
                 JSONObject json = new JSONObject(content);
-
                 JSONArray array = json.getJSONArray("productType");
 
                 int len = array.length();
@@ -174,6 +172,17 @@ public class ProductFragment extends BaseFragment{
             actualListView = mPullRefreshListView.getRefreshableView();
             actualListView.setEnabled(true);
             mPullRefreshListView.setOnRefreshListener(this);
+
+            mMultiStateView.setRetryListener(new MultiStateView.RetryListener()
+            {
+                public void reTry()
+                {
+                    sendRequest(HttpRequst.REQ_TYPE_PRODUCT_LIST,
+                            HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_PRODUCT_LIST),
+                            mParams,
+                            mAct.getAsyncClient(), true);
+                }
+            });
 
             return mView;
         }

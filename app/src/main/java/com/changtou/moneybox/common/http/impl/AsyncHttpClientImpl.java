@@ -42,7 +42,7 @@ public class AsyncHttpClientImpl implements BaseHttpClient {
         client = new AsyncHttpClient();
 
         //设置链接超时
-        client.setTimeout(10000);
+        client.setTimeout(20000);
     }
 
     @Override

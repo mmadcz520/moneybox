@@ -167,7 +167,7 @@ public class HttpRequst extends BaseHttpRequest
             case REQ_TYPE_PRODUCT_TYPE:
                 return REQ_URL_PRODUCT_TYPE;
             case REQ_TYPE_PRODUCT_HOME:
-                return "http://autoapp.hsxiang.com/wp-admin/admin-ajax.php?action=";
+                return REQ_URL_PRODUCT_TYPE;
             case REQ_TYPE_PRODUCT_LIST:
                 return REQ_URL_PRODUCT_LIST;
             case REQ_TYPE_PRODUCT_DETAILS:

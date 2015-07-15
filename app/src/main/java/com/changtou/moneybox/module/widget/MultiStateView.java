@@ -8,6 +8,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 
 import com.changtou.R;
@@ -48,6 +49,13 @@ public class MultiStateView extends FrameLayout {
     private View mEmptyView;
 
     private ViewState mViewState = ViewState.CONTENT;
+
+    public interface RetryListener
+    {
+        void reTry();
+    }
+
+    private RetryListener mRetryListener = null;
 
     public MultiStateView(Context context) {
         this(context, null);
@@ -107,6 +115,19 @@ public class MultiStateView extends FrameLayout {
         }
 
         a.recycle();
+
+        Button retry_btn = (Button)mErrorView.findViewById(R.id.retry_request);
+
+        retry_btn.setOnClickListener(new OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                if(mRetryListener != null)
+                {
+                    mRetryListener.reTry();
+                }
+            }
+        });
     }
 
     @Override
@@ -304,5 +325,10 @@ public class MultiStateView extends FrameLayout {
 
     public void setViewForState(@LayoutRes int layoutRes, ViewState state) {
         setViewForState(layoutRes, state, false);
+    }
+
+    public void setRetryListener(RetryListener retryListener)
+    {
+        this.mRetryListener = retryListener;
     }
 }

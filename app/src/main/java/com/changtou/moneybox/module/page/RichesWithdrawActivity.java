@@ -9,6 +9,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -47,8 +48,10 @@ public class RichesWithdrawActivity extends CTBaseActivity
     private TextView mWithdrawTotle = null;
     private TextView mWithdrawHandling = null;
 
-    private String mOverage = null;
+    private String mOverage = "";
     private String mHandling = "5";
+
+    private Button mSubmitBtn = null;
 
     //默认银行卡号
     private String mDefaultBankNo = "";
@@ -80,6 +83,8 @@ public class RichesWithdrawActivity extends CTBaseActivity
 
         mBankNoView = (TextView)findViewById(R.id.riches_bank_item_no);
         mBankIconView = (ImageView)findViewById(R.id.riches_bank_item_logo);
+
+        mSubmitBtn = (Button)findViewById(R.id.affirm_withdraw_btn);
 
         mBankInfoList = BaseApplication.getInstance().getBankInfoList();
     }
@@ -171,9 +176,8 @@ public class RichesWithdrawActivity extends CTBaseActivity
             // TODO Auto-generated method stub
         }
 
-        @Override
-        public void afterTextChanged(Editable s) {
-
+        public void afterTextChanged(Editable s)
+        {
             Float input_f;
             Float money_f;
 
@@ -194,10 +198,12 @@ public class RichesWithdrawActivity extends CTBaseActivity
             Float m = input_f - money_f;
             if(m > 0)
             {
+                mSubmitBtn.setEnabled(true);
                 mWithdrawMoney.setText(customFormat(m.toString()));
             }
             else
             {
+                mSubmitBtn.setEnabled(false);
                 mWithdrawMoney.setText("");
             }
         }
@@ -252,15 +258,11 @@ public class RichesWithdrawActivity extends CTBaseActivity
 
             String num = mWithdrawNum.getEditableText().toString();
 
-            Log.e("CT_MONEY", "-------" + url + "--------------------------" + num + "---------------" + mDefaultBankNo);
-
             RequestParams params = new RequestParams();
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("num", num);
             jsonObject.put("account", mDefaultBankNo);
             params.put("data", jsonObject.toString());
-
-            Log.e("CT_MONEY", "-------" + params);
 
             sendRequest(HttpRequst.REQ_TYPE_WITHDRAW, url, params, getAsyncClient(), false);
         }
@@ -315,11 +317,11 @@ public class RichesWithdrawActivity extends CTBaseActivity
             {
                 JSONObject json = new JSONObject(content);
 
-                String fee = json.getString("fee");
-                String yue = json.getString("yue");
+                mHandling = json.getString("fee");
+                mOverage = json.getString("yue");
 
-                mWithdrawTotle.setText(customFormat(yue));
-                mWithdrawHandling.setText("-" + customFormat(fee));
+                mWithdrawTotle.setText(customFormat(mOverage));
+                mWithdrawHandling.setText("-" + customFormat(mHandling));
             }
             catch (Exception e)
             {

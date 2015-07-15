@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.utils.SharedPreferencesHelper;
+import com.changtou.moneybox.module.CTMoneyApplication;
 import com.changtou.moneybox.module.appcfg.AppCfg;
 import com.changtou.moneybox.module.usermodule.LoginNotifier;
 import com.changtou.moneybox.module.usermodule.UserManager;
@@ -29,6 +31,8 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
     //记录是否登录
     private SharedPreferencesHelper sph = null;
 
+    private Button mLoginBtn = null;
+
     private String[] mErrorContent = {"","用户名格式不正确", "不存在该用户名", "密码错误", "邮箱未激活", " 手机未激活", "服务器故障"};
 
     @Override
@@ -40,6 +44,8 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
 
         mUserManager = BaseApplication.getInstance().getUserModule();
         mUserManager.setLoginNotifier(this);
+
+        mLoginBtn = (Button)findViewById(R.id.login_btn);
 
 //        TextView loginBtn = (TextView)findViewById(R.id.login_btn);
 //        final Intent intent = new Intent(this, RichesPhoneBookActivity.class);
@@ -79,12 +85,14 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
                 String username = mUserNameView.getEditValue();
                 String password = mPassWordView.getEditValue();
 
-
                 if (username.equals("") || password.equals(""))
                 {
                     popoErrorDialog();
-                } else {
+                }
+                else
+                {
                     mUserManager.logIn(username, password);
+                    mLoginBtn.setEnabled(false);
 //                    mDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE).setTitleText("登陆");
 //                    mDialog.getProgressHelper().setBarColor(getResources().getColor(R.color.ct_blue));
 //                    mDialog.getProgressHelper().setRimColor(getResources().getColor(R.color.ct_blue_hint));
@@ -121,11 +129,14 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
      */
     public void loginSucNotify()
     {
+        mLoginBtn.setEnabled(true);
+
         //清空手势密码
         sph.putString(AppCfg.CFG_LOGIN, AppCfg.LOGIN_STATE.LOGIN.toString());
         sph.putString(AppCfg.GSPD, "");
 
         Intent intent = new Intent(this, MainActivity.class);
+        CTMoneyApplication.getInstance().onBackground();
         LoginActivity.this.setResult(RESULT_OK, intent);
         LoginActivity.this.finish();
     }
@@ -137,6 +148,10 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
 
     public void loginErrNotify(int errcode)
     {
+        printLog("errcode" + errcode);
+
+        mLoginBtn.setEnabled(true);
+
         int code = (errcode < mErrorContent.length) ? errcode : (mErrorContent.length - 1);
         Toast toast = Toast.makeText(getApplicationContext(),
                 mErrorContent[code], Toast.LENGTH_LONG);
@@ -206,6 +221,5 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
     }
-
 
 }

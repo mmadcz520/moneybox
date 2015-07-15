@@ -3,7 +3,6 @@ package com.changtou.moneybox.module.page;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,6 +65,12 @@ public class ProductDetailsActivity extends CTBaseActivity
         mProductType = pro_intent.getIntExtra("type", 0);
         mProductId = pro_intent.getStringExtra("id");
 
+        if(mProductId.equals(""))
+        {
+            Toast.makeText(this, "找不到相应产品", Toast.LENGTH_LONG);
+            return;
+        }
+
         mPageList = new ArrayList<>();
         mDetailsPage = new DetailsPage();
         mAgreementPage = ProductDetailsMorePage.create(mProductType);
@@ -73,10 +78,8 @@ public class ProductDetailsActivity extends CTBaseActivity
         mPageList.add(mAgreementPage);
         pullToNextLayout.setAdapter(new PullToNextAdapter(getSupportFragmentManager(), mPageList));
 
-        pullToNextLayout.setOnItemSelectListener(new OnItemSelectListener()
-        {
-            public void onSelectItem(int position, View view)
-            {
+        pullToNextLayout.setOnItemSelectListener(new OnItemSelectListener() {
+            public void onSelectItem(int position, View view) {
                 mAgreementPage.initScroll();
             }
         });

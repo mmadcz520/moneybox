@@ -14,7 +14,6 @@ import com.changtou.moneybox.common.activity.BaseActivity;
 import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.http.async.RequestParams;
 import com.changtou.moneybox.module.CTMoneyApplication;
-import com.changtou.moneybox.module.widget.ZProgressHUD;
 
 /**
  * 描述: CT钱包app 页面基类

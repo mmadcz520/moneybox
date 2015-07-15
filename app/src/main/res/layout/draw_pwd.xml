@@ -45,21 +45,22 @@
         android:layout_marginTop="20dp"
         android:layout_weight="5">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_alignParentLeft="true"
-            android:text="@string/pd_gesture_forget"
-            android:textColor="@color/font_white"
-            android:textSize="@dimen/font_size_hint2" />
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="30dp"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:text="@string/pd_gesture_forget"-->
+            <!--android:textColor="@color/font_white"-->
+            <!--android:textSize="@dimen/font_size_hint2" />-->
 
         <TextView
+            android:id="@+id/pd_gesture_forget"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginRight="30dp"
-            android:text="@string/pd_gesture_otheruser"
+            android:text="@string/pd_gesture_forget"
             android:textColor="@color/font_white"
             android:textSize="@dimen/font_size_hint2" />
 

@@ -6,6 +6,7 @@ import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -228,7 +229,6 @@ public class PullToNextView extends LinearLayout {
 
             for (int i = 0; i < vp.getChildCount(); i++) {
 
-
                 a(vp.getChildAt(i));
             }
         }
@@ -236,9 +236,7 @@ public class PullToNextView extends LinearLayout {
 
     }
 
-
     public void initContentAdapterView(ViewGroup contentView) {
-
 
         if (contentView == null) {
             contentView = this;
@@ -285,7 +283,6 @@ public class PullToNextView extends LinearLayout {
         }
         return super.onInterceptTouchEvent(e);
     }
-
 
     /*
      * 如果在onInterceptTouchEvent()方法中没有拦截(即onInterceptTouchEvent()方法中 return
@@ -375,8 +372,6 @@ public class PullToNextView extends LinearLayout {
     private boolean isRefreshViewScroll(int deltaY) {
 
         if (PullStateE.PULL_STATE_REFRESH == mPullStateE) {
-
-
             return false;
         }
         LayoutParams params = (LayoutParams) mHeaderView.getLayoutParams();
@@ -390,10 +385,11 @@ public class PullToNextView extends LinearLayout {
                 // 向下
                 mPullStateE = PullStateE.PULL_STATE_DOWN;
                 return true;
-            } else if (deltaY < -12 &&
-
-                    child.getMeasuredHeight() <= contentView.getHeight() + mScrollView.getScrollY()) {
+            } else if (deltaY < -12 && child.getMeasuredHeight() <= contentView.getHeight() + mScrollView.getScrollY()) {
                 //向上
+
+                Log.e("CT_MONEY", "--------------------------------deltaY=" +deltaY);
+
                 mPullStateE = PullStateE.PULL_STATE_UP;
                 return true;
             }
@@ -413,14 +409,10 @@ public class PullToNextView extends LinearLayout {
 
                 mPullStateE = PullStateE.PULL_STATE_UP;
                 return true;
-
             }
-
         }else{
             return true;
         }
-
-
         return false;
     }
 

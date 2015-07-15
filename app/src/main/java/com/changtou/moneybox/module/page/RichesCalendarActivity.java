@@ -2,9 +2,7 @@ package com.changtou.moneybox.module.page;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 
 import com.changtou.R;
 import com.changtou.moneybox.module.adapter.FlowItemAdapter;

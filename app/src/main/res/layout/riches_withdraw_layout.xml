@@ -121,6 +121,7 @@
         android:layout_height="@dimen/button_height_fillparent"
         android:background="@drawable/btn_selector"
         android:textColor="@color/ct_white"
+        android:enabled="false"
         android:text="确认提现"
         android:textSize="@dimen/font_size_normal" />
 

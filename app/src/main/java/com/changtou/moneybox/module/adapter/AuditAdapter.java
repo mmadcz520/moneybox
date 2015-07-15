@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.changtou.R;
 import com.changtou.moneybox.common.utils.AsyncImageLoader;
@@ -42,16 +43,18 @@ public class AuditAdapter extends BaseAdapter {
     @Override
     public int getCount() {
         if (mImgList != null && mImgList.size() > 0) {
-
             return mImgList.size();
         }
         return 0;
     }
 
     @Override
-    public String getItem(int position) {
-        if (mImgList != null && mImgList.size() > 0) {
-            return (String) mImgList.get(position);
+    public Object getItem(int position) {
+        if (mImgList != null) {
+
+            Log.e("CT_MONEY", "mImgList.size()=" + mImgList.size());
+
+            return mImgList.get(position);
         }
         return null;
     }
@@ -64,23 +67,33 @@ public class AuditAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent)
     {
-        String imgSrc = getItem(position);
+        String imgSrc = (String)getItem(position);
+        ViewHolder viewHolder;
 
         Log.e("CT_MONEY", "imgSrc=" + imgSrc);
 
         if(convertView == null)
         {
+            viewHolder = new ViewHolder();
             convertView = mInflater.inflate(R.layout.product_details_audit_item, null);
-            ImageView imageView = (ImageView) convertView.findViewById(R.id.audit_img);
-            AsyncImageLoader mAsyncImageLoader = new AsyncImageLoader();
-            mAsyncImageLoader.showImageAsyn(imageView, imgSrc, R.mipmap.ic_launcher);
+            viewHolder.mImageView = (ImageView) convertView.findViewById(R.id.audit_img);
+
+            convertView.setTag(viewHolder);
         }
         else
         {
-
+            viewHolder = (ViewHolder) convertView.getTag();
         }
 
+        AsyncImageLoader mAsyncImageLoader = new AsyncImageLoader();
+        mAsyncImageLoader.showImageAsyn(viewHolder.mImageView, imgSrc, R.mipmap.ic_launcher);
 
         return convertView;
+    }
+
+
+    private class ViewHolder
+    {
+        public ImageView mImageView;
     }
 }

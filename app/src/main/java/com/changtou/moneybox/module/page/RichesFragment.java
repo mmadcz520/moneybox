@@ -2,7 +2,6 @@ package com.changtou.moneybox.module.page;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.changtou.R;
 import com.changtou.moneybox.common.activity.BaseApplication;
@@ -20,11 +20,10 @@ import com.changtou.moneybox.common.utils.ACache;
 import com.changtou.moneybox.common.utils.SharedPreferencesHelper;
 import com.changtou.moneybox.module.adapter.ExGridAdapter;
 import com.changtou.moneybox.module.appcfg.AppCfg;
+import com.changtou.moneybox.module.entity.BankCardEntity;
 import com.changtou.moneybox.module.entity.UserInfoEntity;
 import com.changtou.moneybox.module.http.HttpRequst;
 import com.changtou.moneybox.module.widget.CountView;
-import com.changtou.moneybox.module.widget.MultiStateView;
-import com.changtou.moneybox.module.widget.SignInHUD;
 
 public class RichesFragment extends BaseFragment implements AdapterView.OnItemClickListener {
 
@@ -76,10 +75,26 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
                         final Intent intent3 = new Intent(RichesFragment.this.getActivity(), RichesFlowActivity.class);
                         startActivity(intent3);
                         break;
-                    case 4:
-                        final Intent intent4 = new Intent(RichesFragment.this.getActivity(), RichesWithdrawActivity.class);
-                        startActivity(intent4);
+                    case 4: {
+
+                        UserInfoEntity userInfoEntity = UserInfoEntity.getInstance();
+                        BankCardEntity bank = userInfoEntity.getBankCardEntity();
+
+                        int len = bank.mList.size();
+                        if(len == 0)
+                        {
+                            Toast.makeText(RichesFragment.this.getActivity(), "请先添加取现银行卡", Toast.LENGTH_LONG).show();
+                            final Intent intent4 = new Intent(RichesFragment.this.getActivity(), RichesBankActivity.class);
+                            startActivity(intent4);
+                        }
+                        else
+                        {
+                            final Intent intent4 = new Intent(RichesFragment.this.getActivity(), RichesWithdrawActivity.class);
+                            startActivity(intent4);
+                        }
+
                         break;
+                    }
                     case 5:
                         final Intent intent5 = new Intent(RichesFragment.this.getActivity(), RichesSafeActivity.class);
                         startActivity(intent5);
@@ -126,12 +141,10 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
 
     public void onSuccess(String content, Object object, int reqType)
     {
-        Log.e("CT_MONEY", "content " + content);
+//        Log.e("CT_MONEY", "content " + content);
 
         if(reqType == HttpRequst.REQ_TYPE_USERINFO)
         {
-//            mTotalAssetsTextView.showNumberWithAnimation(Integer.parseInt(userInfo.getTotalAssets()));
-
             UserInfoEntity userInfo = UserInfoEntity.getInstance();
             mMobileTextView.setText(userInfo.getMobile());
             String total = userInfo.getTotalAssets();
@@ -145,8 +158,6 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
             mOverageTextView.setText(userInfo.getOverage());
             mGiftsTextView.setText(userInfo.getGifts());
             mTouYuanTextView.setText(userInfo.getTouYuan());
-
-//            mMultiStateView.setViewForState(R.layout.state_layout_content, MultiStateView.ViewState.LOADING);
         }
     }
 

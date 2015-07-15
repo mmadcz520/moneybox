@@ -50,6 +50,10 @@ public class RichesInvestListActivity extends CTBaseActivity
     private SubPage mSubPage2 = null;
     private SubPage mSubPage3 = null;
 
+    private LinkedList list1 = null;
+    private LinkedList list2 = null;
+    private LinkedList list3 = null;
+
     protected void initView(Bundle bundle) {
 
         setContentView(R.layout.riches_invest_layout);
@@ -98,9 +102,9 @@ public class RichesInvestListActivity extends CTBaseActivity
             InvestListEntity entity = (InvestListEntity) object;
             Map<String, LinkedList> investMap = entity.getInvestMap();
 
-            LinkedList list1 = investMap.get("1");
-            LinkedList list2 = investMap.get("2");
-            LinkedList list3 = investMap.get("3");
+            list1 = investMap.get("1");
+            list2 = investMap.get("2");
+            list3 = investMap.get("3");
 
             mSubPage1.initInvestList(list1);
             mSubPage2.initInvestList(list2);
@@ -127,6 +131,8 @@ public class RichesInvestListActivity extends CTBaseActivity
 
         private ListView actualListView;
 
+        private LinkedList mData = null;
+
         public static SubPage create(int type)
         {
             SubPage subPage = new SubPage();
@@ -144,33 +150,22 @@ public class RichesInvestListActivity extends CTBaseActivity
             mPullRefreshListView = (PullToRefreshListView) mView.findViewById(R.id.product_list);
             actualListView = mPullRefreshListView.getRefreshableView();
             actualListView.setEnabled(true);
-            mPullRefreshListView.setOnRefreshListener(this);
+//            mPullRefreshListView.setOnRefreshListener(this);
 
             return mView;
         }
 
         protected void initListener()
         {
-            final Activity activity = this.getActivity();
+            actualListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+            {
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+                {
+                    InvestListEntity.ItemEntity item = ( InvestListEntity.ItemEntity)mData.get(position-1);
+                    String pid = item.id;
+                    int type = item.type;
 
-            actualListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                Intent intent = new Intent(activity, ProductDetailsActivity.class);
-
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    startActivity(intent);
-                }
-            });
-
-            actualListView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                Intent intent = new Intent(activity, ProductDetailsActivity.class);
-
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // 跳转到详情页
-                    startActivity(intent);
-                }
-
-                public void onNothingSelected(AdapterView<?> parent) {
-
+                    goToProductDetails(pid, type);
                 }
             });
         }
@@ -196,11 +191,24 @@ public class RichesInvestListActivity extends CTBaseActivity
          */
         public void onRefresh(PullToRefreshBase refreshView)
         {
-//            initInvestListRequest();
+            initInvestList(mData);
+            mPullRefreshListView.onRefreshComplete();
         }
 
         public void initInvestList(LinkedList data) {
             ((InvestListAdapter) mAdapter).setData(data);
+            this.mData = data;
+        }
+
+        /**
+         * 跳转到详情页
+         */
+        private void goToProductDetails(String id, int type)
+        {
+            Intent intent = new Intent(this.getActivity(), ProductDetailsActivity.class);
+            intent.putExtra("id", id);
+            intent.putExtra("type", type);
+            startActivity(intent);
         }
     }
 
@@ -214,4 +222,5 @@ public class RichesInvestListActivity extends CTBaseActivity
                 mParams,
                 getAsyncClient(), false);
     }
+
 }

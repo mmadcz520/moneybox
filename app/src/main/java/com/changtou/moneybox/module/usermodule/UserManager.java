@@ -27,6 +27,8 @@ public class UserManager implements HttpCallback {
 
 	private List<LoginNotifier> mNotifierContainer = null;
 
+	private LoginNotifier mLoginNotifier = null;
+
     public BaseApplication mBaseApp = null;
 
 	private Context mContext = null;
@@ -58,7 +60,7 @@ public class UserManager implements HttpCallback {
 	// 设置通知响应事件
 	public void setLoginNotifier(LoginNotifier loginNotifier) {
 
-		this.mNotifierContainer.add(loginNotifier);
+		this.mLoginNotifier = loginNotifier;
 	}
 
     /**
@@ -82,10 +84,10 @@ public class UserManager implements HttpCallback {
 			{
 				case 0:
 				{
-					for (int i = 0; i < mNotifierContainer.size(); i++)
-					{
-						mNotifierContainer.get(i).loginSucNotify();
-					}
+//					for (int i = 0; i < mNotifierContainer.size(); i++)
+//					{
+						mLoginNotifier.loginSucNotify();
+//					}
 
 					mCache.put("userid", jb.getString("userid"));
 					mCache.put("token", jb.getString("token"));
@@ -95,10 +97,10 @@ public class UserManager implements HttpCallback {
 
 				default:
 				{
-					for (int i = 0; i < mNotifierContainer.size(); i++)
-					{
-						mNotifierContainer.get(i).loginErrNotify(error);
-					}
+//					for (int i = 0; i < mNotifierContainer.size(); i++)
+//					{
+						mLoginNotifier.loginErrNotify(error);
+//					}
 					break;
 				}
 			}

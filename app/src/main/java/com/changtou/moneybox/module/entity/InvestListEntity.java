@@ -1,5 +1,7 @@
 package com.changtou.moneybox.module.entity;
 
+import android.util.Log;
+
 import com.changtou.moneybox.common.http.base.BaseEntity;
 
 import org.json.JSONArray;
@@ -23,6 +25,8 @@ public class InvestListEntity extends BaseEntity{
      */
     public void paser(String data) throws Exception
     {
+        Log.e("CT_MONEY", "--------------------" + data);
+
         JSONArray array = new JSONArray(data);
         int len = array.length();
 
@@ -32,7 +36,7 @@ public class InvestListEntity extends BaseEntity{
         {
             JSONObject typeObject = array.getJSONObject(i);
 
-            String type = typeObject.getString("type");
+            String type = typeObject.getString("status");
             JSONArray itemData = typeObject.getJSONArray("data");
 
             int data_len = itemData.length();
@@ -55,7 +59,7 @@ public class InvestListEntity extends BaseEntity{
     public  class ItemEntity
     {
         public String id;
-        public String type;              //1:还款中 2:已结清 3:已退出
+        public int type;              //1:还款中 2:已结清 3:已退出
         public String projectname;
         public String withdrawamount;    //投资金额
         public String rate;              //利率
@@ -66,8 +70,8 @@ public class InvestListEntity extends BaseEntity{
 
         public void paser(JSONObject json) throws Exception
         {
-            id = json.optString("id");
-            type = json.optString("type");
+            id = json.optString("productid");
+            type = json.optInt("type");
             projectname = json.optString("projectname");
             withdrawamount = json.optString("withdrawamount");
             rate = json.optString("rate");

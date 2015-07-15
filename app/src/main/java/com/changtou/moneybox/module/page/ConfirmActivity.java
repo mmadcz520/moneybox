@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.ViewStub;
 import android.widget.Button;
 import android.widget.EditText;
@@ -217,9 +216,6 @@ public class ConfirmActivity extends CTBaseActivity
                     "userid=" + ACache.get(BaseApplication.getInstance()).getAsString("userid") +
                     "&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token");
 
-            Log.e("CT_MONEY",  "userid=" + ACache.get(BaseApplication.getInstance()).getAsString("userid") +
-                    "&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token"));
-
             RequestParams params = new RequestParams();
 
             JSONObject jsonObject = new JSONObject();
@@ -228,9 +224,6 @@ public class ConfirmActivity extends CTBaseActivity
             jsonObject.put("investmoney", money);
             jsonObject.put("ly", 0);
             params.put("data", jsonObject.toString());
-
-            Log.e("CT_MONEY",  "type=" + type +
-                    "&projid=" + projid);
 
             sendRequest(HttpRequst.REQ_TYPE_INVEST, url, params, getAsyncClient(), false);
         }

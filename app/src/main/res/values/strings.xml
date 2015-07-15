@@ -26,7 +26,7 @@
     <string name="pd_gesture_set_succeed">设置手势密码成功</string>
     <string name="pd_gesture_set_diff">两次密码输入不一致，请重新输入</string>
     <string name="pd_gesture_prompt_error">至少要绘制三个点，请重试</string>
-    <string name="pd_gesture_forget">忘记手势密码</string>
+    <string name="pd_gesture_forget">忘记手势密码?</string>
     <string name="pd_gesture_otheruser">其他账户登陆</string>
 
     <!-- 安全设置页面-->

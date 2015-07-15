@@ -3,7 +3,6 @@ package com.changtou.moneybox.module.page;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -162,7 +161,6 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
                     String title = j.getString("title");
 
                     imgs[i] = j.getString("img");
-                    Log.e("CT_MONEY", imgs[i]);
                 }
 
                 mBannerSwitcher.setImage(imgs);
@@ -203,13 +201,23 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
         //
         if(BaseApplication.getInstance().isUserLogin())
         {
-            Intent intent = new Intent(this.getActivity(), ProductDetailsActivity.class);
-            startActivity(intent);
+            goToProductDetails("0");
         }
         else
         {
             Intent intent = new Intent(this.getActivity(), LoginActivity.class);
             startActivityForResult(intent, 0);
         }
+    }
+
+    /**
+     * 跳转到详情页
+     */
+    private void goToProductDetails(String id)
+    {
+        Intent intent = new Intent(this.getActivity(), ProductDetailsActivity.class);
+        intent.putExtra("id", id);
+        intent.putExtra("type", 0);
+        startActivity(intent);
     }
 }

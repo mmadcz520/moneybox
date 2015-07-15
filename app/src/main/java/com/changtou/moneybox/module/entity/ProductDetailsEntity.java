@@ -41,6 +41,8 @@ public class ProductDetailsEntity extends BaseEntity
     public String hkfs = "";        //还款方式
     public String hksj = "";        //还款时间
 
+    public int productType = 0;       //项目类型
+
     /**
      * @see BaseEntity#paser(String)
      * @param data 1
@@ -53,7 +55,7 @@ public class ProductDetailsEntity extends BaseEntity
         JSONObject object = new JSONObject(data);
         JSONObject productDetail = object.getJSONObject("productDetail");
 
-        int productType = object.getInt("type");
+        productType = object.getInt("type");
         mDetailsCTB = new DetailsEntityCTB();
         mDetailsOther = new DetailsEntityOther();
 
@@ -71,7 +73,7 @@ public class ProductDetailsEntity extends BaseEntity
             hkfs = mDetailsCTB.hkfs;
             hksj = mDetailsCTB.hksj;
         }
-        else if(productType == 2)
+        else
         {
             mDetailsOther.paser(productDetail);
 
@@ -94,7 +96,6 @@ public class ProductDetailsEntity extends BaseEntity
                 String imgSrc = imgList.getString(i);
                 mImgList.add(imgSrc);
             }
-
         }
 
         JSONArray tzlist = object.getJSONArray("tzlist");
