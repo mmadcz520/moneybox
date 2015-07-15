@@ -254,8 +254,6 @@ public class RichesBankActivity extends CTBaseActivity
                 url,
                 mParams,
                 getAsyncClient(), false);
-
-        printLog(url);
     }
 
     private void changeDefaultRequest(int position)

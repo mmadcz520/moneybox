@@ -9,7 +9,8 @@ import android.widget.TextView;
 
 import com.changtou.R;
 import com.changtou.moneybox.module.entity.InvestListEntity;
-import com.changtou.moneybox.module.entity.ProductEntity;
+
+import java.util.LinkedList;
 
 /**
  * Created by Administrator on 2015/5/25.
@@ -17,22 +18,22 @@ import com.changtou.moneybox.module.entity.ProductEntity;
 public class InvestListAdapter extends BaseAdapter
 {
     private LayoutInflater mInflater = null;
-    private InvestListEntity mEntity   = null;
+    private LinkedList mData   = null;
 
     public InvestListAdapter(Context context)
     {
         mInflater = LayoutInflater.from(context);
     }
 
-    public void setData(InvestListEntity entity)
+    public void setData(LinkedList data)
     {
-        this.mEntity = entity;
+        this.mData = data;
         notifyDataSetChanged();
     }
 
-    public InvestListEntity getData()
+    public LinkedList getData()
     {
-        return mEntity;
+        return mData;
     }
 
     /**
@@ -42,11 +43,14 @@ public class InvestListAdapter extends BaseAdapter
      */
     public int getCount()
     {
-        if (mEntity != null && mEntity.mList != null && mEntity.mList.size() > 0)
+        if(mData != null)
         {
-            return mEntity.mList.size();
+            return mData.size();
         }
-        return 0;
+        else
+        {
+            return 0;
+        }
     }
 
     /**
@@ -56,11 +60,11 @@ public class InvestListAdapter extends BaseAdapter
      * @return 产品实体对象
      * @see BaseAdapter#getItem(int)
      */
-    public InvestListEntity.ListEntity getItem(int position)
+    public Object getItem(int position)
     {
-        if (mEntity.mList != null && mEntity.mList.size() > 0)
+        if (mData != null)
         {
-            return (InvestListEntity.ListEntity) mEntity.mList.get(position);
+            return mData.get(position);
         }
         return null;
     }
@@ -70,7 +74,7 @@ public class InvestListAdapter extends BaseAdapter
      */
     public long getItemId(int position)
     {
-        return 0;
+        return position;
     }
 
     /**
@@ -78,33 +82,48 @@ public class InvestListAdapter extends BaseAdapter
      */
     public View getView(int position, View convertView, ViewGroup parent)
     {
-        InvestListEntity.ListEntity entity = getItem(position);
+        InvestListEntity.ItemEntity entity = (InvestListEntity.ItemEntity)getItem(position);
         ViewHolder viewHolder;
 
         if (convertView == null)
         {
             viewHolder = new ViewHolder();
-            convertView = mInflater.inflate(R.layout.riches_invest_list_item, null);
-//            LinearLayout ll = (LinearLayout)convertView.findViewById(R.id.roundProgressBar);
-//            ll.setWillNotDraw(false);
-//            viewHolder.txt_top = (TextView) convertView.findViewById(R.id.pro_list_titile);
-//            viewHolder.txt_bottom = (TextView) convertView.findViewById(R.id.txt_bottom);
-//            RoundProgressBar mRoundProgressBar1 = (RoundProgressBar) convertView.findViewById(R.id.roundProgressBar);
-//            mRoundProgressBar1.setProgress(15);
+            convertView = mInflater.inflate(R.layout.riches_invest_list_item, parent, false);
+            viewHolder.projectnameView = (TextView) convertView.findViewById(R.id.invest_item_titile);
+            viewHolder.withdrawamountView = (TextView) convertView.findViewById(R.id.invest_item_withdrawamount);
+            viewHolder.rateView = (TextView) convertView.findViewById(R.id.invest_item_rate);
+            viewHolder.starttimeView = (TextView) convertView.findViewById(R.id.invest_item_starttime);
+            viewHolder.endtimeView = (TextView) convertView.findViewById(R.id.invest_item_endtime);
+            viewHolder.expectinView = (TextView) convertView.findViewById(R.id.invest_item_expectin);
+            viewHolder.maturityView = (TextView) convertView.findViewById(R.id.invest_item_maturity);
 
             convertView.setTag(viewHolder);
         }
         else
         {
-//            viewHolder = (ViewHolder) convertView.getTag();
+            viewHolder = (ViewHolder) convertView.getTag();
         }
-//        viewHolder.txt_top.setText(entity.name);
+
+        viewHolder.projectnameView.setText(entity.projectname);
+        viewHolder.withdrawamountView.setText(entity.withdrawamount);
+        viewHolder.rateView.setText(entity.rate);
+        viewHolder.starttimeView.setText(entity.starttime);
+        viewHolder.endtimeView.setText(entity.endtime);
+        viewHolder.expectinView.setText(entity.expectin);
+        viewHolder.maturityView.setText(entity.maturity);
+
+
         return convertView;
     }
 
     private class ViewHolder
     {
-        public TextView txt_top;
-//        public TextView txt_bottom;
+        public TextView projectnameView;
+        public TextView withdrawamountView;
+        public TextView rateView;
+        public TextView starttimeView;
+        public TextView endtimeView;
+        public TextView expectinView;
+        public TextView maturityView;
     }
 }

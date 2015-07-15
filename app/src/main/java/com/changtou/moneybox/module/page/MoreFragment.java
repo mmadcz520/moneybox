@@ -1,34 +1,58 @@
 package com.changtou.moneybox.module.page;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.TextAppearanceSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import com.changtou.R;
+import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.activity.BaseFragment;
+import com.changtou.moneybox.module.widget.ExEditView;
+import com.umeng.update.UmengUpdateAgent;
+import com.umeng.update.UmengUpdateListener;
+import com.umeng.update.UpdateResponse;
+import com.umeng.update.UpdateStatus;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 /**
  * Created by Administrator on 2015/3/26.
  */
-public class MoreFragment extends BaseFragment{
+public class MoreFragment extends BaseFragment {
 
     private View mView = null;
 
     private Context mContext = null;
 
+    private ExEditView mVersionView = null;
+
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.setting_fragment, null);
-        mContext=this.getActivity();
+        mContext = this.getActivity();
+
+        mVersionView = (ExEditView) mView.findViewById(R.id.more_check_update);
+
+        String versionName = BaseApplication.getInstance().getVersionName();
+        mVersionView.setMessage(versionName);
 
 //        ListView pageList1 = (ListView) mView.findViewById(R.id.lv_setting1);
 //        ListView pageList2 = (ListView) mView.findViewById(R.id.lv_setting2);
@@ -39,7 +63,54 @@ public class MoreFragment extends BaseFragment{
 
 
     protected void initListener() {
+        setOnClickListener(R.id.more_about_me);
+        setOnClickListener(R.id.more_tell_service);
+        setOnClickListener(R.id.more_check_update);
+        setOnClickListener(R.id.more_push_msg);
+    }
 
+    public void treatClickEvent(int id) {
+        switch (id) {
+            case R.id.more_about_me: {
+                Intent intent = new Intent(this.getActivity(), WebActivity.class);
+                intent.putExtra("url", "http://m.changtounet.com");
+                startActivity(intent);
+
+                break;
+            }
+
+            case R.id.more_tell_service: {
+                popoTeleDialog();
+                break;
+            }
+
+            case R.id.more_check_update: {
+                UmengUpdateAgent.setUpdateAutoPopup(false);
+                UmengUpdateAgent.setUpdateListener(new UmengUpdateListener() {
+                    @Override
+                    public void onUpdateReturned(int updateStatus, UpdateResponse updateInfo) {
+                        switch (updateStatus) {
+                            case UpdateStatus.Yes: // has update
+                                UmengUpdateAgent.showUpdateDialog(mContext, updateInfo);
+                                break;
+                            case UpdateStatus.No: // has no update
+                                Toast.makeText(mContext, "没有更新", Toast.LENGTH_SHORT).show();
+                                break;
+                            case UpdateStatus.NoneWifi: // none wifi
+                                Toast.makeText(mContext, "没有wifi连接， 只在wifi下更新", Toast.LENGTH_SHORT).show();
+                                break;
+                            case UpdateStatus.Timeout: // time out
+                                Toast.makeText(mContext, "超时", Toast.LENGTH_SHORT).show();
+                                break;
+                        }
+                    }
+                });
+
+                UmengUpdateAgent.update(mContext);
+
+                break;
+            }
+        }
     }
 
     protected void initData(Bundle savedInstanceState) {
@@ -68,11 +139,31 @@ public class MoreFragment extends BaseFragment{
         }
 
         SimpleAdapter adapter = new SimpleAdapter(mContext, list, R.layout.setting_item,
-                new String[] {"text", "img"}, new int[] {
+                new String[]{"text", "img"}, new int[]{
                 R.id.homepage_lv_text, R.id.homepage_lv_img
         });
-        ViewStub viewStub= new ViewStub(mContext);
+        ViewStub viewStub = new ViewStub(mContext);
         listView.addHeaderView(viewStub);
         listView.setAdapter(adapter);
+    }
+
+    /**
+     * 注册成功后弹框
+     */
+    private void popoTeleDialog() {
+
+        final SweetAlertDialog sad = new SweetAlertDialog(this.getActivity(), SweetAlertDialog.NORMAL_TYPE);
+        sad.setContentText("400-800-6270");
+        sad.setConfirmText("呼叫");
+        sad.setCancelText("取消");
+        sad.setTitleText("客服电话");
+        sad.show();
+
+        sad.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "18086665591"));
+                startActivity(intent);
+            }
+        });
     }
 }

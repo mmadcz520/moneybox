@@ -2,8 +2,10 @@ package com.changtou.moneybox.module.page;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.changtou.R;
 import com.changtou.moneybox.common.activity.BaseApplication;
@@ -11,8 +13,10 @@ import com.changtou.moneybox.common.activity.BaseFragment;
 import com.changtou.moneybox.module.widget.ExFPAdapter;
 import com.changtou.moneybox.module.widget.ExViewPager;
 import com.changtou.moneybox.module.widget.SignInHUD;
+import com.umeng.update.UmengDownloadListener;
 import com.umeng.update.UmengUpdateAgent;
 import com.umeng.update.UpdateConfig;
+import com.umeng.update.UpdateStatus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,6 +73,26 @@ public class MainActivity extends CTBaseActivity {
 
 //        mSignInHUD = (SignInHUD)this.findViewById(R.id.signin_fragment);
         UpdateConfig.setDebug(true);
+
+        UmengUpdateAgent.setDefault();
+        UmengUpdateAgent.setUpdateUIStyle(UpdateStatus.STYLE_DIALOG);
+        UmengUpdateAgent.setRichNotification(true);
+        UmengUpdateAgent.setDownloadListener(new UmengDownloadListener() {
+
+            public void OnDownloadStart() {
+                Toast.makeText(MainActivity.this, "download start", Toast.LENGTH_SHORT).show();
+            }
+
+            public void OnDownloadUpdate(int progress) {
+                Toast.makeText(MainActivity.this, "download progress : " + progress + "%", Toast.LENGTH_SHORT).show();
+            }
+
+            public void OnDownloadEnd(int result, String file) {
+                //Toast.makeText(mContext, "download result : " + result , Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "download file path : " + file, Toast.LENGTH_SHORT).show();
+            }
+        });
+
         UmengUpdateAgent.update(this);
     }
 

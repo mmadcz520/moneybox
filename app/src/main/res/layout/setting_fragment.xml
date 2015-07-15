@@ -18,6 +18,7 @@
         <!--android_custom:viewType="text" />-->
 
     <com.changtou.moneybox.module.widget.ExEditView
+        android:id="@+id/more_about_me"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/extext_height"
         android:layout_marginTop="20dp"
@@ -28,6 +29,7 @@
         android_custom:ex_title="关于我们"
         android_custom:viewType="text" />
     <com.changtou.moneybox.module.widget.ExEditView
+        android:id="@+id/more_tell_service"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/extext_height"
         android:focusable="true"
@@ -40,6 +42,7 @@
         android_custom:viewType="text" />
 
     <com.changtou.moneybox.module.widget.ExEditView
+        android:id="@+id/more_check_update"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/extext_height"
         android:layout_marginTop="20dp"
@@ -47,11 +50,14 @@
         android:focusableInTouchMode="true"
         android_custom:ex_icon="@mipmap/more_checkupdate"
         android_custom:ex_message_color="@color/font_black"
-        android_custom:ex_message="长投在线1.0"
+        android_custom:ex_message="1.0"
         android_custom:ex_title="检查更新"
         android_custom:viewType="text" />
 
+    <RelativeLayout  android:layout_height="@dimen/extext_height"
+        android:layout_width="fill_parent">
     <com.changtou.moneybox.module.widget.ExEditView
+        android:id="@+id/more_push_msg"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/extext_height"
         android:focusable="true"
@@ -61,15 +67,23 @@
         android_custom:ex_message_color="@color/font_black"
         android_custom:ex_title="接受推送消息"
         android_custom:ex_hide_indicator="hide"
-        android_custom:viewType="text" />
+        android_custom:viewType="text">
 
-    <TextView android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:textSize="@dimen/font_size_normal"
-        android:textColor="@color/font_invalid"
-        android:text="如果您要关闭会开启推送功能, 请在手机的“设置”-“通知中心”里面，找到“长投在线”修改"/>
+    </com.changtou.moneybox.module.widget.ExEditView>
+
+        <ToggleButton
+            android:id="@+id/tglSound"
+            android:background="@drawable/selector_butn_toggle"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="35dp"
+            android:layout_width="45dp"
+            android:layout_height="24dp"
+            android:layout_centerVertical="true"
+            android:checked="true"
+            android:textOn=""
+            android:textOff=""
+            android:text="" />
+
+    </RelativeLayout>
 
 </LinearLayout>

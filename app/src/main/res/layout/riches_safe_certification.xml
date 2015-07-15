@@ -8,6 +8,8 @@
         android:layout_width="fill_parent"
         android:layout_height="@dimen/extext_height"
         android:layout_marginTop="20dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:background="@drawable/stroke_edit_fillpraent">
         <TextView android:layout_width="80dp"
             android:layout_height="wrap_content"
@@ -17,6 +19,7 @@
             android:textColor="@color/font_black"
             android:text="姓 名"/>
         <EditText
+            android:id="@+id/certify_fullname"
             android:layout_gravity="center_vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -37,8 +40,8 @@
             android:textSize="@dimen/font_size_normal"
             android:textColor="@color/font_black"
             android:text="身份证"/>
-        <com.changtou.moneybox.module.widget.BetterSpinner
-            android:id="@+id/riches_safe_add_bank"
+        <EditText
+            android:id="@+id/certify_idcard"
             android:layout_gravity="center_vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -49,6 +52,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/certify_btn"
         android:layout_width="fill_parent"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="42dp"

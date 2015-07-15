@@ -268,8 +268,6 @@ public class ProductDetailsActivity extends CTBaseActivity
             jsonObject.put("type", mProductType);
             params.put("data", jsonObject.toString());
 
-            Log.e("CT_MONEY", "--------------------------------" + mProductId + "----------------------" +mProductType);
-
             sendRequest(HttpRequst.REQ_TYPE_PRODUCT_DETAILS, url, params, getAsyncClient(), true);
         }
         catch (Exception e)
@@ -298,8 +296,6 @@ public class ProductDetailsActivity extends CTBaseActivity
             intent.putExtra("details",mDetails);
             intent.putExtra("id",mProductId);
             intent.putExtra("type",mProductType);
-
-            Log.e("CT_MONEY", "--------------------------------------------------" + mProductType);
 
             startActivity(intent);
         }

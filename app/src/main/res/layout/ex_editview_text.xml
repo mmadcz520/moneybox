@@ -40,7 +40,7 @@
         android:layout_toLeftOf="@+id/ex_indicator"
         android:layout_marginRight="8dp"
         android:layout_centerVertical="true"
-        android:textColor="@color/ct_red"
+        android:textColor="@color/font_invalid"
         android:text="认证送10元"
         android:textSize="@dimen/font_size_hint2"/>
 

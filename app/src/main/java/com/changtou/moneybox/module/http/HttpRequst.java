@@ -48,7 +48,6 @@ public class HttpRequst extends BaseHttpRequest
     //投资
     public final static int REQ_TYPE_INVEST = 1030;
 
-
     //获取提现信息
     public final static int REQ_TYPE_WITHDRAWINFO = 50;
 
@@ -76,6 +75,9 @@ public class HttpRequst extends BaseHttpRequest
     public final static int REQ_TYPE_CHECKCODE = 1081;
     public final static int REQ_TYPE_POSTREG = 1082;
     public final static int REQ_TYPE_NEWPWD = 1083;   //更改新密码
+
+    //实名认证
+    public final static int REQ_TYPE_CERTIFY = 1101;
 
     //banner
     public final String REQ_URL_PRODUCT_BANNER = BASE_URL + "product/GetFocusImg";
@@ -115,7 +117,7 @@ public class HttpRequst extends BaseHttpRequest
     public static final String FEQ_URL_USERINFO = BASE_URL + "usertoken/GetUserInfo?";
 
     //获取投资列表
-    public static String REQ_URL_INVEST_LIST = BASE_URL + "bankcard/getbanklistinfo?";
+    public static String REQ_URL_INVEST_LIST = BASE_URL + "investrecord/getinvestlist?";
 
     //获取站内转让列表
     public static String REQ_URL_TRANSFER_LIST = BASE_URL + "products";
@@ -127,7 +129,7 @@ public class HttpRequst extends BaseHttpRequest
     public static String FEQ_URL_REWARDS_LIST = BASE_URL + "products";
 
     //交易记录
-    public static String REQ_URL_TRADE_LIST = BASE_URL + "investrecord/getinvestlist?";
+    public static String REQ_URL_TRADE_LIST = BASE_URL + "DealRecord/GetDealDatabinds?";
 
     //发送短信
     public static String REQ_URL_SENDMSG = BASE_URL + "usertoken/postsendmsg?";
@@ -140,6 +142,8 @@ public class HttpRequst extends BaseHttpRequest
 
     //更改密码
     public static String REQ_URL_NEWPWD = BASE_URL + "usertoken/postnewpwd?";
+
+    public static String REQ_URL_CERTIFY = BASE_URL + "certification/PostCertiIdcard?";
 
     public static synchronized HttpRequst getInstance()
     {
@@ -208,6 +212,8 @@ public class HttpRequst extends BaseHttpRequest
                 return REQ_URL_POSTREG;
             case REQ_TYPE_NEWPWD:
                 return REQ_URL_NEWPWD;
+            case REQ_TYPE_CERTIFY:
+                return REQ_URL_CERTIFY;
             default:
                 break;
         }

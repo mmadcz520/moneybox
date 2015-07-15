@@ -23,29 +23,35 @@ public class TradeEntity extends BaseEntity
      * @param data
      * @throws Exception
      */
-    public void paser(String data) throws Exception {
-
-        Log.e("CT_MONEY", "fffffffffffffffffffffffffffffffffffffffffff");
-
-//        JSONArray array = new JSONArray(data);
+    public void paser(String data) throws Exception
+    {
+        JSONArray array = new JSONArray(data);
         mList = new LinkedList();
-        ProListEntity entity;
-//        int size = array.length();
-        for (int i = 0; i < 10; i++) {
-            Log.e("CT_MONEY", "--------------------------------------");
-            entity = new ProListEntity();
-//            entity.paser(array.getJSONObject(i));
+        ItemEntity entity;
+        int size = array.length();
+        for (int i = 0; i < size; i++)
+        {
+            entity = new ItemEntity();
+            entity.paser(array.getJSONObject(i));
             mList.add(entity);
         }
     }
 
-    public  class ProListEntity {
-        public String id;
-        public String name;
+    public  class ItemEntity
+    {
+        public String payamount;
+        public int type;
+        public int shouzhi;
+        public String memo;
+        public String createtime;
 
-        public void paser(JSONObject json) throws Exception {
-//            id = json.optString("reply_count");
-//            name = json.optString("post_status");
+        public void paser(JSONObject json) throws Exception
+        {
+            payamount = json.optString("payamount");
+            type = json.optInt("type");
+            shouzhi = json.optInt("shouzhi");
+            memo = json.optString("memo");
+            createtime = json.optString("createtime");
         }
     }
 }

@@ -107,7 +107,7 @@ public abstract class BaseApplication extends Application implements UncaughtExc
 //        FolderManager.initSystemFolder();
 		mAppParamsHolder = new Hashtable<String, Object>();
 
-        Log.e("CT_MONEY", " ----------------- "+getDeviceInfo(mApplication));
+        Log.e("CT_MONEY", " ----------------- " + getDeviceInfo(mApplication));
 
         try {
             mUserManager = new UserManager();
@@ -199,6 +199,23 @@ public abstract class BaseApplication extends Application implements UncaughtExc
 		}
 		return info;
 	}
+
+    /**
+     * 获取app 版本号
+     *
+     * @return
+     */
+    public String getVersionName()
+    {
+        PackageInfo info = null;
+        try {
+            info = getPackageManager().getPackageInfo(this.getPackageName(), 0);
+        } catch (NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return info.versionName;
+    }
+
 
 	public boolean isStat() {
 		return IS_STATISTIC;

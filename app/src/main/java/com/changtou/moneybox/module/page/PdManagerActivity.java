@@ -35,6 +35,8 @@ public class PdManagerActivity extends CTBaseActivity
         {
             case R.id.btn_pd_login:
             {
+                Intent intent = new Intent(this, PdFrogetActivity.class);
+                startActivity(intent);
 
                 break;
             }

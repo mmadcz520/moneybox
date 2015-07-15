@@ -33,8 +33,6 @@ public abstract class BaseFragment extends Fragment implements
 
     public FragmentClick click;
 
-    public MultiStateView mMultiStateView = null;
-
     //载入进度条
     public ZProgressHUD mZProgressHUD = null;
 
@@ -66,8 +64,6 @@ public abstract class BaseFragment extends Fragment implements
         ViewGroup view = (ViewGroup)inflater.inflate(R.layout.base_fragment, null);
         View childView = initView(inflater, container, savedInstanceState);
         view.addView(childView);
-
-        mMultiStateView = (MultiStateView)view.findViewById(R.id.base_fragment);
 
         return view;
     }

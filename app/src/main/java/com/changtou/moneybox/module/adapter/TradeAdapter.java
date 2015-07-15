@@ -5,10 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.changtou.R;
-import com.changtou.moneybox.module.entity.InvestListEntity;
 import com.changtou.moneybox.module.entity.TradeEntity;
 
 /**
@@ -18,6 +18,8 @@ public class TradeAdapter extends BaseAdapter{
 
     private LayoutInflater mInflater = null;
     private TradeEntity mEntity   = null;
+
+    private String[] mType = {"现金", "礼金"};
 
     public TradeAdapter(Context context)
     {
@@ -56,11 +58,11 @@ public class TradeAdapter extends BaseAdapter{
      * @return 产品实体对象
      * @see BaseAdapter#getItem(int)
      */
-    public TradeEntity.ProListEntity getItem(int position)
+    public TradeEntity.ItemEntity getItem(int position)
     {
         if (mEntity.mList != null && mEntity.mList.size() > 0)
         {
-            return (TradeEntity.ProListEntity) mEntity.mList.get(position);
+            return (TradeEntity.ItemEntity) mEntity.mList.get(position);
         }
         return null;
     }
@@ -73,39 +75,72 @@ public class TradeAdapter extends BaseAdapter{
         return 0;
     }
 
-    /**
-     * @see BaseAdapter#getView(int, View, ViewGroup)
-     */
     public View getView(int position, View convertView, ViewGroup parent)
     {
-        TradeEntity.ProListEntity entity = getItem(position);
+        TradeEntity.ItemEntity entity = getItem(position);
         ViewHolder viewHolder;
 
         if (convertView == null)
         {
             viewHolder = new ViewHolder();
             convertView = mInflater.inflate(R.layout.riches_trade_list_item, null);
-//            LinearLayout ll = (LinearLayout)convertView.findViewById(R.id.roundProgressBar);
-//            ll.setWillNotDraw(false);
-//            viewHolder.txt_top = (TextView) convertView.findViewById(R.id.pro_list_titile);
-//            viewHolder.txt_bottom = (TextView) convertView.findViewById(R.id.txt_bottom);
-//            RoundProgressBar mRoundProgressBar1 = (RoundProgressBar) convertView.findViewById(R.id.roundProgressBar);
-//            mRoundProgressBar1.setProgress(15);
+            viewHolder.mShouzhiIcon = (ImageView) convertView.findViewById(R.id.riches_trade_icon);
+            viewHolder.typeTextView = (TextView) convertView.findViewById(R.id.riches_trade_type);
+            viewHolder.mMemoTextView = (TextView) convertView.findViewById(R.id.riches_trade_memo);
+            viewHolder.mCreateTextView = (TextView) convertView.findViewById(R.id.riches_trade_createtime);
+            viewHolder.mPayTextView = (TextView) convertView.findViewById(R.id.riches_trade_payamount);
 
             convertView.setTag(viewHolder);
         }
         else
         {
-//            viewHolder = (ViewHolder) convertView.getTag();
+            viewHolder = (ViewHolder) convertView.getTag();
         }
-//        viewHolder.txt_top.setText(entity.name);
+
+        //现金
+        if(entity.type == 0)
+        {
+            //收
+            if(entity.shouzhi == 1)
+            {
+                viewHolder.mShouzhiIcon.setImageResource(R.mipmap.trade_cash_income);
+            }
+            //支
+            else if(entity.shouzhi == 0)
+            {
+                viewHolder.mShouzhiIcon.setImageResource(R.mipmap.trade_cash_expend);
+            }
+        }
+        //礼金
+        else if(entity.type == 1)
+        {
+            //收
+            if(entity.shouzhi == 1)
+            {
+                viewHolder.mShouzhiIcon.setImageResource(R.mipmap.trade_gift_income);
+            }
+            //支
+            else if(entity.shouzhi == 0)
+            {
+                viewHolder.mShouzhiIcon.setImageResource(R.mipmap.trade_gift_expend);
+            }
+        }
+
+        viewHolder.typeTextView.setText(mType[entity.type]);
+        viewHolder.mMemoTextView.setText(entity.memo);
+        viewHolder.mPayTextView.setText(entity.payamount);
+        viewHolder.mCreateTextView.setText(entity.createtime);
+
         return convertView;
     }
 
     private class ViewHolder
     {
-        public TextView txt_top;
-//        public TextView txt_bottom;
+        public ImageView mShouzhiIcon;
+        public TextView typeTextView;
+        public TextView mMemoTextView;
+        public TextView mPayTextView;
+        public TextView mCreateTextView;
     }
 
 }

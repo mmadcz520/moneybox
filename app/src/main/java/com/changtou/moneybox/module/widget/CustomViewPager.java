@@ -3,12 +3,13 @@ package com.changtou.moneybox.module.widget;
 import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 /**
  * Created by Administrator on 2015/5/28.
  */
-public class CustomViewPager extends ViewPager {
+public class CustomViewPager extends ViewPager{
 
     public CustomViewPager(Context context) {
         super(context);
@@ -16,13 +17,20 @@ public class CustomViewPager extends ViewPager {
 
     public CustomViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
+
     }
 
     @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+    public int getCurrentItem() {
+        return super.getCurrentItem();
+    }
 
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
+    {
         int height = 0;
-        for (int i = 0; i < getChildCount(); i++) {
+        for (int i = 0; i < getChildCount(); i++)
+        {
             View child = getChildAt(i);
             child.measure(widthMeasureSpec, MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
             int h = child.getMeasuredHeight();
@@ -34,5 +42,4 @@ public class CustomViewPager extends ViewPager {
 
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
-
 }

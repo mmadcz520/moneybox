@@ -1,6 +1,7 @@
 package com.changtou.moneybox.module.page;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
@@ -58,8 +59,6 @@ public class RichesTradeActivity extends CTBaseActivity
     {
         if (reqType == HttpRequst.REQ_TYPE_TRADE_LIST)
         {
-            printLog("dfffffffffffffffffffffffffffffffffffffffffff" + content);
-
             super.onSuccess(content, object, reqType);
             TradeEntity entity = (TradeEntity) object;
             mAdapter.setData(entity);

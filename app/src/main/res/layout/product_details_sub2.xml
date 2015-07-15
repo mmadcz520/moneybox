@@ -7,14 +7,14 @@
         android:id="@+id/details_scrollView2"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@color/ct_background"
-        android:fillViewport="true">
+        android:background="@color/ct_background">
 
 
-        <com.changtou.moneybox.module.widget.CustomViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+        <com.changtou.moneybox.module.widget.CustomViewPager
+            xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/product_introduction"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
 
         </com.changtou.moneybox.module.widget.CustomViewPager>

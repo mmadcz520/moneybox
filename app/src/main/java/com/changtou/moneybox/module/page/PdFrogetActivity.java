@@ -79,9 +79,9 @@ public class PdFrogetActivity extends CTBaseActivity
 
                 if(isMobileNO(mPhoneNum))
                 {
-                    mCounter = new Counter(60*1000, 1000);
-                    restCnt = 60;
-                    mCounter.start();
+//                    mCounter = new Counter(60*1000, 1000);
+//                    restCnt = 60;
+//                    mCounter.start();
                     sendMsgRequest(mPhoneNum);
                 }
                 else
@@ -181,6 +181,11 @@ public class PdFrogetActivity extends CTBaseActivity
 
         if(reqType == HttpRequst.REQ_TYPE_SENDMSG)
         {
+            mCounter = new Counter(60*1000, 1000);
+            restCnt = 60;
+            mCounter.start();
+
+
             try
             {
                 JSONObject data = new JSONObject(content);
@@ -235,6 +240,7 @@ public class PdFrogetActivity extends CTBaseActivity
     public void onFailure(Throwable error, String content, int reqType)
     {
         super.onFailure(error, content, reqType);
+        Toast.makeText(this, "网络错误", Toast.LENGTH_LONG).show();
     }
 
 
@@ -245,7 +251,6 @@ public class PdFrogetActivity extends CTBaseActivity
 
         return m.matches();
     }
-
 
     /**
      * 校验验证码

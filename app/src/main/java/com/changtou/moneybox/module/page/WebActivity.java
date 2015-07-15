@@ -1,6 +1,7 @@
 package com.changtou.moneybox.module.page;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -20,14 +21,19 @@ public class WebActivity extends Activity
 {
     private WebView myWebView = null;
 
+    private String mUrl = "";
+
     protected void onCreate(Bundle savedInstanceState)
     {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_layout);
 
+        Intent intent = this.getIntent();
+        mUrl = intent.getStringExtra("url");
+
         myWebView = (WebView) findViewById(R.id.ddwebview);
-        myWebView.loadUrl("http://www.baidu.com");
+        myWebView.loadUrl(mUrl);
         myWebView.setWebViewClient(new WebViewClient()
         {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {

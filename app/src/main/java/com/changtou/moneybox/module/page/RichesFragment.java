@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
-import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -137,6 +136,8 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
             mMobileTextView.setText(userInfo.getMobile());
             String total = userInfo.getTotalAssets();
             total = total.replace(",","");
+            if(total.equals("")) return;
+
             mTotalAssetsTextView.showNumberWithAnimation(Float.parseFloat(total));
             mTotalAssetsTextView.setText(userInfo.getTotalAssets());
             mInvestAssetsTextView.setText(userInfo.getInvestAssets());
@@ -145,7 +146,7 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
             mGiftsTextView.setText(userInfo.getGifts());
             mTouYuanTextView.setText(userInfo.getTouYuan());
 
-            mMultiStateView.setViewForState(R.layout.state_layout_content, MultiStateView.ViewState.LOADING);
+//            mMultiStateView.setViewForState(R.layout.state_layout_content, MultiStateView.ViewState.LOADING);
         }
     }
 
@@ -172,10 +173,7 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
         sendRequest(HttpRequst.REQ_TYPE_USERINFO, url, mParams,
                 mAct.getAsyncClient(), false);
 
-
-        Log.e("CT_MONEY", "ussssssssssssssssssssssssssss + onFailureonFailureonFailureonFailureonFailure" + url);
-
-        mMultiStateView.setViewForState(R.layout.state_layout_loading, MultiStateView.ViewState.LOADING);
+//        mMultiStateView.setViewForState(R.layout.state_layout_loading, MultiStateView.ViewState.LOADING);
     }
 
     public void treatClickEvent(int id)

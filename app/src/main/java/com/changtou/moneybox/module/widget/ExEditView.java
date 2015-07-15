@@ -39,6 +39,8 @@ public class ExEditView extends LinearLayout
 
     private LinearLayout mEditView = null;
 
+    private TextView mMessageTextView = null;
+
     private Location mLocation;
     public enum Location{
         TOP(0), MIDDLE(1), BOTTOM(2);
@@ -104,7 +106,7 @@ public class ExEditView extends LinearLayout
         float paddingleft = getResources().getDimension(R.dimen.edit_img_paddingLeft);
         LayoutParams layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         layoutParams.height = AppUtil.dip2px(mContext, 20);
-        layoutParams.width = AppUtil.dip2px(mContext,20);
+        layoutParams.width = AppUtil.dip2px(mContext, 20);
         layoutParams.leftMargin = (int)paddingleft;
         layoutParams.gravity =  Gravity.CENTER_VERTICAL;
         iv.setLayoutParams(layoutParams);
@@ -119,7 +121,7 @@ public class ExEditView extends LinearLayout
 
         ImageView imageView = (ImageView)view.findViewById(R.id.ex_img);
         TextView title = (TextView)view.findViewById(R.id.ex_text);
-        TextView message = (TextView)view.findViewById(R.id.ex_msg);
+         mMessageTextView = (TextView)view.findViewById(R.id.ex_msg);
         ImageView imageView1 = (ImageView)view.findViewById(R.id.ex_indicator);
 
         if(mLocation == Location.BOTTOM)
@@ -138,8 +140,8 @@ public class ExEditView extends LinearLayout
 
         imageView.setImageResource(mIcon);
         title.setText(mTitle);
-        message.setText(mMessage);
-        message.setTextColor(mMessageColor);
+        mMessageTextView.setText(mMessage);
+        mMessageTextView.setTextColor(mMessageColor);
 
         this.addView(view);
     }
@@ -183,5 +185,10 @@ public class ExEditView extends LinearLayout
     public String getEditValue()
     {
         return  mEditText.getText().toString().trim();
+    }
+
+    public void setMessage(String message)
+    {
+        mMessageTextView.setText(message);
     }
 }

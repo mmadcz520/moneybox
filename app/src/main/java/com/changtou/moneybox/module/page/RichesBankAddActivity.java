@@ -98,6 +98,8 @@ public class RichesBankAddActivity extends CTBaseActivity
 
     private EditText mUserNameEdit = null;
 
+    private String mFullName = "";
+
     /**
      * 当前区的邮政编码
      */
@@ -110,6 +112,7 @@ public class RichesBankAddActivity extends CTBaseActivity
         mUserNameEdit = (EditText)findViewById(R.id.riches_safe_add_username);
 
         UserInfoEntity userInfoEntity = UserInfoEntity.getInstance();
+        mFullName = userInfoEntity.getFullName().trim();
         mUserNameEdit.setText(userInfoEntity.getFullName());
 
         mBankSpinner = (BetterSpinner)findViewById(R.id.riches_safe_add_bank);
@@ -350,7 +353,6 @@ public class RichesBankAddActivity extends CTBaseActivity
         mCitySpinner.setText(filter, false);
     }
 
-
     /** * 银行卡四位加空格 * * @param mEditText */
     public static void bankCardNumAddSpace(final EditText mEditText) {
         mEditText.addTextChangedListener(new TextWatcher() {
@@ -447,7 +449,7 @@ public class RichesBankAddActivity extends CTBaseActivity
         {
             RequestParams params = new RequestParams();
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("cardholder", "周龙飞");
+            jsonObject.put("cardholder", mFullName);
             jsonObject.put("bank", bank);
             jsonObject.put("account", account);
             jsonObject.put("place", place);

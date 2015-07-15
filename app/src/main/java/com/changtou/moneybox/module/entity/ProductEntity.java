@@ -1,7 +1,5 @@
 package com.changtou.moneybox.module.entity;
 
-import android.util.Log;
-
 import com.changtou.moneybox.common.http.base.BaseEntity;
 
 import org.json.JSONArray;
@@ -27,13 +25,11 @@ public class ProductEntity extends BaseEntity {
      */
     public void paser(String data) throws Exception
     {
-        Log.e("CT_MONEY", "data=" + data);
-
         JSONObject productList = new JSONObject(data);
         JSONArray allData = productList.getJSONArray("productList");
 
         JSONObject typeData;
-        ItemEntity itemEntity = null;
+        ItemEntity itemEntity;
         JSONArray listByType;
 
         mProductTypeList = new LinkedList();
@@ -41,7 +37,6 @@ public class ProductEntity extends BaseEntity {
         for(int i = 0; i < allData.length(); i++)
         {
             typeData = allData.getJSONObject(i);
-//            int type = typeData.getInt("type");
             listByType = typeData.getJSONArray("data");
 
             mList = new LinkedList();

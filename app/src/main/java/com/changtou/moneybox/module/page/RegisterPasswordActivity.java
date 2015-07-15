@@ -6,9 +6,6 @@ import android.os.Bundle;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.TextAppearanceSpan;
-import android.util.Log;
-import android.view.MotionEvent;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.changtou.R;
