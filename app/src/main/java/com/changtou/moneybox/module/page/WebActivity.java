@@ -3,7 +3,6 @@ package com.changtou.moneybox.module.page;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Window;
 import android.webkit.WebChromeClient;
@@ -56,7 +55,6 @@ public class WebActivity extends Activity
                     // 网页加载完成
 
                 } else {
-                    Log.e("CT_MONEY", "newProgress" + newProgress);
 
                 }
             }

@@ -22,8 +22,6 @@ public class PromotionEntity extends BaseEntity
      */
     public void paser(String data) throws Exception
     {
-        Log.e("CT_MONEY", "paser+++" + data);
-
         JSONObject json = new JSONObject(data);
         JSONObject dataObject = json.getJSONObject("data");
         JSONArray array = dataObject.getJSONArray("topics");

@@ -50,7 +50,6 @@ import org.apache.http.protocol.HttpContext;
 import org.apache.http.protocol.SyncBasicHttpContext;
 
 import android.content.Context;
-import android.util.Log;
 
 /**
  * The AsyncHttpClient can be used to make asynchronous GET, POST, PUT and

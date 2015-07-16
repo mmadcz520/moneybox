@@ -13,7 +13,8 @@ import org.apache.http.util.EntityUtils;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.util.Log;
+
+import com.changtou.moneybox.common.logger.Logger;
 
 /**
  * Used to intercept and handle the responses from requests made using
@@ -252,7 +253,8 @@ public class AsyncHttpResponseHandler {
                 entity = new BufferedHttpEntity(temp);
             }
 
-//            Log.e("CT_MONEY", "  re= " +  EntityUtils.toString(entity, "UTF-8"));
+            Logger.e("req_type:" + reqType + "-\n" + "content:");
+            Logger.json(EntityUtils.toString(entity, "UTF-8"));
             if (status.getStatusCode() != 200) {
 
                 String responseBody = EntityUtils.toString(entity, "UTF-8");

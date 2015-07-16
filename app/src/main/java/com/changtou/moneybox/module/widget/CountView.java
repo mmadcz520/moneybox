@@ -37,7 +37,6 @@ public class CountView extends TextView
      */
     public void showPercentWithAnimation(int percent)
     {
-        Log.e("CT_MONEY", "showPercentWithAnimation");
         //修改number属性，会调用setNumber方法
         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(this, "percent", 0, (float)percent);
         objectAnimator.setDuration(duration);

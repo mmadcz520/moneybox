@@ -1488,11 +1488,11 @@ containing a value of this type.
         public static int always=0x7f07000f;
         public static int beginning=0x7f07000a;
         public static int bottom=0x7f070019;
-        public static int cancel_button=0x7f070051;
+        public static int cancel_button=0x7f070052;
         public static int checkbox=0x7f07002e;
         public static int collapseActionView=0x7f070011;
-        public static int confirm_button=0x7f070052;
-        public static int content_text=0x7f07004f;
+        public static int confirm_button=0x7f070054;
+        public static int content_text=0x7f070050;
         public static int custom_image=0x7f070045;
         public static int decor_content_parent=0x7f070034;
         public static int default_activity_button=0x7f070029;
@@ -1524,7 +1524,8 @@ containing a value of this type.
         public static int progress_dialog=0x7f07004d;
         public static int progress_horizontal=0x7f070020;
         public static int radio=0x7f070030;
-        public static int riches_line1=0x7f070050;
+        public static int riches_line1=0x7f070051;
+        public static int riches_line2=0x7f070053;
         public static int search_badge=0x7f07003a;
         public static int search_bar=0x7f070039;
         public static int search_button=0x7f07003b;
@@ -1545,6 +1546,7 @@ containing a value of this type.
         public static int success_tick=0x7f07004b;
         public static int tabMode=0x7f070002;
         public static int title=0x7f07002c;
+        public static int title_text=0x7f07004f;
         public static int top=0x7f070018;
         public static int up=0x7f070022;
         public static int useLogo=0x7f070004;

@@ -1,19 +1,14 @@
 package com.changtou.moneybox.module.page;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 
 import com.changtou.R;
 import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.utils.ACache;
-import com.changtou.moneybox.module.adapter.ProductDetailsAdapter;
 import com.changtou.moneybox.module.adapter.TradeAdapter;
-import com.changtou.moneybox.module.entity.ProductDetailsEntity;
 import com.changtou.moneybox.module.entity.TradeEntity;
 import com.changtou.moneybox.module.http.HttpRequst;
-import com.changtou.moneybox.module.widget.NumberWheel;
 
 /**
  * 用户交易记录页面

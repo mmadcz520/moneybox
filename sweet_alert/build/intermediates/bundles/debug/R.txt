@@ -403,11 +403,11 @@ int id activity_chooser_view_content 0x7f070026
 int id always 0x7f07000f
 int id beginning 0x7f07000a
 int id bottom 0x7f070019
-int id cancel_button 0x7f070051
+int id cancel_button 0x7f070052
 int id checkbox 0x7f07002e
 int id collapseActionView 0x7f070011
-int id confirm_button 0x7f070052
-int id content_text 0x7f07004f
+int id confirm_button 0x7f070054
+int id content_text 0x7f070050
 int id custom_image 0x7f070045
 int id decor_content_parent 0x7f070034
 int id default_activity_button 0x7f070029
@@ -439,7 +439,8 @@ int id progress_circular 0x7f07001f
 int id progress_dialog 0x7f07004d
 int id progress_horizontal 0x7f070020
 int id radio 0x7f070030
-int id riches_line1 0x7f070050
+int id riches_line1 0x7f070051
+int id riches_line2 0x7f070053
 int id search_badge 0x7f07003a
 int id search_bar 0x7f070039
 int id search_button 0x7f07003b
@@ -460,6 +461,7 @@ int id success_frame 0x7f070048
 int id success_tick 0x7f07004b
 int id tabMode 0x7f070002
 int id title 0x7f07002c
+int id title_text 0x7f07004f
 int id top 0x7f070018
 int id up 0x7f070022
 int id useLogo 0x7f070004

@@ -148,8 +148,6 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
 
     public void loginErrNotify(int errcode)
     {
-        printLog("errcode" + errcode);
-
         mLoginBtn.setEnabled(true);
 
         int code = (errcode < mErrorContent.length) ? errcode : (mErrorContent.length - 1);

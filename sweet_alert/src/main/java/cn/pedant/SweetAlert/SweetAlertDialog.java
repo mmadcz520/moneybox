@@ -31,7 +31,7 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
     private AnimationSet mErrorXInAnim;
     private AnimationSet mSuccessLayoutAnimSet;
     private Animation mSuccessBowAnim;
-//    private TextView mTitleTextView;
+    private TextView mTitleTextView;
     private TextView mContentTextView;
     private String mTitleText;
     private String mContentText;
@@ -143,7 +143,7 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
         setContentView(R.layout.alert_dialog);
 
         mDialogView = getWindow().getDecorView().findViewById(android.R.id.content);
-//        mTitleTextView = (TextView)findViewById(R.id.title_text);
+        mTitleTextView = (TextView)findViewById(R.id.title_text);
         mContentTextView = (TextView)findViewById(R.id.content_text);
         mErrorFrame = (FrameLayout)findViewById(R.id.error_frame);
         mErrorX = (ImageView)mErrorFrame.findViewById(R.id.error_x);
@@ -261,14 +261,14 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
     }
 
     public SweetAlertDialog setTitleText (String text) {
-//        mTitleText = text;
-//        if (mTitleTextView != null && mTitleText != null) {
-//            mTitleTextView.setText(mTitleText);
-//        }
-//        else if(mTitleTextView != null)
-//        {
-//            mTitleTextView.setVisibility(View.INVISIBLE);
-//        }
+        mTitleText = text;
+        if (mTitleTextView != null && mTitleText != null) {
+            mTitleTextView.setText(mTitleText);
+        }
+        else if(mTitleTextView != null)
+        {
+            mTitleTextView.setVisibility(View.INVISIBLE);
+        }
         return this;
     }
 

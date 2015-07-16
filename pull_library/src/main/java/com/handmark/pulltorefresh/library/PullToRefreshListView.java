@@ -41,29 +41,35 @@ public class PullToRefreshListView extends PullToRefreshAdapterViewBase<ListView
 
 	private boolean mListViewExtrasEnabled;
 
-	public PullToRefreshListView(Context context) {
+	public PullToRefreshListView(Context context)
+	{
 		super(context);
 	}
 
-	public PullToRefreshListView(Context context, AttributeSet attrs) {
+	public PullToRefreshListView(Context context, AttributeSet attrs)
+	{
 		super(context, attrs);
 	}
 
-	public PullToRefreshListView(Context context, Mode mode) {
+	public PullToRefreshListView(Context context, Mode mode)
+	{
 		super(context, mode);
 	}
 
-	public PullToRefreshListView(Context context, Mode mode, AnimationStyle style) {
+	public PullToRefreshListView(Context context, Mode mode, AnimationStyle style)
+	{
 		super(context, mode, style);
 	}
 
 	@Override
-	public final Orientation getPullToRefreshScrollDirection() {
+	public final Orientation getPullToRefreshScrollDirection()
+	{
 		return Orientation.VERTICAL;
 	}
 
 	@Override
-	protected void onRefreshing(final boolean doScroll) {
+	protected void onRefreshing(final boolean doScroll)
+	{
 		/**
 		 * If we're not showing the Refreshing view, or the list is empty, the
 		 * the header/footer views won't show so we use the normal method.

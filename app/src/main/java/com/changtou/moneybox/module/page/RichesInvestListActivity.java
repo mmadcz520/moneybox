@@ -1,12 +1,10 @@
 package com.changtou.moneybox.module.page;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,13 +17,9 @@ import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.activity.BaseFragment;
 import com.changtou.moneybox.common.utils.ACache;
 import com.changtou.moneybox.module.adapter.InvestListAdapter;
-import com.changtou.moneybox.module.adapter.TransferListAdapter;
 import com.changtou.moneybox.module.entity.InvestListEntity;
-import com.changtou.moneybox.module.entity.ProductEntity;
-import com.changtou.moneybox.module.entity.TransferListEntity;
 import com.changtou.moneybox.module.http.HttpRequst;
 import com.changtou.moneybox.module.widget.ExFPAdapter;
-import com.changtou.moneybox.module.widget.MultiStateView;
 import com.changtou.moneybox.module.widget.SlidingTabLayout;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;

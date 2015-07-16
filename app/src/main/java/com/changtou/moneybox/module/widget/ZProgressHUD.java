@@ -94,7 +94,6 @@ public class ZProgressHUD extends Dialog {
 	@Override
 	public void show() {
 		if (!((Activity) context).isFinishing()) {
-			Log.e("CT_MONEY", "showwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww");
 			super.show();
 		} else {
 			instance = null;

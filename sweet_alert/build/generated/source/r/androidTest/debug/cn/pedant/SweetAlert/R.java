@@ -425,11 +425,11 @@ public final class R {
 		public static final int always = 0x7f07000f;
 		public static final int beginning = 0x7f07000a;
 		public static final int bottom = 0x7f070019;
-		public static final int cancel_button = 0x7f070051;
+		public static final int cancel_button = 0x7f070052;
 		public static final int checkbox = 0x7f07002e;
 		public static final int collapseActionView = 0x7f070011;
-		public static final int confirm_button = 0x7f070052;
-		public static final int content_text = 0x7f07004f;
+		public static final int confirm_button = 0x7f070054;
+		public static final int content_text = 0x7f070050;
 		public static final int custom_image = 0x7f070045;
 		public static final int decor_content_parent = 0x7f070034;
 		public static final int default_activity_button = 0x7f070029;
@@ -461,7 +461,8 @@ public final class R {
 		public static final int progress_dialog = 0x7f07004d;
 		public static final int progress_horizontal = 0x7f070020;
 		public static final int radio = 0x7f070030;
-		public static final int riches_line1 = 0x7f070050;
+		public static final int riches_line1 = 0x7f070051;
+		public static final int riches_line2 = 0x7f070053;
 		public static final int search_badge = 0x7f07003a;
 		public static final int search_bar = 0x7f070039;
 		public static final int search_button = 0x7f07003b;
@@ -482,6 +483,7 @@ public final class R {
 		public static final int success_tick = 0x7f07004b;
 		public static final int tabMode = 0x7f070002;
 		public static final int title = 0x7f07002c;
+		public static final int title_text = 0x7f07004f;
 		public static final int top = 0x7f070018;
 		public static final int up = 0x7f070022;
 		public static final int useLogo = 0x7f070004;
