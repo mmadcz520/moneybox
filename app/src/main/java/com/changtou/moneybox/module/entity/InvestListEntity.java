@@ -59,14 +59,14 @@ public class InvestListEntity extends BaseEntity{
     public  class ItemEntity
     {
         public String id;
-        public int type;              //1:»¹¿îÖĞ 2:ÒÑ½áÇå 3:ÒÑÍË³ö
+        public int type;              //1:è¿˜æ¬¾ä¸­ 2:å·²ç»“æ¸… 3:å·²é€€å‡º
         public String projectname;
-        public String withdrawamount;    //Í¶×Ê½ğ¶î
-        public String rate;              //ÀûÂÊ
-        public String maturity;          //ÆÚÏŞ
-        public String starttime;         //¿ªÊ¼Ê±¼ä
-        public String endtime;           //½áÊøÊ±¼ä
-        public String expectin;          //Ô¤ÆÚÊÕÒæ
+        public String withdrawamount;    //æŠ•èµ„é‡‘é¢
+        public String rate;              //åˆ©ç‡
+        public String maturity;          //æœŸé™
+        public String starttime;         //å¼€å§‹æ—¶é—´
+        public String endtime;           //ç»“æŸæ—¶é—´
+        public String expectin;          //é¢„æœŸæ”¶ç›Š
 
         public void paser(JSONObject json) throws Exception
         {

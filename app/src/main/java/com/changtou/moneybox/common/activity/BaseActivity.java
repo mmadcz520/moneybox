@@ -149,7 +149,8 @@ public abstract class BaseActivity extends FragmentActivity implements HttpCallb
     }
 
     public void sendRequest(int reqType, String url, RequestParams params,
-                            BaseHttpClient baseHttpClient, boolean showDialog) {
+                            BaseHttpClient baseHttpClient, boolean showDialog)
+    {
         if(baseHttpClient!=null){
             if (reqType > 1000) {
                 baseHttpClient.post(reqType, this, url, params, this);
@@ -166,7 +167,8 @@ public abstract class BaseActivity extends FragmentActivity implements HttpCallb
      * 得到 http aynsc客户端 实例对象
      * @return
      */
-    public AsyncHttpClientImpl getAsyncClient(){
+    public AsyncHttpClientImpl getAsyncClient()
+    {
         return app.mAsyncClient;
     }
 

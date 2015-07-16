@@ -253,8 +253,8 @@ public class AsyncHttpResponseHandler {
                 entity = new BufferedHttpEntity(temp);
             }
 
-            Logger.e("req_type:" + reqType + "-\n" + "content:");
-            Logger.json(EntityUtils.toString(entity, "UTF-8"));
+//            Logger.e("req_type:" + reqType + "-\n" + "content:");
+//            Logger.json(EntityUtils.toString(entity, "UTF-8"));
             if (status.getStatusCode() != 200) {
 
                 String responseBody = EntityUtils.toString(entity, "UTF-8");

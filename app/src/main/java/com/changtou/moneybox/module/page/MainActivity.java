@@ -67,7 +67,7 @@ public class MainActivity extends CTBaseActivity {
         mViewpager.setAdapter(fPAdapter);
         mViewpager.setScanScroll(false);
         mViewpager.setCurrentItem(0, false);
-        mViewpager.setOffscreenPageLimit(0);
+        mViewpager.setOffscreenPageLimit(4);
 
 //        mSignInHUD = (SignInHUD)this.findViewById(R.id.signin_fragment);
         UpdateConfig.setDebug(true);

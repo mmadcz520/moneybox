@@ -31,10 +31,10 @@ public class HttpRequst extends BaseHttpRequest
     public static String BASE_URL = "http://appt.changtounet.com/api/";
 
 //    public static int REQ_METHOD_POST = 10000;
+    public final static int REQ_TYPE_PING = 1;
 
     // get请求的reqType<1000;
     public final static int REQ_TYPE_PRODUCT_TYPE = 17;
-
 
     //app banner 图接口
     public final static int REQ_TYPE_PRODUCT_BANNER = 10;
@@ -78,6 +78,8 @@ public class HttpRequst extends BaseHttpRequest
 
     //实名认证
     public final static int REQ_TYPE_CERTIFY = 1101;
+
+    public final String REQ_URL_PING = BASE_URL + "usertoken/getconnection";
 
     //banner
     public final String REQ_URL_PRODUCT_BANNER = BASE_URL + "product/GetFocusImg";
@@ -162,6 +164,8 @@ public class HttpRequst extends BaseHttpRequest
     {
         switch (reqType)
         {
+            case REQ_TYPE_PING:
+                return REQ_URL_PING;
             case REQ_TYPE_PRODUCT_BANNER:
                 return REQ_URL_PRODUCT_BANNER;
             case REQ_TYPE_PRODUCT_TYPE:

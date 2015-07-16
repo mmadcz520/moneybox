@@ -22,6 +22,7 @@ import android.util.Log;
 
 import com.changtou.moneybox.common.http.base.BaseHttpRequest;
 import com.changtou.moneybox.common.http.impl.AsyncHttpClientImpl;
+import com.changtou.moneybox.common.logger.Logger;
 import com.changtou.moneybox.common.utils.DeviceInfo;
 import com.changtou.moneybox.common.utils.MySharedPreferencesMgr;
 import com.changtou.moneybox.common.utils.SharedPreferencesHelper;
@@ -95,8 +96,8 @@ public abstract class BaseApplication extends Application implements UncaughtExc
      * 推送， track代码的初始化
      * (友盟))
      */
-	public void onCreate() {
-        //0315
+	public void onCreate()
+    {
         mDeviceId=getDeviceID(this.getApplicationContext());
         mAsyncClient = getAsyncClient();
 
@@ -104,8 +105,6 @@ public abstract class BaseApplication extends Application implements UncaughtExc
 		mApplication = this;
 //        FolderManager.initSystemFolder();
 		mAppParamsHolder = new Hashtable<String, Object>();
-
-        Log.e("CT_MONEY", " ----------------- " + getDeviceInfo(mApplication));
 
         try {
             mUserManager = new UserManager();
@@ -115,14 +114,17 @@ public abstract class BaseApplication extends Application implements UncaughtExc
         }
 	}
 
-	public static BaseApplication getInstance() {
-		if (mApplication == null) {
+	public static BaseApplication getInstance()
+    {
+		if (mApplication == null)
+        {
 			throw new IllegalStateException("Application is not created.");
 		}
 		return mApplication;
 	}
 
-    public boolean isAppOnForeground() {
+    public boolean isAppOnForeground()
+    {
         ActivityManager activityManager = (ActivityManager) getApplicationContext()
                 .getSystemService(Context.ACTIVITY_SERVICE);
         String packageName = getApplicationContext().getPackageName();
@@ -150,7 +152,8 @@ public abstract class BaseApplication extends Application implements UncaughtExc
 	 * @param key
 	 * @param value
 	 */
-	public static void putValue(String key, Object value) {
+	public static void putValue(String key, Object value)
+    {
 		mAppParamsHolder.put(key, value);
 	}
 
@@ -160,7 +163,8 @@ public abstract class BaseApplication extends Application implements UncaughtExc
 	 * @param key
 	 * @return
 	 */
-	public static Object getValue(String key) {
+	public static Object getValue(String key)
+    {
 		return mAppParamsHolder.get(key);
 	}
 
@@ -170,7 +174,8 @@ public abstract class BaseApplication extends Application implements UncaughtExc
 	 * @param key
 	 * @return
 	 */
-	public static boolean containsKey(String key) {
+	public static boolean containsKey(String key)
+    {
 		return mAppParamsHolder.containsKey(key);
 	}
 
@@ -179,7 +184,8 @@ public abstract class BaseApplication extends Application implements UncaughtExc
 	 * 
 	 * @return
 	 */
-	public PackageInfo getLocalPackageInfo() {
+	public PackageInfo getLocalPackageInfo()
+    {
 		return getPackageInfo(getPackageName());
 	}
 
@@ -188,7 +194,8 @@ public abstract class BaseApplication extends Application implements UncaughtExc
 	 * 
 	 * @return
 	 */
-	public PackageInfo getPackageInfo(String packageName) {
+	public PackageInfo getPackageInfo(String packageName)
+    {
 		PackageInfo info = null;
 		try {
 			info = getPackageManager().getPackageInfo(packageName, 0);
