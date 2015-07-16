@@ -14,7 +14,7 @@ import java.io.IOException;
  * @author zhoulongfei
  * @since 2015-3-13
  *
- * //版本分支  developer zhou
+ * //版本分支 初始化时获取产品信息， 缓存机制
  *
  */
 public class CTMoneyApplication extends BaseApplication {
@@ -23,20 +23,18 @@ public class CTMoneyApplication extends BaseApplication {
         super.onCreate();
     }
 
-//    /**
-//     *获取cookieStore
-//     * @return mCookisStore
-//     */
-//    public RzAppCookieStore getCookieStore() {
-//        return mCookisStore;
-//    }
-
     /**
      * @see BaseApplication#initBaseHttpRequest()
      * @return
      */
-    protected BaseHttpRequest initBaseHttpRequest() {
+    protected BaseHttpRequest initBaseHttpRequest()
+    {
         return HttpRequst.getInstance();
+    }
+
+    private void initData()
+    {
+
     }
 
 }
