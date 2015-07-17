@@ -4,6 +4,8 @@ import java.util.HashMap;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
@@ -16,6 +18,9 @@ import com.changtou.moneybox.common.http.base.BaseHttpClient;
 import com.changtou.moneybox.common.http.base.HttpCallback;
 import com.changtou.moneybox.common.http.async.RequestParams;
 import com.changtou.moneybox.common.http.impl.AsyncHttpClientImpl;
+import com.changtou.moneybox.common.logger.Logger;
+import com.changtou.moneybox.module.service.NetReceiver;
+import com.changtou.moneybox.module.service.NetStateListener;
 import com.changtou.moneybox.module.widget.ZProgressHUD;
 import com.umeng.analytics.MobclickAgent;
 
@@ -24,7 +29,8 @@ import com.umeng.analytics.MobclickAgent;
  *
  * @author zhoulongfei
  */
-public abstract class BaseActivity extends FragmentActivity implements HttpCallback {
+public abstract class BaseActivity extends FragmentActivity implements HttpCallback
+{
 
     public final static String LOGTAG = "CT_MONEY";
 
@@ -38,6 +44,7 @@ public abstract class BaseActivity extends FragmentActivity implements HttpCallb
 
     //载入进度条
     public ZProgressHUD mZProgressHUD = null;
+
 
     /**
      * @see android.app.Activity#onCreate(Bundle)
@@ -58,6 +65,7 @@ public abstract class BaseActivity extends FragmentActivity implements HttpCallb
         initListener();
 
         mZProgressHUD = new ZProgressHUD(this);
+
     }
 
     /**
@@ -196,5 +204,11 @@ public abstract class BaseActivity extends FragmentActivity implements HttpCallb
     protected void onPause() {
         super.onPause();
         MobclickAgent.onPause(this);
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
     }
 }

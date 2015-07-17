@@ -2,6 +2,7 @@ package com.changtou.moneybox.module.page;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -150,6 +151,8 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
             String total = userInfo.getTotalAssets();
             total = total.replace(",","");
             if(total.equals("")) return;
+
+            Log.e("CT_MONEY", "mMobileTextViewmMobileTextViewmMobileTextView" + userInfo.getFullName());
 
             mTotalAssetsTextView.showNumberWithAnimation(Float.parseFloat(total));
             mTotalAssetsTextView.setText(userInfo.getTotalAssets());

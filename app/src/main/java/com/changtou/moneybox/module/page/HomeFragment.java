@@ -2,7 +2,10 @@ package com.changtou.moneybox.module.page;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +17,14 @@ import android.widget.Toast;
 import com.changtou.R;
 import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.activity.BaseFragment;
+import com.changtou.moneybox.common.logger.Logger;
+import com.changtou.moneybox.common.utils.ACache;
 import com.changtou.moneybox.common.utils.SharedPreferencesHelper;
 import com.changtou.moneybox.module.adapter.ProductListAdapter;
 import com.changtou.moneybox.module.entity.PromotionEntity;
 import com.changtou.moneybox.module.http.HttpRequst;
+import com.changtou.moneybox.module.service.NetReceiver;
+import com.changtou.moneybox.module.service.NetStateListener;
 import com.changtou.moneybox.module.widget.CountView;
 import com.changtou.moneybox.module.widget.ExEditView;
 import com.changtou.moneybox.module.widget.ExImageSwitcher;
@@ -34,7 +41,7 @@ import org.json.JSONObject;
  * @author zhoulongfei
  * @since 2015-3-20
  */
-public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRefreshListener
+public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRefreshListener, NetStateListener
 {
     private Context mContext = null;
 //    private ACache mCache = null;
@@ -56,6 +63,9 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
     private ProductListAdapter mAdapter = null;
 
     private PullToRefreshScrollView mPullToRefreshScrollView = null;
+
+    private String[] mImgs = {"http://www.changtounet.com/manage/news/uploadimages/50758017-9051-4838-ac09-f764bb5bfa4b.png.png",
+            "http://www.changtounet.com/manage/news/uploadimages/50758017-9051-4838-ac09-f764bb5bfa4b.png.png" };
 
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -82,6 +92,10 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
 
         sph = SharedPreferencesHelper.getInstance(this.getActivity());
 
+        BaseApplication.getInstance().setNetStateListener(this);
+
+        mBannerSwitcher.setImage(mImgs);
+
         return mView;
     }
 
@@ -93,27 +107,9 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
     /**
      * @param savedInstanceState 状态信息
      */
-    protected void initData(Bundle savedInstanceState)
-    {
+    protected void initData(Bundle savedInstanceState) {
         initParam();
-
-        mParams.put("action", "app_article_list");
-        mParams.put("forum_id", "57,287,59,61");// 1表示资讯 2表示攻略
-        mParams.put("page", 1 + "");
-        mParams.put("per_page", 10 + "");// 1表示资讯 2表示攻略
-
-        mZProgressHUD.show();
-
-        sendRequest(HttpRequst.REQ_TYPE_PRODUCT_HOME,
-                HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_PRODUCT_HOME),
-                mParams,
-                mAct.getAsyncClient(), false);
-
-        sendRequest(HttpRequst.REQ_TYPE_PRODUCT_BANNER,
-                HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_PRODUCT_BANNER),
-                mParams,
-                mAct.getAsyncClient(), false);
-
+        requestHomePage();
     }
 
     /**
@@ -125,8 +121,6 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
     {
         if (reqType == HttpRequst.REQ_TYPE_PRODUCT_HOME)
         {
-            mZProgressHUD.cancel();
-
             PromotionEntity entity = (PromotionEntity)object;
             //mBannerSwitcher.setImage(new String[]{"http://www.changtounet.com/manage/news/uploadimages/50758017-9051-4838-ac09-f764bb5bfa4b.png.png", "http://www.changtounet.com/manage/news/uploadimages/50758017-9051-4838-ac09-f764bb5bfa4b.png.png"});
             mInvestProgress.setProgress(60);
@@ -160,10 +154,12 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
                     String url = j.getString("url");
                     String title = j.getString("title");
 
+                    Logger.d(url);
+
                     imgs[i] = j.getString("img");
                 }
 
-                mBannerSwitcher.setImage(imgs);
+//                mBannerSwitcher.setImage(imgs);
             }
             catch (Exception e)
             {
@@ -179,21 +175,12 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
      */
     public void onFailure(Throwable error, String content, int reqType)
     {
-        mZProgressHUD.cancel();
         Toast.makeText(this.getActivity(), "网络连接超时", Toast.LENGTH_LONG).show();
     }
 
     public void onRefresh(PullToRefreshBase refreshView) {
 
-        mParams.put("action", "app_article_list");
-        mParams.put("forum_id", "57,287,59,61");// 1表示资讯 2表示攻略
-        mParams.put("page", 1 + "");
-        mParams.put("per_page", 10 + "");// 1表示资讯 2表示攻略
-
-        sendRequest(HttpRequst.REQ_TYPE_PRODUCT_HOME,
-                HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_PRODUCT_HOME),
-                mParams,
-                mAct.getAsyncClient(), false);
+        requestHomePage();
     }
 
     public void treatClickEvent(int id)
@@ -219,5 +206,35 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
         intent.putExtra("id", id);
         intent.putExtra("type", 0);
         startActivity(intent);
+    }
+
+    public void requestHomePage()
+    {
+//        mZProgressHUD.show();
+
+        sendRequest(HttpRequst.REQ_TYPE_PRODUCT_HOME,
+                HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_PRODUCT_HOME),
+                mParams,
+                mAct.getAsyncClient(), false);
+
+        sendRequest(HttpRequst.REQ_TYPE_PRODUCT_BANNER,
+                HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_PRODUCT_BANNER),
+                mParams,
+                mAct.getAsyncClient(), false);
+    }
+
+    @Override
+    public void connectNet() {
+        requestHomePage();
+    }
+
+    @Override
+    public void disconnectNet() {
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 }

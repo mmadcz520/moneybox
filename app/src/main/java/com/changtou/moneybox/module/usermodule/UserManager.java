@@ -72,7 +72,6 @@ public class UserManager implements HttpCallback {
     public void onSuccess(String content, Object object, int reqType)
     {
 		ACache mCache = ACache.get(mContext);  //缓存类
-		Log.e("CT_MONEY", "=" + content);
         JSONObject jb;
         int error;
         try
@@ -85,12 +84,11 @@ public class UserManager implements HttpCallback {
 				case 0:
 				{
 //					for (int i = 0; i < mNotifierContainer.size(); i++)
+					mCache.put("userid", jb.getString("userid"));
+					mCache.put("token", jb.getString("token"));
 //					{
 						mLoginNotifier.loginSucNotify();
 //					}
-
-					mCache.put("userid", jb.getString("userid"));
-					mCache.put("token", jb.getString("token"));
 
 					break;
 				}

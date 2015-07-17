@@ -18,7 +18,7 @@
         android:layout_marginTop="50dp"
         android:layout_gravity="center_horizontal"
         android:gravity="center"
-        android:text="欢迎您，180****8661"
+        android:text=""
         android:textColor="@color/font_white"
         android:textSize="@dimen/font_size_normal" />
 

@@ -2,6 +2,7 @@ package com.changtou.moneybox.module.page;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -9,9 +10,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.changtou.moneybox.common.activity.BaseApplication;
+import com.changtou.moneybox.common.utils.ACache;
 import com.changtou.moneybox.common.utils.SharedPreferencesHelper;
 import com.changtou.moneybox.module.CTMoneyApplication;
 import com.changtou.moneybox.module.appcfg.AppCfg;
+import com.changtou.moneybox.module.entity.UserInfoEntity;
+import com.changtou.moneybox.module.http.HttpRequst;
 import com.changtou.moneybox.module.usermodule.LoginNotifier;
 import com.changtou.moneybox.module.usermodule.UserManager;
 import com.changtou.moneybox.module.widget.ExEditView;
@@ -129,16 +133,17 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
      */
     public void loginSucNotify()
     {
-        mLoginBtn.setEnabled(true);
-
-        //清空手势密码
-        sph.putString(AppCfg.CFG_LOGIN, AppCfg.LOGIN_STATE.LOGIN.toString());
-        sph.putString(AppCfg.GSPD, "");
-
-        Intent intent = new Intent(this, MainActivity.class);
-        CTMoneyApplication.getInstance().onBackground();
-        LoginActivity.this.setResult(RESULT_OK, intent);
-        LoginActivity.this.finish();
+        getUserInfo();
+//        mLoginBtn.setEnabled(true);
+//
+//        //清空手势密码
+//        sph.putString(AppCfg.CFG_LOGIN, AppCfg.LOGIN_STATE.LOGIN.toString());
+//        sph.putString(AppCfg.GSPD, "");
+//
+//        Intent intent = new Intent(this, MainActivity.class);
+//        CTMoneyApplication.getInstance().onBackground();
+//        LoginActivity.this.setResult(RESULT_OK, intent);
+//        LoginActivity.this.finish();
     }
 
     public void loginIngNotify()
@@ -205,19 +210,51 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
      */
     private void popoErrorDialog()
     {
-//        mDialog = new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE).setTitleText("错误");
-//        mDialog.getProgressHelper().setBarColor(getResources().getColor(R.color.ct_blue));
-//        mDialog.getProgressHelper().setRimColor(getResources().getColor(R.color.ct_blue_hint));
-//        mDialog.setCancelText("取 消");
-//        mDialog.setContentText("用户密码错误");
-//        mDialog.show();
-//        mDialog.setCancelable(true);
-
-
         Toast toast = Toast.makeText(getApplicationContext(),
                 "输入格式错误", Toast.LENGTH_LONG);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
     }
 
+    /**
+     * 获取用户信息
+     */
+    private void getUserInfo()
+    {
+        String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_USERINFO) +
+                "userid=" + ACache.get(BaseApplication.getInstance()).getAsString("userid") +
+                "&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token");
+
+        Log.e("CT_MONEY", ACache.get(BaseApplication.getInstance()).getAsString("token"));
+
+        sendRequest(HttpRequst.REQ_TYPE_USERINFO, url, mParams,
+                getAsyncClient(), false);
+    }
+
+
+    @Override
+    public void onSuccess(String content, Object object, int reqType)
+    {
+        super.onSuccess(content, object, reqType);
+        mLoginBtn.setEnabled(true);
+
+        //初始化用户数据
+        UserInfoEntity userInfo = UserInfoEntity.getInstance();
+        Log.e("CT_MONEY", userInfo.getFullName());
+
+        //清空手势密码
+        sph.putString(AppCfg.CFG_LOGIN, AppCfg.LOGIN_STATE.LOGIN.toString());
+        sph.putString(AppCfg.GSPD, "");
+
+        Intent intent = new Intent(this, MainActivity.class);
+        CTMoneyApplication.getInstance().onBackground();
+        LoginActivity.this.setResult(RESULT_OK, intent);
+        LoginActivity.this.finish();
+    }
+
+    @Override
+    public void onFailure(Throwable error, String content, int reqType)
+    {
+        super.onFailure(error, content, reqType);
+    }
 }

@@ -1,6 +1,8 @@
 package com.changtou.moneybox.common.activity;
 
 import android.app.Activity;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -13,6 +15,8 @@ import com.changtou.moneybox.common.http.base.BaseHttpClient;
 import com.changtou.moneybox.common.http.base.HttpCallback;
 import com.changtou.moneybox.common.http.async.RequestParams;
 import com.changtou.moneybox.common.utils.DeviceInfo;
+import com.changtou.moneybox.module.service.NetReceiver;
+import com.changtou.moneybox.module.service.NetStateListener;
 import com.changtou.moneybox.module.widget.MultiStateView;
 import com.changtou.moneybox.module.widget.ZProgressHUD;
 
@@ -34,7 +38,10 @@ public abstract class BaseFragment extends Fragment implements
     public FragmentClick click;
 
     //载入进度条
-    public ZProgressHUD mZProgressHUD = null;
+//    public ZProgressHUD mZProgressHUD = null;
+
+    NetReceiver mReceiver = new NetReceiver();
+    IntentFilter mFilter = new IntentFilter();
 
     /**
      * @see BaseFragment#onAttach(Activity)
@@ -48,7 +55,11 @@ public abstract class BaseFragment extends Fragment implements
             mAct = (BaseActivity) activity;
         click = new FragmentClick();
 
-        mZProgressHUD = new ZProgressHUD(this.getActivity());
+//        mZProgressHUD = new ZProgressHUD(this.getActivity());
+
+//        mFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+//        this.getActivity().registerReceiver(mReceiver, mFilter);
+//        mReceiver.setNetStateListener(this);
     }
 
     /**
@@ -171,4 +182,6 @@ public abstract class BaseFragment extends Fragment implements
     {
         Log.e(LOGTAG, this.toString() + "-" + log);
     }
+
+
 }

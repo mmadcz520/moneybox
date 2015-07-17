@@ -13,6 +13,8 @@ import android.os.Message;
 import android.util.Log;
 import android.widget.ImageView;
 
+import com.changtou.moneybox.common.activity.BaseApplication;
+
 public class AsyncImageLoader {
     private static final String TAG = "AsynImageLoader";
     // 缓存下载过的图片的Map
@@ -22,6 +24,10 @@ public class AsyncImageLoader {
     private boolean isRunning = false;
 
     public static String CACHE_DIR = "ct_money";
+
+    private String mPath = "";
+
+    private ACache mACache = ACache.get(BaseApplication.getInstance());
 
     public AsyncImageLoader(){
         // 初始化变量
@@ -45,36 +51,54 @@ public class AsyncImageLoader {
         if(bitmap == null){
             imageView.setImageResource(resId);
         }else{
+            mACache.put(mPath, bitmap);
+            Log.e("CT_MONEY", "ImageCallback------------------------------------------" + mPath );
             imageView.setImageBitmap(bitmap);
         }
     }
 
     public Bitmap loadImageAsyn(String path, ImageCallback callback){
-        // 判断缓存中是否已经存在该图片
-        if(caches.containsKey(path)){
-            // 取出软引用
-            SoftReference<Bitmap> rf = caches.get(path);
-            // 通过软引用，获取图片
-            Bitmap bitmap = rf.get();
-            // 如果该图片已经被释放，则将该path对应的键从Map中移除掉
-            if(bitmap == null){
-                caches.remove(path);
+
+        Log.e("CT_MONEY", "loadImageAsyn--------------------" + mACache.getAsBitmap(path));
+        this.mPath = path;
+
+        //判断本地是否存在该图片
+        if(mACache.getAsBitmap(path) != null)
+        {
+            Bitmap bitmap = mACache.getAsBitmap(path);
+            callback.loadImage(path, bitmap);
+            return bitmap;
+        }
+        else
+        {
+            // 判断缓存中是否已经存在该图片
+            if(caches.containsKey(path)){
+                // 取出软引用
+                SoftReference<Bitmap> rf = caches.get(path);
+                // 通过软引用，获取图片
+                Bitmap bitmap = rf.get();
+                // 如果该图片已经被释放，则将该path对应的键从Map中移除掉
+                if(bitmap == null){
+                    caches.remove(path);
+                }else{
+                    //如果图片未被释放，直接返回该图片
+                    Log.i(TAG, "return image in cache" + path);
+                    mACache.put(path, bitmap);
+
+                    return bitmap;
+                }
             }else{
-                //如果图片未被释放，直接返回该图片
-                Log.i(TAG, "return image in cache" + path);
-                return bitmap;
-            }
-        }else{
-            //如果缓存中不常在该图片，则创建图片下载任务
-            Task task = new Task();
-            task.path = path;
-            task.callback = callback;
-            Log.i(TAG, "new Task ," + path);
-            if(!taskQueue.contains(task)){
-                taskQueue.add(task);
-                // 唤醒任务下载队列
-                synchronized (runnable) {
-                    runnable.notify();
+                //如果缓存中不常在该图片，则创建图片下载任务
+                Task task = new Task();
+                task.path = path;
+                task.callback = callback;
+                Log.i(TAG, "new Task ," + path);
+                if(!taskQueue.contains(task)){
+                    taskQueue.add(task);
+                    // 唤醒任务下载队列
+                    synchronized (runnable) {
+                        runnable.notify();
+                    }
                 }
             }
         }
@@ -91,7 +115,12 @@ public class AsyncImageLoader {
     private ImageCallback getImageCallback(final ImageView imageView, final int resId){
         return new ImageCallback() {
             public void loadImage(String path, Bitmap bitmap) {
-                if(path.equals(imageView.getTag().toString())){
+                if(path.equals(imageView.getTag().toString()))
+                {
+                    Log.e("CT_MONEY", "ImageCallback------------------------------------------" + path);
+
+                    mACache.put(path, bitmap);
+
                     imageView.setImageBitmap(bitmap);
                 }else{
                     imageView.setImageResource(resId);

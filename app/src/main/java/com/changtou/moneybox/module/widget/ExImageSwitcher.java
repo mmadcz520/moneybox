@@ -22,6 +22,8 @@ import android.widget.LinearLayout;
 import android.widget.ViewSwitcher.ViewFactory;
 
 import com.changtou.R;
+import com.changtou.moneybox.common.activity.BaseApplication;
+import com.changtou.moneybox.common.utils.ACache;
 import com.changtou.moneybox.common.utils.AppUtil;
 import com.changtou.moneybox.common.utils.AsyncImageLoader;
 import com.changtou.moneybox.module.page.LoginActivity;
@@ -88,34 +90,36 @@ public class ExImageSwitcher extends FrameLayout implements OnTouchListener,Asyn
 
 		mBannerImage = new ArrayList<>();
 
+		linearLayout = (LinearLayout) findViewById(R.id.viewGroup);
+
 		SwitchTask st = new SwitchTask();
 		st.execute();
 	}
 
-	/**
-	 * 设置显示的图片
-	 */
-	public void setImage(int[] res) {
-		linearLayout = (LinearLayout) findViewById(R.id.viewGroup);
-		tips = new ImageView[bannerCnt];
-		for (int i = 0; i < bannerCnt; i++) {
-			ImageView mImageView = new ImageView(mContext);
-			tips[i] = mImageView;
-			LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-					new ViewGroup.LayoutParams(LayoutParams.WRAP_CONTENT,
-							LayoutParams.WRAP_CONTENT));
-			layoutParams.rightMargin = AppUtil.dip2px(mContext, 4);
-			layoutParams.leftMargin = AppUtil.dip2px(mContext, 4);
-			layoutParams.width = AppUtil.dip2px(mContext, 7);
-			layoutParams.height = AppUtil.dip2px(mContext, 7);
-
-//			mImageView.setBackgroundResource(R.drawable.page_indicator_unfocused);
-			linearLayout.addView(mImageView, layoutParams);
-		}
-
-		mImageSwitcher.setImageResource(res[currentPosition]);
-		setImageBackground(currentPosition);
-	}
+//	/**
+//	 * 设置显示的图片
+//	 */
+//	public void setImage(int[] res) {
+//		linearLayout = (LinearLayout) findViewById(R.id.viewGroup);
+//		tips = new ImageView[bannerCnt];
+//		for (int i = 0; i < bannerCnt; i++) {
+//			ImageView mImageView = new ImageView(mContext);
+//			tips[i] = mImageView;
+//			LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+//					new ViewGroup.LayoutParams(LayoutParams.WRAP_CONTENT,
+//							LayoutParams.WRAP_CONTENT));
+//			layoutParams.rightMargin = AppUtil.dip2px(mContext, 4);
+//			layoutParams.leftMargin = AppUtil.dip2px(mContext, 4);
+//			layoutParams.width = AppUtil.dip2px(mContext, 7);
+//			layoutParams.height = AppUtil.dip2px(mContext, 7);
+//
+////			mImageView.setBackgroundResource(R.drawable.page_indicator_unfocused);
+//			linearLayout.addView(mImageView, layoutParams);
+//		}
+//
+//		mImageSwitcher.setImageResource(res[currentPosition]);
+//		setImageBackground(currentPosition);
+//	}
 
 	/**
 	 * 设置显示的图片
@@ -126,7 +130,8 @@ public class ExImageSwitcher extends FrameLayout implements OnTouchListener,Asyn
 		mBannerImage.clear();
 		currentPosition = 0;
 
-		linearLayout = (LinearLayout) findViewById(R.id.viewGroup);
+		linearLayout.removeAllViews();
+
 		tips = new ImageView[url.length];
 
 		for (int i = 0; i < url.length; i++) {
@@ -268,6 +273,9 @@ public class ExImageSwitcher extends FrameLayout implements OnTouchListener,Asyn
 	 */
 	public void loadImage(String path, Bitmap bitmap)
 	{
+		ACache cache = ACache.get(BaseApplication.getInstance());
+		cache.put(path, bitmap);
+
 		currentPosition = 0;
 		mBannerImage.add(bitmap);
 		mCurrentImageView = (ImageView)mImageSwitcher.getNextView();

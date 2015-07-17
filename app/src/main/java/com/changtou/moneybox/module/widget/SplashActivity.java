@@ -2,6 +2,7 @@ package com.changtou.moneybox.module.widget;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.changtou.R;
 import com.changtou.moneybox.common.activity.BaseSplashActivity;
@@ -82,4 +83,5 @@ public class SplashActivity extends BaseSplashActivity {
     public Boolean IsUseAnimation() {
         return false;
     }
+
 }

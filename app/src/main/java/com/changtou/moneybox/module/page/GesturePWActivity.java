@@ -3,6 +3,7 @@ package com.changtou.moneybox.module.page;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -14,6 +15,7 @@ import com.changtou.R;
 import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.utils.SharedPreferencesHelper;
 import com.changtou.moneybox.module.appcfg.AppCfg;
+import com.changtou.moneybox.module.entity.UserInfoEntity;
 import com.changtou.moneybox.module.safe.LocusPassWordView;
 import com.changtou.moneybox.module.safe.Md5Utils;
 import com.umeng.analytics.MobclickAgent;
@@ -62,6 +64,11 @@ public class GesturePWActivity extends Activity implements LocusPassWordView.OnC
         {
             mGesturePrompt.setText("请输入手势密码");
         }
+
+        TextView text = (TextView)this.findViewById(R.id.multi_tv_token_time_hint);
+        UserInfoEntity user = UserInfoEntity.getInstance();
+        text.setText(user.getFullName());
+        Log.e("CT_MONEY", "========================" + user.getFullName());
 
         mPwdView.setOnCompleteListener(this);
     }

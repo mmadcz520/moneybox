@@ -15,8 +15,10 @@ import android.app.ActivityManager.RunningAppProcessInfo;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.net.ConnectivityManager;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -29,6 +31,8 @@ import com.changtou.moneybox.common.utils.SharedPreferencesHelper;
 import com.changtou.moneybox.module.appcfg.AppCfg;
 import com.changtou.moneybox.module.page.GesturePWActivity;
 import com.changtou.moneybox.module.service.BankParserHandler;
+import com.changtou.moneybox.module.service.NetReceiver;
+import com.changtou.moneybox.module.service.NetStateListener;
 import com.changtou.moneybox.module.usermodule.UserManager;
 
 import javax.xml.parsers.SAXParser;
@@ -80,6 +84,9 @@ public abstract class BaseApplication extends Application implements UncaughtExc
      */
     protected Map<String, String> mBankInfoList = null;
 
+    private NetReceiver mReceiver;
+    private IntentFilter mFilter;
+
     public BaseApplication()
     {
         DeviceInfo.init(this);
@@ -112,6 +119,8 @@ public abstract class BaseApplication extends Application implements UncaughtExc
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        registerNetListener();
 	}
 
 	public static BaseApplication getInstance()
@@ -385,7 +394,10 @@ public abstract class BaseApplication extends Application implements UncaughtExc
     /**
      * 结束所有Activity
      */
-    public void finishAllActivity() {
+    public void finishAllActivity()
+    {
+        this.unregisterReceiver(mReceiver);
+
         for (int i = 0, size = activityStack.size(); i < size; i++) {
             if (null != activityStack.get(i)) {
                 activityStack.get(i).finish();
@@ -482,4 +494,17 @@ public abstract class BaseApplication extends Application implements UncaughtExc
         return null;
     }
 
+    public void registerNetListener()
+    {
+        mReceiver = new NetReceiver();
+        mFilter = new IntentFilter();
+
+        mFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        this.registerReceiver(mReceiver, mFilter);
+    }
+
+    public void setNetStateListener(NetStateListener netStateListener)
+    {
+        mReceiver.setNetStateListener(netStateListener);
+    }
 }
