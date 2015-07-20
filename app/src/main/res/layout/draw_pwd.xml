@@ -11,7 +11,7 @@
         <!--android:background="@color/ct_divide_line" />-->+-
 
     <TextView
-        android:id="@+id/multi_tv_token_time_hint"
+        android:id="@+id/pd_gesture_fullname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"

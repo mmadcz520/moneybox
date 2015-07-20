@@ -50,7 +50,8 @@ public class RichesSafeActivity extends CTBaseActivity
         {
             case R.id.btn_phoneauth:
             {
-                final Intent intent = new Intent(this, PhoneAuthActivity.class);
+                final Intent intent = new Intent(this, PdFrogetActivity.class);
+                intent.putExtra("pageType", 1);
                 startActivity(intent);
                 break;
             }

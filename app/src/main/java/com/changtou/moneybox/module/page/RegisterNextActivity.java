@@ -136,7 +136,6 @@ public class RegisterNextActivity extends CTBaseActivity
         }
     }
 
-    //
     public class Counter extends CountDownTimer {
 
         public Counter(long millisInFuture, long countDownInterval) {

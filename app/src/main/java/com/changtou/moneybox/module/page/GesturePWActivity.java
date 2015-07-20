@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.changtou.R;
 import com.changtou.moneybox.common.activity.BaseApplication;
+import com.changtou.moneybox.common.utils.ACache;
 import com.changtou.moneybox.common.utils.SharedPreferencesHelper;
 import com.changtou.moneybox.module.appcfg.AppCfg;
 import com.changtou.moneybox.module.entity.UserInfoEntity;
@@ -65,10 +66,10 @@ public class GesturePWActivity extends Activity implements LocusPassWordView.OnC
             mGesturePrompt.setText("请输入手势密码");
         }
 
-        TextView text = (TextView)this.findViewById(R.id.multi_tv_token_time_hint);
-        UserInfoEntity user = UserInfoEntity.getInstance();
-        text.setText(user.getFullName());
-        Log.e("CT_MONEY", "========================" + user.getFullName());
+        TextView text = (TextView)this.findViewById(R.id.pd_gesture_fullname);
+        ACache cache = ACache.get(BaseApplication.getInstance());
+        String fullname = cache.getAsString("fullname") + "," + "您好！";
+        text.setText(fullname);
 
         mPwdView.setOnCompleteListener(this);
     }

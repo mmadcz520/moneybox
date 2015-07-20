@@ -1,245 +1,228 @@
 package com.changtou.moneybox.module.widget;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.SystemClock;
-import android.support.annotation.LayoutRes;
-import android.util.AttributeSet;
-import android.view.LayoutInflater;
+import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
+import android.view.Window;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.changtou.R;
 
 
-public class SignInHUD extends FrameLayout {
+public class SignInHUD extends Dialog {
 
-	private static final int UNKNOWN_VIEW = -1;
+	public static final int FADED_ROUND_SPINNER = 0;
+	public static final int GEAR_SPINNER = 1;
+	public static final int SIMPLE_ROUND_SPINNER = 2;
 
-	private static final int CONTENT_VIEW = 0;
+	static SignInHUD instance;
+	View view;
+	TextView tvMessage;
+	ImageView ivSuccess;
+	ImageView ivFailure;
+	ImageView ivProgressSpinner;
+	AnimationDrawable adProgressSpinner;
+	Context context;
 
-	private static final int ERROR_VIEW = 1;
+	OnDialogDismiss onDialogDismiss;
 
-	private static final int EMPTY_VIEW = 2;
-
-	private static final int LOADING_VIEW = 3;
-
-	public enum ViewState {
-		CONTENT,
-		LOADING,
-		EMPTY,
-		ERROR
+	public OnDialogDismiss getOnDialogDismiss() {
+		return onDialogDismiss;
 	}
 
-	private LayoutInflater mInflater;
+	public void setOnDialogDismiss(OnDialogDismiss onDialogDismiss) {
+		this.onDialogDismiss = onDialogDismiss;
+	}
 
-	private View mContentView;
-
-	private View mLoadingView;
-
-	private View mErrorView;
-
-	private View mEmptyView;
-
-	private ViewState mViewState = ViewState.CONTENT;
-
-	NumberWheel.NumberBean nBean;
-
-	NumberWheel nw;
+	public static SignInHUD getInstance(Context context) {
+		if (instance == null) {
+			instance = new SignInHUD(context);
+		}
+		return instance;
+	}
 
 	public SignInHUD(Context context) {
-		this(context, null);
+		super(context, R.style.dialog_loading);
+		this.getWindow().setBackgroundDrawable(
+				new ColorDrawable(Color.TRANSPARENT));
+		this.setCanceledOnTouchOutside(false);
+		this.context = context;
+		view = getLayoutInflater().inflate(R.layout.riches_sign_dialog, null);
+
+//		CountView touyuan = (CountView)view.findViewById(R.id.sign_touyuan);
+//		touyuan.showNumberWithAnimation(8521);
+
+//		tvMessage = (TextView) view.findViewById(R.id.textview_message);
+//		ivSuccess = (ImageView) view.findViewById(R.id.imageview_success);
+//		ivFailure = (ImageView) view.findViewById(R.id.imageview_failure);
+//		ivProgressSpinner = (ImageView) view
+//				.findViewById(R.id.imageview_progress_spinner);
+
+//		setSpinnerType(FADED_ROUND_SPINNER);
+		this.setContentView(view);
 	}
 
-	public SignInHUD(Context context, AttributeSet attrs) {
-		super(context, attrs);
-		init(attrs);
-	}
+//	public void setSpinnerType(int spinnerType) {
+//		switch (spinnerType) {
+//			case 0:
+//				ivProgressSpinner.setImageResource(R.anim.round_spinner_fade);
+//				break;
+//			case 1:
+//				ivProgressSpinner.setImageResource(R.anim.gear_spinner);
+//				break;
+//			case 2:
+//				ivProgressSpinner.setImageResource(R.anim.round_spinner);
+//				break;
+//			default:
+//				ivProgressSpinner.setImageResource(R.anim.round_spinner_fade);
+//		}
+//
+//		adProgressSpinner = (AnimationDrawable) ivProgressSpinner.getDrawable();
+//
+//	}
 
-	public SignInHUD(Context context, AttributeSet attrs, int defStyle) {
-		super(context, attrs, defStyle);
-		init(attrs);
-	}
-
-	private void init(AttributeSet attrs) {
-		mInflater = LayoutInflater.from(getContext());
-		TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.MultiStateView);
-
-		mContentView = mInflater.inflate(R.layout.riches_sign_dialog, this, false);
-
-		nBean=new NumberWheel.NumberBean();
-		nBean.setStartShowNumString("0000");
-		RelativeLayout.LayoutParams rl = new RelativeLayout.LayoutParams(338,130);
-		nw = NumberWheel.getInstance(getContext());
-		RelativeLayout r = (RelativeLayout)mContentView.findViewById(R.id.number_count);
-		r.removeView(nw);
-		r.addView(nw);
-
-		addView(mContentView, mContentView.getLayoutParams());
-
-		a.recycle();
-	}
-
-	public void changeNum()
-	{
-		nw.restart(0);
-		nBean.setEndShowNumString("2009");
-	}
-
-	@Override
-	protected void onAttachedToWindow() {
-		super.onAttachedToWindow();
-		if (mContentView == null) throw new IllegalArgumentException("Content view is not defined");
-		setView();
-	}
-
-	/* All of the addView methods have been overridden so that it can obtain the content view via XML
-     It is NOT recommended to add views into MultiStateView via the addView methods, but rather use
-     any of the setViewForState methods to set views for their given ViewState accordingly */
-	@Override
-	public void addView(View child) {
-		if (isValidContentView(child)) mContentView = child;
-		super.addView(child);
+	public void setMessage(String message) {
+		tvMessage.setText(message);
 	}
 
 	@Override
-	public void addView(View child, int index) {
-		if (isValidContentView(child)) mContentView = child;
-		super.addView(child, index);
+	public void show() {
+		if (!((Activity) context).isFinishing()) {
+			super.show();
+		} else {
+			instance = null;
+		}
 	}
 
-	@Override
-	public void addView(View child, int index, ViewGroup.LayoutParams params) {
-		if (isValidContentView(child)) mContentView = child;
-		super.addView(child, index, params);
+	public void dismissWithSuccess() {
+		tvMessage.setText("Success");
+		showSuccessImage();
+
+		if (onDialogDismiss != null) {
+			this.setOnDismissListener(new OnDismissListener() {
+
+				@Override
+				public void onDismiss(DialogInterface dialog) {
+					onDialogDismiss.onDismiss();
+				}
+			});
+		}
+		dismissHUD();
 	}
 
-	@Override
-	public void addView(View child, ViewGroup.LayoutParams params) {
-		if (isValidContentView(child)) mContentView = child;
-		super.addView(child, params);
+	public void dismissWithSuccess(String message) {
+		showSuccessImage();
+		if (message != null) {
+			tvMessage.setText(message);
+		} else {
+			tvMessage.setText("");
+		}
+
+		if (onDialogDismiss != null) {
+			this.setOnDismissListener(new OnDismissListener() {
+
+				@Override
+				public void onDismiss(DialogInterface dialog) {
+					onDialogDismiss.onDismiss();
+				}
+			});
+		}
+		dismissHUD();
 	}
 
-	@Override
-	public void addView(View child, int width, int height) {
-		if (isValidContentView(child)) mContentView = child;
-		super.addView(child, width, height);
+	public void dismissWithFailure() {
+		showFailureImage();
+		tvMessage.setText("Failure");
+		if (onDialogDismiss != null) {
+			this.setOnDismissListener(new OnDismissListener() {
+
+				@Override
+				public void onDismiss(DialogInterface dialog) {
+					onDialogDismiss.onDismiss();
+				}
+			});
+		}
+		dismissHUD();
 	}
 
-	@Override
-	protected boolean addViewInLayout(View child, int index, ViewGroup.LayoutParams params) {
-		if (isValidContentView(child)) mContentView = child;
-		return super.addViewInLayout(child, index, params);
+	public void dismissWithFailure(String message) {
+		showFailureImage();
+		if (message != null) {
+			tvMessage.setText(message);
+		} else {
+			tvMessage.setText("");
+		}
+		if (onDialogDismiss != null) {
+			this.setOnDismissListener(new OnDismissListener() {
+
+				@Override
+				public void onDismiss(DialogInterface dialog) {
+					onDialogDismiss.onDismiss();
+				}
+			});
+		}
+		dismissHUD();
 	}
 
-	@Override
-	protected boolean addViewInLayout(View child, int index, ViewGroup.LayoutParams params, boolean preventRequestLayout) {
-		if (isValidContentView(child)) mContentView = child;
-		return super.addViewInLayout(child, index, params, preventRequestLayout);
+	protected void showSuccessImage() {
+		ivProgressSpinner.setVisibility(View.GONE);
+		ivSuccess.setVisibility(View.VISIBLE);
 	}
 
-	public View getView(ViewState state) {
-		switch (state) {
-			case LOADING:
-				return mLoadingView;
+	protected void showFailureImage() {
+		ivProgressSpinner.setVisibility(View.GONE);
+		ivFailure.setVisibility(View.VISIBLE);
+	}
 
-			case CONTENT:
-				return mContentView;
+	protected void reset() {
+		ivProgressSpinner.setVisibility(View.VISIBLE);
+		ivFailure.setVisibility(View.GONE);
+		ivSuccess.setVisibility(View.GONE);
+		tvMessage.setText("Loading ...");
+	}
 
-			case EMPTY:
-				return mEmptyView;
+	protected void dismissHUD() {
+		AsyncTask<String, Integer, Long> task = new AsyncTask<String, Integer, Long>() {
 
-			case ERROR:
-				return mErrorView;
-
-			default:
+			@Override
+			protected Long doInBackground(String... params) {
+				SystemClock.sleep(500);
 				return null;
-		}
+			}
+
+			@Override
+			protected void onPostExecute(Long result) {
+				super.onPostExecute(result);
+				dismiss();
+				reset();
+			}
+		};
+		task.execute();
 	}
 
-
-	public ViewState getViewState() {
-		return mViewState;
+	@Override
+	public void onWindowFocusChanged(boolean hasFocus) {
+//		ivProgressSpinner.post(new Runnable() {
+//
+//			@Override
+//			public void run() {
+//				adProgressSpinner.start();
+//
+//			}
+//		});
 	}
 
-
-	public void setViewState(ViewState state) {
-		if (state != mViewState) {
-			mViewState = state;
-			setView();
-		}
+	public interface OnDialogDismiss {
+		public void onDismiss();
 	}
 
-	private void setView() {
-		switch (mViewState) {
-			case LOADING:
-				if (mLoadingView == null) {
-					throw new NullPointerException("Loading View");
-				}
-
-				mLoadingView.setVisibility(View.VISIBLE);
-				if (mContentView != null) mContentView.setVisibility(View.GONE);
-				if (mErrorView != null) mErrorView.setVisibility(View.GONE);
-				if (mEmptyView != null) mEmptyView.setVisibility(View.GONE);
-				break;
-
-			case EMPTY:
-				if (mEmptyView == null) {
-					throw new NullPointerException("Empty View");
-				}
-
-				mEmptyView.setVisibility(View.VISIBLE);
-				if (mLoadingView != null) mLoadingView.setVisibility(View.GONE);
-				if (mErrorView != null) mErrorView.setVisibility(View.GONE);
-				if (mContentView != null) mContentView.setVisibility(View.GONE);
-				break;
-
-			case ERROR:
-				if (mErrorView == null) {
-					throw new NullPointerException("Error View");
-				}
-
-				mErrorView.setVisibility(View.VISIBLE);
-				if (mLoadingView != null) mLoadingView.setVisibility(View.GONE);
-				if (mContentView != null) mContentView.setVisibility(View.GONE);
-				if (mEmptyView != null) mEmptyView.setVisibility(View.GONE);
-				break;
-
-			case CONTENT:
-			default:
-				if (mContentView == null) {
-					// Should never happen, the view should throw an exception if no content view is present upon creation
-					throw new NullPointerException("Content View");
-				}
-
-				mContentView.setVisibility(View.VISIBLE);
-				if (mLoadingView != null) mLoadingView.setVisibility(View.GONE);
-				if (mErrorView != null) mErrorView.setVisibility(View.GONE);
-				if (mEmptyView != null) mEmptyView.setVisibility(View.GONE);
-				break;
-		}
-	}
-
-	/**
-	 * Checks if the given {@link View} is valid for the Content View
-	 *
-	 * @param view The {@link View} to check
-	 * @return
-	 */
-	private boolean isValidContentView(View view) {
-		if (mContentView != null && mContentView != view) {
-			return false;
-		}
-
-		return view != mLoadingView && view != mErrorView && view != mEmptyView;
-	}
 }

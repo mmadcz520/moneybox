@@ -241,22 +241,20 @@
 
             </LinearLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
-                <TextView
+                <ImageView
+                    android:id="@+id/riches_signbar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="20dp"
-                    android:text="乐享投园"
-                    android:textColor="@color/font_importance"
-                    android:textSize="@dimen/font_size_normal" />
+                    android:layout_centerHorizontal="true"
+                    android:src="@mipmap/riches_icon_qiandao" />
 
-            </LinearLayout>
+            </RelativeLayout>
 
         </LinearLayout>
 
@@ -287,14 +285,14 @@
                 android:verticalSpacing="10dp" />
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/riches_signbar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="18dp"
-            android:src="@mipmap/riches_icon_qiandao" />
+        <!--<ImageView-->
+            <!--android:id="@+id/riches_signbar"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:layout_marginTop="18dp"-->
+            <!--android:src="@mipmap/riches_icon_qiandao" />-->
 
     </RelativeLayout>
 

@@ -61,5 +61,9 @@
         <item name="android:windowBackground">@drawable/loading_dialog_background</item>
     </style>
 
+    <style name="Transparent">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
 
 </resources>

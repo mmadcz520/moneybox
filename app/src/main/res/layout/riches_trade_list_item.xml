@@ -2,7 +2,7 @@
     xmlns:android_custom="http://schemas.android.com/apk/res-auto"
     android:background="@color/ct_white"
     android:layout_width="fill_parent"
-    android:layout_height="match_parent"
+    android:layout_height="@dimen/extext_height"
     android:minHeight="@dimen/extext_height">
 
     <ImageView
@@ -46,7 +46,7 @@
             android:id="@+id/riches_trade_memo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12dp"
+            android:textSize="@dimen/font_size_hint"
             android:textColor="@color/font_black"
             android:gravity="bottom"
             android:text="投资放款"/>
@@ -56,7 +56,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/font_black"
-            android:textSize="12dp"
+            android:layout_marginTop="4dp"
+            android:textSize="@dimen/font_size_hint"
             android:text="04-16 14:10:20"/>
     </LinearLayout>
 
@@ -64,8 +65,8 @@
         android:id="@+id/riches_trade_payamount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
+        android:layout_marginTop="20dp"
         android:gravity="center"
         android:layout_marginRight="20dp"
         android:text="-5000.00"

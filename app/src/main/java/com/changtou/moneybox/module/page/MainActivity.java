@@ -41,6 +41,8 @@ public class MainActivity extends CTBaseActivity {
 
     private HomeFragment mHomeFragment = null;
 
+    private RichesFragment mRichesFragment = null;
+
     /**
      * @param bundle 保存页面参数
      * @see com.changtou.moneybox.common.activity.BaseActivity#initView(Bundle)
@@ -63,9 +65,10 @@ public class MainActivity extends CTBaseActivity {
 
         List<BaseFragment> viewList = new ArrayList<>();
         mHomeFragment = new HomeFragment();
+        mRichesFragment = new RichesFragment();
         viewList.add(mHomeFragment);
         viewList.add(new ProductFragment());
-        viewList.add(new RichesFragment());
+        viewList.add(mRichesFragment);
         viewList.add(new MoreFragment());
 
         ExFPAdapter fPAdapter = new ExFPAdapter(getSupportFragmentManager(), viewList);
@@ -148,6 +151,7 @@ public class MainActivity extends CTBaseActivity {
                     startActivityForResult(intent, 0);
                 } else {
                     mViewpager.setCurrentItem(2);
+                    mRichesFragment.initAnim();
                     switchNavBar(2);
                 }
 

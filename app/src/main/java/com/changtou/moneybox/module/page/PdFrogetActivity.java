@@ -41,6 +41,8 @@ public class PdFrogetActivity extends CTBaseActivity
     private String mPhoneNum = null;
     private String mCheckSum = null;
 
+    private int mPageType = 0;
+
     protected void initView(Bundle bundle)
     {
         setContentView(R.layout.password_forget_activity);
@@ -53,14 +55,26 @@ public class PdFrogetActivity extends CTBaseActivity
         restTimeCount();
     }
 
-    protected void initListener() {
+    protected void initListener()
+    {
         setOnClickListener(R.id.btn_send_checksum);
         setOnClickListener(R.id.password_forget_submit);
     }
 
     @Override
-    protected void initData() {
-        setPageTitle("忘记密码");
+    protected void initData()
+    {
+        Intent intent = this.getIntent();
+        mPageType = intent.getIntExtra("pageType",0);
+        if(mPageType == 0)
+        {
+            setPageTitle("忘记密码");
+        }
+        else
+        {
+            setPageTitle("校验手机");
+        }
+
     }
 
     @Override
@@ -219,11 +233,19 @@ public class PdFrogetActivity extends CTBaseActivity
 
                 if(error == 0)
                 {
-                    final Intent intent = new Intent(this, RegisterPasswordActivity.class);
-                    intent.putExtra("type", 1);
-                    intent.putExtra("phoneNum",mPhoneNum);
-                    intent.putExtra("code", mCheckSum);
-                    startActivity(intent);
+                    if(mPageType == 0)
+                    {
+                        final Intent intent = new Intent(this, RegisterPasswordActivity.class);
+                        intent.putExtra("type", 1);
+                        intent.putExtra("phoneNum",mPhoneNum);
+                        intent.putExtra("code", mCheckSum);
+                        startActivity(intent);
+                    }
+                    else
+                    {
+                        Toast.makeText(this,"验证手机成功", Toast.LENGTH_LONG).show();
+                    }
+
                 }
                 else
                 {

@@ -1,7 +1,5 @@
 package com.changtou.moneybox.module.entity;
 
-import android.util.Log;
-
 import com.changtou.moneybox.common.http.base.BaseEntity;
 
 import org.json.JSONArray;

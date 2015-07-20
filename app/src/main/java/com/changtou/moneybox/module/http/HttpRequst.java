@@ -76,6 +76,9 @@ public class HttpRequst extends BaseHttpRequest
     public final static int REQ_TYPE_POSTREG = 1082;
     public final static int REQ_TYPE_NEWPWD = 1083;   //更改新密码
 
+    //手机号码认证
+    public final static int REQ_TYPE_PHONE_CHECK = 1100;
+
     //实名认证
     public final static int REQ_TYPE_CERTIFY = 1101;
 
@@ -146,6 +149,9 @@ public class HttpRequst extends BaseHttpRequest
     public static String REQ_URL_NEWPWD = BASE_URL + "usertoken/postnewpwd?";
 
     public static String REQ_URL_CERTIFY = BASE_URL + "certification/PostCertiIdcard?";
+
+    //手机号码认证
+    public static String REQ_URL_PHONE_CHECK = BASE_URL + "usertoken/postvalidmobile?";
 
     public static synchronized HttpRequst getInstance()
     {
@@ -218,6 +224,8 @@ public class HttpRequst extends BaseHttpRequest
                 return REQ_URL_NEWPWD;
             case REQ_TYPE_CERTIFY:
                 return REQ_URL_CERTIFY;
+            case REQ_TYPE_PHONE_CHECK:
+                return REQ_URL_PHONE_CHECK;
             default:
                 break;
         }

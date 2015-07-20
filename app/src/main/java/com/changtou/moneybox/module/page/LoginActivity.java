@@ -111,6 +111,7 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
             case R.id.forgot_password:
             {
                 final Intent intent = new Intent(this, PdFrogetActivity.class);
+                intent.putExtra("pageType", 0);
                 startActivity(intent);
                 break;
             }
@@ -240,7 +241,9 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
 
         //初始化用户数据
         UserInfoEntity userInfo = UserInfoEntity.getInstance();
-        Log.e("CT_MONEY", userInfo.getFullName());
+        ACache cache = ACache.get(this);
+        cache.put("fullname", userInfo.getFullName());
+
 
         //清空手势密码
         sph.putString(AppCfg.CFG_LOGIN, AppCfg.LOGIN_STATE.LOGIN.toString());

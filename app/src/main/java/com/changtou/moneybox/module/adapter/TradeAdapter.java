@@ -1,6 +1,8 @@
 package com.changtou.moneybox.module.adapter;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,8 +23,11 @@ public class TradeAdapter extends BaseAdapter{
 
     private String[] mType = {"现金", "礼金"};
 
+    private Context mContext = null;
+
     public TradeAdapter(Context context)
     {
+        this.mContext = context;
         mInflater = LayoutInflater.from(context);
     }
 
@@ -101,13 +106,17 @@ public class TradeAdapter extends BaseAdapter{
         if(entity.type == 0)
         {
             //收
-            if(entity.shouzhi == 1)
+            if(entity.shouzhi == 0)
             {
+                int color =  mContext.getResources().getColor(R.color.ct_red);
+                viewHolder.mPayTextView.setTextColor(color);
                 viewHolder.mShouzhiIcon.setImageResource(R.mipmap.trade_cash_income);
             }
             //支
-            else if(entity.shouzhi == 0)
+            else if(entity.shouzhi == 1)
             {
+                int color =  mContext.getResources().getColor(R.color.ct_blue);
+                viewHolder.mPayTextView.setTextColor(color);
                 viewHolder.mShouzhiIcon.setImageResource(R.mipmap.trade_cash_expend);
             }
         }
@@ -115,13 +124,17 @@ public class TradeAdapter extends BaseAdapter{
         else if(entity.type == 1)
         {
             //收
-            if(entity.shouzhi == 1)
+            if(entity.shouzhi == 0)
             {
+                int color =  mContext.getResources().getColor(R.color.ct_red);
+                viewHolder.mPayTextView.setTextColor(color);
                 viewHolder.mShouzhiIcon.setImageResource(R.mipmap.trade_gift_income);
             }
             //支
-            else if(entity.shouzhi == 0)
+            else if(entity.shouzhi == 1)
             {
+                int color =  mContext.getResources().getColor(R.color.ct_blue);
+                viewHolder.mPayTextView.setTextColor(color);
                 viewHolder.mShouzhiIcon.setImageResource(R.mipmap.trade_gift_expend);
             }
         }

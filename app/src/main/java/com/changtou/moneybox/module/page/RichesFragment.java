@@ -1,7 +1,14 @@
 package com.changtou.moneybox.module.page;
 
+import android.animation.Keyframe;
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
+import android.animation.ValueAnimator;
+import android.annotation.TargetApi;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +32,8 @@ import com.changtou.moneybox.module.entity.BankCardEntity;
 import com.changtou.moneybox.module.entity.UserInfoEntity;
 import com.changtou.moneybox.module.http.HttpRequst;
 import com.changtou.moneybox.module.widget.CountView;
+import com.changtou.moneybox.module.widget.SignInHUD;
+
 
 public class RichesFragment extends BaseFragment implements AdapterView.OnItemClickListener {
 
@@ -37,6 +46,12 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
     private TextView mTouYuanTextView = null;
 
     private SharedPreferencesHelper sph = null;
+
+    private ObjectAnimator animator = null;
+
+    private Counter mCounter = null;
+
+    private ImageView mQiandaoImage = null;
 
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -56,10 +71,8 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
         ExGridAdapter sa = new ExGridAdapter(this.getActivity(), mImgRes, titleList);
         gv.setAdapter(sa);
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-            {
-                switch (position)
-                {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
                     case 0:
                         final Intent intent0 = new Intent(RichesFragment.this.getActivity(), RichesPromotionActivity.class);
                         startActivity(intent0);
@@ -69,7 +82,7 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
                         startActivity(intent1);
                         break;
                     case 2:
-                        final Intent intent2= new Intent(RichesFragment.this.getActivity(), RichesTradeActivity.class);
+                        final Intent intent2 = new Intent(RichesFragment.this.getActivity(), RichesTradeActivity.class);
                         startActivity(intent2);
                         break;
                     case 3:
@@ -82,14 +95,11 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
                         BankCardEntity bank = userInfoEntity.getBankCardEntity();
 
                         int len = bank.mList.size();
-                        if(len == 0)
-                        {
+                        if (len == 0) {
                             Toast.makeText(RichesFragment.this.getActivity(), "请先添加取现银行卡", Toast.LENGTH_LONG).show();
                             final Intent intent4 = new Intent(RichesFragment.this.getActivity(), RichesBankActivity.class);
                             startActivity(intent4);
-                        }
-                        else
-                        {
+                        } else {
                             final Intent intent4 = new Intent(RichesFragment.this.getActivity(), RichesWithdrawActivity.class);
                             startActivity(intent4);
                         }
@@ -104,13 +114,19 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
             }
         });
 
-        ImageView imageView = (ImageView)view.findViewById(R.id.riches_signbar);
-        Animation translateAnimation = AnimationUtils.loadAnimation(this.getActivity(), R.anim.tip);
-        translateAnimation.setDuration(200);
-        translateAnimation.setRepeatCount(Animation.INFINITE);
-        translateAnimation.setRepeatMode(Animation.REVERSE);
-        imageView.setAnimation(translateAnimation); //这里iv就是我们要执行动画的item，例如一个imageView
-        translateAnimation.start();
+        mQiandaoImage = (ImageView)view.findViewById(R.id.riches_signbar);
+//        Animation translateAnimation = AnimationUtils.loadAnimation(this.getActivity(), R.anim.tip);
+//        translateAnimation.setDuration(200);
+//        translateAnimation.setRepeatCount(Animation.INFINITE);
+//        translateAnimation.setRepeatMode(Animation.REVERSE);
+//        imageView.setAnimation(translateAnimation); //这里iv就是我们要执行动画的item，例如一个imageView
+//        translateAnimation.start();
+
+
+
+//        ObjectAnimator nopeAnimator = nope(imageView);
+//        nopeAnimator.setRepeatCount(ValueAnimator.INFINITE);
+//        nopeAnimator.start();
 
         mMobileTextView = (TextView)view.findViewById(R.id.riches_text_mobile);
         mTotalAssetsTextView = (CountView)view.findViewById(R.id.riches_text_totalassets);
@@ -192,11 +208,116 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
 
     public void treatClickEvent(int id)
     {
-//        SignInHUD sHUD = SignInHUD.getInstance(this.getActivity());
-//        sHUD.show();
-//        SignInHUD mSignInHUD = (SignInHUD)getActivity().findViewById(R.id.signin_fragment);
-//        mSignInHUD.setVisibility(View.VISIBLE);
-//        mSignInHUD.changeNum();
+        SignInHUD sHUD = SignInHUD.getInstance(this.getActivity());
+        sHUD.show();
+//        sHUD.changeNum();
     }
 
+
+    public static ObjectAnimator tada(View view) {
+        return tada(view, 1f);
+    }
+
+
+    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+    public static ObjectAnimator tada(View view, float shakeFactor) {
+
+        PropertyValuesHolder pvhScaleX = PropertyValuesHolder.ofKeyframe(View.SCALE_Y,
+                Keyframe.ofFloat(0f, 1f),
+                Keyframe.ofFloat(.1f, .9f),
+                Keyframe.ofFloat(.2f, .9f),
+                Keyframe.ofFloat(.3f, 1.1f),
+                Keyframe.ofFloat(.4f, 1.1f),
+                Keyframe.ofFloat(.5f, 1.1f),
+                Keyframe.ofFloat(.6f, 1.1f),
+                Keyframe.ofFloat(.7f, 1.1f),
+                Keyframe.ofFloat(.8f, 1.1f),
+                Keyframe.ofFloat(.9f, 1.1f),
+                Keyframe.ofFloat(1f, 1f)
+        );
+
+        PropertyValuesHolder pvhScaleY = PropertyValuesHolder.ofKeyframe(View.SCALE_Y,
+                Keyframe.ofFloat(0f, 1f),
+                Keyframe.ofFloat(.1f, .9f),
+                Keyframe.ofFloat(.2f, .9f),
+                Keyframe.ofFloat(.3f, 1.1f),
+                Keyframe.ofFloat(.4f, 1.1f),
+                Keyframe.ofFloat(.5f, 1.1f),
+                Keyframe.ofFloat(.6f, 1.1f),
+                Keyframe.ofFloat(.7f, 1.1f),
+                Keyframe.ofFloat(.8f, 1.1f),
+                Keyframe.ofFloat(.9f, 1.1f),
+                Keyframe.ofFloat(1f, 1f)
+        );
+
+        PropertyValuesHolder pvhRotate = PropertyValuesHolder.ofKeyframe(View.ROTATION,
+                Keyframe.ofFloat(0f, 0f),
+                Keyframe.ofFloat(.1f, -3f * shakeFactor),
+                Keyframe.ofFloat(.2f, -3f * shakeFactor),
+                Keyframe.ofFloat(.3f, 3f * shakeFactor),
+                Keyframe.ofFloat(.4f, -3f * shakeFactor),
+                Keyframe.ofFloat(.5f, 3f * shakeFactor),
+                Keyframe.ofFloat(.6f, -3f * shakeFactor),
+                Keyframe.ofFloat(.7f, 3f * shakeFactor),
+                Keyframe.ofFloat(.8f, -3f * shakeFactor),
+                Keyframe.ofFloat(.9f, 3f * shakeFactor),
+                Keyframe.ofFloat(1f, 0)
+        );
+
+        return ObjectAnimator.ofPropertyValuesHolder(view, pvhScaleX, pvhScaleY, pvhRotate).
+                setDuration(1000);
+    }
+
+
+    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+    public static ObjectAnimator nope(View view) {
+        int delta = view.getResources().getDimensionPixelOffset(R.dimen.spacing_medium);
+
+        PropertyValuesHolder pvhTranslateX = PropertyValuesHolder.ofKeyframe(View.TRANSLATION_X,
+                Keyframe.ofFloat(0f, 0),
+                Keyframe.ofFloat(.10f, -delta),
+                Keyframe.ofFloat(.26f, delta),
+                Keyframe.ofFloat(.42f, -delta),
+                Keyframe.ofFloat(.58f, delta),
+                Keyframe.ofFloat(.74f, -delta),
+                Keyframe.ofFloat(.90f, delta),
+                Keyframe.ofFloat(1f, 0f)
+        );
+
+        return ObjectAnimator.ofPropertyValuesHolder(view, pvhTranslateX).
+                setDuration(500);
+    }
+
+    public class Counter extends CountDownTimer {
+
+        public Counter(long millisInFuture, long countDownInterval) {
+            super(millisInFuture, countDownInterval);
+            // TODO Auto-generated method stub
+        }
+
+        @Override
+        public void onFinish()
+        {
+            animator.cancel();
+        }
+
+        @Override
+        public void onTick(long millisUntilFinished)
+        {
+
+        }
+    }
+
+    /**
+     * 切换页面是签到按钮动画效果
+     */
+    public void initAnim()
+    {
+        animator = tada(mQiandaoImage);
+        animator.setRepeatCount(ValueAnimator.INFINITE);
+        animator.start();
+
+        mCounter = new Counter(10*1000, 1000);    //第一个参数是倒计时时间，后者为计时间隔，单位毫秒，这里是倒计时 5 分钟，间隔1秒
+        mCounter.start();
+    }
 }

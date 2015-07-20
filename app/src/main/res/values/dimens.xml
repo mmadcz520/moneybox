@@ -36,4 +36,6 @@
     <!-- gesture pd-->
     <dimen name="circular_ring_width">2dp</dimen>
 
+    <dimen name="spacing_medium">8dp</dimen>
+
 </resources>
