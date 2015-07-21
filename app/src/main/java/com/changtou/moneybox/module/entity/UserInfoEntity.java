@@ -3,6 +3,7 @@ package com.changtou.moneybox.module.entity;
 import android.util.Log;
 
 import com.changtou.moneybox.common.http.base.BaseEntity;
+import com.changtou.moneybox.common.logger.Logger;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -26,13 +27,18 @@ public class UserInfoEntity extends BaseEntity
     private String mProfit = "";
     private String mOverage = "";
     private String mGifts = "";
-    private String mTouYuan = "";
+    private int mTouYuan = 0;
+
+    //是否实名认证   是否手机认证  是否首次投资
+    private boolean identycheck = false;
+    private boolean mobilecheck = false;
+    private boolean hasinvestrecords = false;
 
     private FlowEntity mFlowEntity = null;
     private BankCardEntity mBankCardEntity = null;
 
     private static UserInfoEntity single=null;
-    //静态工厂方法
+
     public static UserInfoEntity getInstance() {
         if (single == null) {
             single = new UserInfoEntity();
@@ -43,6 +49,9 @@ public class UserInfoEntity extends BaseEntity
     public void paser(String data) throws Exception
     {
         JSONObject jsonObject = new JSONObject(data);
+
+        Logger.json(data);
+
         JSONObject userinfo = jsonObject.getJSONObject("userinfo");
         mEmail = userinfo.getString("email");
         mMobile = userinfo.getString("mobile");
@@ -57,7 +66,7 @@ public class UserInfoEntity extends BaseEntity
         mProfit = wealthinfo.getString("Profit");
         mOverage = wealthinfo.getString("Overage");
         mGifts = wealthinfo.getString("Gifts");
-        mTouYuan = wealthinfo.getString("TouYuan");
+        mTouYuan = wealthinfo.getInt("TouYuan");
 
         //现金流
         JSONArray flowInfo = jsonObject.getJSONArray("calender");
@@ -100,7 +109,7 @@ public class UserInfoEntity extends BaseEntity
         return mCreatetime;
     }
 
-    public String getTouYuan()
+    public int getTouYuan()
     {
         return mTouYuan;
     }

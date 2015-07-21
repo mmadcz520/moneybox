@@ -174,10 +174,10 @@ public abstract class BaseSplashActivity extends BaseFragmentActivity implements
                 mParams,
                 BaseApplication.getInstance().getAsyncClient(), false);
 
-        sendRequest(HttpRequst.REQ_TYPE_PRODUCT_HOME,
-                HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_PRODUCT_HOME),
-                mParams,
-                BaseApplication.getInstance().getAsyncClient(), false);
+//        sendRequest(HttpRequst.REQ_TYPE_PRODUCT_HOME,
+//                HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_PRODUCT_HOME),
+//                mParams,
+//                BaseApplication.getInstance().getAsyncClient(), false);
 
         sendRequest(HttpRequst.REQ_TYPE_PRODUCT_BANNER,
                 HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_PRODUCT_BANNER),

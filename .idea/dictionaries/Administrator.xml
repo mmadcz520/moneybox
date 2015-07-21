@@ -2,6 +2,7 @@
   <dictionary name="Administrator">
     <words>
       <w>fullname</w>
+      <w>withdrawinfo</w>
     </words>
   </dictionary>
 </component>

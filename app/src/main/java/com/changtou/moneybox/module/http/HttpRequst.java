@@ -39,6 +39,8 @@ public class HttpRequst extends BaseHttpRequest
     //app banner 图接口
     public final static int REQ_TYPE_PRODUCT_BANNER = 10;
 
+    public final static int REQ_TYPE_HOMEPAGE = 11;
+
     public final static int REQ_TYPE_PRODUCT_HOME = 21;
     public final static int REQ_TYPE_PRODUCT_LIST = 22;
     public final static int REQ_TYPE_PRODUCT_DETAILS = 1023;
@@ -82,10 +84,16 @@ public class HttpRequst extends BaseHttpRequest
     //实名认证
     public final static int REQ_TYPE_CERTIFY = 1101;
 
+    //签到
+    public final static int REQ_TYPE_SIGN = 1110;
+    public final static int REQ_TYPE_ISSIGN = 1111;
+
     public final String REQ_URL_PING = BASE_URL + "usertoken/getconnection";
 
     //banner
     public final String REQ_URL_PRODUCT_BANNER = BASE_URL + "product/GetFocusImg";
+
+    public final String REQ_URL_HOMEPAGE = BASE_URL + "AppRecommend/getAppRecomm";
 
     //产品
     public static String REQ_URL_PRODUCT_TYPE = BASE_URL + "product/GetProductType";
@@ -153,6 +161,9 @@ public class HttpRequst extends BaseHttpRequest
     //手机号码认证
     public static String REQ_URL_PHONE_CHECK = BASE_URL + "usertoken/postvalidmobile?";
 
+    public static String REQ_URL_SIGN = BASE_URL + "usertoken/postsign?";
+    public static String REQ_URL_ISSIGN = BASE_URL + "usertoken/postissign?";
+
     public static synchronized HttpRequst getInstance()
     {
         if (instance == null)
@@ -177,7 +188,7 @@ public class HttpRequst extends BaseHttpRequest
             case REQ_TYPE_PRODUCT_TYPE:
                 return REQ_URL_PRODUCT_TYPE;
             case REQ_TYPE_PRODUCT_HOME:
-                return REQ_URL_PRODUCT_TYPE;
+                return REQ_URL_HOMEPAGE;
             case REQ_TYPE_PRODUCT_LIST:
                 return REQ_URL_PRODUCT_LIST;
             case REQ_TYPE_PRODUCT_DETAILS:
@@ -226,6 +237,10 @@ public class HttpRequst extends BaseHttpRequest
                 return REQ_URL_CERTIFY;
             case REQ_TYPE_PHONE_CHECK:
                 return REQ_URL_PHONE_CHECK;
+            case REQ_TYPE_SIGN:
+                return REQ_URL_SIGN;
+            case REQ_TYPE_ISSIGN:
+                return REQ_URL_ISSIGN;
             default:
                 break;
         }

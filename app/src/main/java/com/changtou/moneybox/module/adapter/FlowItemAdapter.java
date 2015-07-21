@@ -79,11 +79,11 @@ public class FlowItemAdapter extends BaseAdapter
             viewHolder = (ViewHolder) convertView.getTag();
         }
         int type = Integer.parseInt((String) entity.get("type"));
-        if(type == 0)
+        if(type == 1)
         {
             viewHolder.mTypeView.setImageResource(R.mipmap.flow_interest);
         }
-        else if(type == 1)
+        else if(type == 0)
         {
             viewHolder.mTypeView.setImageResource(R.mipmap.flow_cash);
         }
@@ -92,6 +92,9 @@ public class FlowItemAdapter extends BaseAdapter
         String name = (String)entity.get("name");
         String num = (String)entity.get("num");
         viewHolder.mTimeView.setText(time);
+
+        name = name.split("\\（")[0];
+
         viewHolder.mNameView.setText(name);
         viewHolder.mNumView.setText(num);
 
@@ -99,6 +102,7 @@ public class FlowItemAdapter extends BaseAdapter
         if(account)
         {
             viewHolder.mNumView.setTextColor(mContext.getResources().getColor(R.color.ct_blue));
+            viewHolder.mAffirmView.setVisibility(View.VISIBLE);
         }
         else
         {

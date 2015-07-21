@@ -1,6 +1,9 @@
 package com.changtou.moneybox.module.entity;
 
+import android.util.Log;
+
 import com.changtou.moneybox.common.http.base.BaseEntity;
+import com.changtou.moneybox.common.logger.Logger;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -26,6 +29,8 @@ public class FlowEntity extends BaseEntity implements Serializable
      */
     public void paser(String data) throws Exception {
         JSONArray array = new JSONArray(data);
+
+        Logger.json(data);
 
 //        /*** 测试数据 ***/
 //        JSONObject details = new JSONObject();
@@ -153,15 +158,17 @@ public class FlowEntity extends BaseEntity implements Serializable
         public void paser(JSONObject json) throws Exception
         {
             dayNum = json.getString("dayNum");
-            mItemArray = new HashMap<>();
+
 
             JSONArray items = json.getJSONArray("item");
             item = new ArrayList<>();
             int size = items.length();
 
+
             JSONObject array;
             for (int i = 0; i < size; i++)
             {
+                mItemArray = new HashMap<>();
                 array = items.getJSONObject(i);
 
                 mItemArray.put("type", array.getString("type"));
@@ -170,7 +177,9 @@ public class FlowEntity extends BaseEntity implements Serializable
                 mItemArray.put("num", array.getString("num"));
                 mItemArray.put("account", array.getBoolean("account"));
 
-                item.add(mItemArray);
+                Log.e("CT_DEMO", mItemArray.get("name").toString());
+
+                item.add(i, mItemArray);
             }
         }
     }

@@ -58,37 +58,19 @@ public class SignInHUD extends Dialog {
 		this.context = context;
 		view = getLayoutInflater().inflate(R.layout.riches_sign_dialog, null);
 
-//		CountView touyuan = (CountView)view.findViewById(R.id.sign_touyuan);
-//		touyuan.showNumberWithAnimation(8521);
 
-//		tvMessage = (TextView) view.findViewById(R.id.textview_message);
-//		ivSuccess = (ImageView) view.findViewById(R.id.imageview_success);
-//		ivFailure = (ImageView) view.findViewById(R.id.imageview_failure);
-//		ivProgressSpinner = (ImageView) view
-//				.findViewById(R.id.imageview_progress_spinner);
+		view.setOnClickListener(new View.OnClickListener()
+		{
+			public void onClick(View v)
+			{
+				SignInHUD.this.cancel();
+			}
+		});
 
-//		setSpinnerType(FADED_ROUND_SPINNER);
 		this.setContentView(view);
 	}
 
-//	public void setSpinnerType(int spinnerType) {
-//		switch (spinnerType) {
-//			case 0:
-//				ivProgressSpinner.setImageResource(R.anim.round_spinner_fade);
-//				break;
-//			case 1:
-//				ivProgressSpinner.setImageResource(R.anim.gear_spinner);
-//				break;
-//			case 2:
-//				ivProgressSpinner.setImageResource(R.anim.round_spinner);
-//				break;
-//			default:
-//				ivProgressSpinner.setImageResource(R.anim.round_spinner_fade);
-//		}
-//
-//		adProgressSpinner = (AnimationDrawable) ivProgressSpinner.getDrawable();
-//
-//	}
+
 
 	public void setMessage(String message) {
 		tvMessage.setText(message);

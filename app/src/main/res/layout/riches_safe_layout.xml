@@ -26,7 +26,7 @@
             android:src="@mipmap/riches_safe_icon"/>
 
         <TextView
-            android:id="@+id/ex_text"
+            android:id="@+id/riches_safe_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"

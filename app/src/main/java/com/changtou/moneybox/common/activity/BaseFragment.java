@@ -161,7 +161,7 @@ public abstract class BaseFragment extends Fragment implements
 
         if (DeviceInfo.isNetWorkEnable(this.getActivity())) {
             if(baseHttpClient!=null){
-                if (reqType > 10000) {
+                if (reqType > 1000) {
                     baseHttpClient.post(reqType, this.getActivity(), url, params, this);
                 } else {
                     baseHttpClient.get(reqType,this.getActivity(), url, params, this);

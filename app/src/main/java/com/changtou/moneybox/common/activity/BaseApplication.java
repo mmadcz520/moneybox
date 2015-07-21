@@ -307,8 +307,6 @@ public abstract class BaseApplication extends Application implements UncaughtExc
      * App 切换到后台
      */
     public void onBackground(){
-        //todo
-
         isBack = false;
     }
 

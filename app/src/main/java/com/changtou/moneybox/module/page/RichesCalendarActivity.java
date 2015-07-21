@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.ListView;
 
 import com.changtou.R;
+import com.changtou.moneybox.common.logger.Logger;
 import com.changtou.moneybox.module.adapter.FlowItemAdapter;
 import com.changtou.moneybox.module.entity.FlowEntity;
 import com.prolificinteractive.materialcalendarview.CalendarDay;

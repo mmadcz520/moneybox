@@ -121,6 +121,9 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
     {
         if (reqType == HttpRequst.REQ_TYPE_PRODUCT_HOME)
         {
+
+            Log.e("CT_MONEY", content);
+
             PromotionEntity entity = (PromotionEntity)object;
             //mBannerSwitcher.setImage(new String[]{"http://www.changtounet.com/manage/news/uploadimages/50758017-9051-4838-ac09-f764bb5bfa4b.png.png", "http://www.changtounet.com/manage/news/uploadimages/50758017-9051-4838-ac09-f764bb5bfa4b.png.png"});
             mInvestProgress.setProgress(60);

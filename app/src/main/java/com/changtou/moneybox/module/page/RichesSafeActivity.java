@@ -2,11 +2,13 @@ package com.changtou.moneybox.module.page;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.changtou.R;
 import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.utils.SharedPreferencesHelper;
 import com.changtou.moneybox.module.appcfg.AppCfg;
+import com.changtou.moneybox.module.entity.UserInfoEntity;
 import com.changtou.moneybox.module.widget.ExEditView;
 
 /**
@@ -18,11 +20,15 @@ public class RichesSafeActivity extends CTBaseActivity
 {
     private ExEditView mExEditView = null;
 
+    private TextView mTitleView = null;
+
     private SharedPreferencesHelper sph = null;
 
     protected void initView(Bundle bundle) {
         sph = SharedPreferencesHelper.getInstance(getApplicationContext());
         setContentView(R.layout.riches_safe_layout);
+
+        mTitleView = (TextView)findViewById(R.id.riches_safe_title);
     }
 
     protected void initListener()
@@ -40,8 +46,13 @@ public class RichesSafeActivity extends CTBaseActivity
     }
 
     @Override
-    protected void initData() {
+    protected void initData()
+    {
         setPageTitle("安全设置");
+
+        UserInfoEntity userInfoEntity = UserInfoEntity.getInstance();
+        String fullname = userInfoEntity.getFullName();
+        mTitleView.setText(fullname);
     }
 
     public void treatClickEvent(int id)

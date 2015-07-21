@@ -5,10 +5,12 @@ import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
 import android.annotation.TargetApi;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +18,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,6 +27,8 @@ import android.widget.Toast;
 import com.changtou.R;
 import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.activity.BaseFragment;
+import com.changtou.moneybox.common.http.async.RequestParams;
+import com.changtou.moneybox.common.logger.Logger;
 import com.changtou.moneybox.common.utils.ACache;
 import com.changtou.moneybox.common.utils.SharedPreferencesHelper;
 import com.changtou.moneybox.module.adapter.ExGridAdapter;
@@ -33,6 +38,8 @@ import com.changtou.moneybox.module.entity.UserInfoEntity;
 import com.changtou.moneybox.module.http.HttpRequst;
 import com.changtou.moneybox.module.widget.CountView;
 import com.changtou.moneybox.module.widget.SignInHUD;
+
+import org.json.JSONObject;
 
 
 public class RichesFragment extends BaseFragment implements AdapterView.OnItemClickListener {
@@ -51,7 +58,13 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
 
     private Counter mCounter = null;
 
-    private ImageView mQiandaoImage = null;
+    private Button mQiandaoImage = null;
+
+    private SignInHUD sHUD = null;
+
+    private int isSign = 0;
+
+    private int mTouyuan = 0;
 
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -114,19 +127,7 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
             }
         });
 
-        mQiandaoImage = (ImageView)view.findViewById(R.id.riches_signbar);
-//        Animation translateAnimation = AnimationUtils.loadAnimation(this.getActivity(), R.anim.tip);
-//        translateAnimation.setDuration(200);
-//        translateAnimation.setRepeatCount(Animation.INFINITE);
-//        translateAnimation.setRepeatMode(Animation.REVERSE);
-//        imageView.setAnimation(translateAnimation); //这里iv就是我们要执行动画的item，例如一个imageView
-//        translateAnimation.start();
-
-
-
-//        ObjectAnimator nopeAnimator = nope(imageView);
-//        nopeAnimator.setRepeatCount(ValueAnimator.INFINITE);
-//        nopeAnimator.start();
+        mQiandaoImage = (Button)view.findViewById(R.id.riches_signbar);
 
         mMobileTextView = (TextView)view.findViewById(R.id.riches_text_mobile);
         mTotalAssetsTextView = (CountView)view.findViewById(R.id.riches_text_totalassets);
@@ -136,6 +137,27 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
         mGiftsTextView = (TextView)view.findViewById(R.id.riches_text_gifts);
         mTouYuanTextView = (TextView)view.findViewById(R.id.riches_text_touyuan);
 
+        sHUD = SignInHUD.getInstance(this.getActivity());
+
+        sHUD.setCancelable(true);
+        sHUD.setOwnerActivity(this.getActivity());
+
+        sHUD.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            public void onDismiss(DialogInterface dialog)
+            {
+                mQiandaoImage.setEnabled(false);
+            }
+        });
+
+        sHUD.setOnShowListener(new DialogInterface.OnShowListener()
+        {
+            @Override
+            public void onShow(DialogInterface dialog)
+            {
+                //签到
+            }
+        });
+
         return view;
     }
 
@@ -143,6 +165,7 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
     {
         //请求userinfo
         getUserInfo();
+        isSignRequest();
         super.onResume();
     }
 
@@ -158,8 +181,6 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
 
     public void onSuccess(String content, Object object, int reqType)
     {
-//        Log.e("CT_MONEY", "content " + content);
-
         if(reqType == HttpRequst.REQ_TYPE_USERINFO)
         {
             UserInfoEntity userInfo = UserInfoEntity.getInstance();
@@ -168,7 +189,7 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
             total = total.replace(",","");
             if(total.equals("")) return;
 
-            Log.e("CT_MONEY", "mMobileTextViewmMobileTextViewmMobileTextView" + userInfo.getFullName());
+            mTouyuan = userInfo.getTouYuan();
 
             mTotalAssetsTextView.showNumberWithAnimation(Float.parseFloat(total));
             mTotalAssetsTextView.setText(userInfo.getTotalAssets());
@@ -176,7 +197,55 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
             mProfitTextView.setText(userInfo.getProfit());
             mOverageTextView.setText(userInfo.getOverage());
             mGiftsTextView.setText(userInfo.getGifts());
-            mTouYuanTextView.setText(userInfo.getTouYuan());
+            mTouYuanTextView.setText("" + mTouyuan);
+        }
+
+        if(reqType == HttpRequst.REQ_TYPE_SIGN)
+        {
+            try
+            {
+                JSONObject jsonObject = new JSONObject(content);
+
+                int error = jsonObject.getInt("errcode");
+                mTouyuan = jsonObject.getInt("touyuan");
+
+                if(error == 0)
+                {
+                    sHUD.show();
+                }
+                else if(error == 1)
+                {
+                    Toast.makeText(this.getActivity(), "签到失败", Toast.LENGTH_LONG).show();
+                }
+            }
+            catch (Exception e)
+            {
+
+            }
+        }
+
+
+        if(reqType == HttpRequst.REQ_TYPE_ISSIGN)
+        {
+            try
+            {
+                JSONObject jsonObject = new JSONObject(content);
+
+                int error = jsonObject.getInt("errcode");
+                isSign = error;
+                if(error == 0)
+                {
+                    mQiandaoImage.setEnabled(true);
+                }
+                else if(error == 1)
+                {
+                    mQiandaoImage.setEnabled(false);
+                }
+            }
+            catch (Exception e)
+            {
+
+            }
         }
     }
 
@@ -200,17 +269,16 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
                 "userid=" + ACache.get(BaseApplication.getInstance()).getAsString("userid") +
                 "&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token");
 
+        Logger.e(url);
+
         sendRequest(HttpRequst.REQ_TYPE_USERINFO, url, mParams,
                 mAct.getAsyncClient(), false);
 
-//        mMultiStateView.setViewForState(R.layout.state_layout_loading, MultiStateView.ViewState.LOADING);
     }
 
     public void treatClickEvent(int id)
     {
-        SignInHUD sHUD = SignInHUD.getInstance(this.getActivity());
-        sHUD.show();
-//        sHUD.changeNum();
+        signRequest();
     }
 
 
@@ -268,7 +336,6 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
                 setDuration(1000);
     }
 
-
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     public static ObjectAnimator nope(View view) {
         int delta = view.getResources().getDimensionPixelOffset(R.dimen.spacing_medium);
@@ -313,11 +380,42 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
      */
     public void initAnim()
     {
-        animator = tada(mQiandaoImage);
-        animator.setRepeatCount(ValueAnimator.INFINITE);
-        animator.start();
+        if(isSign == 0)
+        {
+            animator = tada(mQiandaoImage);
+            animator.setRepeatCount(ValueAnimator.INFINITE);
+            animator.start();
 
-        mCounter = new Counter(10*1000, 1000);    //第一个参数是倒计时时间，后者为计时间隔，单位毫秒，这里是倒计时 5 分钟，间隔1秒
-        mCounter.start();
+            mCounter = new Counter(10*1000, 1000);    //第一个参数是倒计时时间，后者为计时间隔，单位毫秒，这里是倒计时 5 分钟，间隔1秒
+            mCounter.start();
+        }
     }
+
+
+    /**
+     * 签到请求接口
+     */
+    private void signRequest()
+    {
+        String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_SIGN) +
+                "userid=" + ACache.get(BaseApplication.getInstance()).getAsString("userid") +
+                "&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token");
+
+        sendRequest(HttpRequst.REQ_TYPE_SIGN, url, mParams,
+                mAct.getAsyncClient(), false);
+    }
+
+    /**
+     * 是否签到接口
+     */
+    private void isSignRequest()
+    {
+        String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_ISSIGN) +
+                "userid=" + ACache.get(BaseApplication.getInstance()).getAsString("userid") +
+                "&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token");
+
+        sendRequest(HttpRequst.REQ_TYPE_ISSIGN, url, mParams,
+                mAct.getAsyncClient(), false);
+    }
+
 }
