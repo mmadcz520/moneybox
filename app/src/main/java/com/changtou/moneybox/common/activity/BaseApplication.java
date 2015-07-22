@@ -390,6 +390,17 @@ public abstract class BaseApplication extends Application implements UncaughtExc
     }
 
     /**
+     * 将指定activity放在栈顶
+     */
+    public void resetActivity(Class<?> cls) {
+        for (Activity activity : activityStack) {
+            if (activity.getClass().equals(cls)) {
+                activityStack.add(activity);
+            }
+        }
+    }
+
+    /**
      * 结束所有Activity
      */
     public void finishAllActivity()
@@ -403,6 +414,21 @@ public abstract class BaseApplication extends Application implements UncaughtExc
         }
         activityStack.clear();
         System.exit(0);
+    }
+
+    /**
+     * 结束所有Activity
+     */
+    public void cleanAllActivity()
+    {
+        this.unregisterReceiver(mReceiver);
+
+        for (int i = 0, size = activityStack.size(); i < size; i++) {
+            if (null != activityStack.get(i)) {
+                activityStack.get(i).finish();
+            }
+        }
+        activityStack.clear();
     }
 
     /**

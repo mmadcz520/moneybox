@@ -250,9 +250,13 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
         sph.putString(AppCfg.GSPD, "");
 
         Intent intent = new Intent(this, MainActivity.class);
-        CTMoneyApplication.getInstance().onBackground();
-        LoginActivity.this.setResult(RESULT_OK, intent);
-        LoginActivity.this.finish();
+        this.startActivity(intent);
+
+
+//        CTMoneyApplication.getInstance().onBackground();
+//        LoginActivity.this.setResult(RESULT_OK, intent);
+//        LoginActivity.this.finish();
+
     }
 
     @Override

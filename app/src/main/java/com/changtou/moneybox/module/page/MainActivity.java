@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.changtou.R;
 import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.activity.BaseFragment;
+import com.changtou.moneybox.common.logger.Logger;
 import com.changtou.moneybox.module.service.NetReceiver;
 import com.changtou.moneybox.module.service.NetStateListener;
 import com.changtou.moneybox.module.widget.ExFPAdapter;
@@ -177,6 +178,7 @@ public class MainActivity extends CTBaseActivity {
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
+
             //设置手势密码
             mViewpager.setCurrentItem(2);
             switchNavBar(2);

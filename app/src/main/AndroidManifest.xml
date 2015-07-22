@@ -82,7 +82,8 @@
         </activity>
         <activity
             android:name=".moneybox.module.page.LoginActivity"
-            android:theme="@style/ActivityTheme_Light" >
+            android:theme="@style/ActivityTheme_Light"
+            android:launchMode="singleTask">
         </activity>
         <activity
             android:name=".moneybox.module.page.RegisterActivity"
@@ -94,7 +95,8 @@
         </activity>
         <activity
             android:name=".moneybox.module.page.RegisterPasswordActivity"
-            android:theme="@style/ActivityTheme_Light" >
+            android:theme="@style/ActivityTheme_Light"
+            android:noHistory="true">
         </activity>
         <activity
             android:name=".moneybox.module.page.RichesInvestListActivity"
@@ -122,7 +124,8 @@
         </activity>
         <activity
             android:name=".moneybox.module.page.PdFrogetActivity"
-            android:theme="@style/ActivityTheme_Light" >
+            android:theme="@style/ActivityTheme_Light"
+            android:noHistory="true">
         </activity>
         <activity
             android:name=".moneybox.module.page.RichesFlowActivity"

@@ -56,14 +56,13 @@ public class PingService extends Service implements HttpCallback {
     }
 
     @Override
-    public void onSuccess(String content, Object object, int reqType) {
-        Logger.d("onSuccess");
+    public void onSuccess(String content, Object object, int reqType)
+    {
     }
 
     @Override
     public void onFailure(Throwable error, String content, int reqType)
     {
-        Logger.d("onFailure" + content);
     }
 
     private void stopTimer() {

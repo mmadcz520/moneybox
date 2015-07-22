@@ -5,6 +5,8 @@ import android.os.Bundle;
 
 import com.changtou.R;
 import com.changtou.moneybox.common.activity.BaseApplication;
+import com.changtou.moneybox.common.utils.SharedPreferencesHelper;
+import com.changtou.moneybox.module.appcfg.AppCfg;
 
 /**
  * 1. 密码管理页面
@@ -13,9 +15,12 @@ import com.changtou.moneybox.common.activity.BaseApplication;
  */
 public class PdManagerActivity extends CTBaseActivity
 {
+    private SharedPreferencesHelper sph = null;
+
     protected void initView(Bundle bundle)
     {
         setContentView(R.layout.password_mananger_activity);
+        sph = SharedPreferencesHelper.getInstance(getApplicationContext());
     }
 
     protected void initListener()
@@ -35,7 +40,14 @@ public class PdManagerActivity extends CTBaseActivity
         {
             case R.id.btn_pd_login:
             {
-                Intent intent = new Intent(this, PdFrogetActivity.class);
+//                Intent intent = new Intent(this, PdFrogetActivity.class);
+//                startActivity(intent);
+
+                BaseApplication.getInstance().cleanAllActivity();
+                sph.putString(AppCfg.CFG_LOGIN, AppCfg.LOGIN_STATE.EN_LOGIN.toString());
+                sph.putString(AppCfg.GSPD, "");
+
+                Intent intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
 
                 break;
