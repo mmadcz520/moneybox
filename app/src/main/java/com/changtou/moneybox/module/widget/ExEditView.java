@@ -89,6 +89,9 @@ public class ExEditView extends LinearLayout
 
         mTypedArray.recycle();
 
+        this.setFocusableInTouchMode(true);
+        this.setFocusable(true);
+
         if(mViewType == ViewType.EDIT)
         {
             initEditView();
@@ -133,6 +136,8 @@ public class ExEditView extends LinearLayout
             view.setBackgroundResource(R.drawable.stroke_edit_fillpraent);
         }
 
+
+
         if(mHideIndicator == HideIndicator.HIDE)
         {
             imageView1.setVisibility(INVISIBLE);
@@ -161,6 +166,10 @@ public class ExEditView extends LinearLayout
         {
             this.setBackgroundResource(R.drawable.stroke_edit_fillpraent_bottom);
         }
+        else if(mLocation == Location.MIDDLE)
+        {
+            mEditText.setBackgroundResource(R.color.ct_background);
+        }
         else
         {
             this.setBackgroundResource(R.drawable.stroke_edit_fillpraent);
@@ -176,6 +185,8 @@ public class ExEditView extends LinearLayout
                 break;
             case 2:
                 mEditText.setInputType(InputType.TYPE_CLASS_PHONE);
+            case 3:
+                mEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
                 break;
         }
 

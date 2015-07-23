@@ -175,8 +175,8 @@ public class ProductDetailsActivity extends CTBaseActivity
             mDetails = new String[4];
             mDetails[0] = entity.projectname;
             mDetails[1] = "投资期限：  " + entity.cpqx;
-            mDetails[2] = "年化利率：  " + entity.nhsy + "%";
-            mDetails[3] = "剩余可投金：  " + entity.syje;
+            mDetails[2] = "年化收益率：  " + entity.nhsy + "%";
+            mDetails[3] = "剩余可投金额：  " + entity.syje;
 
             mConfirmBtn.setEnabled(true);
         }

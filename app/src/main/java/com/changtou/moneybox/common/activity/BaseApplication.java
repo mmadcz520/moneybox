@@ -30,6 +30,7 @@ import com.changtou.moneybox.common.utils.MySharedPreferencesMgr;
 import com.changtou.moneybox.common.utils.SharedPreferencesHelper;
 import com.changtou.moneybox.module.appcfg.AppCfg;
 import com.changtou.moneybox.module.page.GesturePWActivity;
+import com.changtou.moneybox.module.page.LoginActivity;
 import com.changtou.moneybox.module.service.BankParserHandler;
 import com.changtou.moneybox.module.service.NetReceiver;
 import com.changtou.moneybox.module.service.NetStateListener;
@@ -310,6 +311,18 @@ public abstract class BaseApplication extends Application implements UncaughtExc
         isBack = false;
     }
 
+    public void backToLoginPage()
+    {
+        resetBackFlag();
+        cleanAllActivity();
+        sph.putString(AppCfg.CFG_LOGIN, AppCfg.LOGIN_STATE.EN_LOGIN.toString());
+        sph.putString(AppCfg.GSPD, "");
+
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
     /**
      * App 回到前台
      * 1. 手势密码
@@ -421,8 +434,6 @@ public abstract class BaseApplication extends Application implements UncaughtExc
      */
     public void cleanAllActivity()
     {
-        this.unregisterReceiver(mReceiver);
-
         for (int i = 0, size = activityStack.size(); i < size; i++) {
             if (null != activityStack.get(i)) {
                 activityStack.get(i).finish();

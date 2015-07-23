@@ -52,7 +52,7 @@
         android:textColor="@color/font_invalid"
         android:layout_marginTop="8dp"
         android:textSize="@dimen/font_size_hint2"
-        android:text="你当前可以余额："/>
+        android:text="当前可用余额："/>
 
         <TextView
             android:id="@+id/confirm_text_overage"

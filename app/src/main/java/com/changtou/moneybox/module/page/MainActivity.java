@@ -78,6 +78,13 @@ public class MainActivity extends CTBaseActivity {
         mViewpager.setCurrentItem(0, false);
         mViewpager.setOffscreenPageLimit(4);
 
+        int login_state = this.getIntent().getIntExtra("login_state", 0);
+        if(login_state == 1)
+        {
+            mViewpager.setCurrentItem(2);
+            switchNavBar(2);
+        }
+
 //        mSignInHUD = (SignInHUD)this.findViewById(R.id.signin_fragment);
         UpdateConfig.setDebug(true);
 

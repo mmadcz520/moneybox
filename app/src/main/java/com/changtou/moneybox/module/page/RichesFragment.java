@@ -124,6 +124,7 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
                         startActivity(intent5);
                         break;
                 }
+
             }
         });
 
@@ -137,18 +138,17 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
         mGiftsTextView = (TextView)view.findViewById(R.id.riches_text_gifts);
         mTouYuanTextView = (TextView)view.findViewById(R.id.riches_text_touyuan);
 
-        sHUD = SignInHUD.getInstance(this.getActivity());
+        initRichesPage();
 
+        sHUD = SignInHUD.getInstance(this.getActivity());
         sHUD.setCancelable(true);
         sHUD.setOwnerActivity(this.getActivity());
-
         sHUD.setOnDismissListener(new DialogInterface.OnDismissListener() {
             public void onDismiss(DialogInterface dialog)
             {
                 mQiandaoImage.setEnabled(false);
             }
         });
-
         sHUD.setOnShowListener(new DialogInterface.OnShowListener()
         {
             @Override
@@ -179,25 +179,49 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
 
     }
 
+    private void initRichesPage()
+    {
+        UserInfoEntity userInfo = UserInfoEntity.getInstance();
+        mMobileTextView.setText(userInfo.getMobile());
+        String total = userInfo.getTotalAssets();
+        total = total.replace(",","");
+        if(total.equals("")) return;
+
+        mTouyuan = userInfo.getTouYuan();
+
+        mTotalAssetsTextView.showNumberWithAnimation(Float.parseFloat(total));
+        mTotalAssetsTextView.setText(userInfo.getTotalAssets());
+        mInvestAssetsTextView.setText(userInfo.getInvestAssets());
+        mProfitTextView.setText(userInfo.getProfit());
+        mOverageTextView.setText(userInfo.getOverage());
+        mGiftsTextView.setText(userInfo.getGifts());
+        mTouYuanTextView.setText("" + mTouyuan);
+    }
+
     public void onSuccess(String content, Object object, int reqType)
     {
         if(reqType == HttpRequst.REQ_TYPE_USERINFO)
         {
-            UserInfoEntity userInfo = UserInfoEntity.getInstance();
-            mMobileTextView.setText(userInfo.getMobile());
-            String total = userInfo.getTotalAssets();
-            total = total.replace(",","");
-            if(total.equals("")) return;
+            try {
+                JSONObject jsonObject = new JSONObject(content);
+                int err = jsonObject.getInt("err");
+                if(err == 0)
+                {
+                    initRichesPage();
+                }
+                else if(err == 2)
+                {
+                    sph.putString(AppCfg.CFG_LOGIN, AppCfg.LOGIN_STATE.EN_LOGIN.toString());
+                    sph.putString(AppCfg.GSPD, "");
+                }
+            }
+            catch (Exception e)
+            {
 
-            mTouyuan = userInfo.getTouYuan();
+            }
 
-            mTotalAssetsTextView.showNumberWithAnimation(Float.parseFloat(total));
-            mTotalAssetsTextView.setText(userInfo.getTotalAssets());
-            mInvestAssetsTextView.setText(userInfo.getInvestAssets());
-            mProfitTextView.setText(userInfo.getProfit());
-            mOverageTextView.setText(userInfo.getOverage());
-            mGiftsTextView.setText(userInfo.getGifts());
-            mTouYuanTextView.setText("" + mTouyuan);
+
+
         }
 
         if(reqType == HttpRequst.REQ_TYPE_SIGN)
@@ -240,6 +264,7 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
                 else if(error == 1)
                 {
                     mQiandaoImage.setEnabled(false);
+                    mQiandaoImage.clearAnimation();
                 }
             }
             catch (Exception e)
@@ -249,10 +274,9 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
         }
     }
 
-    public void onFailure(Throwable error, String content, int reqType)
-    {
-        sph.putString(AppCfg.CFG_LOGIN, AppCfg.LOGIN_STATE.EN_LOGIN.toString());
-        sph.putString(AppCfg.GSPD, "");
+    public void onFailure(Throwable error, String content, int reqType) {
+
+
     }
 
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)

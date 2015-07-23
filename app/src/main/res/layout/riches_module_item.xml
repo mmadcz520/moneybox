@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:text="title"
         android:layout_marginTop="2dp"
-        android:textColor="#FF000000"
+        android:textColor="@color/font_black"
         android:layout_gravity="center_horizontal"
         android:id="@+id/riches_grid_name">
     </TextView>

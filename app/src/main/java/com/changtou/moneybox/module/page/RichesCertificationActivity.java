@@ -54,7 +54,16 @@ public class RichesCertificationActivity extends CTBaseActivity
 
     public void treatClickEvent(int id)
     {
-        requestCertify();
+        mIdcard = mIdcardView.getText().toString().trim();
+        mFullName = mFullnameView.getText().toString().trim();
+        if(!mIdcard.equals("") && !mFullName.equals(""))
+        {
+            requestCertify();
+        }
+        else
+        {
+            Toast.makeText(this, "求输入完整信息", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void onSuccess(String content, Object object, int reqType)
@@ -108,8 +117,6 @@ public class RichesCertificationActivity extends CTBaseActivity
         String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_CERTIFY) +
                 "userid=" + ACache.get(BaseApplication.getInstance()).getAsString("userid") +
                 "&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token");
-
-        Log.e("CT_MONEY", " =" + url);
 
         try
         {

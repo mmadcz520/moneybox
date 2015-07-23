@@ -259,18 +259,18 @@
 
         </LinearLayout>
 
-        <View
-            android:id="@+id/riches_line3"
-            android:layout_width="fill_parent"
-            android:layout_height="1px"
-            android:layout_below="@+id/riches_ll_touyuan"
-            android:background="@color/ct_divide_line" />
+        <!--<View-->
+            <!--android:id="@+id/riches_line3"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="1px"-->
+            <!--android:layout_below="@+id/riches_ll_touyuan"-->
+            <!--android:background="@color/ct_divide_line" />-->
 
         <LinearLayout
             android:id="@+id/riches_more"
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
-            android:layout_below="@+id/riches_line3"
+            android:layout_below="@+id/riches_ll_touyuan"
             android:orientation="vertical">
 
             <GridView xmlns:android="http://schemas.android.com/apk/res/android"

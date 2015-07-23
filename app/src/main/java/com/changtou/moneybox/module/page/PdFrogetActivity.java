@@ -110,9 +110,18 @@ public class PdFrogetActivity extends CTBaseActivity
             {
 //                final Intent intent = new Intent(this, RegisterPasswordActivity.class);
 //                startActivity(intent);
-
                 mCheckSum = mCodeText.getEditValue();
-                checkCodeRequest(mPhoneNum, mCheckSum);
+                mPhoneNum = mAccountEditView.getEditValue();
+                if(!mCheckSum.equals("") && isMobileNO(mPhoneNum))
+                {
+                    mCheckSum = mCodeText.getEditValue();
+                    checkCodeRequest(mPhoneNum, mCheckSum);
+                }
+                else
+                {
+                    Toast.makeText(this, "输入有误, 请重新输入", Toast.LENGTH_LONG).show();
+                }
+
 
                 break;
             }

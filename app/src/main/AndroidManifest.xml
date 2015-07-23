@@ -83,7 +83,7 @@
         <activity
             android:name=".moneybox.module.page.LoginActivity"
             android:theme="@style/ActivityTheme_Light"
-            android:launchMode="singleTask">
+            android:noHistory="true">
         </activity>
         <activity
             android:name=".moneybox.module.page.RegisterActivity"

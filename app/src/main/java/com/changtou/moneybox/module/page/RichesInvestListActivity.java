@@ -69,7 +69,7 @@ public class RichesInvestListActivity extends CTBaseActivity
 
         mViewPager = (ViewPager)findViewById(R.id.riches_invest_pager);
         ExFPAdapter pagerAdapter = new ExFPAdapter(getSupportFragmentManager(), viewList);
-        pagerAdapter.setTitles(new String[]{"还款中", "已结束", "已退出"});
+        pagerAdapter.setTitles(new String[]{"还款中", "已结清", "已退出"});
 
         mViewPager.setAdapter(pagerAdapter);
         mViewPager.setCurrentItem(0);

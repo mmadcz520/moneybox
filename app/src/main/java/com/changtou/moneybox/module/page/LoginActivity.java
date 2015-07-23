@@ -12,7 +12,6 @@ import android.widget.Toast;
 import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.utils.ACache;
 import com.changtou.moneybox.common.utils.SharedPreferencesHelper;
-import com.changtou.moneybox.module.CTMoneyApplication;
 import com.changtou.moneybox.module.appcfg.AppCfg;
 import com.changtou.moneybox.module.entity.UserInfoEntity;
 import com.changtou.moneybox.module.http.HttpRequst;
@@ -51,18 +50,6 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
 
         mLoginBtn = (Button)findViewById(R.id.login_btn);
 
-//        TextView loginBtn = (TextView)findViewById(R.id.login_btn);
-//        final Intent intent = new Intent(this, RichesPhoneBookActivity.class);
-//        mForgetPd.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                UserManager um = BaseApplication.getInstance().getUserModule();
-//                um.logIn("", "");
-//
-//                LoginActivity.this.setResult(RESULT_OK, intent);
-//                LoginActivity.this.finish();
-//            }
-//        });
-//
         TextView registBtn = (TextView)findViewById(R.id.loginpage_register_btn);
         final Intent intent2 = new Intent(this, RegisterActivity.class);
         registBtn.setOnClickListener(new View.OnClickListener() {
@@ -97,13 +84,6 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
                 {
                     mUserManager.logIn(username, password);
                     mLoginBtn.setEnabled(false);
-//                    mDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE).setTitleText("登陆");
-//                    mDialog.getProgressHelper().setBarColor(getResources().getColor(R.color.ct_blue));
-//                    mDialog.getProgressHelper().setRimColor(getResources().getColor(R.color.ct_blue_hint));
-//                    mDialog.setCancelText("取消");
-//                    mDialog.setContentText("努力加载中...");
-//                    mDialog.show();
-//                    mDialog.setCancelable(true);
                 }
                 break;
             }
@@ -135,16 +115,6 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
     public void loginSucNotify()
     {
         getUserInfo();
-//        mLoginBtn.setEnabled(true);
-//
-//        //清空手势密码
-//        sph.putString(AppCfg.CFG_LOGIN, AppCfg.LOGIN_STATE.LOGIN.toString());
-//        sph.putString(AppCfg.GSPD, "");
-//
-//        Intent intent = new Intent(this, MainActivity.class);
-//        CTMoneyApplication.getInstance().onBackground();
-//        LoginActivity.this.setResult(RESULT_OK, intent);
-//        LoginActivity.this.finish();
     }
 
     public void loginIngNotify()
@@ -181,29 +151,6 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
         Intent intent = new Intent(this, MainActivity.class);
         LoginActivity.this.setResult(RESULT_CANCELED, intent);
         LoginActivity.this.finish();
-    }
-
-
-    /**
-     * 注册成功后弹框
-     */
-    private void popoSuccDialog()
-    {
-        //注册成功后弹窗
-//                    ColorStateList redColors = ColorStateList.valueOf(0xffff0000);
-//                    SpannableStringBuilder spanBuilder = new SpannableStringBuilder("恭喜你注册成功！获得10元礼金\n 完善认证信息你将在获得20元礼金");
-//                    //style 为0 即是正常的，还有Typeface.BOLD(粗体) Typeface.ITALIC(斜体)等
-//                    //size  为0 即采用原始的正常的 size大小
-//                    spanBuilder.setSpan(new TextAppearanceSpan(null, 0, 60, redColors, null), 10, 12, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
-//                    spanBuilder.setSpan(new TextAppearanceSpan(null, 0, 60, redColors, null), 28, 30, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
-//
-//                    SpannableStringBuilder spanBuilder1 = new SpannableStringBuilder("继续认证得20元");
-//                    spanBuilder1.setSpan(new TextAppearanceSpan(null, 0, 60, redColors, null), 5, 7, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
-//
-//                    new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
-//                            .setConfirmText(spanBuilder1) .setContentText(spanBuilder)
-//                            .setCancelText("先逛逛")
-//                            .show();
     }
 
     /**
@@ -250,13 +197,8 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
         sph.putString(AppCfg.GSPD, "");
 
         Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("login_state", 1);
         this.startActivity(intent);
-
-
-//        CTMoneyApplication.getInstance().onBackground();
-//        LoginActivity.this.setResult(RESULT_OK, intent);
-//        LoginActivity.this.finish();
-
     }
 
     @Override

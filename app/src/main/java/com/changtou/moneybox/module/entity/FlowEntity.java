@@ -177,8 +177,6 @@ public class FlowEntity extends BaseEntity implements Serializable
                 mItemArray.put("num", array.getString("num"));
                 mItemArray.put("account", array.getBoolean("account"));
 
-                Log.e("CT_DEMO", mItemArray.get("name").toString());
-
                 item.add(i, mItemArray);
             }
         }

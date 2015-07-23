@@ -95,28 +95,24 @@ public class ProductDetailsMorePage extends Fragment
 
         final ScrollView scrollView = (ScrollView)v.findViewById(R.id.details_scrollView2);
         scrollView.scrollTo(0, 0);
-        mSlidingTabLayout.setFocusable(true);
-        mSlidingTabLayout.setFocusableInTouchMode(true);
-        mSlidingTabLayout.requestFocus();
 
-        viewPage.setOnPageChangeListener(new ViewPager.OnPageChangeListener()
-        {
+        mSlidingTabLayout.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            public void onPageSelected(int position)
-            {
                 scrollView.scrollTo(0, 0);
-                scrollView.computeScroll();
+            }
+
+            @Override
+            public void onPageSelected(int position) {
 
             }
 
-            public void onPageScrollStateChanged(int state)
-            {
+            @Override
+            public void onPageScrollStateChanged(int state) {
 
             }
         });
+
 
         return v;
     }
