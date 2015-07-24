@@ -155,7 +155,7 @@ public class MoreFragment extends BaseFragment {
 
         sad.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
             public void onClick(SweetAlertDialog sweetAlertDialog) {
-                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "18086665591"));
+                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "4008006270"));
                 startActivity(intent);
             }
         });

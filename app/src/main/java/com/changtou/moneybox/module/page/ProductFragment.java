@@ -15,6 +15,7 @@ import android.widget.ListView;
 
 import com.changtou.R;
 import com.changtou.moneybox.common.activity.BaseFragment;
+import com.changtou.moneybox.common.logger.Logger;
 import com.changtou.moneybox.module.adapter.ProductListAdapter;
 import com.changtou.moneybox.module.entity.ProductEntity;
 import com.changtou.moneybox.module.http.HttpRequst;
@@ -252,6 +253,9 @@ public class ProductFragment extends BaseFragment
         private void goToProductDetails(String id)
         {
             Intent intent = new Intent(this.getActivity(), ProductDetailsActivity.class);
+
+            Logger.e("goToProductDetails=" + id);
+
             intent.putExtra("id", id);
             intent.putExtra("type", mProductType);
             startActivity(intent);

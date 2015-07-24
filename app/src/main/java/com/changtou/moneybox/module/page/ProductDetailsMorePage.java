@@ -65,7 +65,7 @@ public class ProductDetailsMorePage extends Fragment
         String[] titles = {"项目详情", "风险控制", "投资列表"};
 
         int type = getArguments().getInt("productType",0);
-        if(type == 0)
+        if(type == 0 || type == 1)
         {
             viewPage.setOffscreenPageLimit(2);
             mSlidingTabLayout.setTabCount(2);

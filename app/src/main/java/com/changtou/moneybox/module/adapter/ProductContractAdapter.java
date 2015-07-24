@@ -1,7 +1,12 @@
 package com.changtou.moneybox.module.adapter;
 
 import android.content.Context;
-import android.text.Html;
+import android.graphics.Color;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.TextPaint;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +14,9 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.changtou.R;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * 长投宝 产品合同详情页适配器
@@ -18,6 +26,10 @@ import com.changtou.R;
 public class ProductContractAdapter extends BaseAdapter
 {
     private LayoutInflater mInflater = null;
+
+    private Context mContext = null;
+
+    private static final Pattern topicPattern = Pattern.compile("《\\w+》");
 
     private String[] mKeys = {"产品名称：", "投标范围：", "产品期限：", "付息方式：", "预期年化收益：",
     "加入条件：", "加入上限：", "锁定截止日期：", "到期退出方式：", "提前退出方式：", "费用：", "金额服务费：",
@@ -43,6 +55,7 @@ public class ProductContractAdapter extends BaseAdapter
     {
         mInflater = LayoutInflater.from(context);
 //        mValues = new String[mKeys.length];
+        this.mContext = context;
     }
 
     @Override
@@ -80,7 +93,23 @@ public class ProductContractAdapter extends BaseAdapter
             viewHolder = (ViewHolder) convertView.getTag();
         }
         viewHolder.mKey.setText(mKeys[position]);
-        viewHolder.mValue.setText(Html.fromHtml(mValues[position]));
+
+        SpannableString ss = new SpannableString(mValues[position]);
+
+        viewHolder.mValue.setText(mValues[position]);
+        setKeyworkClickable(viewHolder.mValue, ss, topicPattern, new MyClickSpan(new OnTextviewClickListener() {
+            @Override
+            public void clickTextView()
+            {
+
+            }
+
+            @Override
+            public void setStyle(TextPaint ds) {
+                ds.setColor(Color.BLUE);
+                ds.setUnderlineText(true);
+            }
+        }));
 
         return convertView;
     }
@@ -100,5 +129,44 @@ public class ProductContractAdapter extends BaseAdapter
     {
         public TextView mKey;
         public TextView mValue;
+    }
+
+    /**
+     * 设置具体某个关键字可点
+     *
+     * @param textView
+     * @param ss
+     * @param pattern
+     * @param cs
+     */
+    private void  setKeyworkClickable(TextView textView, SpannableString ss, Pattern pattern, ClickableSpan cs)
+    {
+        Matcher matcher = pattern.matcher(ss.toString());
+        while(matcher.find())
+        {
+            String key = matcher.group();
+            if(!"".equals(key))
+            {
+                int start = ss.toString().indexOf(key);
+                int end = start + key.length();
+                setClickTextView(textView, ss, start, end, cs);
+            }
+        }
+    }
+
+    private void setClickTextView(TextView textView, SpannableString ss, int start, int end, ClickableSpan cs)
+    {
+        ss.setSpan(cs, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        textView.setText(ss);
+        textView.setMovementMethod(LinkMovementMethod.getInstance());
+    }
+
+
+
+    public interface OnTextviewClickListener
+    {
+         void clickTextView();
+
+         void setStyle(TextPaint ds);
     }
 }

@@ -146,7 +146,7 @@ public class ProductDetailsActivity extends CTBaseActivity
             mDetailsPage.getQtjeTextView().setText(entity.qtje + "起投 | " + "每人限购100万元");
 
             mAgreementPage.initTzListData(entity.mTzList);
-            if(mProductType != 0)
+            if(mProductType == 2 )
             {
                 mAgreementPage.initContractText(entity.mDetailsOther.xmqk);
                 mAgreementPage.initContractImgList(entity.mImgList);
