@@ -48,6 +48,8 @@ public class RichesBankActivity extends CTBaseActivity
 
     private BankCardEntity mEntity = null;
 
+    private boolean isCertify = false;
+
     /**
      * 银行基本信列表
      */
@@ -58,6 +60,8 @@ public class RichesBankActivity extends CTBaseActivity
         setContentView(R.layout.riches_safe_bank);
 
         mBankListView = (SwipeMenuListView)findViewById(R.id.riches_safe_bank_list);
+
+        isCertify = UserInfoEntity.getInstance().getIdentycheck();
 
         SwipeMenuCreator creator = new SwipeMenuCreator() {
             @Override
@@ -145,7 +149,14 @@ public class RichesBankActivity extends CTBaseActivity
         {
             public void onClick(View v)
             {
-                startActivity(intent3);
+                if(isCertify)
+                {
+                    startActivity(intent3);
+                }
+                else
+                {
+                    Toast.makeText(RichesBankActivity.this, "请先进行实名认证！", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -213,8 +224,6 @@ public class RichesBankActivity extends CTBaseActivity
     {
         super.onFailure(error,content,  reqType);
     }
-
-
 
     /**
      * 删除银行卡

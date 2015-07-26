@@ -77,6 +77,9 @@ public class UserInfoEntity extends BaseEntity
         JSONArray bankInfo = jsonObject.getJSONArray("bankinfo");
         mBankCardEntity = new BankCardEntity();
         mBankCardEntity.paser(bankInfo.toString());
+
+        identycheck = jsonObject.getBoolean("identycheck");
+        mobilecheck = jsonObject.getBoolean("mobilecheck");
     }
 
     public String getEmail()
@@ -153,4 +156,13 @@ public class UserInfoEntity extends BaseEntity
         this.mBankCardEntity = bankCardEntity;
     }
 
+    public boolean getIdentycheck()
+    {
+        return identycheck;
+    }
+
+    public boolean getMobilecheck()
+    {
+        return mobilecheck;
+    }
 }

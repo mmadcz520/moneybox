@@ -30,8 +30,6 @@ public class FlowEntity extends BaseEntity implements Serializable
     public void paser(String data) throws Exception {
         JSONArray array = new JSONArray(data);
 
-        Logger.json(data);
-
 //        /*** 测试数据 ***/
 //        JSONObject details = new JSONObject();
 //        details.put("type", "0");

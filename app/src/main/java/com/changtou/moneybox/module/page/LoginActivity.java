@@ -183,14 +183,12 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
     @Override
     public void onSuccess(String content, Object object, int reqType)
     {
-        super.onSuccess(content, object, reqType);
         mLoginBtn.setEnabled(true);
 
         //初始化用户数据
         UserInfoEntity userInfo = UserInfoEntity.getInstance();
         ACache cache = ACache.get(this);
         cache.put("fullname", userInfo.getFullName());
-
 
         //清空手势密码
         sph.putString(AppCfg.CFG_LOGIN, AppCfg.LOGIN_STATE.LOGIN.toString());
@@ -199,6 +197,10 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("login_state", 1);
         this.startActivity(intent);
+
+        //初始化弹框
+        cache.put("isPopu", true);
+        super.onSuccess(content, object, reqType);
     }
 
     @Override

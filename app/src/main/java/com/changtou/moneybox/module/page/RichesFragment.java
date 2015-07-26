@@ -7,10 +7,14 @@ import android.animation.ValueAnimator;
 import android.annotation.TargetApi;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Looper;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.TextAppearanceSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,6 +45,8 @@ import com.changtou.moneybox.module.widget.SignInHUD;
 
 import org.json.JSONObject;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 
 public class RichesFragment extends BaseFragment implements AdapterView.OnItemClickListener {
 
@@ -66,9 +72,17 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
 
     private int mTouyuan = 0;
 
+    //是否实名认证
+    private boolean isCertify = false;
+
+    private boolean isPopu = false;
+
+    private ACache cache = null;
+
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         sph = SharedPreferencesHelper.getInstance(this.getActivity().getApplicationContext());
+        cache = ACache.get(this.getActivity());
 
         int[] mImgRes = {R.drawable.riches_btn_adf_selector,
                 R.drawable.riches_btn_invest_selector,
@@ -147,6 +161,7 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
             public void onDismiss(DialogInterface dialog)
             {
                 mQiandaoImage.setEnabled(false);
+                mTouYuanTextView.setText("" + mTouyuan);
             }
         });
         sHUD.setOnShowListener(new DialogInterface.OnShowListener()
@@ -184,7 +199,7 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
         UserInfoEntity userInfo = UserInfoEntity.getInstance();
         mMobileTextView.setText(userInfo.getMobile());
         String total = userInfo.getTotalAssets();
-        total = total.replace(",","");
+        total = total.replace(",", "");
         if(total.equals("")) return;
 
         mTouyuan = userInfo.getTouYuan();
@@ -196,6 +211,8 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
         mOverageTextView.setText(userInfo.getOverage());
         mGiftsTextView.setText(userInfo.getGifts());
         mTouYuanTextView.setText("" + mTouyuan);
+
+        cache.put("fullname", userInfo.getFullName());
     }
 
     public void onSuccess(String content, Object object, int reqType)
@@ -208,6 +225,14 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
                 if(err == 0)
                 {
                     initRichesPage();
+
+                    isPopu = (boolean)cache.getAsObject("isPopu");
+                    isCertify = UserInfoEntity.getInstance().getIdentycheck();
+                    if((!isCertify) && isPopu)
+                    {
+                        cache.put("isPopu", false);
+                        popuAuthDailog();
+                    }
                 }
                 else if(err == 2)
                 {
@@ -404,10 +429,10 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
      */
     public void initAnim()
     {
-        if(isSign == 0)
+        if(isSign == 0 && mQiandaoImage.isEnabled())
         {
-            animator = tada(mQiandaoImage);
-            animator.setRepeatCount(ValueAnimator.INFINITE);
+            animator = nope(mQiandaoImage);
+            animator.setRepeatCount(1);
             animator.start();
 
             mCounter = new Counter(10*1000, 1000);    //第一个参数是倒计时时间，后者为计时间隔，单位毫秒，这里是倒计时 5 分钟，间隔1秒
@@ -440,6 +465,41 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
 
         sendRequest(HttpRequst.REQ_TYPE_ISSIGN, url, mParams,
                 mAct.getAsyncClient(), false);
+    }
+
+    private void popuAuthDailog()
+    {
+        ColorStateList redColors = ColorStateList.valueOf(0xffff0000);
+        SpannableStringBuilder spanBuilder = new SpannableStringBuilder("实名认证得10元礼金！");
+        //style 为0 即是正常的，还有Typeface.BOLD(粗体) Typeface.ITALIC(斜体)等
+        //size  为0 即采用原始的正常的 size大小
+        spanBuilder.setSpan(new TextAppearanceSpan(null, 0, 40, redColors, null), 5, 7, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+//        spanBuilder.setSpan(new TextAppearanceSpan(null, 0, 60, redColors, null), 28, 30, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+
+        SpannableStringBuilder spanBuilder1 = new SpannableStringBuilder("去认证");
+
+        final SweetAlertDialog sad = new SweetAlertDialog(this.getActivity(), SweetAlertDialog.NORMAL_TYPE);
+        sad.setConfirmText(spanBuilder1) .setContentText(spanBuilder);
+        sad.setCancelText("先逛逛");
+        sad .show();
+
+        sad.setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+            public void onClick(SweetAlertDialog sweetAlertDialog)
+            {
+                sad.cancel();
+
+            }
+        });
+
+        sad.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+            @Override
+            public void onClick(SweetAlertDialog sweetAlertDialog)
+            {
+                sad.cancel();
+                Intent intent = new Intent(RichesFragment.this.getActivity(), RichesSafeActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 }

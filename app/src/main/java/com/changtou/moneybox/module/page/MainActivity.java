@@ -86,7 +86,7 @@ public class MainActivity extends CTBaseActivity {
         }
 
 //        mSignInHUD = (SignInHUD)this.findViewById(R.id.signin_fragment);
-        UpdateConfig.setDebug(true);
+//        UpdateConfig.setDebug(true);
 
 //        updateVersion();
 //        registerNetListener();

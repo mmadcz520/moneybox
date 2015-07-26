@@ -48,6 +48,7 @@
             android:background="@drawable/stroke_edit_null"
             android:textColorHint="@color/font_invalid"
             android:textSize="@dimen/font_size_normal"
+            android:inputType="number"
             android:hint="请输入您的身份证号码" />
     </LinearLayout>
 

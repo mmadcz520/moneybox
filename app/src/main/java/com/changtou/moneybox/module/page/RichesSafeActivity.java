@@ -6,6 +6,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.changtou.R;
 import com.changtou.moneybox.common.activity.BaseApplication;
@@ -48,6 +49,27 @@ public class RichesSafeActivity extends CTBaseActivity implements View.OnTouchLi
         quitBtn.setOnTouchListener(this);
         bankBtn.setOnTouchListener(this);
         pdBtn.setOnTouchListener(this);
+
+        int bcolor = getResources().getColor(R.color.font_black);
+        int rcolor = getResources().getColor(R.color.ct_red);
+        UserInfoEntity userInfoEntity = UserInfoEntity.getInstance();
+        if(userInfoEntity.getMobilecheck())
+        {
+            phoneauthBtn.setMessage("已认证", bcolor);
+        }
+        else
+        {
+            phoneauthBtn.setMessage("认证得10元礼金", rcolor);
+        }
+
+        if(userInfoEntity.getIdentycheck())
+        {
+            certyBtn.setMessage("已认证", bcolor);
+        }
+        else
+        {
+            certyBtn.setMessage("认证得10元礼金", rcolor);
+        }
     }
 
     protected void initListener()
@@ -95,8 +117,17 @@ public class RichesSafeActivity extends CTBaseActivity implements View.OnTouchLi
 
             case R.id.btn_bank_manager:
             {
-                final Intent intent = new Intent(this, RichesBankActivity.class);
-                startActivity(intent);
+                if(UserInfoEntity.getInstance().getIdentycheck())
+                {
+                    final Intent intent = new Intent(this, RichesBankActivity.class);
+                    startActivity(intent);
+                }
+                else
+                {
+                    Toast.makeText(RichesSafeActivity.this, "请先进行实名认证！", Toast.LENGTH_LONG).show();
+                }
+
+
                 break;
             }
 

@@ -213,8 +213,9 @@
                 android:layout_height="40dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="31dp"
-                android:background="@color/ct_blue"
+                android:background="@drawable/btn_selector"
                 android:text="立即投资"
+                android:enabled="false"
                 android:textColor="@color/font_white"
                 android:textSize="19dp" />
 

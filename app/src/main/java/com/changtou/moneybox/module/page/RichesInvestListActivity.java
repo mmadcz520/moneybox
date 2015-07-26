@@ -48,6 +48,8 @@ public class RichesInvestListActivity extends CTBaseActivity
     private LinkedList list2 = null;
     private LinkedList list3 = null;
 
+    private static String[] mTypeName = {"还款中", "已结清", "已退出"};
+
     protected void initView(Bundle bundle) {
 
         setContentView(R.layout.riches_invest_layout);
@@ -69,7 +71,7 @@ public class RichesInvestListActivity extends CTBaseActivity
 
         mViewPager = (ViewPager)findViewById(R.id.riches_invest_pager);
         ExFPAdapter pagerAdapter = new ExFPAdapter(getSupportFragmentManager(), viewList);
-        pagerAdapter.setTitles(new String[]{"还款中", "已结清", "已退出"});
+        pagerAdapter.setTitles(mTypeName);
 
         mViewPager.setAdapter(pagerAdapter);
         mViewPager.setCurrentItem(0);
@@ -127,6 +129,8 @@ public class RichesInvestListActivity extends CTBaseActivity
 
         private LinkedList mData = null;
 
+        private int mType = 0;
+
         public static SubPage create(int type)
         {
             SubPage subPage = new SubPage();
@@ -144,6 +148,9 @@ public class RichesInvestListActivity extends CTBaseActivity
             mPullRefreshListView = (PullToRefreshListView) mView.findViewById(R.id.product_list);
             actualListView = mPullRefreshListView.getRefreshableView();
             actualListView.setEnabled(true);
+
+            mType = getArguments().getInt("invest");
+
 //            mPullRefreshListView.setOnRefreshListener(this);
 
             return mView;
@@ -159,7 +166,7 @@ public class RichesInvestListActivity extends CTBaseActivity
                     String pid = item.id;
                     int type = item.type;
 
-                    goToProductDetails(pid, type);
+                    goToProducDtetails(pid, type, mTypeName[mType]);
                 }
             });
         }
@@ -197,11 +204,12 @@ public class RichesInvestListActivity extends CTBaseActivity
         /**
          * 跳转到详情页
          */
-        private void goToProductDetails(String id, int type)
+        private void goToProducDtetails(String id, int type, String state)
         {
             Intent intent = new Intent(this.getActivity(), ProductDetailsActivity.class);
             intent.putExtra("id", id);
             intent.putExtra("type", type);
+            intent.putExtra("state", state);
             startActivity(intent);
         }
     }

@@ -70,6 +70,7 @@
         <activity
             android:name=".moneybox.module.page.MainActivity"
             android:screenOrientation="portrait"
+            android:launchMode="singleTop"
             android:theme="@style/ActivityTheme_Light" >
         </activity>
         <activity
@@ -78,7 +79,8 @@
         </activity>
         <activity
             android:name=".moneybox.module.page.ConfirmActivity"
-            android:theme="@style/ActivityTheme_Light" >
+            android:theme="@style/ActivityTheme_Light"
+            android:noHistory="true">
         </activity>
         <activity
             android:name=".moneybox.module.page.LoginActivity"
@@ -124,8 +126,7 @@
         </activity>
         <activity
             android:name=".moneybox.module.page.PdFrogetActivity"
-            android:theme="@style/ActivityTheme_Light"
-            android:noHistory="true">
+            android:theme="@style/ActivityTheme_Light">
         </activity>
         <activity
             android:name=".moneybox.module.page.RichesFlowActivity"

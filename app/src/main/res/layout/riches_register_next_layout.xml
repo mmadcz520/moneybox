@@ -23,7 +23,7 @@
             android:id="@+id/register_code"
             android:layout_width="fill_parent"
             android:layout_height="@dimen/exedit_height"
-            android_custom:editType="0"
+            android_custom:editType="3"
             android_custom:hintText="请输入验证码"
             android_custom:imgSrc="@mipmap/riches_register_checknum">
         </com.changtou.moneybox.module.widget.ExEditView>

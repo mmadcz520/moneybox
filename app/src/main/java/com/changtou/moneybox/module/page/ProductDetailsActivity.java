@@ -52,6 +52,8 @@ public class ProductDetailsActivity extends CTBaseActivity
 
     private Button mConfirmBtn = null;
 
+    private String mState = null;
+
     /**
      * @see CTBaseActivity#initView(Bundle)
      */
@@ -64,6 +66,7 @@ public class ProductDetailsActivity extends CTBaseActivity
         Intent pro_intent = getIntent();
         mProductType = pro_intent.getIntExtra("type", 0);
         mProductId = pro_intent.getStringExtra("id");
+        mState = pro_intent.getStringExtra("state");
 
         if(mProductId.equals(""))
         {
@@ -85,6 +88,12 @@ public class ProductDetailsActivity extends CTBaseActivity
         });
 
         mConfirmBtn = (Button)findViewById(R.id.confirm_button);
+
+        if(mState != null)
+        {
+            mConfirmBtn.setEnabled(false);
+            mConfirmBtn.setText(mState);
+        }
     }
 
     /**
@@ -178,6 +187,7 @@ public class ProductDetailsActivity extends CTBaseActivity
             mDetails[2] = "年化收益率：  " + entity.nhsy + "%";
             mDetails[3] = "剩余可投金额：  " + entity.syje;
 
+            if(mState == null)
             mConfirmBtn.setEnabled(true);
         }
     }

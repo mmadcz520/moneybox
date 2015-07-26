@@ -43,6 +43,8 @@ public class GesturePWActivity extends Activity implements LocusPassWordView.OnC
 
     private TextView forgetPdView = null;
 
+    private String mFullName = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,8 +70,17 @@ public class GesturePWActivity extends Activity implements LocusPassWordView.OnC
 
         TextView text = (TextView)this.findViewById(R.id.pd_gesture_fullname);
         ACache cache = ACache.get(BaseApplication.getInstance());
-        String fullname = cache.getAsString("fullname") + "," + "您好！";
-        text.setText(fullname);
+        String fullname = cache.getAsString("fullname");
+        if(fullname == null)
+        {
+            mFullName = "您好！";
+        }
+        else
+        {
+            mFullName =  fullname + "," + "您好！";
+        }
+
+        text.setText(mFullName);
 
         mPwdView.setOnCompleteListener(this);
     }

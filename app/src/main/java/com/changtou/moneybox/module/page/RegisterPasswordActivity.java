@@ -113,6 +113,7 @@ public class RegisterPasswordActivity extends CTBaseActivity implements LoginNot
 
         if(reqType == HttpRequst.REQ_TYPE_POSTREG)
         {
+            popoSuccDialog();
             try
             {
                 JSONObject data = new JSONObject(content);
@@ -120,7 +121,7 @@ public class RegisterPasswordActivity extends CTBaseActivity implements LoginNot
 
                 if(error == 0)
                 {
-                    popoSuccDialog();
+
                 }
                 else if(error == 1)
                 {
@@ -218,40 +219,42 @@ public class RegisterPasswordActivity extends CTBaseActivity implements LoginNot
      */
     private void popoSuccDialog()
     {
-        //注册成功后弹窗
-        ColorStateList redColors = ColorStateList.valueOf(0xffff0000);
-        SpannableStringBuilder spanBuilder = new SpannableStringBuilder("恭喜你注册成功！获得10元礼金\n 完善认证信息你将在获得20元礼金");
-        //style 为0 即是正常的，还有Typeface.BOLD(粗体) Typeface.ITALIC(斜体)等
-        //size  为0 即采用原始的正常的 size大小
-        spanBuilder.setSpan(new TextAppearanceSpan(null, 0, 60, redColors, null), 10, 12, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
-        spanBuilder.setSpan(new TextAppearanceSpan(null, 0, 60, redColors, null), 28, 30, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+        mUserManager.logIn(mPhoneNum, mPassword);
 
-        SpannableStringBuilder spanBuilder1 = new SpannableStringBuilder("继续认证得20元");
-        spanBuilder1.setSpan(new TextAppearanceSpan(null, 0, 60, redColors, null), 5, 7, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
-
-        final SweetAlertDialog sad = new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE);
-        sad.setConfirmText(spanBuilder1) .setContentText(spanBuilder);
-        sad.setCancelText("先逛逛");
-        sad .show();
-
-        sad.setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
-            public void onClick(SweetAlertDialog sweetAlertDialog)
-            {
-                sad.cancel();
-                mUserManager.logIn(mPhoneNum, mPassword);
-            }
-        });
-
-        sad.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-            @Override
-            public void onClick(SweetAlertDialog sweetAlertDialog)
-            {
-                sad.cancel();
-
-                Intent intent = new Intent(RegisterPasswordActivity.this, RichesSafeActivity.class);
-                startActivity(intent);
-            }
-        });
+//        //注册成功后弹窗
+//        ColorStateList redColors = ColorStateList.valueOf(0xffff0000);
+//        SpannableStringBuilder spanBuilder = new SpannableStringBuilder("恭喜你注册成功！获得10元礼金\n 完善认证信息你将在获得20元礼金");
+//        //style 为0 即是正常的，还有Typeface.BOLD(粗体) Typeface.ITALIC(斜体)等
+//        //size  为0 即采用原始的正常的 size大小
+//        spanBuilder.setSpan(new TextAppearanceSpan(null, 0, 60, redColors, null), 10, 12, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+//        spanBuilder.setSpan(new TextAppearanceSpan(null, 0, 60, redColors, null), 28, 30, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+//
+//        SpannableStringBuilder spanBuilder1 = new SpannableStringBuilder("继续认证得20元");
+//        spanBuilder1.setSpan(new TextAppearanceSpan(null, 0, 60, redColors, null), 5, 7, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+//
+//        final SweetAlertDialog sad = new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE);
+//        sad.setConfirmText(spanBuilder1) .setContentText(spanBuilder);
+//        sad.setCancelText("先逛逛");
+//        sad .show();
+//
+//        sad.setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+//            public void onClick(SweetAlertDialog sweetAlertDialog)
+//            {
+//                sad.cancel();
+//                mUserManager.logIn(mPhoneNum, mPassword);
+//            }
+//        });
+//
+//        sad.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+//            @Override
+//            public void onClick(SweetAlertDialog sweetAlertDialog)
+//            {
+//                sad.cancel();
+//
+//                Intent intent = new Intent(RegisterPasswordActivity.this, RichesSafeActivity.class);
+//                startActivity(intent);
+//            }
+//        });
     }
 
     @Override
@@ -260,9 +263,11 @@ public class RegisterPasswordActivity extends CTBaseActivity implements LoginNot
         sph.putString(AppCfg.CFG_LOGIN, AppCfg.LOGIN_STATE.LOGIN.toString());
         sph.putString(AppCfg.GSPD, "");
 
+        BaseApplication.getInstance().onBackground();
+
         Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("login_state", 1);
         this.startActivity(intent);
-        this.finish();
     }
 
     @Override

@@ -95,6 +95,19 @@ public class ConfirmActivity extends CTBaseActivity
         String overage = userInfoEntity.getOverage();
         TextView textView = (TextView)findViewById(R.id.confirm_text_overage);
         textView.setText(overage);
+
+        mDialog = new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE);
+        mDialog.setConfirmText("确认");
+        mDialog.setContentText("恭喜你投资成功!\n 获得2个投元");
+        mDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener()
+        {
+            public void onClick(SweetAlertDialog sweetAlertDialog)
+            {
+                Intent intent = new Intent(ConfirmActivity.this, MainActivity.class);
+                intent.putExtra("login_state", 1);
+                ConfirmActivity.this.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -137,10 +150,6 @@ public class ConfirmActivity extends CTBaseActivity
 
                 if(result == 0)
                 {
-                    mDialog = new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE).setTitleText("投资");
-                    mDialog.setConfirmText("确认");
-                    mDialog.setContentText("投资成功");
-
                     mDialog.show();
                 }
                 else

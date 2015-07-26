@@ -9,6 +9,7 @@ import com.changtou.moneybox.common.http.base.HttpCallback;
 import com.changtou.moneybox.common.http.impl.AsyncHttpClientImpl;
 import com.changtou.moneybox.common.utils.ACache;
 import com.changtou.moneybox.module.http.HttpRequst;
+import com.changtou.moneybox.module.widget.ZProgressHUD;
 
 import org.json.JSONException;
 import org.json.JSONObject;

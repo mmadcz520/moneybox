@@ -67,6 +67,20 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
     private String[] mImgs = {"http://www.changtounet.com/manage/news/uploadimages/50758017-9051-4838-ac09-f764bb5bfa4b.png.png",
             "http://www.changtounet.com/manage/news/uploadimages/50758017-9051-4838-ac09-f764bb5bfa4b.png.png" };
 
+    private String productId = "0";
+    private double jd = 0;
+    private String maturity = "";
+    private String interest = "";
+    private String projectname = "";
+    private String syje = "";
+    private String amount = "";
+    private String minamount = "";
+
+    private double allInvest = 0;
+    private double leiji = 0;
+
+    private TextView mQtjeTextView = null;
+
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View mView = inflater.inflate(R.layout.home_fragment, null);
@@ -84,6 +98,8 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
         mProductTitle = (TextView)mView.findViewById(R.id.homepage_title_text);
         mInvestPercent = (CountView)mView.findViewById(R.id.invest_progress_percent);
         mInvestNum = (TextView)mView.findViewById(R.id.invest_progress_num);
+
+        mQtjeTextView = (TextView)mView.findViewById(R.id.invest_progress_qtje);
 
         mContext = this.getActivity();
         mAdapter = new ProductListAdapter(mContext);
@@ -125,7 +141,26 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
 
             try
             {
-                JSONObject jsonObject = new JSONObject(content);
+                JSONArray array = new JSONArray(content);
+
+                JSONObject obj1 = array.getJSONObject(0);
+                JSONArray appRecomm = obj1.getJSONArray("AppRecomm");
+                JSONObject appObject = appRecomm.getJSONObject(0);
+
+                productId = appObject.getString("id");
+                jd = appObject.getDouble("jd") * 100;
+                projectname = appObject.getString("projectname");
+                maturity = appObject.getString("maturity");
+                interest = appObject.getString("interest");
+                syje = appObject.getString("syje");
+                amount = appObject.getString("amount");
+                minamount = appObject.getString("minamount");
+
+                JSONObject obj2 = array.getJSONObject(1);
+                allInvest = obj2.getDouble("allInvest");
+
+                JSONObject obj3 = array.getJSONObject(3);
+                leiji = obj3.getDouble("leiji");
             }
             catch (Exception e)
             {
@@ -133,17 +168,20 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
             }
 
 
-            mInvestProgress.setProgress(60);
+            mInvestProgress.setProgress((int)jd);
 
-            mInvestSum.showNumberWithAnimation(1309476000);
-            mMakeMoney.showNumberWithAnimation(3882519);
+            mInvestSum.showNumberWithAnimation((float) allInvest);
+            mMakeMoney.showNumberWithAnimation((float)leiji);
 
-            mProductTitle.setText("今日优选[上投宝]上手易第256期");
-            mIcomeText.setText("14");
+            mProductTitle.setText(projectname);
+            mIcomeText.setText(interest);
             mTagTextView.setText("%");
-            mTimeLimit.setText("三个月");
-            mInvestPercent.showPercentWithAnimation(60);
-            mInvestNum.setText("25.5万/100万");
+            mTimeLimit.setText(maturity);
+            mInvestPercent.showPercentWithAnimation((float)jd);
+            mInvestNum.setText(syje + "/" + amount);
+            mQtjeTextView.setText(minamount + "起投 | " + "每人限购100万元");
+            mInvestBtn.setEnabled(true);
+
             mPullToRefreshScrollView.onRefreshComplete();
         }
 
@@ -198,7 +236,7 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
         //
         if(BaseApplication.getInstance().isUserLogin())
         {
-            goToProductDetails("0");
+            goToProductDetails(productId);
         }
         else
         {

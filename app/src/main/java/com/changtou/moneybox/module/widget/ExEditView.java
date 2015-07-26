@@ -2,6 +2,7 @@ package com.changtou.moneybox.module.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.text.InputType;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -198,8 +199,9 @@ public class ExEditView extends LinearLayout
         return  mEditText.getText().toString().trim();
     }
 
-    public void setMessage(String message)
+    public void setMessage(String message, int color)
     {
+        mMessageTextView.setTextColor(color);
         mMessageTextView.setText(message);
     }
 }
