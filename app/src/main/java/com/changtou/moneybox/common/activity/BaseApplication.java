@@ -121,6 +121,8 @@ public abstract class BaseApplication extends Application implements UncaughtExc
             e.printStackTrace();
         }
 
+        Logger.e(getDeviceInfo(this));
+
         registerNetListener();
 	}
 
@@ -209,6 +211,7 @@ public abstract class BaseApplication extends Application implements UncaughtExc
 		PackageInfo info = null;
 		try {
 			info = getPackageManager().getPackageInfo(packageName, 0);
+
 		} catch (NameNotFoundException e) {
 			e.printStackTrace();
 		}

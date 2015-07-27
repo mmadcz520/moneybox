@@ -11,21 +11,22 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.changtou.R;
+import com.changtou.moneybox.common.activity.BaseActivity;
 import com.umeng.analytics.MobclickAgent;
 
 /**
  * Created by Administrator on 2015/7/8.
  */
-public class WebActivity extends Activity
+public class WebActivity extends CTBaseActivity
 {
     private WebView myWebView = null;
 
     private String mUrl = "";
 
-    protected void onCreate(Bundle savedInstanceState)
-    {
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        super.onCreate(savedInstanceState);
+    @Override
+    protected void initView(Bundle bundle) {
+
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_web_layout);
 
         Intent intent = this.getIntent();
@@ -59,6 +60,23 @@ public class WebActivity extends Activity
                 }
             }
         });
+
+    }
+
+    @Override
+    protected void initListener() {
+
+    }
+
+    @Override
+    protected void initData() {
+
+        setPageTitle("关于我们");
+    }
+
+    @Override
+    protected int setPageType() {
+        return PAGE_TYPE_SUB;
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {

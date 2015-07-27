@@ -71,7 +71,7 @@ public class GesturePWActivity extends Activity implements LocusPassWordView.OnC
         TextView text = (TextView)this.findViewById(R.id.pd_gesture_fullname);
         ACache cache = ACache.get(BaseApplication.getInstance());
         String fullname = cache.getAsString("fullname");
-        if(fullname == null)
+        if(fullname == null || fullname.equals(""))
         {
             mFullName = "您好！";
         }

@@ -25,8 +25,6 @@ public class InvestListEntity extends BaseEntity{
      */
     public void paser(String data) throws Exception
     {
-        Log.e("CT_MONEY", "--------------------" + data);
-
         JSONArray array = new JSONArray(data);
         int len = array.length();
 

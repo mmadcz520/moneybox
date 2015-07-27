@@ -2,11 +2,13 @@ package com.changtou.moneybox.module.page;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.changtou.R;
+import com.changtou.moneybox.common.utils.ACache;
 import com.changtou.moneybox.module.adapter.FlowAdapter;
 import com.changtou.moneybox.module.entity.FlowEntity;
 import com.changtou.moneybox.module.entity.UserInfoEntity;
@@ -37,10 +39,10 @@ public class RichesFlowActivity extends CTBaseActivity implements AdapterView.On
         mAdapter = new FlowAdapter(this);
         mFlowListView.setAdapter(mAdapter);
 
-        sendRequest(HttpRequst.REQ_TYPE_FLOW,
-                HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_FLOW),
-                mParams,
-                getAsyncClient(), false);
+//        sendRequest(HttpRequst.REQ_TYPE_FLOW,
+//                HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_FLOW),
+//                mParams,
+//                getAsyncClient(), false);
 
 
         UserInfoEntity userInfoEntity = UserInfoEntity.getInstance();
@@ -68,6 +70,7 @@ public class RichesFlowActivity extends CTBaseActivity implements AdapterView.On
             if(object != null)
             {
                 mEntity = (FlowEntity) object;
+                Log.e("CT_MONEY", "sMonthsMonth---------------------" + mEntity.getMonth().toString());
             }
             UserInfoEntity userInfoEntity = UserInfoEntity.getInstance();
             mAdapter.setData(userInfoEntity.getFlowEntity());
@@ -91,10 +94,17 @@ public class RichesFlowActivity extends CTBaseActivity implements AdapterView.On
     {
         final Intent intent = new Intent(RichesFlowActivity.this, RichesCalendarActivity.class);
 
-        Bundle bundle = new Bundle();
-        bundle.putInt("selected_month", position);
-        bundle.putSerializable("flow", mEntity);
-        intent.putExtras(bundle);
+//        Bundle bundle = new Bundle();
+//        bundle.putInt("selected_month", position);
+//        bundle.putSerializable("flow", mEntity);
+//        intent.putExtras(bundle);
+
+        ACache cache = ACache.get(this);
+        cache.put("selected_month", position);
+
+        Log.e("CT_MONEY", "sMonthsMonth---------------------" + mEntity.getMonth().toString());
+
+        cache.put("flow", mEntity);
 
         startActivity(intent);
     }

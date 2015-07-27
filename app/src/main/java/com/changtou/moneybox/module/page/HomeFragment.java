@@ -137,8 +137,6 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
     {
         if (reqType == HttpRequst.REQ_TYPE_PRODUCT_HOME)
         {
-            Logger.json(content);
-
             try
             {
                 JSONArray array = new JSONArray(content);

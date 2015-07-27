@@ -2,10 +2,12 @@ package com.changtou.moneybox.module.page;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ListView;
 
 import com.changtou.R;
 import com.changtou.moneybox.common.logger.Logger;
+import com.changtou.moneybox.common.utils.ACache;
 import com.changtou.moneybox.module.adapter.FlowItemAdapter;
 import com.changtou.moneybox.module.entity.FlowEntity;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
@@ -43,12 +45,18 @@ public class RichesCalendarActivity extends CTBaseActivity implements OnDateChan
     {
         super.setContentView(R.layout.riches_datapicker);
 
-        mFlowEntity = (FlowEntity)getIntent().getSerializableExtra("flow");
-        mSelectMonth = getIntent().getIntExtra("selected_month",0);
+//        mFlowEntity = (FlowEntity)getIntent().getSerializableExtra("flow");
+//        mSelectMonth = getIntent().getIntExtra("selected_month",0);
 
-        String time="";
+        ACache cache = ACache.get(this);
+        mSelectMonth = (int)cache.getAsObject("selected_month");
+        mFlowEntity = (FlowEntity)cache.getAsObject("flow");
+
+        String time = "";
         if(mFlowEntity != null)
         {
+            Log.e("CT_MONEY", "sMonthsMonth---------------------" + mFlowEntity.getMonth().toString());
+
             FlowEntity.MonthEntity sMonth = mFlowEntity.mMonth.get(mSelectMonth);
             time = sMonth.time;
         }

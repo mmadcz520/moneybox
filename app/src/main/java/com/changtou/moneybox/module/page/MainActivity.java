@@ -85,8 +85,7 @@ public class MainActivity extends CTBaseActivity {
             switchNavBar(2);
         }
 
-//        mSignInHUD = (SignInHUD)this.findViewById(R.id.signin_fragment);
-//        UpdateConfig.setDebug(true);
+        UpdateConfig.setDebug(true);
 
 //        updateVersion();
 //        registerNetListener();
