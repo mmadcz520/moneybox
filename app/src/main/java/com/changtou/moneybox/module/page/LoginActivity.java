@@ -19,6 +19,7 @@ import com.changtou.moneybox.module.usermodule.LoginNotifier;
 import com.changtou.moneybox.module.usermodule.UserManager;
 import com.changtou.moneybox.module.widget.ExEditView;
 import com.changtou.R;
+import com.changtou.moneybox.module.widget.ZProgressHUD;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -37,6 +38,8 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
     private Button mLoginBtn = null;
 
     private String[] mErrorContent = {"","用户名格式不正确", "不存在该用户名", "密码错误", "邮箱未激活", " 手机未激活", "服务器故障"};
+
+    private ZProgressHUD zProgressHUD = null;
 
     @Override
     protected void initView(Bundle bundle) {
@@ -63,6 +66,8 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
         mDialog.getProgressHelper().setBarColor(getResources().getColor(R.color.ct_blue));
         mDialog.getProgressHelper().setRimColor(getResources().getColor(R.color.ct_blue_hint));
         sph = SharedPreferencesHelper.getInstance(getApplicationContext());
+
+        zProgressHUD = new ZProgressHUD(this);
     }
 
     protected void initListener() {
@@ -82,6 +87,7 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
                 }
                 else
                 {
+                    zProgressHUD.show();
                     mUserManager.logIn(username, password);
                     mLoginBtn.setEnabled(false);
                 }
@@ -187,8 +193,11 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
 
         //初始化用户数据
         UserInfoEntity userInfo = UserInfoEntity.getInstance();
-        ACache cache = ACache.get(this);
+        ACache cache = ACache.get(BaseApplication.getInstance());
         cache.put("fullname", userInfo.getFullName());
+
+        //缓存用户信息
+        cache.put("userinfo", userInfo);
 
         //清空手势密码
         sph.putString(AppCfg.CFG_LOGIN, AppCfg.LOGIN_STATE.LOGIN.toString());

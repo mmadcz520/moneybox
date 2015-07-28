@@ -29,6 +29,7 @@ import com.changtou.moneybox.module.widget.CountView;
 import com.changtou.moneybox.module.widget.ExEditView;
 import com.changtou.moneybox.module.widget.ExImageSwitcher;
 import com.changtou.moneybox.module.widget.RoundProgressBar;
+import com.changtou.moneybox.module.widget.ZProgressHUD;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 
@@ -106,12 +107,6 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
 
         mPullToRefreshScrollView.setOnRefreshListener(this);
 
-        sph = SharedPreferencesHelper.getInstance(this.getActivity());
-
-        BaseApplication.getInstance().setNetStateListener(this);
-
-        mBannerSwitcher.setImage(mImgs);
-
         return mView;
     }
 
@@ -124,6 +119,11 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
      * @param savedInstanceState 状态信息
      */
     protected void initData(Bundle savedInstanceState) {
+
+        sph = SharedPreferencesHelper.getInstance(this.getActivity());
+        BaseApplication.getInstance().setNetStateListener(this);
+        mBannerSwitcher.setImage(mImgs);
+
         initParam();
         requestHomePage();
     }

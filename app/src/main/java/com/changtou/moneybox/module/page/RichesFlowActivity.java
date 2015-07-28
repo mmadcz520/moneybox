@@ -45,7 +45,7 @@ public class RichesFlowActivity extends CTBaseActivity implements AdapterView.On
 //                getAsyncClient(), false);
 
 
-        UserInfoEntity userInfoEntity = UserInfoEntity.getInstance();
+        UserInfoEntity userInfoEntity = (UserInfoEntity)ACache.get(this).getAsObject("userinfo");
         mEntity = userInfoEntity.getFlowEntity();
         mAdapter.setData(mEntity);
     }

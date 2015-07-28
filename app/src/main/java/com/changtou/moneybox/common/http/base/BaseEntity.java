@@ -2,6 +2,7 @@ package com.changtou.moneybox.common.http.base;
 
 import org.json.JSONArray;
 
+import java.io.Serializable;
 import java.util.LinkedHashMap;
 
 /**

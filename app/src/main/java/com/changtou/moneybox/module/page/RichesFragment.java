@@ -42,6 +42,7 @@ import com.changtou.moneybox.module.entity.UserInfoEntity;
 import com.changtou.moneybox.module.http.HttpRequst;
 import com.changtou.moneybox.module.widget.CountView;
 import com.changtou.moneybox.module.widget.SignInHUD;
+import com.changtou.moneybox.module.widget.ZProgressHUD;
 
 import org.json.JSONObject;
 
@@ -79,10 +80,17 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
 
     private ACache cache = null;
 
+    private ZProgressHUD mZProgressHUD = null;
+
+    private ACache mAcache = null;
+    private UserInfoEntity mUserInfoEntity = null;
+
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         sph = SharedPreferencesHelper.getInstance(this.getActivity().getApplicationContext());
         cache = ACache.get(this.getActivity());
+
+        mZProgressHUD = ZProgressHUD.getInstance(this.getActivity());
 
         int[] mImgRes = {R.drawable.riches_btn_adf_selector,
                 R.drawable.riches_btn_invest_selector,
@@ -152,7 +160,13 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
         mGiftsTextView = (TextView)view.findViewById(R.id.riches_text_gifts);
         mTouYuanTextView = (TextView)view.findViewById(R.id.riches_text_touyuan);
 
-        initRichesPage();
+        mAcache = ACache.get(BaseApplication.getInstance());
+        mUserInfoEntity = (UserInfoEntity)mAcache.getAsObject("userinfo");
+
+        if(mUserInfoEntity != null)
+        {
+            initRichesPage();
+        }
 
         sHUD = SignInHUD.getInstance(this.getActivity());
         sHUD.setCancelable(true);
@@ -196,23 +210,22 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
 
     private void initRichesPage()
     {
-        UserInfoEntity userInfo = UserInfoEntity.getInstance();
-        mMobileTextView.setText(userInfo.getMobile());
-        String total = userInfo.getTotalAssets();
+        mMobileTextView.setText(mUserInfoEntity.getMobile());
+        String total = mUserInfoEntity.getTotalAssets();
         total = total.replace(",", "");
         if(total.equals("")) return;
 
-        mTouyuan = userInfo.getTouYuan();
+        mTouyuan = mUserInfoEntity.getTouYuan();
 
         mTotalAssetsTextView.showNumberWithAnimation(Float.parseFloat(total));
-        mTotalAssetsTextView.setText(userInfo.getTotalAssets());
-        mInvestAssetsTextView.setText(userInfo.getInvestAssets());
-        mProfitTextView.setText(userInfo.getProfit());
-        mOverageTextView.setText(userInfo.getOverage());
-        mGiftsTextView.setText(userInfo.getGifts());
+        mTotalAssetsTextView.setText(mUserInfoEntity.getTotalAssets());
+        mInvestAssetsTextView.setText(mUserInfoEntity.getInvestAssets());
+        mProfitTextView.setText(mUserInfoEntity.getProfit());
+        mOverageTextView.setText(mUserInfoEntity.getOverage());
+        mGiftsTextView.setText(mUserInfoEntity.getGifts());
         mTouYuanTextView.setText("" + mTouyuan);
 
-        cache.put("fullname", userInfo.getFullName());
+        cache.put("fullname", mUserInfoEntity.getFullName());
     }
 
     public void onSuccess(String content, Object object, int reqType)
@@ -224,6 +237,8 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
                 int err = jsonObject.getInt("err");
                 if(err == 0)
                 {
+                    mUserInfoEntity = (UserInfoEntity)object;
+                    mAcache.put("userinfo", mUserInfoEntity);
                     initRichesPage();
 
                     isPopu = (boolean)cache.getAsObject("isPopu");
@@ -253,6 +268,7 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
         {
             try
             {
+                mZProgressHUD.cancel();
                 JSONObject jsonObject = new JSONObject(content);
 
                 int error = jsonObject.getInt("errcode");
@@ -446,6 +462,8 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
      */
     private void signRequest()
     {
+        mZProgressHUD.show();
+
         String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_SIGN) +
                 "userid=" + ACache.get(BaseApplication.getInstance()).getAsString("userid") +
                 "&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token");

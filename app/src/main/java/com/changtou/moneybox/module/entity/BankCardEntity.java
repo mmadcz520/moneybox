@@ -5,6 +5,8 @@ import com.changtou.moneybox.common.http.base.BaseEntity;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
@@ -12,14 +14,14 @@ import java.util.LinkedList;
  *
  * Created by Administrator on 2015/5/21.
  */
-public class BankCardEntity extends BaseEntity
+public class BankCardEntity extends BaseEntity implements Serializable
 {
-    public LinkedList mList = null;
+    public ArrayList mList = null;
 
     public void paser(String data) throws Exception
     {
         JSONArray array = new JSONArray(data);
-        mList = new LinkedList();
+        mList = new ArrayList<>();
         BankListEntity entity;
         int size = array.length();
         for (int i = 0; i < size; i++) {
@@ -29,7 +31,7 @@ public class BankCardEntity extends BaseEntity
         }
     }
 
-    public class BankListEntity {
+    public class BankListEntity implements Serializable{
         public String account = "";
         public String bank = "";
         public String branch = "";

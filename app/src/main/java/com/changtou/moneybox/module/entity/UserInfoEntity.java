@@ -8,10 +8,12 @@ import com.changtou.moneybox.common.logger.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2015/6/16.
  */
-public class UserInfoEntity extends BaseEntity
+public class UserInfoEntity extends BaseEntity implements Serializable
 {
     /** user info*/
     private String mEmail = "";
@@ -37,7 +39,7 @@ public class UserInfoEntity extends BaseEntity
     private FlowEntity mFlowEntity = null;
     private BankCardEntity mBankCardEntity = null;
 
-    private static UserInfoEntity single=null;
+    private static UserInfoEntity single = null;
 
     public static UserInfoEntity getInstance() {
         if (single == null) {
