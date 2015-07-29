@@ -1,12 +1,14 @@
 package com.changtou.moneybox.module.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +16,12 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.changtou.R;
+import com.changtou.moneybox.common.activity.BaseApplication;
+import com.changtou.moneybox.common.utils.ACache;
+import com.changtou.moneybox.module.page.WebActivity;
 
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,6 +35,10 @@ public class ProductContractAdapter extends BaseAdapter
     private LayoutInflater mInflater = null;
 
     private Context mContext = null;
+
+    private String  mProID = null;
+
+    private String mAmount = null;
 
     private static final Pattern topicPattern = Pattern.compile("《\\w+》");
 
@@ -101,6 +112,26 @@ public class ProductContractAdapter extends BaseAdapter
             @Override
             public void clickTextView()
             {
+                try
+                {
+                    Intent intent = new Intent(mContext, WebActivity.class);
+                    String url = "http://www.changtounet.com/contract/app_coCtbService.aspx?";
+                    String userId =  ACache.get(BaseApplication.getInstance()).getAsString("userid");
+                    String uid = URLEncoder.encode(userId, "UTF-8");
+                    String amount = URLEncoder.encode(mAmount, "UTF-8");
+                    String prd = URLEncoder.encode(mProID, "UTF-8");
+                    url = url + "userid=" + userId + "&amount=" +  amount + "&ctbid=" + prd;
+
+                    Log.e("CT_MONEY", url);
+
+                    intent.putExtra("url", url);
+                    intent.putExtra("title", "长投宝服务协议");
+                    mContext.startActivity(intent);
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
 
             }
 
@@ -114,11 +145,13 @@ public class ProductContractAdapter extends BaseAdapter
         return convertView;
     }
 
-    public void setData(String[] data)
+    public void setData(String[] data, String amount, String proID)
     {
         if(data.length == mValues.length)
         {
             this.mValues = data;
+            this.mAmount = amount;
+            this.mProID = proID;
         }
 
         notifyDataSetChanged();

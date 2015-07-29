@@ -51,8 +51,6 @@ public class ProductDetailsEntity extends BaseEntity
      */
     public void paser(String data) throws Exception
     {
-        Log.e("CT_MONEY", "productDetail = " + data);
-
         JSONObject object = new JSONObject(data);
         JSONObject productDetail = object.getJSONObject("productDetail");
 
@@ -185,7 +183,7 @@ public class ProductDetailsEntity extends BaseEntity
             sdjzrq = json.getString("sdjzrq");
             tcfs = json.getString("tcfs");
             tqtcfs = json.getString("tqtcfs");
-            glfy = json.getString("glfy");
+            glfy = "管理费参见《长投宝服务协议》";
             jrfwf = json.getString("jrfwf");
             tqtcfy = json.getString("tqtcfy");
             bzfs = json.getString("bzfs");

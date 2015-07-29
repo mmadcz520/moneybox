@@ -55,6 +55,9 @@ public abstract class BaseActivity extends FragmentActivity implements HttpCallb
 
         BaseApplication.getInstance().addActivity(this);
 
+        mZProgressHUD = new ZProgressHUD(this);
+
+
         click = new Click();
         mcontext=this.getApplicationContext();
         if (mParams == null)
@@ -63,9 +66,6 @@ public abstract class BaseActivity extends FragmentActivity implements HttpCallb
         mDeviceId =app.mDeviceId;
         initView(bundle);
         initListener();
-
-        mZProgressHUD = new ZProgressHUD(this);
-
     }
 
     /**

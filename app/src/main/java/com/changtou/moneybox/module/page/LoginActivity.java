@@ -1,5 +1,6 @@
 package com.changtou.moneybox.module.page;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,8 +40,6 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
 
     private String[] mErrorContent = {"","用户名格式不正确", "不存在该用户名", "密码错误", "邮箱未激活", " 手机未激活", "服务器故障"};
 
-    private ZProgressHUD zProgressHUD = null;
-
     @Override
     protected void initView(Bundle bundle) {
         setContentView(R.layout.riches_login_layout);
@@ -67,7 +66,13 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
         mDialog.getProgressHelper().setRimColor(getResources().getColor(R.color.ct_blue_hint));
         sph = SharedPreferencesHelper.getInstance(getApplicationContext());
 
-        zProgressHUD = new ZProgressHUD(this);
+        mZProgressHUD.setOnDismissListener(new DialogInterface.OnDismissListener()
+        {
+            public void onDismiss(DialogInterface dialog)
+            {
+                mLoginBtn.setEnabled(true);
+            }
+        });
     }
 
     protected void initListener() {
@@ -87,7 +92,7 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
                 }
                 else
                 {
-                    zProgressHUD.show();
+                    mZProgressHUD.show();
                     mUserManager.logIn(username, password);
                     mLoginBtn.setEnabled(false);
                 }
@@ -131,6 +136,7 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
     public void loginErrNotify(int errcode)
     {
         mLoginBtn.setEnabled(true);
+        mZProgressHUD.cancel();
 
         int code = (errcode < mErrorContent.length) ? errcode : (mErrorContent.length - 1);
         Toast toast = Toast.makeText(getApplicationContext(),

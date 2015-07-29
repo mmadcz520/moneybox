@@ -2,6 +2,8 @@ package com.changtou.moneybox.module.page;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.changtou.R;
@@ -13,6 +15,7 @@ import com.changtou.moneybox.module.widget.ExEditView;
 
 import org.json.JSONObject;
 
+import java.net.URLEncoder;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -42,19 +45,56 @@ public class RegisterActivity extends CTBaseActivity
     protected void initListener()
     {
         setOnClickListener(R.id.register_btn);
+        setOnClickListener(R.id.register_zhucexieyi);
+        setOnClickListener(R.id.register_guanlixieyi);
+
     }
 
     public void treatClickEvent(int id)
     {
-        phoneNum = mPhoneNum.getEditValue();
+        switch (id)
+        {
+            case R.id.register_btn:
+            {
+                phoneNum = mPhoneNum.getEditValue();
 
-        if(isMobileNO(phoneNum))
-        {
-            sendMsgRequest(phoneNum);
-        }
-        else
-        {
-            Toast.makeText(this, "请输入正确的手机号码", Toast.LENGTH_SHORT).show();
+                if(isMobileNO(phoneNum))
+                {
+                    sendMsgRequest(phoneNum);
+                }
+                else
+                {
+                    Toast.makeText(this, "请输入正确的手机号码", Toast.LENGTH_SHORT).show();
+                }
+
+                break;
+            }
+
+            case R.id.register_zhucexieyi:
+            {
+
+                Intent intent = new Intent(this, WebActivity.class);
+                String url = "http://www.changtounet.com/contract/regcontract.html";
+
+                intent.putExtra("url", url);
+                intent.putExtra("title", "注册协议");
+                this.startActivity(intent);
+
+                break;
+            }
+
+            case R.id.register_guanlixieyi:
+            {
+
+                Intent intent = new Intent(this, WebActivity.class);
+                String url = "http://www.changtounet.com/contract/regcontract.html/contract/managecontract.html";
+
+                intent.putExtra("url", url);
+                intent.putExtra("title", "投资咨询与管理协议");
+                this.startActivity(intent);
+
+                break;
+            }
         }
     }
 

@@ -117,6 +117,7 @@ public class RichesPhoneBookActivity extends CTBaseActivity {
             }
         });
 
+
 //		mSourceDateList = filledData(getResources().getStringArray(R.array.item_setting1));
 
         // 根据a-z进行排序源数据

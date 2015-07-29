@@ -41,6 +41,7 @@
         android:text="注册即代表您已经阅读并同意"/>
 
     <TextView
+        android:id="@+id/register_zhucexieyi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -57,6 +58,7 @@
         android:text="及"/>
 
     <TextView
+        android:id="@+id/register_guanlixieyi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"

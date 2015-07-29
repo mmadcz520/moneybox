@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.changtou.R;
 import com.changtou.moneybox.common.activity.BaseApplication;
+import com.changtou.moneybox.common.utils.ACache;
 import com.changtou.moneybox.common.utils.SharedPreferencesHelper;
 import com.changtou.moneybox.module.appcfg.AppCfg;
 import com.changtou.moneybox.module.entity.UserInfoEntity;
@@ -52,7 +53,7 @@ public class RichesSafeActivity extends CTBaseActivity implements View.OnTouchLi
 
         int bcolor = getResources().getColor(R.color.font_black);
         int rcolor = getResources().getColor(R.color.ct_red);
-        UserInfoEntity userInfoEntity = UserInfoEntity.getInstance();
+        UserInfoEntity userInfoEntity = (UserInfoEntity)ACache.get(this).getAsObject("userinfo");
         if(userInfoEntity.getMobilecheck())
         {
             phoneauthBtn.setMessage("已认证", bcolor);

@@ -62,11 +62,13 @@
                     android:textColor="#999999" />
             </LinearLayout>
 
-            <Button
+            <com.changtou.moneybox.module.widget.PromotionBtn
+                android:id="@+id/send_btn"
                 android:layout_width="80dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/btn_selector"
+                android:focusable="true"
                 android:textColor="@color/ct_white"
                 android:textSize="@dimen/font_size_hint2"
                 android:text="邀请注册"/>

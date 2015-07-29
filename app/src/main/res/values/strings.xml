@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CT_MONEY</string>
+    <string name="app_name">长投在线</string>
 
     <string name="title_activity_boot">BootActivity</string>
     <string name="dummy_button">Dummy Button</string>

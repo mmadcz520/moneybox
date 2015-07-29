@@ -1,30 +1,49 @@
 package com.changtou.moneybox.module.phonebook;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.changtou.R;
+import com.changtou.moneybox.module.widget.PromotionBtn;
 
 public class SortAdapter extends BaseAdapter implements SectionIndexer {
 	
 	private List<SortModel> list = null;
+
+	private ArrayList<Boolean> btnlist = new ArrayList<>();
 	
 	private Context mContext;
 	
 	public SortAdapter(Context mContext,List<SortModel> list){
 		this.mContext = mContext;
+
+		for(int i = 0; i < list.size(); i++)
+		{
+			btnlist.add(true);
+		}
+
 		this.list = list;
 	}
 	public void updateListView(List<SortModel> list){
 		this.list = list;
+
+		for(int i = 0; i < list.size(); i++)
+		{
+			btnlist.add(true);
+		}
+
 		notifyDataSetChanged();
 	}
 	
@@ -45,8 +64,8 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer {
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		
+	public View getView(final int position, View convertView, ViewGroup parent) {
+
 		ViewHolder viewHolder = null;
 		final SortModel mContent = list.get(position);
 		if (convertView== null) {
@@ -54,6 +73,11 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer {
 			convertView = LayoutInflater.from(mContext).inflate(R.layout.riches_phonelist_item, null);
 			viewHolder.tvTitle = (TextView) convertView.findViewById(R.id.name);
 			viewHolder.tvLetter = (TextView) convertView.findViewById(R.id.catalog);
+			viewHolder.tvButton = (PromotionBtn) convertView.findViewById(R.id.send_btn);
+
+			viewHolder.tvButton.setEnabled(btnlist.get(position));
+			Log.e("CT_MONEY", "======= +++ getViewgetViewgetViewgetView"  + position + "---" + btnlist.get(position));
+
 			convertView.setTag(viewHolder);
 		}else {
 			viewHolder = (ViewHolder) convertView.getTag();
@@ -68,6 +92,19 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer {
 			viewHolder.tvLetter.setVisibility(View.GONE);
 		}
 		viewHolder.tvTitle.setText(this.list.get(position).getName());
+
+		final ViewHolder finalViewHolder = viewHolder;
+		viewHolder.tvButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+
+				Toast.makeText(mContext, "" + position, Toast.LENGTH_SHORT).show();
+				finalViewHolder.tvButton.setEnabled(false);
+				btnlist.set(position, false);
+				notifyDataSetChanged();
+			}
+		});
+
 		return convertView;
 	}
 
@@ -103,6 +140,7 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer {
 	final static class ViewHolder{
 		TextView tvLetter;
 		TextView tvTitle;
+		 PromotionBtn tvButton;
 	}
 	/**
 	 * 提取英文的首字母，非英文字母用#代替。
@@ -120,5 +158,5 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer {
 		}
 	}
 
-	
+
 }

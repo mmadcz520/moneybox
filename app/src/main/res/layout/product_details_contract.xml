@@ -67,12 +67,23 @@
         android:textColor="@color/font_black"
         android:textSize="@dimen/font_size_normal" />
 
-    <ListView
+
+    <TextView
         android:id="@+id/product_details_contract_list"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:headerDividersEnabled="true"
-        android:footerDividersEnabled="true">
-    </ListView>
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:textSize="@dimen/font_size_hint"
+        android:textColor="@color/font_importance"
+        android:text="《投资咨询与管理协议》"/>
+
+
+    <!--<ListView-->
+        <!--android:id="@+id/product_details_contract_list"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="fill_parent"-->
+        <!--android:headerDividersEnabled="true"-->
+        <!--android:footerDividersEnabled="true">-->
+    <!--</ListView>-->
 
 </LinearLayout>

@@ -158,7 +158,7 @@ public class ProductDetailsActivity extends CTBaseActivity
             if(mProductType == 2 )
             {
                 mAgreementPage.initContractText(entity.mDetailsOther.xmqk);
-                mAgreementPage.initContractImgList(entity.mImgList);
+                mAgreementPage.initContractImgList(mProductId);
             }
             else
             {
@@ -178,7 +178,7 @@ public class ProductDetailsActivity extends CTBaseActivity
                 contractList[12] = entity.mDetailsCTB.tqtcfy;
                 contractList[13] = entity.mDetailsCTB.bzfs;
 
-                mAgreementPage.initContractCTB(contractList);
+                mAgreementPage.initContractCTB(contractList, entity.mDetailsCTB.rzje, mProductId);
             }
 
             mDetails = new String[4];

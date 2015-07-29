@@ -23,6 +23,8 @@ public class WebActivity extends CTBaseActivity
 
     private String mUrl = "";
 
+    private String mTitle = "关于我们";
+
     @Override
     protected void initView(Bundle bundle) {
 
@@ -31,6 +33,7 @@ public class WebActivity extends CTBaseActivity
 
         Intent intent = this.getIntent();
         mUrl = intent.getStringExtra("url");
+        mTitle = intent.getStringExtra("title");
 
         myWebView = (WebView) findViewById(R.id.ddwebview);
         myWebView.loadUrl(mUrl);
@@ -71,7 +74,7 @@ public class WebActivity extends CTBaseActivity
     @Override
     protected void initData() {
 
-        setPageTitle("关于我们");
+        setPageTitle(mTitle);
     }
 
     @Override

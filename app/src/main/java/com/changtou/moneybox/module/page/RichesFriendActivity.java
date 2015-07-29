@@ -3,6 +3,8 @@ package com.changtou.moneybox.module.page;
 import android.os.Bundle;
 
 import com.changtou.R;
+import com.umeng.socialize.controller.UMServiceFactory;
+import com.umeng.socialize.controller.UMSocialService;
 
 /**
  * 好友推荐列表
@@ -16,8 +18,11 @@ public class RichesFriendActivity extends CTBaseActivity
         setContentView(R.layout.riches_friend_layout);
     }
 
+    final UMSocialService mController = UMServiceFactory.getUMSocialService("com.umeng.share");
+
     @Override
-    protected int setPageType() {
+    protected int setPageType()
+    {
         return PAGE_TYPE_SUB;
     }
 }

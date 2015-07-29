@@ -445,7 +445,7 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
      */
     public void initAnim()
     {
-        if(isSign == 0 && mQiandaoImage.isEnabled())
+        if(mQiandaoImage!=null && isSign == 0 && mQiandaoImage.isEnabled())
         {
             animator = nope(mQiandaoImage);
             animator.setRepeatCount(1);

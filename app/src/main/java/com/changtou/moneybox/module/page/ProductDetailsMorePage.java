@@ -1,6 +1,7 @@
 package com.changtou.moneybox.module.page;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -158,14 +159,14 @@ public class ProductDetailsMorePage extends Fragment
      *初始化长投宝合同列表
      *@param data
      */
-    public void initContractCTB(String[] data)
+    public void initContractCTB(String[] data, String amount, String prdID)
     {
-        mContractCTBPage.setContractList(data);
+        mContractCTBPage.setContractList(data, amount, prdID);
     }
 
-    public void initContractImgList(LinkedList list)
+    public void initContractImgList(String prdID)
     {
-        mContractPage.setContractImgList(list);
+        mContractPage.setContractImgList(prdID);
     }
 
     /**
@@ -228,9 +229,13 @@ public class ProductDetailsMorePage extends Fragment
         private Context mContext = null;
 
         private TextView mContentView = null;
-        private ListView mAuditImgListView = null;
+//        private ListView mAuditImgListView = null;
 
         private AuditAdapter mAdapter = null;
+
+        private TextView mContractText = null;
+
+        private String mProID = null;
 
         protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -238,25 +243,29 @@ public class ProductDetailsMorePage extends Fragment
             mContext = this.getActivity();
 
             mContentView = (TextView)mView.findViewById(R.id.product_details_content);
-            mAuditImgListView = (ListView)mView.findViewById(R.id.product_details_contract_list);
+            mContractText = (TextView)mView.findViewById(R.id.product_details_contract_list);
 
             return mView;
         }
 
         protected void initListener()
         {
+            setOnClickListener(R.id.product_details_contract_list);
+        }
 
+        public void treatClickEvent(int id)
+        {
+            Intent intent = new Intent(this.getActivity(), WebActivity.class);
+            String url = "http://www.changtounet.com/contract/contractimg.aspx?" + "id=" + mProID;
+
+            intent.putExtra("url", url);
+            intent.putExtra("title", "产品合同");
+            this.startActivity(intent);
         }
 
         protected void initData(Bundle savedInstanceState)
         {
             mAdapter = new AuditAdapter(mContext);
-            mAuditImgListView.setAdapter(mAdapter);
-
-//            sendRequest(HttpRequst.REQ_TYPE_PRODUCT_CONTRACT,
-//                    HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_PRODUCT_CONTRACT),
-//                    mParams,
-//                    mAct.getAsyncClient(), false);
         }
 
         public void onSuccess(String content, Object object, int reqType)
@@ -274,10 +283,11 @@ public class ProductDetailsMorePage extends Fragment
             mContentView.setText(Html.fromHtml(text));
          }
 
-        public void setContractImgList(LinkedList list)
+        public void setContractImgList(String proID)
         {
-            mAdapter.setData(list);
-            setListViewHeightBasedOnChildren(mAuditImgListView);
+            this.mProID = proID;
+//            mAdapter.setData(list);
+//            setListViewHeightBasedOnChildren(mAuditImgListView);
         }
     }
 
@@ -324,9 +334,9 @@ public class ProductDetailsMorePage extends Fragment
 
         }
 
-        public void setContractList(String[] data)
+        public void setContractList(String[] data, String amount, String prdID)
         {
-            mAdapter.setData(data);
+            mAdapter.setData(data, amount, prdID);
         }
     }
 

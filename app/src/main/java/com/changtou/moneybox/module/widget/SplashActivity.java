@@ -73,7 +73,7 @@ public class SplashActivity extends BaseSplashActivity {
      * @see BaseSplashActivity#setSplashImage()
      */
     public void setSplashImage() {
-        mImagebackgruand.setImageResource(R.mipmap.splash_page);
+        mImagebackgruand.setImageResource(R.mipmap.splash_page_new);
     }
 
     /**

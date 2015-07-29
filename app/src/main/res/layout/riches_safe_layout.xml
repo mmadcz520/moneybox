@@ -47,7 +47,7 @@
         android:focusable="true"
         android:focusableInTouchMode="true"
         android_custom:viewType="text"
-        android_custom:ex_icon="@mipmap/riches_safe_mail"
+        android_custom:ex_icon="@mipmap/riches_safe_phone"
         android_custom:ex_title="手机认证"
         android_custom:ex_message="认证送10元"/>
 

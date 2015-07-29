@@ -187,6 +187,7 @@ public class MoreFragment extends BaseFragment implements View.OnTouchListener{
             case R.id.more_about_me: {
                 Intent intent = new Intent(this.getActivity(), WebActivity.class);
                 intent.putExtra("url", "http://m.changtounet.com/about.htm");
+                intent.putExtra("title", "关于我们");
                 startActivity(intent);
 
                 break;
