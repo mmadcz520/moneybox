@@ -88,6 +88,12 @@ public class HttpRequst extends BaseHttpRequest
     public final static int REQ_TYPE_SIGN = 1110;
     public final static int REQ_TYPE_ISSIGN = 1111;
 
+    public final static int REQ_TYPE_RECOMMENDLIST = 35;
+
+    public final static int REQ_TYPE_RECOMMEND_SENDSMS = 1300;
+
+    public final static int REQ_TYPE_MOBILE_LIST = 36;
+
     public final String REQ_URL_PING = BASE_URL + "usertoken/getconnection";
 
     //banner
@@ -163,6 +169,15 @@ public class HttpRequst extends BaseHttpRequest
 
     public static String REQ_URL_SIGN = BASE_URL + "usertoken/postsign?";
     public static String REQ_URL_ISSIGN = BASE_URL + "usertoken/postissign?";
+
+    //推荐好友列表
+    public static String REQ_URL_RECOMMENDLIST = BASE_URL + "AppRecommend/getTuijian?";
+
+    //发送推荐好友短信
+    public static String REQ_URL_RECOMMEND_SENDSMS = BASE_URL + "AppRecommend/PostSendSms?";
+
+    //获取今日已推荐列表
+    public static String REQ_URL_MOBILE_LIST = BASE_URL + "AppRecommend/GetMobileList?";
 
     public static synchronized HttpRequst getInstance()
     {
@@ -241,6 +256,12 @@ public class HttpRequst extends BaseHttpRequest
                 return REQ_URL_SIGN;
             case REQ_TYPE_ISSIGN:
                 return REQ_URL_ISSIGN;
+            case REQ_TYPE_RECOMMENDLIST:
+                return REQ_URL_RECOMMENDLIST;
+            case REQ_TYPE_RECOMMEND_SENDSMS:
+                return REQ_URL_RECOMMEND_SENDSMS;
+            case REQ_TYPE_MOBILE_LIST:
+                return REQ_URL_MOBILE_LIST;
             default:
                 break;
         }

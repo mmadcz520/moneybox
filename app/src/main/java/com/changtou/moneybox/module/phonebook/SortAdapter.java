@@ -10,22 +10,39 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.changtou.R;
+import com.changtou.moneybox.common.activity.BaseApplication;
+import com.changtou.moneybox.common.http.async.RequestParams;
+import com.changtou.moneybox.common.http.base.HttpCallback;
+import com.changtou.moneybox.common.http.impl.AsyncHttpClientImpl;
+import com.changtou.moneybox.common.logger.Logger;
+import com.changtou.moneybox.common.utils.ACache;
+import com.changtou.moneybox.module.entity.BankCardEntity;
+import com.changtou.moneybox.module.http.HttpRequst;
 import com.changtou.moneybox.module.widget.PromotionBtn;
 
-public class SortAdapter extends BaseAdapter implements SectionIndexer {
+import org.json.JSONObject;
+
+public class SortAdapter extends BaseAdapter implements SectionIndexer ,HttpCallback {
 	
 	private List<SortModel> list = null;
 
 	private ArrayList<Boolean> btnlist = new ArrayList<>();
 	
 	private Context mContext;
-	
+
+	private SendPhoneCallBack mSendPhoneCallBack = null;
+
+	public interface SendPhoneCallBack
+	{
+		void sendPhone(String phone);
+	}
+
+
 	public SortAdapter(Context mContext,List<SortModel> list){
 		this.mContext = mContext;
 
@@ -33,6 +50,9 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer {
 		{
 			btnlist.add(true);
 		}
+
+		//获取以及发送联系人的列表
+		sendMobileList();
 
 		this.list = list;
 	}
@@ -76,7 +96,6 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer {
 			viewHolder.tvButton = (PromotionBtn) convertView.findViewById(R.id.send_btn);
 
 			viewHolder.tvButton.setEnabled(btnlist.get(position));
-			Log.e("CT_MONEY", "======= +++ getViewgetViewgetViewgetView"  + position + "---" + btnlist.get(position));
 
 			convertView.setTag(viewHolder);
 		}else {
@@ -93,13 +112,24 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer {
 		}
 		viewHolder.tvTitle.setText(this.list.get(position).getName());
 
+		viewHolder.tvButton.setEnabled(btnlist.get(position));
+
 		final ViewHolder finalViewHolder = viewHolder;
 		viewHolder.tvButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 
-				Toast.makeText(mContext, "" + position, Toast.LENGTH_SHORT).show();
+
 				finalViewHolder.tvButton.setEnabled(false);
+				String number = list.get(position).getNumber();
+				Toast.makeText(mContext, "" + number, Toast.LENGTH_SHORT).show();
+
+				if (mSendPhoneCallBack != null) {
+					mSendPhoneCallBack.sendPhone(number);
+				}
+
+				sendMsg(number);
+
 				btnlist.set(position, false);
 				notifyDataSetChanged();
 			}
@@ -140,7 +170,7 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer {
 	final static class ViewHolder{
 		TextView tvLetter;
 		TextView tvTitle;
-		 PromotionBtn tvButton;
+		PromotionBtn tvButton;
 	}
 	/**
 	 * 提取英文的首字母，非英文字母用#代替。
@@ -158,5 +188,78 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer {
 		}
 	}
 
+	public void setSendPhoneCallBack(SendPhoneCallBack sendPhoneCallBack)
+	{
+		this.mSendPhoneCallBack = sendPhoneCallBack;
+	}
+
+	// 登陆
+	public void sendMsg(String phoneNum)
+	{
+		AsyncHttpClientImpl client = BaseApplication.getInstance().getAsyncClient();
+
+		String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_RECOMMEND_SENDSMS) +
+				"userid=" + ACache.get(BaseApplication.getInstance()).getAsString("userid") +
+				"&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token");
+
+		try {
+
+			Logger.e(url);
+
+			RequestParams params = new RequestParams();
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("mobile", phoneNum);
+			params.put("data", jsonObject.toString());
+			client.post(HttpRequst.REQ_TYPE_RECOMMEND_SENDSMS, BaseApplication.getInstance(), url, params, this);
+		}
+		catch (Exception e)
+		{
+
+		}
+
+	}
+
+	@Override
+	public void onSuccess(String content, Object object, int reqType)
+	{
+		if(reqType == HttpRequst.REQ_TYPE_RECOMMEND_SENDSMS)
+		{
+			Toast.makeText(mContext, "发生短信成功", Toast.LENGTH_LONG).show();
+		}
+		else if(reqType == HttpRequst.REQ_TYPE_MOBILE_LIST)
+		{
+			Logger.e(content);
+		}
+
+	}
+
+	@Override
+	public void onFailure(Throwable error, String content, int reqType)
+	{
+		Logger.e(error.toString());
+		Toast.makeText(mContext, "发生短信失败-网络异常", Toast.LENGTH_LONG).show();
+	}
+
+
+	// 登陆
+	public void sendMobileList()
+	{
+		AsyncHttpClientImpl client = BaseApplication.getInstance().getAsyncClient();
+
+		String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_MOBILE_LIST) +
+				"userid=" + ACache.get(BaseApplication.getInstance()).getAsString("userid") +
+				"&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token");
+
+		try {
+
+			RequestParams params = new RequestParams();
+			client.get(HttpRequst.REQ_TYPE_MOBILE_LIST, BaseApplication.getInstance(), url, params, this);
+		}
+		catch (Exception e)
+		{
+
+		}
+
+	}
 
 }

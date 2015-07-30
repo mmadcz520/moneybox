@@ -82,6 +82,8 @@ public class UserInfoEntity extends BaseEntity implements Serializable
 
         identycheck = jsonObject.getBoolean("identycheck");
         mobilecheck = jsonObject.getBoolean("mobilecheck");
+
+        hasinvestrecords = jsonObject.getBoolean("hasinvestrecords");
     }
 
     public String getEmail()
@@ -166,5 +168,10 @@ public class UserInfoEntity extends BaseEntity implements Serializable
     public boolean getMobilecheck()
     {
         return mobilecheck;
+    }
+
+    public boolean getHasinvestrecords()
+    {
+        return hasinvestrecords;
     }
 }

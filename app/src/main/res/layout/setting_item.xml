@@ -1,25 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="48dp"
+    android:layout_height="40dp"
     android:orientation="horizontal">
 
     <TextView
-        android:paddingLeft="24dp"
-        android:layout_centerVertical="true"
-        android:id="@+id/homepage_lv_text"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textColor="@color/font_white"/>
+        android:id="@+id/zhanghao"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:textSize="@dimen/font_size_hint"
+        android:textColor="@color/font_black"/>
 
-    <ImageView
-        android:id = "@+id/homepage_lv_img"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:src="@drawable/common_icon_arrow"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:contentDescription="设置"/>
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/zhuce"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:textSize="@dimen/font_size_hint"
+        android:textColor="@color/font_black"/>
+
+    <TextView
+        android:id="@+id/touzi"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:textSize="@dimen/font_size_hint"
+        android:textColor="@color/font_black"/>
+
+
+</LinearLayout>

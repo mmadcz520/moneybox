@@ -36,7 +36,7 @@
         android:focusableInTouchMode="true"
         android_custom:ex_icon="@mipmap/more_service"
         android_custom:position="bottom"
-        android_custom:ex_message="420-880-6270"
+        android_custom:ex_message="400-880-6270"
         android_custom:ex_message_color="@color/font_black"
         android_custom:ex_title="致电客服"
         android_custom:viewType="text" />

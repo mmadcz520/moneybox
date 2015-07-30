@@ -22,18 +22,12 @@ import com.changtou.moneybox.module.adapter.BankCardAdapter;
 import com.changtou.moneybox.module.entity.BankCardEntity;
 import com.changtou.moneybox.module.entity.UserInfoEntity;
 import com.changtou.moneybox.module.http.HttpRequst;
-import com.changtou.moneybox.module.service.BankParserHandler;
-import com.changtou.moneybox.module.widget.MultiStateView;
-import com.changtou.moneybox.module.widget.ZProgressHUD;
 
 import org.json.JSONObject;
 
-import java.io.InputStream;
-import java.util.List;
+
 import java.util.Map;
 
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
 
 /**
  * Created by Administrator on 2015/5/21.
@@ -50,6 +44,8 @@ public class RichesBankActivity extends CTBaseActivity
 
     private boolean isCertify = false;
 
+    private UserInfoEntity mUserInfoEntity = null;
+
     /**
      * 银行基本信列表
      */
@@ -61,7 +57,8 @@ public class RichesBankActivity extends CTBaseActivity
 
         mBankListView = (SwipeMenuListView)findViewById(R.id.riches_safe_bank_list);
 
-        isCertify = UserInfoEntity.getInstance().getIdentycheck();
+        mUserInfoEntity = (UserInfoEntity)ACache.get(this).getAsObject("userinfo");
+        isCertify = mUserInfoEntity.getIdentycheck();
 
         SwipeMenuCreator creator = new SwipeMenuCreator() {
             @Override
@@ -171,8 +168,7 @@ public class RichesBankActivity extends CTBaseActivity
         mBankListView.setAdapter(mAdapter);
 
         //初始化银行卡列表
-        UserInfoEntity userInfoEntity = UserInfoEntity.getInstance();
-        mEntity = userInfoEntity.getBankCardEntity();
+        mEntity = mUserInfoEntity.getBankCardEntity();
         mAdapter.setData(mEntity);
 
         initBankListRequest();
@@ -199,8 +195,8 @@ public class RichesBankActivity extends CTBaseActivity
             mEntity = (BankCardEntity) object;
             mAdapter.setData(mEntity);
 
-            UserInfoEntity userInfoEntity = UserInfoEntity.getInstance();
-            userInfoEntity.setBankCardEntity(mEntity);
+            mUserInfoEntity.setBankCardEntity(mEntity);
+            ACache.get(this).put("userinfo", mUserInfoEntity);
         }
 
         if(reqType == HttpRequst.REQ_TYPE_DELBANK)

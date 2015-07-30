@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.changtou.R;
+import com.changtou.moneybox.common.utils.ACache;
+import com.changtou.moneybox.module.entity.UserInfoEntity;
 import com.changtou.moneybox.module.phonebook.RichesPhoneBookActivity;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.bean.SocializeEntity;
@@ -25,6 +27,8 @@ public class RichesPromotionActivity extends CTBaseActivity
 
     final UMSocialService mController = UMServiceFactory.getUMSocialService("com.umeng.share");
 
+    private UserInfoEntity mUserInfoEntity = null;
+
     @Override
     protected void initView(Bundle bundle)
     {
@@ -39,6 +43,8 @@ public class RichesPromotionActivity extends CTBaseActivity
         UMWXHandler wxCircleHandler = new UMWXHandler(this,appID,appSecret);
         wxCircleHandler.setToCircle(true);
         wxCircleHandler.addToSocialSDK();
+
+        mUserInfoEntity = (UserInfoEntity)ACache.get(this).getAsObject("userinfo");
     }
 
     @Override
@@ -55,11 +61,20 @@ public class RichesPromotionActivity extends CTBaseActivity
 
     public void treatClickEvent(int id)
     {
-        switch (id)
-        {
+        switch (id) {
             case R.id.riches_pro_phonenum:
-                final Intent intent1 = new Intent(this, RichesPhoneBookActivity.class);
-                startActivity(intent1);
+
+                if (mUserInfoEntity.getHasinvestrecords())
+                {
+                    final Intent intent1 = new Intent(this, RichesPhoneBookActivity.class);
+                    startActivity(intent1);
+                }
+                else
+                {
+                    Toast.makeText(this, "请先进行第一笔投资", Toast.LENGTH_LONG).show();
+                }
+
+
 //                postWexin();
 
 //                postSinaWeibo();

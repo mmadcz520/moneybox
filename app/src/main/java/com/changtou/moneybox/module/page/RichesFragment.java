@@ -126,8 +126,8 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
                         break;
                     case 4: {
 
-                        UserInfoEntity userInfoEntity = UserInfoEntity.getInstance();
-                        BankCardEntity bank = userInfoEntity.getBankCardEntity();
+//                        UserInfoEntity userInfoEntity = UserInfoEntity.getInstance();
+                        BankCardEntity bank = mUserInfoEntity.getBankCardEntity();
 
                         int len = bank.mList.size();
                         if (len == 0) {

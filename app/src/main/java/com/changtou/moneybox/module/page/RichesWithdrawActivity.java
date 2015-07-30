@@ -27,7 +27,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Map;
 
@@ -56,6 +55,8 @@ public class RichesWithdrawActivity extends CTBaseActivity
     private String mDefaultBankNo = "";
 
     private String[] mError = {"取现成功", "取现失败", "没有绑定银行卡", "没有绑定支行信息", "用户设置银行卡有问题", "没有实名认证", "余额不足"};
+
+    private UserInfoEntity mUserInfoEntity = null;
 
     @Override
     protected void initView(Bundle bundle)
@@ -91,13 +92,14 @@ public class RichesWithdrawActivity extends CTBaseActivity
     @Override
     protected void initData()
     {
+        mUserInfoEntity = (UserInfoEntity)ACache.get(this).getAsObject("userinfo");
+
         initBankInfo();
         setPageTitle("提现");
 
-        UserInfoEntity userInfoEntity = UserInfoEntity.getInstance();
-        mOverage = userInfoEntity.getOverage();
-        mWithdrawTotle.setText(customFormat(mOverage));
-        mWithdrawHandling.setText("-" + customFormat("5"));
+        mOverage = mUserInfoEntity.getOverage();
+//        mWithdrawTotle.setText(customFormat(mOverage));
+//        mWithdrawHandling.setText("-" + customFormat("5"));
 
         makeWithdrawInfoRequest();
 
@@ -106,8 +108,7 @@ public class RichesWithdrawActivity extends CTBaseActivity
 
     private void initBankInfo()
     {
-        UserInfoEntity userInfoEntity = UserInfoEntity.getInstance();
-        BankCardEntity bank = userInfoEntity.getBankCardEntity();
+        BankCardEntity bank = mUserInfoEntity.getBankCardEntity();
 
         int len = bank.mList.size();
         BankCardEntity.BankListEntity bList ;

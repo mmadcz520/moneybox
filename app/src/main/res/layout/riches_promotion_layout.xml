@@ -172,12 +172,13 @@
                         android:layout_height="fill_parent"
                         android:layout_weight="1"
                         android:orientation="vertical">
-                    <ImageView
+                    <Button
                         android:layout_marginTop="10dp"
                         android:layout_width="45dp"
                         android:layout_height="45dp"
                         android:layout_gravity="center_horizontal"
-                        android:src="@mipmap/riches_promotion_weixin" />
+                        android:enabled="false"
+                        android:background="@drawable/promotion_weixin_selector" />
 
                         <TextView android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
@@ -195,12 +196,13 @@
                         android:layout_weight="1"
                         android:orientation="vertical">
 
-                    <ImageView
+                    <Button
                         android:layout_marginTop="10dp"
                         android:layout_width="45dp"
                         android:layout_height="45dp"
                         android:layout_gravity="center_horizontal"
-                        android:src="@mipmap/riches_promotion_friend" />
+                        android:enabled="false"
+                        android:background="@drawable/promotion_friend_selector" />
 
                         <TextView android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
@@ -222,12 +224,13 @@
                         android:layout_height="fill_parent"
                         android:layout_weight="1"
                         android:orientation="vertical">
-                    <ImageView
+                    <Button
                         android:layout_marginTop="10dp"
                         android:layout_width="45dp"
                         android:layout_height="45dp"
                         android:layout_gravity="center_horizontal"
-                        android:src="@mipmap/riches_promotion_weibo" />
+                        android:enabled="false"
+                        android:background="@drawable/promotion_weibo_selector" />
 
                         <TextView android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
@@ -244,12 +247,13 @@
                         android:layout_height="fill_parent"
                         android:layout_weight="1"
                         android:orientation="vertical">
-                    <ImageView
+                    <Button
                         android:layout_marginTop="10dp"
                         android:layout_width="45dp"
                         android:layout_height="45dp"
                         android:layout_gravity="center_horizontal"
-                        android:src="@mipmap/riches_promotion_qq" />
+                        android:enabled="false"
+                        android:background="@drawable/promotion_qq_selector" />
 
                         <TextView android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
@@ -266,12 +270,13 @@
                         android:layout_weight="1"
                         android:orientation="vertical">
 
-                    <ImageView
+                    <Button
                         android:layout_marginTop="10dp"
                         android:layout_width="45dp"
                         android:layout_height="45dp"
                         android:layout_gravity="center_horizontal"
-                        android:src="@mipmap/riches_promotion_kongjian" />
+                        android:enabled="false"
+                        android:background="@drawable/promotion_kongjian_selector" />
 
                         <TextView android:layout_width="fill_parent"
                             android:layout_height="fill_parent"

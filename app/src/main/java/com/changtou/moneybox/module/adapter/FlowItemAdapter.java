@@ -99,7 +99,7 @@ public class FlowItemAdapter extends BaseAdapter
         viewHolder.mNumView.setText(num);
 
         boolean account = (boolean)entity.get("account");
-        if(account)
+        if(!account)
         {
             viewHolder.mNumView.setTextColor(mContext.getResources().getColor(R.color.ct_blue));
             viewHolder.mAffirmView.setVisibility(View.VISIBLE);

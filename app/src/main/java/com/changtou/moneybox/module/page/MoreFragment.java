@@ -133,28 +133,6 @@ public class MoreFragment extends BaseFragment implements View.OnTouchListener{
 
     }
 
-    /*
-    * 初始化设置列表
-    */
-    private void initSettingList(ListView listView, int resId) {
-        List<Map<String, Object>> list = new ArrayList();
-        String[] titleList = mContext.getResources().getStringArray(resId);
-        for (int i = 0; i < titleList.length; i++) {
-            Map<String, Object> map = new HashMap();
-            map.put("text", titleList[i]);
-            map.put("img", R.drawable.common_icon_arrow);
-            list.add(map);
-        }
-
-        SimpleAdapter adapter = new SimpleAdapter(mContext, list, R.layout.setting_item,
-                new String[]{"text", "img"}, new int[]{
-                R.id.homepage_lv_text, R.id.homepage_lv_img
-        });
-        ViewStub viewStub = new ViewStub(mContext);
-        listView.addHeaderView(viewStub);
-        listView.setAdapter(adapter);
-    }
-
     /**
      * 注册成功后弹框
      */

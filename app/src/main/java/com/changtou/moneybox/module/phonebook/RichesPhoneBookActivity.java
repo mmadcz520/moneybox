@@ -243,13 +243,16 @@ public class RichesPhoneBookActivity extends CTBaseActivity {
 
                     mSourceDateList.add(item);
                     Collections.sort(mSourceDateList, pinyinComparator);
-                    adapter = new SortAdapter(RichesPhoneBookActivity.this, mSourceDateList);
-                    sortListView.setAdapter(adapter);
+//                    adapter = new SortAdapter(RichesPhoneBookActivity.this, mSourceDateList);
+//                    sortListView.setAdapter(adapter);
                 }
             }
             if (mSourceDateList.size() > 0) {
 
             }
+
+            adapter = new SortAdapter(RichesPhoneBookActivity.this, mSourceDateList);
+            sortListView.setAdapter(adapter);
         }
     }
 

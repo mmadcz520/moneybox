@@ -215,7 +215,7 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
 
         //初始化弹框
         cache.put("isPopu", true);
-        super.onSuccess(content, object, reqType);
+//        super.onSuccess(content, object, reqType);
     }
 
     @Override
