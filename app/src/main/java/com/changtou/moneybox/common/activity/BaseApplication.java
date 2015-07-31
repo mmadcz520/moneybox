@@ -333,6 +333,8 @@ public abstract class BaseApplication extends Application implements UncaughtExc
      */
     public void onForeground()
     {
+        Logger.e("-------------------------------------is back" + isBack);
+
         if(!isBack && (sph.getString(AppCfg.CFG_LOGIN, "").equals(AppCfg.LOGIN_STATE.LOGIN.toString())))
         {
             Intent intent = new Intent(this, GesturePWActivity.class);

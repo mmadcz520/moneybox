@@ -125,7 +125,7 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
      */
     public void loginSucNotify()
     {
-        getUserInfo();
+        gotoMainPage();
     }
 
     public void loginIngNotify()
@@ -195,6 +195,18 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
     @Override
     public void onSuccess(String content, Object object, int reqType)
     {
+//        gotoMainPage();
+        super.onSuccess(content, object, reqType);
+    }
+
+    @Override
+    public void onFailure(Throwable error, String content, int reqType)
+    {
+        super.onFailure(error, content, reqType);
+    }
+
+    private void gotoMainPage()
+    {
         mLoginBtn.setEnabled(true);
 
         //初始化用户数据
@@ -209,18 +221,14 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
         sph.putString(AppCfg.CFG_LOGIN, AppCfg.LOGIN_STATE.LOGIN.toString());
         sph.putString(AppCfg.GSPD, "");
 
+        BaseApplication.getInstance().onBackground();
+
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("login_state", 1);
         this.startActivity(intent);
 
         //初始化弹框
         cache.put("isPopu", true);
-//        super.onSuccess(content, object, reqType);
     }
 
-    @Override
-    public void onFailure(Throwable error, String content, int reqType)
-    {
-        super.onFailure(error, content, reqType);
-    }
 }

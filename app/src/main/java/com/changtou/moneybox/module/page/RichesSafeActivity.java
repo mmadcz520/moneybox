@@ -54,6 +54,8 @@ public class RichesSafeActivity extends CTBaseActivity implements View.OnTouchLi
         int bcolor = getResources().getColor(R.color.font_black);
         int rcolor = getResources().getColor(R.color.ct_red);
         UserInfoEntity userInfoEntity = (UserInfoEntity)ACache.get(this).getAsObject("userinfo");
+
+        if(userInfoEntity == null) return;
         if(userInfoEntity.getMobilecheck())
         {
             phoneauthBtn.setMessage("已认证", bcolor);

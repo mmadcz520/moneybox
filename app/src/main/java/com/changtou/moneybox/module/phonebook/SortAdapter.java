@@ -224,7 +224,7 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer ,HttpCall
 	{
 		if(reqType == HttpRequst.REQ_TYPE_RECOMMEND_SENDSMS)
 		{
-			Toast.makeText(mContext, "发生短信成功", Toast.LENGTH_LONG).show();
+			Toast.makeText(mContext, "发送短信成功", Toast.LENGTH_LONG).show();
 		}
 		else if(reqType == HttpRequst.REQ_TYPE_MOBILE_LIST)
 		{
