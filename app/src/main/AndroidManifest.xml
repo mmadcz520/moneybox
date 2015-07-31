@@ -47,7 +47,7 @@
         android:name=".moneybox.module.CTMoneyApplication"
         android:allowBackup="true"
         tools:replace="android:icon"
-        android:icon="@drawable/ct_app_loge"
+        android:icon="@drawable/ct_app_logo"
         android:label="@string/app_name"
         android:screenOrientation="portrait">
         <meta-data

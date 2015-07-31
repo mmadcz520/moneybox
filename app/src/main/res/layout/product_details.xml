@@ -28,7 +28,7 @@
         <Button
             android:id="@+id/confirm_button"
             android:layout_width="fill_parent"
-            android:layout_height="@dimen/button_height_fillparent"
+            android:layout_height="50dp"
             android:layout_centerInParent="true"
             android:background="@drawable/btn_selector"
             android:textColor="@color/ct_white"

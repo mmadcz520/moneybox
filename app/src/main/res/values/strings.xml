@@ -30,7 +30,7 @@
     <string name="pd_gesture_otheruser">其他账户登陆</string>
 
     <!-- 安全设置页面-->
-    <string name="safe_page_prompt">24小时内首次充值送20元，首次充值送10元。请登录长投在线网页版进行充值。</string>
+    <string name="safe_page_prompt">24小时内首次充值送20元礼金。请登录长投在线网页版进行充值。</string>
 
     <!-- 推荐好友页面-->
     <string name="promotion_page_prompt">

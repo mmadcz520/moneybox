@@ -48,7 +48,7 @@
                     android:clickable="false"
                     android:text="@string/tab_homepage"
                     android:textColor="@color/font_white"
-                    android:textSize="@dimen/font_size_normal" />
+                    android:textSize="@dimen/font_size_hint" />
             </LinearLayout>
 
             <LinearLayout
@@ -75,7 +75,7 @@
                     android:clickable="false"
                     android:text="@string/tab_productpage"
                     android:textColor="@color/font_white"
-                    android:textSize="@dimen/font_size_normal" />
+                    android:textSize="@dimen/font_size_hint" />
             </LinearLayout>
 
             <LinearLayout
@@ -102,7 +102,7 @@
                     android:clickable="false"
                     android:text="@string/tab_richespage"
                     android:textColor="@color/font_white"
-                    android:textSize="@dimen/font_size_normal" />
+                    android:textSize="@dimen/font_size_hint" />
             </LinearLayout>
 
             <LinearLayout
@@ -129,7 +129,7 @@
                     android:clickable="false"
                     android:text="@string/tab_setttingpage"
                     android:textColor="@color/font_white"
-                    android:textSize="@dimen/font_size_normal" />
+                    android:textSize="@dimen/font_size_hint" />
             </LinearLayout>
         </LinearLayout>
 

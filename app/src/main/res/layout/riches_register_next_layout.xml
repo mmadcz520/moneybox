@@ -50,7 +50,7 @@
         android:background="@color/ct_blue"
         android:textColor="@color/ct_white"
         android:text="下一步"
-        android:textSize="@dimen/font_size_normal"
+        android:textSize="@dimen/font_size_navigation"
         android:layout_height="@dimen/button_height_fillparent" />
 
 </LinearLayout>

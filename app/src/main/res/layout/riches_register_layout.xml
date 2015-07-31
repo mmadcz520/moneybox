@@ -25,7 +25,7 @@
         android:background="@drawable/btn_selector"
         android:textColor="@color/ct_white"
         android:text="注 册"
-        android:textSize="@dimen/font_size_normal" />
+        android:textSize="@dimen/font_size_navigation" />
 
     <LinearLayout android:layout_height="wrap_content"
         android:layout_width="fill_parent"

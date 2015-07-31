@@ -1,6 +1,6 @@
 <resources>
     <dimen name="app_actionbar_height">50dp</dimen>
-    <dimen name="app_bottomtab_height">50dp</dimen>
+    <dimen name="app_bottomtab_height">55dp</dimen>
 
     <!--<dimen name="edit_img_paddingLeft">40dp</dimen>-->
     <dimen name="widget_progress_height">140dp</dimen>

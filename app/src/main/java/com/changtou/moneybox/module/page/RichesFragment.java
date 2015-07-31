@@ -51,7 +51,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class RichesFragment extends BaseFragment implements AdapterView.OnItemClickListener {
 
-    private TextView mMobileTextView = null;
+//    private TextView mMobileTextView = null;
     private CountView mTotalAssetsTextView = null;
     private TextView mInvestAssetsTextView = null;
     private TextView mProfitTextView = null;
@@ -152,7 +152,7 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
 
         mQiandaoImage = (Button)view.findViewById(R.id.riches_signbar);
 
-        mMobileTextView = (TextView)view.findViewById(R.id.riches_text_mobile);
+//        mMobileTextView = (TextView)view.findViewById(R.id.riches_text_mobile);
         mTotalAssetsTextView = (CountView)view.findViewById(R.id.riches_text_totalassets);
         mInvestAssetsTextView = (TextView)view.findViewById(R.id.riches_text_investassets);
         mProfitTextView = (TextView)view.findViewById(R.id.riches_text_profit);
@@ -210,7 +210,7 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
 
     private void initRichesPage()
     {
-        mMobileTextView.setText(mUserInfoEntity.getMobile());
+//        mMobileTextView.setText(mUserInfoEntity.getMobile());
         String total = mUserInfoEntity.getTotalAssets();
         total = total.replace(",", "");
         if(total.equals("")) return;

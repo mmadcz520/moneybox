@@ -98,7 +98,7 @@ public class ConfirmActivity extends CTBaseActivity
 
         mDialog = new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE);
         mDialog.setConfirmText("确认");
-        mDialog.setContentText("恭喜你投资成功!\n 获得2个投元");
+        mDialog.setContentText("恭喜你您资成功!\n 获得2个投园");
         mDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener()
         {
             public void onClick(SweetAlertDialog sweetAlertDialog)
