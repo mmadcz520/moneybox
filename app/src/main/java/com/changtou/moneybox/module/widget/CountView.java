@@ -2,9 +2,7 @@ package com.changtou.moneybox.module.widget;
 
 import android.content.Context;
 
-
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.TextView;
 
@@ -31,6 +29,17 @@ public class CountView extends TextView
         objectAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
         objectAnimator.start();
     }
+
+
+    public void showNumberWithAnimation(int number) {
+        //修改number属性，会调用setNumber方法
+        ObjectAnimator objectAnimator= ObjectAnimator.ofFloat(this, "number", 0, number);
+        objectAnimator.setDuration(duration);
+        //加速器，从慢到快到再到慢
+        objectAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
+        objectAnimator.start();
+    }
+
 
     /**
      * 百分数显示动画

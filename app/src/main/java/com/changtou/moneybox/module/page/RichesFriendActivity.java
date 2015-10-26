@@ -2,7 +2,7 @@ package com.changtou.moneybox.module.page;
 
 import android.os.Bundle;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 import com.umeng.socialize.controller.UMServiceFactory;
 import com.umeng.socialize.controller.UMSocialService;
 

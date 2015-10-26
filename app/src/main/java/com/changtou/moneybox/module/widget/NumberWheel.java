@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.RelativeLayout;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 
 /**
  * 1280*720 密度2；暂不支持适配

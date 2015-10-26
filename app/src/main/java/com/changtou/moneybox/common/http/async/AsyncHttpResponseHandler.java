@@ -14,8 +14,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 
-import com.changtou.moneybox.common.logger.Logger;
-
 /**
  * Used to intercept and handle the responses from requests made using
  * be anonymously overridden with your own response handling code.

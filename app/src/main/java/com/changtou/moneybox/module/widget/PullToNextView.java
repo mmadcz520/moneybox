@@ -6,7 +6,6 @@ import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -18,7 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 import com.nineoldandroids.animation.ValueAnimator;
 
 
@@ -387,9 +386,6 @@ public class PullToNextView extends LinearLayout {
                 return true;
             } else if (deltaY < -12 && child.getMeasuredHeight() <= contentView.getHeight() + mScrollView.getScrollY()) {
                 //向上
-
-                Log.e("CT_MONEY", "--------------------------------deltaY=" +deltaY);
-
                 mPullStateE = PullStateE.PULL_STATE_UP;
                 return true;
             }

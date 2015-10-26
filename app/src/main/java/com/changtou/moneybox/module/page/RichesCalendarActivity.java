@@ -2,20 +2,20 @@ package com.changtou.moneybox.module.page;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ListView;
 
-import com.changtou.R;
-import com.changtou.moneybox.common.logger.Logger;
+import com.changtou.moneybox.R;
 import com.changtou.moneybox.common.utils.ACache;
 import com.changtou.moneybox.module.adapter.FlowItemAdapter;
 import com.changtou.moneybox.module.entity.FlowEntity;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateChangedListener;
+import com.prolificinteractive.materialcalendarview.OnMonthChangedListener;
 import com.prolificinteractive.materialcalendarview.decorator.EventDecorator;
 import com.prolificinteractive.materialcalendarview.decorator.OneDayDecorator;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -26,7 +26,7 @@ import java.util.Map;
  * Created by Administrator on 2015/5/25.
  * 现金流界面
  */
-public class RichesCalendarActivity extends CTBaseActivity implements OnDateChangedListener
+public class RichesCalendarActivity extends CTBaseActivity implements OnDateChangedListener, OnMonthChangedListener
 {
     private OneDayDecorator oneDayDecorator = new OneDayDecorator();
     private MaterialCalendarView widget;
@@ -52,40 +52,25 @@ public class RichesCalendarActivity extends CTBaseActivity implements OnDateChan
         mSelectMonth = (int)cache.getAsObject("selected_month");
         mFlowEntity = (FlowEntity)cache.getAsObject("flow");
 
-        String time = "";
-        if(mFlowEntity != null)
-        {
-            Log.e("CT_MONEY", "sMonthsMonth---------------------" + mFlowEntity.getMonth().toString());
-
-            FlowEntity.MonthEntity sMonth = mFlowEntity.mMonth.get(mSelectMonth);
-            time = sMonth.time;
-        }
-
-
         widget = (MaterialCalendarView) findViewById(R.id.calendarView);
         widget.setOnDateChangedListener(this);
-        widget.setShowOtherDates(true);
+        widget.setShowOtherDates(false);
         widget.setArrowColor(getResources().getColor(R.color.ct_blue));
         widget.setSelectionColor(getResources().getColor(R.color.ct_blue));
         widget.addDecorators(
                 oneDayDecorator
         );
         widget.setSelectedDate(Calendar.getInstance());
+        widget.setOnMonthChangedListener(this);
 
-
-        //设置当日日期
-        String[] time_arr = time.split("-");
-        if(time_arr.length != 2) return;
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.YEAR, Integer.parseInt(time_arr[0]));
-        calendar.set(Calendar.MONTH, (Integer.parseInt(time_arr[1])-1));
-        widget.setCurrentDate(calendar);
 
         mFlowItemAdapter = new FlowItemAdapter(this);
         mItemListView = (ListView)findViewById(R.id.riches_flow_day_listview);
         mItemListView.setAdapter(mFlowItemAdapter);
 
         setLabelDays();
+
+        setReData();
     }
 
     protected void initData() {
@@ -95,6 +80,18 @@ public class RichesCalendarActivity extends CTBaseActivity implements OnDateChan
 
     protected int setPageType() {
         return PAGE_TYPE_SUB;
+    }
+
+    private void setReData()
+    {
+        Calendar calendar = Calendar.getInstance();
+        widget.setSelectedDate(calendar);
+
+        widget.invalidateDecorators();
+
+        CalendarDay day = new CalendarDay(calendar);
+        ArrayList<Map<String, Object>> item = mLabelData.get(day);
+        mFlowItemAdapter.setData(item);
     }
 
     public void onDateChanged(MaterialCalendarView widget, CalendarDay date)
@@ -143,5 +140,32 @@ public class RichesCalendarActivity extends CTBaseActivity implements OnDateChan
 
         widget.addDecorator(new EventDecorator(Color.RED, dates));
         widget.addDecorators();
+    }
+
+    @Override
+    public void onMonthChanged(MaterialCalendarView widget, CalendarDay date)
+    {
+        ArrayList<FlowEntity.MonthEntity> monthList = mFlowEntity.getMonth();
+        Calendar calendar = date.getCalendar();
+        String str = (new SimpleDateFormat("yyyy-M")).format(calendar.getTime());
+        String dayNum = "1";
+
+        for(int i = 0; i < monthList.size(); i++)
+        {
+            String time = monthList.get(i).time;
+            if(time.equals(str))
+            {
+                ArrayList<FlowEntity.DayEntity> days = monthList.get(i).mDay;
+                dayNum = days.get(0).dayNum;
+            }
+        }
+
+        calendar.set(Calendar.DATE, Integer.parseInt(dayNum));
+        widget.setSelectedDate(calendar);
+        widget.invalidateDecorators();
+
+        CalendarDay day = new CalendarDay(calendar);
+        ArrayList<Map<String, Object>> item = mLabelData.get(day);
+        mFlowItemAdapter.setData(item);
     }
 }

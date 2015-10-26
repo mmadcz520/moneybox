@@ -46,7 +46,6 @@ import android.graphics.Canvas;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 
 /**
  * Android 缓存工具类
@@ -400,9 +399,6 @@ public class ACache {
 				put(key, data);
 			}
 		} catch (Exception e) {
-
-			Log.e("CT_MONEY", e.toString());
-
 			e.printStackTrace();
 		} finally {
 			try {

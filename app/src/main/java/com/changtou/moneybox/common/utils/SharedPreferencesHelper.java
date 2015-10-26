@@ -2,7 +2,6 @@ package com.changtou.moneybox.common.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 public class SharedPreferencesHelper {
 
@@ -34,7 +33,6 @@ public class SharedPreferencesHelper {
         try {
             return getSP().getBoolean(key, defValue);
         } catch (NullPointerException exception) {
-            Log.d("hcj", ""+exception);
             return defValue;
         }
     }
@@ -45,7 +43,6 @@ public class SharedPreferencesHelper {
             editor.putBoolean(key, value);
             editor.commit();
         } catch (NullPointerException exception) {
-            Log.d("hcj", ""+exception);
         }
     }
 
@@ -54,7 +51,6 @@ public class SharedPreferencesHelper {
         try {
             return getSP().getLong(key, defValue);
         } catch (NullPointerException exception) {
-            Log.d("hcj", ""+exception);
             return defValue;
         }
     }
@@ -65,7 +61,6 @@ public class SharedPreferencesHelper {
             editor.putLong(key, value);
             editor.commit();
         } catch (NullPointerException exception) {
-            Log.d("hcj", ""+exception);
         }
     }
 
@@ -73,7 +68,6 @@ public class SharedPreferencesHelper {
         try {
             return getSP().getInt(key, defaultValue);
         } catch (Exception e) {
-            Log.d("hcj", ""+e);
             return defaultValue;
 
         }
@@ -85,7 +79,6 @@ public class SharedPreferencesHelper {
             editor.putInt(key, value);
             editor.commit();
         } catch (Exception e) {
-            Log.d("hcj", ""+e);
         }
     }
 
@@ -93,7 +86,6 @@ public class SharedPreferencesHelper {
         try {
             return getSP().getString(key, defValue);
         } catch (NullPointerException e) {
-            Log.d("hcj", ""+e);
             return defValue;
         }
     }
@@ -104,7 +96,6 @@ public class SharedPreferencesHelper {
             editor.putString(key, value);
             editor.commit();
         } catch (NullPointerException e) {
-            Log.d("hcj", ""+e);
         }
     }
 
@@ -114,7 +105,6 @@ public class SharedPreferencesHelper {
             editor.clear();
             editor.commit();
         } catch (NullPointerException e) {
-            Log.d("hcj", ""+e);
         }
     }
 

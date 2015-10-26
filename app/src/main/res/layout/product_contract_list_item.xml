@@ -17,9 +17,10 @@
     <TextView android:id="@+id/pro_value"
         android:layout_width="0dp"
         android:layout_height="fill_parent"
-        android:gravity="left|center"
+        android:gravity="right|center"
         android:layout_weight="7"
         android:textColor="@color/font_black"
+        android:layout_marginRight="8dp"
         android:textSize="@dimen/font_size_hint2"/>
 
 </LinearLayout>

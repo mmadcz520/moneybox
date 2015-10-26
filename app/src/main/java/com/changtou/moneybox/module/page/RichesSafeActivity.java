@@ -8,11 +8,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.utils.ACache;
 import com.changtou.moneybox.common.utils.SharedPreferencesHelper;
-import com.changtou.moneybox.module.appcfg.AppCfg;
 import com.changtou.moneybox.module.entity.UserInfoEntity;
 import com.changtou.moneybox.module.widget.ExEditView;
 
@@ -32,6 +31,8 @@ public class RichesSafeActivity extends CTBaseActivity implements View.OnTouchLi
     private TextView mTitleView = null;
 
     private SharedPreferencesHelper sph = null;
+
+    private UserInfoEntity userInfoEntity = null;
 
     protected void initView(Bundle bundle) {
         sph = SharedPreferencesHelper.getInstance(getApplicationContext());
@@ -53,7 +54,7 @@ public class RichesSafeActivity extends CTBaseActivity implements View.OnTouchLi
 
         int bcolor = getResources().getColor(R.color.font_black);
         int rcolor = getResources().getColor(R.color.ct_red);
-        UserInfoEntity userInfoEntity = (UserInfoEntity)ACache.get(this).getAsObject("userinfo");
+        userInfoEntity = (UserInfoEntity)ACache.get(this).getAsObject("userinfo");
 
         if(userInfoEntity == null) return;
         if(userInfoEntity.getMobilecheck())
@@ -94,7 +95,6 @@ public class RichesSafeActivity extends CTBaseActivity implements View.OnTouchLi
     {
         setPageTitle("安全设置");
 
-        UserInfoEntity userInfoEntity = UserInfoEntity.getInstance();
         String fullname = userInfoEntity.getFullName();
         mTitleView.setText(fullname);
     }
@@ -107,6 +107,7 @@ public class RichesSafeActivity extends CTBaseActivity implements View.OnTouchLi
             {
                 final Intent intent = new Intent(this, PdFrogetActivity.class);
                 intent.putExtra("pageType", 1);
+                intent.putExtra("isPhoneauth", userInfoEntity.getMobilecheck());
                 startActivity(intent);
                 break;
             }
@@ -114,13 +115,14 @@ public class RichesSafeActivity extends CTBaseActivity implements View.OnTouchLi
             case R.id.btn_certification_manager:
             {
                 final Intent intent = new Intent(this, RichesCertificationActivity.class);
+                intent.putExtra("isCerfy", userInfoEntity.getIdentycheck());
                 startActivity(intent);
                 break;
             }
 
             case R.id.btn_bank_manager:
             {
-                if(UserInfoEntity.getInstance().getIdentycheck())
+                if(userInfoEntity.getIdentycheck())
                 {
                     final Intent intent = new Intent(this, RichesBankActivity.class);
                     startActivity(intent);
@@ -162,6 +164,7 @@ public class RichesSafeActivity extends CTBaseActivity implements View.OnTouchLi
             {
                 final Intent intent = new Intent(this, PdFrogetActivity.class);
                 intent.putExtra("pageType", 1);
+                intent.putExtra("isPhoneauth", userInfoEntity.getMobilecheck());
                 startActivity(intent);
                 break;
             }
@@ -169,6 +172,7 @@ public class RichesSafeActivity extends CTBaseActivity implements View.OnTouchLi
             case R.id.btn_certification_manager:
             {
                 final Intent intent = new Intent(this, RichesCertificationActivity.class);
+                intent.putExtra("isCerfy", userInfoEntity.getIdentycheck());
                 startActivity(intent);
                 break;
             }

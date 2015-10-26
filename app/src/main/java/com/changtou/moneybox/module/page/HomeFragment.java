@@ -2,10 +2,7 @@ package com.changtou.moneybox.module.page;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.net.ConnectivityManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,22 +11,16 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.activity.BaseFragment;
-import com.changtou.moneybox.common.logger.Logger;
-import com.changtou.moneybox.common.utils.ACache;
 import com.changtou.moneybox.common.utils.SharedPreferencesHelper;
 import com.changtou.moneybox.module.adapter.ProductListAdapter;
-import com.changtou.moneybox.module.entity.PromotionEntity;
 import com.changtou.moneybox.module.http.HttpRequst;
-import com.changtou.moneybox.module.service.NetReceiver;
 import com.changtou.moneybox.module.service.NetStateListener;
 import com.changtou.moneybox.module.widget.CountView;
-import com.changtou.moneybox.module.widget.ExEditView;
 import com.changtou.moneybox.module.widget.ExImageSwitcher;
 import com.changtou.moneybox.module.widget.RoundProgressBar;
-import com.changtou.moneybox.module.widget.ZProgressHUD;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 
@@ -65,8 +56,8 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
 
     private PullToRefreshScrollView mPullToRefreshScrollView = null;
 
-    private String[] mImgs = {"http://www.changtounet.com/manage/news/uploadimages/50758017-9051-4838-ac09-f764bb5bfa4b.png.png",
-            "http://www.changtounet.com/manage/news/uploadimages/50758017-9051-4838-ac09-f764bb5bfa4b.png.png" };
+//    private String[] mImgs = {"http://www.changtounet.com/manage/news/uploadimages/50758017-9051-4838-ac09-f764bb5bfa4b.png.png",
+//            "http://www.changtounet.com/manage/news/uploadimages/50758017-9051-4838-ac09-f764bb5bfa4b.png.png" };
 
     private String productId = "0";
     private double jd = 0;
@@ -77,8 +68,8 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
     private String amount = "";
     private String minamount = "";
 
-    private double allInvest = 0;
-    private double leiji = 0;
+    private String allInvest = "";
+    private String leiji = "";
 
     private TextView mQtjeTextView = null;
 
@@ -122,7 +113,7 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
 
         sph = SharedPreferencesHelper.getInstance(this.getActivity());
         BaseApplication.getInstance().setNetStateListener(this);
-        mBannerSwitcher.setImage(mImgs);
+//        mBannerSwitcher.setImage(mImgs);
 
         initParam();
         requestHomePage();
@@ -143,22 +134,24 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
 
                 JSONObject obj1 = array.getJSONObject(0);
                 JSONArray appRecomm = obj1.getJSONArray("AppRecomm");
-                JSONObject appObject = appRecomm.getJSONObject(0);
 
-                productId = appObject.getString("id");
-                jd = appObject.getDouble("jd") * 100;
-                projectname = appObject.getString("projectname");
-                maturity = appObject.getString("maturity");
-                interest = appObject.getString("interest");
-                syje = appObject.getString("syje");
-                amount = appObject.getString("amount");
-                minamount = appObject.getString("minamount");
+                if(appRecomm.length() > 0) {
+                    JSONObject appObject = appRecomm.getJSONObject(0);
+                    productId = appObject.getString("id");
+                    jd = appObject.getDouble("jd") * 100;
+                    projectname = appObject.getString("projectname");
+                    maturity = appObject.getString("maturity");
+                    interest = appObject.getString("interest");
+                    syje = appObject.getString("syje");
+                    amount = appObject.getString("amount");
+                    minamount = appObject.getString("minamount");
+                }
 
                 JSONObject obj2 = array.getJSONObject(1);
-                allInvest = obj2.getDouble("allInvest");
+                allInvest = obj2.getString("allInvest");
 
                 JSONObject obj3 = array.getJSONObject(3);
-                leiji = obj3.getDouble("leiji");
+                leiji = obj3.getString("leiji");
             }
             catch (Exception e)
             {
@@ -166,17 +159,17 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
             }
 
 
-            mInvestProgress.setProgress((int)jd);
+            mInvestProgress.setProgress((int) jd);
 
-            mInvestSum.showNumberWithAnimation((float) allInvest);
-            mMakeMoney.showNumberWithAnimation((float)leiji);
+            mInvestSum.setText(allInvest);
+            mMakeMoney.setText(leiji);
 
             mProductTitle.setText(projectname);
             mIcomeText.setText(interest);
             mTagTextView.setText("%");
             mTimeLimit.setText(maturity);
             mInvestPercent.showPercentWithAnimation((float)jd);
-            mInvestNum.setText(syje + "/" + amount);
+            mInvestNum.setText("￥" + syje + "/" + amount);
             mQtjeTextView.setText(minamount + "起投 | " + "每人限购100万元");
             mInvestBtn.setEnabled(true);
 
@@ -192,6 +185,7 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
 
                 int len = array.length();
                 String[] imgs = new String[len];
+                String[] urls = new String[len];
 
                 for(int i = 0; i < len; i++)
                 {
@@ -200,12 +194,11 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
                     String url = j.getString("url");
                     String title = j.getString("title");
 
-                    Logger.d(url);
-
                     imgs[i] = j.getString("img");
+                    urls[i] = url;
                 }
 
-//                mBannerSwitcher.setImage(imgs);
+                mBannerSwitcher.setImage(imgs, urls);
             }
             catch (Exception e)
             {

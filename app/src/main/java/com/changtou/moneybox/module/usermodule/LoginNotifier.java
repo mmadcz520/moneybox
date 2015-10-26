@@ -19,4 +19,6 @@ public interface LoginNotifier {
 
 	// 登出通知
 	void logoutNotify();
+
+	void loginUserInfo(Object oject);
 }

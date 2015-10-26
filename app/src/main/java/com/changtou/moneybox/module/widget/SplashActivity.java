@@ -2,9 +2,8 @@ package com.changtou.moneybox.module.widget;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 import com.changtou.moneybox.common.activity.BaseSplashActivity;
 import com.changtou.moneybox.module.page.BootActivity;
 import com.changtou.moneybox.module.page.MainActivity;
@@ -49,7 +48,6 @@ public class SplashActivity extends BaseSplashActivity {
         // TODO Auto-generated method stub
         Intent intent = new Intent();
         intent.setClass(SplashActivity.this, MainActivity.class);
-
         startActivity(intent);
 
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);

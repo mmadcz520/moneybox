@@ -1,9 +1,6 @@
 package com.changtou.moneybox.module.entity;
 
-import android.util.Log;
-
 import com.changtou.moneybox.common.http.base.BaseEntity;
-import com.changtou.moneybox.common.logger.Logger;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -29,8 +26,6 @@ public class FlowEntity extends BaseEntity implements Serializable
      */
     public void paser(String data) throws Exception {
         JSONArray array = new JSONArray(data);
-
-        Log.e("CT_MONEY", "llllllllllllllllllllllllldsadsadsadsa");
 
         //解析json 数据
         mMonth = new ArrayList<>();

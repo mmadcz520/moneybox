@@ -6,11 +6,13 @@ import android.os.CountDownTimer;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.http.async.RequestParams;
 import com.changtou.moneybox.common.utils.ACache;
+import com.changtou.moneybox.module.entity.UserInfoEntity;
 import com.changtou.moneybox.module.http.HttpRequst;
+import com.changtou.moneybox.module.service.ReadSMsTool;
 import com.changtou.moneybox.module.widget.ExEditView;
 
 import org.json.JSONObject;
@@ -28,6 +30,9 @@ public class PdFrogetActivity extends CTBaseActivity
 {
     //发送验证码
     private Button mBtnSendCS = null;
+
+    //提交验证码
+    private Button mBtnSubmitCS = null;
 
     private Counter mCounter = null;
 
@@ -48,11 +53,22 @@ public class PdFrogetActivity extends CTBaseActivity
         setContentView(R.layout.password_forget_activity);
         mBtnSendCS = (Button)findViewById(R.id.btn_send_checksum);
 
+        mBtnSubmitCS = (Button)findViewById(R.id.password_forget_submit);
+
         mAccountEditView = (ExEditView)findViewById(R.id.forget_pwd_account);
         mCodeText = (ExEditView)findViewById(R.id.forget_pwd_code);
 
         mACache = ACache.get(this);
         restTimeCount();
+
+        ReadSMsTool readSMsTool = BaseApplication.getInstance().getReadSMsTool();
+        readSMsTool.setSMSReadListener(new ReadSMsTool.ReadSMSListener()
+        {
+            public void readCallback(String code)
+            {
+                mCodeText.setEditValue(code);
+            }
+        });
     }
 
     protected void initListener()
@@ -72,7 +88,14 @@ public class PdFrogetActivity extends CTBaseActivity
         }
         else
         {
-            setPageTitle("校验手机");
+            setPageTitle("手机认证");
+            if(intent.getBooleanExtra("isPhoneauth", false))
+            {
+                mBtnSendCS.setEnabled(false);
+                mBtnSubmitCS.setEnabled(false);
+                String phone = UserInfoEntity.getInstance().getMobile();
+                mAccountEditView.setEditValue(phone);
+            }
         }
 
     }
@@ -96,7 +119,8 @@ public class PdFrogetActivity extends CTBaseActivity
 //                    mCounter = new Counter(60*1000, 1000);
 //                    restCnt = 60;
 //                    mCounter.start();
-                    sendMsgRequest(mPhoneNum);
+//                    sendMsgRequest(mPhoneNum);
+                    isRegister(mPhoneNum);
                 }
                 else
                 {
@@ -161,14 +185,14 @@ public class PdFrogetActivity extends CTBaseActivity
 
     private void restTimeCount()
     {
-        if(mACache.getAsString("restCnt") == null)
-        {
+//        if(mACache.getAsString("restCnt") == null)
+//        {
             restCnt = 0;
-        }
-        else
-        {
-            restCnt =  (int)mACache.getAsObject("restCnt");
-        }
+//        }
+//        else
+//        {
+//            restCnt =  (int)mACache.getAsObject("restCnt");
+//        }
 
         mCounter = new Counter(restCnt*1000, 1000);
         mCounter.start();
@@ -181,9 +205,7 @@ public class PdFrogetActivity extends CTBaseActivity
     {
         try
         {
-            String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_SENDMSG) +
-                    "userid=" + ACache.get(BaseApplication.getInstance()).getAsString("userid") +
-                    "&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token");
+            String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_SENDMSG);
 
             RequestParams params = new RequestParams();
             JSONObject jsonObject = new JSONObject();
@@ -266,6 +288,29 @@ public class PdFrogetActivity extends CTBaseActivity
                 Toast.makeText(this, "内部错误", Toast.LENGTH_LONG).show();
             }
         }
+
+        if(reqType == HttpRequst.REQ_TYPE_ISREG)
+        {
+            try
+            {
+                JSONObject data = new JSONObject(content);
+                boolean error = data.getBoolean("isreg");
+
+                if(!error)
+                {
+                    Toast.makeText(this, "该手机未注册，请先注册", Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    sendMsgRequest(mPhoneNum);
+                }
+            }
+            catch (Exception e)
+            {
+                Toast.makeText(this, "内部错误", Toast.LENGTH_LONG).show();
+            }
+        }
+
     }
 
     public void onFailure(Throwable error, String content, int reqType)
@@ -290,9 +335,7 @@ public class PdFrogetActivity extends CTBaseActivity
     {
         try
         {
-            String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_CHECKCODE) +
-                    "userid=" + ACache.get(BaseApplication.getInstance()).getAsString("userid") +
-                    "&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token");
+            String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_CHECKCODE);
 
             RequestParams params = new RequestParams();
             JSONObject jsonObject = new JSONObject();
@@ -301,6 +344,28 @@ public class PdFrogetActivity extends CTBaseActivity
             params.put("data", jsonObject.toString());
 
             sendRequest(HttpRequst.REQ_TYPE_CHECKCODE, url, params, getAsyncClient(), false);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 是否是注册过的
+     */
+    private void isRegister(String mobiles)
+    {
+        try
+        {
+            String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_ISREG);
+
+            RequestParams params = new RequestParams();
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("mobile", mobiles);
+            params.put("data", jsonObject.toString());
+
+            sendRequest(HttpRequst.REQ_TYPE_ISREG, url, params, getAsyncClient(), false);
         }
         catch (Exception e)
         {

@@ -5,12 +5,8 @@ import android.view.ViewStub;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.changtou.R;
-import com.changtou.moneybox.common.activity.BaseApplication;
-import com.changtou.moneybox.common.logger.Logger;
-import com.changtou.moneybox.common.utils.ACache;
+import com.changtou.moneybox.R;
 import com.changtou.moneybox.module.http.HttpRequst;
 
 import org.json.JSONArray;
@@ -87,9 +83,7 @@ public class RichesRewardsActivity extends CTBaseActivity
 //    }
 
     private void initRewardsListRequest() {
-        String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_RECOMMENDLIST) +
-                "userid=" + ACache.get(BaseApplication.getInstance()).getAsString("userid") +
-                "&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token");
+        String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_RECOMMENDLIST);
 
         sendRequest(HttpRequst.REQ_TYPE_RECOMMENDLIST,
                 url,
@@ -102,10 +96,12 @@ public class RichesRewardsActivity extends CTBaseActivity
         try
         {
             JSONArray array = new JSONArray(content);
+
             JSONObject listObj = array.getJSONObject(0);
             JSONArray listData = listObj.getJSONArray("_list");
 
             int size = listData.length();
+
             List<Map<String, Object>> list = new ArrayList();
             for(int i = 0; i< size; i++)
             {
@@ -140,8 +136,6 @@ public class RichesRewardsActivity extends CTBaseActivity
         {
             e.printStackTrace();
         }
-
-
 
         super.onSuccess(content, object, reqType);
     }

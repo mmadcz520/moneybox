@@ -1,7 +1,6 @@
 package com.changtou.moneybox.common.http.impl;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.changtou.moneybox.common.http.base.BaseHttpClient;
 import com.changtou.moneybox.common.http.base.BaseHttpHandler;

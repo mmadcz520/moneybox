@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 import com.changtou.moneybox.common.utils.AppUtil;
 
 /**
@@ -197,6 +197,11 @@ public class ExEditView extends LinearLayout
     public String getEditValue()
     {
         return  mEditText.getText().toString().trim();
+    }
+
+    public void setEditValue(String value)
+    {
+        mEditText.setText(value);
     }
 
     public void setMessage(String message, int color)

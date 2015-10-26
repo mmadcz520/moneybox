@@ -11,7 +11,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 
 
 /**

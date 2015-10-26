@@ -1,14 +1,17 @@
 package com.changtou.moneybox.module.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 import com.changtou.moneybox.module.entity.InvestListEntity;
+import com.changtou.moneybox.module.page.ProductDetailsActivity;
 
 import java.util.LinkedList;
 
@@ -20,9 +23,15 @@ public class InvestListAdapter extends BaseAdapter
     private LayoutInflater mInflater = null;
     private LinkedList mData   = null;
 
+    private Context mContext = null;
+
+    private static String[] mTypeName = {"还款中", "已结清", "已退出"};
+    private int mType = 0;
+
     public InvestListAdapter(Context context)
     {
         mInflater = LayoutInflater.from(context);
+        mContext = context;
     }
 
     public void setData(LinkedList data)
@@ -80,7 +89,7 @@ public class InvestListAdapter extends BaseAdapter
     /**
      * @see BaseAdapter#getView(int, View, ViewGroup)
      */
-    public View getView(int position, View convertView, ViewGroup parent)
+    public View getView(final int position, View convertView, ViewGroup parent)
     {
         InvestListEntity.ItemEntity entity = (InvestListEntity.ItemEntity)getItem(position);
         ViewHolder viewHolder;
@@ -98,6 +107,18 @@ public class InvestListAdapter extends BaseAdapter
             viewHolder.maturityView = (TextView) convertView.findViewById(R.id.invest_item_maturity);
 
             convertView.setTag(viewHolder);
+
+            convertView.setOnClickListener(new View.OnClickListener()
+            {
+                public void onClick(View v)
+                {
+                    InvestListEntity.ItemEntity item = ( InvestListEntity.ItemEntity)mData.get(position);
+                    String pid = item.id;
+                    int type = item.type;
+
+                    goToProducDtetails(pid, type, mTypeName[mType]);
+                }
+            });
         }
         else
         {
@@ -125,5 +146,22 @@ public class InvestListAdapter extends BaseAdapter
         public TextView endtimeView;
         public TextView expectinView;
         public TextView maturityView;
+    }
+
+    /**
+     * 跳转到详情页
+     */
+    private void goToProducDtetails(String id, int type, String state)
+    {
+        Intent intent = new Intent(mContext, ProductDetailsActivity.class);
+        intent.putExtra("id", id);
+        intent.putExtra("type", type);
+        intent.putExtra("state", state);
+        mContext.startActivity(intent);
+    }
+
+    public void setProdType(int type)
+    {
+        this.mType = type;
     }
 }

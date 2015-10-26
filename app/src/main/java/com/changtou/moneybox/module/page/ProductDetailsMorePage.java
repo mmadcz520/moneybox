@@ -15,7 +15,7 @@ import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 import com.changtou.moneybox.common.activity.BaseFragment;
 import com.changtou.moneybox.common.utils.AppUtil;
 import com.changtou.moneybox.module.CTMoneyApplication;
@@ -200,14 +200,14 @@ public class ProductDetailsMorePage extends Fragment
         }
 
         public void onSuccess(String content, Object object, int reqType) {
-            if (reqType == HttpRequst.REQ_TYPE_PRODUCT_INVESTOR) {
-//                mMultiStateView.setViewState(MultiStateView.ViewState.CONTENT);
-//                InvestorEntity entity = (InvestorEntity) object;
-//                mAdapter.setData(entity);
-//                setListViewHeightBasedOnChildren(actualListView);
-//
-//                mPullRefreshListView.onRefreshComplete();
-            }
+//            if (reqType == HttpRequst.REQ_TYPE_PRODUCT_INVESTOR) {
+////                mMultiStateView.setViewState(MultiStateView.ViewState.CONTENT);
+////                InvestorEntity entity = (InvestorEntity) object;
+////                mAdapter.setData(entity);
+////                setListViewHeightBasedOnChildren(actualListView);
+////
+////                mPullRefreshListView.onRefreshComplete();
+//            }
         }
 
         public void onFailure(Throwable error, String content, int reqType) {
@@ -259,7 +259,7 @@ public class ProductDetailsMorePage extends Fragment
             String url = "http://www.changtounet.com/contract/contractimg.aspx?" + "id=" + mProID;
 
             intent.putExtra("url", url);
-            intent.putExtra("title", "产品合同");
+            intent.putExtra("title", "项目基本资料");
             this.startActivity(intent);
         }
 

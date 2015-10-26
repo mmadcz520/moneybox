@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/exchange_touyuan_pop"
+        android:layout_width="fill_parent"
+        android:layout_height="42dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:background="@drawable/stroke_edit_fillpraent_top">
+
+        <TextView
+            android:id="@+id/exchange_touyuan"
+            android:paddingLeft="24dp"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_size_normal"
+            android:textColor="@color/font_black"
+            android:text="当前投圆"/>
+
+        <ImageView
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/exchange_touyuan"
+            android:paddingLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/confirm_dklj_icon"/>
+
+        <TextView
+            android:id="@+id/exchange_touyuan_num"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:textSize="@dimen/font_size_normal"
+            android:paddingRight="24dp"
+            android:textColor="@color/ct_blue"
+            android:text="605"/>
+    </RelativeLayout>
+
+    <RelativeLayout android:layout_width="fill_parent"
+        android:layout_height="@dimen/edit_height_normal"
+        android:background="@drawable/stroke_edit_fillpraent">
+
+        <EditText
+            android:id="@+id/exchange_touyuan_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/font_invalid"
+            android:textColor="@color/font_black"
+            android:textSize="@dimen/font_size_normal"
+            android:inputType="number"
+            android:background="@color/ct_white"
+            android:layout_marginLeft="24dp"
+            android:layout_centerVertical="true"
+            android:hint="请输入投圆数(100整数倍)"/>
+
+        <Button
+            android:id="@+id/exchange_touyuan_max"
+            android:layout_width="60dp"
+            android:layout_height="28dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/btn_selector"
+            android:textSize="@dimen/font_size_hint"
+            android:textColor="@color/ct_white"
+            android:enabled="true"
+            android:text="最多"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_marginLeft="24dp"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/font_invalid"
+            android:layout_marginTop="8dp"
+            android:textSize="@dimen/font_size_hint2"
+            android:text="可获得礼金："/>
+
+        <TextView
+            android:id="@+id/exchange_lijin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/ct_blue"
+            android:layout_marginTop="8dp"
+            android:textSize="@dimen/font_size_hint2"
+            android:text="0"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/font_invalid"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="3dp"
+            android:textSize="@dimen/font_size_hint2"
+            android:text="元"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/exchange_btn"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/button_height_fillparent"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/btn_selector"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/font_white"
+        android:textSize="@dimen/font_size_navigation"
+        android:enabled="true"
+        android:text="确认兑换"/>
+
+</LinearLayout>

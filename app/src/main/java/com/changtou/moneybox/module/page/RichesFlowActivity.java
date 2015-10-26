@@ -2,12 +2,11 @@ package com.changtou.moneybox.module.page;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 import com.changtou.moneybox.common.utils.ACache;
 import com.changtou.moneybox.module.adapter.FlowAdapter;
 import com.changtou.moneybox.module.entity.FlowEntity;
@@ -70,7 +69,6 @@ public class RichesFlowActivity extends CTBaseActivity implements AdapterView.On
             if(object != null)
             {
                 mEntity = (FlowEntity) object;
-                Log.e("CT_MONEY", "sMonthsMonth---------------------" + mEntity.getMonth().toString());
             }
             UserInfoEntity userInfoEntity = UserInfoEntity.getInstance();
             mAdapter.setData(userInfoEntity.getFlowEntity());
@@ -101,8 +99,6 @@ public class RichesFlowActivity extends CTBaseActivity implements AdapterView.On
 
         ACache cache = ACache.get(this);
         cache.put("selected_month", position);
-
-        Log.e("CT_MONEY", "sMonthsMonth---------------------" + mEntity.getMonth().toString());
 
         cache.put("flow", mEntity);
 

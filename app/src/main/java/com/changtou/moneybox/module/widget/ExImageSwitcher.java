@@ -5,10 +5,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -21,7 +19,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ViewSwitcher.ViewFactory;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.utils.ACache;
 import com.changtou.moneybox.common.utils.AppUtil;
@@ -72,6 +70,8 @@ public class ExImageSwitcher extends FrameLayout implements OnTouchListener,Asyn
 	private ImageView mCurrentImageView = null;
 
 	private static int FLOW = 10;
+
+	private String[] mUrls = null;
 
 	public ExImageSwitcher(Context context) {
 		this(context, null);
@@ -124,11 +124,12 @@ public class ExImageSwitcher extends FrameLayout implements OnTouchListener,Asyn
 	/**
 	 * 设置显示的图片
 	 */
-	public void setImage(String[] url) {
+	public void setImage(String[] url, String[] webUrl) {
 
 		bannerCnt = url.length;
 		mBannerImage.clear();
 		currentPosition = 0;
+		this.mUrls = webUrl;
 
 		linearLayout.removeAllViews();
 
@@ -246,6 +247,7 @@ public class ExImageSwitcher extends FrameLayout implements OnTouchListener,Asyn
 				else
 				{
 					Intent it = new Intent(this.getContext(), WebActivity.class);
+					it.putExtra("url", mUrls[currentPosition]);
 					getContext().startActivity(it);
 				}
 			}

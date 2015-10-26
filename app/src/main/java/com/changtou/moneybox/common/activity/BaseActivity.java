@@ -2,14 +2,9 @@ package com.changtou.moneybox.common.activity;
 
 import java.util.HashMap;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.IntentFilter;
-import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
@@ -18,9 +13,6 @@ import com.changtou.moneybox.common.http.base.BaseHttpClient;
 import com.changtou.moneybox.common.http.base.HttpCallback;
 import com.changtou.moneybox.common.http.async.RequestParams;
 import com.changtou.moneybox.common.http.impl.AsyncHttpClientImpl;
-import com.changtou.moneybox.common.logger.Logger;
-import com.changtou.moneybox.module.service.NetReceiver;
-import com.changtou.moneybox.module.service.NetStateListener;
 import com.changtou.moneybox.module.widget.ZProgressHUD;
 import com.umeng.analytics.MobclickAgent;
 
@@ -191,14 +183,14 @@ public abstract class BaseActivity extends FragmentActivity implements HttpCallb
         initData();
     }
 
-    /**
-     * app 调试信息
-     * @param log
-     */
-    protected void printLog(String log)
-    {
-        Log.e(LOGTAG, this.toString()+"-"+log);
-    }
+//    /**
+//     * app 调试信息
+//     * @param log
+//     */
+//    protected void printLog(String log)
+//    {
+////        Log.e(LOGTAG, this.toString()+"-"+log);
+//    }
 
     @Override
     protected void onPause() {

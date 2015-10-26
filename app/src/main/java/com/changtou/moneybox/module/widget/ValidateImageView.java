@@ -9,9 +9,6 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Bitmap.Config;
-import android.util.AttributeSet;
-import android.util.Log;
-import android.view.View;
 
 public class ValidateImageView {
 

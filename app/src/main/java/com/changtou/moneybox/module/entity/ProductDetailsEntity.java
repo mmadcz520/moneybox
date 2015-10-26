@@ -1,9 +1,6 @@
 package com.changtou.moneybox.module.entity;
 
-import android.util.Log;
-
 import com.changtou.moneybox.common.http.base.BaseEntity;
-import com.changtou.moneybox.common.logger.Logger;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -88,8 +85,6 @@ public class ProductDetailsEntity extends BaseEntity
 
             JSONArray imgList = object.getJSONArray("imglist");
             mImgList = new LinkedList();
-
-            Logger.json(imgList.toString());
 
             int len = imgList.length();
             for(int i = 0; i < len; i++)

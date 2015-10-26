@@ -7,10 +7,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 import com.changtou.moneybox.module.entity.ProductEntity;
 import com.changtou.moneybox.module.widget.RoundProgressBar;
 
+import java.math.BigDecimal;
 import java.util.LinkedList;
 
 /**
@@ -111,8 +112,9 @@ public class ProductListAdapter extends BaseAdapter
         viewHolder.amountTextView.setText(item.syje);
 
         String jd = item.jd;
-        Float schedule = Float.parseFloat(jd);
-        int schedule_int = (int)(schedule*100);
+        double schedule = Double.parseDouble(jd) * 100;
+        double d = Math.rint(schedule);
+        int schedule_int = (int)(d);
         viewHolder.scheduleView.setProgress(schedule_int);
         viewHolder.describeTextView.setText(schedule_int + "%");
 

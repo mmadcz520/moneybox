@@ -5,7 +5,7 @@ import android.os.CountDownTimer;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.http.async.RequestParams;
 import com.changtou.moneybox.common.utils.ACache;
@@ -94,9 +94,7 @@ public class PhoneAuthActivity extends CTBaseActivity
     {
         try
         {
-            String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_CHECKCODE) +
-                    "userid=" + ACache.get(BaseApplication.getInstance()).getAsString("userid") +
-                    "&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token");
+            String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_CHECKCODE);
 
             RequestParams params = new RequestParams();
             JSONObject jsonObject = new JSONObject();
@@ -148,9 +146,7 @@ public class PhoneAuthActivity extends CTBaseActivity
     {
         try
         {
-            String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_SENDMSG) +
-                    "userid=" + ACache.get(BaseApplication.getInstance()).getAsString("userid") +
-                    "&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token");
+            String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_SENDMSG);
 
             RequestParams params = new RequestParams();
             JSONObject jsonObject = new JSONObject();

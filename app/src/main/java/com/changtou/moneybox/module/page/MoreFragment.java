@@ -9,14 +9,18 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.activity.BaseFragment;
+import com.changtou.moneybox.common.utils.ACache;
 import com.changtou.moneybox.module.widget.ExEditView;
+import com.umeng.message.PushAgent;
 import com.umeng.update.UmengUpdateAgent;
 import com.umeng.update.UmengUpdateListener;
 import com.umeng.update.UpdateResponse;
@@ -40,13 +44,15 @@ public class MoreFragment extends BaseFragment implements View.OnTouchListener{
 
     private ExEditView mVersionView = null;
 
+    private ToggleButton tglSound = null;
+
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.setting_fragment, null);
         mContext = this.getActivity();
 
         mVersionView = (ExEditView) mView.findViewById(R.id.more_check_update);
 
-        String versionName = BaseApplication.getInstance().getVersionName();
+        String versionName = BaseApplication.getInstance().getVersionName() + "("+BaseApplication.getInstance().getChannelName()+")";
         int color = getResources().getColor(R.color.font_black);
         mVersionView.setMessage(versionName, color);
 
@@ -59,12 +65,54 @@ public class MoreFragment extends BaseFragment implements View.OnTouchListener{
         ExEditView view2 = (ExEditView)mView.findViewById(R.id.more_tell_service);
         ExEditView view3 = (ExEditView)mView.findViewById(R.id.more_push_msg);
 
-
+        tglSound = (ToggleButton)mView.findViewById(R.id.tglSound);
 
         view1.setOnTouchListener(this);
         view2.setOnTouchListener(this);
         view3.setOnTouchListener(this);
         mVersionView.setOnTouchListener(this);
+
+
+        final ACache cache = ACache.get(BaseApplication.getInstance());
+        boolean ispush = true;
+        final PushAgent mPushAgent = PushAgent.getInstance(this.getActivity());
+        if(cache.getAsObject("ispush") == null)
+        {
+            ispush = true;
+        }
+        else
+        {
+            ispush = (boolean)cache.getAsObject("ispush");
+        }
+        tglSound.setChecked(ispush);
+
+        if(ispush) {
+            mPushAgent.enable();
+            PushAgent.getInstance(this.getActivity()).onAppStart();
+        }
+        else
+        {
+            mPushAgent.disable();
+        }
+
+        tglSound.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked)
+                {
+                    Toast.makeText(MoreFragment.this.getActivity(), "推送消息启用", Toast.LENGTH_LONG).show();
+                    mPushAgent.enable();
+
+                    cache.put("ispush", true);
+                }
+                else
+                {
+                    Toast.makeText(MoreFragment.this.getActivity(), "推送消息关闭", Toast.LENGTH_LONG).show();
+                    mPushAgent.disable();
+
+                    cache.put("ispush", false);
+                }
+            }
+        });
 
         return mView;
     }

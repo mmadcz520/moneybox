@@ -15,7 +15,6 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -94,7 +93,6 @@ public class PicUtil
             bitmap = BitmapFactory.decodeStream(is);
             is.close();
 
-            Log.i(TAG, "image download finished." + imageUri);
         } catch (IOException e) {
             e.printStackTrace();
             return null;
@@ -116,7 +114,6 @@ public class PicUtil
             File cacheFile = FileUtil.getCacheFile(imageUri);
             BufferedOutputStream bos = null;
             bos = new BufferedOutputStream(new FileOutputStream(cacheFile));
-            Log.i(TAG, "write file to " + cacheFile.getCanonicalPath());
 
             byte[] buf = new byte[1024];
             int len = 0;

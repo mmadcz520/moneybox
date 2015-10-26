@@ -66,4 +66,10 @@
         <item name="android:windowIsTranslucent">true</item>
     </style>
 
+    <style name="SpotsDialogDefault" parent="android:Theme.DeviceDefault.Light.Dialog">
+        <item name="DialogTitleAppearance">@android:style/TextAppearance.Medium</item>
+        <item name="DialogTitleText">载入中…</item>
+        <item name="DialogSpotCount">5</item>
+    </style>
+
 </resources>

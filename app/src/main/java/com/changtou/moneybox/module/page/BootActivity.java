@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 import com.changtou.moneybox.module.widget.EntryFragment;
 import com.chechezhi.ui.guide.AbsGuideActivity;
 import com.chechezhi.ui.guide.SinglePage;

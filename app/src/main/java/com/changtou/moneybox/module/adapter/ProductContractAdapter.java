@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.utils.ACache;
 import com.changtou.moneybox.module.page.WebActivity;
@@ -116,13 +116,12 @@ public class ProductContractAdapter extends BaseAdapter
                 {
                     Intent intent = new Intent(mContext, WebActivity.class);
                     String url = "http://www.changtounet.com/contract/app_coCtbService.aspx?";
-                    String userId =  ACache.get(BaseApplication.getInstance()).getAsString("userid");
+                    String userId =  BaseApplication.getInstance().getUserId();
+
                     String uid = URLEncoder.encode(userId, "UTF-8");
                     String amount = URLEncoder.encode(mAmount, "UTF-8");
                     String prd = URLEncoder.encode(mProID, "UTF-8");
                     url = url + "userid=" + userId + "&amount=" +  amount + "&ctbid=" + prd;
-
-                    Log.e("CT_MONEY", url);
 
                     intent.putExtra("url", url);
                     intent.putExtra("title", "长投宝服务协议");

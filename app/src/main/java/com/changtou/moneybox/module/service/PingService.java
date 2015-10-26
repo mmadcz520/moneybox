@@ -8,7 +8,6 @@ import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.http.async.RequestParams;
 import com.changtou.moneybox.common.http.base.BaseHttpClient;
 import com.changtou.moneybox.common.http.base.HttpCallback;
-import com.changtou.moneybox.common.logger.Logger;
 import com.changtou.moneybox.module.http.HttpRequst;
 
 import java.util.Timer;
@@ -36,8 +35,6 @@ public class PingService extends Service implements HttpCallback {
     @Override
     public void onDestroy()
     {
-        Logger.e("onDestroy");
-
         super.onDestroy();
         if (mTimer != null) {
             mTimer.cancel();
@@ -94,7 +91,6 @@ public class PingService extends Service implements HttpCallback {
                                     HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_PING),
                                     mParams,
                                     BaseApplication.getInstance().getAsyncClient(), false);
-
                             Thread.sleep(10000);
                         } catch (InterruptedException e) {
                         }

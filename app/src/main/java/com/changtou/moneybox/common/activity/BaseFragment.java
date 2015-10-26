@@ -2,23 +2,18 @@ package com.changtou.moneybox.common.activity;
 
 import android.app.Activity;
 import android.content.IntentFilter;
-import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 import com.changtou.moneybox.common.http.base.BaseHttpClient;
 import com.changtou.moneybox.common.http.base.HttpCallback;
 import com.changtou.moneybox.common.http.async.RequestParams;
 import com.changtou.moneybox.common.utils.DeviceInfo;
 import com.changtou.moneybox.module.service.NetReceiver;
-import com.changtou.moneybox.module.service.NetStateListener;
-import com.changtou.moneybox.module.widget.MultiStateView;
-import com.changtou.moneybox.module.widget.ZProgressHUD;
 
 public abstract class BaseFragment extends Fragment implements
         HttpCallback {
@@ -174,14 +169,14 @@ public abstract class BaseFragment extends Fragment implements
         }
     }
 
-    /**
-     * app 调试信息
-     * @param log
-     */
-    protected void printLog(String log)
-    {
-        Log.e(LOGTAG, this.toString() + "-" + log);
-    }
+//    /**
+//     * app 调试信息
+//     * @param log
+//     */
+//    protected void printLog(String log)
+//    {
+////        Log.e(LOGTAG, this.toString() + "-" + log);
+//    }
 
 
 }

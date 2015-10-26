@@ -2,7 +2,6 @@ package com.changtou.moneybox.module.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
@@ -100,12 +99,9 @@ public class VerticalPager extends ViewGroup{
 
                 if(getScrollY()<0)
                 {
-                    Log.e("eeeee", "666666666666666666666666666");
                     mScroller.startScroll(0, 0, 0, 0);
                 }
                 else if(getScrollY()>(getHeight()*(getChildCount()-1))){
-
-                    Log.e("eeeee", "555555555555555555555555555");
 
                     View lastView=getChildAt(getChildCount()-1);
                     mScroller.startScroll(0,lastView.getTop()+0, 0, -0);
@@ -120,13 +116,9 @@ public class VerticalPager extends ViewGroup{
                     {
                         if(mod>getHeight()/6){
 
-                            Log.e("eeeee", "4444444444444444444444444444444444");
-
                             View positionView=getChildAt(position+1);
                             mScroller.startScroll(0, positionView.getTop()-mod, 0, mod);
                         }else{
-
-                            Log.e("eeeee", "333333333333333333333333333333");
 
                             mIsIntercept = false;
                             View positionView=getChildAt(position);
@@ -137,14 +129,10 @@ public class VerticalPager extends ViewGroup{
                     {
                         if(mod>getHeight()/6){
 
-                            Log.e("eeeee", "111111111111111111111111111111");
-
                             mIsIntercept = false;
                             View positionView=getChildAt(position);
                             mScroller.startScroll(0, positionView.getTop()+mod, 0, -mod);
                         }else{
-
-                            Log.e("eeeee", "2222222222222222222222222222222222");
 
                             View positionView=getChildAt(position+1);
                             mScroller.startScroll(0, positionView.getTop()-mod, 0, mod);
@@ -152,7 +140,6 @@ public class VerticalPager extends ViewGroup{
                     }
                     else
                     {
-                        Log.e("eeeee", "77777777777777777777777777777");
                     }
                 }
                 invalidate();

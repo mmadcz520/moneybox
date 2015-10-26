@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 import com.changtou.moneybox.module.page.BootActivity;
 
 public class EntryFragment extends Fragment{

@@ -4,29 +4,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.ViewStub;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.changtou.R;
-import com.changtou.moneybox.common.activity.BaseApplication;
+import com.changtou.moneybox.R;
 import com.changtou.moneybox.common.http.async.RequestParams;
 import com.changtou.moneybox.common.utils.ACache;
-import com.changtou.moneybox.module.entity.BankCardEntity;
-import com.changtou.moneybox.module.entity.UserEntity;
 import com.changtou.moneybox.module.entity.UserInfoEntity;
 import com.changtou.moneybox.module.http.HttpRequst;
 
-import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import org.json.JSONObject;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -53,11 +45,17 @@ public class ConfirmActivity extends CTBaseActivity
 
     private EditText mNumInput = null;
 
+    private int touyuan = 10;
+
+    private int mSyLijin = 0;
+
     private String[] mError = {"投资成功", "参数为空", "不存在该产品",  " 产品类型参数错误",
                 "用户ID参数错误", "产品ID参数错误", "投资金额参数错误", "不存在该用户",
                 "找不到原始转让产品", "投资必须是投资金额的整数倍", "已经不是新手不能投资新手标",
                 "此项目为专属项目", "投资额不能小于起投金额", "该项目融资已满或者尚未发布",
                 "余额不足", "输入金额大于项目剩余金额", " 系统错误", "参数名错误", " 产品不在可投资时间内"};
+
+    private TextView mLinjinView = null;
 
     protected void initView(Bundle savedInstanceState)
     {
@@ -70,42 +68,60 @@ public class ConfirmActivity extends CTBaseActivity
 
         if(mContent == null) return;
 
-        mConfirmDetails = (ListView)findViewById(R.id.confirm_product_details);
-        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-        SimpleAdapter adapter = new SimpleAdapter(this, list, R.layout.confirm_listview_item,
-                new String[] {"text"}, new int[] {R.id.confirm_lv_text});
+        TextView tx1 = (TextView)findViewById(R.id.confirm_product_name);
+        TextView tx2 = (TextView)findViewById(R.id.confirm_tzxq);
+        TextView tx3 = (TextView)findViewById(R.id.confirm_nhln);
+        TextView tx4 = (TextView)findViewById(R.id.confirm_ktje);
 
-        for (int i = 0; i < 4; i++)
-        {
-            Map<String, Object> map = new HashMap<String, Object>();
-            map.put("text", mContent[i]);
-            list.add(map);
-        }
-
-        ViewStub viewStub= new ViewStub(this);
-        mConfirmDetails.addHeaderView(viewStub);
-        mConfirmDetails.setAdapter(adapter);
+        tx1.setText(mContent[0]);
+        tx2.setText(mContent[1]);
+        tx3.setText(mContent[2]);
+        tx4.setText(mContent[3]);
 
         mConfirmBtn = (Button)findViewById(R.id.confirm_button_do);
         mNumInput = (EditText)findViewById(R.id.confirm_input_edit);
         mNumInput.addTextChangedListener(mTextWatcher);
 
+        mLinjinView = (TextView)findViewById(R.id.confirm_lijin_num);
+
         //显示余额
-        UserInfoEntity userInfoEntity = UserInfoEntity.getInstance();
+        UserInfoEntity userInfoEntity = (UserInfoEntity) ACache.get(this).getAsObject("userinfo");
         String overage = userInfoEntity.getOverage();
+        String gift = userInfoEntity.getGifts();
+        if(gift != null && gift.equals(""))
+        {
+            mSyLijin = (int)Double.parseDouble(userInfoEntity.getGifts());
+        }
         TextView textView = (TextView)findViewById(R.id.confirm_text_overage);
         textView.setText(overage);
 
         mDialog = new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE);
         mDialog.setConfirmText("确认");
-        mDialog.setContentText("恭喜你您资成功!\n 获得2个投园");
-        mDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener()
+        mDialog.setCancelText("继续投资");
+//        mDialog.setContentText("恭喜你您资成功!\n 获得" + touyuan + "个投圆");
+                mDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        Intent intent = new Intent(ConfirmActivity.this, MainActivity.class);
+                        intent.putExtra("login_state", 1);
+                        ConfirmActivity.this.startActivity(intent);
+                    }
+                });
+
+        mDialog.setCancelClickListener(new SweetAlertDialog.OnSweetClickListener()
         {
             public void onClick(SweetAlertDialog sweetAlertDialog)
             {
-                Intent intent = new Intent(ConfirmActivity.this, MainActivity.class);
-                intent.putExtra("login_state", 1);
-                ConfirmActivity.this.startActivity(intent);
+                mDialog.dismiss();
+            }
+        });
+
+        View dklj = findViewById(R.id.confirm_button_dklj);
+        dklj.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                popuDailog();
             }
         });
     }
@@ -146,7 +162,11 @@ public class ConfirmActivity extends CTBaseActivity
             try
             {
                 JSONObject data = new JSONObject(content);
+
                 int result = data.getInt("result");
+                touyuan = data.getInt("touyuan");
+
+                mDialog.setTitleText("恭喜您投资成功!\n 获得" + touyuan + "个投圆" + "\n");
 
                 if(result == 0)
                 {
@@ -162,7 +182,6 @@ public class ConfirmActivity extends CTBaseActivity
             {
                 e.printStackTrace();
             }
-
         }
         super.onSuccess(content, object, reqType);
     }
@@ -171,6 +190,33 @@ public class ConfirmActivity extends CTBaseActivity
     {
         Toast.makeText(this, "网络异常", Toast.LENGTH_LONG).show();
         super.onFailure(error, content, reqType);
+    }
+
+    /**
+     * 弹出抵扣礼金提示框
+     */
+    private void popuDailog()
+    {
+        final SweetAlertDialog sad = new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE);
+        sad.setTitleText("每投资1000元,5元礼金变为5元现金\n");
+        sad.setConfirmText("我知道啦");
+        sad.showCancelButton(false);
+        sad.show();
+
+        sad.setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+            public void onClick(SweetAlertDialog sweetAlertDialog)
+            {
+                sad.cancel();
+            }
+        });
+
+        sad.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+            @Override
+            public void onClick(SweetAlertDialog sweetAlertDialog)
+            {
+                sad.cancel();
+            }
+        });
     }
 
     /**
@@ -211,6 +257,10 @@ public class ConfirmActivity extends CTBaseActivity
             {
                 mConfirmBtn.setEnabled(false);
             }
+
+            int sylijin = mSyLijin;
+            int lijin = (num/1000*5)> sylijin ? sylijin:((num/1000) * 5);
+            mLinjinView.setText(String.valueOf(lijin));
         }
     };
 
@@ -221,9 +271,7 @@ public class ConfirmActivity extends CTBaseActivity
     {
         try
         {
-            String url = HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_INVEST) +
-                    "userid=" + ACache.get(BaseApplication.getInstance()).getAsString("userid") +
-                    "&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token");
+            String url = HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_INVEST);
 
             RequestParams params = new RequestParams();
 
@@ -231,7 +279,7 @@ public class ConfirmActivity extends CTBaseActivity
             jsonObject.put("type", type);
             jsonObject.put("projid", projid);
             jsonObject.put("investmoney", money);
-            jsonObject.put("ly", 0);
+            jsonObject.put("ly", "android");
             params.put("data", jsonObject.toString());
 
             sendRequest(HttpRequst.REQ_TYPE_INVEST, url, params, getAsyncClient(), false);

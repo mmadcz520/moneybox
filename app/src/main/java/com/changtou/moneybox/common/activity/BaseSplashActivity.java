@@ -2,7 +2,6 @@ package com.changtou.moneybox.common.activity;
 
 import android.os.Bundle;
 import android.os.Message;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Window;
 import android.view.animation.Animation;
@@ -10,13 +9,11 @@ import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 import com.changtou.moneybox.common.http.async.RequestParams;
 import com.changtou.moneybox.common.http.base.BaseHttpClient;
 import com.changtou.moneybox.common.http.base.HttpCallback;
-import com.changtou.moneybox.common.logger.Logger;
 import com.changtou.moneybox.common.preference.DefaultPreference;
-import com.changtou.moneybox.common.utils.ACache;
 import com.changtou.moneybox.module.http.HttpRequst;
 
 import org.json.JSONArray;
@@ -147,10 +144,7 @@ public abstract class BaseSplashActivity extends BaseFragmentActivity implements
                     String url = j.getString("url");
                     String title = j.getString("title");
 
-                    Logger.d(title);
-
                     imgs[i] = j.getString("img");
-
                 }
             }
             catch (Exception e)

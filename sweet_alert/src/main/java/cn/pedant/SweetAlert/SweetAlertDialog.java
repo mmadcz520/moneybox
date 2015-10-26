@@ -1,6 +1,5 @@
 package cn.pedant.SweetAlert;
 
-
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -58,6 +57,8 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
     private OnSweetClickListener mCancelClickListener;
     private OnSweetClickListener mConfirmClickListener;
     private boolean mCloseFromCancel;
+
+    private View mMidLineView;
 
     public static final int NORMAL_TYPE = 0;
     public static final int ERROR_TYPE = 1;
@@ -142,6 +143,7 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.alert_dialog);
 
+        mMidLineView = findViewById(R.id.riches_line2);
         mDialogView = getWindow().getDecorView().findViewById(android.R.id.content);
         mTitleTextView = (TextView)findViewById(R.id.title_text);
         mContentTextView = (TextView)findViewById(R.id.content_text);
@@ -231,6 +233,7 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
                     break;
                 case WARNING_TYPE:
 //                    mConfirmButton.setBackgroundResource(R.drawable.red_button_background);
+                    mMidLineView.setVisibility(View.GONE);
                     mWarningFrame.setVisibility(View.VISIBLE);
                     break;
                 case CUSTOM_IMAGE_TYPE:
@@ -419,5 +422,12 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
 
     public ProgressHelper getProgressHelper () {
         return mProgressHelper;
+    }
+
+    public SweetAlertDialog hideMidLine()
+    {
+        if(mMidLineView != null)
+        mMidLineView.setVisibility(View.GONE);
+        return this;
     }
 }

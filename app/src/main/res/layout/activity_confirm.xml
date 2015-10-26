@@ -3,27 +3,161 @@
                 android:layout_height="match_parent"
                 android:background="@color/ct_background"
                 android:orientation="vertical">
-    <LinearLayout
-        android:layout_below="@+id/split_line"
-        android:id="@+id/describe_layout"
-        android:layout_width="fill_parent"
-        android:layout_height="150dp"
-        android:orientation="vertical">
-        <ListView
-            android:id="@+id/confirm_product_details"
-            android:layout_marginTop="2dp"
-            android:layout_width="fill_parent"
-            android:layout_height="320dp"
-            android:divider="@color/ct_divide_line"
-            android:dividerHeight="1px"
-            android:headerDividersEnabled="true" />
 
-    </LinearLayout>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="42dp"
+        android:orientation="horizontal"
+        android:background="@drawable/stroke_edit_fillpraent_top">
+
+        <TextView
+            android:id="@+id/confirm_product_name"
+            android:paddingLeft="24dp"
+            android:layout_centerVertical="true"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_size_normal"
+            android:textColor="@color/font_black"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="42dp"
+        android:orientation="horizontal"
+        android:background="@drawable/stroke_edit_fillpraent">
+
+        <TextView
+            android:paddingLeft="24dp"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_size_normal"
+            android:textColor="@color/font_black"
+            android:text="投资期限"/>
+
+        <TextView
+            android:id="@+id/confirm_tzxq"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:paddingRight="24dp"
+            android:textSize="@dimen/font_size_normal"
+            android:textColor="@color/font_black"
+            android:text=""/>
+
+    </RelativeLayout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="42dp"
+        android:orientation="horizontal"
+        android:background="@drawable/stroke_edit_fillpraent_bottom">
+
+        <TextView
+            android:paddingLeft="24dp"
+            android:layout_centerVertical="true"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_size_normal"
+            android:textColor="@color/font_black"
+            android:text="年华利率"/>
+
+        <TextView
+            android:id="@+id/confirm_nhln"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:paddingRight="24dp"
+            android:textSize="@dimen/font_size_normal"
+            android:textColor="@color/font_black"
+            android:text=""/>
+
+    </RelativeLayout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="42dp"
+        android:orientation="horizontal"
+        android:background="@drawable/stroke_edit_fillpraent_bottom">
+
+        <TextView
+            android:paddingLeft="24dp"
+            android:layout_centerVertical="true"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_size_normal"
+            android:textColor="@color/font_black"
+            android:text="剩余可投金额"/>
+
+        <TextView
+            android:id="@+id/confirm_ktje"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:paddingRight="24dp"
+            android:textSize="@dimen/font_size_normal"
+            android:textColor="@color/font_black"
+            android:text=""/>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/confirm_button_dklj"
+        android:layout_width="fill_parent"
+        android:layout_height="42dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:background="@drawable/stroke_edit_fillpraent_top">
+
+        <TextView
+            android:id="@+id/confirm_dklj"
+            android:paddingLeft="24dp"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_size_normal"
+            android:textColor="@color/font_black"
+            android:text="抵扣礼金"/>
+
+        <ImageView
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/confirm_dklj"
+            android:paddingLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/confirm_dklj_icon"/>
+
+        <TextView
+            android:id="@+id/confirm_lijin_yuan"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:textSize="@dimen/font_size_normal"
+            android:paddingRight="24dp"
+            android:text="元"/>
+
+        <TextView
+            android:id="@+id/confirm_lijin_num"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/confirm_lijin_yuan"
+            android:textSize="@dimen/font_size_normal"
+            android:paddingRight="2dp"
+            android:textColor="@color/ct_blue"
+            android:text="0"/>
+
+    </RelativeLayout>
 
     <LinearLayout android:layout_width="fill_parent"
         android:layout_height="@dimen/edit_height_normal"
         android:orientation="horizontal"
-        android:layout_marginTop="17dp"
         android:background="@drawable/stroke_edit_fillpraent">
         <EditText
             android:id="@+id/confirm_input_edit"
@@ -43,7 +177,7 @@
         android:id="@+id/balance_layout"
         android:layout_marginLeft="20dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:orientation="horizontal">
 
         <TextView
@@ -84,6 +218,6 @@
         android:textColor="@color/font_white"
         android:textSize="@dimen/font_size_navigation"
         android:enabled="false"
-        android:text="立即投资"/>
+        android:text="确认投资"/>
 
 </LinearLayout>

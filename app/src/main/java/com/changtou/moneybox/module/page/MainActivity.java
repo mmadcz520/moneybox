@@ -7,14 +7,13 @@ import android.os.Bundle;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.activity.BaseFragment;
-import com.changtou.moneybox.common.logger.Logger;
-import com.changtou.moneybox.module.service.NetReceiver;
-import com.changtou.moneybox.module.service.NetStateListener;
 import com.changtou.moneybox.module.widget.ExFPAdapter;
 import com.changtou.moneybox.module.widget.ExViewPager;
+import com.umeng.message.PushAgent;
+import com.umeng.message.UmengRegistrar;
 import com.umeng.update.UmengDownloadListener;
 import com.umeng.update.UmengUpdateAgent;
 import com.umeng.update.UpdateConfig;
@@ -87,8 +86,11 @@ public class MainActivity extends CTBaseActivity {
 
         UpdateConfig.setDebug(true);
 
-//        updateVersion();
-//        registerNetListener();
+        //开启自动更新
+        UmengUpdateAgent.setDefault();
+        UmengUpdateAgent.setUpdateUIStyle(UpdateStatus.STYLE_DIALOG);
+        UmengUpdateAgent.setRichNotification(true);
+        UmengUpdateAgent.silentUpdate(this);
     }
 
     /**

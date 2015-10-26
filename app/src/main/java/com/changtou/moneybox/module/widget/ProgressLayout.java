@@ -7,7 +7,7 @@ import android.os.Build;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 
 /**
  * Created by Maxim Dybarsky | maxim.dybarskyy@gmail.com

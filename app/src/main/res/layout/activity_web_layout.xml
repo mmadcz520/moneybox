@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <WebView
+    <com.changtou.moneybox.module.widget.ProgressWebView
         android:id="@+id/ddwebview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" />

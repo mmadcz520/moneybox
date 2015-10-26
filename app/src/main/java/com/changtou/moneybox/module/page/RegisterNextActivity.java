@@ -6,11 +6,12 @@ import android.os.CountDownTimer;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.http.async.RequestParams;
 import com.changtou.moneybox.common.utils.ACache;
 import com.changtou.moneybox.module.http.HttpRequst;
+import com.changtou.moneybox.module.service.ReadSMsTool;
 import com.changtou.moneybox.module.widget.ExEditView;
 
 import org.json.JSONObject;
@@ -42,6 +43,13 @@ public class RegisterNextActivity extends CTBaseActivity
 
         mCounter = new Counter(60*1000, 1000);    //第一个参数是倒计时时间，后者为计时间隔，单位毫秒，这里是倒计时 5 分钟，间隔1秒
         mCounter.start();
+
+        ReadSMsTool readSMsTool = BaseApplication.getInstance().getReadSMsTool();
+        readSMsTool.setSMSReadListener(new ReadSMsTool.ReadSMSListener() {
+            public void readCallback(String code) {
+                mCodeText.setEditValue(code);
+            }
+        });
     }
 
     protected int setPageType()
@@ -118,9 +126,7 @@ public class RegisterNextActivity extends CTBaseActivity
     {
         try
         {
-            String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_CHECKCODE) +
-                    "userid=" + ACache.get(BaseApplication.getInstance()).getAsString("userid") +
-                    "&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token");
+            String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_CHECKCODE);
 
             RequestParams params = new RequestParams();
             JSONObject jsonObject = new JSONObject();
@@ -164,9 +170,7 @@ public class RegisterNextActivity extends CTBaseActivity
     {
         try
         {
-            String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_SENDMSG) +
-                    "userid=" + ACache.get(BaseApplication.getInstance()).getAsString("userid") +
-                    "&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token");
+            String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_SENDMSG);
 
             RequestParams params = new RequestParams();
             JSONObject jsonObject = new JSONObject();

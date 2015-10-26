@@ -14,7 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.http.async.RequestParams;
 import com.changtou.moneybox.common.utils.ACache;
@@ -178,7 +178,15 @@ public class RichesBankAddActivity extends CTBaseActivity
 
     public void treatClickEvent(int id)
     {
-        requestAddBank();
+        if(!mBranchEdit.getText().toString().equals("") && !mBankSpinner.getText().toString().equals("") &&
+                !mBankNoEdit.getText().toString().equals("") && !mProvinceSpinner.getText().toString().equals(""))
+        {
+            requestAddBank();
+        }
+        else
+        {
+            Toast.makeText(this, "请输入完整信息", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
@@ -439,9 +447,7 @@ public class RichesBankAddActivity extends CTBaseActivity
         String place = mProvinceSpinner.getText().toString().trim() + mCitySpinner.getText().toString().trim();
         String branch = mBranchEdit.getText().toString().trim();
 
-        String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_ADDBANK) +
-                "userid=" + ACache.get(BaseApplication.getInstance()).getAsString("userid") +
-                "&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token");
+        String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_ADDBANK);
 
         try
         {

@@ -3,7 +3,6 @@ package com.changtou.moneybox.module.page;
 import android.animation.Keyframe;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
-import android.animation.ValueAnimator;
 import android.annotation.TargetApi;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,45 +10,45 @@ import android.content.res.ColorStateList;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Looper;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.TextAppearanceSpan;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.activity.BaseFragment;
-import com.changtou.moneybox.common.http.async.RequestParams;
-import com.changtou.moneybox.common.logger.Logger;
+import com.changtou.moneybox.common.dialog.SpotsDialog;
 import com.changtou.moneybox.common.utils.ACache;
+import com.changtou.moneybox.common.utils.AppUtil;
 import com.changtou.moneybox.common.utils.SharedPreferencesHelper;
 import com.changtou.moneybox.module.adapter.ExGridAdapter;
 import com.changtou.moneybox.module.appcfg.AppCfg;
 import com.changtou.moneybox.module.entity.BankCardEntity;
+import com.changtou.moneybox.module.entity.FlowEntity;
 import com.changtou.moneybox.module.entity.UserInfoEntity;
 import com.changtou.moneybox.module.http.HttpRequst;
+import com.changtou.moneybox.module.usermodule.LoginNotifier;
+import com.changtou.moneybox.module.usermodule.UserManager;
 import com.changtou.moneybox.module.widget.CountView;
 import com.changtou.moneybox.module.widget.SignInHUD;
-import com.changtou.moneybox.module.widget.ZProgressHUD;
 
 import org.json.JSONObject;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 
-public class RichesFragment extends BaseFragment implements AdapterView.OnItemClickListener {
+public class RichesFragment extends BaseFragment implements AdapterView.OnItemClickListener, LoginNotifier {
 
 //    private TextView mMobileTextView = null;
     private CountView mTotalAssetsTextView = null;
@@ -58,6 +57,10 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
     private TextView mOverageTextView = null;
     private TextView mGiftsTextView = null;
     private TextView mTouYuanTextView = null;
+
+    private ImageView mAuthIdcodeIV = null;
+    private ImageView mAuthPhoneIV = null;
+    private ImageView mAuthCardIV = null;
 
     private SharedPreferencesHelper sph = null;
 
@@ -80,23 +83,34 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
 
     private ACache cache = null;
 
-    private ZProgressHUD mZProgressHUD = null;
-
     private ACache mAcache = null;
     private UserInfoEntity mUserInfoEntity = null;
+
+    private UserManager mUserManager = null;
+
+    private SpotsDialog mSpotsDialog = null;
+
+    private View mExchangeGiftView = null;
 
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         sph = SharedPreferencesHelper.getInstance(this.getActivity().getApplicationContext());
         cache = ACache.get(this.getActivity());
 
-        mZProgressHUD = ZProgressHUD.getInstance(this.getActivity());
+        mUserManager = BaseApplication.getInstance().getUserModule();
+        mUserManager.setLoginNotifier(this);
+
+        mSpotsDialog = new SpotsDialog(this.getActivity());
+        if(BaseApplication.getInstance().isUserLogin())
+        {
+            mSpotsDialog.show();
+        }
 
         int[] mImgRes = {R.drawable.riches_btn_adf_selector,
-                R.drawable.riches_btn_invest_selector,
-                R.drawable.riches_btn_flow_selector,
-                R.drawable.riches_btn_safe_selector,
+                R.drawable.riches_btn_regcharge_selector,
                 R.drawable.riches_btn_wd_selector,
+                R.drawable.riches_btn_flow_selector,
+                R.drawable.riches_btn_invest_selector,
                 R.drawable.riches_btn_safe_selector};
 
         String[] titleList = this.getActivity().getResources().getStringArray(R.array.riches_modules);
@@ -107,26 +121,24 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
         gv.setAdapter(sa);
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                 switch (position) {
                     case 0:
                         final Intent intent0 = new Intent(RichesFragment.this.getActivity(), RichesPromotionActivity.class);
                         startActivity(intent0);
                         break;
                     case 1:
-                        final Intent intent1 = new Intent(RichesFragment.this.getActivity(), RichesInvestListActivity.class);
-                        startActivity(intent1);
+
+                        Toast.makeText(RichesFragment.this.getActivity(), "充值功能敬请期待", Toast.LENGTH_LONG).show();
+//                        final Intent intent2 = new Intent(RichesFragment.this.getActivity(), RichesRechargePage.class);
+//                        startActivity(intent2);
+
+                        //先验证实名认证，在添加银行卡
+
+
                         break;
                     case 2:
-                        final Intent intent2 = new Intent(RichesFragment.this.getActivity(), RichesTradeActivity.class);
-                        startActivity(intent2);
-                        break;
-                    case 3:
-                        final Intent intent3 = new Intent(RichesFragment.this.getActivity(), RichesFlowActivity.class);
-                        startActivity(intent3);
-                        break;
-                    case 4: {
 
-//                        UserInfoEntity userInfoEntity = UserInfoEntity.getInstance();
                         BankCardEntity bank = mUserInfoEntity.getBankCardEntity();
 
                         int len = bank.mList.size();
@@ -138,6 +150,18 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
                             final Intent intent4 = new Intent(RichesFragment.this.getActivity(), RichesWithdrawActivity.class);
                             startActivity(intent4);
                         }
+
+                        break;
+                    case 3:
+                        gotoCalendar();
+
+                        break;
+                    case 4: {
+
+                        final Intent intent1 = new Intent(RichesFragment.this.getActivity(), RecordActivity.class);
+                        startActivity(intent1);
+
+//                        UserInfoEntity userInfoEntity = UserInfoEntity.getInstance();
 
                         break;
                     }
@@ -152,6 +176,8 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
 
         mQiandaoImage = (Button)view.findViewById(R.id.riches_signbar);
 
+        //100
+
 //        mMobileTextView = (TextView)view.findViewById(R.id.riches_text_mobile);
         mTotalAssetsTextView = (CountView)view.findViewById(R.id.riches_text_totalassets);
         mInvestAssetsTextView = (TextView)view.findViewById(R.id.riches_text_investassets);
@@ -163,7 +189,13 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
         mAcache = ACache.get(BaseApplication.getInstance());
         mUserInfoEntity = (UserInfoEntity)mAcache.getAsObject("userinfo");
 
-        if(mUserInfoEntity != null)
+        mAuthIdcodeIV = (ImageView)view.findViewById(R.id.auth_idcode_img);
+        mAuthPhoneIV = (ImageView)view.findViewById(R.id.auth_phone_img);
+        mAuthCardIV = (ImageView)view.findViewById(R.id.auth_card_img);
+
+        mExchangeGiftView = view.findViewById(R.id.gift_click_layout);
+
+        if(mUserInfoEntity != null && !mUserInfoEntity.getCreatetime().equals(""))
         {
             initRichesPage();
         }
@@ -172,18 +204,28 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
         sHUD.setCancelable(true);
         sHUD.setOwnerActivity(this.getActivity());
         sHUD.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            public void onDismiss(DialogInterface dialog)
-            {
+            public void onDismiss(DialogInterface dialog) {
                 mQiandaoImage.setEnabled(false);
                 mTouYuanTextView.setText("" + mTouyuan);
             }
         });
-        sHUD.setOnShowListener(new DialogInterface.OnShowListener()
-        {
+        sHUD.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
-            public void onShow(DialogInterface dialog)
-            {
+            public void onShow(DialogInterface dialog) {
                 //签到
+            }
+        });
+
+        mExchangeGiftView.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(RichesFragment.this.getActivity(), GiftExchangeActivity.class);
+//                intent.putExtra("details",mDetails);
+//                intent.putExtra("id",mProductId);
+//                intent.putExtra("type",mProductType);
+
+                startActivity(intent);
             }
         });
 
@@ -193,8 +235,10 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
     public void onResume()
     {
         //请求userinfo
-        getUserInfo();
-        isSignRequest();
+        if(BaseApplication.getInstance().isUserLogin()) {
+            getUserInfo();
+            isSignRequest();
+        }
         super.onResume();
     }
 
@@ -210,6 +254,12 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
 
     private void initRichesPage()
     {
+//        if(!isUpdate) return;
+//
+//        isUpdate = false;
+
+        mSpotsDialog.cancel();
+
 //        mMobileTextView.setText(mUserInfoEntity.getMobile());
         String total = mUserInfoEntity.getTotalAssets();
         total = total.replace(",", "");
@@ -224,6 +274,22 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
         mOverageTextView.setText(mUserInfoEntity.getOverage());
         mGiftsTextView.setText(mUserInfoEntity.getGifts());
         mTouYuanTextView.setText("" + mTouyuan);
+
+        if(mUserInfoEntity.getIdentycheck())
+        {
+            mAuthIdcodeIV.setImageResource(R.mipmap.auth_idcode_true);
+        }
+
+        if(mUserInfoEntity.getMobilecheck())
+        {
+            mAuthPhoneIV.setImageResource(R.mipmap.auth_phone_true);
+        }
+
+        int cardSize = mUserInfoEntity.getBankCardEntity().mList.size();
+        if(cardSize > 0)
+        {
+            mAuthCardIV.setImageResource(R.mipmap.auth_card_true);
+        }
 
         cache.put("fullname", mUserInfoEntity.getFullName());
     }
@@ -251,24 +317,23 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
                 }
                 else if(err == 2)
                 {
-                    sph.putString(AppCfg.CFG_LOGIN, AppCfg.LOGIN_STATE.EN_LOGIN.toString());
-                    sph.putString(AppCfg.GSPD, "");
+                    Toast.makeText(this.getActivity(),"账号在其他设备登陆,请重新登录", Toast.LENGTH_LONG).show();
+                    BaseApplication.getInstance().backToLoginPage();
+//                    sph.putString(AppCfg.GSPD, "");
+//                    ACache.get(this.getActivity()).clear();
+                    mSpotsDialog.cancel();
                 }
             }
             catch (Exception e)
             {
 
             }
-
-
-
         }
 
         if(reqType == HttpRequst.REQ_TYPE_SIGN)
         {
             try
             {
-                mZProgressHUD.cancel();
                 JSONObject jsonObject = new JSONObject(content);
 
                 int error = jsonObject.getInt("errcode");
@@ -276,11 +341,30 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
 
                 if(error == 0)
                 {
-                    sHUD.show();
+//                    sHUD.show();
+                    mTouYuanTextView.setText("" + mTouyuan);
+//                    Toast.makeText(this.getActivity(), "签到成功", Toast.LENGTH_LONG).show();
+//
+                    Toast toast = Toast.makeText(this.getActivity(), "", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    LinearLayout toastView = (LinearLayout) toast.getView();
+                    ImageView imageCodeProject = new ImageView(this.getActivity());
+                    imageCodeProject.setImageResource(R.mipmap.riches_touyuan_banner);
+                    toastView.addView(imageCodeProject, 0);
+                    int width = AppUtil.getScreenSize(BaseApplication.getInstance())[0];
+                    toastView.setMinimumWidth(width);
+                    toast.show();
+
                 }
                 else if(error == 1)
                 {
                     Toast.makeText(this.getActivity(), "签到失败", Toast.LENGTH_LONG).show();
+                    mQiandaoImage.setEnabled(true);
+                }
+                else if(error == 2)
+                {
+                    sHUD.show();
+                    Toast.makeText(this.getActivity(), "您已签到", Toast.LENGTH_LONG).show();
                 }
             }
             catch (Exception e)
@@ -297,6 +381,7 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
                 JSONObject jsonObject = new JSONObject(content);
 
                 int error = jsonObject.getInt("errcode");
+
                 isSign = error;
                 if(error == 0)
                 {
@@ -315,9 +400,19 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
         }
     }
 
-    public void onFailure(Throwable error, String content, int reqType) {
+    public void onFailure(Throwable error, String content, int reqType)
+    {
+        mSpotsDialog.cancel();
 
+        if(reqType == HttpRequst.REQ_TYPE_USERINFO)
+        {
+            Toast.makeText(this.getActivity(), "获取用户信息失败, 请重新登录", Toast.LENGTH_LONG).show();
 
+            sph.putString(AppCfg.CFG_LOGIN, AppCfg.LOGIN_STATE.EN_LOGIN.toString());
+            sph.putString(AppCfg.GSPD, "");
+            ACache.get(this.getActivity()).clear();
+            BaseApplication.getInstance().AppExit();
+        }
     }
 
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
@@ -330,11 +425,7 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
      */
     private void getUserInfo()
     {
-        String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_USERINFO) +
-                "userid=" + ACache.get(BaseApplication.getInstance()).getAsString("userid") +
-                "&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token");
-
-        Logger.e(url);
+        String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_USERINFO);
 
         sendRequest(HttpRequst.REQ_TYPE_USERINFO, url, mParams,
                 mAct.getAsyncClient(), false);
@@ -420,6 +511,34 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
                 setDuration(500);
     }
 
+    @Override
+    public void loginSucNotify() {
+
+    }
+
+    @Override
+    public void loginIngNotify() {
+
+    }
+
+    @Override
+    public void loginErrNotify(int errcode) {
+
+    }
+
+    @Override
+    public void logoutNotify() {
+
+    }
+
+    @Override
+    public void loginUserInfo(Object object) {
+        mUserInfoEntity = (UserInfoEntity)object;
+        mAcache.put("userinfo", mUserInfoEntity);
+
+        initRichesPage();
+    }
+
     public class Counter extends CountDownTimer {
 
         public Counter(long millisInFuture, long countDownInterval) {
@@ -462,11 +581,9 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
      */
     private void signRequest()
     {
-        mZProgressHUD.show();
+        mQiandaoImage.setEnabled(false);
 
-        String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_SIGN) +
-                "userid=" + ACache.get(BaseApplication.getInstance()).getAsString("userid") +
-                "&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token");
+        String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_SIGN);
 
         sendRequest(HttpRequst.REQ_TYPE_SIGN, url, mParams,
                 mAct.getAsyncClient(), false);
@@ -477,9 +594,7 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
      */
     private void isSignRequest()
     {
-        String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_ISSIGN) +
-                "userid=" + ACache.get(BaseApplication.getInstance()).getAsString("userid") +
-                "&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token");
+        String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_ISSIGN);
 
         sendRequest(HttpRequst.REQ_TYPE_ISSIGN, url, mParams,
                 mAct.getAsyncClient(), false);
@@ -518,6 +633,22 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
                 startActivity(intent);
             }
         });
+    }
+
+    /**
+     * 跳转到还款日历
+     */
+    private void gotoCalendar()
+    {
+        FlowEntity mEntity = mUserInfoEntity.getFlowEntity();
+
+        final Intent intent = new Intent(this.getActivity(), RichesCalendarActivity.class);
+
+        ACache cache = ACache.get(BaseApplication.getInstance());
+        cache.put("selected_month", mEntity.mMonth.size());
+        cache.put("flow", mEntity);
+
+        startActivity(intent);
     }
 
 }

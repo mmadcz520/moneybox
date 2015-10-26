@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.http.async.RequestParams;
 import com.changtou.moneybox.common.utils.ACache;
@@ -142,16 +142,11 @@ public class RichesBankActivity extends CTBaseActivity
 
         final Intent intent3 = new Intent(this, RichesBankAddActivity.class);
         View view = findViewById(R.id.riches_bank_add);
-        view.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View v)
-            {
-                if(isCertify)
-                {
+        view.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (isCertify) {
                     startActivity(intent3);
-                }
-                else
-                {
+                } else {
                     Toast.makeText(RichesBankActivity.this, "请先进行实名认证！", Toast.LENGTH_LONG).show();
                 }
             }
@@ -190,23 +185,27 @@ public class RichesBankActivity extends CTBaseActivity
 
         super.onSuccess(content, object, reqType);
 
-        if (reqType == HttpRequst.REQ_TYPE_BANKCARD)
-        {
-            mEntity = (BankCardEntity) object;
-            mAdapter.setData(mEntity);
+        try {
+            if (reqType == HttpRequst.REQ_TYPE_BANKCARD) {
+                mEntity = (BankCardEntity) object;
+                mAdapter.setData(mEntity);
 
-            mUserInfoEntity.setBankCardEntity(mEntity);
-            ACache.get(this).put("userinfo", mUserInfoEntity);
+                mUserInfoEntity.setBankCardEntity(mEntity);
+                ACache.get(this).put("userinfo", mUserInfoEntity);
+            }
+
+            if (reqType == HttpRequst.REQ_TYPE_DELBANK) {
+                initBankListRequest();
+            }
+
+            if (reqType == HttpRequst.REQ_TYPE_CHANGEBANK) {
+                initBankListRequest();
+            }
         }
-
-        if(reqType == HttpRequst.REQ_TYPE_DELBANK)
+        catch (Exception e)
         {
-            initBankListRequest();
-        }
-
-        if(reqType == HttpRequst.REQ_TYPE_CHANGEBANK)
-        {
-            initBankListRequest();
+            BaseApplication.getInstance().backToLoginPage();
+            Toast.makeText(BaseApplication.getInstance(), "账号在其他设备登陆,请重新登录", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -228,9 +227,7 @@ public class RichesBankActivity extends CTBaseActivity
     {
         try
         {
-            String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_DELBANK) +
-                    "userid=" + ACache.get(BaseApplication.getInstance()).getAsString("userid") +
-                    "&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token");
+            String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_DELBANK);
 
             BankCardEntity.BankListEntity bank = (BankCardEntity.BankListEntity)mEntity.mList.get(position);
 
@@ -249,10 +246,7 @@ public class RichesBankActivity extends CTBaseActivity
 
     private void initBankListRequest()
     {
-        String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_BANKCARD) +
-                "userid=" + ACache.get(BaseApplication.getInstance()).getAsString("userid") +
-                "&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token");
-
+        String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_BANKCARD);
         sendRequest(HttpRequst.REQ_TYPE_BANKCARD,
                 url,
                 mParams,
@@ -262,9 +256,7 @@ public class RichesBankActivity extends CTBaseActivity
     private void changeDefaultRequest(int position)
     {
         try {
-            String url = HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_CHANGEBANK) +
-                    "userid=" + ACache.get(BaseApplication.getInstance()).getAsString("userid") +
-                    "&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token");
+            String url = HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_CHANGEBANK);
 
             BankCardEntity.BankListEntity bank = (BankCardEntity.BankListEntity) mEntity.mList.get(position);
 

@@ -1,7 +1,5 @@
 package com.changtou.moneybox.module.service;
 
-import android.util.Log;
-
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;

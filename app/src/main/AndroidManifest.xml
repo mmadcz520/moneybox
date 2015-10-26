@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.changtou"
+    package="com.changtou.moneybox"
     android:versionCode="1"
     android:versionName="1.1">
 
@@ -9,6 +9,7 @@
 
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.WRITE_SMS" />
 
     <!-- Push service 运行需要的权限 -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -21,6 +22,8 @@
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
 
     <!-- Push service 运行需要的权限 -->
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
@@ -34,6 +37,12 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.WRITE_APN_SETTINGS." />
+
+
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+
     <!--
      To retrieve OAuth 2.0 tokens or invalidate tokens to disconnect a user. This disconnect
      option is required to comply with the Google+ Sign-In developer policies
@@ -44,9 +53,9 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
-        android:name=".moneybox.module.CTMoneyApplication"
-        android:allowBackup="true"
-        tools:replace="android:icon"
+        android:name=".module.CTMoneyApplication"
+        android:allowBackup="false"
+        tools:replace="android:icon, android:allowBackup"
         android:icon="@drawable/ct_app_logo"
         android:label="@string/app_name"
         android:screenOrientation="portrait">
@@ -57,94 +66,136 @@
             android:name="UMENG_CHANNEL"
             android:value="${UMENG_CHANNEL_VALUE}" />
 
+        <meta-data
+            android:name="UMENG_MESSAGE_SECRET"
+            android:value="6548065c1dcd2b2b97e663fd18bd63f9">
+        </meta-data>
+
         <activity
-            android:name=".moneybox.module.widget.SplashActivity"
-            android:theme="@android:style/Theme.NoTitleBar">
+            android:name=".module.widget.SplashActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:exported="true"
+            android:protectionLevel="signatureOrSystem">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".moneybox.module.page.BootActivity"
+            android:name=".module.page.BootActivity"
+            android:exported="false"
             android:theme="@android:style/Theme.NoTitleBar"></activity>
         <activity
-            android:name=".moneybox.module.page.MainActivity"
+            android:name=".module.page.MainActivity"
             android:launchMode="singleTop"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/ActivityTheme_Light"></activity>
         <activity
-            android:name=".moneybox.module.page.ProductDetailsActivity"
+            android:name=".module.page.ProductDetailsActivity"
+            android:exported="false"
             android:theme="@style/ActivityTheme_Light"></activity>
         <activity
-            android:name=".moneybox.module.page.ConfirmActivity"
+            android:name=".module.page.ConfirmActivity"
             android:noHistory="true"
+            android:exported="false"
             android:theme="@style/ActivityTheme_Light"></activity>
         <activity
-            android:name=".moneybox.module.page.LoginActivity"
+            android:name=".module.page.LoginActivity"
+            android:exported="false"
+            android:theme="@style/ActivityTheme_Light"></activity>
+        <activity
+            android:name=".module.page.RegisterActivity"
+            android:exported="false"
+            android:theme="@style/ActivityTheme_Light"></activity>
+        <activity
+            android:name=".module.page.RegisterNextActivity"
+            android:exported="false"
+            android:theme="@style/ActivityTheme_Light"></activity>
+        <activity
+            android:name=".module.page.RichesRechargePage"
+            android:exported="false"
+            android:theme="@style/ActivityTheme_Light"></activity>
+        <activity
+            android:name=".module.page.RegisterPasswordActivity"
             android:noHistory="true"
+            android:exported="false"
             android:theme="@style/ActivityTheme_Light"></activity>
         <activity
-            android:name=".moneybox.module.page.RegisterActivity"
+            android:name=".module.page.RichesInvestListActivity"
+            android:exported="false"
             android:theme="@style/ActivityTheme_Light"></activity>
         <activity
-            android:name=".moneybox.module.page.RegisterNextActivity"
+            android:name=".module.page.RichesBankActivity"
+            android:exported="false"
             android:theme="@style/ActivityTheme_Light"></activity>
         <activity
-            android:name=".moneybox.module.page.RegisterPasswordActivity"
-            android:noHistory="true"
+            android:name=".module.page.RichesWithdrawActivity"
+            android:exported="false"
             android:theme="@style/ActivityTheme_Light"></activity>
         <activity
-            android:name=".moneybox.module.page.RichesInvestListActivity"
+            android:name=".module.page.RichesSafeActivity"
+            android:exported="false"
             android:theme="@style/ActivityTheme_Light"></activity>
         <activity
-            android:name=".moneybox.module.page.RichesBankActivity"
+            android:name=".module.page.RichesBankAddActivity"
+            android:exported="false"
             android:theme="@style/ActivityTheme_Light"></activity>
         <activity
-            android:name=".moneybox.module.page.RichesWithdrawActivity"
+            android:name=".module.page.RecordActivity"
+            android:exported="false"
             android:theme="@style/ActivityTheme_Light"></activity>
         <activity
-            android:name=".moneybox.module.page.RichesSafeActivity"
+            android:name=".module.page.PdManagerActivity"
+            android:exported="false"
             android:theme="@style/ActivityTheme_Light"></activity>
         <activity
-            android:name=".moneybox.module.page.RichesBankAddActivity"
+            android:name=".module.page.PdFrogetActivity"
+            android:exported="false"
             android:theme="@style/ActivityTheme_Light"></activity>
         <activity
-            android:name=".moneybox.module.page.PdManagerActivity"
+            android:name=".module.page.RichesFlowActivity"
+            android:exported="false"
             android:theme="@style/ActivityTheme_Light"></activity>
         <activity
-            android:name=".moneybox.module.page.PdFrogetActivity"
+            android:name=".module.page.RichesTradeActivity"
+            android:exported="false"
             android:theme="@style/ActivityTheme_Light"></activity>
         <activity
-            android:name=".moneybox.module.page.RichesFlowActivity"
+            android:name=".module.page.RichesCalendarActivity"
+            android:exported="false"
             android:theme="@style/ActivityTheme_Light"></activity>
         <activity
-            android:name=".moneybox.module.page.RichesTradeActivity"
+            android:name=".module.page.GesturePWActivity"
+            android:exported="false"
             android:theme="@style/ActivityTheme_Light"></activity>
         <activity
-            android:name=".moneybox.module.page.RichesCalendarActivity"
+            android:name=".module.page.RichesPromotionActivity"
+            android:exported="false"
             android:theme="@style/ActivityTheme_Light"></activity>
         <activity
-            android:name=".moneybox.module.page.GesturePWActivity"
+            android:name=".module.page.GiftExchangeActivity"
+            android:exported="false"
             android:theme="@style/ActivityTheme_Light"></activity>
         <activity
-            android:name=".moneybox.module.page.RichesPromotionActivity"
+            android:name=".module.phonebook.RichesPhoneBookActivity"
+            android:exported="false"
             android:theme="@style/ActivityTheme_Light"></activity>
         <activity
-            android:name=".moneybox.module.phonebook.RichesPhoneBookActivity"
+            android:name=".module.page.RichesRewardsActivity"
+            android:exported="false"
             android:theme="@style/ActivityTheme_Light"></activity>
         <activity
-            android:name=".moneybox.module.page.RichesRewardsActivity"
+            android:name=".module.page.RichesCertificationActivity"
+            android:exported="false"
             android:theme="@style/ActivityTheme_Light"></activity>
         <activity
-            android:name=".moneybox.module.page.RichesCertificationActivity"
+            android:name=".module.page.WebActivity"
+            android:exported="false"
             android:theme="@style/ActivityTheme_Light"></activity>
         <activity
-            android:name=".moneybox.module.page.WebActivity"
-            android:theme="@style/ActivityTheme_Light"></activity>
-        <activity
-            android:name=".moneybox.module.page.PhoneAuthActivity"
+            android:name=".module.page.PhoneAuthActivity"
+            android:exported="false"
             android:theme="@style/ActivityTheme_Light"></activity>
 
         <meta-data
@@ -160,9 +211,9 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
 
         <service
-            android:name=".moneybox.module.service.PingService"
+            android:name=".module.service.PingService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="false"></service>
 
 
         <activity
@@ -193,11 +244,152 @@
 
 
         <activity
-            android:name=".moneybox.wxapi.WXEntryActivity"
+            android:name=".wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+
+
+        <!-- 监听通知点击或者忽略处理的广播 -->
+        <receiver
+            android:name="com.umeng.message.NotificationProxyBroadcastReceiver"
+            android:exported="false" >
+        </receiver>
+
+        <!-- 监听开机运行、网络连接变化、卸载的广播 -->
+        <receiver
+            android:name="com.umeng.message.SystemReceiver"
+            android:process=":push" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+
+        <!-- 监听消息到达的广播 -->
+        <receiver
+            android:name="com.umeng.message.MessageReceiver"
+            android:process=":push" >
+            <intent-filter>
+                <action android:name="org.agoo.android.intent.action.RECEIVE" />
+            </intent-filter>
+        </receiver>
+
+        <!-- 监听宿主选举的广播 -->
+        <receiver
+            android:name="com.umeng.message.ElectionReceiver"
+            android:process=":push" >
+            <intent-filter>
+                <action android:name="org.agoo.android.intent.action.ELECTION_RESULT_V4" />
+                <category android:name="umeng" />
+            </intent-filter>
+        </receiver>
+
+        <!-- 监听注册的广播 -->
+        <!-- 【应用包名】字符串需要替换成本应用的应用包名 -->
+        <receiver
+            android:name="com.umeng.message.RegistrationReceiver"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.changtou.moneybox.intent.action.COMMAND" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.umeng.message.UmengMessageBootReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+
+        <!-- Umeng的长连服务，用来建立推送的长连接的 -->
+        <!-- 【应用包名】字符串需要替换成本应用的应用包名 -->
+        <service
+            android:name="com.umeng.message.UmengService"
+            android:label="PushService"
+            android:exported="true"
+            android:process=":push" >
+            <intent-filter>
+                <action android:name="com.changtou.moneybox.intent.action.START" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.changtou.moneybox.intent.action.COCKROACH" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="org.agoo.android.intent.action.PING_V4" />
+                <category android:name="umeng" />
+            </intent-filter>
+        </service>
+
+        <!-- Umeng的消息接收服务 -->
+        <service android:name="com.umeng.message.UmengIntentService"
+            android:process=":push" />
+
+        <!-- Umeng的消息路由服务 -->
+        <service
+            android:name="com.umeng.message.UmengMessageIntentReceiverService"
+            android:process=":push"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="org.android.agoo.client.MessageReceiverService" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="org.android.agoo.client.ElectionReceiverService" />
+            </intent-filter>
+        </service>
+
+        <!-- v2.4.1添加的Service，Umeng的消息接收后的处理服务 -->
+        <service android:name="com.umeng.message.UmengMessageCallbackHandlerService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.umeng.messge.registercallback.action" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.umeng.message.unregistercallback.action"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.umeng.message.message.handler.action"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.umeng.message.autoupdate.handler.action"/>
+            </intent-filter>
+        </service>
+
+        <!-- V1.3.0添加的service，负责下载通知的资源 -->
+        <service android:name="com.umeng.message.UmengDownloadResourceService" />
+
+
+        <activity
+            android:name="com.yintong.activity.StandActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" >
+
+        </activity>
+
+        <!-- LLYT SDK START -->
+        <activity
+            android:name="com.yintong.secure.activity.BaseActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:windowSoftInputMode="adjustResize" >
+        </activity>
+
+        <service
+            android:name="com.yintong.secure.service.PayService"
+            >
+        </service>
+        <!-- LLYT SDK END -->
 
     </application>
 

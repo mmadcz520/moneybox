@@ -7,15 +7,15 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 import com.changtou.moneybox.common.activity.BaseFragment;
-import com.changtou.moneybox.common.logger.Logger;
 import com.changtou.moneybox.module.adapter.ProductListAdapter;
 import com.changtou.moneybox.module.entity.ProductEntity;
 import com.changtou.moneybox.module.http.HttpRequst;
@@ -96,15 +96,16 @@ public class ProductFragment extends BaseFragment
                 ExFPAdapter pagerAdapter = new ExFPAdapter(getChildFragmentManager(), mViewList);
                 pagerAdapter.setTitles(titles);
                 mViewPager.setAdapter(pagerAdapter);
-                mViewPager.setOffscreenPageLimit(mViewList.size());
+                mViewPager.setOffscreenPageLimit(len);
                 mSlidingTabLayout.setTabCount(len);
                 mSlidingTabLayout.setViewPager(mViewPager);
+
+                mSlidingTabLayout.setOnPageChangeListener(mPageChangeListener);
             }
             catch (Exception e)
             {
 
             }
-
         }
     }
 
@@ -117,17 +118,15 @@ public class ProductFragment extends BaseFragment
     {
         public void onPageSelected(int arg0)
         {
-//            mSegmentControl.setSelectIndex(arg0);
+            ((SubPage)mViewList.get(arg0)).refreshList();
         }
 
         public void onPageScrolled(int arg0, float arg1, int arg2)
         {
-
         }
 
         public void onPageScrollStateChanged(int arg0)
         {
-
         }
     };
 
@@ -157,6 +156,14 @@ public class ProductFragment extends BaseFragment
             b.putInt("productType", type);
             f.setArguments(b);
             return f;
+        }
+
+        public void refreshList()
+        {
+            sendRequest(HttpRequst.REQ_TYPE_PRODUCT_LIST,
+                    HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_PRODUCT_LIST),
+                    mParams,
+                    mAct.getAsyncClient(), false);
         }
 
         protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -253,9 +260,6 @@ public class ProductFragment extends BaseFragment
         private void goToProductDetails(String id)
         {
             Intent intent = new Intent(this.getActivity(), ProductDetailsActivity.class);
-
-            Logger.e("goToProductDetails=" + id);
-
             intent.putExtra("id", id);
             intent.putExtra("type", mProductType);
             startActivity(intent);

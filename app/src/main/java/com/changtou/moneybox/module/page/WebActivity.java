@@ -10,8 +10,9 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 import com.changtou.moneybox.common.activity.BaseActivity;
+import com.changtou.moneybox.module.widget.ProgressWebView;
 import com.umeng.analytics.MobclickAgent;
 
 /**
@@ -19,7 +20,7 @@ import com.umeng.analytics.MobclickAgent;
  */
 public class WebActivity extends CTBaseActivity
 {
-    private WebView myWebView = null;
+    private ProgressWebView myWebView = null;
 
     private String mUrl = "";
 
@@ -35,10 +36,9 @@ public class WebActivity extends CTBaseActivity
         mUrl = intent.getStringExtra("url");
         mTitle = intent.getStringExtra("title");
 
-        myWebView = (WebView) findViewById(R.id.ddwebview);
+        myWebView = (ProgressWebView) findViewById(R.id.ddwebview);
         myWebView.loadUrl(mUrl);
-        myWebView.setWebViewClient(new WebViewClient()
-        {
+        myWebView.setWebViewClient(new WebViewClient() {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 //  重写此方法表明点击网页里面的链接还是在当前的webview里跳转，不跳到浏览器那边
                 view.loadUrl(url);
@@ -47,10 +47,12 @@ public class WebActivity extends CTBaseActivity
 
         });
 
+        myWebView.removeJavascriptInterface("searchBoxJavaBredge_");
+
         WebSettings settings = myWebView.getSettings();
         settings.setJavaScriptEnabled(true);
 
-        myWebView.setWebChromeClient(new WebChromeClient(){
+        myWebView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 super.onProgressChanged(view, newProgress);
@@ -63,7 +65,6 @@ public class WebActivity extends CTBaseActivity
                 }
             }
         });
-
     }
 
     @Override

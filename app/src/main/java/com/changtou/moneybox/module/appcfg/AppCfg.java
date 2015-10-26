@@ -19,7 +19,7 @@ public class AppCfg
 
     public static final String TOKEN = "token";
 
-
+    public static final String USERID = "userid";
 
     public static Map<String,String> MAP_MSG_ERROR = new HashMap<>();
 

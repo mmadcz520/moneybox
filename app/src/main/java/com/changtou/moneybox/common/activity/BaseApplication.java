@@ -16,15 +16,16 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.ConnectivityManager;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.changtou.moneybox.common.http.base.BaseHttpRequest;
 import com.changtou.moneybox.common.http.impl.AsyncHttpClientImpl;
-import com.changtou.moneybox.common.logger.Logger;
+import com.changtou.moneybox.common.utils.ACache;
 import com.changtou.moneybox.common.utils.DeviceInfo;
 import com.changtou.moneybox.common.utils.MySharedPreferencesMgr;
 import com.changtou.moneybox.common.utils.SharedPreferencesHelper;
@@ -34,6 +35,7 @@ import com.changtou.moneybox.module.page.LoginActivity;
 import com.changtou.moneybox.module.service.BankParserHandler;
 import com.changtou.moneybox.module.service.NetReceiver;
 import com.changtou.moneybox.module.service.NetStateListener;
+import com.changtou.moneybox.module.service.ReadSMsTool;
 import com.changtou.moneybox.module.usermodule.UserManager;
 
 import javax.xml.parsers.SAXParser;
@@ -74,6 +76,8 @@ public abstract class BaseApplication extends Application implements UncaughtExc
     private boolean isBack = false;
 
     private SharedPreferencesHelper sph = null;
+
+    private ReadSMsTool mReadSMsTool = null;
 
     /**
      * 银行列表
@@ -117,11 +121,13 @@ public abstract class BaseApplication extends Application implements UncaughtExc
         try {
             mUserManager = new UserManager();
             mUserManager.init(this);
+
+            mReadSMsTool = new ReadSMsTool();
+            mReadSMsTool.init(this);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        Logger.e(getDeviceInfo(this));
 
         registerNetListener();
 	}
@@ -321,6 +327,8 @@ public abstract class BaseApplication extends Application implements UncaughtExc
         sph.putString(AppCfg.CFG_LOGIN, AppCfg.LOGIN_STATE.EN_LOGIN.toString());
         sph.putString(AppCfg.GSPD, "");
 
+        ACache.get(this).clear();
+
         Intent intent = new Intent(this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
@@ -333,8 +341,6 @@ public abstract class BaseApplication extends Application implements UncaughtExc
      */
     public void onForeground()
     {
-        Logger.e("-------------------------------------is back" + isBack);
-
         if(!isBack && (sph.getString(AppCfg.CFG_LOGIN, "").equals(AppCfg.LOGIN_STATE.LOGIN.toString())))
         {
             Intent intent = new Intent(this, GesturePWActivity.class);
@@ -503,6 +509,25 @@ public abstract class BaseApplication extends Application implements UncaughtExc
                 || (sph.getString(AppCfg.CFG_LOGIN, "").equals("")));
     }
 
+    public void setToken(String token)
+    {
+        sph.putString(AppCfg.TOKEN, token);;
+    }
+
+    public void setUserId(String userId)
+    {
+        sph.putString(AppCfg.USERID, userId);
+    }
+
+    public String getToken()
+    {
+        return sph.getString(AppCfg.TOKEN, "");
+    }
+
+    public String getUserId()
+    {
+        return sph.getString(AppCfg.USERID, "");
+    }
 
     public static String getDeviceInfo(Context context) {
         try{
@@ -546,5 +571,35 @@ public abstract class BaseApplication extends Application implements UncaughtExc
     public void setNetStateListener(NetStateListener netStateListener)
     {
         mReceiver.setNetStateListener(netStateListener);
+    }
+
+    public ReadSMsTool getReadSMsTool()
+    {
+        return mReadSMsTool;
+    }
+
+
+    /**
+     * 获取渠道名字
+     * @return
+     */
+    public String getChannelName() {
+        String channelName = null;
+        try {
+            PackageManager packageManager = getPackageManager();
+            if (packageManager != null) {
+                //注意此处为ApplicationInfo 而不是 ActivityInfo,因为友盟设置的meta-data是在application标签中，而不是某activity标签中，所以用ApplicationInfo
+                ApplicationInfo applicationInfo = packageManager.getApplicationInfo(getPackageName(), PackageManager.GET_META_DATA);
+                if (applicationInfo != null) {
+                    if (applicationInfo.metaData != null) {
+
+                    }
+                    channelName = applicationInfo.metaData.getString("UMENG_CHANNEL");
+                }
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return channelName;
     }
 }

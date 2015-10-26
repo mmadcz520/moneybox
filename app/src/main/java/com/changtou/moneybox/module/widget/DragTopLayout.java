@@ -30,7 +30,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ScrollView;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 
 /**
  * Created by chenupt@gmail.com on 2015/1/18.

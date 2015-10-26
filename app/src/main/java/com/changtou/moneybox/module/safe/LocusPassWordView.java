@@ -7,14 +7,11 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
-import com.changtou.R;
-import com.changtou.moneybox.common.utils.AppUtil;
-import com.changtou.moneybox.module.CTMoneyApplication;
+import com.changtou.moneybox.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -182,7 +179,6 @@ public class LocusPassWordView extends View {
         mPoints[2][1] = new Point(x + middleX, y + middleY + dotPadding, 8);
         mPoints[2][2] = new Point(x + middleX + dotPadding, y + middleY + dotPadding, 9);
 
-        Log.d("jerome", "canvas width:"+width);
         dotRadius = width / 10;
         isCache = true;
 
@@ -338,7 +334,6 @@ public class LocusPassWordView extends View {
                 if (task != null) {
                     task.cancel();
                     task = null;
-                    Log.d("task", "touch cancel()");
                 }
                 //
                 reset();
@@ -449,7 +444,6 @@ public class LocusPassWordView extends View {
         if (time > 1) {
             if (task != null) {
                 task.cancel();
-                Log.d("task", "clearPassword cancel()");
             }
             postInvalidate();
             task = new TimerTask() {
@@ -458,7 +452,6 @@ public class LocusPassWordView extends View {
                     postInvalidate();
                 }
             };
-            Log.d("task", "clearPassword schedule(" + time + ")");
             timer.schedule(task, time);
         } else {
             reset();

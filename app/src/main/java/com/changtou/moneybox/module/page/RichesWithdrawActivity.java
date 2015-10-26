@@ -1,21 +1,25 @@
 package com.changtou.moneybox.module.page;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.SpannableStringBuilder;
 import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.http.async.RequestParams;
 import com.changtou.moneybox.common.utils.ACache;
@@ -29,6 +33,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.NumberFormat;
 import java.util.Map;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * Created by Administrator on 2015/5/21.
@@ -46,17 +52,26 @@ public class RichesWithdrawActivity extends CTBaseActivity
     private TextView mWithdrawTotle = null;
     private TextView mWithdrawHandling = null;
 
+    private TextView mTouyuanTextView = null;
+
     private String mOverage = "";
     private String mHandling = "5";
+
+    private int mTouyuan = 0;
+
+    private CheckBox mBrtxCheck = null;
 
     private Button mSubmitBtn = null;
 
     //默认银行卡号
     private String mDefaultBankNo = "";
 
-    private String[] mError = {"取现成功", "取现失败", "没有绑定银行卡", "没有绑定支行信息", "用户设置银行卡有问题", "没有实名认证", "余额不足"};
+    private String[] mError = {"取现成功", "取现失败", "没有绑定银行卡", "没有绑定支行信息", "用户设置银行卡有问题", "没有实名认证", "余额不足",
+            "投圆不足，暂不能使用博尔特靴", "不在工作日，暂不能使用博尔特靴", "超过14点，暂不能使用博尔特靴", "成功使用博尔特靴道具提现", "提现未知错误"};
 
     private UserInfoEntity mUserInfoEntity = null;
+
+    private int bolt = 1;
 
     @Override
     protected void initView(Bundle bundle)
@@ -81,12 +96,48 @@ public class RichesWithdrawActivity extends CTBaseActivity
         mWithdrawTotle = (TextView)findViewById(R.id.riches_withdraw_total);
         mWithdrawHandling = (TextView)findViewById(R.id.riches_withdraw_handling);
 
+        mTouyuanTextView = (TextView)findViewById(R.id.sytou_num);
+        mBrtxCheck = (CheckBox)findViewById(R.id.brtx_check);
+
         mBankNoView = (TextView)findViewById(R.id.riches_bank_item_no);
         mBankIconView = (ImageView)findViewById(R.id.riches_bank_item_logo);
 
         mSubmitBtn = (Button)findViewById(R.id.affirm_withdraw_btn);
 
         mBankInfoList = BaseApplication.getInstance().getBankInfoList();
+
+        /**
+         * 点选博尔特靴响应事件
+         */
+        mBrtxCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+            {
+                if(isChecked)
+                {
+                    String withNumStr = mWithdrawNum.getEditableText().toString();
+                    if(withNumStr.equals("")) return;
+                    bolt = 0;
+                    try
+                    {
+                        int withNum = Integer.parseInt(withNumStr);
+                        if(withNum>50000)
+                        {
+                            mWithdrawNum.setText("50000");
+                            Toast.makeText(RichesWithdrawActivity.this, "使用博尔特靴,单次提现限额5万", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Toast.makeText(RichesWithdrawActivity.this, "请输入正确的提现金额", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else
+                {
+                    bolt = 1;
+                }
+            }
+        });
     }
 
     @Override
@@ -100,6 +151,13 @@ public class RichesWithdrawActivity extends CTBaseActivity
         mOverage = mUserInfoEntity.getOverage();
 //        mWithdrawTotle.setText(customFormat(mOverage));
 //        mWithdrawHandling.setText("-" + customFormat("5"));
+        mTouyuan = mUserInfoEntity.getTouYuan();
+        mTouyuanTextView.setText(String.valueOf(mTouyuan));
+
+        if(mTouyuan >= 800)
+        {
+            mBrtxCheck.setEnabled(true);
+        }
 
         makeWithdrawInfoRequest();
 
@@ -124,7 +182,6 @@ public class RichesWithdrawActivity extends CTBaseActivity
             if(bList.isdefault.equals("是"))
             {
                 mDefaultBankNo = bList.account;
-
                 mBankNoView.setText(account);
                 setBankIcon(mBankIconView, bList.bank);
             }
@@ -167,13 +224,11 @@ public class RichesWithdrawActivity extends CTBaseActivity
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            // TODO Auto-generated method stub
         }
 
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count,
                                       int after) {
-            // TODO Auto-generated method stub
         }
 
         public void afterTextChanged(Editable s)
@@ -237,7 +292,8 @@ public class RichesWithdrawActivity extends CTBaseActivity
     @Override
     public void treatClickEvent(int id)
     {
-        makeWithdrawRequest();
+        popuAuthDailog();
+//        makeWithdrawRequest();
     }
 
     /**
@@ -252,9 +308,7 @@ public class RichesWithdrawActivity extends CTBaseActivity
     {
         try
         {
-            String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_WITHDRAW) +
-                    "userid=" + ACache.get(BaseApplication.getInstance()).getAsString("userid") +
-                    "&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token");
+            String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_WITHDRAW);
 
             String num = mWithdrawNum.getEditableText().toString();
 
@@ -262,6 +316,7 @@ public class RichesWithdrawActivity extends CTBaseActivity
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("num", num);
             jsonObject.put("account", mDefaultBankNo);
+            jsonObject.put("bolt", bolt);
             params.put("data", jsonObject.toString());
 
             sendRequest(HttpRequst.REQ_TYPE_WITHDRAW, url, params, getAsyncClient(), false);
@@ -274,9 +329,7 @@ public class RichesWithdrawActivity extends CTBaseActivity
 
     private void  makeWithdrawInfoRequest()
     {
-        String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_WITHDRAWINFO) +
-                "userid=" + ACache.get(BaseApplication.getInstance()).getAsString("userid") +
-                "&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token");
+        String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_WITHDRAWINFO);
 
         sendRequest(HttpRequst.REQ_TYPE_WITHDRAWINFO, url, mParams, getAsyncClient(), false);
     }
@@ -287,46 +340,45 @@ public class RichesWithdrawActivity extends CTBaseActivity
      * @param object    返回的转化对象
      * @param reqType   请求的唯一识别
      */
-    public void onSuccess(String content, Object object, int reqType)
-    {
+    public void onSuccess(String content, Object object, int reqType) {
         super.onSuccess(content, object, reqType);
 
-        if(reqType == HttpRequst.REQ_TYPE_WITHDRAW)
-        {
-            try
-            {
-                JSONObject json = new JSONObject(content);
-                int errcode = json.getInt("errorcode");
+        try {
 
-                int code = (errcode < mError.length) ? errcode : (mError.length - 1);
-                Toast toast = Toast.makeText(getApplicationContext(),
-                        mError[code], Toast.LENGTH_LONG);
-                toast.setGravity(Gravity.CENTER, 0, 0);
+            if (reqType == HttpRequst.REQ_TYPE_WITHDRAW) {
+//                try {
+                    JSONObject json = new JSONObject(content);
+                    int errcode = json.getInt("errorcode");
+
+                    int code = (errcode < mError.length) ? errcode : (mError.length - 1);
+                    Toast toast = Toast.makeText(getApplicationContext(),
+                            mError[code], Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
 
-                makeWithdrawInfoRequest();
+//                    finish();
+
+                    makeWithdrawInfoRequest();
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+            } else if (reqType == HttpRequst.REQ_TYPE_WITHDRAWINFO) {
+//                try {
+                    JSONObject json = new JSONObject(content);
+
+                    mHandling = json.getString("fee");
+                    mOverage = json.getString("yue");
+
+                    mWithdrawTotle.setText(customFormat(mOverage));
+                    mWithdrawHandling.setText("-" + customFormat(mHandling));
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
             }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
-        }
-        else if(reqType == HttpRequst.REQ_TYPE_WITHDRAWINFO)
+        } catch (Exception e)
         {
-            try
-            {
-                JSONObject json = new JSONObject(content);
-
-                mHandling = json.getString("fee");
-                mOverage = json.getString("yue");
-
-                mWithdrawTotle.setText(customFormat(mOverage));
-                mWithdrawHandling.setText("-" + customFormat(mHandling));
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
+            BaseApplication.getInstance().backToLoginPage();
+            Toast.makeText(BaseApplication.getInstance(), "账号在其他设备登陆,请重新登录", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -339,5 +391,44 @@ public class RichesWithdrawActivity extends CTBaseActivity
     public void onFailure(Throwable error, String content, int reqType)
     {
         super.onFailure(error, content, reqType);
+    }
+
+
+    /**
+     * 确认提现弹框
+     *
+     */
+    private void popuAuthDailog()
+    {
+        ColorStateList redColors = ColorStateList.valueOf(0xffff0000);
+        SpannableStringBuilder spanBuilder = new SpannableStringBuilder("确认提现！");
+        //style 为0 即是正常的，还有Typeface.BOLD(粗体) Typeface.ITALIC(斜体)等
+        //size  为0 即采用原始的正常的 size大小
+//        spanBuilder.setSpan(new TextAppearanceSpan(null, 0, 40, redColors, null), 5, 7, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+//        spanBuilder.setSpan(new TextAppearanceSpan(null, 0, 60, redColors, null), 28, 30, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+
+        SpannableStringBuilder spanBuilder1 = new SpannableStringBuilder("确认");
+
+        final SweetAlertDialog sad = new SweetAlertDialog(this, SweetAlertDialog.NORMAL_TYPE);
+        sad.setConfirmText(spanBuilder1) .setContentText(spanBuilder);
+        sad.setCancelText("取消");
+        sad .show();
+
+        sad.setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+            public void onClick(SweetAlertDialog sweetAlertDialog)
+            {
+                sad.cancel();
+
+            }
+        });
+
+        sad.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+            @Override
+            public void onClick(SweetAlertDialog sweetAlertDialog)
+            {
+                sad.cancel();
+                makeWithdrawRequest();
+            }
+        });
     }
 }

@@ -1,12 +1,11 @@
 package com.changtou.moneybox.module.http;
 
+import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.http.base.BaseEntity;
 import com.changtou.moneybox.common.http.base.BaseHttpRequest;
 import com.changtou.moneybox.module.entity.BankCardEntity;
 import com.changtou.moneybox.module.entity.FlowEntity;
 import com.changtou.moneybox.module.entity.InvestListEntity;
-import com.changtou.moneybox.module.entity.InvestorEntity;
-import com.changtou.moneybox.module.entity.ProductContractEntity;
 import com.changtou.moneybox.module.entity.ProductDetailsEntity;
 import com.changtou.moneybox.module.entity.ProductEntity;
 import com.changtou.moneybox.module.entity.PromotionEntity;
@@ -39,13 +38,13 @@ public class HttpRequst extends BaseHttpRequest
     //app banner 图接口
     public final static int REQ_TYPE_PRODUCT_BANNER = 10;
 
-    public final static int REQ_TYPE_HOMEPAGE = 11;
+//    public final static int REQ_TYPE_HOMEPAGE = 11;
 
     public final static int REQ_TYPE_PRODUCT_HOME = 21;
     public final static int REQ_TYPE_PRODUCT_LIST = 22;
     public final static int REQ_TYPE_PRODUCT_DETAILS = 1023;
-    public final static int REQ_TYPE_PRODUCT_CONTRACT = 24;
-    public final static int REQ_TYPE_PRODUCT_INVESTOR = 25;
+//    public final static int REQ_TYPE_PRODUCT_CONTRACT = 24;
+//    public final static int REQ_TYPE_PRODUCT_INVESTOR = 25;
 
     //投资
     public final static int REQ_TYPE_INVEST = 1030;
@@ -71,28 +70,31 @@ public class HttpRequst extends BaseHttpRequest
     public final static int REQ_TYPE_DELBANK = 1011;
     public final static int REQ_TYPE_CHANGEBANK = 1012;
 
-
     //注册相关
     public final static int REQ_TYPE_SENDMSG = 1080;
     public final static int REQ_TYPE_CHECKCODE = 1081;
     public final static int REQ_TYPE_POSTREG = 1082;
     public final static int REQ_TYPE_NEWPWD = 1083;   //更改新密码
 
-    //手机号码认证
-    public final static int REQ_TYPE_PHONE_CHECK = 1100;
+//    //手机号码认证
+//    public final static int REQ_TYPE_PHONE_CHECK = 1100;
 
     //实名认证
     public final static int REQ_TYPE_CERTIFY = 1101;
 
     //签到
-    public final static int REQ_TYPE_SIGN = 1110;
-    public final static int REQ_TYPE_ISSIGN = 1111;
+    public final static int REQ_TYPE_SIGN = 80;
+    public final static int REQ_TYPE_ISSIGN = 81;
 
     public final static int REQ_TYPE_RECOMMENDLIST = 35;
 
     public final static int REQ_TYPE_RECOMMEND_SENDSMS = 1300;
 
     public final static int REQ_TYPE_MOBILE_LIST = 36;
+
+    public final static int REQ_TYPE_ISREG = 1818;
+
+    public final static int REQ_TYPE_DEAL = 2011;
 
     public final String REQ_URL_PING = BASE_URL + "usertoken/getconnection";
 
@@ -109,8 +111,8 @@ public class HttpRequst extends BaseHttpRequest
     public static String REQ_URL_INVEST = BASE_URL + "Invest/PostInvest?";
 
     //投资post
-    public static String REQ_URL_PRODUCT_CONTRACT = BASE_URL + "products";
-    public static String REQ_URL_PRODUCT_INVESTOR = BASE_URL + "products";
+//    public static String REQ_URL_PRODUCT_CONTRACT = BASE_URL + "products";
+//    public static String REQ_URL_PRODUCT_INVESTOR = BASE_URL + "products";
 
     //获取提现信息
     public static String REQ_URL_WITHDRAWINFO = BASE_URL + "Withdraw/GetWithdrawDataBinds?";
@@ -139,10 +141,10 @@ public class HttpRequst extends BaseHttpRequest
     public static String REQ_URL_INVEST_LIST = BASE_URL + "investrecord/getinvestlist?";
 
     //获取站内转让列表
-    public static String REQ_URL_TRANSFER_LIST = BASE_URL + "products";
+//    public static String REQ_URL_TRANSFER_LIST = BASE_URL + "products";
 
     //资金流接口
-    public static String FEQ_URL_FLOW = BASE_URL + "products";
+//    public static String FEQ_URL_FLOW = BASE_URL + "products";
 
     //推荐好友列表接口
     public static String FEQ_URL_REWARDS_LIST = BASE_URL + "products";
@@ -165,10 +167,10 @@ public class HttpRequst extends BaseHttpRequest
     public static String REQ_URL_CERTIFY = BASE_URL + "certification/PostCertiIdcard?";
 
     //手机号码认证
-    public static String REQ_URL_PHONE_CHECK = BASE_URL + "usertoken/postvalidmobile?";
+//    public static String REQ_URL_PHONE_CHECK = BASE_URL + "usertoken/postvalidmobile?";
 
-    public static String REQ_URL_SIGN = BASE_URL + "usertoken/postsign?";
-    public static String REQ_URL_ISSIGN = BASE_URL + "usertoken/postissign?";
+    public static String REQ_URL_SIGN = BASE_URL + "usertoken/getsign?";
+    public static String REQ_URL_ISSIGN = BASE_URL + "usertoken/getissign?";
 
     //推荐好友列表
     public static String REQ_URL_RECOMMENDLIST = BASE_URL + "AppRecommend/getTuijian?";
@@ -178,6 +180,16 @@ public class HttpRequst extends BaseHttpRequest
 
     //获取今日已推荐列表
     public static String REQ_URL_MOBILE_LIST = BASE_URL + "AppRecommend/GetMobileList?";
+
+    //手机是否注册
+    public static String REQ_URL_ISREG = BASE_URL + "usertoken/postisreg?";
+
+    public static String REQ_URL_DEAL = BASE_URL + "dealrecord/postdealdatabindsbytype?";
+
+    public static String TOKEN = "";
+
+    public final static int REQ_TYPE_RECHARGE = 2001;
+    public static String REQ_URL_RECHARGE = BASE_URL + "quickpay/postprepay?";
 
     public static synchronized HttpRequst getInstance()
     {
@@ -194,79 +206,121 @@ public class HttpRequst extends BaseHttpRequest
      */
     public String getUrl(int reqType)
     {
+        String url = null;
+
+        TOKEN =  "userid=" + BaseApplication.getInstance().getUserId() +
+                "&token=" + BaseApplication.getInstance().getToken();
+
         switch (reqType)
         {
             case REQ_TYPE_PING:
-                return REQ_URL_PING;
+                url= REQ_URL_PING;
+                break;
             case REQ_TYPE_PRODUCT_BANNER:
-                return REQ_URL_PRODUCT_BANNER;
+                url = REQ_URL_PRODUCT_BANNER;
+                break;
             case REQ_TYPE_PRODUCT_TYPE:
-                return REQ_URL_PRODUCT_TYPE;
+                url = REQ_URL_PRODUCT_TYPE;
+                break;
             case REQ_TYPE_PRODUCT_HOME:
-                return REQ_URL_HOMEPAGE;
+                url = REQ_URL_HOMEPAGE;
+                break;
             case REQ_TYPE_PRODUCT_LIST:
-                return REQ_URL_PRODUCT_LIST;
+                url = REQ_URL_PRODUCT_LIST;
+                break;
             case REQ_TYPE_PRODUCT_DETAILS:
-                return REQ_URL_PRODUCT_DETAILS;
-            case REQ_TYPE_PRODUCT_CONTRACT:
-                return REQ_URL_PRODUCT_CONTRACT;
-            case REQ_TYPE_PRODUCT_INVESTOR:
-                return REQ_URL_PRODUCT_INVESTOR;
+                url = REQ_URL_PRODUCT_DETAILS;
+                break;
+
             case REQ_TYPE_LOGIN:
-                return REQ_URL_LOGIN;
+                url =  REQ_URL_LOGIN;
+                break;
             case REQ_TYPE_BANKCARD:
-                return REQ_URL_BANKCARD;
+                url =  REQ_URL_BANKCARD + TOKEN;
+                break;
             case REQ_TYPE_INVEST_LIST:
-                return REQ_URL_INVEST_LIST;
-            case REQ_TYPE_TRANSFER_LIST:
-                return REQ_URL_TRANSFER_LIST;
+                url =  REQ_URL_INVEST_LIST + TOKEN;
+                break;
+//            case REQ_TYPE_TRANSFER_LIST:
+//                url = REQ_URL_TRANSFER_LIST + TOKEN;
+//                break;
             case REQ_TYPE_TRADE_LIST:
-                return REQ_URL_TRADE_LIST;
-            case REQ_TYPE_FLOW:
-                return FEQ_URL_FLOW;
+                url = REQ_URL_TRADE_LIST + TOKEN;
+                break;
+//            case REQ_TYPE_FLOW:
+//                url = FEQ_URL_FLOW + TOKEN;
+//                break;
             case REQ_TYPE_REWARDS_LIST:
-                return FEQ_URL_REWARDS_LIST;
+                url = FEQ_URL_REWARDS_LIST + TOKEN;
+                break;
             case REQ_TYPE_USERINFO:
-                return FEQ_URL_USERINFO;
+                url = FEQ_URL_USERINFO + TOKEN;
+                break;
             case REQ_TYPE_ADDBANK:
-                return REQ_URL_ADDBANK;
+                url = REQ_URL_ADDBANK + TOKEN;
+                break;
             case REQ_TYPE_DELBANK:
-                return REQ_URL_DELBANK;
+                url =  REQ_URL_DELBANK + TOKEN;
+                break;
             case REQ_TYPE_CHANGEBANK:
-                return REQ_URL_CHANGEBANK;
+                url = REQ_URL_CHANGEBANK + TOKEN;
+                break;
             case REQ_TYPE_INVEST:
-                return REQ_URL_INVEST;
+                url = REQ_URL_INVEST + TOKEN;
+                break;
             case REQ_TYPE_WITHDRAW:
-                return REQ_URL_WITHDRAW;
+                url =  REQ_URL_WITHDRAW + TOKEN;
+                break;
             case REQ_TYPE_WITHDRAWINFO:
-                return REQ_URL_WITHDRAWINFO;
+                url = REQ_URL_WITHDRAWINFO + TOKEN;
+                break;
             case REQ_TYPE_SENDMSG:
-                return REQ_URL_SENDMSG;
+                url = REQ_URL_SENDMSG + TOKEN;
+                break;
             case REQ_TYPE_CHECKCODE:
-                return REQ_URL_CHECKCODE;
+                url = REQ_URL_CHECKCODE + TOKEN;
+                break;
             case REQ_TYPE_POSTREG:
-                return REQ_URL_POSTREG;
+                url = REQ_URL_POSTREG + TOKEN;
+                break;
             case REQ_TYPE_NEWPWD:
-                return REQ_URL_NEWPWD;
+                url =  REQ_URL_NEWPWD + TOKEN;
+                break;
             case REQ_TYPE_CERTIFY:
-                return REQ_URL_CERTIFY;
-            case REQ_TYPE_PHONE_CHECK:
-                return REQ_URL_PHONE_CHECK;
+                url =  REQ_URL_CERTIFY + TOKEN;
+                break;
+//            case REQ_TYPE_PHONE_CHECK:
+//                url =  REQ_URL_PHONE_CHECK + TOKEN;
+//                break;
             case REQ_TYPE_SIGN:
-                return REQ_URL_SIGN;
+                url = REQ_URL_SIGN + TOKEN;
+                break;
             case REQ_TYPE_ISSIGN:
-                return REQ_URL_ISSIGN;
+                url =  REQ_URL_ISSIGN + TOKEN;
+                break;
             case REQ_TYPE_RECOMMENDLIST:
-                return REQ_URL_RECOMMENDLIST;
+                url = REQ_URL_RECOMMENDLIST + TOKEN;
+                break;
             case REQ_TYPE_RECOMMEND_SENDSMS:
-                return REQ_URL_RECOMMEND_SENDSMS;
+                url = REQ_URL_RECOMMEND_SENDSMS + TOKEN;
+                break;
             case REQ_TYPE_MOBILE_LIST:
-                return REQ_URL_MOBILE_LIST;
+                url = REQ_URL_MOBILE_LIST + TOKEN;
+                break;
+            case REQ_TYPE_ISREG:
+                url = REQ_URL_ISREG + TOKEN;
+                break;
+            case REQ_TYPE_RECHARGE:
+                url = REQ_URL_RECHARGE + TOKEN;
+                break;
+            case REQ_TYPE_DEAL:
+                url = REQ_URL_DEAL + TOKEN;
+                break;
             default:
                 break;
         }
 
-        return null;
+        return url;
     }
 
     /**
@@ -303,12 +357,6 @@ public class HttpRequst extends BaseHttpRequest
             case REQ_TYPE_PRODUCT_DETAILS:
                 paser = new ProductDetailsEntity();
                 break;
-            case REQ_TYPE_PRODUCT_CONTRACT:
-                paser = new ProductContractEntity();
-                break;
-            case REQ_TYPE_PRODUCT_INVESTOR:
-                paser = new InvestorEntity();
-                break;
             case REQ_TYPE_LOGIN:
                 paser = new UserEntity();
                 break;
@@ -332,6 +380,9 @@ public class HttpRequst extends BaseHttpRequest
                 break;
             case REQ_TYPE_USERINFO:
                 paser = UserInfoEntity.getInstance();
+                break;
+            case REQ_TYPE_DEAL:
+                paser = new TradeEntity();
                 break;
             default:
                 break;

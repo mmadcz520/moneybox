@@ -9,7 +9,7 @@
     </item>
     <!-- 主体背景颜色值 -->
     <item
-        android:top="1dp">
+        android:top="1px">
         <shape>
             <solid android:color="#ffffff" />
         </shape>

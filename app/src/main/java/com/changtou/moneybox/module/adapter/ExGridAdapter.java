@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 
 /**
  * Created by Administrator on 2015/5/12.

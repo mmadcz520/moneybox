@@ -11,7 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.http.async.RequestParams;
 import com.changtou.moneybox.module.adapter.ProductDetailsAdapter;
@@ -70,7 +70,7 @@ public class ProductDetailsActivity extends CTBaseActivity
 
         if(mProductId.equals(""))
         {
-            Toast.makeText(this, "找不到相应产品", Toast.LENGTH_LONG);
+            Toast.makeText(this, "找不到相应产品", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -112,7 +112,8 @@ public class ProductDetailsActivity extends CTBaseActivity
     }
 
     @Override
-    protected int setPageType() {
+    protected int setPageType()
+    {
         return PAGE_TYPE_SUB;
     }
 
@@ -150,7 +151,7 @@ public class ProductDetailsActivity extends CTBaseActivity
             mDetailsPage.getInvestPercent().showPercentWithAnimation((int)jd);
             mDetailsPage.getIcomeText().setText(entity.nhsy);
             mDetailsPage.getTagTextView().setText("%");
-            mDetailsPage.getInvestNum().setText(entity.syje + "/" + entity.rzje);
+            mDetailsPage.getInvestNum().setText("￥" + entity.syje + "/" + entity.rzje);
             mDetailsPage.getTimeLimit().setText(entity.cpqx);
             mDetailsPage.getQtjeTextView().setText(entity.qtje + "起投 | " + "每人限购100万元");
 
@@ -183,9 +184,9 @@ public class ProductDetailsActivity extends CTBaseActivity
 
             mDetails = new String[4];
             mDetails[0] = entity.projectname;
-            mDetails[1] = "投资期限：  " + entity.cpqx;
-            mDetails[2] = "年化收益率：  " + entity.nhsy + "%";
-            mDetails[3] = "剩余可投金额：  " + entity.syje;
+            mDetails[1] = entity.cpqx;
+            mDetails[2] = entity.nhsy + "%";
+            mDetails[3] = entity.syje;
 
             if(mState == null)
             mConfirmBtn.setEnabled(true);
@@ -209,7 +210,6 @@ public class ProductDetailsActivity extends CTBaseActivity
         private TextView mInvestNum = null;      //投资进度数值
 
         private TextView mQtjeTextView = null;   //起投金额
-
 
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {

@@ -8,7 +8,7 @@ import android.text.Spanned;
 import android.text.style.TextAppearanceSpan;
 import android.widget.Toast;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.http.async.RequestParams;
 import com.changtou.moneybox.common.utils.ACache;
@@ -113,7 +113,6 @@ public class RegisterPasswordActivity extends CTBaseActivity implements LoginNot
 
         if(reqType == HttpRequst.REQ_TYPE_POSTREG)
         {
-            popoSuccDialog();
             try
             {
                 JSONObject data = new JSONObject(content);
@@ -121,7 +120,7 @@ public class RegisterPasswordActivity extends CTBaseActivity implements LoginNot
 
                 if(error == 0)
                 {
-
+                    popoSuccDialog();
                 }
                 else if(error == 1)
                 {
@@ -150,6 +149,18 @@ public class RegisterPasswordActivity extends CTBaseActivity implements LoginNot
                     Intent intent = new Intent(this, LoginActivity.class);
                     startActivity(intent);
                 }
+                else if(error == 1)
+                {
+                    Toast.makeText(this, "手机号码格式不正确", Toast.LENGTH_LONG).show();
+                }
+                else if(error == 2)
+                {
+                    Toast.makeText(this, "该手机号码已被使用", Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    Toast.makeText(this, "未知错误", Toast.LENGTH_LONG).show();
+                }
             }
             catch (Exception e)
             {
@@ -171,9 +182,7 @@ public class RegisterPasswordActivity extends CTBaseActivity implements LoginNot
     {
         try
         {
-            String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_NEWPWD) +
-                    "userid=" + ACache.get(BaseApplication.getInstance()).getAsString("userid") +
-                    "&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token");
+            String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_NEWPWD);
 
             RequestParams params = new RequestParams();
             JSONObject jsonObject = new JSONObject();
@@ -196,9 +205,7 @@ public class RegisterPasswordActivity extends CTBaseActivity implements LoginNot
     {
         try
         {
-            String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_POSTREG) +
-                    "userid=" + ACache.get(BaseApplication.getInstance()).getAsString("userid") +
-                    "&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token");
+            String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_POSTREG);
 
             RequestParams params = new RequestParams();
             JSONObject jsonObject = new JSONObject();
@@ -282,6 +289,11 @@ public class RegisterPasswordActivity extends CTBaseActivity implements LoginNot
 
     @Override
     public void logoutNotify() {
+
+    }
+
+    @Override
+    public void loginUserInfo(Object object) {
 
     }
 }

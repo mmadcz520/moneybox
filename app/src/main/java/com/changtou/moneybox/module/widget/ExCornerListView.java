@@ -2,12 +2,11 @@ package com.changtou.moneybox.module.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 
 /**
  * 描述:自定义圆角ListView

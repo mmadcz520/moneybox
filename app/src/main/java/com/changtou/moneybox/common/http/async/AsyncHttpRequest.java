@@ -1,7 +1,5 @@
 package com.changtou.moneybox.common.http.async;
 
-import android.util.Log;
-
 import java.io.IOException;
 import java.net.ConnectException;
 import java.net.SocketException;

@@ -9,13 +9,11 @@ import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.SystemClock;
-import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 
 
 public class SignInHUD extends Dialog {
@@ -59,13 +57,13 @@ public class SignInHUD extends Dialog {
 		view = getLayoutInflater().inflate(R.layout.riches_sign_dialog, null);
 
 
-		view.setOnClickListener(new View.OnClickListener()
-		{
-			public void onClick(View v)
-			{
-				SignInHUD.this.cancel();
-			}
-		});
+//		view.setOnClickListener(new View.OnClickListener()
+//		{
+//			public void onClick(View v)
+//			{
+//				SignInHUD.this.cancel();
+//			}
+//		});
 
 		this.setContentView(view);
 	}

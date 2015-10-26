@@ -11,11 +11,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.activity.BaseFragment;
-import com.changtou.moneybox.common.utils.ACache;
 import com.changtou.moneybox.module.adapter.InvestListAdapter;
 import com.changtou.moneybox.module.entity.InvestListEntity;
 import com.changtou.moneybox.module.http.HttpRequst;
@@ -93,20 +93,27 @@ public class RichesInvestListActivity extends CTBaseActivity
     {
         super.onSuccess(content, object, reqType);
 
-        if(reqType == HttpRequst.REQ_TYPE_INVEST_LIST)
-        {
-            InvestListEntity entity = (InvestListEntity) object;
-            Map<String, LinkedList> investMap = entity.getInvestMap();
+        try {
 
-            list1 = investMap.get("1");
-            list2 = investMap.get("2");
-            list3 = investMap.get("3");
+            if(reqType == HttpRequst.REQ_TYPE_INVEST_LIST)
+            {
+                InvestListEntity entity = (InvestListEntity) object;
+                Map<String, LinkedList> investMap = entity.getInvestMap();
 
-            mSubPage1.initInvestList(list1);
-            mSubPage2.initInvestList(list2);
-            mSubPage3.initInvestList(list3);
+                list1 = investMap.get("1");
+                list2 = investMap.get("2");
+                list3 = investMap.get("3");
+
+                mSubPage1.initInvestList(list1);
+                mSubPage2.initInvestList(list2);
+                mSubPage3.initInvestList(list3);
+            }
         }
-
+        catch (Exception e)
+        {
+            BaseApplication.getInstance().backToLoginPage();
+            Toast.makeText(BaseApplication.getInstance(), "账号在其他设备登陆,请重新登录", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void onFailure(Throwable error, String content, int reqType)
@@ -215,9 +222,7 @@ public class RichesInvestListActivity extends CTBaseActivity
     }
 
     private void initInvestListRequest() {
-        String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_INVEST_LIST) +
-                "userid=" + ACache.get(BaseApplication.getInstance()).getAsString("userid") +
-                "&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token");
+        String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_INVEST_LIST);
 
         sendRequest(HttpRequst.REQ_TYPE_INVEST_LIST,
                 url,

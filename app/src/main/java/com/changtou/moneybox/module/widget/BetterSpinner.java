@@ -12,7 +12,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 
 import java.util.Calendar;
 

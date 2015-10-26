@@ -40,23 +40,53 @@
                 android:layout_width="fill_parent"
                 android:layout_height="0dp"
                 android:layout_weight="2"
-                android:gravity="top|center"
+                android:gravity="center"
                 android:text="0.00"
                 android:textColor="@color/font_white"
                 android:textSize="@dimen/font_size_percent" />
 
             <!--<TextView-->
-                <!--android:id="@+id/riches_text_mobile"-->
-                <!--android:layout_width="200dp"-->
-                <!--android:layout_height="0dp"-->
-                <!--android:layout_gravity="center_horizontal"-->
-                <!--android:layout_marginBottom="15dp"-->
-                <!--android:layout_weight="1"-->
-                <!--android:background="@drawable/fillet_stroke_bule"-->
-                <!--android:gravity="center"-->
-                <!--android:text=""-->
-                <!--android:textColor="@color/font_white"-->
-                <!--android:textSize="@dimen/font_size_normal" />-->
+            <!--android:id="@+id/riches_text_mobile"-->
+            <!--android:layout_width="200dp"-->
+            <!--android:layout_height="0dp"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:layout_marginBottom="15dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="@drawable/fillet_stroke_bule"-->
+            <!--android:gravity="center"-->
+            <!--android:text=""-->
+            <!--android:textColor="@color/font_white"-->
+            <!--android:textSize="@dimen/font_size_navigation" />-->
+            <RelativeLayout
+                android:layout_width="110dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="15dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/auth_idcode_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/auth_idcode_false" />
+
+                <ImageView
+                    android:id="@+id/auth_phone_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@mipmap/auth_phone_false" />
+
+                <ImageView
+                    android:id="@+id/auth_card_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/auth_card_false" />
+
+            </RelativeLayout>
 
         </LinearLayout>
 
@@ -187,6 +217,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/gift_click_layout"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
@@ -251,19 +282,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:enabled="false"
-                    android:background="@drawable/qiandao_btn_selector" />
+                    android:background="@drawable/qiandao_btn_selector"
+                    android:enabled="false" />
 
             </RelativeLayout>
 
         </LinearLayout>
 
         <!--<View-->
-            <!--android:id="@+id/riches_line3"-->
-            <!--android:layout_width="fill_parent"-->
-            <!--android:layout_height="1px"-->
-            <!--android:layout_below="@+id/riches_ll_touyuan"-->
-            <!--android:background="@color/ct_divide_line" />-->
+        <!--android:id="@+id/riches_line3"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="1px"-->
+        <!--android:layout_below="@+id/riches_ll_touyuan"-->
+        <!--android:background="@color/ct_divide_line" />-->
 
         <LinearLayout
             android:id="@+id/riches_more"
@@ -286,13 +317,13 @@
         </LinearLayout>
 
         <!--<ImageView-->
-            <!--android:id="@+id/riches_signbar"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:layout_marginRight="10dp"-->
-            <!--android:layout_marginTop="18dp"-->
-            <!--android:src="@mipmap/riches_icon_qiandao" />-->
+        <!--android:id="@+id/riches_signbar"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_marginRight="10dp"-->
+        <!--android:layout_marginTop="18dp"-->
+        <!--android:src="@mipmap/riches_icon_qiandao" />-->
 
     </RelativeLayout>
 

@@ -1,7 +1,6 @@
 package com.changtou.moneybox.module.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 import com.changtou.moneybox.common.utils.AsyncImageLoader;
 
 import java.util.LinkedList;
@@ -51,9 +50,6 @@ public class AuditAdapter extends BaseAdapter {
     @Override
     public Object getItem(int position) {
         if (mImgList != null) {
-
-            Log.e("CT_MONEY", "mImgList.size()=" + mImgList.size());
-
             return mImgList.get(position);
         }
         return null;
@@ -69,8 +65,6 @@ public class AuditAdapter extends BaseAdapter {
     {
         String imgSrc = (String)getItem(position);
         ViewHolder viewHolder;
-
-        Log.e("CT_MONEY", "imgSrc=" + imgSrc);
 
         if(convertView == null)
         {

@@ -3,7 +3,6 @@ package com.changtou.moneybox.module.page;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -14,13 +13,10 @@ import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.utils.ACache;
 import com.changtou.moneybox.common.utils.SharedPreferencesHelper;
 import com.changtou.moneybox.module.appcfg.AppCfg;
-import com.changtou.moneybox.module.entity.UserInfoEntity;
-import com.changtou.moneybox.module.http.HttpRequst;
 import com.changtou.moneybox.module.usermodule.LoginNotifier;
 import com.changtou.moneybox.module.usermodule.UserManager;
 import com.changtou.moneybox.module.widget.ExEditView;
-import com.changtou.R;
-import com.changtou.moneybox.module.widget.ZProgressHUD;
+import com.changtou.moneybox.R;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -38,6 +34,8 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
 
     private Button mLoginBtn = null;
 
+    private boolean quitflag = false;
+
     private String[] mErrorContent = {"","用户名格式不正确", "不存在该用户名", "密码错误", "邮箱未激活", " 手机未激活", "服务器故障"};
 
     @Override
@@ -46,6 +44,9 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
 
         mUserNameView = (ExEditView)findViewById(R.id.login_username);
         mPassWordView = (ExEditView)findViewById(R.id.login_password);
+
+        mUserNameView.setEditValue("");
+        mPassWordView.setEditValue("");
 
         mUserManager = BaseApplication.getInstance().getUserModule();
         mUserManager.setLoginNotifier(this);
@@ -66,13 +67,13 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
         mDialog.getProgressHelper().setRimColor(getResources().getColor(R.color.ct_blue_hint));
         sph = SharedPreferencesHelper.getInstance(getApplicationContext());
 
-        mZProgressHUD.setOnDismissListener(new DialogInterface.OnDismissListener()
-        {
-            public void onDismiss(DialogInterface dialog)
-            {
+        mZProgressHUD.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            public void onDismiss(DialogInterface dialog) {
                 mLoginBtn.setEnabled(true);
             }
         });
+
+        quitflag = this.getIntent().getBooleanExtra("quit_flag", false);
     }
 
     protected void initListener() {
@@ -80,11 +81,20 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
         setOnClickListener(R.id.forgot_password);
     }
 
+    protected void onResume()
+    {
+        mUserNameView.setEditValue("");
+        mPassWordView.setEditValue("");
+        super.onResume();
+    }
+
     public void treatClickEvent(int id) {
         switch (id) {
             case R.id.login_btn: {
                 String username = mUserNameView.getEditValue();
                 String password = mPassWordView.getEditValue();
+                ACache cache = ACache.get(BaseApplication.getInstance());
+                cache.put("fullname", "");
 
                 if (username.equals("") || password.equals(""))
                 {
@@ -112,11 +122,15 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
     protected void initData()
     {
         setPageTitle("登录");
-
     }
 
     @Override
     protected int setPageType() {
+
+        if(quitflag)
+        {
+            return PAGE_TYPE_HOME;
+        }
         return PAGE_TYPE_SUB;
     }
 
@@ -150,6 +164,11 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
 
     }
 
+    @Override
+    public void loginUserInfo(Object object) {
+
+    }
+
     protected void onStop()
     {
         super.onStop();
@@ -160,9 +179,16 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
      */
     public void onBackPressed()
     {
-        Intent intent = new Intent(this, MainActivity.class);
-        LoginActivity.this.setResult(RESULT_CANCELED, intent);
-        LoginActivity.this.finish();
+        if(quitflag)
+        {
+            BaseApplication.getInstance().AppExit();
+        }
+        else
+        {
+            Intent intent = new Intent(this, MainActivity.class);
+            LoginActivity.this.setResult(RESULT_CANCELED, intent);
+            LoginActivity.this.finish();
+        }
     }
 
     /**
@@ -176,20 +202,20 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
         toast.show();
     }
 
-    /**
-     * 获取用户信息
-     */
-    private void getUserInfo()
-    {
-        String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_USERINFO) +
-                "userid=" + ACache.get(BaseApplication.getInstance()).getAsString("userid") +
-                "&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token");
-
-        Log.e("CT_MONEY", ACache.get(BaseApplication.getInstance()).getAsString("token"));
-
-        sendRequest(HttpRequst.REQ_TYPE_USERINFO, url, mParams,
-                getAsyncClient(), false);
-    }
+//    /**
+//     * 获取用户信息
+//     */
+//    private void getUserInfo()
+//    {
+//        String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_USERINFO) +
+//                "userid=" + ACache.get(BaseApplication.getInstance()).getAsString("userid") +
+//                "&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token");
+//
+//        Log.e("CT_MONEY", ACache.get(BaseApplication.getInstance()).getAsString("token"));
+//
+//        sendRequest(HttpRequst.REQ_TYPE_USERINFO, url, mParams,
+//                getAsyncClient(), false);
+//    }
 
 
     @Override
@@ -207,15 +233,11 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
 
     private void gotoMainPage()
     {
-        mLoginBtn.setEnabled(true);
-
         //初始化用户数据
-        UserInfoEntity userInfo = UserInfoEntity.getInstance();
-        ACache cache = ACache.get(BaseApplication.getInstance());
-        cache.put("fullname", userInfo.getFullName());
-
-        //缓存用户信息
-        cache.put("userinfo", userInfo);
+//        UserInfoEntity userInfo = UserInfoEntity.getInstance();
+//
+//        //缓存用户信息
+//        cache.put("userinfo", userInfo);
 
         //清空手势密码
         sph.putString(AppCfg.CFG_LOGIN, AppCfg.LOGIN_STATE.LOGIN.toString());
@@ -228,7 +250,27 @@ public class LoginActivity extends CTBaseActivity implements LoginNotifier{
         this.startActivity(intent);
 
         //初始化弹框
+        ACache cache = ACache.get(BaseApplication.getInstance());
         cache.put("isPopu", true);
+//        mZProgressHUD.cancel();
+    }
+
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+
+//        if(quitflag)
+//        {
+//            this.finish();
+//        }
+//        else
+//        {
+//            Intent intent = new Intent(this, MainActivity.class);
+//            LoginActivity.this.setResult(RESULT_CANCELED, intent);
+//            LoginActivity.this.finish();
+//        }
+
     }
 
 }

@@ -8,7 +8,7 @@ import android.view.MotionEvent;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 
 public class BomPanel extends LinearLayout implements GestureDetector.OnGestureListener{
 

@@ -3,17 +3,19 @@
   <bank name="中国工商银行" icon="bank_icon/img_bank_gsyh_tx.png"></bank>
   <bank name="中国建设银行" icon="bank_icon/riches_bank_jianhang.png"></bank>
   <bank name="中国农业银行" icon="bank_icon/img_bank_nyyh_tx.png"></bank>
-  <bank name="中国邮政" icon="bank_icon/img_bank_zgyz_tx.png"></bank>
+  <bank name="邮政储蓄银行" icon="bank_icon/img_bank_zgyz_tx.png"></bank>
   <bank name="招商银行" icon="bank_icon/img_bank_zsyh_tx.png"></bank>
   <bank name="交通银行" icon="bank_icon/img_bank_jtyh_tx.png"></bank>
   <bank name="华夏银行" icon="bank_icon/img_bank_hxyh_tx.png"></bank>
   <bank name="中信银行" icon="bank_icon/img_bank_zxyh_tx.png"></bank>
   <bank name="兴业银行" icon="bank_icon/img_bank_xyyh_tx.png"></bank>
-  <bank name="中国光大银行" icon="bank_icon/img_bank_gdyh_tx.png"></bank>
+  <bank name="光大银行" icon="bank_icon/img_bank_gdyh_tx.png"></bank>
   <bank name="广发银行" icon="bank_icon/img_bank_gfyh_tx.png"></bank>
   <bank name="平安银行" icon="bank_icon/img_bank_payh_tx.png"></bank>
   <bank name="汉口银行" icon="bank_icon/img_bank_hkyh_tx.png"></bank>
-  <bank name="中国民生银行" icon="bank_icon/img_bank_msyh_tx.png"></bank>
+  <bank name="民生银行" icon="bank_icon/img_bank_msyh_tx.png"></bank>
   <bank name="武汉农村商业银行" icon="bank_icon/img_bank_ncsy_tx.png"></bank>
-  <bank name="上海浦东发展银行" icon="bank_icon/img_bank_pfyh_tx.png"></bank>
+  <bank name="浦发银行" icon="bank_icon/img_bank_pfyh_tx.png"></bank>
+  <bank name="中国招商银行" icon="bank_icon/img_bank_zsyh_tx.png"></bank>
+  <bank name="招行银行" icon="bank_icon/img_bank_zsyh_tx.png"></bank>
 </root>

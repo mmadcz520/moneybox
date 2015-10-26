@@ -3,9 +3,7 @@ package com.changtou.moneybox.module.phonebook;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +12,11 @@ import android.widget.SectionIndexer;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.http.async.RequestParams;
 import com.changtou.moneybox.common.http.base.HttpCallback;
 import com.changtou.moneybox.common.http.impl.AsyncHttpClientImpl;
-import com.changtou.moneybox.common.logger.Logger;
 import com.changtou.moneybox.common.utils.ACache;
 import com.changtou.moneybox.module.entity.BankCardEntity;
 import com.changtou.moneybox.module.http.HttpRequst;
@@ -198,14 +195,9 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer ,HttpCall
 	{
 		AsyncHttpClientImpl client = BaseApplication.getInstance().getAsyncClient();
 
-		String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_RECOMMEND_SENDSMS) +
-				"userid=" + ACache.get(BaseApplication.getInstance()).getAsString("userid") +
-				"&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token");
+		String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_RECOMMEND_SENDSMS);
 
 		try {
-
-			Logger.e(url);
-
 			RequestParams params = new RequestParams();
 			JSONObject jsonObject = new JSONObject();
 			jsonObject.put("mobile", phoneNum);
@@ -228,7 +220,6 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer ,HttpCall
 		}
 		else if(reqType == HttpRequst.REQ_TYPE_MOBILE_LIST)
 		{
-			Logger.e(content);
 		}
 
 	}
@@ -236,8 +227,7 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer ,HttpCall
 	@Override
 	public void onFailure(Throwable error, String content, int reqType)
 	{
-		Logger.e(error.toString());
-		Toast.makeText(mContext, "发生短信失败-网络异常", Toast.LENGTH_LONG).show();
+		Toast.makeText(mContext, "发送短信失败-网络异常", Toast.LENGTH_LONG).show();
 	}
 
 
@@ -246,9 +236,7 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer ,HttpCall
 	{
 		AsyncHttpClientImpl client = BaseApplication.getInstance().getAsyncClient();
 
-		String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_MOBILE_LIST) +
-				"userid=" + ACache.get(BaseApplication.getInstance()).getAsString("userid") +
-				"&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token");
+		String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_MOBILE_LIST);
 
 		try {
 

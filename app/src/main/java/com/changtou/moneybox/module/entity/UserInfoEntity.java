@@ -1,9 +1,6 @@
 package com.changtou.moneybox.module.entity;
 
-import android.util.Log;
-
 import com.changtou.moneybox.common.http.base.BaseEntity;
-import com.changtou.moneybox.common.logger.Logger;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -28,7 +25,7 @@ public class UserInfoEntity extends BaseEntity implements Serializable
     private String mInvestAssets = "";
     private String mProfit = "";
     private String mOverage = "";
-    private String mGifts = "";
+    private String mGifts = "0.00";
     private int mTouYuan = 0;
 
     //是否实名认证   是否手机认证  是否首次投资
@@ -51,8 +48,6 @@ public class UserInfoEntity extends BaseEntity implements Serializable
     public void paser(String data) throws Exception
     {
         JSONObject jsonObject = new JSONObject(data);
-
-        Logger.json(data);
 
         JSONObject userinfo = jsonObject.getJSONObject("userinfo");
         mEmail = userinfo.getString("email");
@@ -173,5 +168,10 @@ public class UserInfoEntity extends BaseEntity implements Serializable
     public boolean getHasinvestrecords()
     {
         return hasinvestrecords;
+    }
+
+    public void setTouyuan(int touyuan)
+    {
+        this.mTouYuan = touyuan;
     }
 }

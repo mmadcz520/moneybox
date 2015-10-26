@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android_custom="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/extext_height"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/stroke_edit_fillpraent">
+        <TextView android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="26dp"
+            android:layout_gravity="center_vertical"
+            android:textSize="@dimen/font_size_normal"
+            android:textColor="@color/font_black"
+            android:text="姓名"/>
+        <EditText
+            android:id="@+id/riches_recharge_name"
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/stroke_edit_null"
+            android:textColorHint="@color/font_invalid"
+            android:textColor="@color/font_black"
+            android:textSize="@dimen/font_size_normal"
+            android:hint="请输入姓名" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/extext_height"
+        android:background="@drawable/stroke_edit_fillpraent">
+        <TextView android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="26dp"
+            android:layout_gravity="center_vertical"
+            android:textSize="@dimen/font_size_normal"
+            android:textColor="@color/font_black"
+            android:text="身份证号"/>
+        <EditText
+            android:id="@+id/riches_recharge_idcode"
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/stroke_edit_null"
+            android:textColorHint="@color/font_invalid"
+            android:textColor="@color/font_black"
+            android:textSize="@dimen/font_size_normal"
+            android:hint="请输入身份证号码" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/extext_height"
+        android:background="@drawable/stroke_edit_fillpraent">
+        <TextView android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="26dp"
+            android:layout_gravity="center_vertical"
+            android:textSize="@dimen/font_size_normal"
+            android:textColor="@color/font_black"
+            android:text="充值金额"/>
+        <EditText
+            android:id="@+id/riches_recharge_number"
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/stroke_edit_null"
+            android:textColorHint="@color/font_invalid"
+            android:textSize="@dimen/font_size_normal"
+            android:inputType="numberDecimal"
+            android:textColor="@color/font_black"
+            android:hint="请输入充值金额(元)" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/quick_recharge_btn"
+        android:layout_width="fill_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40dp"
+        android:layout_height="@dimen/button_height_fillparent"
+        android:textColor="@color/ct_white"
+        android:textSize="@dimen/font_size_navigation"
+        android:background="@drawable/btn_selector"
+        android:typeface="monospace"
+        android:text="充 值"/>
+
+</LinearLayout>

@@ -6,7 +6,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.utils.SharedPreferencesHelper;
 import com.changtou.moneybox.module.appcfg.AppCfg;
@@ -127,6 +127,11 @@ public class PdManagerActivity extends CTBaseActivity implements VerifyDialog.Ve
 
     @Override
     public void logoutNotify() {
+
+    }
+
+    @Override
+    public void loginUserInfo(Object oject) {
 
     }
 

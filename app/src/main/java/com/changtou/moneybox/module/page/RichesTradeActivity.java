@@ -2,8 +2,9 @@ package com.changtou.moneybox.module.page;
 
 import android.os.Bundle;
 import android.widget.ListView;
+import android.widget.Toast;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.utils.ACache;
 import com.changtou.moneybox.module.adapter.TradeAdapter;
@@ -34,9 +35,7 @@ public class RichesTradeActivity extends CTBaseActivity
         mAdapter = new TradeAdapter(this);
         mTradeListView.setAdapter(mAdapter);
 
-        String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_TRADE_LIST) +
-                "userid=" + ACache.get(BaseApplication.getInstance()).getAsString("userid") +
-                "&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token");
+        String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_TRADE_LIST);
 
         sendRequest(HttpRequst.REQ_TYPE_TRADE_LIST,
                 url,
@@ -54,9 +53,18 @@ public class RichesTradeActivity extends CTBaseActivity
     {
         if (reqType == HttpRequst.REQ_TYPE_TRADE_LIST)
         {
-            super.onSuccess(content, object, reqType);
-            TradeEntity entity = (TradeEntity) object;
-            mAdapter.setData(entity);
+            try {
+
+                super.onSuccess(content, object, reqType);
+                TradeEntity entity = (TradeEntity) object;
+                mAdapter.setData(entity);
+            }
+            catch (Exception e)
+            {
+                BaseApplication.getInstance().backToLoginPage();
+                Toast.makeText(BaseApplication.getInstance(), "账号在其他设备登陆,请重新登录", Toast.LENGTH_LONG).show();
+            }
+
         }
     }
 }

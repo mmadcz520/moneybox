@@ -2,20 +2,18 @@ package com.changtou.moneybox.module.page;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.http.async.RequestParams;
 import com.changtou.moneybox.common.utils.ACache;
 import com.changtou.moneybox.module.http.HttpRequst;
+import com.changtou.moneybox.module.service.ReadSMsTool;
 import com.changtou.moneybox.module.widget.ExEditView;
 
 import org.json.JSONObject;
 
-import java.net.URLEncoder;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -34,6 +32,8 @@ public class RegisterActivity extends CTBaseActivity
         setContentView(R.layout.riches_register_layout);
 
         mPhoneNum = (ExEditView)findViewById(R.id.register_phone_no);
+
+
     }
 
     protected int setPageType()
@@ -60,7 +60,7 @@ public class RegisterActivity extends CTBaseActivity
 
                 if(isMobileNO(phoneNum))
                 {
-                    sendMsgRequest(phoneNum);
+                    isRegister(phoneNum);
                 }
                 else
                 {
@@ -87,7 +87,7 @@ public class RegisterActivity extends CTBaseActivity
             {
 
                 Intent intent = new Intent(this, WebActivity.class);
-                String url = "http://www.changtounet.com/contract/regcontract.html/contract/managecontract.html";
+                String url = "http://www.changtounet.com/contract/managecontract.html";
 
                 intent.putExtra("url", url);
                 intent.putExtra("title", "投资咨询与管理协议");
@@ -134,6 +134,28 @@ public class RegisterActivity extends CTBaseActivity
             }
 
         }
+
+        if(reqType == HttpRequst.REQ_TYPE_ISREG)
+        {
+            try
+            {
+                JSONObject data = new JSONObject(content);
+                boolean error = data.getBoolean("isreg");
+
+                if(!error)
+                {
+                    sendMsgRequest(phoneNum);
+                }
+                else
+                {
+                    Toast.makeText(this, "该手机已注册", Toast.LENGTH_LONG).show();
+                }
+            }
+            catch (Exception e)
+            {
+                Toast.makeText(this, "内部错误", Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
     public void onFailure(Throwable error, String content, int reqType)
@@ -148,9 +170,7 @@ public class RegisterActivity extends CTBaseActivity
     {
         try
         {
-            String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_SENDMSG) +
-                    "userid=" + ACache.get(BaseApplication.getInstance()).getAsString("userid") +
-                    "&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token");
+            String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_SENDMSG);
 
             RequestParams params = new RequestParams();
             JSONObject jsonObject = new JSONObject();
@@ -158,6 +178,29 @@ public class RegisterActivity extends CTBaseActivity
             params.put("data", jsonObject.toString());
 
             sendRequest(HttpRequst.REQ_TYPE_SENDMSG, url, params, getAsyncClient(), false);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+
+    /**
+     * 是否是注册过的
+     */
+    private void isRegister(String mobiles)
+    {
+        try
+        {
+            String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_ISREG);
+
+            RequestParams params = new RequestParams();
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("mobile", mobiles);
+            params.put("data", jsonObject.toString());
+
+            sendRequest(HttpRequst.REQ_TYPE_ISREG, url, params, getAsyncClient(), false);
         }
         catch (Exception e)
         {

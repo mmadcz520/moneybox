@@ -1,11 +1,13 @@
 package com.changtou.moneybox.module.page;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.http.async.RequestParams;
 import com.changtou.moneybox.common.utils.ACache;
@@ -42,8 +44,31 @@ public class RichesCertificationActivity extends CTBaseActivity
         mIdcardView = (EditText)findViewById(R.id.certify_idcard);
 
         UserInfoEntity userInfoEntity = UserInfoEntity.getInstance();
-        mFullName = userInfoEntity.getFullName().trim();
-        mFullnameView.setText(mFullName);
+
+        Button button = (Button)findViewById(R.id.certify_btn);
+
+        Intent intent = getIntent();
+        if(intent.getBooleanExtra("isCerfy", false))
+        {
+            mFullName = userInfoEntity.getFullName().trim();
+            mFullnameView.setText(mFullName);
+            mFullnameView.setEnabled(false);
+
+            String idcard = userInfoEntity.getIdCard();
+            int len = idcard.length();
+            idcard = idcard.substring(0,3);
+            for(int i = 0; i < len-7;i++)
+            {
+                idcard = idcard + " *";
+            }
+
+            idcard = idcard + userInfoEntity.getIdCard().substring(len-4, len);
+            mIdcardView.setText(idcard);
+            mIdcardView.setEnabled(false);
+
+            button.setEnabled(false);
+        }
+
     }
 
     protected void initListener()
@@ -61,7 +86,7 @@ public class RichesCertificationActivity extends CTBaseActivity
         }
         else
         {
-            Toast.makeText(this, "求输入完整信息", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "请输入完整信息", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -72,7 +97,6 @@ public class RichesCertificationActivity extends CTBaseActivity
         {
             try
             {
-                printLog(content);
                 JSONObject json = new JSONObject(content);
                 int errcode = json.getInt("errorcode");
 
@@ -113,9 +137,7 @@ public class RichesCertificationActivity extends CTBaseActivity
     {
         mIdcard = mIdcardView.getText().toString();
 
-        String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_CERTIFY) +
-                "userid=" + ACache.get(BaseApplication.getInstance()).getAsString("userid") +
-                "&token=" + ACache.get(BaseApplication.getInstance()).getAsString("token");
+        String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_CERTIFY);
 
         try
         {

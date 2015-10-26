@@ -18,7 +18,6 @@ package com.handmark.pulltorefresh.library;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -103,8 +102,8 @@ public abstract class PullToRefreshAdapterViewBase<T extends AbsListView> extend
 			final int totalItemCount) {
 
 		if (DEBUG) {
-			Log.d(LOG_TAG, "First Visible: " + firstVisibleItem + ". Visible Count: " + visibleItemCount
-					+ ". Total Items:" + totalItemCount);
+//			Log.d(LOG_TAG, "First Visible: " + firstVisibleItem + ". Visible Count: " + visibleItemCount
+//					+ ". Total Items:" + totalItemCount);
 		}
 
 		/**
@@ -375,7 +374,7 @@ public abstract class PullToRefreshAdapterViewBase<T extends AbsListView> extend
 
 		if (null == adapter || adapter.isEmpty()) {
 			if (DEBUG) {
-				Log.d(LOG_TAG, "isFirstItemVisible. Empty View.");
+//				Log.d(LOG_TAG, "isFirstItemVisible. Empty View.");
 			}
 			return true;
 
@@ -404,7 +403,7 @@ public abstract class PullToRefreshAdapterViewBase<T extends AbsListView> extend
 
 		if (null == adapter || adapter.isEmpty()) {
 			if (DEBUG) {
-				Log.d(LOG_TAG, "isLastItemVisible. Empty View.");
+//				Log.d(LOG_TAG, "isLastItemVisible. Empty View.");
 			}
 			return true;
 		} else {
@@ -412,8 +411,8 @@ public abstract class PullToRefreshAdapterViewBase<T extends AbsListView> extend
 			final int lastVisiblePosition = mRefreshableView.getLastVisiblePosition();
 
 			if (DEBUG) {
-				Log.d(LOG_TAG, "isLastItemVisible. Last Item Position: " + lastItemPosition + " Last Visible Pos: "
-						+ lastVisiblePosition);
+//				Log.d(LOG_TAG, "isLastItemVisible. Last Item Position: " + lastItemPosition + " Last Visible Pos: "
+//						+ lastVisiblePosition);
 			}
 
 			/**

@@ -13,7 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 
 /**
  * Created by 7heaven on 15/4/22.

@@ -62,7 +62,8 @@
             android:layout_marginRight="30dp"
             android:text="@string/pd_gesture_forget"
             android:textColor="@color/font_white"
-            android:textSize="@dimen/font_size_hint2" />
+            android:textSize="@dimen/font_size_hint2"
+            android:visibility="gone"/>
 
     </RelativeLayout>
 

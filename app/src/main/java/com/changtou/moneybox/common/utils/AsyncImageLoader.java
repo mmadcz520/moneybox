@@ -10,7 +10,6 @@ import java.util.Map;
 import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.widget.ImageView;
 
 import com.changtou.moneybox.common.activity.BaseApplication;
@@ -52,14 +51,12 @@ public class AsyncImageLoader {
             imageView.setImageResource(resId);
         }else{
             mACache.put(mPath, bitmap);
-            Log.e("CT_MONEY", "ImageCallback------------------------------------------" + mPath );
             imageView.setImageBitmap(bitmap);
         }
     }
 
     public Bitmap loadImageAsyn(String path, ImageCallback callback){
 
-        Log.e("CT_MONEY", "loadImageAsyn--------------------" + mACache.getAsBitmap(path));
         this.mPath = path;
 
         //判断本地是否存在该图片
@@ -82,7 +79,6 @@ public class AsyncImageLoader {
                     caches.remove(path);
                 }else{
                     //如果图片未被释放，直接返回该图片
-                    Log.i(TAG, "return image in cache" + path);
                     mACache.put(path, bitmap);
 
                     return bitmap;
@@ -92,7 +88,6 @@ public class AsyncImageLoader {
                 Task task = new Task();
                 task.path = path;
                 task.callback = callback;
-                Log.i(TAG, "new Task ," + path);
                 if(!taskQueue.contains(task)){
                     taskQueue.add(task);
                     // 唤醒任务下载队列
@@ -117,10 +112,7 @@ public class AsyncImageLoader {
             public void loadImage(String path, Bitmap bitmap) {
                 if(path.equals(imageView.getTag().toString()))
                 {
-                    Log.e("CT_MONEY", "ImageCallback------------------------------------------" + path);
-
                     mACache.put(path, bitmap);
-
                     imageView.setImageBitmap(bitmap);
                 }else{
                     imageView.setImageResource(resId);

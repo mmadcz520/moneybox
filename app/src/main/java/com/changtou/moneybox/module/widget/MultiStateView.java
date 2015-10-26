@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
-import com.changtou.R;
+import com.changtou.moneybox.R;
 
 /**
  * View that contains 4 different states: Content, Error, Empty, and Loading.<br>

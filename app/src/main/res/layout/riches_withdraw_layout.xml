@@ -95,10 +95,60 @@
             android:text=""/>
     </RelativeLayout>
 
+    <RelativeLayout android:layout_width="fill_parent"
+        android:layout_height="@dimen/edit_height_normal"
+        android:layout_marginTop="17dp"
+        android:orientation="horizontal"
+        android:background="@drawable/stroke_edit_fillpraent_top">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/font_black"
+            android:background="@color/ct_white"
+            android:textSize="@dimen/font_size_normal"
+            android:layout_marginLeft="20dp"
+            android:layout_centerVertical="true"
+            android:text="博尔特靴(当日到账)"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/ct_invalid"
+            android:background="@color/ct_white"
+            android:textSize="@dimen/font_size_normal"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/sytou_num"
+            android:text="剩余投园:"/>
+
+        <TextView
+            android:id="@+id/sytou_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/ct_invalid"
+            android:background="@color/ct_white"
+            android:textSize="@dimen/font_size_normal"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/brtx_check"
+            android:text="0"/>
+
+        <CheckBox
+            android:id="@+id/brtx_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/ct_invalid"
+            android:background="@color/ct_white"
+            android:textSize="@dimen/font_size_navigation"
+            android:layout_marginRight="20dp"
+            android:layout_centerVertical="true"
+            android:enabled="false"
+            android:layout_alignParentRight="true"
+            android:text=""/>
+    </RelativeLayout>
+
+
     <LinearLayout android:layout_width="fill_parent"
         android:layout_height="@dimen/edit_height_normal"
         android:orientation="horizontal"
-        android:layout_marginTop="17dp"
         android:background="@drawable/stroke_edit_fillpraent">
         <EditText
             android:id="@+id/riches_withdraw_number"
@@ -106,7 +156,7 @@
             android:layout_height="wrap_content"
             android:textColorHint="@color/font_invalid"
             android:textColor="@color/font_black"
-            android:textSize="@dimen/font_size_normal"
+            android:textSize="@dimen/font_size_navigation"
             android:background="@color/ct_white"
             android:layout_marginLeft="20dp"
             android:layout_gravity="center"
@@ -125,13 +175,14 @@
         android:text="确认提现"
         android:textSize="@dimen/font_size_normal" />
 
-    <!--<TextView-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="10dp"-->
-        <!--android:layout_marginLeft="10dp"-->
-        <!--android:textSize="@dimen/font_size_hint"-->
-        <!--android:textColor="@color/font_invalid"-->
-        <!--android:text="注册即代表您已经阅读并同意《注册协议》及《投资咨询与管理协议》"/>-->
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:textSize="@dimen/font_size_hint"
+        android:textColor="@color/font_invalid"
+        android:text="充值后未投资直接提现的部分收取1%的手续费。（当月第一笔提现免费，当月第二笔开始 5元 /笔）"/>
 
 </LinearLayout>

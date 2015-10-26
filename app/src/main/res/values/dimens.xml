@@ -28,7 +28,7 @@
     <dimen name="exedit_height">52dp</dimen>
 
     <!-- Button -->
-    <dimen name="button_height_fillparent">40dp</dimen>
+    <dimen name="button_height_fillparent">52dp</dimen>
 
     <!--text-->
     <dimen name="extext_height">46dp</dimen>
