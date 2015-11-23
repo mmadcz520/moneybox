@@ -223,51 +223,102 @@
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical|right"
-                    android:text="礼金: "
                     android:textColor="@color/font_importance"
-                    android:textSize="@dimen/font_size_normal" />
+                    android:textSize="@dimen/font_size_normal">
 
-                <TextView
-                    android:id="@+id/riches_text_gifts"
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="10dp"
+                        android:src="@mipmap/riches_userinfo_lijin_icon" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/riches_text_gifts_ly"
                     android:layout_width="0dp"
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical|left"
-                    android:text="0.00"
+                    android:orientation="vertical"
                     android:textColor="@color/font_importance"
-                    android:textSize="@dimen/font_size_normal" />
+                    android:textSize="@dimen/font_size_normal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/font_importance"
+                        android:textSize="@dimen/font_size_normal"
+                        android:text="礼金"/>
+
+                    <TextView
+                        android:id="@+id/riches_text_gifts"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/font_importance"
+                        android:textSize="@dimen/font_size_normal"
+                        android:text="0"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/gift_click_layout1"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical|right"
-                    android:text="投园: "
                     android:textColor="@color/font_importance"
-                    android:textSize="@dimen/font_size_normal" />
+                    android:textSize="@dimen/font_size_normal">
 
-                <TextView
-                    android:id="@+id/riches_text_touyuan"
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="10dp"
+                        android:src="@mipmap/riches_userinfo_touyuan_icon" />
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:id="@+id/riches_text_touyuan_ly"
                     android:layout_width="0dp"
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical|left"
-                    android:text="0.00"
+                    android:orientation="vertical"
                     android:textColor="@color/font_importance"
-                    android:textSize="@dimen/font_size_normal" />
+                    android:textSize="@dimen/font_size_normal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/font_importance"
+                        android:textSize="@dimen/font_size_normal"
+                        android:text="投圆"/>
+
+                    <TextView
+                        android:id="@+id/riches_text_touyuan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/font_importance"
+                        android:textSize="@dimen/font_size_normal"
+                        android:text="0"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 

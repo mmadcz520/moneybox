@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.TextAppearanceSpan;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.changtou.moneybox.R;
@@ -42,6 +43,8 @@ public class RegisterPasswordActivity extends CTBaseActivity implements LoginNot
     private int mPageType = 0;
     private String mCheckSum = "";
 
+    private Button mSumbitBtn = null;
+
     protected void initView(Bundle bundle)
     {
         setContentView(R.layout.riches_register_password_layout);
@@ -57,6 +60,8 @@ public class RegisterPasswordActivity extends CTBaseActivity implements LoginNot
 
         mPasswordText = (ExEditView)findViewById(R.id.register_password);
         mAffirmText = (ExEditView)findViewById(R.id.register_affirm_password);
+
+        mSumbitBtn = (Button)findViewById(R.id.riches_register_do);
 
         mUserManager = BaseApplication.getInstance().getUserModule();
         mUserManager.setLoginNotifier(this);
@@ -110,6 +115,7 @@ public class RegisterPasswordActivity extends CTBaseActivity implements LoginNot
 
     public void onSuccess(String content, Object object, int reqType) {
         super.onSuccess(content, object, reqType);
+        mSumbitBtn.setEnabled(true);
 
         if(reqType == HttpRequst.REQ_TYPE_POSTREG)
         {
@@ -172,6 +178,7 @@ public class RegisterPasswordActivity extends CTBaseActivity implements LoginNot
 
     public void onFailure(Throwable error, String content, int reqType)
     {
+        mSumbitBtn.setEnabled(true);
         super.onFailure(error, content, reqType);
     }
 
@@ -182,6 +189,8 @@ public class RegisterPasswordActivity extends CTBaseActivity implements LoginNot
     {
         try
         {
+            mSumbitBtn.setEnabled(false);
+
             String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_NEWPWD);
 
             RequestParams params = new RequestParams();
@@ -203,6 +212,8 @@ public class RegisterPasswordActivity extends CTBaseActivity implements LoginNot
      */
     private void  postregRequest(String mobiles, String password)
     {
+
+
         try
         {
             String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_POSTREG);

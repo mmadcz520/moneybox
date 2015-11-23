@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -49,6 +50,8 @@ public class ConfirmActivity extends CTBaseActivity
 
     private int mSyLijin = 0;
 
+    private TextView mRechargeBtn = null;
+
     private String[] mError = {"投资成功", "参数为空", "不存在该产品",  " 产品类型参数错误",
                 "用户ID参数错误", "产品ID参数错误", "投资金额参数错误", "不存在该用户",
                 "找不到原始转让产品", "投资必须是投资金额的整数倍", "已经不是新手不能投资新手标",
@@ -87,10 +90,10 @@ public class ConfirmActivity extends CTBaseActivity
         //显示余额
         UserInfoEntity userInfoEntity = (UserInfoEntity) ACache.get(this).getAsObject("userinfo");
         String overage = userInfoEntity.getOverage();
-        String gift = userInfoEntity.getGifts();
-        if(gift != null && gift.equals(""))
+        String gift = String.valueOf(userInfoEntity.getGifts());
+         if(gift != null && !gift.equals(""))
         {
-            mSyLijin = (int)Double.parseDouble(userInfoEntity.getGifts());
+            mSyLijin = (int)Double.parseDouble(String.valueOf(userInfoEntity.getGifts()));
         }
         TextView textView = (TextView)findViewById(R.id.confirm_text_overage);
         textView.setText(overage);
@@ -107,10 +110,8 @@ public class ConfirmActivity extends CTBaseActivity
                     }
                 });
 
-        mDialog.setCancelClickListener(new SweetAlertDialog.OnSweetClickListener()
-        {
-            public void onClick(SweetAlertDialog sweetAlertDialog)
-            {
+        mDialog.setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+            public void onClick(SweetAlertDialog sweetAlertDialog) {
                 mDialog.dismiss();
             }
         });
@@ -122,6 +123,17 @@ public class ConfirmActivity extends CTBaseActivity
             public void onClick(View v)
             {
                 popuDailog();
+            }
+        });
+
+        mRechargeBtn = (TextView)findViewById(R.id.recharge_btn);
+        mRechargeBtn.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(ConfirmActivity.this, RichesRechargePage.class);
+                intent.putExtra("urlType", 1);
+                startActivity(intent);
             }
         });
     }
@@ -151,6 +163,7 @@ public class ConfirmActivity extends CTBaseActivity
      */
     public void treatClickEvent(int id)
     {
+        mConfirmBtn.setEnabled(false);
         String mum = mNumInput.getEditableText().toString();
         postInvestRequest(mProductType, mProductId, mum);
     }
@@ -161,16 +174,19 @@ public class ConfirmActivity extends CTBaseActivity
         {
             try
             {
+                mConfirmBtn.setEnabled(true);
+
                 JSONObject data = new JSONObject(content);
 
                 int result = data.getInt("result");
                 touyuan = data.getInt("touyuan");
 
-                mDialog.setTitleText("恭喜您投资成功!\n 获得" + touyuan + "个投圆" + "\n");
-
                 if(result == 0)
                 {
-                    mDialog.show();
+//                    mDialog.show();
+                    Intent intent = new Intent(this, InvestmentSuccPage.class);
+                    intent.putExtra("touyuan", String.valueOf(touyuan));
+                    startActivity(intent);
                 }
                 else
                 {

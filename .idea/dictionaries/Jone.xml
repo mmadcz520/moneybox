@@ -2,21 +2,31 @@
   <dictionary name="Jone">
     <words>
       <w>addbank</w>
+      <w>banklist</w>
       <w>brtx</w>
       <w>changebank</w>
       <w>checkcode</w>
+      <w>createtime</w>
       <w>delbank</w>
       <w>dklj</w>
       <w>fillpraent</w>
+      <w>isdefault</w>
       <w>issign</w>
+      <w>lefttouyuan</w>
+      <w>lijin</w>
       <w>newpwd</w>
+      <w>paser</w>
+      <w>paynum</w>
       <w>postreg</w>
+      <w>quickpay</w>
       <w>requst</w>
       <w>sendmsg</w>
+      <w>succ</w>
       <w>sylijin</w>
       <w>touyuan</w>
       <w>userinfo</w>
       <w>wealthinfo</w>
+      <w>withdrawamount</w>
       <w>withdrawinfo</w>
     </words>
   </dictionary>

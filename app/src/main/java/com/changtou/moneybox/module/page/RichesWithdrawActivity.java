@@ -81,6 +81,7 @@ public class RichesWithdrawActivity extends CTBaseActivity
         final Intent intent3 = new Intent(this, RichesBankActivity.class);
 
         RelativeLayout ll = (RelativeLayout)findViewById(R.id.riches_bank_item);
+        intent3.putExtra("URLType",2);
         ll.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v)
@@ -109,31 +110,18 @@ public class RichesWithdrawActivity extends CTBaseActivity
         /**
          * 点选博尔特靴响应事件
          */
-        mBrtxCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
-        {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
-            {
-                if(isChecked)
-                {
-                    String withNumStr = mWithdrawNum.getEditableText().toString();
-                    if(withNumStr.equals("")) return;
-                    bolt = 0;
-                    try
-                    {
-                        int withNum = Integer.parseInt(withNumStr);
-                        if(withNum>50000)
-                        {
-                            mWithdrawNum.setText("50000");
-                            Toast.makeText(RichesWithdrawActivity.this, "使用博尔特靴,单次提现限额5万", Toast.LENGTH_SHORT).show();
-                        }
+        mBrtxCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    if (mTouyuan >= 800) {
+                        popuBoltDailog();
                     }
-                    catch (Exception e)
+                    else
                     {
-                        Toast.makeText(RichesWithdrawActivity.this, "请输入正确的提现金额", Toast.LENGTH_SHORT).show();
+                        mBrtxCheck.setChecked(false);
+                        Toast.makeText(RichesWithdrawActivity.this,"投圆个数需大于800才可使用今日到账功能",Toast.LENGTH_LONG).show();
                     }
-                }
-                else
-                {
+                } else {
                     bolt = 1;
                 }
             }
@@ -143,21 +131,31 @@ public class RichesWithdrawActivity extends CTBaseActivity
     @Override
     protected void initData()
     {
+        showRightBtn(true);
+        setRightBtnName("提现记录");
+        setRightBtnOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(RichesWithdrawActivity.this, WithdrawRecordActivity.class );
+                intent.putExtra("goPageCode", 0);
+                startActivity(intent);
+            }
+        });
+
         mUserInfoEntity = (UserInfoEntity)ACache.get(this).getAsObject("userinfo");
 
         initBankInfo();
         setPageTitle("提现");
 
         mOverage = mUserInfoEntity.getOverage();
-//        mWithdrawTotle.setText(customFormat(mOverage));
-//        mWithdrawHandling.setText("-" + customFormat("5"));
         mTouyuan = mUserInfoEntity.getTouYuan();
         mTouyuanTextView.setText(String.valueOf(mTouyuan));
 
-        if(mTouyuan >= 800)
-        {
+//        if(mTouyuan >= 800)
+//        {
             mBrtxCheck.setEnabled(true);
-        }
+//        }
 
         makeWithdrawInfoRequest();
 
@@ -193,7 +191,8 @@ public class RichesWithdrawActivity extends CTBaseActivity
         return PAGE_TYPE_SUB;
     }
 
-    private void setBankIcon(ImageView imageView, String bankName) {
+    private void setBankIcon(ImageView imageView, String bankName)
+    {
         InputStream open = null;
         try {
             if (mBankInfoList == null) return;
@@ -233,16 +232,22 @@ public class RichesWithdrawActivity extends CTBaseActivity
 
         public void afterTextChanged(Editable s)
         {
-            Float input_f;
-            Float money_f;
+            double input_f;
+            double money_f;
 
             try {
                 mHandling = mHandling.replace(",", "");
-                money_f = Float.parseFloat(mHandling);
+                money_f = Double.parseDouble(mHandling);
 
                 String input = s.toString();
+                if(input.length() > 9)
+                {
+                    Toast.makeText(RichesWithdrawActivity.this, "请输入有效金额", Toast.LENGTH_LONG).show();
+                    mWithdrawNum.setText("");
+                    return;
+                }
                 input = input.replace(",", "");
-                input_f = Float.parseFloat(input);
+                input_f =  Double.parseDouble(input);
             }
             catch (Exception e)
             {
@@ -250,11 +255,11 @@ public class RichesWithdrawActivity extends CTBaseActivity
                 input_f = 0f;
             }
 
-            Float m = input_f - money_f;
+            double m = input_f - money_f;
             if(m > 0)
             {
                 mSubmitBtn.setEnabled(true);
-                mWithdrawMoney.setText(customFormat(m.toString()));
+                mWithdrawMoney.setText(customFormat(String.valueOf(m)));
             }
             else
             {
@@ -317,6 +322,7 @@ public class RichesWithdrawActivity extends CTBaseActivity
             jsonObject.put("num", num);
             jsonObject.put("account", mDefaultBankNo);
             jsonObject.put("bolt", bolt);
+            jsonObject.put("ly", "android");
             params.put("data", jsonObject.toString());
 
             sendRequest(HttpRequst.REQ_TYPE_WITHDRAW, url, params, getAsyncClient(), false);
@@ -355,9 +361,12 @@ public class RichesWithdrawActivity extends CTBaseActivity
                             mError[code], Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
-
 //                    finish();
-
+                if(code == 0 || code == 10)
+                {
+                    Intent intent = new Intent(this, WithdrawSuccPage.class);
+                    startActivity(intent);
+                }
                     makeWithdrawInfoRequest();
 //                } catch (Exception e) {
 //                    e.printStackTrace();
@@ -366,16 +375,19 @@ public class RichesWithdrawActivity extends CTBaseActivity
 //                try {
                     JSONObject json = new JSONObject(content);
 
-                    mHandling = json.getString("fee");
-                    mOverage = json.getString("yue");
+                    mHandling = json.optString("fee");
+                    mOverage = json.optString("yue");
+                    mTouyuan = json.optInt("touyuan",mTouyuan);
 
                     mWithdrawTotle.setText(customFormat(mOverage));
                     mWithdrawHandling.setText("-" + customFormat(mHandling));
+                    mTouyuanTextView.setText(String.valueOf(mTouyuan));
 //                } catch (Exception e) {
 //                    e.printStackTrace();
 //                }
             }
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             BaseApplication.getInstance().backToLoginPage();
             Toast.makeText(BaseApplication.getInstance(), "账号在其他设备登陆,请重新登录", Toast.LENGTH_LONG).show();
@@ -401,7 +413,7 @@ public class RichesWithdrawActivity extends CTBaseActivity
     private void popuAuthDailog()
     {
         ColorStateList redColors = ColorStateList.valueOf(0xffff0000);
-        SpannableStringBuilder spanBuilder = new SpannableStringBuilder("确认提现！");
+        SpannableStringBuilder spanBuilder = new SpannableStringBuilder("确认提现");
         //style 为0 即是正常的，还有Typeface.BOLD(粗体) Typeface.ITALIC(斜体)等
         //size  为0 即采用原始的正常的 size大小
 //        spanBuilder.setSpan(new TextAppearanceSpan(null, 0, 40, redColors, null), 5, 7, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
@@ -418,7 +430,6 @@ public class RichesWithdrawActivity extends CTBaseActivity
             public void onClick(SweetAlertDialog sweetAlertDialog)
             {
                 sad.cancel();
-
             }
         });
 
@@ -428,6 +439,53 @@ public class RichesWithdrawActivity extends CTBaseActivity
             {
                 sad.cancel();
                 makeWithdrawRequest();
+            }
+        });
+    }
+
+
+    protected void onBackIcon()
+    {
+        super.onBackIcon();
+        final Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("login_state", 1);
+        startActivity(intent);
+    }
+
+    public void onBackPressed()
+    {
+        super.onBackPressed();
+        final Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("login_state", 1);
+        startActivity(intent);
+    }
+
+    /**
+     * 确认使用博尔特鞋弹框
+     *
+     */
+    private void popuBoltDailog()
+    {
+        final SweetAlertDialog sad = new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE);
+        String str = "您当前有" + mTouyuan + "个投圆，本次提现将花费您800个投圆。当日到账功能仅限工作日14:00前使用，且单笔提现金额不大于5万元。";
+        sad.setTitleText(str);
+        sad.setCancelText("取消");
+        sad.setConfirmText("确认");
+        sad.show();
+
+        sad.setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                bolt = 1;
+                sad.cancel();
+                mBrtxCheck.setChecked(false);
+            }
+        });
+
+        sad.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+            @Override
+            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                bolt = 0;
+                sad.cancel();
             }
         });
     }

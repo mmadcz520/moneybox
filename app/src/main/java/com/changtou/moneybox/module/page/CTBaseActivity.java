@@ -2,6 +2,7 @@ package com.changtou.moneybox.module.page;
 
 import android.app.ActionBar;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +32,14 @@ abstract public class CTBaseActivity extends BaseActivity{
     public static final int PAGE_TYPE_HOME = 0;
     public static final int PAGE_TYPE_SUB  = 1;
     private int mPageType = 0;
+
+    private boolean mShowRightBtn = false;
+
+    private LinearLayout mRightTouc = null;
+
+    LinearLayout mLefttouc = null;
+
+    private TextView mRightTextView = null;
 
     /**
      * @see android.app.Activity#onCreate(Bundle)
@@ -145,13 +154,16 @@ abstract public class CTBaseActivity extends BaseActivity{
             actionBar.setCustomView(v,layout);
 
             mPageTitleView = (TextView)v.findViewById(R.id.page_title);
-            LinearLayout lefttouc = (LinearLayout) findViewById(R.id.touchLeft);
+            mLefttouc = (LinearLayout) findViewById(R.id.touchLeft);
             ImageView leftBtn = (ImageView)findViewById(R.id.menuBtn);
+
+            mRightTouc = (LinearLayout) findViewById(R.id.touchRight);
+            mRightTextView = (TextView)findViewById(R.id.menuBtnRight);
 
             if(mPageType == PAGE_TYPE_SUB)
             {
                 leftBtn.setVisibility(View.VISIBLE);
-                lefttouc.setOnClickListener(new View.OnClickListener()
+                mLefttouc.setOnClickListener(new View.OnClickListener()
                 {
                     /*
                      * (non-Javadoc)
@@ -160,6 +172,7 @@ abstract public class CTBaseActivity extends BaseActivity{
                     public void onClick(View arg0)
                     {
                         CTBaseActivity.this.finish();
+                        onBackIcon();
                     }
                 });
             }
@@ -187,5 +200,34 @@ abstract public class CTBaseActivity extends BaseActivity{
         }
 
         super.onDestroy();
+    }
+
+    protected void onBackIcon()
+    {
+
+    }
+
+    protected void showRightBtn(boolean isShow)
+    {
+        mShowRightBtn = isShow;
+        mRightTouc.setVisibility(View.VISIBLE);
+    }
+
+    protected void setRightBtnName(String name)
+    {
+        if(mRightTextView != null)
+        {
+            mRightTextView.setText(name);
+        }
+    }
+
+    protected void setRightBtnOnClickListener(View.OnClickListener listener)
+    {
+        mRightTouc.setOnClickListener(listener);
+    }
+
+    protected void setLeftBtnOnClickListener(View.OnClickListener listener)
+    {
+        mLefttouc.setOnClickListener(listener);
     }
 }

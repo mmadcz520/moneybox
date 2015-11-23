@@ -31,6 +31,13 @@ public class RichesCertificationActivity extends CTBaseActivity
 
     private String[] mError = {"认证成功", "该身份证号已认证", "实名认证错误", "身份证号与姓名不匹配"};
 
+    //是否实名认证
+    private boolean isCertifty= false;
+
+    private UserInfoEntity mUserInfoEntity = null;
+
+    private int mURLType = 0;
+
 
     /**
      * @see CTBaseActivity#initView(Bundle)
@@ -48,7 +55,8 @@ public class RichesCertificationActivity extends CTBaseActivity
         Button button = (Button)findViewById(R.id.certify_btn);
 
         Intent intent = getIntent();
-        if(intent.getBooleanExtra("isCerfy", false))
+        isCertifty = intent.getBooleanExtra("isCerfy", false);
+        if(isCertifty)
         {
             mFullName = userInfoEntity.getFullName().trim();
             mFullnameView.setText(mFullName);
@@ -69,6 +77,9 @@ public class RichesCertificationActivity extends CTBaseActivity
             button.setEnabled(false);
         }
 
+        mUserInfoEntity = (UserInfoEntity)ACache.get(this).getAsObject("userinfo");
+
+        mURLType = intent.getIntExtra("URLType", 0);
     }
 
     protected void initListener()
@@ -105,6 +116,19 @@ public class RichesCertificationActivity extends CTBaseActivity
                         mError[code], Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
+
+                //添加银行卡时，先实名认证后跳转
+                if(errcode == 0 && !isCertifty)
+                {
+                    mUserInfoEntity.setIdentycheck(true);
+                    mUserInfoEntity.setFullName(mFullName);
+                    ACache.get(this).put("userinfo", mUserInfoEntity);
+
+                    this.finish();
+                    final Intent intent = new Intent(this, RichesBankAddActivity.class);
+                    intent.putExtra("URLType", mURLType);
+                    startActivity(intent);
+                }
             }
             catch (Exception e)
             {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content">
 
@@ -29,17 +29,25 @@
         android:textSize="@dimen/font_size_navigation"
         android:textColor="@color/font_white" />
 
-    <!--<ImageButton-->
-        <!--android:id="@+id/left_btn"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="left|center_vertical"-->
-        <!--android:src="@android:drawable/ic_media_play" />-->
-
-    <!--<ImageButton-->
-        <!--android:id="@+id/right_btn"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="right|center_vertical"-->
-        <!--android:src="@android:drawable/ic_media_pause" />-->
-</FrameLayout>
+    <LinearLayout
+        android:visibility="invisible"
+        android:id="@+id/touchRight"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true">
+        <TextView
+            android:id="@+id/menuBtnRight"
+            android:layout_marginRight="24.0dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:scaleType="centerInside"
+            android:src="@mipmap/back"
+            android:text="充值记录"
+            android:textColor="@color/font_white"
+            android:textSize="@dimen/font_size_normal"
+            android:contentDescription="@string/app_name"/>
+    </LinearLayout>
+</RelativeLayout>

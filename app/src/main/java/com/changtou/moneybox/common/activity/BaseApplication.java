@@ -3,6 +3,7 @@ package com.changtou.moneybox.common.activity;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.Thread.UncaughtExceptionHandler;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
@@ -411,6 +412,20 @@ public abstract class BaseApplication extends Application implements UncaughtExc
                 finishActivity(activity);
             }
         }
+    }
+
+    /**
+     * 结束指定类名的Activity
+     */
+    public void finishActivityAll(Class<?> cls) {
+        List delList = new ArrayList();
+        for (Activity activity : activityStack) {
+            if (activity.getClass().equals(cls)) {
+//                finishActivity(activity);
+                delList.add(activityStack);
+            }
+        }
+        activityStack.removeAll(delList);
     }
 
     /**

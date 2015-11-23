@@ -58,10 +58,11 @@ public class RegisterActivity extends CTBaseActivity
             {
                 phoneNum = mPhoneNum.getEditValue();
 
-                if(isMobileNO(phoneNum))
-                {
+//                if(isMobileNO(phoneNum))
+//                {
+                if( !phoneNum.equals("") && phoneNum != null)
                     isRegister(phoneNum);
-                }
+//                }
                 else
                 {
                     Toast.makeText(this, "请输入正确的手机号码", Toast.LENGTH_SHORT).show();

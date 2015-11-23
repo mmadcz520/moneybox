@@ -81,22 +81,22 @@
 
     <FrameLayout
         android:id="@+id/warning_frame"
-        android:layout_width="53dp"
-        android:layout_height="53dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginTop="20dp"
         android:visibility="gone">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/warning_circle" />
+        <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="@drawable/warning_circle" />-->
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/warning_sigh"
-            android:scaleType="center" />
+            android:src="@drawable/warning_sign_custom"
+            android:scaleType="centerInside" />
     </FrameLayout>
 
     <FrameLayout
@@ -122,10 +122,14 @@
         android:id="@+id/title_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="17dp"
-        android:gravity="center_horizontal"
+        android:textSize="15dp"
+        android:layout_gravity="center"
+        android:gravity="left"
         android:textColor="#575757"
         android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:lineSpacingExtra="3dp"
         android:text="@string/dialog_default_title" />
 
     <TextView
@@ -149,32 +153,32 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="38dp"
+        android:layout_height="42dp"
         android:orientation="horizontal"
         android:gravity="center">
 
         <Button
             android:id="@+id/cancel_button"
-            android:layout_height="38dp"
+            android:layout_height="42dp"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:background="#00000000"
+            android:background="@drawable/cancal_button"
             android:layout_gravity="center_horizontal"
             android:textColor="@color/ct_blue"
             android:gravity="center"
             android:visibility="gone"
             android:text="@string/dialog_cancel" />
 
-        <View
-            android:id="@+id/riches_line2"
-            android:layout_width="1dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:background="@color/ct_divide_line" />
+        <!--<View-->
+            <!--android:id="@+id/riches_line2"-->
+            <!--android:layout_width="1dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:background="@color/ct_divide_line" />-->
 
         <Button
             android:id="@+id/confirm_button"
-            android:layout_height="38dp"
+            android:layout_height="42dp"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:background="#00000000"

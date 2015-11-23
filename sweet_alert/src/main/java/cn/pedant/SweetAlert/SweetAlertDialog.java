@@ -5,7 +5,10 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Spannable;
 import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
@@ -58,14 +61,14 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
     private OnSweetClickListener mConfirmClickListener;
     private boolean mCloseFromCancel;
 
-    private View mMidLineView;
-
     public static final int NORMAL_TYPE = 0;
     public static final int ERROR_TYPE = 1;
     public static final int SUCCESS_TYPE = 2;
     public static final int WARNING_TYPE = 3;
     public static final int CUSTOM_IMAGE_TYPE = 4;
     public static final int PROGRESS_TYPE = 5;
+
+    public static Spanned mTitleTextHtml = null;
 
     public static interface OnSweetClickListener {
         public void onClick (SweetAlertDialog sweetAlertDialog);
@@ -143,7 +146,6 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.alert_dialog);
 
-        mMidLineView = findViewById(R.id.riches_line2);
         mDialogView = getWindow().getDecorView().findViewById(android.R.id.content);
         mTitleTextView = (TextView)findViewById(R.id.title_text);
         mContentTextView = (TextView)findViewById(R.id.content_text);
@@ -162,7 +164,15 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
         mConfirmButton.setOnClickListener(this);
         mCancelButton.setOnClickListener(this);
 
-        setTitleText(mTitleText);
+        if(mTitleTextHtml != null)
+        {
+            setTitleText(mTitleTextHtml);
+        }
+        else
+        {
+            setTitleText(mTitleText);
+        }
+
         if(mContentTextBuilder != null)
         {
             setContentText(mContentTextBuilder);
@@ -233,7 +243,6 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
                     break;
                 case WARNING_TYPE:
 //                    mConfirmButton.setBackgroundResource(R.drawable.red_button_background);
-                    mMidLineView.setVisibility(View.GONE);
                     mWarningFrame.setVisibility(View.VISIBLE);
                     break;
                 case CUSTOM_IMAGE_TYPE:
@@ -274,6 +283,19 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
         }
         return this;
     }
+
+    public SweetAlertDialog setTitleText (Spanned text) {
+        mTitleTextHtml = text;
+        if (mTitleTextView != null && mTitleTextHtml != null) {
+            mTitleTextView.setText(mTitleTextHtml);
+        }
+        else if(mTitleTextView != null)
+        {
+            mTitleTextView.setVisibility(View.INVISIBLE);
+        }
+        return this;
+    }
+
 
     public SweetAlertDialog setCustomImage (Drawable drawable) {
         mCustomImgDrawable = drawable;
@@ -424,10 +446,10 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
         return mProgressHelper;
     }
 
-    public SweetAlertDialog hideMidLine()
-    {
-        if(mMidLineView != null)
-        mMidLineView.setVisibility(View.GONE);
-        return this;
-    }
+//    public SweetAlertDialog hideMidLine()
+//    {
+//        if(mMidLineView != null)
+//        mMidLineView.setVisibility(View.GONE);
+//        return this;
+//    }
 }

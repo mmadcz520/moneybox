@@ -19,5 +19,4 @@ public class EnvConstants {
     // 银通支付（RSA）公钥，这个是银通的公钥，不需要修改，如果是RSA签名的，可以用来本地验签，MD5不需要关注
     public static final String RSA_YT_PUBLIC =
             "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCSS/DiwdCf/aZsxxcacDnooGph3d2JOj5GXWi+q3gznZauZjkNP8SKl3J2liP0O6rU/Y/29+IUe+GTMhMOFJuZm1htAtKiu5ekW0GlBMWxf4FPkYlQkPE0FtaoMP3gYfh+OwI+fIRrpW3ySn3mScnc6Z700nU/VYrRkfcSCbSnRwIDAQAB";
-
 }

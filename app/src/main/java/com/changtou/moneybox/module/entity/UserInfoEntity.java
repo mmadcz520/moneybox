@@ -1,5 +1,7 @@
 package com.changtou.moneybox.module.entity;
 
+import android.util.Log;
+
 import com.changtou.moneybox.common.http.base.BaseEntity;
 
 import org.json.JSONArray;
@@ -25,7 +27,7 @@ public class UserInfoEntity extends BaseEntity implements Serializable
     private String mInvestAssets = "";
     private String mProfit = "";
     private String mOverage = "";
-    private String mGifts = "0.00";
+    private String mGifts = "0.0";
     private int mTouYuan = 0;
 
     //是否实名认证   是否手机认证  是否首次投资
@@ -35,6 +37,8 @@ public class UserInfoEntity extends BaseEntity implements Serializable
 
     private FlowEntity mFlowEntity = null;
     private BankCardEntity mBankCardEntity = null;
+
+    private boolean isRecharged = false;
 
     private static UserInfoEntity single = null;
 
@@ -57,12 +61,16 @@ public class UserInfoEntity extends BaseEntity implements Serializable
         mAutoinvest = userinfo.getString("autoinvest");
         mCreatetime = userinfo.getString("createtime");
 
+        isRecharged = jsonObject.getBoolean("IsCharged");
+
         JSONObject wealthinfo = jsonObject.getJSONObject("wealthinfo");
         mTotalAssets = wealthinfo.getString("TotalAssets");
         mInvestAssets = wealthinfo.getString("InvestAssets");
         mProfit = wealthinfo.getString("Profit");
         mOverage = wealthinfo.getString("Overage");
         mGifts = wealthinfo.getString("Gifts");
+        mGifts = mGifts.split("\\.")[0];
+
         mTouYuan = wealthinfo.getInt("TouYuan");
 
         //现金流
@@ -173,5 +181,25 @@ public class UserInfoEntity extends BaseEntity implements Serializable
     public void setTouyuan(int touyuan)
     {
         this.mTouYuan = touyuan;
+    }
+
+    public boolean getIsRecharged()
+    {
+        return isRecharged;
+    }
+
+    public void setIsRecharged(boolean isRecharged)
+    {
+        this.isRecharged = isRecharged;
+    }
+
+    public void setIdentycheck(boolean identycheck)
+    {
+        this.identycheck = identycheck;
+    }
+
+    public void setFullName(String fullName)
+    {
+        this.mFullName = fullName;
     }
 }

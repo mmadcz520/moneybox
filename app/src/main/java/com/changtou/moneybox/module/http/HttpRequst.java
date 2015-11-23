@@ -9,11 +9,13 @@ import com.changtou.moneybox.module.entity.InvestListEntity;
 import com.changtou.moneybox.module.entity.ProductDetailsEntity;
 import com.changtou.moneybox.module.entity.ProductEntity;
 import com.changtou.moneybox.module.entity.PromotionEntity;
+import com.changtou.moneybox.module.entity.RechargeEntity;
 import com.changtou.moneybox.module.entity.RewardsEntity;
 import com.changtou.moneybox.module.entity.TradeEntity;
 import com.changtou.moneybox.module.entity.TransferListEntity;
 import com.changtou.moneybox.module.entity.UserEntity;
 import com.changtou.moneybox.module.entity.UserInfoEntity;
+import com.changtou.moneybox.module.entity.WithdrawEntity;
 
 /**
  * 描述:http Api 工具类
@@ -191,6 +193,22 @@ public class HttpRequst extends BaseHttpRequest
     public final static int REQ_TYPE_RECHARGE = 2001;
     public static String REQ_URL_RECHARGE = BASE_URL + "quickpay/postprepay?";
 
+    public final static int REQ_TYPE_GIFTEXCHANGE = 2108;
+    public static String REQ_URL_GIFTEXCHANGE = BASE_URL + "UserToken/postTouyuanLijinExchange?";
+
+
+    //充值成功回调
+    public final static int REQ_TYPE_QUICKPAY_SUCC = 2308;
+    public static String REQ_URL_QUICKPAY_SUCC = BASE_URL + "QuickPay/PostPayResult?";
+
+    //充值记录
+    public final static int REQ_TYPE_QUICKPAY_REC = 90;
+    public static String REQ_URL_QUICKPAY_REC = BASE_URL + "QuickPay/GetChargeRecords?";
+
+    //提现记录
+    public final static int REQ_TYPE_WITHDRAW_REC = 91;
+    public static String REQ_URL_WITHDRAWE_REC = BASE_URL + "QuickPay/GetTxRecords?";
+
     public static synchronized HttpRequst getInstance()
     {
         if (instance == null)
@@ -231,7 +249,6 @@ public class HttpRequst extends BaseHttpRequest
             case REQ_TYPE_PRODUCT_DETAILS:
                 url = REQ_URL_PRODUCT_DETAILS;
                 break;
-
             case REQ_TYPE_LOGIN:
                 url =  REQ_URL_LOGIN;
                 break;
@@ -316,6 +333,18 @@ public class HttpRequst extends BaseHttpRequest
             case REQ_TYPE_DEAL:
                 url = REQ_URL_DEAL + TOKEN;
                 break;
+            case REQ_TYPE_GIFTEXCHANGE:
+                url = REQ_URL_GIFTEXCHANGE + TOKEN;
+                break;
+            case REQ_TYPE_QUICKPAY_SUCC:
+                url = REQ_URL_QUICKPAY_SUCC + TOKEN;
+                break;
+            case REQ_TYPE_QUICKPAY_REC:
+                url = REQ_URL_QUICKPAY_REC + TOKEN;
+                break;
+            case REQ_TYPE_WITHDRAW_REC:
+                url = REQ_URL_WITHDRAWE_REC + TOKEN;
+                break;
             default:
                 break;
         }
@@ -383,6 +412,12 @@ public class HttpRequst extends BaseHttpRequest
                 break;
             case REQ_TYPE_DEAL:
                 paser = new TradeEntity();
+                break;
+            case REQ_TYPE_QUICKPAY_REC:
+                paser = new RechargeEntity();
+                break;
+            case REQ_TYPE_WITHDRAW_REC:
+                paser = new WithdrawEntity();
                 break;
             default:
                 break;

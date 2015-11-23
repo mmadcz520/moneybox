@@ -51,6 +51,8 @@ public class WebActivity extends CTBaseActivity
 
         WebSettings settings = myWebView.getSettings();
         settings.setJavaScriptEnabled(true);
+        settings.setUseWideViewPort(true);
+        settings.setLoadWithOverviewMode(true);
 
         myWebView.setWebChromeClient(new WebChromeClient() {
             @Override

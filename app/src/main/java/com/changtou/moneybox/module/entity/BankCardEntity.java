@@ -7,8 +7,6 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.LinkedList;
-
 /**
  * "bankinfo":[{"id":240,"account":"6217857600003237158","bank":"中国银行","branch":"民族大道支行","isdefault":"是","place":"湖北武汉","type":"","createtime":"2015-06-08"}],
  *
@@ -16,12 +14,11 @@ import java.util.LinkedList;
  */
 public class BankCardEntity extends BaseEntity implements Serializable
 {
-    public ArrayList mList = null;
+    public ArrayList mList = new ArrayList<>();
 
     public void paser(String data) throws Exception
     {
         JSONArray array = new JSONArray(data);
-        mList = new ArrayList<>();
         BankListEntity entity;
         int size = array.length();
         for (int i = 0; i < size; i++) {

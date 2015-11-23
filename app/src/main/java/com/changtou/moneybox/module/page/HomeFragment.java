@@ -56,9 +56,6 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
 
     private PullToRefreshScrollView mPullToRefreshScrollView = null;
 
-//    private String[] mImgs = {"http://www.changtounet.com/manage/news/uploadimages/50758017-9051-4838-ac09-f764bb5bfa4b.png.png",
-//            "http://www.changtounet.com/manage/news/uploadimages/50758017-9051-4838-ac09-f764bb5bfa4b.png.png" };
-
     private String productId = "0";
     private double jd = 0;
     private String maturity = "";
@@ -72,6 +69,8 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
     private String leiji = "";
 
     private TextView mQtjeTextView = null;
+
+    private String[] mDetails = new String[4];
 
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -98,6 +97,26 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
 
         mPullToRefreshScrollView.setOnRefreshListener(this);
 
+        mInvestProgress.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                //
+                if(BaseApplication.getInstance().isUserLogin())
+                {
+                    Intent intent = new Intent(HomeFragment.this.getActivity(), ProductDetailsActivity.class);
+                    intent.putExtra("id", productId);
+                    intent.putExtra("type", 0);
+                    startActivity(intent);
+                }
+                else
+                {
+                    Intent intent = new Intent(HomeFragment.this.getActivity(), LoginActivity.class);
+                    startActivityForResult(intent, 0);
+                }
+            }
+        });
+
         return mView;
     }
 
@@ -113,7 +132,6 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
 
         sph = SharedPreferencesHelper.getInstance(this.getActivity());
         BaseApplication.getInstance().setNetStateListener(this);
-//        mBannerSwitcher.setImage(mImgs);
 
         initParam();
         requestHomePage();
@@ -136,6 +154,7 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
                 JSONArray appRecomm = obj1.getJSONArray("AppRecomm");
 
                 if(appRecomm.length() > 0) {
+
                     JSONObject appObject = appRecomm.getJSONObject(0);
                     productId = appObject.getString("id");
                     jd = appObject.getDouble("jd") * 100;
@@ -145,13 +164,42 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
                     syje = appObject.getString("syje");
                     amount = appObject.getString("amount");
                     minamount = appObject.getString("minamount");
+
+                    mInvestProgress.setProgress((int) jd);
+
+                    mInvestSum.setText(allInvest);
+                    mMakeMoney.setText(leiji);
+
+                    mProductTitle.setText(projectname);
+                    mIcomeText.setText(interest);
+                    mTagTextView.setText("%");
+                    mTimeLimit.setText(maturity);
+                    mInvestPercent.showPercentWithAnimation((float) jd);
+                    mInvestNum.setText("￥" + syje + "/" + amount);
+                    mQtjeTextView.setText(minamount + "起投 | " + "每人限购100万元");
+                    mInvestBtn.setEnabled(true);
+                    mInvestBtn.setText("立即投资");
+
+                    mPullToRefreshScrollView.onRefreshComplete();
+
+                    mDetails[0] = projectname;
+                    mDetails[1] = maturity;
+                    mDetails[2] = interest + "%";
+                    mDetails[3] = syje;
+
+                    JSONObject obj2 = array.getJSONObject(1);
+                    allInvest = obj2.getString("allInvest");
+
+                    JSONObject obj3 = array.getJSONObject(3);
+                    leiji = obj3.getString("leiji");
+
+                }
+                else
+                {
+                    mInvestBtn.setEnabled(false);
+                    mInvestBtn.setText("敬请期待");
                 }
 
-                JSONObject obj2 = array.getJSONObject(1);
-                allInvest = obj2.getString("allInvest");
-
-                JSONObject obj3 = array.getJSONObject(3);
-                leiji = obj3.getString("leiji");
             }
             catch (Exception e)
             {
@@ -159,21 +207,7 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
             }
 
 
-            mInvestProgress.setProgress((int) jd);
 
-            mInvestSum.setText(allInvest);
-            mMakeMoney.setText(leiji);
-
-            mProductTitle.setText(projectname);
-            mIcomeText.setText(interest);
-            mTagTextView.setText("%");
-            mTimeLimit.setText(maturity);
-            mInvestPercent.showPercentWithAnimation((float)jd);
-            mInvestNum.setText("￥" + syje + "/" + amount);
-            mQtjeTextView.setText(minamount + "起投 | " + "每人限购100万元");
-            mInvestBtn.setEnabled(true);
-
-            mPullToRefreshScrollView.onRefreshComplete();
         }
 
         if(reqType == HttpRequst.REQ_TYPE_PRODUCT_BANNER)
@@ -241,10 +275,19 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
      */
     private void goToProductDetails(String id)
     {
-        Intent intent = new Intent(this.getActivity(), ProductDetailsActivity.class);
-        intent.putExtra("id", id);
-        intent.putExtra("type", 0);
+//        Intent intent = new Intent(this.getActivity(), ProductDetailsActivity.class);
+//        intent.putExtra("id", id);
+//        intent.putExtra("type", 0);
+//        startActivity(intent);
+
+        Intent intent = new Intent(this.getActivity(), ConfirmActivity.class);
+
+        intent.putExtra("details",mDetails);
+        intent.putExtra("id",id);
+        intent.putExtra("type",0);
+
         startActivity(intent);
+
     }
 
     public void requestHomePage()

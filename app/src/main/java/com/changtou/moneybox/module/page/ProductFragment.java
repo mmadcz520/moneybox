@@ -48,6 +48,8 @@ public class ProductFragment extends BaseFragment
 
     private SlidingTabLayout mSlidingTabLayout;
 
+    private ProductEntity entity = null;
+
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View mView = inflater.inflate(R.layout.product_fragment, container, false);
@@ -101,11 +103,22 @@ public class ProductFragment extends BaseFragment
                 mSlidingTabLayout.setViewPager(mViewPager);
 
                 mSlidingTabLayout.setOnPageChangeListener(mPageChangeListener);
+
+
+                sendRequest(HttpRequst.REQ_TYPE_PRODUCT_LIST,
+                        HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_PRODUCT_LIST),
+                        mParams,
+                        mAct.getAsyncClient(), true);
             }
             catch (Exception e)
             {
 
             }
+        }
+        else if(reqType == HttpRequst.REQ_TYPE_PRODUCT_LIST)
+        {
+            entity = (ProductEntity) object;
+            ctrlProductPage(entity.getProductTypeList());
         }
     }
 
@@ -113,6 +126,16 @@ public class ProductFragment extends BaseFragment
     {
 //        mZProgressHUD.cancel();
     }
+
+    @Override
+    public void onResume() {
+        if(entity != null)
+        {
+            ctrlProductPage(entity.getProductTypeList());
+        }
+        super.onResume();
+    }
+
 
     private OnPageChangeListener mPageChangeListener = new OnPageChangeListener()
     {
@@ -177,10 +200,8 @@ public class ProductFragment extends BaseFragment
             actualListView.setEnabled(true);
             mPullRefreshListView.setOnRefreshListener(this);
 
-            mMultiStateView.setRetryListener(new MultiStateView.RetryListener()
-            {
-                public void reTry()
-                {
+            mMultiStateView.setRetryListener(new MultiStateView.RetryListener() {
+                public void reTry() {
                     sendRequest(HttpRequst.REQ_TYPE_PRODUCT_LIST,
                             HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_PRODUCT_LIST),
                             mParams,
@@ -193,11 +214,9 @@ public class ProductFragment extends BaseFragment
 
         protected void initListener()
         {
-            actualListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
-            {
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-                {
-                    ProductEntity.ItemEntity item = (ProductEntity.ItemEntity)mData.get(position-1);
+            actualListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    ProductEntity.ItemEntity item = (ProductEntity.ItemEntity) mData.get(position - 1);
                     mSelectedProdId = item.id;
                     goToProductDetails(mSelectedProdId);
                 }
@@ -225,6 +244,7 @@ public class ProductFragment extends BaseFragment
                 mProductType = getArguments().getInt("productType");
                 int len = entity.getProductTypeList().size();
                 if(mProductType > (len -1)) return;
+
                 mData = (LinkedList)entity.getProductTypeList().get(mProductType);
                 mAdapter.setData(mData);
 
@@ -264,5 +284,28 @@ public class ProductFragment extends BaseFragment
             intent.putExtra("type", mProductType);
             startActivity(intent);
         }
+    }
+
+    /**
+     * 切换产品页面
+     *
+     * //无产品时自动定位到有产品页面
+     *
+     */
+    private void ctrlProductPage(LinkedList prdData)
+    {
+        if(prdData == null) return;
+
+        int len = prdData.size();
+        for(int i = 0; i<len; i++)
+        {
+            LinkedList data = (LinkedList)prdData.get(i);
+            if(data.size() > 0)
+            {
+                mViewPager.setCurrentItem(i);
+                return;
+            }
+        }
+        return;
     }
 }

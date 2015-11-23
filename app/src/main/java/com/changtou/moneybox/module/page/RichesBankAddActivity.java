@@ -1,6 +1,7 @@
 package com.changtou.moneybox.module.page;
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -98,20 +99,27 @@ public class RichesBankAddActivity extends CTBaseActivity
 
     private String mFullName = "";
 
+    private UserInfoEntity mUserInfoEntity = null;
+
     /**
      * 当前区的邮政编码
      */
     protected String mCurrentZipCode ="";
 
+    private int mURLType = 0;
+
+    private String mBankNo = "";
+
     protected void initView(Bundle bundle)
     {
         setContentView(R.layout.riches_safe_bank_add);
 
+        mUserInfoEntity = (UserInfoEntity)ACache.get(this).getAsObject("userinfo");
+
         mUserNameEdit = (EditText)findViewById(R.id.riches_safe_add_username);
 
-        UserInfoEntity userInfoEntity = UserInfoEntity.getInstance();
-        mFullName = userInfoEntity.getFullName().trim();
-        mUserNameEdit.setText(userInfoEntity.getFullName());
+        mFullName = mUserInfoEntity.getFullName().trim();
+        mUserNameEdit.setText(mUserInfoEntity.getFullName());
 
         mBankSpinner = (BetterSpinner)findViewById(R.id.riches_safe_add_bank);
         mProvinceSpinner = (BetterSpinner)findViewById(R.id.riches_safe_add_province);
@@ -170,6 +178,9 @@ public class RichesBankAddActivity extends CTBaseActivity
                 filterText2(mCitisDatas[position]);
             }
         });
+
+        Intent intent = getIntent();
+        mURLType = intent.getIntExtra("URLType", 0);
     }
 
     protected void initListener() {
@@ -197,7 +208,7 @@ public class RichesBankAddActivity extends CTBaseActivity
 
     @Override
     protected void initData() {
-        setPageTitle("添加提现银行卡");
+        setPageTitle("添加银行卡");
     }
 
     /**
@@ -443,7 +454,7 @@ public class RichesBankAddActivity extends CTBaseActivity
     private void requestAddBank()
     {
         String bank = mBankSpinner.getText().toString().trim();
-        String account = mBankNoEdit.getText().toString().trim().replaceAll(" ","");
+        mBankNo = mBankNoEdit.getText().toString().trim().replaceAll(" ","");
         String place = mProvinceSpinner.getText().toString().trim() + mCitySpinner.getText().toString().trim();
         String branch = mBranchEdit.getText().toString().trim();
 
@@ -455,7 +466,7 @@ public class RichesBankAddActivity extends CTBaseActivity
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("cardholder", mFullName);
             jsonObject.put("bank", bank);
-            jsonObject.put("account", account);
+            jsonObject.put("account", mBankNo);
             jsonObject.put("place", place);
             jsonObject.put("branch", branch);
             params.put("data", jsonObject.toString());
@@ -474,22 +485,81 @@ public class RichesBankAddActivity extends CTBaseActivity
     public void onSuccess(String content, Object object, int reqType)
     {
         super.onSuccess(content, object, reqType);
-        try
-        {
-            JSONObject json = new JSONObject(content);
-            String errorCode = json.getString("errcode");
+        if(reqType == HttpRequst.REQ_TYPE_ADDBANK) {
+            try {
+                JSONObject json = new JSONObject(content);
+                String errorCode = json.getString("errcode");
 
-            Toast.makeText(this,AppCfg.MAP_MSG_ERROR.get(errorCode), Toast.LENGTH_LONG).show();
-        }
-        catch (Exception e)
-        {
+                Toast.makeText(this, AppCfg.MAP_MSG_ERROR.get(errorCode), Toast.LENGTH_LONG).show();
+                if (errorCode.equals("1")) {
+                    changeDefaultRequest();
+                }
+            } catch (Exception e) {
 
+            }
         }
+        else if(reqType == HttpRequst.REQ_TYPE_BANKCARD)
+        {
+            BankCardEntity entity = (BankCardEntity) object;
+            mUserInfoEntity.setBankCardEntity(entity);
+            ACache.get(this).put("userinfo", mUserInfoEntity);
+
+            finish();
+            if(mURLType == 0)
+            {
+                final Intent intent = new Intent(this, RichesBankActivity.class);
+                startActivity(intent);
+            }
+            else if(mURLType == 1)
+            {
+                final Intent intent = new Intent(this, RichesRechargePage.class);
+                startActivity(intent);
+            }
+            else if(mURLType == 2)
+            {
+                final Intent intent = new Intent(this, RichesWithdrawActivity.class);
+                startActivity(intent);
+            }
+        }
+        else if(reqType == HttpRequst.REQ_TYPE_CHANGEBANK)
+        {
+            initBankListRequest();
+        }
+
     }
 
     public void onFailure(Throwable error, String content, int reqType)
     {
         super.onFailure(error, content, reqType);
         Toast.makeText(this,"内部错误", Toast.LENGTH_LONG).show();
+    }
+
+    private void initBankListRequest()
+    {
+        String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_BANKCARD);
+        sendRequest(HttpRequst.REQ_TYPE_BANKCARD,
+                url,
+                mParams,
+                getAsyncClient(), false);
+    }
+
+
+    //添加后立即设置银行卡
+    private void changeDefaultRequest()
+    {
+        try {
+            String url = HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_CHANGEBANK);
+
+            RequestParams params = new RequestParams();
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("account", mBankNo);
+            params.put("data", jsonObject.toString());
+
+            sendRequest(HttpRequst.REQ_TYPE_CHANGEBANK, url, params, getAsyncClient(), false);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 }

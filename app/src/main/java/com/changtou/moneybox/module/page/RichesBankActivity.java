@@ -17,7 +17,6 @@ import com.changtou.moneybox.common.widget.swipeMenuListView.SwipeMenu;
 import com.changtou.moneybox.common.widget.swipeMenuListView.SwipeMenuCreator;
 import com.changtou.moneybox.common.widget.swipeMenuListView.SwipeMenuItem;
 import com.changtou.moneybox.common.widget.swipeMenuListView.SwipeMenuListView;
-import com.changtou.moneybox.module.CTMoneyApplication;
 import com.changtou.moneybox.module.adapter.BankCardAdapter;
 import com.changtou.moneybox.module.entity.BankCardEntity;
 import com.changtou.moneybox.module.entity.UserInfoEntity;
@@ -27,6 +26,8 @@ import org.json.JSONObject;
 
 
 import java.util.Map;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 
 /**
@@ -44,7 +45,11 @@ public class RichesBankActivity extends CTBaseActivity
 
     private boolean isCertify = false;
 
+    private boolean isRecharge = false;
+
     private UserInfoEntity mUserInfoEntity = null;
+
+    private int mURLType = 0;
 
     /**
      * 银行基本信列表
@@ -59,6 +64,7 @@ public class RichesBankActivity extends CTBaseActivity
 
         mUserInfoEntity = (UserInfoEntity)ACache.get(this).getAsObject("userinfo");
         isCertify = mUserInfoEntity.getIdentycheck();
+        isRecharge = mUserInfoEntity.getIsRecharged();
 
         SwipeMenuCreator creator = new SwipeMenuCreator() {
             @Override
@@ -111,7 +117,14 @@ public class RichesBankActivity extends CTBaseActivity
                         break;
                     case 0:
                         //跟换默认银行卡
-                        changeDefaultRequest(position);
+                        if(isRecharge)
+                        {
+                            popuDailog();
+                        }
+                        else
+                        {
+                            changeDefaultRequest(position);
+                        }
                         break;
                 }
                 return false;
@@ -145,12 +158,23 @@ public class RichesBankActivity extends CTBaseActivity
         view.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (isCertify) {
-                    startActivity(intent3);
+                    if(!isRecharge)
+                    {
+                        intent3.putExtra("URLType",mURLType);
+                        startActivity(intent3);
+                    }
+                    else
+                    {
+                        popuDailog();
+                    }
                 } else {
                     Toast.makeText(RichesBankActivity.this, "请先进行实名认证！", Toast.LENGTH_LONG).show();
                 }
             }
         });
+
+        Intent intent = getIntent();
+        mURLType = intent.getIntExtra("URLType", 0);
 
         mBankInfoList = BaseApplication.getInstance().getBankInfoList();
     }
@@ -217,7 +241,7 @@ public class RichesBankActivity extends CTBaseActivity
      */
     public void onFailure(Throwable error, String content, int reqType)
     {
-        super.onFailure(error,content,  reqType);
+        super.onFailure(error, content, reqType);
     }
 
     /**
@@ -272,4 +296,48 @@ public class RichesBankActivity extends CTBaseActivity
             e.printStackTrace();
         }
     }
+
+    private void popuDailog() {
+        final SweetAlertDialog sad = new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE);
+        String str =
+                "为保障用户资金安全，首次充值成功后，该卡即为用户默认充值及提现银行卡，不可更改、删除。\n\n详情请致电客服：400-880-6270\n";
+
+        sad.setTitleText(str);
+        sad.setConfirmText("我知道啦");
+        sad.show();
+
+        sad.setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                sad.cancel();
+            }
+        });
+
+        sad.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+            @Override
+            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                sad.cancel();
+            }
+        });
+    }
+
+//    protected void onBackIcon()
+//    {
+//        super.onBackIcon();
+//        if(mURLType == 0)
+//        {
+//            BaseApplication.getInstance().cleanAllActivity();
+//            final Intent intent = new Intent(this, RichesSafeActivity.class);
+//            startActivity(intent);
+//        }
+//
+//    }
+//
+//    public void onBackPressed() {
+//        super.onBackPressed();
+//        if(mURLType == 0) {
+//            BaseApplication.getInstance().cleanAllActivity();
+//            final Intent intent = new Intent(this, RichesSafeActivity.class);
+//            startActivity(intent);
+//        }
+//    }
 }

@@ -110,9 +110,8 @@
         android:id="@+id/confirm_button_dklj"
         android:layout_width="fill_parent"
         android:layout_height="42dp"
-        android:layout_marginTop="10dp"
         android:orientation="horizontal"
-        android:background="@drawable/stroke_edit_fillpraent_top">
+        android:background="@drawable/stroke_edit_fillpraent_bottom">
 
         <TextView
             android:id="@+id/confirm_dklj"
@@ -158,7 +157,18 @@
     <LinearLayout android:layout_width="fill_parent"
         android:layout_height="@dimen/edit_height_normal"
         android:orientation="horizontal"
+        android:layout_marginTop="10dp"
         android:background="@drawable/stroke_edit_fillpraent">
+
+        <TextView
+            android:paddingLeft="20dp"
+            android:text="充值金额"
+            android:textSize="@dimen/font_size_navigation"
+            android:textColor="@color/font_black"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
         <EditText
             android:id="@+id/confirm_input_edit"
             android:layout_width="wrap_content"
@@ -205,6 +215,16 @@
             android:layout_marginLeft="5dp"
             android:textSize="@dimen/font_size_hint2"
             android:text="元"/>
+
+        <TextView
+            android:id="@+id/recharge_btn"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/ct_blue_fouce"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:textSize="@dimen/font_size_hint2"
+            android:text="充值"/>
 
     </LinearLayout>
 

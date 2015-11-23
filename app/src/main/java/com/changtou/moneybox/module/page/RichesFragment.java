@@ -91,6 +91,7 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
     private SpotsDialog mSpotsDialog = null;
 
     private View mExchangeGiftView = null;
+    private View mExchangeGiftView1 = null;
 
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -129,26 +130,53 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
                         break;
                     case 1:
 
-                        Toast.makeText(RichesFragment.this.getActivity(), "充值功能敬请期待", Toast.LENGTH_LONG).show();
-//                        final Intent intent2 = new Intent(RichesFragment.this.getActivity(), RichesRechargePage.class);
-//                        startActivity(intent2);
-
                         //先验证实名认证，在添加银行卡
+                        if(!mUserInfoEntity.getIdentycheck())
+                        {
+                            final Intent intent = new Intent(RichesFragment.this.getActivity(), RichesCertificationActivity.class);
+                            intent.putExtra("URLType", 1);
+                            startActivity(intent);
+                        }
+                        else
+                        {
+                            BankCardEntity bank = mUserInfoEntity.getBankCardEntity();
 
+                            int len = bank.mList.size();
+                            if (len == 0) {
+                                final Intent intent = new Intent(RichesFragment.this.getActivity(), RichesBankAddActivity.class);
+                                intent.putExtra("URLType", 1);
+                                startActivity(intent);
+                            } else {
+                                final Intent intent = new Intent(RichesFragment.this.getActivity(), RichesRechargePage.class);
+                                startActivity(intent);
+                                //跳转到充值页面
+                            }
+                        }
 
                         break;
                     case 2:
 
-                        BankCardEntity bank = mUserInfoEntity.getBankCardEntity();
+                        //先验证实名认证，在添加银行卡
+                        if(!mUserInfoEntity.getIdentycheck())
+                        {
+                            final Intent intent = new Intent(RichesFragment.this.getActivity(), RichesCertificationActivity.class);
+                            intent.putExtra("URLType", 2);
+                            startActivity(intent);
+                        }
+                        else
+                        {
+                            BankCardEntity bank = mUserInfoEntity.getBankCardEntity();
 
-                        int len = bank.mList.size();
-                        if (len == 0) {
-                            Toast.makeText(RichesFragment.this.getActivity(), "请先添加取现银行卡", Toast.LENGTH_LONG).show();
-                            final Intent intent4 = new Intent(RichesFragment.this.getActivity(), RichesBankActivity.class);
-                            startActivity(intent4);
-                        } else {
-                            final Intent intent4 = new Intent(RichesFragment.this.getActivity(), RichesWithdrawActivity.class);
-                            startActivity(intent4);
+                            int len = bank.mList.size();
+                            if (len == 0) {
+                                final Intent intent = new Intent(RichesFragment.this.getActivity(), RichesBankAddActivity.class);
+                                intent.putExtra("URLType", 2);
+                                startActivity(intent);
+                            } else {
+                                final Intent intent = new Intent(RichesFragment.this.getActivity(), RichesWithdrawActivity.class);
+                                startActivity(intent);
+                                //跳转到充值页面
+                            }
                         }
 
                         break;
@@ -193,11 +221,51 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
         mAuthPhoneIV = (ImageView)view.findViewById(R.id.auth_phone_img);
         mAuthCardIV = (ImageView)view.findViewById(R.id.auth_card_img);
 
+        //添加认证按钮点击事件
+        //// TODO: 2015/11/23
+        mAuthIdcodeIV.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                final Intent intent = new Intent(RichesFragment.this.getActivity(), RichesCertificationActivity.class);
+                intent.putExtra("isCerfy", mUserInfoEntity.getIdentycheck());
+                startActivity(intent);
+            }
+        });
+
+        mAuthPhoneIV.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                final Intent intent = new Intent(RichesFragment.this.getActivity(), PdFrogetActivity.class);
+                intent.putExtra("pageType", 1);
+                intent.putExtra("isPhoneauth", mUserInfoEntity.getMobilecheck());
+                startActivity(intent);
+            }
+        });
+
+        mAuthCardIV.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                if(mUserInfoEntity.getIdentycheck())
+                {
+                    final Intent intent = new Intent(RichesFragment.this.getActivity(), RichesBankActivity.class);
+                    startActivity(intent);
+                }
+                else
+                {
+                    Toast.makeText(RichesFragment.this.getActivity(), "请先进行实名认证！", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
         mExchangeGiftView = view.findViewById(R.id.gift_click_layout);
+        mExchangeGiftView1 = view.findViewById(R.id.gift_click_layout1);
 
         if(mUserInfoEntity != null && !mUserInfoEntity.getCreatetime().equals(""))
         {
-            initRichesPage();
+                initRichesPage();
         }
 
         sHUD = SignInHUD.getInstance(this.getActivity());
@@ -216,15 +284,18 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
             }
         });
 
-        mExchangeGiftView.setOnClickListener(new View.OnClickListener()
+        mExchangeGiftView.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(RichesFragment.this.getActivity(), GiftExchangeActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        mExchangeGiftView1.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v)
             {
                 Intent intent = new Intent(RichesFragment.this.getActivity(), GiftExchangeActivity.class);
-//                intent.putExtra("details",mDetails);
-//                intent.putExtra("id",mProductId);
-//                intent.putExtra("type",mProductType);
-
                 startActivity(intent);
             }
         });
@@ -258,40 +329,52 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
 //
 //        isUpdate = false;
 
-        mSpotsDialog.cancel();
+        try {
+
+            mSpotsDialog.cancel();
 
 //        mMobileTextView.setText(mUserInfoEntity.getMobile());
-        String total = mUserInfoEntity.getTotalAssets();
-        total = total.replace(",", "");
-        if(total.equals("")) return;
+            String total = mUserInfoEntity.getTotalAssets();
+            total = total.replace(",", "");
+            if(total.equals("")) return;
 
-        mTouyuan = mUserInfoEntity.getTouYuan();
+            mTouyuan = mUserInfoEntity.getTouYuan();
 
-        mTotalAssetsTextView.showNumberWithAnimation(Float.parseFloat(total));
-        mTotalAssetsTextView.setText(mUserInfoEntity.getTotalAssets());
-        mInvestAssetsTextView.setText(mUserInfoEntity.getInvestAssets());
-        mProfitTextView.setText(mUserInfoEntity.getProfit());
-        mOverageTextView.setText(mUserInfoEntity.getOverage());
-        mGiftsTextView.setText(mUserInfoEntity.getGifts());
-        mTouYuanTextView.setText("" + mTouyuan);
+            mTotalAssetsTextView.showNumberWithAnimation(Float.parseFloat(total));
+            mTotalAssetsTextView.setText(mUserInfoEntity.getTotalAssets());
+            mInvestAssetsTextView.setText(mUserInfoEntity.getInvestAssets());
+            mProfitTextView.setText(mUserInfoEntity.getProfit());
+            mOverageTextView.setText(mUserInfoEntity.getOverage());
+            mGiftsTextView.setText(mUserInfoEntity.getGifts());
+            mTouYuanTextView.setText("" + mTouyuan);
 
-        if(mUserInfoEntity.getIdentycheck())
+            if(mUserInfoEntity.getIdentycheck())
+            {
+                mAuthIdcodeIV.setImageResource(R.mipmap.auth_idcode_true);
+            }
+
+            if(mUserInfoEntity.getMobilecheck())
+            {
+                mAuthPhoneIV.setImageResource(R.mipmap.auth_phone_true);
+            }
+
+            if( mUserInfoEntity.getBankCardEntity() != null && mUserInfoEntity.getBankCardEntity().mList != null) {
+                int cardSize = mUserInfoEntity.getBankCardEntity().mList.size();
+                if (cardSize > 0) {
+                    mAuthCardIV.setImageResource(R.mipmap.auth_card_true);
+                }
+            }
+
+            cache.put("fullname", mUserInfoEntity.getFullName());
+
+        }
+        catch (Exception e)
         {
-            mAuthIdcodeIV.setImageResource(R.mipmap.auth_idcode_true);
+            e.printStackTrace();
+            BaseApplication.getInstance().backToLoginPage();
         }
 
-        if(mUserInfoEntity.getMobilecheck())
-        {
-            mAuthPhoneIV.setImageResource(R.mipmap.auth_phone_true);
-        }
 
-        int cardSize = mUserInfoEntity.getBankCardEntity().mList.size();
-        if(cardSize > 0)
-        {
-            mAuthCardIV.setImageResource(R.mipmap.auth_card_true);
-        }
-
-        cache.put("fullname", mUserInfoEntity.getFullName());
     }
 
     public void onSuccess(String content, Object object, int reqType)
@@ -326,7 +409,7 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
             }
             catch (Exception e)
             {
-
+                e.printStackTrace();
             }
         }
 
@@ -341,11 +424,9 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
 
                 if(error == 0)
                 {
-//                    sHUD.show();
                     mTouYuanTextView.setText("" + mTouyuan);
-//                    Toast.makeText(this.getActivity(), "签到成功", Toast.LENGTH_LONG).show();
-//
-                    Toast toast = Toast.makeText(this.getActivity(), "", Toast.LENGTH_LONG);
+
+                    Toast toast = Toast.makeText(this.getActivity(), "", Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     LinearLayout toastView = (LinearLayout) toast.getView();
                     ImageView imageCodeProject = new ImageView(this.getActivity());
@@ -369,7 +450,7 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
             }
             catch (Exception e)
             {
-
+                e.printStackTrace();
             }
         }
 
@@ -421,7 +502,7 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
     }
 
     /**
-     * 获取用户信息
+     * 初始化用户信息
      */
     private void getUserInfo()
     {

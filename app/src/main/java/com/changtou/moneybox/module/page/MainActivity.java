@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -42,6 +43,8 @@ public class MainActivity extends CTBaseActivity {
     private HomeFragment mHomeFragment = null;
 
     private RichesFragment mRichesFragment = null;
+
+    private long exitTime = 0;
 
     /**
      * @param bundle 保存页面参数
@@ -82,6 +85,11 @@ public class MainActivity extends CTBaseActivity {
         {
             mViewpager.setCurrentItem(2);
             switchNavBar(2);
+        }
+        else if(login_state == 2)
+        {
+            mViewpager.setCurrentItem(1);
+            switchNavBar(1);
         }
 
         UpdateConfig.setDebug(true);
@@ -204,7 +212,7 @@ public class MainActivity extends CTBaseActivity {
 //        }
 //        else
 //        {
-        super.onBackPressed();
+//        super.onBackPressed();
 //        }
     }
 
@@ -229,5 +237,26 @@ public class MainActivity extends CTBaseActivity {
         });
 
         UmengUpdateAgent.update(this);
+    }
+
+
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN)
+        {
+            if((System.currentTimeMillis()-exitTime) > 2000)
+            {
+                Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
+                exitTime = System.currentTimeMillis();
+            }
+            else
+            {
+                finish();
+                BaseApplication.getInstance().AppExit();
+                System.exit(0);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

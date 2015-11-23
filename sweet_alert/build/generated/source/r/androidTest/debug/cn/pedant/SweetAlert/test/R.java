@@ -1459,16 +1459,18 @@ containing a value of this type.
         public static final int abc_textfield_search_default_mtrl_alpha=0x7f020031;
         public static final int abc_textfield_search_material=0x7f020032;
         public static final int blue_button_background=0x7f020033;
-        public static final int dialog_background=0x7f020034;
-        public static final int error_center_x=0x7f020035;
-        public static final int error_circle=0x7f020036;
-        public static final int gray_button_background=0x7f020037;
-        public static final int ic_launcher=0x7f020038;
-        public static final int red_button_background=0x7f020039;
-        public static final int success_bow=0x7f02003a;
-        public static final int success_circle=0x7f02003b;
-        public static final int warning_circle=0x7f02003c;
-        public static final int warning_sigh=0x7f02003d;
+        public static final int cancal_button=0x7f020034;
+        public static final int dialog_background=0x7f020035;
+        public static final int error_center_x=0x7f020036;
+        public static final int error_circle=0x7f020037;
+        public static final int gray_button_background=0x7f020038;
+        public static final int ic_launcher=0x7f020039;
+        public static final int red_button_background=0x7f02003a;
+        public static final int success_bow=0x7f02003b;
+        public static final int success_circle=0x7f02003c;
+        public static final int warning_circle=0x7f02003d;
+        public static final int warning_sigh=0x7f02003e;
+        public static final int warning_sign_custom=0x7f02003f;
     }
     public static final class id {
         public static final int action_bar=0x7f0b0036;
@@ -1491,7 +1493,7 @@ containing a value of this type.
         public static final int cancel_button=0x7f0b0052;
         public static final int checkbox=0x7f0b002e;
         public static final int collapseActionView=0x7f0b0011;
-        public static final int confirm_button=0x7f0b0054;
+        public static final int confirm_button=0x7f0b0053;
         public static final int content_text=0x7f0b0050;
         public static final int custom_image=0x7f0b0045;
         public static final int decor_content_parent=0x7f0b0034;
@@ -1525,7 +1527,6 @@ containing a value of this type.
         public static final int progress_horizontal=0x7f0b0020;
         public static final int radio=0x7f0b0030;
         public static final int riches_line1=0x7f0b0051;
-        public static final int riches_line2=0x7f0b0053;
         public static final int search_badge=0x7f0b003a;
         public static final int search_bar=0x7f0b0039;
         public static final int search_button=0x7f0b003b;

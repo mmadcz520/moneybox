@@ -128,6 +128,7 @@
         <activity
             android:name=".module.page.RichesBankActivity"
             android:exported="false"
+            android:launchMode="singleTask"
             android:theme="@style/ActivityTheme_Light"></activity>
         <activity
             android:name=".module.page.RichesWithdrawActivity"
@@ -195,6 +196,34 @@
             android:theme="@style/ActivityTheme_Light"></activity>
         <activity
             android:name=".module.page.PhoneAuthActivity"
+            android:exported="false"
+            android:theme="@style/ActivityTheme_Light"></activity>
+        <activity
+            android:name=".module.page.RechargeRecordActivity"
+            android:exported="false"
+            android:theme="@style/ActivityTheme_Light"></activity>
+        <activity
+            android:name=".module.page.RichesRechargeSuccPage"
+            android:exported="false"
+            android:theme="@style/ActivityTheme_Light"></activity>
+
+        <activity
+            android:name=".module.page.WithdrawRecordActivity"
+            android:exported="false"
+            android:theme="@style/ActivityTheme_Light"></activity>
+        <activity
+        android:name=".module.page.WithdrawSuccPage"
+        android:exported="false"
+        android:theme="@style/ActivityTheme_Light"></activity>
+
+        <activity
+            android:name=".module.page.RechargeBankListPage"
+            android:exported="false"
+            android:theme="@style/ActivityTheme_Light"></activity>
+
+
+        <activity
+            android:name=".module.page.InvestmentSuccPage"
             android:exported="false"
             android:theme="@style/ActivityTheme_Light"></activity>
 
