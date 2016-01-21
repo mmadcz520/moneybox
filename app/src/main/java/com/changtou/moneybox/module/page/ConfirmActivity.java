@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,8 +31,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
  * @author zhoulongfei
  * @since 2015-04-17
  */
-public class ConfirmActivity extends CTBaseActivity
-{
+public class ConfirmActivity extends CTBaseActivity {
     //投资详情确认
     private ListView mConfirmDetails = null;
 
@@ -46,69 +47,99 @@ public class ConfirmActivity extends CTBaseActivity
 
     private EditText mNumInput = null;
 
-    private int touyuan = 10;
+    private int touyuan = 0;
 
     private int mSyLijin = 0;
 
     private TextView mRechargeBtn = null;
 
-    private String[] mError = {"投资成功", "参数为空", "不存在该产品",  " 产品类型参数错误",
-                "用户ID参数错误", "产品ID参数错误", "投资金额参数错误", "不存在该用户",
-                "找不到原始转让产品", "投资必须是投资金额的整数倍", "已经不是新手不能投资新手标",
-                "此项目为专属项目", "投资额不能小于起投金额", "该项目融资已满或者尚未发布",
-                "余额不足", "输入金额大于项目剩余金额", " 系统错误", "参数名错误", " 产品不在可投资时间内"};
+    private RelativeLayout mRLLayout = null;
+
+    private TextView mJiaXiTextView = null;
+
+    private String mJiaXiCode = "";
+
+    private String mBadgeid = "";
+
+    private String[] mError = {"投资成功", "参数为空", "不存在该产品", " 产品类型参数错误",
+            "用户ID参数错误", "产品ID参数错误", "投资金额参数错误", "不存在该用户",
+            "找不到原始转让产品", "投资必须是投资金额的整数倍", "已经不是新手不能投资新手标",
+            "此项目为专属项目", "投资额不能小于起投金额", "该项目融资已满或者尚未发布",
+            "余额不足", "输入金额大于项目剩余金额", " 系统错误", "参数名错误", " 产品不在可投资时间内", "产品已过期"};
 
     private TextView mLinjinView = null;
 
-    protected void initView(Bundle savedInstanceState)
-    {
+    protected void initView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_confirm);
 
         Intent intent = getIntent();
         mContent = intent.getStringArrayExtra("details");
-        mProductType = intent.getIntExtra("type",0);
+        mProductType = intent.getIntExtra("type", 0);
         mProductId = intent.getStringExtra("id");
 
-        if(mContent == null) return;
+        if (mContent == null || mContent.length < 6) return;
 
-        TextView tx1 = (TextView)findViewById(R.id.confirm_product_name);
-        TextView tx2 = (TextView)findViewById(R.id.confirm_tzxq);
-        TextView tx3 = (TextView)findViewById(R.id.confirm_nhln);
-        TextView tx4 = (TextView)findViewById(R.id.confirm_ktje);
+        TextView tx1 = (TextView) findViewById(R.id.confirm_product_name);
+        TextView tx2 = (TextView) findViewById(R.id.confirm_tzxq);
+        TextView tx3 = (TextView) findViewById(R.id.confirm_nhln);
+        TextView tx4 = (TextView) findViewById(R.id.confirm_ktje);
+
+        TextView tx5 = (TextView) findViewById(R.id.confirm_qtje);
+        TextView tx6 = (TextView) findViewById(R.id.confirm_mrxg);
+
+        mRLLayout = (RelativeLayout)findViewById(R.id.confirm_ishasjiaxi);
 
         tx1.setText(mContent[0]);
         tx2.setText(mContent[1]);
         tx3.setText(mContent[2]);
         tx4.setText(mContent[3]);
+        tx5.setText(mContent[4]);
+        tx6.setText(mContent[5]);
 
-        mConfirmBtn = (Button)findViewById(R.id.confirm_button_do);
-        mNumInput = (EditText)findViewById(R.id.confirm_input_edit);
+        mConfirmBtn = (Button) findViewById(R.id.confirm_button_do);
+        mNumInput = (EditText) findViewById(R.id.confirm_input_edit);
         mNumInput.addTextChangedListener(mTextWatcher);
 
-        mLinjinView = (TextView)findViewById(R.id.confirm_lijin_num);
+        mLinjinView = (TextView) findViewById(R.id.confirm_lijin_num);
+
+        mJiaXiTextView = (TextView) mRLLayout.findViewById(R.id.confirm_jiaxi_text);
+        CheckBox isJiaXi = (CheckBox)mRLLayout.findViewById(R.id.confirm_jiaxi_checkbox);
+        isJiaXi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+            {
+                if(isChecked)
+                {
+                    mBadgeid = mJiaXiCode;
+                }
+                else
+                {
+                    mBadgeid = "";
+                }
+            }
+        });
 
         //显示余额
         UserInfoEntity userInfoEntity = (UserInfoEntity) ACache.get(this).getAsObject("userinfo");
         String overage = userInfoEntity.getOverage();
         String gift = String.valueOf(userInfoEntity.getGifts());
-         if(gift != null && !gift.equals(""))
-        {
-            mSyLijin = (int)Double.parseDouble(String.valueOf(userInfoEntity.getGifts()));
+        if (gift != null && !gift.equals("")) {
+            mSyLijin = (int) Double.parseDouble(String.valueOf(userInfoEntity.getGifts()));
         }
-        TextView textView = (TextView)findViewById(R.id.confirm_text_overage);
+        TextView textView = (TextView) findViewById(R.id.confirm_text_overage);
         textView.setText(overage);
 
         mDialog = new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE);
         mDialog.setConfirmText("确认");
         mDialog.setCancelText("继续投资");
 //        mDialog.setContentText("恭喜你您资成功!\n 获得" + touyuan + "个投圆");
-                mDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                    public void onClick(SweetAlertDialog sweetAlertDialog) {
-                        Intent intent = new Intent(ConfirmActivity.this, MainActivity.class);
-                        intent.putExtra("login_state", 1);
-                        ConfirmActivity.this.startActivity(intent);
-                    }
-                });
+        mDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                Intent intent = new Intent(ConfirmActivity.this, MainActivity.class);
+                intent.putExtra("login_state", 1);
+                ConfirmActivity.this.startActivity(intent);
+            }
+        });
 
         mDialog.setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
             public void onClick(SweetAlertDialog sweetAlertDialog) {
@@ -117,42 +148,48 @@ public class ConfirmActivity extends CTBaseActivity
         });
 
         View dklj = findViewById(R.id.confirm_button_dklj);
-        dklj.setOnClickListener(new View.OnClickListener()
-        {
+        dklj.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 popuDailog();
             }
         });
 
-        mRechargeBtn = (TextView)findViewById(R.id.recharge_btn);
-        mRechargeBtn.setOnClickListener(new View.OnClickListener()
+        mRechargeBtn = (TextView) findViewById(R.id.recharge_btn);
+        mRechargeBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(ConfirmActivity.this, RichesRechargePage.class);
+                intent.putExtra("urlType", 1);
+                startActivity(intent);
+            }
+        });
+
+        initHasJiaxi(mProductType, mProductId);
+
+        TextView ckxjView =  (TextView) findViewById(R.id.confirm_jiaxi_ckxj);
+        ckxjView.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v)
             {
-                Intent intent = new Intent(ConfirmActivity.this, RichesRechargePage.class);
-                intent.putExtra("urlType", 1);
+                Intent intent = new Intent(ConfirmActivity.this, WebActivity.class);
+                intent.putExtra("url", "https://m.changtounet.com/APP_web/jxtq_detail.html");
                 startActivity(intent);
             }
         });
     }
 
     @Override
-    protected int setPageType()
-    {
+    protected int setPageType() {
         return PAGE_TYPE_SUB;
     }
 
     @Override
-    protected void initData()
-    {
+    protected void initData() {
         setPageTitle("确认投资");
     }
 
     @Override
-    protected void initListener()
-    {
+    protected void initListener() {
         setOnClickListener(R.id.confirm_button_do);
     }
 
@@ -161,8 +198,7 @@ public class ConfirmActivity extends CTBaseActivity
      *
      * @param id
      */
-    public void treatClickEvent(int id)
-    {
+    public void treatClickEvent(int id) {
         mConfirmBtn.setEnabled(false);
         String mum = mNumInput.getEditableText().toString();
         postInvestRequest(mProductType, mProductId, mum);
@@ -170,28 +206,44 @@ public class ConfirmActivity extends CTBaseActivity
 
     public void onSuccess(String content, Object object, int reqType)
     {
-        if(reqType == HttpRequst.REQ_TYPE_INVEST)
-        {
-            try
-            {
+        if (reqType == HttpRequst.REQ_TYPE_INVEST) {
+            try {
                 mConfirmBtn.setEnabled(true);
 
                 JSONObject data = new JSONObject(content);
 
                 int result = data.getInt("result");
-                touyuan = data.getInt("touyuan");
 
-                if(result == 0)
-                {
-//                    mDialog.show();
+                if (result == 0) {
+//                    mDialog.show();、
+                    touyuan = data.getInt("touyuan");
                     Intent intent = new Intent(this, InvestmentSuccPage.class);
                     intent.putExtra("touyuan", String.valueOf(touyuan));
                     startActivity(intent);
+                } else {
+                    String errmsg = data.getString("errmsg");
+//                    int code = (result < mError.length) ? result : (mError.length - 1);
+                    Toast.makeText(this, errmsg, Toast.LENGTH_LONG).show();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        else if(reqType == HttpRequst.REQ_TYPE_ISHASJIAXI)
+        {
+            try
+            {
+                JSONObject data = new JSONObject(content);
+                int errcode = data.getInt("errcode");
+                if(errcode == 0)
+                {
+                    mRLLayout.setVisibility(View.GONE);
                 }
                 else
                 {
-                    int code = (result < mError.length) ? result : (mError.length - 1);
-                    Toast.makeText(this, mError[code], Toast.LENGTH_LONG).show();
+                    mJiaXiCode = data.getString("id");
+                    String msg = data.getString("msg");
+                    mJiaXiTextView.setText(msg);
                 }
             }
             catch (Exception e)
@@ -202,8 +254,7 @@ public class ConfirmActivity extends CTBaseActivity
         super.onSuccess(content, object, reqType);
     }
 
-    public void onFailure(Throwable error, String content, int reqType)
-    {
+    public void onFailure(Throwable error, String content, int reqType) {
         Toast.makeText(this, "网络异常", Toast.LENGTH_LONG).show();
         super.onFailure(error, content, reqType);
     }
@@ -211,8 +262,7 @@ public class ConfirmActivity extends CTBaseActivity
     /**
      * 弹出抵扣礼金提示框
      */
-    private void popuDailog()
-    {
+    private void popuDailog() {
         final SweetAlertDialog sad = new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE);
         sad.setTitleText("每投资1000元,5元礼金变为5元现金\n");
         sad.setConfirmText("我知道啦");
@@ -220,16 +270,14 @@ public class ConfirmActivity extends CTBaseActivity
         sad.show();
 
         sad.setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
-            public void onClick(SweetAlertDialog sweetAlertDialog)
-            {
+            public void onClick(SweetAlertDialog sweetAlertDialog) {
                 sad.cancel();
             }
         });
 
         sad.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
             @Override
-            public void onClick(SweetAlertDialog sweetAlertDialog)
-            {
+            public void onClick(SweetAlertDialog sweetAlertDialog) {
                 sad.cancel();
             }
         });
@@ -252,30 +300,23 @@ public class ConfirmActivity extends CTBaseActivity
         }
 
         @Override
-        public void afterTextChanged(Editable s)
-        {
+        public void afterTextChanged(Editable s) {
             String str = s.toString();
             int num;
-            try
-            {
+            try {
                 num = Integer.parseInt(str);
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 num = 0;
             }
 
-            if(num >= 100)
-            {
+            if (num >= 100) {
                 mConfirmBtn.setEnabled(true);
-            }
-            else
-            {
+            } else {
                 mConfirmBtn.setEnabled(false);
             }
 
             int sylijin = mSyLijin;
-            int lijin = (num/1000*5)> sylijin ? sylijin:((num/1000) * 5);
+            int lijin = (num / 1000 * 5) > sylijin ? sylijin : ((num / 1000) * 5);
             mLinjinView.setText(String.valueOf(lijin));
         }
     };
@@ -283,10 +324,8 @@ public class ConfirmActivity extends CTBaseActivity
     /**
      * 投资请求
      */
-    private void postInvestRequest(int type, String projid, String money)
-    {
-        try
-        {
+    private void postInvestRequest(int type, String projid, String money) {
+        try {
             String url = HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_INVEST);
 
             RequestParams params = new RequestParams();
@@ -295,13 +334,32 @@ public class ConfirmActivity extends CTBaseActivity
             jsonObject.put("type", type);
             jsonObject.put("projid", projid);
             jsonObject.put("investmoney", money);
+            jsonObject.put("badgeid", mBadgeid);
             jsonObject.put("ly", "android");
             params.put("data", jsonObject.toString());
 
             sendRequest(HttpRequst.REQ_TYPE_INVEST, url, params, getAsyncClient(), false);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        catch (Exception e)
-        {
+    }
+
+    /**
+     * 投资请求
+     */
+    private void initHasJiaxi(int type, String projid) {
+        try {
+            String url = HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_ISHASJIAXI);
+
+            RequestParams params = new RequestParams();
+
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("type", type);
+            jsonObject.put("pid", projid);
+            params.put("data", jsonObject.toString());
+
+            sendRequest(HttpRequst.REQ_TYPE_ISHASJIAXI, url, params, getAsyncClient(), false);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
