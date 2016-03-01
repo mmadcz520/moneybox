@@ -71,6 +71,7 @@ public class ProductEntity extends BaseEntity {
         public String createtime;
         public String jd;
         public String syje;
+        public double lijininterest = 0;
 
         public void paser(JSONObject json) throws Exception {
             id = json.optString("id");
@@ -85,6 +86,7 @@ public class ProductEntity extends BaseEntity {
             createtime = json.optString("createtime");
             jd = json.optString("jd");
             syje = json.optString("syje");
+            lijininterest = json.optDouble("lijininterest");
         }
     }
 }

@@ -5,11 +5,8 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.changtou.moneybox.R;
-import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.http.async.RequestParams;
-import com.changtou.moneybox.common.utils.ACache;
 import com.changtou.moneybox.module.http.HttpRequst;
-import com.changtou.moneybox.module.service.ReadSMsTool;
 import com.changtou.moneybox.module.widget.ExEditView;
 
 import org.json.JSONObject;
@@ -32,8 +29,6 @@ public class RegisterActivity extends CTBaseActivity
         setContentView(R.layout.riches_register_layout);
 
         mPhoneNum = (ExEditView)findViewById(R.id.register_phone_no);
-
-
     }
 
     protected int setPageType()
@@ -47,7 +42,6 @@ public class RegisterActivity extends CTBaseActivity
         setOnClickListener(R.id.register_btn);
         setOnClickListener(R.id.register_zhucexieyi);
         setOnClickListener(R.id.register_guanlixieyi);
-
     }
 
     public void treatClickEvent(int id)
@@ -133,7 +127,6 @@ public class RegisterActivity extends CTBaseActivity
             {
                 Toast.makeText(this, "内部错误", Toast.LENGTH_LONG).show();
             }
-
         }
 
         if(reqType == HttpRequst.REQ_TYPE_ISREG)
@@ -185,7 +178,6 @@ public class RegisterActivity extends CTBaseActivity
             e.printStackTrace();
         }
     }
-
 
     /**
      * 是否是注册过的

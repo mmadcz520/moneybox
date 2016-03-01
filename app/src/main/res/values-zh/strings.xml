@@ -18,7 +18,8 @@
 
     <!-- home page-->
     <string name="invest_total">累计投资</string>
-    <string name="income_total">累计赚取</string>
+    <string name="income_total">累计为用户赚取(元)</string>
+    <string name="income_bfj">风险备付金(元)</string>
 
     <!-- 手势密码-->
     <string name="pd_gesture_set">为了账号安全, 请设置手势密码</string>

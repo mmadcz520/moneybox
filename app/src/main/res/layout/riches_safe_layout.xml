@@ -85,15 +85,6 @@
         android_custom:ex_icon="@mipmap/riches_safe_lock"
         android_custom:ex_title="密码管理"/>
 
-    <TextView android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:paddingLeft="25dp"
-        android:paddingRight="25dp"
-        android:textColor="@color/font_black"
-        android:textSize="@dimen/font_size_normal"
-        android:text="@string/safe_page_prompt"/>
-    
     <Button
         android:id="@+id/safe_page_quit"
         android:layout_width="fill_parent"

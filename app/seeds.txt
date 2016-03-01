@@ -3588,8 +3588,10 @@ com.changtou.moneybox.R$id: int confirm_ktje
 com.changtou.moneybox.R$id: int confirm_lijin_num
 com.changtou.moneybox.R$id: int confirm_lijin_yuan
 com.changtou.moneybox.R$id: int confirm_lv_text
+com.changtou.moneybox.R$id: int confirm_mrxg
 com.changtou.moneybox.R$id: int confirm_nhln
 com.changtou.moneybox.R$id: int confirm_product_name
+com.changtou.moneybox.R$id: int confirm_qtje
 com.changtou.moneybox.R$id: int confirm_text_overage
 com.changtou.moneybox.R$id: int confirm_tzxq
 com.changtou.moneybox.R$id: int content
@@ -3631,6 +3633,7 @@ com.changtou.moneybox.R$id: int exchange_touyuan_num
 com.changtou.moneybox.R$id: int exchange_touyuan_pop
 com.changtou.moneybox.R$id: int expand_activities_button
 com.changtou.moneybox.R$id: int expanded_menu
+com.changtou.moneybox.R$id: int fh
 com.changtou.moneybox.R$id: int filter_edit
 com.changtou.moneybox.R$id: int fl_inner
 com.changtou.moneybox.R$id: int flag_modify_0
@@ -3693,6 +3696,7 @@ com.changtou.moneybox.R$id: int imageview_progress_spinner
 com.changtou.moneybox.R$id: int imageview_success
 com.changtou.moneybox.R$id: int invest_item_endtime
 com.changtou.moneybox.R$id: int invest_item_expectin
+com.changtou.moneybox.R$id: int invest_item_jxzq
 com.changtou.moneybox.R$id: int invest_item_maturity
 com.changtou.moneybox.R$id: int invest_item_rate
 com.changtou.moneybox.R$id: int invest_item_starttime
@@ -3813,6 +3817,7 @@ com.changtou.moneybox.R$id: int pull_to_refresh_sub_text
 com.changtou.moneybox.R$id: int pull_to_refresh_text
 com.changtou.moneybox.R$id: int quick_recharge_btn
 com.changtou.moneybox.R$id: int radio
+com.changtou.moneybox.R$id: int recharge_btn
 com.changtou.moneybox.R$id: int recharge_list_memo
 com.changtou.moneybox.R$id: int recharge_list_money
 com.changtou.moneybox.R$id: int recharge_list_state
@@ -3851,6 +3856,7 @@ com.changtou.moneybox.R$id: int riches_line3
 com.changtou.moneybox.R$id: int riches_ll_touyuan
 com.changtou.moneybox.R$id: int riches_more
 com.changtou.moneybox.R$id: int riches_pro_phonenum
+com.changtou.moneybox.R$id: int riches_recharge_banklist
 com.changtou.moneybox.R$id: int riches_recharge_idcode
 com.changtou.moneybox.R$id: int riches_recharge_name
 com.changtou.moneybox.R$id: int riches_recharge_number
@@ -3973,8 +3979,11 @@ com.changtou.moneybox.R$id: int wednesday
 com.changtou.moneybox.R$id: int withText
 com.changtou.moneybox.R$id: int withdraw_list_memo
 com.changtou.moneybox.R$id: int withdraw_list_money
+com.changtou.moneybox.R$id: int withdraw_list_sjaccount
+com.changtou.moneybox.R$id: int withdraw_list_sjaccount_yuan
 com.changtou.moneybox.R$id: int withdraw_list_state
 com.changtou.moneybox.R$id: int withdraw_list_time
+com.changtou.moneybox.R$id: int withdraw_list_tip
 com.changtou.moneybox.R$id: int withdraw_succ_btn_1
 com.changtou.moneybox.R$id: int withdraw_succ_btn_2
 com.changtou.moneybox.R$id: int wrap_content
@@ -4074,6 +4083,7 @@ com.changtou.moneybox.R$layout: int riches_phonelist_item
 com.changtou.moneybox.R$layout: int riches_phonelist_layout
 com.changtou.moneybox.R$layout: int riches_phonelist_overlay
 com.changtou.moneybox.R$layout: int riches_promotion_layout
+com.changtou.moneybox.R$layout: int riches_recharge_banklist
 com.changtou.moneybox.R$layout: int riches_recharge_item1
 com.changtou.moneybox.R$layout: int riches_recharge_item2
 com.changtou.moneybox.R$layout: int riches_recharge_item3
@@ -4114,6 +4124,7 @@ com.changtou.moneybox.R$layout: int widget_draw_pwd
 com.changtou.moneybox.R$layout: int widget_ex_imageswitcher
 com.changtou.moneybox.R$layout: int windows_popupwindow
 com.changtou.moneybox.R$layout: int withdraw_succ_layout
+com.changtou.moneybox.R$mipmap: int an_hui
 com.changtou.moneybox.R$mipmap: int auth_card_false
 com.changtou.moneybox.R$mipmap: int auth_card_true
 com.changtou.moneybox.R$mipmap: int auth_idcode_false
@@ -4155,6 +4166,9 @@ com.changtou.moneybox.R$mipmap: int navbar_user
 com.changtou.moneybox.R$mipmap: int product_empty
 com.changtou.moneybox.R$mipmap: int product_error
 com.changtou.moneybox.R$mipmap: int product_tag
+com.changtou.moneybox.R$mipmap: int recharge_popu_1
+com.changtou.moneybox.R$mipmap: int recharge_popu_2
+com.changtou.moneybox.R$mipmap: int recharge_popu_banklist
 com.changtou.moneybox.R$mipmap: int recharge_succ_icon
 com.changtou.moneybox.R$mipmap: int riches_bank_delete
 com.changtou.moneybox.R$mipmap: int riches_bank_jianhang
@@ -5113,6 +5127,12 @@ com.changtou.moneybox.common.utils.PatchInfo: java.lang.String getPatchDownloadU
 com.changtou.moneybox.common.utils.PatchInfo: void setPatchDownloadUrl(java.lang.String)
 com.changtou.moneybox.common.utils.PatchInfo: java.lang.String getPatchHash()
 com.changtou.moneybox.common.utils.PatchInfo: void setPatchHash(java.lang.String)
+com.changtou.moneybox.common.utils.RiseNumberTextView
+com.changtou.moneybox.common.utils.RiseNumberTextView: RiseNumberTextView(android.content.Context)
+com.changtou.moneybox.common.utils.RiseNumberTextView: RiseNumberTextView(android.content.Context,android.util.AttributeSet)
+com.changtou.moneybox.common.utils.RiseNumberTextView: RiseNumberTextView(android.content.Context,android.util.AttributeSet,int)
+com.changtou.moneybox.common.utils.RiseNumberTextView: void setDuration(long)
+com.changtou.moneybox.common.utils.RiseNumberTextView: void setOnEndListener(com.changtou.moneybox.common.utils.RiseNumberTextView$EndListener)
 com.changtou.moneybox.common.utils.SerializableCookie
 com.changtou.moneybox.common.utils.SerializableCookie: long serialVersionUID
 com.changtou.moneybox.common.utils.SerializableCookie: SerializableCookie(org.apache.http.cookie.Cookie)
@@ -5267,6 +5287,8 @@ com.changtou.moneybox.module.page.ProductDetailsMorePage$InvestorPage
 com.changtou.moneybox.module.page.ProductDetailsMorePage$RiskControlPage
 com.changtou.moneybox.module.page.ProductFragment
 com.changtou.moneybox.module.page.ProductFragment$SubPage
+com.changtou.moneybox.module.page.RechargeBankListPage
+com.changtou.moneybox.module.page.RechargeBankListPage: RechargeBankListPage()
 com.changtou.moneybox.module.page.RechargeRecordActivity
 com.changtou.moneybox.module.page.RechargeRecordActivity: RechargeRecordActivity()
 com.changtou.moneybox.module.page.RecordActivity

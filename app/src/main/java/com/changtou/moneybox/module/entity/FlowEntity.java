@@ -55,6 +55,10 @@ public class FlowEntity extends BaseEntity implements Serializable
         public String received = null;
         public String time = null;
 
+        public String zsy = null;
+
+        public String zhb = null;
+
         public ArrayList<DayEntity> mDay = null;
 
         public void paser(JSONObject json) throws Exception
@@ -63,6 +67,8 @@ public class FlowEntity extends BaseEntity implements Serializable
             dueIn = json.getString("dueIn");
             received = json.getString("received");
             time = json.getString("time");
+            zsy = json.getString("zsy");
+            zhb = json.getString("zhb");
 
             JSONArray days = json.getJSONArray("days");
             mDay = new ArrayList<>();

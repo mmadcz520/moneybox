@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,7 +60,8 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
  * <p/>
  * Created by Jone on 2015/9/2.
  */
-public class RichesRechargePage extends CTBaseActivity {
+public class RichesRechargePage extends CTBaseActivity
+{
     private ViewPager mViewPager = null;
     private SlidingTabLayout mSlidingTabLayout;
 
@@ -352,6 +352,7 @@ public class RichesRechargePage extends CTBaseActivity {
             }
             else {
                 try {
+
                     JSONObject jsObj = new JSONObject(content);
                     JSONObject data = jsObj.getJSONObject("data");
                     int errcode = jsObj.getInt("errcode");
@@ -382,7 +383,6 @@ public class RichesRechargePage extends CTBaseActivity {
         }
 
         public void onFailure(Throwable error, String content, int reqType) {
-            Log.e("CT_MONEY", "dsdsadsads" + error);
         }
 
         /**
@@ -397,7 +397,6 @@ public class RichesRechargePage extends CTBaseActivity {
         public void initInvestList(LinkedList data) {
 
         }
-
 
         /**
          * 充值 按钮

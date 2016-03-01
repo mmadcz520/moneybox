@@ -29,73 +29,6 @@
             android:background="@color/ct_white"
             android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:id="@+id/homepage_ll_invest"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_weight="2"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_gravity="bottom"
-                        android:gravity="center"
-                        android:text="￥"
-                        android:textColor="@color/font_black"
-                        android:textSize="@dimen/font_size_normal" />
-
-                    <com.changtou.moneybox.module.widget.CountView
-                        android:id="@+id/homepage_investsum"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="bottom"
-                        android:gravity="bottom"
-                        android:text="0"
-                        android:textColor="@color/ct_blue"
-                        android:textSize="@dimen/font_size_number" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_weight="1"
-                    android:baselineAligned="true"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="17dp"
-                        android:layout_height="17dp"
-                        android:layout_gravity="top"
-                        android:gravity="top"
-                        android:src="@mipmap/home_icon_income1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="top"
-                        android:gravity="top"
-                        android:paddingLeft="4dp"
-                        android:text="@string/invest_total"
-                        android:textColor="@color/font_black"
-                        android:textSize="@dimen/font_size_normal" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <View
-                android:layout_width="1px"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/ct_divide_line"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -157,6 +90,77 @@
                         android:textSize="@dimen/font_size_normal" />
                 </LinearLayout>
             </LinearLayout>
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/ct_divide_line"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/homepage_ll_invest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="2"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_gravity="bottom"
+                        android:gravity="center"
+                        android:text="￥"
+                        android:textColor="@color/font_black"
+                        android:textSize="@dimen/font_size_normal" />
+
+                    <com.changtou.moneybox.module.widget.CountView
+                        android:id="@+id/homepage_investsum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:gravity="bottom"
+                        android:text="0"
+                        android:textColor="@color/ct_blue"
+                        android:textSize="@dimen/font_size_number" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:baselineAligned="true"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="17dp"
+                        android:layout_height="17dp"
+                        android:layout_gravity="top"
+                        android:gravity="top"
+                        android:src="@mipmap/home_icon_income1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top"
+                        android:gravity="top"
+                        android:paddingLeft="4dp"
+                        android:text="@string/income_bfj"
+                        android:textColor="@color/font_black"
+                        android:textSize="@dimen/font_size_normal" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+
         </LinearLayout>
 
         <View

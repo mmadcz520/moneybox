@@ -3,10 +3,12 @@ package com.changtou.moneybox.module.page;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -134,8 +136,9 @@ public class ProductDetailsActivity extends CTBaseActivity
         {
             super.onSuccess(content, object, reqType);
             ProductDetailsEntity entity = (ProductDetailsEntity) object;
-            String[] keys = {"项目名称", "还款方式", "还款时间"};
-            String[] mValues = {entity.projectname, entity.hkfs, entity.hksj};
+
+            String[] keys = {"项目名称", "还款方式", "还款时间", "服务费"};
+            String[] mValues = {entity.projectname, entity.hkfs, entity.hksj, entity.fwf};
             mAdapter.setData(keys, mValues);
 
             float jd;
@@ -148,12 +151,18 @@ public class ProductDetailsActivity extends CTBaseActivity
                 jd = 0.0f;
             }
             mDetailsPage.getProgressBar().setProgress((int)jd);
-            mDetailsPage.getInvestPercent().showPercentWithAnimation((int)jd);
+            mDetailsPage.getInvestPercent().showPercentWithAnimation((int) jd);
             mDetailsPage.getIcomeText().setText(entity.nhsy);
             mDetailsPage.getTagTextView().setText("%");
             mDetailsPage.getInvestNum().setText("￥" + entity.syje + "/" + entity.rzje);
             mDetailsPage.getTimeLimit().setText(entity.cpqx);
-            mDetailsPage.getQtjeTextView().setText(entity.qtje + "起投 | " + "每人限购100万元");
+            mDetailsPage.getQtjeTextView().setText(entity.qtje + "起投 | " + "融资金额" + entity.rzje);
+            mDetailsPage.getLiJinTextView().setText(entity.lijininterest + "%礼金变现");
+
+            if(entity.lijininterest > 0)
+            {
+                mDetailsPage.getLijinLayout().setVisibility(View.VISIBLE);
+            }
 
             mAgreementPage.initTzListData(entity.mTzList);
             if(mProductType == 2 )
@@ -182,11 +191,14 @@ public class ProductDetailsActivity extends CTBaseActivity
                 mAgreementPage.initContractCTB(contractList, entity.mDetailsCTB.rzje, mProductId);
             }
 
-            mDetails = new String[4];
+            mDetails = new String[6];
             mDetails[0] = entity.projectname;
             mDetails[1] = entity.cpqx;
+
             mDetails[2] = entity.nhsy + "%";
-            mDetails[3] = entity.syje;
+            mDetails[3] = entity.syje_money;
+            mDetails[4] = entity.qtje;
+            mDetails[5] = entity.xg;
 
             if(mState == null)
             mConfirmBtn.setEnabled(true);
@@ -211,6 +223,10 @@ public class ProductDetailsActivity extends CTBaseActivity
 
         private TextView mQtjeTextView = null;   //起投金额
 
+        private TextView mLijinTextView = null;
+
+        private FrameLayout mLijinLayout = null;
+
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
 
@@ -225,6 +241,10 @@ public class ProductDetailsActivity extends CTBaseActivity
             mInvestNum = (TextView)v.findViewById(R.id.invest_progress_num);
 
             mQtjeTextView = (TextView)v.findViewById(R.id.invest_progress_qtje);
+
+            mLijinTextView = (TextView)v.findViewById(R.id.homepage_invest_lijininterest);
+
+            mLijinLayout = (FrameLayout)v.findViewById(R.id.homepage_invest_lijinlayout);
 
             return v;
         }
@@ -267,6 +287,16 @@ public class ProductDetailsActivity extends CTBaseActivity
         public TextView getQtjeTextView()
         {
             return mQtjeTextView;
+        }
+
+        public TextView getLiJinTextView()
+        {
+            return mLijinTextView;
+        }
+
+        public FrameLayout getLijinLayout()
+        {
+            return mLijinLayout;
         }
     }
 

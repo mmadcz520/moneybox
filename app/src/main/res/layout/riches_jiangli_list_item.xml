@@ -1,0 +1,140 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:minHeight="70dp">
+
+    <LinearLayout
+        android:id="@+id/lld"
+        android:layout_width="fill_parent"
+        android:layout_height="90dp"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/stroke_edit_fillpraent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="3"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:gravity="bottom|right"
+                    android:paddingRight="4dp"
+                    android:text="+"
+                    android:textColor="@color/ct_red"
+                    android:textSize="@dimen/font_size_percent" />
+
+                <TextView
+                    android:id="@+id/riches_jiangli_percent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:gravity="bottom"
+                    android:text="2"
+                    android:textColor="@color/ct_red"
+                    android:textSize="@dimen/font_size_percent" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:gravity="bottom|left"
+                    android:paddingBottom="3dp"
+                    android:paddingLeft="2dp"
+                    android:text="%"
+                    android:textColor="@color/ct_red"
+                    android:textSize="@dimen/font_size_navigation" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/riches_jiangli_money"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="fill_parent"
+                    android:paddingTop="5dp"
+                    android:gravity="bottom|right"
+                    android:paddingBottom="20dp"
+                    android:textSize="@dimen/font_size_navigation"
+                    android:textColor="@color/font_black"
+                    android:text="5.36"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:gravity="bottom"
+                    android:paddingBottom="22dp"
+                    android:textColor="@color/font_black"
+                    android:textSize="@dimen/font_size_normal"
+                    android:text="元"/>
+
+                <TextView
+                    android:id="@+id/riches_jiangli_state"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="fill_parent"
+                    android:gravity="bottom"
+                    android:paddingBottom="22dp"
+                    android:textColor="@color/font_black"
+                    android:textSize="@dimen/font_size_normal"
+                    android:text="(待支付)"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center_vertical"
+            android:background="@color/ct_divide_line" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="5"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/riches_jiangli_memo"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:gravity="bottom"
+                android:textSize="@dimen/font_size_normal"
+                android:textColor="@color/font_black"
+                android:text="2016老推新加息"/>
+
+            <TextView
+                android:id="@+id/riches_jiangli_time"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:gravity="top"
+                android:paddingTop="10dp"
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:textSize="@dimen/font_size_normal"
+                android:textColor="@color/font_invalid"
+                android:text="获得时间:2016-01-07"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>
+
+

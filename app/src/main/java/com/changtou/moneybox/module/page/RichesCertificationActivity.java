@@ -8,7 +8,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.changtou.moneybox.R;
-import com.changtou.moneybox.common.activity.BaseApplication;
 import com.changtou.moneybox.common.http.async.RequestParams;
 import com.changtou.moneybox.common.utils.ACache;
 import com.changtou.moneybox.module.entity.UserInfoEntity;
@@ -50,19 +49,19 @@ public class RichesCertificationActivity extends CTBaseActivity
 
         mIdcardView = (EditText)findViewById(R.id.certify_idcard);
 
-        UserInfoEntity userInfoEntity = UserInfoEntity.getInstance();
-
         Button button = (Button)findViewById(R.id.certify_btn);
+
+        mUserInfoEntity = (UserInfoEntity)ACache.get(this).getAsObject("userinfo");
 
         Intent intent = getIntent();
         isCertifty = intent.getBooleanExtra("isCerfy", false);
         if(isCertifty)
         {
-            mFullName = userInfoEntity.getFullName().trim();
+            mFullName = mUserInfoEntity.getFullName().trim();
             mFullnameView.setText(mFullName);
             mFullnameView.setEnabled(false);
 
-            String idcard = userInfoEntity.getIdCard();
+            String idcard = mUserInfoEntity.getIdCard();
             int len = idcard.length();
             idcard = idcard.substring(0,3);
             for(int i = 0; i < len-7;i++)
@@ -70,14 +69,12 @@ public class RichesCertificationActivity extends CTBaseActivity
                 idcard = idcard + " *";
             }
 
-            idcard = idcard + userInfoEntity.getIdCard().substring(len-4, len);
+            idcard = idcard + mUserInfoEntity.getIdCard().substring(len-4, len);
             mIdcardView.setText(idcard);
             mIdcardView.setEnabled(false);
 
             button.setEnabled(false);
         }
-
-        mUserInfoEntity = (UserInfoEntity)ACache.get(this).getAsObject("userinfo");
 
         mURLType = intent.getIntExtra("URLType", 0);
     }
@@ -122,6 +119,7 @@ public class RichesCertificationActivity extends CTBaseActivity
                 {
                     mUserInfoEntity.setIdentycheck(true);
                     mUserInfoEntity.setFullName(mFullName);
+                    mUserInfoEntity.setIdCard(mIdcard);
                     ACache.get(this).put("userinfo", mUserInfoEntity);
 
                     this.finish();

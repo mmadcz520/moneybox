@@ -3727,7 +3727,7 @@ com.alimama.mobile.csdk.umupdate.models.c:
     private static final java.lang.String j
 com.changtou.moneybox.BuildConfig
 com.changtou.moneybox.R:
-    10:3825:public R()
+    10:3839:public R()
 com.changtou.moneybox.R$anim
 com.changtou.moneybox.R$array
 com.changtou.moneybox.R$attr
@@ -3743,7 +3743,7 @@ com.changtou.moneybox.R$raw
 com.changtou.moneybox.R$string
 com.changtou.moneybox.R$style
 com.changtou.moneybox.R$styleable:
-    3825:3825:public R$styleable()
+    3839:3839:public R$styleable()
 com.changtou.moneybox.common.activity.BaseActivity:
     public static final java.lang.String LOGTAG
     102:106:public void sendUmeng(java.lang.String,java.lang.String,java.lang.String)
@@ -3764,6 +3764,8 @@ com.changtou.moneybox.common.activity.BaseApplication:
     421:429:public void finishActivityAll(java.lang.Class)
     435:440:public void resetActivity(java.lang.Class)
     549:574:public static java.lang.String getDeviceInfo(android.content.Context)
+    627:627:private void cacheUserInfo()
+    635:635:private void getCacheUserInfo()
 com.changtou.moneybox.common.activity.BaseFragment:
     public static final java.lang.String LOGTAG
     107:107:public void entry()
@@ -3973,7 +3975,6 @@ com.changtou.moneybox.common.utils.AppUtil:
     834:834:public static int getSdkInt()
     843:849:public static java.lang.String getPackageName(android.content.Context)
     859:865:public static java.lang.String getVersionName(android.content.Context)
-    875:881:public static int getVersionCode(android.content.Context)
     892:902:public static java.lang.String getWifiMacAddr(android.content.Context)
     915:931:public static boolean isPicked(java.lang.String,float)
     942:948:public static boolean isPicked(float)
@@ -4031,6 +4032,7 @@ com.changtou.moneybox.common.utils.DeviceInfo:
     191:200:public static java.lang.String getAppVersion(android.content.Context)
     204:213:public int getAppVersionCode()
 com.changtou.moneybox.common.utils.FileUtil
+com.changtou.moneybox.common.utils.IRiseNumber
 com.changtou.moneybox.common.utils.ImageUtil
 com.changtou.moneybox.common.utils.LocalAppInfo
 com.changtou.moneybox.common.utils.MD5Util
@@ -4061,6 +4063,10 @@ com.changtou.moneybox.common.utils.PicUtil:
     219:227:public static android.graphics.Bitmap drawableToBitmap(android.graphics.drawable.Drawable)
     232:252:public static android.graphics.Bitmap getRoundedCornerBitmap(android.graphics.Bitmap,float)
     256:287:public static android.graphics.Bitmap createReflectionImageWithOrigin(android.graphics.Bitmap)
+com.changtou.moneybox.common.utils.RiseNumberTextView:
+    private static final int STOPPED
+    private static final int RUNNING
+    184:193:public void withNumber(int)
 com.changtou.moneybox.common.utils.SDCardUtil
 com.changtou.moneybox.common.utils.SerializableCookie
 com.changtou.moneybox.common.utils.SharedPreferencesHelper:
@@ -4075,6 +4081,7 @@ com.changtou.moneybox.common.utils.SharedPreferencesHelper:
     116:116:private android.content.SharedPreferences getSP(java.lang.String)
 com.changtou.moneybox.common.utils.StringUtil
 com.changtou.moneybox.common.utils.TrackUtil
+com.changtou.moneybox.common.utils.Utils
 com.changtou.moneybox.common.widget.swipeMenuListView.SwipeMenu:
     34:35:public void removeMenuItem(com.changtou.moneybox.common.widget.swipeMenuListView.SwipeMenuItem)
     42:42:public com.changtou.moneybox.common.widget.swipeMenuListView.SwipeMenuItem getMenuItem(int)
@@ -4109,7 +4116,7 @@ com.changtou.moneybox.module.adapter.BankCardAdapter:
 com.changtou.moneybox.module.adapter.FlowAdapter:
     36:36:public com.changtou.moneybox.module.entity.FlowEntity getData()
 com.changtou.moneybox.module.adapter.InvestListAdapter:
-    45:45:public java.util.LinkedList getData()
+    47:47:public java.util.LinkedList getData()
 com.changtou.moneybox.module.adapter.ProductInvestorAdapter:
     40:40:public java.util.LinkedList getData()
 com.changtou.moneybox.module.adapter.RechargeAdapter:
@@ -4171,17 +4178,18 @@ com.changtou.moneybox.module.http.HttpRequst:
     public static final int REQ_TYPE_MOBILE_LIST
     public static final int REQ_TYPE_ISREG
     public static final int REQ_TYPE_DEAL
+    public static final int REQ_TYPE_CALENDER
     public static final int REQ_TYPE_RECHARGE
     public static final int REQ_TYPE_GIFTEXCHANGE
     public static final int REQ_TYPE_QUICKPAY_SUCC
     public static final int REQ_TYPE_QUICKPAY_REC
     public static final int REQ_TYPE_WITHDRAW_REC
-    360:365:public java.lang.String getUrl(int,java.lang.String)
+    367:372:public java.lang.String getUrl(int,java.lang.String)
 com.changtou.moneybox.module.page.CTBaseActivity:
     public static final int PAGE_TYPE_HOME
     public static final int PAGE_TYPE_SUB
-    124:125:public void quitApp()
-    132:134:public com.changtou.moneybox.common.http.async.RequestParams initParameter()
+    126:127:public void quitApp()
+    134:136:public com.changtou.moneybox.common.http.async.RequestParams initParameter()
 com.changtou.moneybox.module.page.LoginActivity:
     148:148:public void loginIngNotify()
     165:165:public void logoutNotify()
@@ -4201,27 +4209,27 @@ com.changtou.moneybox.module.page.RecordActivity:
 com.changtou.moneybox.module.page.RegisterActivity:
     104:107:public static boolean isMobileNO(java.lang.String)
 com.changtou.moneybox.module.page.RegisterPasswordActivity:
-    294:294:public void loginIngNotify()
-    304:304:public void logoutNotify()
+    293:293:public void loginIngNotify()
+    303:303:public void logoutNotify()
 com.changtou.moneybox.module.page.RichesFragment:
-    484:484:public static android.animation.ObjectAnimator tada(android.view.View)
-    491:534:public static android.animation.ObjectAnimator tada(android.view.View,float)
-    564:564:public void loginIngNotify()
-    574:574:public void logoutNotify()
+    531:531:public static android.animation.ObjectAnimator tada(android.view.View)
+    538:581:public static android.animation.ObjectAnimator tada(android.view.View,float)
+    611:611:public void loginIngNotify()
+    621:621:public void logoutNotify()
 com.changtou.moneybox.module.page.RichesPromotionActivity:
     93:119:private void postSinaWeibo()
     124:158:private void postWexin()
 com.changtou.moneybox.module.page.RichesPromotionActivity$1
 com.changtou.moneybox.module.page.RichesPromotionActivity$2
 com.changtou.moneybox.module.page.RichesRechargePage$QuickRechargePage:
-    385:385:public void initInvestList(java.util.LinkedList)
-    539:550:private java.lang.String constructRiskItem()
-    620:629:public static java.lang.String ToDBC(java.lang.String)
-    633:637:public static java.lang.String StringFilter(java.lang.String)
+    399:399:public void initInvestList(java.util.LinkedList)
+    553:564:private java.lang.String constructRiskItem()
+    634:643:public static java.lang.String ToDBC(java.lang.String)
+    647:651:public static java.lang.String StringFilter(java.lang.String)
 com.changtou.moneybox.module.page.RichesRechargePage$SubPage:
     private com.handmark.pulltorefresh.library.PullToRefreshListView mPullRefreshListView
     private android.widget.ListView actualListView
-    176:176:public void initInvestList(java.util.LinkedList)
+    180:180:public void initInvestList(java.util.LinkedList)
 com.changtou.moneybox.module.phonebook.CharacterParser:
     private java.lang.String resource
     112:112:public java.lang.String getResource()
@@ -4260,6 +4268,7 @@ com.changtou.moneybox.module.widget.BetterSpinner:
     private static final int MAX_CLICK_DURATION
 com.changtou.moneybox.module.widget.BootViewPagerAdapter
 com.changtou.moneybox.module.widget.CountView:
+    26:31:public void showNumberWithAnimation(float)
     36:41:public void showNumberWithAnimation(int)
 com.changtou.moneybox.module.widget.DragTopLayout:
     517:520:public void updateTopViewHeight(int)
@@ -9947,7 +9956,6 @@ com.nineoldandroids.animation.ValueAnimator:
     public static final int RESTART
     public static final int REVERSE
     public static final int INFINITE
-    298:300:public static varargs com.nineoldandroids.animation.ValueAnimator ofInt(int[])
     329:331:public static varargs com.nineoldandroids.animation.ValueAnimator ofPropertyValuesHolder(com.nineoldandroids.animation.PropertyValuesHolder[])
     352:355:public static varargs com.nineoldandroids.animation.ValueAnimator ofObject(com.nineoldandroids.animation.TypeEvaluator,java.lang.Object[])
     433:445:public varargs void setObjectValues(java.lang.Object[])
@@ -9971,7 +9979,6 @@ com.nineoldandroids.animation.ValueAnimator:
     993:993:public boolean isRunning()
     998:998:public boolean isStarted()
     1009:1018:public void reverse()
-    1153:1153:public float getAnimatedFraction()
     1239:1239:public static int getCurrentAnimationsCount()
     1249:1252:public static void clearAllAnimations()
 com.nineoldandroids.util.NoSuchPropertyException

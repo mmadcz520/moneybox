@@ -1,5 +1,7 @@
 package com.changtou.moneybox.module.entity;
 
+import android.util.Log;
+
 import com.changtou.moneybox.common.http.base.BaseEntity;
 
 import org.json.JSONArray;
@@ -17,6 +19,8 @@ public class InvestListEntity extends BaseEntity{
     private Map<String, LinkedList> mInvestMap = null;
     public LinkedList<ItemEntity> mDataList = null;
 
+    public LinkedList<ItemEntity> mAllDataList = null;
+
     /**
      * @see BaseEntity#paser(String)
      * @throws Exception
@@ -27,12 +31,13 @@ public class InvestListEntity extends BaseEntity{
         int len = array.length();
 
         mInvestMap = new HashMap<>();
+        mAllDataList = new LinkedList<>();
 
         for(int i = 0; i < len; i++)
         {
             JSONObject typeObject = array.getJSONObject(i);
 
-            String type = typeObject.getString("status");
+            String status = typeObject.getString("status");
             JSONArray itemData = typeObject.getJSONArray("data");
 
             int data_len = itemData.length();
@@ -44,10 +49,12 @@ public class InvestListEntity extends BaseEntity{
                 JSONObject itemJson = itemData.getJSONObject(m);
                 itemEntity = new ItemEntity();
                 itemEntity.paser(itemJson);
+                itemEntity.state = Integer.parseInt(status);
                 mDataList.add(itemEntity);
+                mAllDataList.add(itemEntity);
             }
 
-            mInvestMap.put(type, mDataList);
+            mInvestMap.put(status, mDataList);
         }
 
     }
@@ -55,7 +62,7 @@ public class InvestListEntity extends BaseEntity{
     public  class ItemEntity
     {
         public String id;
-        public int type;              //1:还款中 2:已结清 3:已退出
+        public int type;              //0 长投宝 1.站内转入 2.普通项目
         public String projectname;
         public String withdrawamount;    //投资金额
         public String rate;              //利率
@@ -63,6 +70,7 @@ public class InvestListEntity extends BaseEntity{
         public String starttime;         //开始时间
         public String endtime;           //结束时间
         public String expectin;          //预期收益
+        public int state;             //产品状态
 
         public void paser(JSONObject json) throws Exception
         {
@@ -81,5 +89,10 @@ public class InvestListEntity extends BaseEntity{
     public Map<String, LinkedList> getInvestMap()
     {
         return mInvestMap;
+    }
+
+    public LinkedList<ItemEntity> getAllInvestList()
+    {
+        return mAllDataList;
     }
 }

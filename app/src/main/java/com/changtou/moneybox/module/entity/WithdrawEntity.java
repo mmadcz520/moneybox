@@ -1,5 +1,7 @@
 package com.changtou.moneybox.module.entity;
 
+import android.util.Log;
+
 import com.changtou.moneybox.common.http.base.BaseEntity;
 
 import org.json.JSONArray;
@@ -8,7 +10,7 @@ import org.json.JSONObject;
 import java.util.LinkedList;
 
 /**
- * 充值记录实体类
+ * 提现记录实体类
  * Created by Administrator on 2015/6/2.
  */
 public class WithdrawEntity extends BaseEntity
@@ -41,6 +43,8 @@ public class WithdrawEntity extends BaseEntity
         public String bank;
         public String account;
         public String createtime;
+        public String sjaccount;
+        public String tip;
 
         public void paser(JSONObject json) throws Exception
         {
@@ -49,6 +53,8 @@ public class WithdrawEntity extends BaseEntity
             bank = json.optString("bank");
             account = json.optString("account");
             createtime = json.optString("createtime");
+            sjaccount = json.optString("sjaccount");
+            tip = json.optString("tip");
         }
     }
 }

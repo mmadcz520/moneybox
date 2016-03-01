@@ -13,6 +13,7 @@ import android.os.CountDownTimer;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.TextAppearanceSpan;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +32,7 @@ import com.changtou.moneybox.common.activity.BaseFragment;
 import com.changtou.moneybox.common.dialog.SpotsDialog;
 import com.changtou.moneybox.common.utils.ACache;
 import com.changtou.moneybox.common.utils.AppUtil;
+import com.changtou.moneybox.common.utils.RiseNumberTextView;
 import com.changtou.moneybox.common.utils.SharedPreferencesHelper;
 import com.changtou.moneybox.module.adapter.ExGridAdapter;
 import com.changtou.moneybox.module.appcfg.AppCfg;
@@ -45,13 +47,15 @@ import com.changtou.moneybox.module.widget.SignInHUD;
 
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
+
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 
 public class RichesFragment extends BaseFragment implements AdapterView.OnItemClickListener, LoginNotifier {
 
 //    private TextView mMobileTextView = null;
-    private CountView mTotalAssetsTextView = null;
+    private RiseNumberTextView mTotalAssetsTextView = null;
     private TextView mInvestAssetsTextView = null;
     private TextView mProfitTextView = null;
     private TextView mOverageTextView = null;
@@ -92,6 +96,10 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
 
     private View mExchangeGiftView = null;
     private View mExchangeGiftView1 = null;
+    private View mJiangLiView = null;
+    private TextView mJiangLiTextView = null;
+
+    private String total = "0.00";
 
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -207,12 +215,14 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
         //100
 
 //        mMobileTextView = (TextView)view.findViewById(R.id.riches_text_mobile);
-        mTotalAssetsTextView = (CountView)view.findViewById(R.id.riches_text_totalassets);
+        mTotalAssetsTextView = (RiseNumberTextView)view.findViewById(R.id.riches_text_totalassets);
         mInvestAssetsTextView = (TextView)view.findViewById(R.id.riches_text_investassets);
         mProfitTextView = (TextView)view.findViewById(R.id.riches_text_profit);
         mOverageTextView = (TextView)view.findViewById(R.id.riches_text_overage);
         mGiftsTextView = (TextView)view.findViewById(R.id.riches_text_gifts);
         mTouYuanTextView = (TextView)view.findViewById(R.id.riches_text_touyuan);
+        mTouYuanTextView = (TextView)view.findViewById(R.id.riches_text_touyuan);
+        mJiangLiTextView = (TextView)view.findViewById(R.id.riches_text_jiangli);
 
         mAcache = ACache.get(BaseApplication.getInstance());
         mUserInfoEntity = (UserInfoEntity)mAcache.getAsObject("userinfo");
@@ -262,6 +272,7 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
 
         mExchangeGiftView = view.findViewById(R.id.gift_click_layout);
         mExchangeGiftView1 = view.findViewById(R.id.gift_click_layout1);
+        mJiangLiView = view.findViewById(R.id.gift_click_layout2);
 
         if(mUserInfoEntity != null && !mUserInfoEntity.getCreatetime().equals(""))
         {
@@ -286,7 +297,7 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
 
         mExchangeGiftView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(RichesFragment.this.getActivity(), GiftExchangeActivity.class);
+                Intent intent = new Intent(RichesFragment.this.getActivity(), RichesLiJinActivity.class);
                 startActivity(intent);
             }
         });
@@ -296,6 +307,13 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
             public void onClick(View v)
             {
                 Intent intent = new Intent(RichesFragment.this.getActivity(), GiftExchangeActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        mJiangLiView.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(RichesFragment.this.getActivity(), RichesInvestJiangliActivity.class);
                 startActivity(intent);
             }
         });
@@ -325,28 +343,29 @@ public class RichesFragment extends BaseFragment implements AdapterView.OnItemCl
 
     private void initRichesPage()
     {
-//        if(!isUpdate) return;
-//
-//        isUpdate = false;
-
         try {
-
             mSpotsDialog.cancel();
 
-//        mMobileTextView.setText(mUserInfoEntity.getMobile());
-            String total = mUserInfoEntity.getTotalAssets();
+            total = mUserInfoEntity.getTotalAssets();
             total = total.replace(",", "");
             if(total.equals("")) return;
 
             mTouyuan = mUserInfoEntity.getTouYuan();
 
-            mTotalAssetsTextView.showNumberWithAnimation(Float.parseFloat(total));
-            mTotalAssetsTextView.setText(mUserInfoEntity.getTotalAssets());
+            mTotalAssetsTextView.withNumber((float) Double.parseDouble(total));
+            mTotalAssetsTextView.setDuration(1000);
+            mTotalAssetsTextView.setOnEndListener(new RiseNumberTextView.EndListener() {
+                public void onEndFinish() {
+                    mTotalAssetsTextView.setText(mUserInfoEntity.getTotalAssets());
+                }
+            });
+            mTotalAssetsTextView.start();
             mInvestAssetsTextView.setText(mUserInfoEntity.getInvestAssets());
             mProfitTextView.setText(mUserInfoEntity.getProfit());
             mOverageTextView.setText(mUserInfoEntity.getOverage());
             mGiftsTextView.setText(mUserInfoEntity.getGifts());
             mTouYuanTextView.setText("" + mTouyuan);
+            mJiangLiTextView.setText(mUserInfoEntity.getJiangLiText());
 
             if(mUserInfoEntity.getIdentycheck())
             {

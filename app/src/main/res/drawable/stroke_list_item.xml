@@ -5,7 +5,7 @@
 
     <!-- 描边 -->
     <stroke
-        android:width="1px"
+        android:width="1dp"
         android:color="@color/ct_divide_line" />
 
     <!-- 间隔  -->

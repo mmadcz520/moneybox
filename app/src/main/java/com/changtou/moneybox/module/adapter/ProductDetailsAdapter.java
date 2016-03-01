@@ -16,8 +16,8 @@ public class ProductDetailsAdapter extends BaseAdapter
 {
     private LayoutInflater mInflater = null;
 
-    private String[] mKeys = {"项目名称", "还款方式", "还款时间"};
-    private String[] mValues = {"", "", ""};
+    private String[] mKeys = {"项目名称", "还款方式", "还款时间", "服务费"};
+    private String[] mValues = {"", "", "", ""};
 
     public ProductDetailsAdapter(Context context)
     {

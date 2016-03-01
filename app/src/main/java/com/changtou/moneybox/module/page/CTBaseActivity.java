@@ -3,6 +3,7 @@ package com.changtou.moneybox.module.page;
 import android.app.ActionBar;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -151,7 +152,9 @@ abstract public class CTBaseActivity extends BaseActivity{
             LayoutInflater inflator = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View v = inflator.inflate(layoutId, null);
             ActionBar.LayoutParams layout = new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT);
-            actionBar.setCustomView(v,layout);
+            actionBar.setCustomView(v, layout);
+
+            v.setBackgroundColor(0xf9f1cd);
 
             mPageTitleView = (TextView)v.findViewById(R.id.page_title);
             mLefttouc = (LinearLayout) findViewById(R.id.touchLeft);

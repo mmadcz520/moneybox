@@ -24,7 +24,7 @@
         <LinearLayout
             android:id="@+id/homepage_ll_count"
             android:layout_width="fill_parent"
-            android:layout_height="75dp"
+            android:layout_height="65dp"
             android:layout_below="@+id/homepage_banner"
             android:background="@color/ct_white"
             android:orientation="horizontal">
@@ -169,7 +169,7 @@
         <RelativeLayout
             android:id="@+id/homepage_title"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="20dp"
             android:layout_below="@+id/homepage_line2"
             android:background="#f9f9f9">
 
@@ -203,7 +203,7 @@
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="0dp"
-            android:layout_weight="100">
+            android:layout_weight="60">
 
             <Button
                 android:id="@+id/homepage_btn_invest"

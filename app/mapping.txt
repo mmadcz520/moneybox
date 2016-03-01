@@ -10148,7 +10148,7 @@ com.changtou.moneybox.common.preference.DefaultPreference -> com.changtou.moneyb
     com.changtou.moneybox.common.preference.DefaultPreference getInstance() -> a
     void setIsFirstTimeOpenApp(boolean) -> a
     boolean IsFirstTimeOpenApp() -> b
-com.changtou.moneybox.common.utils.ACache -> com.changtou.moneybox.common.c.a:
+com.changtou.moneybox.common.utils.ACache -> com.changtou.moneybox.common.utils.a:
     java.util.Map mInstanceMap -> a
     com.changtou.moneybox.common.utils.ACache$ACacheManager mCache -> b
     com.changtou.moneybox.common.utils.ACache get(android.content.Context) -> a
@@ -10167,8 +10167,8 @@ com.changtou.moneybox.common.utils.ACache -> com.changtou.moneybox.common.c.a:
     android.graphics.Bitmap getAsBitmap(java.lang.String) -> d
     boolean remove(java.lang.String) -> e
     void clear() -> a
-com.changtou.moneybox.common.utils.ACache$1 -> com.changtou.moneybox.common.c.b:
-com.changtou.moneybox.common.utils.ACache$ACacheManager -> com.changtou.moneybox.common.c.c:
+com.changtou.moneybox.common.utils.ACache$1 -> com.changtou.moneybox.common.utils.b:
+com.changtou.moneybox.common.utils.ACache$ACacheManager -> com.changtou.moneybox.common.utils.c:
     java.util.concurrent.atomic.AtomicLong cacheSize -> c
     java.util.concurrent.atomic.AtomicInteger cacheCount -> d
     long sizeLimit -> e
@@ -10193,10 +10193,10 @@ com.changtou.moneybox.common.utils.ACache$ACacheManager -> com.changtou.moneybox
     java.util.Map access$1700(com.changtou.moneybox.common.utils.ACache$ACacheManager) -> b
     java.util.concurrent.atomic.AtomicLong access$1800(com.changtou.moneybox.common.utils.ACache$ACacheManager) -> c
     java.util.concurrent.atomic.AtomicInteger access$1900(com.changtou.moneybox.common.utils.ACache$ACacheManager) -> d
-com.changtou.moneybox.common.utils.ACache$ACacheManager$1 -> com.changtou.moneybox.common.c.d:
+com.changtou.moneybox.common.utils.ACache$ACacheManager$1 -> com.changtou.moneybox.common.utils.d:
     com.changtou.moneybox.common.utils.ACache$ACacheManager this$1 -> a
     void run() -> run
-com.changtou.moneybox.common.utils.ACache$Utils -> com.changtou.moneybox.common.c.e:
+com.changtou.moneybox.common.utils.ACache$Utils -> com.changtou.moneybox.common.utils.e:
     boolean isDue(java.lang.String) -> c
     boolean isDue(byte[]) -> d
     byte[] newByteArrayWithDateInfo(int,byte[]) -> b
@@ -10216,10 +10216,11 @@ com.changtou.moneybox.common.utils.ACache$Utils -> com.changtou.moneybox.common.
     byte[] access$900(byte[]) -> b
     byte[] access$1000(android.graphics.Bitmap) -> a
     android.graphics.Bitmap access$1100(byte[]) -> c
-com.changtou.moneybox.common.utils.AppUtil -> com.changtou.moneybox.common.c.f:
+com.changtou.moneybox.common.utils.AppUtil -> com.changtou.moneybox.common.utils.f:
     int dip2px(android.content.Context,float) -> a
-    int[] getScreenSize(android.content.Context) -> a
-com.changtou.moneybox.common.utils.AsyncImageLoader -> com.changtou.moneybox.common.c.g:
+    int getVersionCode(android.content.Context) -> a
+    int[] getScreenSize(android.content.Context) -> b
+com.changtou.moneybox.common.utils.AsyncImageLoader -> com.changtou.moneybox.common.utils.g:
     java.util.Map caches -> b
     java.util.List taskQueue -> c
     boolean isRunning -> d
@@ -10236,26 +10237,26 @@ com.changtou.moneybox.common.utils.AsyncImageLoader -> com.changtou.moneybox.com
     java.util.List access$200(com.changtou.moneybox.common.utils.AsyncImageLoader) -> c
     java.util.Map access$300(com.changtou.moneybox.common.utils.AsyncImageLoader) -> d
     android.os.Handler access$400(com.changtou.moneybox.common.utils.AsyncImageLoader) -> e
-com.changtou.moneybox.common.utils.AsyncImageLoader$1 -> com.changtou.moneybox.common.c.h:
+com.changtou.moneybox.common.utils.AsyncImageLoader$1 -> com.changtou.moneybox.common.utils.h:
     android.widget.ImageView val$imageView -> a
     int val$resId -> b
     com.changtou.moneybox.common.utils.AsyncImageLoader this$0 -> c
     void loadImage(java.lang.String,android.graphics.Bitmap) -> a
-com.changtou.moneybox.common.utils.AsyncImageLoader$2 -> com.changtou.moneybox.common.c.i:
+com.changtou.moneybox.common.utils.AsyncImageLoader$2 -> com.changtou.moneybox.common.utils.i:
     com.changtou.moneybox.common.utils.AsyncImageLoader this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-com.changtou.moneybox.common.utils.AsyncImageLoader$3 -> com.changtou.moneybox.common.c.j:
+com.changtou.moneybox.common.utils.AsyncImageLoader$3 -> com.changtou.moneybox.common.utils.j:
     com.changtou.moneybox.common.utils.AsyncImageLoader this$0 -> a
     void run() -> run
-com.changtou.moneybox.common.utils.AsyncImageLoader$ImageCallback -> com.changtou.moneybox.common.c.k:
+com.changtou.moneybox.common.utils.AsyncImageLoader$ImageCallback -> com.changtou.moneybox.common.utils.k:
     void loadImage(java.lang.String,android.graphics.Bitmap) -> a
-com.changtou.moneybox.common.utils.AsyncImageLoader$Task -> com.changtou.moneybox.common.c.l:
+com.changtou.moneybox.common.utils.AsyncImageLoader$Task -> com.changtou.moneybox.common.utils.l:
     java.lang.String path -> a
     android.graphics.Bitmap bitmap -> b
     com.changtou.moneybox.common.utils.AsyncImageLoader$ImageCallback callback -> c
     com.changtou.moneybox.common.utils.AsyncImageLoader this$0 -> d
     boolean equals(java.lang.Object) -> equals
-com.changtou.moneybox.common.utils.DeviceInfo -> com.changtou.moneybox.common.c.m:
+com.changtou.moneybox.common.utils.DeviceInfo -> com.changtou.moneybox.common.utils.m:
     android.content.Context context -> b
     com.changtou.moneybox.common.utils.DeviceInfo instance -> a
     java.lang.String deviceId -> c
@@ -10265,13 +10266,42 @@ com.changtou.moneybox.common.utils.DeviceInfo -> com.changtou.moneybox.common.c.
     java.lang.String getDeviceInfo(android.content.Context) -> d
     java.lang.String getAndroidId() -> b
     java.lang.String getUUID() -> a
-com.changtou.moneybox.common.utils.MySharedPreferencesMgr -> com.changtou.moneybox.common.c.n:
+com.changtou.moneybox.common.utils.MySharedPreferencesMgr -> com.changtou.moneybox.common.utils.n:
     android.content.SharedPreferences sPrefs -> a
     java.lang.String getString(java.lang.String,java.lang.String) -> a
     void setString(java.lang.String,java.lang.String) -> b
-com.changtou.moneybox.common.utils.PicUtil -> com.changtou.moneybox.common.c.o:
+com.changtou.moneybox.common.utils.PicUtil -> com.changtou.moneybox.common.utils.o:
     android.graphics.Bitmap getbitmap(java.lang.String) -> a
-com.changtou.moneybox.common.utils.SharedPreferencesHelper -> com.changtou.moneybox.common.c.p:
+com.changtou.moneybox.common.utils.RiseNumberTextView -> com.changtou.moneybox.common.utils.RiseNumberTextView:
+    int mPlayingState -> b
+    float number -> c
+    float fromNumber -> d
+    long duration -> e
+    int numberType -> f
+    java.text.DecimalFormat fnum -> g
+    com.changtou.moneybox.common.utils.RiseNumberTextView$EndListener mEndListener -> h
+    int[] sizeTable -> a
+    boolean isRunning() -> a
+    void runFloat() -> c
+    void runInt() -> d
+    int sizeOfInt(int) -> a
+    void onFinishInflate() -> onFinishInflate
+    void start() -> b
+    void withNumber(float) -> a
+    void setDuration(long) -> setDuration
+    void setOnEndListener(com.changtou.moneybox.common.utils.RiseNumberTextView$EndListener) -> setOnEndListener
+    java.text.DecimalFormat access$000(com.changtou.moneybox.common.utils.RiseNumberTextView) -> a
+    int access$102(com.changtou.moneybox.common.utils.RiseNumberTextView,int) -> a
+    com.changtou.moneybox.common.utils.RiseNumberTextView$EndListener access$200(com.changtou.moneybox.common.utils.RiseNumberTextView) -> b
+com.changtou.moneybox.common.utils.RiseNumberTextView$1 -> com.changtou.moneybox.common.utils.p:
+    com.changtou.moneybox.common.utils.RiseNumberTextView this$0 -> a
+    void onAnimationUpdate(com.nineoldandroids.animation.ValueAnimator) -> a
+com.changtou.moneybox.common.utils.RiseNumberTextView$2 -> com.changtou.moneybox.common.utils.q:
+    com.changtou.moneybox.common.utils.RiseNumberTextView this$0 -> a
+    void onAnimationUpdate(com.nineoldandroids.animation.ValueAnimator) -> a
+com.changtou.moneybox.common.utils.RiseNumberTextView$EndListener -> com.changtou.moneybox.common.utils.r:
+    void onEndFinish() -> a
+com.changtou.moneybox.common.utils.SharedPreferencesHelper -> com.changtou.moneybox.common.utils.s:
     com.changtou.moneybox.common.utils.SharedPreferencesHelper sharedPreferencesHelper -> a
     android.content.Context context -> b
     com.changtou.moneybox.common.utils.SharedPreferencesHelper getInstance(android.content.Context) -> a
@@ -10505,32 +10535,37 @@ com.changtou.moneybox.module.adapter.InvestListAdapter -> com.changtou.moneybox.
     android.view.LayoutInflater mInflater -> a
     java.util.LinkedList mData -> b
     android.content.Context mContext -> c
-    java.lang.String[] mTypeName -> d
-    int mType -> e
+    java.lang.String[] mStateName -> d
     void setData(java.util.LinkedList) -> a
     int getCount() -> getCount
     java.lang.Object getItem(int) -> getItem
     long getItemId(int) -> getItemId
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
     void goToProducDtetails(java.lang.String,int,java.lang.String) -> a
-    void setProdType(int) -> a
-    java.util.LinkedList access$100(com.changtou.moneybox.module.adapter.InvestListAdapter) -> a
-    java.lang.String[] access$200() -> a
-    int access$300(com.changtou.moneybox.module.adapter.InvestListAdapter) -> b
+    java.util.LinkedList access$200(com.changtou.moneybox.module.adapter.InvestListAdapter) -> a
+    java.lang.String[] access$300(com.changtou.moneybox.module.adapter.InvestListAdapter) -> b
     void access$400(com.changtou.moneybox.module.adapter.InvestListAdapter,java.lang.String,int,java.lang.String) -> a
+    android.content.Context access$500(com.changtou.moneybox.module.adapter.InvestListAdapter) -> c
 com.changtou.moneybox.module.adapter.InvestListAdapter$1 -> com.changtou.moneybox.module.a.m:
-    int val$position -> a
-    com.changtou.moneybox.module.adapter.InvestListAdapter this$0 -> b
+    com.changtou.moneybox.module.adapter.InvestListAdapter$ViewHolder val$viewHolder -> a
+    int val$position -> b
+    com.changtou.moneybox.module.adapter.InvestListAdapter this$0 -> c
     void onClick(android.view.View) -> onClick
 com.changtou.moneybox.module.adapter.InvestListAdapter$ViewHolder -> com.changtou.moneybox.module.a.n:
-    android.widget.TextView projectnameView -> a
-    android.widget.TextView withdrawamountView -> b
-    android.widget.TextView rateView -> c
-    android.widget.TextView starttimeView -> d
-    android.widget.TextView endtimeView -> e
-    android.widget.TextView expectinView -> f
-    android.widget.TextView maturityView -> g
-    com.changtou.moneybox.module.adapter.InvestListAdapter this$0 -> h
+    android.view.View mItemLayout -> a
+    android.widget.TextView projectnameView -> b
+    android.widget.TextView withdrawamountView -> c
+    android.widget.TextView rateView -> d
+    android.widget.TextView starttimeView -> e
+    android.widget.TextView endtimeView -> f
+    android.widget.TextView expectinView -> g
+    android.widget.TextView maturityView -> h
+    android.widget.TextView fhView -> i
+    android.widget.TextView jxzqView -> j
+    int postion -> l
+    com.changtou.moneybox.module.adapter.InvestListAdapter this$0 -> k
+    int access$100(com.changtou.moneybox.module.adapter.InvestListAdapter$ViewHolder) -> a
+    int access$102(com.changtou.moneybox.module.adapter.InvestListAdapter$ViewHolder,int) -> a
 com.changtou.moneybox.module.adapter.MyClickSpan -> com.changtou.moneybox.module.a.o:
     com.changtou.moneybox.module.adapter.ProductContractAdapter$OnTextviewClickListener mListener -> a
     void onClick(android.view.View) -> onClick
@@ -10665,7 +10700,10 @@ com.changtou.moneybox.module.adapter.WithdrawAdapter$ViewHolder -> com.changtou.
     android.widget.TextView mMemoTextView -> b
     android.widget.TextView statusTextView -> c
     android.widget.TextView mCreateTextView -> d
-    com.changtou.moneybox.module.adapter.WithdrawAdapter this$0 -> e
+    android.widget.TextView mSjaccountTextView -> e
+    android.widget.TextView mTipTextView -> f
+    android.widget.TextView mSjaccountYuanTextView -> g
+    com.changtou.moneybox.module.adapter.WithdrawAdapter this$0 -> h
 com.changtou.moneybox.module.appcfg.AppCfg -> com.changtou.moneybox.module.appcfg.AppCfg:
     java.util.Map MAP_MSG_ERROR -> a
 com.changtou.moneybox.module.appcfg.AppCfg$LOGIN_STATE -> com.changtou.moneybox.module.appcfg.AppCfg$LOGIN_STATE:
@@ -10722,10 +10760,12 @@ com.changtou.moneybox.module.entity.FlowEntity$MonthEntity -> com.changtou.money
     com.changtou.moneybox.module.entity.FlowEntity this$0 -> this$0
     void paser(org.json.JSONObject) -> paser
 com.changtou.moneybox.module.entity.InvestListEntity -> com.changtou.moneybox.module.entity.c:
-    java.util.Map mInvestMap -> b
+    java.util.Map mInvestMap -> c
     java.util.LinkedList mDataList -> a
+    java.util.LinkedList mAllDataList -> b
     void paser(java.lang.String) -> paser
     java.util.Map getInvestMap() -> a
+    java.util.LinkedList getAllInvestList() -> b
 com.changtou.moneybox.module.entity.InvestListEntity$ItemEntity -> com.changtou.moneybox.module.entity.d:
     java.lang.String id -> a
     int type -> b
@@ -10736,7 +10776,8 @@ com.changtou.moneybox.module.entity.InvestListEntity$ItemEntity -> com.changtou.
     java.lang.String starttime -> g
     java.lang.String endtime -> h
     java.lang.String expectin -> i
-    com.changtou.moneybox.module.entity.InvestListEntity this$0 -> j
+    int state -> j
+    com.changtou.moneybox.module.entity.InvestListEntity this$0 -> k
     void paser(org.json.JSONObject) -> a
 com.changtou.moneybox.module.entity.ProductDetailsEntity -> com.changtou.moneybox.module.entity.e:
     java.util.LinkedList mTzList -> a
@@ -10753,6 +10794,9 @@ com.changtou.moneybox.module.entity.ProductDetailsEntity -> com.changtou.moneybo
     java.lang.String hkfs -> l
     java.lang.String hksj -> m
     int productType -> n
+    java.lang.String fwf -> o
+    java.lang.String xg -> p
+    java.lang.String syje_money -> q
     void paser(java.lang.String) -> paser
 com.changtou.moneybox.module.entity.ProductDetailsEntity$DetailsEntityCTB -> com.changtou.moneybox.module.entity.f:
     java.lang.String nhsy -> a
@@ -10774,7 +10818,10 @@ com.changtou.moneybox.module.entity.ProductDetailsEntity$DetailsEntityCTB -> com
     java.lang.String jrfwf -> q
     java.lang.String tqtcfy -> r
     java.lang.String bzfs -> s
-    com.changtou.moneybox.module.entity.ProductDetailsEntity this$0 -> t
+    java.lang.String fwf -> t
+    java.lang.String xg -> u
+    java.lang.String syje_money -> v
+    com.changtou.moneybox.module.entity.ProductDetailsEntity this$0 -> w
     void paser(org.json.JSONObject) -> a
 com.changtou.moneybox.module.entity.ProductDetailsEntity$DetailsEntityOther -> com.changtou.moneybox.module.entity.g:
     java.lang.String nhsy -> a
@@ -10787,7 +10834,10 @@ com.changtou.moneybox.module.entity.ProductDetailsEntity$DetailsEntityOther -> c
     java.lang.String hkfs -> h
     java.lang.String hksj -> i
     java.lang.String xmqk -> j
-    com.changtou.moneybox.module.entity.ProductDetailsEntity this$0 -> k
+    java.lang.String fwf -> k
+    java.lang.String xg -> l
+    java.lang.String syje_money -> m
+    com.changtou.moneybox.module.entity.ProductDetailsEntity this$0 -> n
     void paser(org.json.JSONObject) -> a
 com.changtou.moneybox.module.entity.ProductDetailsEntity$TzListEntity -> com.changtou.moneybox.module.entity.h:
     java.lang.String id -> a
@@ -10930,10 +10980,12 @@ com.changtou.moneybox.module.entity.WithdrawEntity$ItemEntity -> com.changtou.mo
     java.lang.String bank -> c
     java.lang.String account -> d
     java.lang.String createtime -> e
-    com.changtou.moneybox.module.entity.WithdrawEntity this$0 -> f
+    java.lang.String sjaccount -> f
+    java.lang.String tip -> g
+    com.changtou.moneybox.module.entity.WithdrawEntity this$0 -> h
     void paser(org.json.JSONObject) -> a
 com.changtou.moneybox.module.http.HttpRequst -> com.changtou.moneybox.module.b.a:
-    com.changtou.moneybox.module.http.HttpRequst instance -> L
+    com.changtou.moneybox.module.http.HttpRequst instance -> M
     java.lang.String BASE_URL -> a
     java.lang.String REQ_URL_PING -> b
     java.lang.String REQ_URL_PRODUCT_BANNER -> c
@@ -10971,6 +11023,7 @@ com.changtou.moneybox.module.http.HttpRequst -> com.changtou.moneybox.module.b.a
     java.lang.String REQ_URL_QUICKPAY_SUCC -> I
     java.lang.String REQ_URL_QUICKPAY_REC -> J
     java.lang.String REQ_URL_WITHDRAWE_REC -> K
+    java.lang.String REQ_URL_CALENDER -> L
     com.changtou.moneybox.module.http.HttpRequst getInstance() -> a
     java.lang.String getUrl(int) -> b
     com.changtou.moneybox.common.http.base.BaseEntity getPaser(int) -> c
@@ -10987,11 +11040,12 @@ com.changtou.moneybox.module.page.BootActivity -> com.changtou.moneybox.module.p
 com.changtou.moneybox.module.page.CTBaseActivity -> com.changtou.moneybox.module.page.CTBaseActivity:
     com.changtou.moneybox.module.CTMoneyApplication mCtApp -> u
     com.changtou.moneybox.module.page.CTBaseActivity mBaseAct -> v
-    android.widget.TextView mPageTitleView -> w
-    int mPageType -> x
-    boolean mShowRightBtn -> y
-    android.widget.LinearLayout mRightTouc -> z
-    android.widget.TextView mRightTextView -> A
+    android.widget.TextView mPageTitleView -> x
+    int mPageType -> y
+    boolean mShowRightBtn -> z
+    android.widget.LinearLayout mRightTouc -> A
+    android.widget.LinearLayout mLefttouc -> w
+    android.widget.TextView mRightTextView -> B
     void onCreate(android.os.Bundle) -> onCreate
     void onStop() -> onStop
     void onResume() -> onResume
@@ -11008,22 +11062,24 @@ com.changtou.moneybox.module.page.CTBaseActivity -> com.changtou.moneybox.module
     void showRightBtn(boolean) -> b
     void setRightBtnName(java.lang.String) -> c
     void setRightBtnOnClickListener(android.view.View$OnClickListener) -> a
+    void setLeftBtnOnClickListener(android.view.View$OnClickListener) -> b
 com.changtou.moneybox.module.page.CTBaseActivity$1 -> com.changtou.moneybox.module.page.a:
     com.changtou.moneybox.module.page.CTBaseActivity this$0 -> a
     void onClick(android.view.View) -> onClick
 com.changtou.moneybox.module.page.ConfirmActivity -> com.changtou.moneybox.module.page.ConfirmActivity:
-    android.widget.ListView mConfirmDetails -> x
-    java.lang.String[] mContent -> y
-    android.widget.Button mConfirmBtn -> z
-    cn.pedant.SweetAlert.SweetAlertDialog mDialog -> A
-    int mProductType -> B
-    java.lang.String mProductId -> C
-    android.widget.EditText mNumInput -> D
-    int touyuan -> E
-    int mSyLijin -> F
-    java.lang.String[] mError -> G
-    android.widget.TextView mLinjinView -> H
-    android.text.TextWatcher mTextWatcher -> w
+    android.widget.ListView mConfirmDetails -> y
+    java.lang.String[] mContent -> z
+    android.widget.Button mConfirmBtn -> A
+    cn.pedant.SweetAlert.SweetAlertDialog mDialog -> B
+    int mProductType -> C
+    java.lang.String mProductId -> D
+    android.widget.EditText mNumInput -> E
+    int touyuan -> F
+    int mSyLijin -> G
+    android.widget.TextView mRechargeBtn -> H
+    java.lang.String[] mError -> I
+    android.widget.TextView mLinjinView -> J
+    android.text.TextWatcher mTextWatcher -> x
     void initView(android.os.Bundle) -> a
     int setPageType() -> m
     void initData() -> h
@@ -11048,14 +11104,17 @@ com.changtou.moneybox.module.page.ConfirmActivity$3 -> com.changtou.moneybox.mod
     com.changtou.moneybox.module.page.ConfirmActivity this$0 -> a
     void onClick(android.view.View) -> onClick
 com.changtou.moneybox.module.page.ConfirmActivity$4 -> com.changtou.moneybox.module.page.e:
-    cn.pedant.SweetAlert.SweetAlertDialog val$sad -> a
-    com.changtou.moneybox.module.page.ConfirmActivity this$0 -> b
-    void onClick(cn.pedant.SweetAlert.SweetAlertDialog) -> a
+    com.changtou.moneybox.module.page.ConfirmActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
 com.changtou.moneybox.module.page.ConfirmActivity$5 -> com.changtou.moneybox.module.page.f:
     cn.pedant.SweetAlert.SweetAlertDialog val$sad -> a
     com.changtou.moneybox.module.page.ConfirmActivity this$0 -> b
     void onClick(cn.pedant.SweetAlert.SweetAlertDialog) -> a
 com.changtou.moneybox.module.page.ConfirmActivity$6 -> com.changtou.moneybox.module.page.g:
+    cn.pedant.SweetAlert.SweetAlertDialog val$sad -> a
+    com.changtou.moneybox.module.page.ConfirmActivity this$0 -> b
+    void onClick(cn.pedant.SweetAlert.SweetAlertDialog) -> a
+com.changtou.moneybox.module.page.ConfirmActivity$7 -> com.changtou.moneybox.module.page.h:
     com.changtou.moneybox.module.page.ConfirmActivity this$0 -> a
     void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
     void beforeTextChanged(java.lang.CharSequence,int,int,int) -> beforeTextChanged
@@ -11079,14 +11138,14 @@ com.changtou.moneybox.module.page.GesturePWActivity -> com.changtou.moneybox.mod
     void onResume() -> onResume
     void onPause() -> onPause
 com.changtou.moneybox.module.page.GiftExchangeActivity -> com.changtou.moneybox.module.page.GiftExchangeActivity:
-    android.widget.TextView mTouyuanNum -> x
-    android.widget.Button mMaxButton -> y
-    android.widget.EditText mTouyuanInput -> z
-    android.widget.TextView mExchangeLijinView -> A
-    int mTouyuan -> B
-    android.view.View mPopExchange -> C
-    android.widget.Button mExChangeBtn -> D
-    android.text.TextWatcher mTextWatcher -> w
+    android.widget.TextView mTouyuanNum -> y
+    android.widget.Button mMaxButton -> z
+    android.widget.EditText mTouyuanInput -> A
+    android.widget.TextView mExchangeLijinView -> B
+    int mTouyuan -> C
+    android.view.View mPopExchange -> D
+    android.widget.Button mExChangeBtn -> E
+    android.text.TextWatcher mTextWatcher -> x
     void initView(android.os.Bundle) -> a
     void initData() -> h
     int setPageType() -> m
@@ -11100,33 +11159,33 @@ com.changtou.moneybox.module.page.GiftExchangeActivity -> com.changtou.moneybox.
     void access$200(com.changtou.moneybox.module.page.GiftExchangeActivity,int) -> a
     void access$300(com.changtou.moneybox.module.page.GiftExchangeActivity) -> c
     android.widget.TextView access$400(com.changtou.moneybox.module.page.GiftExchangeActivity) -> d
-com.changtou.moneybox.module.page.GiftExchangeActivity$1 -> com.changtou.moneybox.module.page.h:
+com.changtou.moneybox.module.page.GiftExchangeActivity$1 -> com.changtou.moneybox.module.page.i:
     com.changtou.moneybox.module.page.GiftExchangeActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.changtou.moneybox.module.page.GiftExchangeActivity$2 -> com.changtou.moneybox.module.page.i:
+com.changtou.moneybox.module.page.GiftExchangeActivity$2 -> com.changtou.moneybox.module.page.j:
     com.changtou.moneybox.module.page.GiftExchangeActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.changtou.moneybox.module.page.GiftExchangeActivity$3 -> com.changtou.moneybox.module.page.j:
+com.changtou.moneybox.module.page.GiftExchangeActivity$3 -> com.changtou.moneybox.module.page.k:
     com.changtou.moneybox.module.page.GiftExchangeActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.changtou.moneybox.module.page.GiftExchangeActivity$4 -> com.changtou.moneybox.module.page.k:
+com.changtou.moneybox.module.page.GiftExchangeActivity$4 -> com.changtou.moneybox.module.page.l:
     com.changtou.moneybox.module.page.GiftExchangeActivity this$0 -> a
     void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
     void beforeTextChanged(java.lang.CharSequence,int,int,int) -> beforeTextChanged
     void afterTextChanged(android.text.Editable) -> afterTextChanged
-com.changtou.moneybox.module.page.GiftExchangeActivity$5 -> com.changtou.moneybox.module.page.l:
+com.changtou.moneybox.module.page.GiftExchangeActivity$5 -> com.changtou.moneybox.module.page.m:
     cn.pedant.SweetAlert.SweetAlertDialog val$sad -> a
     com.changtou.moneybox.module.page.GiftExchangeActivity this$0 -> b
     void onClick(cn.pedant.SweetAlert.SweetAlertDialog) -> a
-com.changtou.moneybox.module.page.GiftExchangeActivity$6 -> com.changtou.moneybox.module.page.m:
+com.changtou.moneybox.module.page.GiftExchangeActivity$6 -> com.changtou.moneybox.module.page.n:
     cn.pedant.SweetAlert.SweetAlertDialog val$sad -> a
     com.changtou.moneybox.module.page.GiftExchangeActivity this$0 -> b
     void onClick(cn.pedant.SweetAlert.SweetAlertDialog) -> a
-com.changtou.moneybox.module.page.GiftExchangeActivity$7 -> com.changtou.moneybox.module.page.n:
+com.changtou.moneybox.module.page.GiftExchangeActivity$7 -> com.changtou.moneybox.module.page.o:
     cn.pedant.SweetAlert.SweetAlertDialog val$sad -> a
     com.changtou.moneybox.module.page.GiftExchangeActivity this$0 -> b
     void onClick(cn.pedant.SweetAlert.SweetAlertDialog) -> a
-com.changtou.moneybox.module.page.GiftExchangeActivity$8 -> com.changtou.moneybox.module.page.o:
+com.changtou.moneybox.module.page.GiftExchangeActivity$8 -> com.changtou.moneybox.module.page.p:
     cn.pedant.SweetAlert.SweetAlertDialog val$sad -> a
     com.changtou.moneybox.module.page.GiftExchangeActivity this$0 -> b
     void onClick(cn.pedant.SweetAlert.SweetAlertDialog) -> a
@@ -11154,9 +11213,14 @@ com.changtou.moneybox.module.page.HomeFragment -> com.changtou.moneybox.module.p
     java.lang.String syje -> aB
     java.lang.String amount -> aC
     java.lang.String minamount -> aD
-    java.lang.String allInvest -> aE
-    java.lang.String leiji -> aF
-    android.widget.TextView mQtjeTextView -> aG
+    java.lang.String syje_money -> aE
+    java.lang.String xg -> aF
+    java.lang.String allInvest -> aG
+    java.lang.String leiji -> aH
+    android.widget.TextView mQtjeTextView -> aI
+    java.lang.String[] mDetails -> aJ
+    java.lang.String mProType -> aK
+    boolean isHasProd -> aL
     android.view.View initView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> c
     void initListener() -> a
     void initData(android.os.Bundle) -> c
@@ -11169,23 +11233,29 @@ com.changtou.moneybox.module.page.HomeFragment -> com.changtou.moneybox.module.p
     void connectNet() -> Z
     void disconnectNet() -> aa
     void onDestroy() -> D
+    boolean access$000(com.changtou.moneybox.module.page.HomeFragment) -> a
+    java.lang.String access$100(com.changtou.moneybox.module.page.HomeFragment) -> b
+    java.lang.String access$200(com.changtou.moneybox.module.page.HomeFragment) -> c
+com.changtou.moneybox.module.page.HomeFragment$1 -> com.changtou.moneybox.module.page.q:
+    com.changtou.moneybox.module.page.HomeFragment this$0 -> a
+    void onClick(android.view.View) -> onClick
 com.changtou.moneybox.module.page.InvestmentSuccPage -> com.changtou.moneybox.module.page.InvestmentSuccPage:
-    android.widget.Button mSuccButton1 -> w
-    android.widget.Button mSuccButton2 -> x
+    android.widget.Button mSuccButton1 -> x
+    android.widget.Button mSuccButton2 -> y
     void initView(android.os.Bundle) -> a
     void initListener() -> g
     void initData() -> h
     int setPageType() -> m
     void treatClickEvent(int) -> b
 com.changtou.moneybox.module.page.LoginActivity -> com.changtou.moneybox.module.page.LoginActivity:
-    com.changtou.moneybox.module.widget.ExEditView mUserNameView -> w
-    com.changtou.moneybox.module.widget.ExEditView mPassWordView -> x
-    com.changtou.moneybox.module.usermodule.UserManager mUserManager -> y
-    cn.pedant.SweetAlert.SweetAlertDialog mDialog -> z
-    com.changtou.moneybox.common.utils.SharedPreferencesHelper sph -> A
-    android.widget.Button mLoginBtn -> B
-    boolean quitflag -> C
-    java.lang.String[] mErrorContent -> D
+    com.changtou.moneybox.module.widget.ExEditView mUserNameView -> x
+    com.changtou.moneybox.module.widget.ExEditView mPassWordView -> y
+    com.changtou.moneybox.module.usermodule.UserManager mUserManager -> z
+    cn.pedant.SweetAlert.SweetAlertDialog mDialog -> A
+    com.changtou.moneybox.common.utils.SharedPreferencesHelper sph -> B
+    android.widget.Button mLoginBtn -> C
+    boolean quitflag -> D
+    java.lang.String[] mErrorContent -> E
     void initView(android.os.Bundle) -> a
     void initListener() -> g
     void onResume() -> onResume
@@ -11203,19 +11273,19 @@ com.changtou.moneybox.module.page.LoginActivity -> com.changtou.moneybox.module.
     void gotoMainPage() -> q
     void onPause() -> onPause
     android.widget.Button access$000(com.changtou.moneybox.module.page.LoginActivity) -> a
-com.changtou.moneybox.module.page.LoginActivity$1 -> com.changtou.moneybox.module.page.p:
+com.changtou.moneybox.module.page.LoginActivity$1 -> com.changtou.moneybox.module.page.r:
     android.content.Intent val$intent2 -> a
     com.changtou.moneybox.module.page.LoginActivity this$0 -> b
     void onClick(android.view.View) -> onClick
-com.changtou.moneybox.module.page.LoginActivity$2 -> com.changtou.moneybox.module.page.q:
+com.changtou.moneybox.module.page.LoginActivity$2 -> com.changtou.moneybox.module.page.s:
     com.changtou.moneybox.module.page.LoginActivity this$0 -> a
     void onDismiss(android.content.DialogInterface) -> onDismiss
 com.changtou.moneybox.module.page.MainActivity -> com.changtou.moneybox.module.page.MainActivity:
-    com.changtou.moneybox.module.widget.ExViewPager mViewpager -> w
-    android.widget.LinearLayout[] mBars -> x
-    com.changtou.moneybox.module.page.HomeFragment mHomeFragment -> y
-    com.changtou.moneybox.module.page.RichesFragment mRichesFragment -> z
-    long exitTime -> A
+    com.changtou.moneybox.module.widget.ExViewPager mViewpager -> x
+    android.widget.LinearLayout[] mBars -> y
+    com.changtou.moneybox.module.page.HomeFragment mHomeFragment -> z
+    com.changtou.moneybox.module.page.RichesFragment mRichesFragment -> A
+    long exitTime -> B
     void initView(android.os.Bundle) -> a
     void initListener() -> g
     int setPageType() -> m
@@ -11240,32 +11310,32 @@ com.changtou.moneybox.module.page.MoreFragment -> com.changtou.moneybox.module.p
     void popoTeleDialog() -> Y
     boolean onTouch(android.view.View,android.view.MotionEvent) -> onTouch
     android.content.Context access$000(com.changtou.moneybox.module.page.MoreFragment) -> a
-com.changtou.moneybox.module.page.MoreFragment$1 -> com.changtou.moneybox.module.page.r:
+com.changtou.moneybox.module.page.MoreFragment$1 -> com.changtou.moneybox.module.page.t:
     com.umeng.message.PushAgent val$mPushAgent -> a
     com.changtou.moneybox.common.utils.ACache val$cache -> b
     com.changtou.moneybox.module.page.MoreFragment this$0 -> c
     void onCheckedChanged(android.widget.CompoundButton,boolean) -> onCheckedChanged
-com.changtou.moneybox.module.page.MoreFragment$2 -> com.changtou.moneybox.module.page.s:
+com.changtou.moneybox.module.page.MoreFragment$2 -> com.changtou.moneybox.module.page.u:
     com.changtou.moneybox.module.page.MoreFragment this$0 -> a
     void onUpdateReturned(int,com.umeng.update.UpdateResponse) -> onUpdateReturned
-com.changtou.moneybox.module.page.MoreFragment$3 -> com.changtou.moneybox.module.page.t:
+com.changtou.moneybox.module.page.MoreFragment$3 -> com.changtou.moneybox.module.page.v:
     cn.pedant.SweetAlert.SweetAlertDialog val$sad -> a
     com.changtou.moneybox.module.page.MoreFragment this$0 -> b
     void onClick(cn.pedant.SweetAlert.SweetAlertDialog) -> a
-com.changtou.moneybox.module.page.MoreFragment$4 -> com.changtou.moneybox.module.page.u:
+com.changtou.moneybox.module.page.MoreFragment$4 -> com.changtou.moneybox.module.page.w:
     com.changtou.moneybox.module.page.MoreFragment this$0 -> a
     void onUpdateReturned(int,com.umeng.update.UpdateResponse) -> onUpdateReturned
 com.changtou.moneybox.module.page.PdFrogetActivity -> com.changtou.moneybox.module.page.PdFrogetActivity:
-    android.widget.Button mBtnSendCS -> w
-    android.widget.Button mBtnSubmitCS -> x
-    com.changtou.moneybox.module.page.PdFrogetActivity$Counter mCounter -> y
-    int restCnt -> z
-    com.changtou.moneybox.common.utils.ACache mACache -> A
-    com.changtou.moneybox.module.widget.ExEditView mAccountEditView -> B
-    com.changtou.moneybox.module.widget.ExEditView mCodeText -> C
-    java.lang.String mPhoneNum -> D
-    java.lang.String mCheckSum -> E
-    int mPageType -> F
+    android.widget.Button mBtnSendCS -> x
+    android.widget.Button mBtnSubmitCS -> y
+    com.changtou.moneybox.module.page.PdFrogetActivity$Counter mCounter -> z
+    int restCnt -> A
+    com.changtou.moneybox.common.utils.ACache mACache -> B
+    com.changtou.moneybox.module.widget.ExEditView mAccountEditView -> C
+    com.changtou.moneybox.module.widget.ExEditView mCodeText -> D
+    java.lang.String mPhoneNum -> E
+    java.lang.String mCheckSum -> F
+    int mPageType -> G
     void initView(android.os.Bundle) -> a
     void initListener() -> g
     void initData() -> h
@@ -11282,19 +11352,19 @@ com.changtou.moneybox.module.page.PdFrogetActivity -> com.changtou.moneybox.modu
     com.changtou.moneybox.module.widget.ExEditView access$000(com.changtou.moneybox.module.page.PdFrogetActivity) -> a
     android.widget.Button access$100(com.changtou.moneybox.module.page.PdFrogetActivity) -> b
     int access$210(com.changtou.moneybox.module.page.PdFrogetActivity) -> c
-com.changtou.moneybox.module.page.PdFrogetActivity$1 -> com.changtou.moneybox.module.page.v:
+com.changtou.moneybox.module.page.PdFrogetActivity$1 -> com.changtou.moneybox.module.page.x:
     com.changtou.moneybox.module.page.PdFrogetActivity this$0 -> a
     void readCallback(java.lang.String) -> a
-com.changtou.moneybox.module.page.PdFrogetActivity$Counter -> com.changtou.moneybox.module.page.w:
+com.changtou.moneybox.module.page.PdFrogetActivity$Counter -> com.changtou.moneybox.module.page.y:
     com.changtou.moneybox.module.page.PdFrogetActivity this$0 -> a
     void onFinish() -> onFinish
     void onTick(long) -> onTick
 com.changtou.moneybox.module.page.PdManagerActivity -> com.changtou.moneybox.module.page.PdManagerActivity:
-    com.changtou.moneybox.common.utils.SharedPreferencesHelper sph -> w
-    com.changtou.moneybox.module.widget.VerifyDialog mVerifyDialog -> x
-    com.changtou.moneybox.module.usermodule.UserManager mUserManager -> y
-    com.changtou.moneybox.module.widget.ExEditView loginBtn -> z
-    com.changtou.moneybox.module.widget.ExEditView gestureBtn -> A
+    com.changtou.moneybox.common.utils.SharedPreferencesHelper sph -> x
+    com.changtou.moneybox.module.widget.VerifyDialog mVerifyDialog -> y
+    com.changtou.moneybox.module.usermodule.UserManager mUserManager -> z
+    com.changtou.moneybox.module.widget.ExEditView loginBtn -> A
+    com.changtou.moneybox.module.widget.ExEditView gestureBtn -> B
     void initView(android.os.Bundle) -> a
     void initListener() -> g
     int setPageType() -> m
@@ -11306,10 +11376,10 @@ com.changtou.moneybox.module.page.PdManagerActivity -> com.changtou.moneybox.mod
     void loginUserInfo(java.lang.Object) -> a
     boolean onTouch(android.view.View,android.view.MotionEvent) -> onTouch
 com.changtou.moneybox.module.page.PhoneAuthActivity -> com.changtou.moneybox.module.page.PhoneAuthActivity:
-    android.widget.Button mCountBtn -> w
-    android.widget.EditText mCodeText -> x
-    android.widget.EditText mPhoneNumText -> y
-    com.changtou.moneybox.module.page.PhoneAuthActivity$Counter mCounter -> z
+    android.widget.Button mCountBtn -> x
+    android.widget.EditText mCodeText -> y
+    android.widget.EditText mPhoneNumText -> z
+    com.changtou.moneybox.module.page.PhoneAuthActivity$Counter mCounter -> A
     void initView(android.os.Bundle) -> a
     void initListener() -> g
     void initData() -> h
@@ -11318,22 +11388,22 @@ com.changtou.moneybox.module.page.PhoneAuthActivity -> com.changtou.moneybox.mod
     void checkCodeRequest(java.lang.String,java.lang.String) -> a
     void sendMsgRequest(java.lang.String) -> d
     android.widget.Button access$000(com.changtou.moneybox.module.page.PhoneAuthActivity) -> a
-com.changtou.moneybox.module.page.PhoneAuthActivity$Counter -> com.changtou.moneybox.module.page.x:
+com.changtou.moneybox.module.page.PhoneAuthActivity$Counter -> com.changtou.moneybox.module.page.z:
     com.changtou.moneybox.module.page.PhoneAuthActivity this$0 -> a
     void onFinish() -> onFinish
     void onTick(long) -> onTick
 com.changtou.moneybox.module.page.ProductDetailsActivity -> com.changtou.moneybox.module.page.ProductDetailsActivity:
-    com.changtou.moneybox.module.adapter.ProductDetailsAdapter mAdapter -> C
-    android.widget.ListView mProdList -> D
-    com.changtou.moneybox.module.widget.PullToNextLayout pullToNextLayout -> w
-    java.util.ArrayList mPageList -> E
-    com.changtou.moneybox.module.page.ProductDetailsActivity$DetailsPage mDetailsPage -> x
-    com.changtou.moneybox.module.page.ProductDetailsMorePage mAgreementPage -> y
-    int mProductType -> z
-    java.lang.String mProductId -> A
-    java.lang.String[] mDetails -> B
-    android.widget.Button mConfirmBtn -> F
-    java.lang.String mState -> G
+    com.changtou.moneybox.module.adapter.ProductDetailsAdapter mAdapter -> D
+    android.widget.ListView mProdList -> E
+    com.changtou.moneybox.module.widget.PullToNextLayout pullToNextLayout -> x
+    java.util.ArrayList mPageList -> F
+    com.changtou.moneybox.module.page.ProductDetailsActivity$DetailsPage mDetailsPage -> y
+    com.changtou.moneybox.module.page.ProductDetailsMorePage mAgreementPage -> z
+    int mProductType -> A
+    java.lang.String mProductId -> B
+    java.lang.String[] mDetails -> C
+    android.widget.Button mConfirmBtn -> G
+    java.lang.String mState -> H
     void initView(android.os.Bundle) -> a
     void initData() -> h
     int setPageType() -> m
@@ -11343,7 +11413,7 @@ com.changtou.moneybox.module.page.ProductDetailsActivity -> com.changtou.moneybo
     void onFailure(java.lang.Throwable,java.lang.String,int) -> a
     void initListener() -> g
     void treatClickEvent(int) -> b
-com.changtou.moneybox.module.page.ProductDetailsActivity$1 -> com.changtou.moneybox.module.page.y:
+com.changtou.moneybox.module.page.ProductDetailsActivity$1 -> com.changtou.moneybox.module.page.aa:
     com.changtou.moneybox.module.page.ProductDetailsActivity this$0 -> a
     void onSelectItem(int,android.view.View) -> a
 com.changtou.moneybox.module.page.ProductDetailsActivity$DetailsPage -> com.changtou.moneybox.module.page.ProductDetailsActivity$DetailsPage:
@@ -11377,7 +11447,7 @@ com.changtou.moneybox.module.page.ProductDetailsMorePage -> com.changtou.moneybo
     void initContractText(java.lang.String) -> a
     void initContractCTB(java.lang.String[],java.lang.String,java.lang.String) -> a
     void initContractImgList(java.lang.String) -> b
-com.changtou.moneybox.module.page.ProductDetailsMorePage$1 -> com.changtou.moneybox.module.page.z:
+com.changtou.moneybox.module.page.ProductDetailsMorePage$1 -> com.changtou.moneybox.module.page.ab:
     android.widget.ScrollView val$scrollView -> a
     com.changtou.moneybox.module.page.ProductDetailsMorePage this$0 -> b
     void onPageScrolled(int,float,int) -> a
@@ -11426,14 +11496,17 @@ com.changtou.moneybox.module.page.ProductFragment -> com.changtou.moneybox.modul
     android.support.v4.view.ViewPager mViewPager -> h
     java.util.List mViewList -> i
     com.changtou.moneybox.module.widget.SlidingTabLayout mSlidingTabLayout -> aj
-    android.support.v4.view.ViewPager$OnPageChangeListener mPageChangeListener -> ak
+    com.changtou.moneybox.module.entity.ProductEntity entity -> ak
+    android.support.v4.view.ViewPager$OnPageChangeListener mPageChangeListener -> al
     android.view.View initView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> c
     void initListener() -> a
     void initData(android.os.Bundle) -> c
     void onSuccess(java.lang.String,java.lang.Object,int) -> a
     void onFailure(java.lang.Throwable,java.lang.String,int) -> a
+    void onResume() -> B
+    void ctrlProductPage(java.util.LinkedList) -> a
     java.util.List access$000(com.changtou.moneybox.module.page.ProductFragment) -> a
-com.changtou.moneybox.module.page.ProductFragment$1 -> com.changtou.moneybox.module.page.aa:
+com.changtou.moneybox.module.page.ProductFragment$1 -> com.changtou.moneybox.module.page.ac:
     com.changtou.moneybox.module.page.ProductFragment this$0 -> a
     void onPageSelected(int) -> a
     void onPageScrolled(int,float,int) -> a
@@ -11462,16 +11535,20 @@ com.changtou.moneybox.module.page.ProductFragment$SubPage -> com.changtou.moneyb
     java.lang.String access$402(com.changtou.moneybox.module.page.ProductFragment$SubPage,java.lang.String) -> a
     java.lang.String access$400(com.changtou.moneybox.module.page.ProductFragment$SubPage) -> d
     void access$500(com.changtou.moneybox.module.page.ProductFragment$SubPage,java.lang.String) -> b
-com.changtou.moneybox.module.page.ProductFragment$SubPage$1 -> com.changtou.moneybox.module.page.ab:
+com.changtou.moneybox.module.page.ProductFragment$SubPage$1 -> com.changtou.moneybox.module.page.ad:
     com.changtou.moneybox.module.page.ProductFragment$SubPage this$0 -> a
     void reTry() -> a
-com.changtou.moneybox.module.page.ProductFragment$SubPage$2 -> com.changtou.moneybox.module.page.ac:
+com.changtou.moneybox.module.page.ProductFragment$SubPage$2 -> com.changtou.moneybox.module.page.ae:
     com.changtou.moneybox.module.page.ProductFragment$SubPage this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
+com.changtou.moneybox.module.page.RechargeBankListPage -> com.changtou.moneybox.module.page.RechargeBankListPage:
+    void initView(android.os.Bundle) -> a
+    void initData() -> h
+    int setPageType() -> m
 com.changtou.moneybox.module.page.RechargeRecordActivity -> com.changtou.moneybox.module.page.RechargeRecordActivity:
-    android.widget.ListView mTradeListView -> w
-    com.changtou.moneybox.module.adapter.RechargeAdapter mAdapter -> x
-    int mGoPageCode -> y
+    android.widget.ListView mTradeListView -> x
+    com.changtou.moneybox.module.adapter.RechargeAdapter mAdapter -> y
+    int mGoPageCode -> z
     void initView(android.os.Bundle) -> a
     void initData() -> h
     int setPageType() -> m
@@ -11479,23 +11556,29 @@ com.changtou.moneybox.module.page.RechargeRecordActivity -> com.changtou.moneybo
     void onFailure(java.lang.Throwable,java.lang.String,int) -> a
     void onBackPressed() -> onBackPressed
     void backToMainActivity() -> o
+    int access$000(com.changtou.moneybox.module.page.RechargeRecordActivity) -> a
+    void access$100(com.changtou.moneybox.module.page.RechargeRecordActivity) -> b
+com.changtou.moneybox.module.page.RechargeRecordActivity$1 -> com.changtou.moneybox.module.page.af:
+    com.changtou.moneybox.module.page.RechargeRecordActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
 com.changtou.moneybox.module.page.RecordActivity -> com.changtou.moneybox.module.page.RecordActivity:
-    android.widget.LinearLayout ll_Investment -> w
-    android.widget.LinearLayout ll_Trading -> x
-    android.widget.ListView lv1 -> y
-    android.widget.ImageView icon1 -> z
-    android.widget.ImageView icon2 -> A
-    int screenWidth -> B
-    int screenHeight -> C
-    com.changtou.moneybox.module.widget.MyAdapter adapter -> D
-    int idx -> E
-    android.widget.BaseAdapter mAdapter -> F
-    com.handmark.pulltorefresh.library.PullToRefreshListView mPullRefreshListView -> G
-    android.widget.ListView actualListView -> H
-    java.util.LinkedList list1 -> I
-    java.util.LinkedList list2 -> J
-    java.util.LinkedList list3 -> K
-    java.lang.String mShouzhi -> L
+    android.widget.LinearLayout ll_Investment -> x
+    android.widget.LinearLayout ll_Trading -> y
+    android.widget.ListView lv1 -> z
+    android.widget.ImageView icon1 -> A
+    android.widget.ImageView icon2 -> B
+    int screenWidth -> C
+    int screenHeight -> D
+    com.changtou.moneybox.module.widget.MyAdapter adapter -> E
+    int idx -> F
+    android.widget.BaseAdapter mAdapter -> G
+    com.handmark.pulltorefresh.library.PullToRefreshListView mPullRefreshListView -> H
+    android.widget.ListView actualListView -> I
+    java.util.LinkedList mAllList -> J
+    java.util.LinkedList list1 -> K
+    java.util.LinkedList list2 -> L
+    java.util.LinkedList list3 -> M
+    java.lang.String mShouzhi -> N
     void initView(android.os.Bundle) -> a
     int setPageType() -> m
     void initData() -> h
@@ -11513,13 +11596,13 @@ com.changtou.moneybox.module.page.RecordActivity -> com.changtou.moneybox.module
     void initDealRequest() -> t
     android.widget.ListView access$000(com.changtou.moneybox.module.page.RecordActivity) -> a
     void access$100(com.changtou.moneybox.module.page.RecordActivity,java.lang.String) -> a
-com.changtou.moneybox.module.page.RecordActivity$1 -> com.changtou.moneybox.module.page.ad:
+com.changtou.moneybox.module.page.RecordActivity$1 -> com.changtou.moneybox.module.page.ag:
     android.widget.PopupWindow val$popupWindow -> a
     com.changtou.moneybox.module.page.RecordActivity this$0 -> b
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
 com.changtou.moneybox.module.page.RegisterActivity -> com.changtou.moneybox.module.page.RegisterActivity:
-    com.changtou.moneybox.module.widget.ExEditView mPhoneNum -> w
-    java.lang.String phoneNum -> x
+    com.changtou.moneybox.module.widget.ExEditView mPhoneNum -> x
+    java.lang.String phoneNum -> y
     void initView(android.os.Bundle) -> a
     int setPageType() -> m
     void initListener() -> g
@@ -11529,10 +11612,10 @@ com.changtou.moneybox.module.page.RegisterActivity -> com.changtou.moneybox.modu
     void sendMsgRequest(java.lang.String) -> d
     void isRegister(java.lang.String) -> e
 com.changtou.moneybox.module.page.RegisterNextActivity -> com.changtou.moneybox.module.page.RegisterNextActivity:
-    com.changtou.moneybox.module.widget.ExEditView mCodeText -> w
-    android.widget.Button mCountBtn -> x
-    java.lang.String mPhoneNum -> y
-    com.changtou.moneybox.module.page.RegisterNextActivity$Counter mCounter -> z
+    com.changtou.moneybox.module.widget.ExEditView mCodeText -> x
+    android.widget.Button mCountBtn -> y
+    java.lang.String mPhoneNum -> z
+    com.changtou.moneybox.module.page.RegisterNextActivity$Counter mCounter -> A
     void initView(android.os.Bundle) -> a
     int setPageType() -> m
     void initListener() -> g
@@ -11543,23 +11626,23 @@ com.changtou.moneybox.module.page.RegisterNextActivity -> com.changtou.moneybox.
     void sendMsgRequest(java.lang.String) -> d
     com.changtou.moneybox.module.widget.ExEditView access$000(com.changtou.moneybox.module.page.RegisterNextActivity) -> a
     android.widget.Button access$100(com.changtou.moneybox.module.page.RegisterNextActivity) -> b
-com.changtou.moneybox.module.page.RegisterNextActivity$1 -> com.changtou.moneybox.module.page.ae:
+com.changtou.moneybox.module.page.RegisterNextActivity$1 -> com.changtou.moneybox.module.page.ah:
     com.changtou.moneybox.module.page.RegisterNextActivity this$0 -> a
     void readCallback(java.lang.String) -> a
-com.changtou.moneybox.module.page.RegisterNextActivity$Counter -> com.changtou.moneybox.module.page.af:
+com.changtou.moneybox.module.page.RegisterNextActivity$Counter -> com.changtou.moneybox.module.page.ai:
     com.changtou.moneybox.module.page.RegisterNextActivity this$0 -> a
     void onFinish() -> onFinish
     void onTick(long) -> onTick
 com.changtou.moneybox.module.page.RegisterPasswordActivity -> com.changtou.moneybox.module.page.RegisterPasswordActivity:
-    com.changtou.moneybox.module.widget.ExEditView mPasswordText -> w
-    com.changtou.moneybox.module.widget.ExEditView mAffirmText -> x
-    java.lang.String mPhoneNum -> y
-    java.lang.String mPassword -> z
-    com.changtou.moneybox.module.usermodule.UserManager mUserManager -> A
-    com.changtou.moneybox.common.utils.SharedPreferencesHelper sph -> B
-    int mPageType -> C
-    java.lang.String mCheckSum -> D
-    android.widget.Button mSumbitBtn -> E
+    com.changtou.moneybox.module.widget.ExEditView mPasswordText -> x
+    com.changtou.moneybox.module.widget.ExEditView mAffirmText -> y
+    java.lang.String mPhoneNum -> z
+    java.lang.String mPassword -> A
+    com.changtou.moneybox.module.usermodule.UserManager mUserManager -> B
+    com.changtou.moneybox.common.utils.SharedPreferencesHelper sph -> C
+    int mPageType -> D
+    java.lang.String mCheckSum -> E
+    android.widget.Button mSumbitBtn -> F
     void initView(android.os.Bundle) -> a
     void initListener() -> g
     int setPageType() -> m
@@ -11573,14 +11656,14 @@ com.changtou.moneybox.module.page.RegisterPasswordActivity -> com.changtou.money
     void loginErrNotify(int) -> c
     void loginUserInfo(java.lang.Object) -> a
 com.changtou.moneybox.module.page.RichesBankActivity -> com.changtou.moneybox.module.page.RichesBankActivity:
-    com.changtou.moneybox.common.widget.swipeMenuListView.SwipeMenuListView mBankListView -> x
-    com.changtou.moneybox.module.adapter.BankCardAdapter mAdapter -> y
-    com.changtou.moneybox.module.entity.BankCardEntity mEntity -> z
-    boolean isCertify -> A
-    boolean isRecharge -> B
-    com.changtou.moneybox.module.entity.UserInfoEntity mUserInfoEntity -> C
-    int mURLType -> D
-    java.util.Map mBankInfoList -> w
+    com.changtou.moneybox.common.widget.swipeMenuListView.SwipeMenuListView mBankListView -> y
+    com.changtou.moneybox.module.adapter.BankCardAdapter mAdapter -> z
+    com.changtou.moneybox.module.entity.BankCardEntity mEntity -> A
+    boolean isCertify -> B
+    boolean isRecharge -> C
+    com.changtou.moneybox.module.entity.UserInfoEntity mUserInfoEntity -> D
+    int mURLType -> E
+    java.util.Map mBankInfoList -> x
     void initView(android.os.Bundle) -> a
     void initData() -> h
     int setPageType() -> m
@@ -11598,54 +11681,54 @@ com.changtou.moneybox.module.page.RichesBankActivity -> com.changtou.moneybox.mo
     com.changtou.moneybox.common.widget.swipeMenuListView.SwipeMenuListView access$500(com.changtou.moneybox.module.page.RichesBankActivity) -> d
     boolean access$600(com.changtou.moneybox.module.page.RichesBankActivity) -> e
     int access$700(com.changtou.moneybox.module.page.RichesBankActivity) -> f
-com.changtou.moneybox.module.page.RichesBankActivity$1 -> com.changtou.moneybox.module.page.ag:
+com.changtou.moneybox.module.page.RichesBankActivity$1 -> com.changtou.moneybox.module.page.aj:
     com.changtou.moneybox.module.page.RichesBankActivity this$0 -> a
     void create(com.changtou.moneybox.common.widget.swipeMenuListView.SwipeMenu) -> a
-com.changtou.moneybox.module.page.RichesBankActivity$2 -> com.changtou.moneybox.module.page.ah:
+com.changtou.moneybox.module.page.RichesBankActivity$2 -> com.changtou.moneybox.module.page.ak:
     com.changtou.moneybox.module.page.RichesBankActivity this$0 -> a
     boolean onMenuItemClick(int,com.changtou.moneybox.common.widget.swipeMenuListView.SwipeMenu,int) -> a
-com.changtou.moneybox.module.page.RichesBankActivity$3 -> com.changtou.moneybox.module.page.ai:
+com.changtou.moneybox.module.page.RichesBankActivity$3 -> com.changtou.moneybox.module.page.al:
     com.changtou.moneybox.module.page.RichesBankActivity this$0 -> a
     void onSwipeStart(int) -> a
     void onSwipeEnd(int) -> b
-com.changtou.moneybox.module.page.RichesBankActivity$4 -> com.changtou.moneybox.module.page.aj:
+com.changtou.moneybox.module.page.RichesBankActivity$4 -> com.changtou.moneybox.module.page.am:
     com.changtou.moneybox.module.page.RichesBankActivity this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-com.changtou.moneybox.module.page.RichesBankActivity$5 -> com.changtou.moneybox.module.page.ak:
+com.changtou.moneybox.module.page.RichesBankActivity$5 -> com.changtou.moneybox.module.page.an:
     android.content.Intent val$intent3 -> a
     com.changtou.moneybox.module.page.RichesBankActivity this$0 -> b
     void onClick(android.view.View) -> onClick
-com.changtou.moneybox.module.page.RichesBankActivity$6 -> com.changtou.moneybox.module.page.al:
+com.changtou.moneybox.module.page.RichesBankActivity$6 -> com.changtou.moneybox.module.page.ao:
     cn.pedant.SweetAlert.SweetAlertDialog val$sad -> a
     com.changtou.moneybox.module.page.RichesBankActivity this$0 -> b
     void onClick(cn.pedant.SweetAlert.SweetAlertDialog) -> a
-com.changtou.moneybox.module.page.RichesBankActivity$7 -> com.changtou.moneybox.module.page.am:
+com.changtou.moneybox.module.page.RichesBankActivity$7 -> com.changtou.moneybox.module.page.ap:
     cn.pedant.SweetAlert.SweetAlertDialog val$sad -> a
     com.changtou.moneybox.module.page.RichesBankActivity this$0 -> b
     void onClick(cn.pedant.SweetAlert.SweetAlertDialog) -> a
 com.changtou.moneybox.module.page.RichesBankAddActivity -> com.changtou.moneybox.module.page.RichesBankAddActivity:
-    com.changtou.moneybox.module.widget.BetterSpinner mBankSpinner -> G
-    com.changtou.moneybox.module.widget.BetterSpinner mProvinceSpinner -> H
-    com.changtou.moneybox.module.widget.BetterSpinner mCitySpinner -> I
-    android.widget.TextView mRankTextView -> J
-    android.widget.TextView mRank2TextView -> K
-    android.widget.EditText mBankNoEdit -> L
-    android.widget.EditText mBranchEdit -> M
-    java.lang.String[] mBankDatas -> w
-    java.lang.String[] mProvinceDatas -> x
-    java.lang.String[] mCitisDatas -> y
-    java.util.Map mCitisDatasMap -> z
-    java.util.Map mDistrictDatasMap -> A
-    java.util.Map mZipcodeDatasMap -> B
-    java.lang.String mCurrentProviceName -> C
-    java.lang.String mCurrentCityName -> D
-    java.lang.String mCurrentDistrictName -> E
-    android.widget.EditText mUserNameEdit -> N
-    java.lang.String mFullName -> O
-    com.changtou.moneybox.module.entity.UserInfoEntity mUserInfoEntity -> P
-    java.lang.String mCurrentZipCode -> F
-    int mURLType -> Q
-    java.lang.String mBankNo -> R
+    com.changtou.moneybox.module.widget.BetterSpinner mBankSpinner -> H
+    com.changtou.moneybox.module.widget.BetterSpinner mProvinceSpinner -> I
+    com.changtou.moneybox.module.widget.BetterSpinner mCitySpinner -> J
+    android.widget.TextView mRankTextView -> K
+    android.widget.TextView mRank2TextView -> L
+    android.widget.EditText mBankNoEdit -> M
+    android.widget.EditText mBranchEdit -> N
+    java.lang.String[] mBankDatas -> x
+    java.lang.String[] mProvinceDatas -> y
+    java.lang.String[] mCitisDatas -> z
+    java.util.Map mCitisDatasMap -> A
+    java.util.Map mDistrictDatasMap -> B
+    java.util.Map mZipcodeDatasMap -> C
+    java.lang.String mCurrentProviceName -> D
+    java.lang.String mCurrentCityName -> E
+    java.lang.String mCurrentDistrictName -> F
+    android.widget.EditText mUserNameEdit -> O
+    java.lang.String mFullName -> P
+    com.changtou.moneybox.module.entity.UserInfoEntity mUserInfoEntity -> Q
+    java.lang.String mCurrentZipCode -> G
+    int mURLType -> R
+    java.lang.String mBankNo -> S
     void initView(android.os.Bundle) -> a
     void initListener() -> g
     void treatClickEvent(int) -> b
@@ -11665,16 +11748,16 @@ com.changtou.moneybox.module.page.RichesBankAddActivity -> com.changtou.moneybox
     com.changtou.moneybox.module.widget.BetterSpinner access$100(com.changtou.moneybox.module.page.RichesBankAddActivity) -> a
     com.changtou.moneybox.module.widget.BetterSpinner access$200(com.changtou.moneybox.module.page.RichesBankAddActivity) -> b
     void access$300(com.changtou.moneybox.module.page.RichesBankAddActivity,java.lang.String) -> b
-com.changtou.moneybox.module.page.RichesBankAddActivity$1 -> com.changtou.moneybox.module.page.an:
+com.changtou.moneybox.module.page.RichesBankAddActivity$1 -> com.changtou.moneybox.module.page.aq:
     com.changtou.moneybox.module.page.RichesBankAddActivity this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-com.changtou.moneybox.module.page.RichesBankAddActivity$2 -> com.changtou.moneybox.module.page.ao:
+com.changtou.moneybox.module.page.RichesBankAddActivity$2 -> com.changtou.moneybox.module.page.ar:
     com.changtou.moneybox.module.page.RichesBankAddActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.changtou.moneybox.module.page.RichesBankAddActivity$3 -> com.changtou.moneybox.module.page.ap:
+com.changtou.moneybox.module.page.RichesBankAddActivity$3 -> com.changtou.moneybox.module.page.as:
     com.changtou.moneybox.module.page.RichesBankAddActivity this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-com.changtou.moneybox.module.page.RichesBankAddActivity$4 -> com.changtou.moneybox.module.page.aq:
+com.changtou.moneybox.module.page.RichesBankAddActivity$4 -> com.changtou.moneybox.module.page.at:
     int beforeTextLength -> a
     int onTextLength -> b
     boolean isChanged -> c
@@ -11687,30 +11770,32 @@ com.changtou.moneybox.module.page.RichesBankAddActivity$4 -> com.changtou.moneyb
     void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
     void afterTextChanged(android.text.Editable) -> afterTextChanged
 com.changtou.moneybox.module.page.RichesCalendarActivity -> com.changtou.moneybox.module.page.RichesCalendarActivity:
-    com.prolificinteractive.materialcalendarview.decorator.OneDayDecorator oneDayDecorator -> w
-    com.prolificinteractive.materialcalendarview.MaterialCalendarView widget -> x
-    com.changtou.moneybox.module.entity.FlowEntity mFlowEntity -> y
-    int mSelectMonth -> z
-    java.util.List mDayList -> A
-    java.util.Map mLabelData -> B
-    android.widget.ListView mItemListView -> C
-    com.changtou.moneybox.module.adapter.FlowItemAdapter mFlowItemAdapter -> D
+    com.prolificinteractive.materialcalendarview.decorator.OneDayDecorator oneDayDecorator -> x
+    com.prolificinteractive.materialcalendarview.MaterialCalendarView widget -> y
+    com.changtou.moneybox.module.entity.FlowEntity mFlowEntity -> z
+    int mSelectMonth -> A
+    java.util.List mDayList -> B
+    java.util.Map mLabelData -> C
+    android.widget.ListView mItemListView -> D
+    com.changtou.moneybox.module.adapter.FlowItemAdapter mFlowItemAdapter -> E
     void initView(android.os.Bundle) -> a
     void initData() -> h
+    void onSuccess(java.lang.String,java.lang.Object,int) -> a
+    void onFailure(java.lang.Throwable,java.lang.String,int) -> a
     int setPageType() -> m
     void setReData() -> o
     void onDateChanged(com.prolificinteractive.materialcalendarview.MaterialCalendarView,com.prolificinteractive.materialcalendarview.CalendarDay) -> a
     void setLabelDays() -> p
     void onMonthChanged(com.prolificinteractive.materialcalendarview.MaterialCalendarView,com.prolificinteractive.materialcalendarview.CalendarDay) -> b
 com.changtou.moneybox.module.page.RichesCertificationActivity -> com.changtou.moneybox.module.page.RichesCertificationActivity:
-    java.lang.String mFullName -> w
-    android.widget.EditText mFullnameView -> x
-    java.lang.String mIdcard -> y
-    android.widget.EditText mIdcardView -> z
-    java.lang.String[] mError -> A
-    boolean isCertifty -> B
-    com.changtou.moneybox.module.entity.UserInfoEntity mUserInfoEntity -> C
-    int mURLType -> D
+    java.lang.String mFullName -> x
+    android.widget.EditText mFullnameView -> y
+    java.lang.String mIdcard -> z
+    android.widget.EditText mIdcardView -> A
+    java.lang.String[] mError -> B
+    boolean isCertifty -> C
+    com.changtou.moneybox.module.entity.UserInfoEntity mUserInfoEntity -> D
+    int mURLType -> E
     void initView(android.os.Bundle) -> a
     void initListener() -> g
     void treatClickEvent(int) -> b
@@ -11720,9 +11805,9 @@ com.changtou.moneybox.module.page.RichesCertificationActivity -> com.changtou.mo
     int setPageType() -> m
     void requestCertify() -> o
 com.changtou.moneybox.module.page.RichesFlowActivity -> com.changtou.moneybox.module.page.RichesFlowActivity:
-    android.widget.ListView mFlowListView -> w
-    com.changtou.moneybox.module.adapter.FlowAdapter mAdapter -> x
-    com.changtou.moneybox.module.entity.FlowEntity mEntity -> y
+    android.widget.ListView mFlowListView -> x
+    com.changtou.moneybox.module.adapter.FlowAdapter mAdapter -> y
+    com.changtou.moneybox.module.entity.FlowEntity mEntity -> z
     void initView(android.os.Bundle) -> a
     void initData() -> h
     int setPageType() -> m
@@ -11730,7 +11815,7 @@ com.changtou.moneybox.module.page.RichesFlowActivity -> com.changtou.moneybox.mo
     void onFailure(java.lang.Throwable,java.lang.String,int) -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
 com.changtou.moneybox.module.page.RichesFragment -> com.changtou.moneybox.module.page.RichesFragment:
-    com.changtou.moneybox.module.widget.CountView mTotalAssetsTextView -> h
+    com.changtou.moneybox.common.utils.RiseNumberTextView mTotalAssetsTextView -> h
     android.widget.TextView mInvestAssetsTextView -> i
     android.widget.TextView mProfitTextView -> aj
     android.widget.TextView mOverageTextView -> ak
@@ -11755,6 +11840,7 @@ com.changtou.moneybox.module.page.RichesFragment -> com.changtou.moneybox.module
     com.changtou.moneybox.common.dialog.SpotsDialog mSpotsDialog -> aD
     android.view.View mExchangeGiftView -> aE
     android.view.View mExchangeGiftView1 -> aF
+    java.lang.String total -> aG
     android.view.View initView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> c
     void onResume() -> B
     void initListener() -> a
@@ -11779,48 +11865,61 @@ com.changtou.moneybox.module.page.RichesFragment -> com.changtou.moneybox.module
     android.widget.Button access$200(com.changtou.moneybox.module.page.RichesFragment) -> c
     int access$300(com.changtou.moneybox.module.page.RichesFragment) -> d
     android.widget.TextView access$400(com.changtou.moneybox.module.page.RichesFragment) -> e
-    android.animation.ObjectAnimator access$500(com.changtou.moneybox.module.page.RichesFragment) -> f
-com.changtou.moneybox.module.page.RichesFragment$1 -> com.changtou.moneybox.module.page.ar:
+    com.changtou.moneybox.common.utils.RiseNumberTextView access$500(com.changtou.moneybox.module.page.RichesFragment) -> f
+    android.animation.ObjectAnimator access$600(com.changtou.moneybox.module.page.RichesFragment) -> g
+com.changtou.moneybox.module.page.RichesFragment$1 -> com.changtou.moneybox.module.page.au:
     com.changtou.moneybox.module.page.RichesFragment this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-com.changtou.moneybox.module.page.RichesFragment$2 -> com.changtou.moneybox.module.page.as:
+com.changtou.moneybox.module.page.RichesFragment$10 -> com.changtou.moneybox.module.page.av:
+    cn.pedant.SweetAlert.SweetAlertDialog val$sad -> a
+    com.changtou.moneybox.module.page.RichesFragment this$0 -> b
+    void onClick(cn.pedant.SweetAlert.SweetAlertDialog) -> a
+com.changtou.moneybox.module.page.RichesFragment$11 -> com.changtou.moneybox.module.page.aw:
+    cn.pedant.SweetAlert.SweetAlertDialog val$sad -> a
+    com.changtou.moneybox.module.page.RichesFragment this$0 -> b
+    void onClick(cn.pedant.SweetAlert.SweetAlertDialog) -> a
+com.changtou.moneybox.module.page.RichesFragment$2 -> com.changtou.moneybox.module.page.ax:
+    com.changtou.moneybox.module.page.RichesFragment this$0 -> a
+    void onClick(android.view.View) -> onClick
+com.changtou.moneybox.module.page.RichesFragment$3 -> com.changtou.moneybox.module.page.ay:
+    com.changtou.moneybox.module.page.RichesFragment this$0 -> a
+    void onClick(android.view.View) -> onClick
+com.changtou.moneybox.module.page.RichesFragment$4 -> com.changtou.moneybox.module.page.az:
+    com.changtou.moneybox.module.page.RichesFragment this$0 -> a
+    void onClick(android.view.View) -> onClick
+com.changtou.moneybox.module.page.RichesFragment$5 -> com.changtou.moneybox.module.page.ba:
     com.changtou.moneybox.module.page.RichesFragment this$0 -> a
     void onDismiss(android.content.DialogInterface) -> onDismiss
-com.changtou.moneybox.module.page.RichesFragment$3 -> com.changtou.moneybox.module.page.at:
+com.changtou.moneybox.module.page.RichesFragment$6 -> com.changtou.moneybox.module.page.bb:
     com.changtou.moneybox.module.page.RichesFragment this$0 -> a
     void onShow(android.content.DialogInterface) -> onShow
-com.changtou.moneybox.module.page.RichesFragment$4 -> com.changtou.moneybox.module.page.au:
+com.changtou.moneybox.module.page.RichesFragment$7 -> com.changtou.moneybox.module.page.bc:
     com.changtou.moneybox.module.page.RichesFragment this$0 -> a
     void onClick(android.view.View) -> onClick
-com.changtou.moneybox.module.page.RichesFragment$5 -> com.changtou.moneybox.module.page.av:
+com.changtou.moneybox.module.page.RichesFragment$8 -> com.changtou.moneybox.module.page.bd:
     com.changtou.moneybox.module.page.RichesFragment this$0 -> a
     void onClick(android.view.View) -> onClick
-com.changtou.moneybox.module.page.RichesFragment$6 -> com.changtou.moneybox.module.page.aw:
-    cn.pedant.SweetAlert.SweetAlertDialog val$sad -> a
-    com.changtou.moneybox.module.page.RichesFragment this$0 -> b
-    void onClick(cn.pedant.SweetAlert.SweetAlertDialog) -> a
-com.changtou.moneybox.module.page.RichesFragment$7 -> com.changtou.moneybox.module.page.ax:
-    cn.pedant.SweetAlert.SweetAlertDialog val$sad -> a
-    com.changtou.moneybox.module.page.RichesFragment this$0 -> b
-    void onClick(cn.pedant.SweetAlert.SweetAlertDialog) -> a
-com.changtou.moneybox.module.page.RichesFragment$Counter -> com.changtou.moneybox.module.page.ay:
+com.changtou.moneybox.module.page.RichesFragment$9 -> com.changtou.moneybox.module.page.be:
+    com.changtou.moneybox.module.page.RichesFragment this$0 -> a
+    void onEndFinish() -> a
+com.changtou.moneybox.module.page.RichesFragment$Counter -> com.changtou.moneybox.module.page.bf:
     com.changtou.moneybox.module.page.RichesFragment this$0 -> a
     void onFinish() -> onFinish
     void onTick(long) -> onTick
 com.changtou.moneybox.module.page.RichesFriendActivity -> com.changtou.moneybox.module.page.RichesFriendActivity:
-    com.umeng.socialize.controller.UMSocialService mController -> w
+    com.umeng.socialize.controller.UMSocialService mController -> x
     void initView(android.os.Bundle) -> a
     int setPageType() -> m
 com.changtou.moneybox.module.page.RichesInvestListActivity -> com.changtou.moneybox.module.page.RichesInvestListActivity:
-    android.support.v4.view.ViewPager mViewPager -> w
-    com.changtou.moneybox.module.widget.SlidingTabLayout mSlidingTabLayout -> x
-    com.changtou.moneybox.module.page.RichesInvestListActivity$SubPage mSubPage1 -> y
-    com.changtou.moneybox.module.page.RichesInvestListActivity$SubPage mSubPage2 -> z
-    com.changtou.moneybox.module.page.RichesInvestListActivity$SubPage mSubPage3 -> A
-    java.util.LinkedList list1 -> B
-    java.util.LinkedList list2 -> C
-    java.util.LinkedList list3 -> D
-    java.lang.String[] mTypeName -> E
+    android.support.v4.view.ViewPager mViewPager -> x
+    com.changtou.moneybox.module.widget.SlidingTabLayout mSlidingTabLayout -> y
+    com.changtou.moneybox.module.page.RichesInvestListActivity$SubPage mSubPage1 -> z
+    com.changtou.moneybox.module.page.RichesInvestListActivity$SubPage mSubPage2 -> A
+    com.changtou.moneybox.module.page.RichesInvestListActivity$SubPage mSubPage3 -> B
+    java.util.LinkedList list1 -> C
+    java.util.LinkedList list2 -> D
+    java.util.LinkedList list3 -> E
+    java.lang.String[] mTypeName -> F
     void initView(android.os.Bundle) -> a
     int setPageType() -> m
     void initData() -> h
@@ -11847,28 +11946,29 @@ com.changtou.moneybox.module.page.RichesInvestListActivity$SubPage -> com.changt
     java.util.LinkedList access$000(com.changtou.moneybox.module.page.RichesInvestListActivity$SubPage) -> a
     int access$200(com.changtou.moneybox.module.page.RichesInvestListActivity$SubPage) -> b
     void access$300(com.changtou.moneybox.module.page.RichesInvestListActivity$SubPage,java.lang.String,int,java.lang.String) -> a
-com.changtou.moneybox.module.page.RichesInvestListActivity$SubPage$1 -> com.changtou.moneybox.module.page.az:
+com.changtou.moneybox.module.page.RichesInvestListActivity$SubPage$1 -> com.changtou.moneybox.module.page.bg:
     com.changtou.moneybox.module.page.RichesInvestListActivity$SubPage this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
 com.changtou.moneybox.module.page.RichesPromotionActivity -> com.changtou.moneybox.module.page.RichesPromotionActivity:
-    com.umeng.socialize.controller.UMSocialService mController -> w
-    com.changtou.moneybox.module.entity.UserInfoEntity mUserInfoEntity -> x
+    com.umeng.socialize.controller.UMSocialService mController -> x
+    com.changtou.moneybox.module.entity.UserInfoEntity mUserInfoEntity -> y
     void initView(android.os.Bundle) -> a
     void initListener() -> g
     int setPageType() -> m
     void treatClickEvent(int) -> b
 com.changtou.moneybox.module.page.RichesRechargePage -> com.changtou.moneybox.module.page.RichesRechargePage:
-    android.support.v4.view.ViewPager mViewPager -> w
-    com.changtou.moneybox.module.widget.SlidingTabLayout mSlidingTabLayout -> x
-    com.changtou.moneybox.module.page.RichesRechargePage$QuickRechargePage mSubPage1 -> y
-    com.changtou.moneybox.module.page.RichesRechargePage$SubPage mSubPage2 -> z
-    java.lang.String[] mTypeName -> A
+    android.support.v4.view.ViewPager mViewPager -> x
+    com.changtou.moneybox.module.widget.SlidingTabLayout mSlidingTabLayout -> y
+    com.changtou.moneybox.module.page.RichesRechargePage$QuickRechargePage mSubPage1 -> z
+    com.changtou.moneybox.module.page.RichesRechargePage$SubPage mSubPage2 -> A
+    int mUrlType -> B
+    java.lang.String[] mTypeName -> C
     void initView(android.os.Bundle) -> a
     void initData() -> h
     int setPageType() -> m
     void onBackIcon() -> n
     void onBackPressed() -> onBackPressed
-com.changtou.moneybox.module.page.RichesRechargePage$1 -> com.changtou.moneybox.module.page.ba:
+com.changtou.moneybox.module.page.RichesRechargePage$1 -> com.changtou.moneybox.module.page.bh:
     com.changtou.moneybox.module.page.RichesRechargePage this$0 -> a
     void onClick(android.view.View) -> onClick
 com.changtou.moneybox.module.page.RichesRechargePage$QuickRechargePage -> com.changtou.moneybox.module.page.RichesRechargePage$QuickRechargePage:
@@ -11911,18 +12011,22 @@ com.changtou.moneybox.module.page.RichesRechargePage$QuickRechargePage -> com.ch
     void access$000(com.changtou.moneybox.module.page.RichesRechargePage$QuickRechargePage) -> a
     com.changtou.moneybox.module.entity.UserInfoEntity access$100(com.changtou.moneybox.module.page.RichesRechargePage$QuickRechargePage) -> b
     void access$200(com.changtou.moneybox.module.page.RichesRechargePage$QuickRechargePage) -> c
-com.changtou.moneybox.module.page.RichesRechargePage$QuickRechargePage$1 -> com.changtou.moneybox.module.page.bb:
+com.changtou.moneybox.module.page.RichesRechargePage$QuickRechargePage$1 -> com.changtou.moneybox.module.page.bi:
+    android.content.Intent val$intent1 -> a
+    com.changtou.moneybox.module.page.RichesRechargePage$QuickRechargePage this$0 -> b
+    void onClick(android.view.View) -> onClick
+com.changtou.moneybox.module.page.RichesRechargePage$QuickRechargePage$2 -> com.changtou.moneybox.module.page.bj:
     android.content.Intent val$intent -> a
     com.changtou.moneybox.module.page.RichesRechargePage$QuickRechargePage this$0 -> b
     void onClick(android.view.View) -> onClick
-com.changtou.moneybox.module.page.RichesRechargePage$QuickRechargePage$2 -> com.changtou.moneybox.module.page.bc:
+com.changtou.moneybox.module.page.RichesRechargePage$QuickRechargePage$3 -> com.changtou.moneybox.module.page.bk:
     com.changtou.moneybox.module.page.RichesRechargePage$QuickRechargePage this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-com.changtou.moneybox.module.page.RichesRechargePage$QuickRechargePage$3 -> com.changtou.moneybox.module.page.bd:
+com.changtou.moneybox.module.page.RichesRechargePage$QuickRechargePage$4 -> com.changtou.moneybox.module.page.bl:
     cn.pedant.SweetAlert.SweetAlertDialog val$sad -> a
     com.changtou.moneybox.module.page.RichesRechargePage$QuickRechargePage this$0 -> b
     void onClick(cn.pedant.SweetAlert.SweetAlertDialog) -> a
-com.changtou.moneybox.module.page.RichesRechargePage$QuickRechargePage$4 -> com.changtou.moneybox.module.page.be:
+com.changtou.moneybox.module.page.RichesRechargePage$QuickRechargePage$5 -> com.changtou.moneybox.module.page.bm:
     cn.pedant.SweetAlert.SweetAlertDialog val$sad -> a
     com.changtou.moneybox.module.page.RichesRechargePage$QuickRechargePage this$0 -> b
     void onClick(cn.pedant.SweetAlert.SweetAlertDialog) -> a
@@ -11939,19 +12043,19 @@ com.changtou.moneybox.module.page.RichesRechargePage$SubPage -> com.changtou.mon
     void onFailure(java.lang.Throwable,java.lang.String,int) -> a
     void onRefresh(com.handmark.pulltorefresh.library.PullToRefreshBase) -> a
 com.changtou.moneybox.module.page.RichesRechargeSuccPage -> com.changtou.moneybox.module.page.RichesRechargeSuccPage:
-    android.widget.Button mSuccButton1 -> w
-    android.widget.Button mSuccButton2 -> x
+    android.widget.Button mSuccButton1 -> x
+    android.widget.Button mSuccButton2 -> y
     void initView(android.os.Bundle) -> a
     void initListener() -> g
     void initData() -> h
     int setPageType() -> m
     void treatClickEvent(int) -> b
 com.changtou.moneybox.module.page.RichesRewardsActivity -> com.changtou.moneybox.module.page.RichesRewardsActivity:
-    android.widget.ListView mRewarListView -> w
-    android.widget.TextView mZhuceTextView -> x
-    android.widget.TextView mTouziTextView -> y
-    android.widget.TextView mLijinTextView -> z
-    android.widget.TextView mXianjinTextView -> A
+    android.widget.ListView mRewarListView -> x
+    android.widget.TextView mZhuceTextView -> y
+    android.widget.TextView mTouziTextView -> z
+    android.widget.TextView mLijinTextView -> A
+    android.widget.TextView mXianjinTextView -> B
     void initView(android.os.Bundle) -> a
     void initData() -> h
     int setPageType() -> m
@@ -11959,14 +12063,14 @@ com.changtou.moneybox.module.page.RichesRewardsActivity -> com.changtou.moneybox
     void onSuccess(java.lang.String,java.lang.Object,int) -> a
     void onFailure(java.lang.Throwable,java.lang.String,int) -> a
 com.changtou.moneybox.module.page.RichesSafeActivity -> com.changtou.moneybox.module.page.RichesSafeActivity:
-    com.changtou.moneybox.module.widget.ExEditView phoneauthBtn -> w
-    com.changtou.moneybox.module.widget.ExEditView certyBtn -> x
-    android.widget.Button quitBtn -> y
-    com.changtou.moneybox.module.widget.ExEditView bankBtn -> z
-    com.changtou.moneybox.module.widget.ExEditView pdBtn -> A
-    android.widget.TextView mTitleView -> B
-    com.changtou.moneybox.common.utils.SharedPreferencesHelper sph -> C
-    com.changtou.moneybox.module.entity.UserInfoEntity userInfoEntity -> D
+    com.changtou.moneybox.module.widget.ExEditView phoneauthBtn -> x
+    com.changtou.moneybox.module.widget.ExEditView certyBtn -> y
+    android.widget.Button quitBtn -> z
+    com.changtou.moneybox.module.widget.ExEditView bankBtn -> A
+    com.changtou.moneybox.module.widget.ExEditView pdBtn -> B
+    android.widget.TextView mTitleView -> C
+    com.changtou.moneybox.common.utils.SharedPreferencesHelper sph -> D
+    com.changtou.moneybox.module.entity.UserInfoEntity userInfoEntity -> E
     void initView(android.os.Bundle) -> a
     void initListener() -> g
     int setPageType() -> m
@@ -11974,31 +12078,31 @@ com.changtou.moneybox.module.page.RichesSafeActivity -> com.changtou.moneybox.mo
     void treatClickEvent(int) -> b
     boolean onTouch(android.view.View,android.view.MotionEvent) -> onTouch
 com.changtou.moneybox.module.page.RichesTradeActivity -> com.changtou.moneybox.module.page.RichesTradeActivity:
-    android.widget.ListView mTradeListView -> w
-    com.changtou.moneybox.module.adapter.TradeAdapter mAdapter -> x
+    android.widget.ListView mTradeListView -> x
+    com.changtou.moneybox.module.adapter.TradeAdapter mAdapter -> y
     void initView(android.os.Bundle) -> a
     void initData() -> h
     int setPageType() -> m
     void onSuccess(java.lang.String,java.lang.Object,int) -> a
 com.changtou.moneybox.module.page.RichesWithdrawActivity -> com.changtou.moneybox.module.page.RichesWithdrawActivity:
-    android.widget.TextView mBankNoView -> x
-    android.widget.ImageView mBankIconView -> y
-    java.util.Map mBankInfoList -> z
-    android.widget.EditText mWithdrawNum -> A
-    android.widget.TextView mWithdrawMoney -> B
-    android.widget.TextView mWithdrawTotle -> C
-    android.widget.TextView mWithdrawHandling -> D
-    android.widget.TextView mTouyuanTextView -> E
-    java.lang.String mOverage -> F
-    java.lang.String mHandling -> G
-    int mTouyuan -> H
-    android.widget.CheckBox mBrtxCheck -> I
-    android.widget.Button mSubmitBtn -> J
-    java.lang.String mDefaultBankNo -> K
-    java.lang.String[] mError -> L
-    com.changtou.moneybox.module.entity.UserInfoEntity mUserInfoEntity -> M
-    int bolt -> N
-    android.text.TextWatcher mTextWatcher -> w
+    android.widget.TextView mBankNoView -> y
+    android.widget.ImageView mBankIconView -> z
+    java.util.Map mBankInfoList -> A
+    android.widget.EditText mWithdrawNum -> B
+    android.widget.TextView mWithdrawMoney -> C
+    android.widget.TextView mWithdrawTotle -> D
+    android.widget.TextView mWithdrawHandling -> E
+    android.widget.TextView mTouyuanTextView -> F
+    java.lang.String mOverage -> G
+    java.lang.String mHandling -> H
+    int mTouyuan -> I
+    android.widget.CheckBox mBrtxCheck -> J
+    android.widget.Button mSubmitBtn -> K
+    java.lang.String mDefaultBankNo -> L
+    java.lang.String[] mError -> M
+    com.changtou.moneybox.module.entity.UserInfoEntity mUserInfoEntity -> N
+    int bolt -> O
+    android.text.TextWatcher mTextWatcher -> x
     void initView(android.os.Bundle) -> a
     void initData() -> h
     void initBankInfo() -> o
@@ -12014,40 +12118,52 @@ com.changtou.moneybox.module.page.RichesWithdrawActivity -> com.changtou.moneybo
     void popuAuthDailog() -> r
     void onBackIcon() -> n
     void onBackPressed() -> onBackPressed
-    android.widget.EditText access$000(com.changtou.moneybox.module.page.RichesWithdrawActivity) -> a
-    int access$102(com.changtou.moneybox.module.page.RichesWithdrawActivity,int) -> a
-    java.lang.String access$202(com.changtou.moneybox.module.page.RichesWithdrawActivity,java.lang.String) -> a
-    java.lang.String access$200(com.changtou.moneybox.module.page.RichesWithdrawActivity) -> b
-    android.widget.Button access$300(com.changtou.moneybox.module.page.RichesWithdrawActivity) -> c
-    android.widget.TextView access$400(com.changtou.moneybox.module.page.RichesWithdrawActivity) -> d
-    void access$500(com.changtou.moneybox.module.page.RichesWithdrawActivity) -> e
-com.changtou.moneybox.module.page.RichesWithdrawActivity$1 -> com.changtou.moneybox.module.page.bf:
+    void popuBoltDailog() -> s
+    int access$000(com.changtou.moneybox.module.page.RichesWithdrawActivity) -> a
+    void access$100(com.changtou.moneybox.module.page.RichesWithdrawActivity) -> b
+    android.widget.CheckBox access$200(com.changtou.moneybox.module.page.RichesWithdrawActivity) -> c
+    int access$302(com.changtou.moneybox.module.page.RichesWithdrawActivity,int) -> a
+    java.lang.String access$402(com.changtou.moneybox.module.page.RichesWithdrawActivity,java.lang.String) -> a
+    java.lang.String access$400(com.changtou.moneybox.module.page.RichesWithdrawActivity) -> d
+    android.widget.EditText access$500(com.changtou.moneybox.module.page.RichesWithdrawActivity) -> e
+    android.widget.Button access$600(com.changtou.moneybox.module.page.RichesWithdrawActivity) -> f
+    android.widget.TextView access$700(com.changtou.moneybox.module.page.RichesWithdrawActivity) -> g
+    void access$800(com.changtou.moneybox.module.page.RichesWithdrawActivity) -> h
+com.changtou.moneybox.module.page.RichesWithdrawActivity$1 -> com.changtou.moneybox.module.page.bn:
     android.content.Intent val$intent3 -> a
     com.changtou.moneybox.module.page.RichesWithdrawActivity this$0 -> b
     void onClick(android.view.View) -> onClick
-com.changtou.moneybox.module.page.RichesWithdrawActivity$2 -> com.changtou.moneybox.module.page.bg:
+com.changtou.moneybox.module.page.RichesWithdrawActivity$2 -> com.changtou.moneybox.module.page.bo:
     com.changtou.moneybox.module.page.RichesWithdrawActivity this$0 -> a
     void onCheckedChanged(android.widget.CompoundButton,boolean) -> onCheckedChanged
-com.changtou.moneybox.module.page.RichesWithdrawActivity$3 -> com.changtou.moneybox.module.page.bh:
+com.changtou.moneybox.module.page.RichesWithdrawActivity$3 -> com.changtou.moneybox.module.page.bp:
     com.changtou.moneybox.module.page.RichesWithdrawActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.changtou.moneybox.module.page.RichesWithdrawActivity$4 -> com.changtou.moneybox.module.page.bi:
+com.changtou.moneybox.module.page.RichesWithdrawActivity$4 -> com.changtou.moneybox.module.page.bq:
     com.changtou.moneybox.module.page.RichesWithdrawActivity this$0 -> a
     void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
     void beforeTextChanged(java.lang.CharSequence,int,int,int) -> beforeTextChanged
     void afterTextChanged(android.text.Editable) -> afterTextChanged
-com.changtou.moneybox.module.page.RichesWithdrawActivity$5 -> com.changtou.moneybox.module.page.bj:
+com.changtou.moneybox.module.page.RichesWithdrawActivity$5 -> com.changtou.moneybox.module.page.br:
     cn.pedant.SweetAlert.SweetAlertDialog val$sad -> a
     com.changtou.moneybox.module.page.RichesWithdrawActivity this$0 -> b
     void onClick(cn.pedant.SweetAlert.SweetAlertDialog) -> a
-com.changtou.moneybox.module.page.RichesWithdrawActivity$6 -> com.changtou.moneybox.module.page.bk:
+com.changtou.moneybox.module.page.RichesWithdrawActivity$6 -> com.changtou.moneybox.module.page.bs:
+    cn.pedant.SweetAlert.SweetAlertDialog val$sad -> a
+    com.changtou.moneybox.module.page.RichesWithdrawActivity this$0 -> b
+    void onClick(cn.pedant.SweetAlert.SweetAlertDialog) -> a
+com.changtou.moneybox.module.page.RichesWithdrawActivity$7 -> com.changtou.moneybox.module.page.bt:
+    cn.pedant.SweetAlert.SweetAlertDialog val$sad -> a
+    com.changtou.moneybox.module.page.RichesWithdrawActivity this$0 -> b
+    void onClick(cn.pedant.SweetAlert.SweetAlertDialog) -> a
+com.changtou.moneybox.module.page.RichesWithdrawActivity$8 -> com.changtou.moneybox.module.page.bu:
     cn.pedant.SweetAlert.SweetAlertDialog val$sad -> a
     com.changtou.moneybox.module.page.RichesWithdrawActivity this$0 -> b
     void onClick(cn.pedant.SweetAlert.SweetAlertDialog) -> a
 com.changtou.moneybox.module.page.WebActivity -> com.changtou.moneybox.module.page.WebActivity:
-    com.changtou.moneybox.module.widget.ProgressWebView myWebView -> w
-    java.lang.String mUrl -> x
-    java.lang.String mTitle -> y
+    com.changtou.moneybox.module.widget.ProgressWebView myWebView -> x
+    java.lang.String mUrl -> y
+    java.lang.String mTitle -> z
     void initView(android.os.Bundle) -> a
     void initListener() -> g
     void initData() -> h
@@ -12055,16 +12171,16 @@ com.changtou.moneybox.module.page.WebActivity -> com.changtou.moneybox.module.pa
     boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
     void onResume() -> onResume
     void onPause() -> onPause
-com.changtou.moneybox.module.page.WebActivity$1 -> com.changtou.moneybox.module.page.bl:
+com.changtou.moneybox.module.page.WebActivity$1 -> com.changtou.moneybox.module.page.bv:
     com.changtou.moneybox.module.page.WebActivity this$0 -> a
     boolean shouldOverrideUrlLoading(android.webkit.WebView,java.lang.String) -> shouldOverrideUrlLoading
-com.changtou.moneybox.module.page.WebActivity$2 -> com.changtou.moneybox.module.page.bm:
+com.changtou.moneybox.module.page.WebActivity$2 -> com.changtou.moneybox.module.page.bw:
     com.changtou.moneybox.module.page.WebActivity this$0 -> a
     void onProgressChanged(android.webkit.WebView,int) -> onProgressChanged
 com.changtou.moneybox.module.page.WithdrawRecordActivity -> com.changtou.moneybox.module.page.WithdrawRecordActivity:
-    android.widget.ListView mTradeListView -> w
-    com.changtou.moneybox.module.adapter.WithdrawAdapter mAdapter -> x
-    int mGoPageCode -> y
+    android.widget.ListView mTradeListView -> x
+    com.changtou.moneybox.module.adapter.WithdrawAdapter mAdapter -> y
+    int mGoPageCode -> z
     void initView(android.os.Bundle) -> a
     void initData() -> h
     int setPageType() -> m
@@ -12072,9 +12188,14 @@ com.changtou.moneybox.module.page.WithdrawRecordActivity -> com.changtou.moneybo
     void onFailure(java.lang.Throwable,java.lang.String,int) -> a
     void onBackPressed() -> onBackPressed
     void backToMainActivity() -> o
+    int access$000(com.changtou.moneybox.module.page.WithdrawRecordActivity) -> a
+    void access$100(com.changtou.moneybox.module.page.WithdrawRecordActivity) -> b
+com.changtou.moneybox.module.page.WithdrawRecordActivity$1 -> com.changtou.moneybox.module.page.bx:
+    com.changtou.moneybox.module.page.WithdrawRecordActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
 com.changtou.moneybox.module.page.WithdrawSuccPage -> com.changtou.moneybox.module.page.WithdrawSuccPage:
-    android.widget.Button mSuccButton1 -> w
-    android.widget.Button mSuccButton2 -> x
+    android.widget.Button mSuccButton1 -> x
+    android.widget.Button mSuccButton2 -> y
     void initView(android.os.Bundle) -> a
     void initListener() -> g
     void initData() -> h
@@ -12104,17 +12225,17 @@ com.changtou.moneybox.module.phonebook.PinyinComparator -> com.changtou.moneybox
     int compare(com.changtou.moneybox.module.phonebook.SortModel,com.changtou.moneybox.module.phonebook.SortModel) -> a
     int compare(java.lang.Object,java.lang.Object) -> compare
 com.changtou.moneybox.module.phonebook.RichesPhoneBookActivity -> com.changtou.moneybox.module.phonebook.RichesPhoneBookActivity:
-    android.widget.ListView sortListView -> w
-    com.changtou.moneybox.module.phonebook.SideBar sideBar -> x
-    android.widget.TextView dialog -> y
-    com.changtou.moneybox.module.phonebook.SortAdapter adapter -> z
-    com.changtou.moneybox.module.phonebook.ClearEditText mClearEditText -> A
-    com.changtou.moneybox.module.phonebook.CharacterParser characterParser -> B
-    java.util.List mSourceDateList -> C
-    com.changtou.moneybox.module.phonebook.PinyinComparator pinyinComparator -> D
-    android.net.Uri uri -> E
-    java.lang.String[] projection -> F
-    android.content.AsyncQueryHandler queryHandler -> G
+    android.widget.ListView sortListView -> x
+    com.changtou.moneybox.module.phonebook.SideBar sideBar -> y
+    android.widget.TextView dialog -> z
+    com.changtou.moneybox.module.phonebook.SortAdapter adapter -> A
+    com.changtou.moneybox.module.phonebook.ClearEditText mClearEditText -> B
+    com.changtou.moneybox.module.phonebook.CharacterParser characterParser -> C
+    java.util.List mSourceDateList -> D
+    com.changtou.moneybox.module.phonebook.PinyinComparator pinyinComparator -> E
+    android.net.Uri uri -> F
+    java.lang.String[] projection -> G
+    android.content.AsyncQueryHandler queryHandler -> H
     void initView(android.os.Bundle) -> a
     int setPageType() -> m
     void initViews() -> o
@@ -12381,8 +12502,7 @@ com.changtou.moneybox.module.widget.BomPanel$AsynMove -> com.changtou.moneybox.m
 com.changtou.moneybox.module.widget.CountView -> com.changtou.moneybox.module.widget.CountView:
     int duration -> a
     float number -> b
-    void showNumberWithAnimation(float) -> a
-    void showPercentWithAnimation(float) -> b
+    void showPercentWithAnimation(float) -> a
     float getNumber() -> getNumber
     void setNumber(float) -> setNumber
     void setPercent(float) -> setPercent
@@ -33413,6 +33533,7 @@ com.nineoldandroids.animation.ValueAnimator -> com.a.a.an:
     java.util.ArrayList mUpdateListeners -> D
     com.nineoldandroids.animation.PropertyValuesHolder[] mValues -> f
     java.util.HashMap mValuesMap -> g
+    com.nineoldandroids.animation.ValueAnimator ofInt(int[]) -> b
     com.nineoldandroids.animation.ValueAnimator ofFloat(float[]) -> b
     void setIntValues(int[]) -> a
     void setFloatValues(float[]) -> a
@@ -33427,26 +33548,27 @@ com.nineoldandroids.animation.ValueAnimator -> com.a.a.an:
     void start(boolean) -> a
     void start() -> a
     void endAnimation() -> e
-    void startAnimation() -> o
+    void startAnimation() -> p
     boolean delayedAnimationFrame(long) -> b
     boolean animationFrame(long) -> e
+    float getAnimatedFraction() -> i
     void animateValue(float) -> a
     com.nineoldandroids.animation.ValueAnimator clone() -> f
     java.lang.String toString() -> toString
     com.nineoldandroids.animation.Animator clone() -> c
     com.nineoldandroids.animation.Animator setDuration(long) -> a
     java.lang.Object clone() -> clone
-    java.lang.ThreadLocal access$000() -> i
-    java.lang.ThreadLocal access$100() -> j
-    java.lang.ThreadLocal access$200() -> k
+    java.lang.ThreadLocal access$000() -> j
+    java.lang.ThreadLocal access$100() -> k
+    java.lang.ThreadLocal access$200() -> l
     long access$300(com.nineoldandroids.animation.ValueAnimator) -> a
     void access$400(com.nineoldandroids.animation.ValueAnimator) -> b
-    java.lang.ThreadLocal access$500() -> l
-    java.lang.ThreadLocal access$600() -> m
+    java.lang.ThreadLocal access$500() -> m
+    java.lang.ThreadLocal access$600() -> n
     boolean access$700(com.nineoldandroids.animation.ValueAnimator,long) -> a
     boolean access$802(com.nineoldandroids.animation.ValueAnimator,boolean) -> a
     void access$900(com.nineoldandroids.animation.ValueAnimator) -> c
-    long access$1000() -> n
+    long access$1000() -> o
 com.nineoldandroids.animation.ValueAnimator$1 -> com.a.a.ao:
     java.util.ArrayList initialValue() -> a
     java.lang.Object initialValue() -> initialValue

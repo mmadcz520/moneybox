@@ -55,6 +55,8 @@ public class RecordActivity extends CTBaseActivity implements OnTouchListener,
     private PullToRefreshListView mPullRefreshListView;
     private ListView actualListView;
 
+    private LinkedList mAllList = null;
+
     private LinkedList list1 = null;
     private LinkedList list2 = null;
     private LinkedList list3 = null;
@@ -105,13 +107,6 @@ public class RecordActivity extends CTBaseActivity implements OnTouchListener,
 
     }
 
-
-    /**
-     * @return void 杩斿洖绫诲瀷
-     * @Title: showPopupWindow
-     * @Description: PopupWindow
-     * @author luck
-     */
     public void showPopupWindow(View anchor, int flag) {
         final PopupWindow popupWindow = new PopupWindow(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         View contentView = LayoutInflater.from(RecordActivity.this).inflate(
@@ -158,12 +153,15 @@ public class RecordActivity extends CTBaseActivity implements OnTouchListener,
         for (int i = 0; i < 5; i++) {
             switch (i) {
                 case 0:
-                    l.add("还款中");
+                    l.add("全部");
                     break;
                 case 1:
-                    l.add("已还款");
+                    l.add("还款中");
                     break;
                 case 2:
+                    l.add("已结清");
+                    break;
+                case 3:
                     l.add("已退出");
                     break;
             }
@@ -215,48 +213,40 @@ public class RecordActivity extends CTBaseActivity implements OnTouchListener,
                 break;
         }
 
-//	            break;
-//	        }
-
-//	    }
         return false;
     }
 
-    private void switchContent(String keyStr)
-    {
-        if(keyStr.equals("还款中"))
-        {
-            ((InvestListAdapter)mAdapter).setProdType(0);
+    private void switchContent(String keyStr) {
+        if (idx == 1) {
+
             actualListView.setAdapter(mAdapter);
-            ((InvestListAdapter) mAdapter).setData(list1);
-        }
-        else if(keyStr.equals("已还款"))
-        {
-            ((InvestListAdapter)mAdapter).setProdType(1);
-            actualListView.setAdapter(mAdapter);
-            ((InvestListAdapter) mAdapter).setData(list2);
-        }
-        else if(keyStr.equals("已退出"))
-        {
-            ((InvestListAdapter)mAdapter).setProdType(2);
-            actualListView.setAdapter(mAdapter);
-            ((InvestListAdapter) mAdapter).setData(list3);
+            if (keyStr.equals("还款中")) {
+//            ((InvestListAdapter)mAdapter).setProdType(0);
+                ((InvestListAdapter) mAdapter).setData(list1);
+            } else if (keyStr.equals("已结清")) {
+//            ((InvestListAdapter)mAdapter).setProdType(1);
+                ((InvestListAdapter) mAdapter).setData(list2);
+            } else if (keyStr.equals("已退出")) {
+//            ((InvestListAdapter)mAdapter).setProdType(2);
+                ((InvestListAdapter) mAdapter).setData(list3);
+            }
+            else if(keyStr.equals("全部"))
+            {
+                ((InvestListAdapter) mAdapter).setData(mAllList);
+            }
         }
 
-        if(keyStr.equals("全部"))
-        {
-            mShouzhi = "";
-            initDealRequest();
-        }
-        else if(keyStr.equals("收入"))
-        {
-            mShouzhi = "0";
-            initDealRequest();
-        }
-        else if(keyStr.equals("支出"))
-        {
-            mShouzhi = "1";
-            initDealRequest();
+        if(idx == 2) {
+            if (keyStr.equals("全部")) {
+                mShouzhi = "";
+                initDealRequest();
+            } else if (keyStr.equals("收入")) {
+                mShouzhi = "0";
+                initDealRequest();
+            } else if (keyStr.equals("支出")) {
+                mShouzhi = "1";
+                initDealRequest();
+            }
         }
 
     }
@@ -277,7 +267,10 @@ public class RecordActivity extends CTBaseActivity implements OnTouchListener,
                 list2 = investMap.get("2");
                 list3 = investMap.get("3");
 
-                ((InvestListAdapter) mAdapter).setData(list1);
+                mAllList = entity.getAllInvestList();
+
+                ((InvestListAdapter) mAdapter).setData(mAllList);
+//                adapter.notifyDataSetChanged();
 
 //                mSubPage1.initInvestList(list1);
 //                mSubPage2.initInvestList(list2);

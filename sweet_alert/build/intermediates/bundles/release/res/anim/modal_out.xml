@@ -15,4 +15,4 @@
         android:fromAlpha="1"
         android:toAlpha="0"
         android:duration="150"/> -->
-</set><!-- From: file:/F:/app/android/moneybox/moneybox/sweet_alert/src/main/res/anim/modal_out.xml -->
+</set>

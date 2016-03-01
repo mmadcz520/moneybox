@@ -90,6 +90,9 @@ public class WithdrawAdapter extends BaseAdapter{
             viewHolder.mMemoTextView = (TextView) convertView.findViewById(R.id.withdraw_list_memo);
             viewHolder.mCreateTextView = (TextView) convertView.findViewById(R.id.withdraw_list_time);
             viewHolder.statusTextView = (TextView) convertView.findViewById(R.id.withdraw_list_state);
+            viewHolder.mTipTextView = (TextView)convertView.findViewById(R.id.withdraw_list_tip);
+            viewHolder.mSjaccountTextView = (TextView)convertView.findViewById(R.id.withdraw_list_sjaccount);
+            viewHolder.mSjaccountYuanTextView = (TextView)convertView.findViewById(R.id.withdraw_list_sjaccount_yuan);
 
             convertView.setTag(viewHolder);
         }
@@ -102,6 +105,19 @@ public class WithdrawAdapter extends BaseAdapter{
         viewHolder.mMemoTextView.setText(entity.bank);
         viewHolder.statusTextView.setText(entity.status);
         viewHolder.mCreateTextView.setText(entity.createtime);
+        viewHolder.mTipTextView.setText(entity.tip);
+        if(entity.sjaccount.equals("0") || entity.sjaccount.equals(""))
+        {
+            viewHolder.mSjaccountTextView.setVisibility(View.INVISIBLE);
+            viewHolder.mSjaccountYuanTextView.setVisibility(View.INVISIBLE);
+        }
+        else
+        {
+            viewHolder.mSjaccountTextView.setVisibility(View.VISIBLE);
+            viewHolder.mSjaccountYuanTextView.setVisibility(View.VISIBLE);
+            viewHolder.mSjaccountTextView.setText(String.valueOf(entity.sjaccount));
+        }
+
 
         return convertView;
     }
@@ -112,6 +128,9 @@ public class WithdrawAdapter extends BaseAdapter{
         public TextView mMemoTextView;
         public TextView statusTextView;
         public TextView mCreateTextView;
+        public TextView mSjaccountTextView;
+        public TextView mTipTextView;
+        public TextView mSjaccountYuanTextView;
     }
 
 }

@@ -9,6 +9,108 @@
         android:layout_width="match_parent"
         android:layout_height="350dp" />
 
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/ct_divide_line" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="30dp"
+                android:src="@mipmap/riches_calendar_dysy" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="12dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="8dp"
+                    android:text="当月收益（元）"
+                    android:textColor="@color/font_black"
+                    android:textSize="@dimen/font_size_hint2" />
+
+                <TextView
+                    android:id="@+id/riches_calemdar_zsy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:gravity="top"
+                    android:paddingLeft="8dp"
+                    android:text="0.0"
+                    android:textColor="@color/ct_blue"
+                    android:textSize="@dimen/font_size_normal" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_vertical"
+            android:background="@color/ct_divide_line" />
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="30dp"
+                android:src="@mipmap/riches_calendar_dyhb" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="12dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="8dp"
+                    android:text="当月还本（元）"
+                    android:textColor="@color/font_black"
+                    android:textSize="@dimen/font_size_hint2" />
+
+                <TextView
+                    android:id="@+id/riches_calemdar_zhb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:gravity="top"
+                    android:paddingLeft="8dp"
+                    android:text="0.0"
+                    android:textColor="@color/ct_blue"
+                    android:textSize="@dimen/font_size_normal" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
     <View
         android:layout_width="fill_parent"
         android:layout_height="2dp"
@@ -20,8 +122,9 @@
         android:layout_height="fill_parent"
         android:divider="@color/ct_divide_line"
         android:dividerHeight="1px"
-        android:headerDividersEnabled="true"
-        android:footerDividersEnabled="true">
+        android:footerDividersEnabled="true"
+        android:headerDividersEnabled="true">
+
     </ListView>
 
 </LinearLayout>

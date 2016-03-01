@@ -3,7 +3,7 @@
     xmlns:android_custom="http://schemas.android.com/apk/res-auto"
     android:id="@+id/homepage_progress"
     android:layout_width="fill_parent"
-    android:minHeight="190dp"
+    android:minHeight="210dp"
     android:layout_height="wrap_content"
     android:background="@color/ct_white"
     android:orientation="vertical">
@@ -16,7 +16,7 @@
         <com.changtou.moneybox.module.widget.RoundProgressBar
             android:id="@+id/homepage_invest_progress"
             android:layout_width="300dp"
-            android:layout_height="120dp"
+            android:layout_height="250dp"
             android:layout_centerInParent="true"
             android_custom:roundColor="#ffffff"
             android_custom:roundProgressColor="@color/ct_blue_hint"
@@ -27,12 +27,36 @@
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_height="100dp"
                 android:orientation="vertical">
+                <FrameLayout
+                    android:id="@+id/homepage_invest_lijinlayout"
+                    android:visibility="invisible"
+                    android:layout_width="wrap_content"
+                    android:paddingLeft="20dp"
+                    android:layout_height="12dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:scaleType="centerInside"
+                        android:src="@mipmap/an_lj_bg" />
+
+                    <TextView
+                        android:id="@+id/homepage_invest_lijininterest"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:gravity="center_vertical|left"
+                        android:text="5%礼金变现"
+                        android:layout_gravity="center_vertical"
+                        android:textColor="@color/font_prompt"
+                        android:textSize="7sp" />
+                </FrameLayout>
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="33dp">
+                    android:layout_height="30dp">
                     <TextView
                         android:id="@+id/homepage_income_percent"
                         android:layout_width="wrap_content"
@@ -56,11 +80,11 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="14dp"
+                    android:layout_height="12dp"
                     android:layout_marginTop="2dp"
                     android:text="预期年化收益"
                     android:textColor="@color/ct_blue"
-                    android:textSize="12dp" />
+                    android:textSize="10dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -81,10 +105,10 @@
                 <TextView
                     android:id="@+id/xiangmuqixiang"
                     android:layout_width="wrap_content"
-                    android:layout_height="14dp"
+                    android:layout_height="12dp"
                     android:text="项目期限"
                     android:textColor="@color/ct_blue"
-                    android:textSize="12dp" />
+                    android:textSize="10dp" />
             </LinearLayout>
         </com.changtou.moneybox.module.widget.RoundProgressBar>
 
@@ -125,9 +149,10 @@
 
         <TextView
             android:id="@+id/invest_progress_qtje"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:gravity="center_horizontal"
             android:background="@drawable/fillet_stroke"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"

@@ -2,18 +2,26 @@ package com.changtou.moneybox.module.page;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.changtou.moneybox.R;
 import com.changtou.moneybox.common.utils.ACache;
 import com.changtou.moneybox.module.adapter.FlowItemAdapter;
 import com.changtou.moneybox.module.entity.FlowEntity;
+import com.changtou.moneybox.module.entity.ProductEntity;
+import com.changtou.moneybox.module.http.HttpRequst;
+import com.changtou.moneybox.module.widget.ExFPAdapter;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateChangedListener;
 import com.prolificinteractive.materialcalendarview.OnMonthChangedListener;
 import com.prolificinteractive.materialcalendarview.decorator.EventDecorator;
 import com.prolificinteractive.materialcalendarview.decorator.OneDayDecorator;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -41,12 +49,12 @@ public class RichesCalendarActivity extends CTBaseActivity implements OnDateChan
 
     private FlowItemAdapter mFlowItemAdapter = null;
 
+    private TextView mZsyTextView = null;
+    private TextView mZhbTextView = null;
+
     protected void initView(Bundle bundle)
     {
         super.setContentView(R.layout.riches_datapicker);
-
-//        mFlowEntity = (FlowEntity)getIntent().getSerializableExtra("flow");
-//        mSelectMonth = getIntent().getIntExtra("selected_month",0);
 
         ACache cache = ACache.get(this);
         mSelectMonth = (int)cache.getAsObject("selected_month");
@@ -68,14 +76,46 @@ public class RichesCalendarActivity extends CTBaseActivity implements OnDateChan
         mItemListView = (ListView)findViewById(R.id.riches_flow_day_listview);
         mItemListView.setAdapter(mFlowItemAdapter);
 
-        setLabelDays();
+        mZsyTextView = (TextView)findViewById(R.id.riches_calemdar_zsy);
+        mZhbTextView = (TextView)findViewById(R.id.riches_calemdar_zhb);
 
-        setReData();
+//        setLabelDays();
+//        setReData();
     }
 
     protected void initData() {
         super.initData();
         setPageTitle("还款日历");
+
+        sendRequest(HttpRequst.REQ_TYPE_CALENDER,
+                HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_CALENDER),
+                mParams,
+                getAsyncClient(), false);
+    }
+
+    public void onSuccess(String content, Object object, int reqType)
+    {
+        if(reqType == HttpRequst.REQ_TYPE_CALENDER)
+        {
+            try {
+                JSONObject obj = new JSONObject(content);
+                mFlowEntity = new FlowEntity();
+                mFlowEntity.paser(obj.getJSONArray("data").toString());
+
+                setLabelDays();
+                setReData();
+                super.onSuccess(content,object, reqType);
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public void onFailure(Throwable error, String content, int reqType) {
+        super.onFailure(error, content, reqType);
     }
 
     protected int setPageType() {
@@ -157,6 +197,16 @@ public class RichesCalendarActivity extends CTBaseActivity implements OnDateChan
             {
                 ArrayList<FlowEntity.DayEntity> days = monthList.get(i).mDay;
                 dayNum = days.get(0).dayNum;
+
+                //M
+                FlowEntity.MonthEntity month = monthList.get(i);
+                mZsyTextView.setText(month.zsy);
+                mZhbTextView.setText(month.zhb);
+            }
+            else
+            {
+                mZsyTextView.setText("0.0");
+                mZhbTextView.setText("0.0");
             }
         }
 

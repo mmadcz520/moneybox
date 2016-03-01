@@ -7,6 +7,7 @@ import com.changtou.moneybox.common.http.async.RequestParams;
 import com.changtou.moneybox.common.http.base.HttpCallback;
 import com.changtou.moneybox.common.http.impl.AsyncHttpClientImpl;
 import com.changtou.moneybox.common.utils.ACache;
+import com.changtou.moneybox.common.utils.AppUtil;
 import com.changtou.moneybox.module.http.HttpRequst;
 
 import org.json.JSONException;
@@ -46,6 +47,9 @@ public class UserManager implements HttpCallback {
         RequestParams params = new RequestParams();
         params.put("username", username);
         params.put("pwd", password);
+        params.put("ly", "android");
+        AppUtil.getVersionCode(BaseApplication.getInstance());
+        params.put("version", BaseApplication.getInstance().getVersionName());
         client.post(HttpRequst.REQ_TYPE_LOGIN, mBaseApp, loginUrl, params, this);
     }
 
@@ -116,7 +120,7 @@ public class UserManager implements HttpCallback {
     public void onFailure(Throwable error, String content, int reqType) {
 //        for (int i = 0; i < mNotifierContainer.size(); i++)
 //        {
-        mLoginNotifier.loginErrNotify(6);
+        mLoginNotifier.loginErrNotify(reqType);
 //        }
     }
 

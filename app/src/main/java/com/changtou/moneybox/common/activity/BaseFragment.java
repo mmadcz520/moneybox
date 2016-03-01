@@ -13,7 +13,10 @@ import com.changtou.moneybox.common.http.base.BaseHttpClient;
 import com.changtou.moneybox.common.http.base.HttpCallback;
 import com.changtou.moneybox.common.http.async.RequestParams;
 import com.changtou.moneybox.common.utils.DeviceInfo;
+import com.changtou.moneybox.module.http.HttpRequst;
 import com.changtou.moneybox.module.service.NetReceiver;
+
+import org.apache.http.HttpRequest;
 
 public abstract class BaseFragment extends Fragment implements
         HttpCallback {
@@ -146,21 +149,20 @@ public abstract class BaseFragment extends Fragment implements
     /**
      *
      * @param reqType
-     * @param url
      * @param params
      * @param baseHttpClient
      * @param showDialog
      */
-    public void sendRequest(int reqType, String url, RequestParams params,
+    public void sendRequest(HttpRequst reqType, RequestParams params,
                             BaseHttpClient baseHttpClient, boolean showDialog) {
 
         if (DeviceInfo.isNetWorkEnable(this.getActivity())) {
             if(baseHttpClient!=null){
-                if (reqType > 1000) {
-                    baseHttpClient.post(reqType, this.getActivity(), url, params, this);
-                } else {
-                    baseHttpClient.get(reqType,this.getActivity(), url, params, this);
-                }
+//                if (reqType. > 1000) {
+                    baseHttpClient.post(reqType.hashCode(), this.getActivity(), reqType.getUrl(), params, this);
+//                } else {
+//                    baseHttpClient.get(reqType,this.getActivity(), url, params, this);
+//                }
             }
         }
         else

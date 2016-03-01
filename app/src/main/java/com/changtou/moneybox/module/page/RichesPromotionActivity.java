@@ -2,6 +2,11 @@ package com.changtou.moneybox.module.page;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.changtou.moneybox.R;
@@ -45,6 +50,40 @@ public class RichesPromotionActivity extends CTBaseActivity
         wxCircleHandler.addToSocialSDK();
 
         mUserInfoEntity = (UserInfoEntity)ACache.get(this).getAsObject("userinfo");
+
+        ImageView tuijianrenIV = (ImageView)findViewById(R.id.riches_promo_tuijianren);
+        tuijianrenIV.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(RichesPromotionActivity.this, RegisterPromotionActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        ImageView tuijianguizeIV = (ImageView)findViewById(R.id.riches_promo_tuijianguize);
+        tuijianguizeIV.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(RichesPromotionActivity.this, WebActivity.class);
+                intent.putExtra("url", "https://m.changtounet.com/APP_web/Recommend.htm");
+                startActivity(intent);
+            }
+        });
+
+        final ScrollView sroll = (ScrollView)findViewById(R.id.scrollView_showMessages);
+        final int offset = sroll.getMeasuredHeight() - sroll.getHeight();
+
+        Button wytjBtn = (Button)findViewById(R.id.riches_promo_wytj);
+        wytjBtn.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                sroll.fullScroll(ScrollView.FOCUS_DOWN);
+            }
+        });
+
     }
 
     @Override

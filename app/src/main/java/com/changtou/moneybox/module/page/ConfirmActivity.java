@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -17,11 +18,15 @@ import android.widget.Toast;
 import com.changtou.moneybox.R;
 import com.changtou.moneybox.common.http.async.RequestParams;
 import com.changtou.moneybox.common.utils.ACache;
+import com.changtou.moneybox.module.entity.ProductDetailsEntity;
 import com.changtou.moneybox.module.entity.UserInfoEntity;
 import com.changtou.moneybox.module.http.HttpRequst;
 
 
 import org.json.JSONObject;
+
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -69,6 +74,22 @@ public class ConfirmActivity extends CTBaseActivity {
 
     private TextView mLinjinView = null;
 
+    private TextView mShouyiView = null;
+
+    //利息
+    private double interest = 0.0;
+
+    //加息
+    private double jiaxi = 0;
+
+    //手续费
+    private double fee = 0;
+
+    //天数
+    private double daysinterval = 0;
+
+    private TextView mLinjinbianxianView = null;
+
     protected void initView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_confirm);
 
@@ -85,7 +106,6 @@ public class ConfirmActivity extends CTBaseActivity {
         TextView tx4 = (TextView) findViewById(R.id.confirm_ktje);
 
         TextView tx5 = (TextView) findViewById(R.id.confirm_qtje);
-        TextView tx6 = (TextView) findViewById(R.id.confirm_mrxg);
 
         mRLLayout = (RelativeLayout)findViewById(R.id.confirm_ishasjiaxi);
 
@@ -94,13 +114,17 @@ public class ConfirmActivity extends CTBaseActivity {
         tx3.setText(mContent[2]);
         tx4.setText(mContent[3]);
         tx5.setText(mContent[4]);
-        tx6.setText(mContent[5]);
 
         mConfirmBtn = (Button) findViewById(R.id.confirm_button_do);
         mNumInput = (EditText) findViewById(R.id.confirm_input_edit);
         mNumInput.addTextChangedListener(mTextWatcher);
 
         mLinjinView = (TextView) findViewById(R.id.confirm_lijin_num);
+
+        mShouyiView = (TextView)findViewById(R.id.confirm_shouyi_num);
+
+        //礼金变现
+        mLinjinbianxianView = (TextView)findViewById(R.id.confirm_linjinbianxian);
 
         mJiaXiTextView = (TextView) mRLLayout.findViewById(R.id.confirm_jiaxi_text);
         CheckBox isJiaXi = (CheckBox)mRLLayout.findViewById(R.id.confirm_jiaxi_checkbox);
@@ -121,13 +145,15 @@ public class ConfirmActivity extends CTBaseActivity {
 
         //显示余额
         UserInfoEntity userInfoEntity = (UserInfoEntity) ACache.get(this).getAsObject("userinfo");
-        String overage = userInfoEntity.getOverage();
+        String overage = userInfoEntity.getOverage() + "元";
         String gift = String.valueOf(userInfoEntity.getGifts());
         if (gift != null && !gift.equals("")) {
             mSyLijin = (int) Double.parseDouble(String.valueOf(userInfoEntity.getGifts()));
         }
         TextView textView = (TextView) findViewById(R.id.confirm_text_overage);
         textView.setText(overage);
+        TextView lijinTextView = (TextView) findViewById(R.id.confirm_text_lijin);
+        lijinTextView.setText(String.valueOf(mSyLijin)+ "元");
 
         mDialog = new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE);
         mDialog.setConfirmText("确认");
@@ -155,14 +181,14 @@ public class ConfirmActivity extends CTBaseActivity {
             }
         });
 
-        mRechargeBtn = (TextView) findViewById(R.id.recharge_btn);
-        mRechargeBtn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(ConfirmActivity.this, RichesRechargePage.class);
-                intent.putExtra("urlType", 1);
-                startActivity(intent);
-            }
-        });
+//        mRechargeBtn = (TextView) findViewById(R.id.recharge_btn);
+//        mRechargeBtn.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                Intent intent = new Intent(ConfirmActivity.this, RichesRechargePage.class);
+//                intent.putExtra("urlType", 1);
+//                startActivity(intent);
+//            }
+//        });
 
         initHasJiaxi(mProductType, mProductId);
 
@@ -186,6 +212,7 @@ public class ConfirmActivity extends CTBaseActivity {
     @Override
     protected void initData() {
         setPageTitle("确认投资");
+        getProductDetailsRequest();
     }
 
     @Override
@@ -251,6 +278,17 @@ public class ConfirmActivity extends CTBaseActivity {
                 e.printStackTrace();
             }
         }
+        else if(reqType == HttpRequst.REQ_TYPE_PRODUCT_DETAILS)
+        {
+            ProductDetailsEntity entity = (ProductDetailsEntity) object;
+
+            interest = Double.parseDouble(entity.nhsy);
+            jiaxi = entity.jiaxi;
+            fee = entity.fee;
+            daysinterval = entity.daysinterval;
+
+            mLinjinbianxianView.setText(entity.lijininterest + "%");
+        }
         super.onSuccess(content, object, reqType);
     }
 
@@ -315,8 +353,23 @@ public class ConfirmActivity extends CTBaseActivity {
                 mConfirmBtn.setEnabled(false);
             }
 
+            //计算礼金抵扣
             int sylijin = mSyLijin;
             int lijin = (num / 1000 * 5) > sylijin ? sylijin : ((num / 1000) * 5);
+
+
+            //计算加息
+//            (sjlv * days * Convert.ToDouble(this.buy_balance.Text)) / 360;
+//            ((product.interest + product.jiaxi) * (1 - product.fee))
+            Log.e("CT_MONEY", interest + "-" + jiaxi +"-"  + fee +"-"+ daysinterval);
+
+            double lixi = ((interest + jiaxi) * (1 - fee))/100;
+            double shouyi = (lixi * num * daysinterval)/360;
+            DecimalFormat   fnum  =   new DecimalFormat("##0.00");
+            fnum.setRoundingMode(RoundingMode.FLOOR);
+            String shouyistr = fnum.format(shouyi);
+            mShouyiView.setText(String.valueOf(shouyistr)+"元");
+
             mLinjinView.setText(String.valueOf(lijin));
         }
     };
@@ -360,6 +413,28 @@ public class ConfirmActivity extends CTBaseActivity {
 
             sendRequest(HttpRequst.REQ_TYPE_ISHASJIAXI, url, params, getAsyncClient(), false);
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 获取产品详情
+     */
+    private void getProductDetailsRequest()
+    {
+        try {
+            String url = HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_PRODUCT_DETAILS);
+
+            RequestParams params = new RequestParams();
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("id", mProductId);
+            jsonObject.put("type", mProductType);
+            params.put("data", jsonObject.toString());
+
+            sendRequest(HttpRequst.REQ_TYPE_PRODUCT_DETAILS, url, params, getAsyncClient(), true);
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
         }
     }

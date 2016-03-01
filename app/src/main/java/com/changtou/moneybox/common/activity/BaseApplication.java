@@ -617,4 +617,20 @@ public abstract class BaseApplication extends Application implements UncaughtExc
         }
         return channelName;
     }
+
+    /**
+     * 缓存用户数据
+     */
+    private void cacheUserInfo()
+    {
+
+    }
+
+    /**
+     *
+     */
+    private void getCacheUserInfo()
+    {
+
+    }
 }

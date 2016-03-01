@@ -80,6 +80,8 @@ public class ProductFragment extends BaseFragment
 
     public void onSuccess(String content, Object object, int reqType)
     {
+        Log.e("CT_MONEY", content);
+
         if(reqType == HttpRequst.REQ_TYPE_PRODUCT_TYPE)
         {
             try
@@ -124,6 +126,7 @@ public class ProductFragment extends BaseFragment
 
     public void onFailure(Throwable error, String content, int reqType)
     {
+        Log.e("CT_MONEY", content + "=" + reqType);
 //        mZProgressHUD.cancel();
     }
 

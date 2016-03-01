@@ -1,107 +1,165 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="fill_parent"
-                android:layout_height="match_parent"
-                android:background="@color/ct_background"
-                android:orientation="vertical">
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/ct_background"
+    android:orientation="vertical"
+    android:windowSoftInputMode="adjustResize">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="42dp"
-        android:orientation="horizontal"
-        android:background="@drawable/stroke_edit_fillpraent_top">
+        android:background="@drawable/stroke_edit_fillpraent_top"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/confirm_product_name"
-            android:paddingLeft="24dp"
-            android:layout_centerVertical="true"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/font_size_normal"
-            android:textColor="@color/font_black"/>
+            android:layout_centerVertical="true"
+            android:paddingLeft="24dp"
+            android:textColor="@color/font_black"
+            android:textSize="@dimen/font_size_normal" />
 
     </RelativeLayout>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="42dp"
-        android:orientation="horizontal"
-        android:background="@drawable/stroke_edit_fillpraent">
+        android:background="@drawable/stroke_edit_fillpraent"
+        android:orientation="horizontal">
 
         <TextView
-            android:paddingLeft="24dp"
-            android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/font_size_normal"
+            android:layout_centerVertical="true"
+            android:paddingLeft="24dp"
+            android:text="投资期限"
             android:textColor="@color/font_black"
-            android:text="投资期限"/>
+            android:textSize="@dimen/font_size_normal" />
 
         <TextView
             android:id="@+id/confirm_tzxq"
-            android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:paddingRight="24dp"
-            android:textSize="@dimen/font_size_normal"
+            android:text=""
             android:textColor="@color/font_black"
-            android:text=""/>
+            android:textSize="@dimen/font_size_normal" />
 
     </RelativeLayout>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="42dp"
-        android:orientation="horizontal"
-        android:background="@drawable/stroke_edit_fillpraent_bottom">
+        android:background="@drawable/stroke_edit_fillpraent_bottom"
+        android:orientation="horizontal">
 
         <TextView
-            android:paddingLeft="24dp"
-            android:layout_centerVertical="true"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/font_size_normal"
+            android:layout_centerVertical="true"
+            android:paddingLeft="24dp"
+            android:text="年化利率"
             android:textColor="@color/font_black"
-            android:text="年华利率"/>
+            android:textSize="@dimen/font_size_normal" />
 
         <TextView
             android:id="@+id/confirm_nhln"
-            android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:paddingRight="24dp"
-            android:textSize="@dimen/font_size_normal"
-            android:textColor="@color/font_black"
-            android:text=""/>
+            android:text="12%"
+            android:textColor="@color/font_prompt"
+            android:textSize="@dimen/font_size_normal" />
 
     </RelativeLayout>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="42dp"
-        android:orientation="horizontal"
-        android:background="@drawable/stroke_edit_fillpraent_bottom">
+        android:background="@drawable/stroke_edit_fillpraent_bottom"
+        android:orientation="horizontal">
 
         <TextView
-            android:paddingLeft="24dp"
-            android:layout_centerVertical="true"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/font_size_normal"
+            android:layout_centerVertical="true"
+            android:paddingLeft="24dp"
+            android:text="礼金变现"
             android:textColor="@color/font_black"
-            android:text="剩余可投金额"/>
+            android:textSize="@dimen/font_size_normal" />
 
         <TextView
-            android:id="@+id/confirm_ktje"
-            android:layout_centerVertical="true"
+            android:id="@+id/confirm_linjinbianxian"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:paddingRight="24dp"
-            android:textSize="@dimen/font_size_normal"
+            android:text="0%"
+            android:textColor="@color/font_prompt"
+            android:textSize="@dimen/font_size_normal" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="42dp"
+        android:background="@drawable/stroke_edit_fillpraent_bottom"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingLeft="24dp"
+            android:text="起投金额"
             android:textColor="@color/font_black"
-            android:text=""/>
+            android:textSize="@dimen/font_size_normal" />
+
+        <TextView
+            android:id="@+id/confirm_qtje"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingRight="24dp"
+            android:text=""
+            android:textColor="@color/font_black"
+            android:textSize="@dimen/font_size_normal" />
+
+    </RelativeLayout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="42dp"
+        android:background="@drawable/stroke_edit_fillpraent_bottom"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingLeft="24dp"
+            android:text="剩余可投"
+            android:textColor="@color/font_black"
+            android:textSize="@dimen/font_size_normal" />
+
+        <TextView
+            android:id="@+id/confirm_ktje"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingRight="24dp"
+            android:text=""
+            android:textColor="@color/font_black"
+            android:textSize="@dimen/font_size_normal" />
 
     </RelativeLayout>
 
@@ -110,134 +168,214 @@
         android:id="@+id/confirm_button_dklj"
         android:layout_width="fill_parent"
         android:layout_height="42dp"
-        android:orientation="horizontal"
-        android:background="@drawable/stroke_edit_fillpraent_bottom">
+        android:background="@drawable/stroke_edit_fillpraent_bottom"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/confirm_dklj"
-            android:paddingLeft="24dp"
-            android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/font_size_normal"
+            android:layout_centerVertical="true"
+            android:paddingLeft="24dp"
+            android:text="抵扣礼金"
             android:textColor="@color/font_black"
-            android:text="抵扣礼金"/>
+            android:textSize="@dimen/font_size_normal" />
 
         <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/confirm_dklj"
             android:paddingLeft="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/confirm_dklj_icon"/>
+            android:src="@mipmap/confirm_dklj_icon" />
 
         <TextView
             android:id="@+id/confirm_lijin_yuan"
-            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:layout_centerVertical="true"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:textSize="@dimen/font_size_normal"
+            android:layout_centerVertical="true"
             android:paddingRight="24dp"
-            android:text="元"/>
+            android:text="元"
+            android:textSize="@dimen/font_size_normal" />
 
         <TextView
             android:id="@+id/confirm_lijin_num"
-            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/confirm_lijin_yuan"
-            android:textSize="@dimen/font_size_normal"
             android:paddingRight="2dp"
+            android:text="0"
             android:textColor="@color/ct_blue"
-            android:text="0"/>
+            android:textSize="@dimen/font_size_normal" />
 
     </RelativeLayout>
 
-    <LinearLayout android:layout_width="fill_parent"
-        android:layout_height="@dimen/edit_height_normal"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/confirm_ishasjiaxi"
+        android:layout_width="fill_parent"
+        android:layout_height="42dp"
+        android:background="@drawable/stroke_edit_fillpraent_bottom"
         android:orientation="horizontal"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/stroke_edit_fillpraent">
+        android:visibility="visible">
 
         <TextView
-            android:paddingLeft="20dp"
-            android:text="充值金额"
-            android:textSize="@dimen/font_size_navigation"
-            android:textColor="@color/font_black"
-            android:layout_gravity="center"
+            android:id="@+id/confirm_jiaxi_text"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingLeft="24dp"
+            android:text="是否加息"
+            android:textColor="@color/font_black"
+            android:textSize="@dimen/font_size_normal" />
+
+        <CheckBox
+            android:id="@+id/confirm_jiaxi_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingRight="10dp"
+            android:textSize="@dimen/font_size_normal" />
+
+        <TextView
+            android:id="@+id/confirm_jiaxi_ckxj"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/confirm_jiaxi_checkbox"
+            android:paddingRight="2dp"
+            android:text="查看详情"
+            android:textColor="@color/ct_blue"
+            android:textSize="@dimen/font_size_normal" />
+
+    </RelativeLayout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="42dp"
+        android:background="@drawable/stroke_edit_fillpraent_bottom"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingLeft="24dp"
+            android:text="到期预期收益"
+            android:textColor="@color/font_black"
+            android:textSize="@dimen/font_size_normal" />
+
+        <TextView
+            android:id="@+id/confirm_shouyi_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingRight="24dp"
+            android:text="0.00元"
+            android:textColor="@color/ct_blue"
+            android:textSize="@dimen/font_size_normal" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/edit_height_normal"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/stroke_edit_fillpraent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingLeft="20dp"
+            android:text="投资金额"
+            android:textColor="@color/font_black"
+            android:textSize="@dimen/font_size_navigation" />
 
         <EditText
             android:id="@+id/confirm_input_edit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColorHint="@color/font_invalid"
-            android:textColor="@color/font_black"
-            android:textSize="@dimen/font_size_normal"
-            android:inputType="number"
-            android:background="@color/ct_white"
-            android:layout_marginLeft="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="43dp"
             android:layout_gravity="center"
-            android:hint="请输入100元的整数倍，不超过100万元"/>
+            android:layout_marginLeft="20dp"
+            android:background="@color/ct_white"
+            android:hint="请输入100元的整数倍"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:textColor="@color/font_black"
+            android:textColorHint="@color/font_invalid"
+            android:textSize="@dimen/font_size_navigation"
+            android:windowSoftInputMode="adjustResize" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/balance_layout"
-        android:layout_marginLeft="20dp"
         android:layout_width="match_parent"
         android:layout_height="30dp"
+        android:layout_marginLeft="20dp"
         android:orientation="horizontal">
 
         <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/font_invalid"
-        android:layout_marginTop="8dp"
-        android:textSize="@dimen/font_size_hint2"
-        android:text="当前可用余额："/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="当前可用余额："
+            android:textColor="@color/font_invalid"
+            android:textSize="@dimen/font_size_hint2" />
 
         <TextView
             android:id="@+id/confirm_text_overage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/font_invalid"
             android:layout_marginTop="8dp"
-            android:textSize="@dimen/font_size_hint2"
-            android:text="0.00"/>
+            android:text="0.00元"
+            android:textColor="@color/font_invalid"
+            android:textSize="@dimen/font_size_hint2" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/font_invalid"
+            android:layout_marginLeft="15dp"
             android:layout_marginTop="8dp"
-            android:layout_marginLeft="5dp"
-            android:textSize="@dimen/font_size_hint2"
-            android:text="元"/>
+            android:text="礼金："
+            android:textColor="@color/font_invalid"
+            android:textSize="@dimen/font_size_hint2" />
 
         <TextView
-            android:id="@+id/recharge_btn"
-            android:layout_width="60dp"
+            android:id="@+id/confirm_text_lijin"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/ct_blue_fouce"
-            android:gravity="center_horizontal"
             android:layout_marginTop="8dp"
-            android:textSize="@dimen/font_size_hint2"
-            android:text="充值"/>
+            android:text="0元"
+            android:textColor="@color/font_invalid"
+            android:textSize="@dimen/font_size_hint2" />
+
+        <!--<TextView-->
+        <!--android:id="@+id/recharge_btn"-->
+        <!--android:layout_width="60dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textColor="@color/ct_blue_fouce"-->
+        <!--android:gravity="center_horizontal"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:textSize="@dimen/font_size_hint2"-->
+        <!--android:text="充值"/>-->
 
     </LinearLayout>
 
-    <Button
+     <Button
         android:id="@+id/confirm_button_do"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/button_height_fillparent"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/btn_selector"
         android:layout_marginTop="20dp"
-        android:textColor="@color/font_white"
-        android:textSize="@dimen/font_size_navigation"
+        android:background="@drawable/btn_selector"
         android:enabled="false"
-        android:text="确认投资"/>
+        android:text="确认投资"
+        android:textColor="@color/font_white"
+        android:textSize="@dimen/font_size_navigation" />
 
 </LinearLayout>

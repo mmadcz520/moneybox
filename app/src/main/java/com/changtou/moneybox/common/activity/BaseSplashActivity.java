@@ -2,6 +2,7 @@ package com.changtou.moneybox.common.activity;
 
 import android.os.Bundle;
 import android.os.Message;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Window;
 import android.view.animation.Animation;
@@ -157,7 +158,8 @@ public abstract class BaseSplashActivity extends BaseFragmentActivity implements
     @Override
     public void onFailure(Throwable error, String content, int reqType)
     {
-        Toast.makeText(BaseApplication.getInstance(),"网络错误", Toast.LENGTH_LONG).show();
+        Log.e("CT_MONEY", error.toString());
+        Toast.makeText(BaseApplication.getInstance(),"网络错误" + reqType, Toast.LENGTH_LONG).show();
         sendEmptyUiMessageDelayed(MSG_UI_GOTO_EXITAPP, 2000);
     }
 

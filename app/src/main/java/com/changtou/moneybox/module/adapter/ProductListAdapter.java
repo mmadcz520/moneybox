@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.changtou.moneybox.R;
@@ -98,6 +99,10 @@ public class ProductListAdapter extends BaseAdapter
             viewHolder.scheduleView = (RoundProgressBar)convertView.findViewById(R.id.pro_list_schedule);
             viewHolder.describeTextView = (TextView)convertView.findViewById(R.id.pro_list_schedule_describe);
 
+            viewHolder.lijinTextView = (TextView)convertView.findViewById(R.id.pro_list_lijininterest);
+
+            viewHolder.lijinLayout = (FrameLayout)convertView.findViewById(R.id.pro_list_lijinlayout);
+
             convertView.setTag(viewHolder);
         }
         else
@@ -118,6 +123,17 @@ public class ProductListAdapter extends BaseAdapter
         viewHolder.scheduleView.setProgress(schedule_int);
         viewHolder.describeTextView.setText(schedule_int + "%");
 
+        viewHolder.lijinTextView.setText(item.lijininterest + "%"+ "礼金变现");
+
+        if(item.lijininterest>0)
+        {
+            viewHolder.lijinLayout.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            viewHolder.lijinLayout.setVisibility(View.INVISIBLE);
+        }
+
         return convertView;
     }
 
@@ -131,5 +147,8 @@ public class ProductListAdapter extends BaseAdapter
 
         public RoundProgressBar scheduleView;
         public TextView  describeTextView;
+
+        public TextView lijinTextView;
+        public FrameLayout lijinLayout;
     }
 }

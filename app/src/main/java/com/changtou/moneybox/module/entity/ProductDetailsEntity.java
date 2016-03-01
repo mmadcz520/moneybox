@@ -1,5 +1,7 @@
 package com.changtou.moneybox.module.entity;
 
+import android.util.Log;
+
 import com.changtou.moneybox.common.http.base.BaseEntity;
 
 import org.json.JSONArray;
@@ -35,11 +37,27 @@ public class ProductDetailsEntity extends BaseEntity
 
     public String qtje = ""; //起投金额
 
+    public double lijininterest = 0.0;
+
+    public double addday = 0;
+    public double fee = 0;
+    public double jiaxi = 0;
+    public double daysinterval = 0;
+
     public String projectname = ""; //项目名称
     public String hkfs = "";        //还款方式
     public String hksj = "";        //还款时间
 
     public int productType = 0;       //项目类型
+
+    //服务费
+    public String fwf = "";
+
+    //限购
+    public String xg = "";
+
+    //剩余详细金额
+    public String syje_money = "";
 
     /**
      * @see BaseEntity#paser(String)
@@ -48,6 +66,8 @@ public class ProductDetailsEntity extends BaseEntity
      */
     public void paser(String data) throws Exception
     {
+        Log.e("CT_MONEY", "product===" + data);
+
         JSONObject object = new JSONObject(data);
         JSONObject productDetail = object.getJSONObject("productDetail");
 
@@ -68,6 +88,16 @@ public class ProductDetailsEntity extends BaseEntity
             projectname = mDetailsCTB.projectname;
             hkfs = mDetailsCTB.hkfs;
             hksj = mDetailsCTB.hksj;
+
+            fwf = mDetailsCTB.fwf;
+            xg = mDetailsCTB.xg;
+            syje_money = mDetailsCTB.syje_money;
+
+            lijininterest = mDetailsCTB.lijininterest;
+            addday = mDetailsCTB.addday;
+            fee = mDetailsCTB.fee;
+            jiaxi = mDetailsCTB.jiaxi;
+            daysinterval = mDetailsCTB.daysinterval;
         }
         else
         {
@@ -83,6 +113,16 @@ public class ProductDetailsEntity extends BaseEntity
             hkfs = mDetailsOther.hkfs;
             hksj = mDetailsOther.hksj;
 
+            fwf = mDetailsOther.fwf;
+            xg = mDetailsOther.xg;
+            syje_money = mDetailsOther.syje_money;
+
+            lijininterest = mDetailsOther.lijininterest;
+            addday = mDetailsOther.addday;
+            fee = mDetailsOther.fee;
+            jiaxi = mDetailsOther.jiaxi;
+            daysinterval = mDetailsOther.daysinterval;
+
             JSONArray imgList = object.getJSONArray("imglist");
             mImgList = new LinkedList();
 
@@ -95,7 +135,7 @@ public class ProductDetailsEntity extends BaseEntity
         }
 
         JSONArray tzlist = object.getJSONArray("tzlist");
-        int  count = tzlist.length();
+        int  count = tzlist.length();   
 
         mTzList = new LinkedList();
         TzListEntity entity;
@@ -157,6 +197,20 @@ public class ProductDetailsEntity extends BaseEntity
         public String tqtcfy = "";      //提前退出费用
         public String bzfs = "";       //保障方式
 
+        //服务费
+        public String fwf = "";
+
+        //限购
+        public String xg = "";
+
+        //剩余详细金额
+        public String syje_money = "";
+
+        public double lijininterest = 0;
+        public double addday = 0;
+        public double fee = 0;
+        public double jiaxi = 0;
+        public double daysinterval = 0;
 
         public void paser(JSONObject json) throws Exception
         {
@@ -182,6 +236,16 @@ public class ProductDetailsEntity extends BaseEntity
             jrfwf = json.getString("jrfwf");
             tqtcfy = json.getString("tqtcfy");
             bzfs = json.getString("bzfs");
+
+            fwf = json.getString("fwf");
+            xg = json.getString("xg");
+            syje_money = json.getString("syje_money");
+
+            lijininterest = json.optDouble("lijininterest");
+            addday = json.optDouble("addday");
+            fee = json.optDouble("fee");
+            jiaxi = json.optDouble("jiaxi");
+            daysinterval = json.optDouble("daysinterval");
         }
     }
 
@@ -204,6 +268,20 @@ public class ProductDetailsEntity extends BaseEntity
 
         public String xmqk = "";       //项目合同情况
 
+        //服务费
+        public String fwf = "";
+
+        //限购
+        public String xg = "";
+
+        //剩余详细金额
+        public String syje_money = "";
+        public double lijininterest = 0.0;
+        public double addday = 0;
+        public double fee = 0;
+        public double jiaxi = 0;
+        public double daysinterval = 0;
+
         public void paser(JSONObject json) throws Exception
         {
             nhsy = json.getString("nhsy");
@@ -219,6 +297,16 @@ public class ProductDetailsEntity extends BaseEntity
             hksj = json.getString("hksj");
 
             xmqk = json.getString("xmqk");
+
+            fwf = json.getString("fwf");
+            xg = json.getString("xg");
+            syje_money = json.getString("syje_money");
+
+            lijininterest = json.optDouble("lijininterest");
+            addday = json.optDouble("addday");
+            fee = json.optDouble("fee");
+            jiaxi = json.optDouble("jiaxi");
+            daysinterval = json.optDouble("daysinterval");
         }
     }
 }
