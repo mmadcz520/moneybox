@@ -99,7 +99,6 @@ public class RichesFlowActivity extends CTBaseActivity implements AdapterView.On
 
         ACache cache = ACache.get(this);
         cache.put("selected_month", position);
-
         cache.put("flow", mEntity);
 
         startActivity(intent);

@@ -2,12 +2,15 @@ package com.changtou.moneybox.module.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.changtou.moneybox.R;
 import com.changtou.moneybox.module.entity.InvestListEntity;
@@ -25,8 +28,7 @@ public class InvestListAdapter extends BaseAdapter
 
     private Context mContext = null;
 
-    private static String[] mTypeName = {"还款中", "已结清", "已退出"};
-    private int mType = 0;
+    private String[] mStateName = {"","还款中", "已结清", "已退出"};
 
     public InvestListAdapter(Context context)
     {
@@ -91,13 +93,14 @@ public class InvestListAdapter extends BaseAdapter
      */
     public View getView(final int position, View convertView, ViewGroup parent)
     {
-        InvestListEntity.ItemEntity entity = (InvestListEntity.ItemEntity)getItem(position);
-        ViewHolder viewHolder;
+        final InvestListEntity.ItemEntity entity = (InvestListEntity.ItemEntity)getItem(position);
+        final ViewHolder viewHolder;
 
         if (convertView == null)
         {
             viewHolder = new ViewHolder();
             convertView = mInflater.inflate(R.layout.riches_invest_list_item, parent, false);
+            viewHolder.mItemLayout = convertView.findViewById(R.id.lld);
             viewHolder.projectnameView = (TextView) convertView.findViewById(R.id.invest_item_titile);
             viewHolder.withdrawamountView = (TextView) convertView.findViewById(R.id.invest_item_withdrawamount);
             viewHolder.rateView = (TextView) convertView.findViewById(R.id.invest_item_rate);
@@ -105,20 +108,29 @@ public class InvestListAdapter extends BaseAdapter
             viewHolder.endtimeView = (TextView) convertView.findViewById(R.id.invest_item_endtime);
             viewHolder.expectinView = (TextView) convertView.findViewById(R.id.invest_item_expectin);
             viewHolder.maturityView = (TextView) convertView.findViewById(R.id.invest_item_maturity);
+            viewHolder.fhView = (TextView) convertView.findViewById(R.id.fh);
+            viewHolder.jxzqView = (TextView)convertView.findViewById(R.id.invest_item_jxzq);
 
             convertView.setTag(viewHolder);
 
-            convertView.setOnClickListener(new View.OnClickListener()
-            {
-                public void onClick(View v)
-                {
-                    InvestListEntity.ItemEntity item = ( InvestListEntity.ItemEntity)mData.get(position);
-                    String pid = item.id;
-                    int type = item.type;
+            convertView.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    InvestListEntity.ItemEntity entity = (InvestListEntity.ItemEntity)getItem(viewHolder.postion);
+                    if (entity.state == 1) {
 
-                    goToProducDtetails(pid, type, mTypeName[mType]);
+                        InvestListEntity.ItemEntity item = (InvestListEntity.ItemEntity) mData.get(position);
+                        String pid = item.id;
+                        int type = item.type;
+
+                        goToProducDtetails(pid, type, mStateName[entity.state]);
+                    }
+                    else
+                    {
+                        Toast.makeText(mContext,"产品已过期", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
+
         }
         else
         {
@@ -131,14 +143,50 @@ public class InvestListAdapter extends BaseAdapter
         viewHolder.starttimeView.setText(entity.starttime);
         viewHolder.endtimeView.setText(entity.endtime);
         viewHolder.expectinView.setText(entity.expectin);
-        viewHolder.maturityView.setText(entity.maturity);
+        viewHolder.maturityView.setText(mStateName[entity.state]);
+        viewHolder.postion = position;
 
+        if(entity.state != 1)
+        {
+            viewHolder.mItemLayout.setBackgroundResource(R.color.ct_invalid);
+            int color = mContext.getResources().getColor(R.color.font_invalid);
+            viewHolder.projectnameView.setTextColor(color);
+            viewHolder.withdrawamountView.setTextColor(color);
+            viewHolder.rateView.setTextColor(color);
+            viewHolder.starttimeView.setTextColor(color);
+            viewHolder.endtimeView.setTextColor(color);
+            viewHolder.expectinView.setTextColor(color);
+            viewHolder.maturityView.setTextColor(color);
+            viewHolder.jxzqView.setTextColor(color);
+
+            viewHolder.fhView.setTextColor(color);
+
+        }
+        else
+        {
+            viewHolder.mItemLayout.setBackgroundResource(R.drawable.stroke_list_item);
+
+            int black = mContext.getResources().getColor(R.color.font_black);
+            int red = mContext.getResources().getColor(R.color.font_prompt);
+            int importance = mContext.getResources().getColor(R.color.font_importance);
+            viewHolder.projectnameView.setTextColor(black);
+            viewHolder.withdrawamountView.setTextColor(red);
+            viewHolder.rateView.setTextColor(red);
+            viewHolder.starttimeView.setTextColor(importance);
+            viewHolder.endtimeView.setTextColor(importance);
+            viewHolder.expectinView.setTextColor(red);
+            viewHolder.maturityView.setTextColor(importance);
+            viewHolder.jxzqView.setTextColor(importance);
+
+            viewHolder.fhView.setTextColor(importance);
+        }
 
         return convertView;
     }
 
     private class ViewHolder
     {
+        public View mItemLayout;
         public TextView projectnameView;
         public TextView withdrawamountView;
         public TextView rateView;
@@ -146,6 +194,10 @@ public class InvestListAdapter extends BaseAdapter
         public TextView endtimeView;
         public TextView expectinView;
         public TextView maturityView;
+        public TextView fhView;
+        public TextView jxzqView;
+
+        private int postion = 0;
     }
 
     /**
@@ -158,10 +210,5 @@ public class InvestListAdapter extends BaseAdapter
         intent.putExtra("type", type);
         intent.putExtra("state", state);
         mContext.startActivity(intent);
-    }
-
-    public void setProdType(int type)
-    {
-        this.mType = type;
     }
 }

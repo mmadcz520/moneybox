@@ -42,6 +42,8 @@ public class UserInfoEntity extends BaseEntity implements Serializable
 
     private static UserInfoEntity single = null;
 
+    private String mJiangLi = "0.0";
+
     public static UserInfoEntity getInstance() {
         if (single == null) {
             single = new UserInfoEntity();
@@ -54,6 +56,7 @@ public class UserInfoEntity extends BaseEntity implements Serializable
         JSONObject jsonObject = new JSONObject(data);
 
         JSONObject userinfo = jsonObject.getJSONObject("userinfo");
+
         mEmail = userinfo.getString("email");
         mMobile = userinfo.getString("mobile");
         mIdCard = userinfo.getString("idcard");
@@ -87,6 +90,8 @@ public class UserInfoEntity extends BaseEntity implements Serializable
         mobilecheck = jsonObject.getBoolean("mobilecheck");
 
         hasinvestrecords = jsonObject.getBoolean("hasinvestrecords");
+
+        mJiangLi = jsonObject.getString("YsReward");
     }
 
     public String getEmail()
@@ -201,5 +206,15 @@ public class UserInfoEntity extends BaseEntity implements Serializable
     public void setFullName(String fullName)
     {
         this.mFullName = fullName;
+    }
+
+    public void setIdCard(String idCard)
+    {
+        this.mIdCard = idCard;
+    }
+
+    public String getJiangLiText()
+    {
+        return mJiangLi;
     }
 }

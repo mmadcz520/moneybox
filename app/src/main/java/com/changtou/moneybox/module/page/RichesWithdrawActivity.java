@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.SpannableStringBuilder;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -67,7 +68,7 @@ public class RichesWithdrawActivity extends CTBaseActivity
     private String mDefaultBankNo = "";
 
     private String[] mError = {"取现成功", "取现失败", "没有绑定银行卡", "没有绑定支行信息", "用户设置银行卡有问题", "没有实名认证", "余额不足",
-            "投圆不足，暂不能使用博尔特靴", "不在工作日，暂不能使用博尔特靴", "超过14点，暂不能使用博尔特靴", "成功使用博尔特靴道具提现", "提现未知错误"};
+            "投圆不足，暂不能使用博尔特靴", "不在工作日，暂不能使用博尔特靴", "超过14点，暂不能使用博尔特靴", "成功使用博尔特靴道具提现", "提现未知错误", "当日到账单笔金额不能大于五万"};
 
     private UserInfoEntity mUserInfoEntity = null;
 
@@ -354,13 +355,14 @@ public class RichesWithdrawActivity extends CTBaseActivity
             if (reqType == HttpRequst.REQ_TYPE_WITHDRAW) {
 //                try {
                     JSONObject json = new JSONObject(content);
+
                     int errcode = json.getInt("errorcode");
 
                     int code = (errcode < mError.length) ? errcode : (mError.length - 1);
                     Toast toast = Toast.makeText(getApplicationContext(),
                             mError[code], Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
+                    toast.show();
 //                    finish();
                 if(code == 0 || code == 10)
                 {
@@ -442,7 +444,6 @@ public class RichesWithdrawActivity extends CTBaseActivity
             }
         });
     }
-
 
     protected void onBackIcon()
     {

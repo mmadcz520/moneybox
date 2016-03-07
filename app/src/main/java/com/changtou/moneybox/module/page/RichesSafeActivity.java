@@ -52,6 +52,27 @@ public class RichesSafeActivity extends CTBaseActivity implements View.OnTouchLi
         bankBtn.setOnTouchListener(this);
         pdBtn.setOnTouchListener(this);
 
+    }
+
+    protected void initListener()
+    {
+//        setOnClickListener(R.id.btn_phoneauth);
+//        setOnClickListener(R.id.btn_certification_manager);
+//        setOnClickListener(R.id.safe_page_quit);
+//        setOnClickListener(R.id.btn_bank_manager);
+//        setOnClickListener(R.id.btn_pd_manager);
+    }
+
+    @Override
+    protected int setPageType() {
+        return PAGE_TYPE_SUB;
+    }
+
+    @Override
+    protected void initData()
+    {
+        setPageTitle("安全设置");
+
         int bcolor = getResources().getColor(R.color.font_black);
         int rcolor = getResources().getColor(R.color.ct_red);
         userInfoEntity = (UserInfoEntity)ACache.get(this).getAsObject("userinfo");
@@ -74,26 +95,6 @@ public class RichesSafeActivity extends CTBaseActivity implements View.OnTouchLi
         {
             certyBtn.setMessage("认证得10元礼金", rcolor);
         }
-    }
-
-    protected void initListener()
-    {
-//        setOnClickListener(R.id.btn_phoneauth);
-//        setOnClickListener(R.id.btn_certification_manager);
-//        setOnClickListener(R.id.safe_page_quit);
-//        setOnClickListener(R.id.btn_bank_manager);
-//        setOnClickListener(R.id.btn_pd_manager);
-    }
-
-    @Override
-    protected int setPageType() {
-        return PAGE_TYPE_SUB;
-    }
-
-    @Override
-    protected void initData()
-    {
-        setPageTitle("安全设置");
 
         String fullname = userInfoEntity.getFullName();
         mTitleView.setText(fullname);

@@ -187,4 +187,4 @@
             android:text="@string/dialog_ok"
             android:layout_gravity="center"/>
     </LinearLayout>
-</LinearLayout><!-- From: file:/F:/app/android/moneybox/moneybox/sweet_alert/src/main/res/layout/alert_dialog.xml -->
+</LinearLayout>

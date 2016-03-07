@@ -2,7 +2,7 @@
     <dimen name="app_actionbar_height">40dp</dimen>
     <dimen name="app_bottomtab_height">44dp</dimen>
 
-    <dimen name="widget_progress_height">120dp</dimen>
+    <dimen name="widget_progress_height">140dp</dimen>
 
 </resources>
 

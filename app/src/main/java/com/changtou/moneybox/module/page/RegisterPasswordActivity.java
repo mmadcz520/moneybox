@@ -212,8 +212,6 @@ public class RegisterPasswordActivity extends CTBaseActivity implements LoginNot
      */
     private void  postregRequest(String mobiles, String password)
     {
-
-
         try
         {
             String url =  HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_POSTREG);
@@ -222,6 +220,7 @@ public class RegisterPasswordActivity extends CTBaseActivity implements LoginNot
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("mobile", mobiles);
             jsonObject.put("pwd", password);
+            jsonObject.put("ly","android");
             params.put("data", jsonObject.toString());
 
             sendRequest(HttpRequst.REQ_TYPE_POSTREG, url, params, getAsyncClient(), false);
@@ -238,6 +237,14 @@ public class RegisterPasswordActivity extends CTBaseActivity implements LoginNot
     private void popoSuccDialog()
     {
         mUserManager.logIn(mPhoneNum, mPassword);
+
+//        Intent intent = new Intent(this, RegisterPromotionActivity.class);
+//        intent.putExtra("urltype", 1);
+//        intent.putExtra("phonenum", mPhoneNum);
+//        intent.putExtra("password", mPassword);
+//        ACache cache = ACache.get(BaseApplication.getInstance());
+//        cache.put("isPopu", true);
+//        startActivity(intent);
 
 //        //注册成功后弹窗
 //        ColorStateList redColors = ColorStateList.valueOf(0xffff0000);
@@ -278,14 +285,22 @@ public class RegisterPasswordActivity extends CTBaseActivity implements LoginNot
     @Override
     public void loginSucNotify()
     {
-        sph.putString(AppCfg.CFG_LOGIN, AppCfg.LOGIN_STATE.LOGIN.toString());
-        sph.putString(AppCfg.GSPD, "");
+//        sph.putString(AppCfg.CFG_LOGIN, AppCfg.LOGIN_STATE.LOGIN.toString());
+//        sph.putString(AppCfg.GSPD, "");
+//
+//        BaseApplication.getInstance().onBackground();
+//
+//        Intent intent = new Intent(this, MainActivity.class);
+//        intent.putExtra("login_state", 1);
+//        this.startActivity(intent);
 
-        BaseApplication.getInstance().onBackground();
-
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("login_state", 1);
-        this.startActivity(intent);
+        Intent intent = new Intent(this, RegisterPromotionActivity.class);
+        intent.putExtra("urltype", 1);
+        intent.putExtra("phonenum", mPhoneNum);
+        intent.putExtra("password", mPassword);
+        ACache cache = ACache.get(BaseApplication.getInstance());
+        cache.put("isPopu", true);
+        startActivity(intent);
     }
 
     @Override
