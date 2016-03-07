@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "F:\\app\\android\\moneybox\\moneybox\\pull_library\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\indicator_bg_top.xml",
+        "source": "F:\\app\\android\\moneybox\\moneybox\\pull_library\\build\\intermediates\\bundles\\debug\\res\\drawable\\indicator_bg_top.xml"
+    },
+    {
+        "merged": "F:\\app\\android\\moneybox\\moneybox\\pull_library\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\indicator_bg_bottom.xml",
+        "source": "F:\\app\\android\\moneybox\\moneybox\\pull_library\\build\\intermediates\\bundles\\debug\\res\\drawable\\indicator_bg_bottom.xml"
+    },
+    {
+        "merged": "F:\\app\\app\\android\\moneybox\\moneybox\\pull_library\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\indicator_bg_bottom.xml",
+        "source": "F:\\app\\app\\android\\moneybox\\moneybox\\pull_library\\build\\intermediates\\bundles\\debug\\res\\drawable\\indicator_bg_bottom.xml"
+    },
+    {
+        "merged": "F:\\app\\app\\android\\moneybox\\moneybox\\pull_library\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\indicator_bg_top.xml",
+        "source": "F:\\app\\app\\android\\moneybox\\moneybox\\pull_library\\build\\intermediates\\bundles\\debug\\res\\drawable\\indicator_bg_top.xml"
+    }
+]

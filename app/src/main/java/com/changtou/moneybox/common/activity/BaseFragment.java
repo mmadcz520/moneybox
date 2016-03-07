@@ -42,8 +42,8 @@ public abstract class BaseFragment extends Fragment implements
     IntentFilter mFilter = new IntentFilter();
 
     /**
-     * @see BaseFragment#onAttach(Activity)
      * @param activity
+     * @see BaseFragment#onAttach(Activity)
      */
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -61,7 +61,6 @@ public abstract class BaseFragment extends Fragment implements
     }
 
     /**
-     *
      * @param inflater
      * @param container
      * @param savedInstanceState
@@ -70,7 +69,7 @@ public abstract class BaseFragment extends Fragment implements
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        ViewGroup view = (ViewGroup)inflater.inflate(R.layout.base_fragment, null);
+        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.base_fragment, null);
         View childView = initView(inflater, container, savedInstanceState);
         view.addView(childView);
 
@@ -78,10 +77,8 @@ public abstract class BaseFragment extends Fragment implements
     }
 
 
-
     /**
      * 初始化布局和控件
-     *
      */
     protected abstract View initView(LayoutInflater inflater, ViewGroup container,
                                      Bundle savedInstanceState);
@@ -132,6 +129,7 @@ public abstract class BaseFragment extends Fragment implements
 
     /**
      * 事件返回
+     *
      * @param id
      */
     public void treatClickEvent(int id) {
@@ -140,6 +138,7 @@ public abstract class BaseFragment extends Fragment implements
 
     /**
      * 事件返回
+     *
      * @param v 视图
      */
     public void treatClickEvent(View v) {
@@ -147,7 +146,6 @@ public abstract class BaseFragment extends Fragment implements
     }
 
     /**
-     *
      * @param reqType
      * @param params
      * @param baseHttpClient
@@ -157,16 +155,14 @@ public abstract class BaseFragment extends Fragment implements
                             BaseHttpClient baseHttpClient, boolean showDialog) {
 
         if (DeviceInfo.isNetWorkEnable(this.getActivity())) {
-            if(baseHttpClient!=null){
+            if (baseHttpClient != null) {
 //                if (reqType. > 1000) {
-                    baseHttpClient.post(reqType.hashCode(), this.getActivity(), reqType.getUrl(), params, this);
+                baseHttpClient.post(reqType.hashCode(), this.getActivity(), reqType.getUrl(), params, this);
 //                } else {
 //                    baseHttpClient.get(reqType,this.getActivity(), url, params, this);
 //                }
             }
-        }
-        else
-        {
+        } else {
 //            mMultiStateView.setViewState(MultiStateView.ViewState.ERROR);
         }
     }

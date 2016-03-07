@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android_custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/ct_background">
+
+    <LinearLayout android:layout_width="fill_parent"
+        android:layout_height="@dimen/edit_height_normal"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/stroke_edit_fillpraent">
+        <TextView
+            android:paddingLeft="20dp"
+            android:text="推荐人"
+            android:textSize="@dimen/font_size_navigation"
+            android:textColor="@color/font_black"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/riches_promotion_phone"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/font_invalid"
+            android:textColor="@color/font_black"
+            android:textSize="@dimen/font_size_navigation"
+            android:background="@color/ct_white"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="center"
+            android:inputType="numberDecimal"
+            android:hint="请输入推荐人手机号码"/>
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/riches_pro_okbtn"
+        android:layout_width="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="35dp"
+        android:background="@drawable/btn_yuanjiao_selector"
+        android:text="确 定"
+        android:textColor="@color/ct_white"
+        android:layout_height="40dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"/>
+
+
+    <Button
+        android:id="@+id/riches_pro_cancalbtn"
+        android:layout_width="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="18dp"
+        android:background="@drawable/stroke_round_btn_red"
+        android:text="跳 过"
+        android:textColor="@color/ct_white"
+        android:layout_height="40dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"/>
+
+    <LinearLayout android:layout_width="fill_parent"
+        android:layout_marginTop="50dp"
+        android:layout_height="wrap_content">
+        <ImageView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:src="@mipmap/riches_promo_tik"/>
+        <TextView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="温馨提示"
+            android:textColor="@color/red_btn_bg_color"
+            android:textSize="@dimen/font_size_navigation"/>
+
+        </LinearLayout>
+
+    <TextView android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1.推荐人必须为长投在线用户，建立推荐关系后，推荐人可获得额外奖励。"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:textColor="@color/font_black"
+        android:textSize="@dimen/font_size_normal"/>
+
+    <LinearLayout android:layout_width="fill_parent"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <TextView android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2.查看"
+        android:paddingLeft="20dp"
+        android:textColor="@color/font_black"
+        android:textSize="@dimen/font_size_normal"/>
+
+        <TextView
+            android:id="@+id/riches_promo_jiangliguize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="推荐奖励规则"
+            android:paddingLeft="10dp"
+            android:textColor="@color/ct_blue"
+            android:textSize="@dimen/font_size_normal"/>
+        </LinearLayout>
+
+</LinearLayout>

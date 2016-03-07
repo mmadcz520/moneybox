@@ -99,6 +99,7 @@
             android:name=".module.page.ConfirmActivity"
             android:noHistory="true"
             android:exported="false"
+            android:windowSoftInputMode="stateUnchanged|adjustPan"
             android:theme="@style/ActivityTheme_Light"></activity>
         <activity
             android:name=".module.page.LoginActivity"
@@ -118,6 +119,11 @@
             android:theme="@style/ActivityTheme_Light"></activity>
         <activity
             android:name=".module.page.RegisterPasswordActivity"
+            android:noHistory="true"
+            android:exported="false"
+            android:theme="@style/ActivityTheme_Light"></activity>
+        <activity
+            android:name=".module.page.RegisterPromotionActivity"
             android:noHistory="true"
             android:exported="false"
             android:theme="@style/ActivityTheme_Light"></activity>
@@ -187,6 +193,10 @@
             android:exported="false"
             android:theme="@style/ActivityTheme_Light"></activity>
         <activity
+            android:name=".module.page.RichesLiJinActivity"
+            android:exported="false"
+            android:theme="@style/ActivityTheme_Light"></activity>
+        <activity
             android:name=".module.page.RichesCertificationActivity"
             android:exported="false"
             android:theme="@style/ActivityTheme_Light"></activity>
@@ -224,6 +234,11 @@
 
         <activity
             android:name=".module.page.InvestmentSuccPage"
+            android:exported="false"
+            android:theme="@style/ActivityTheme_Light"></activity>
+
+        <activity
+            android:name=".module.page.RichesInvestJiangliActivity"
             android:exported="false"
             android:theme="@style/ActivityTheme_Light"></activity>
 

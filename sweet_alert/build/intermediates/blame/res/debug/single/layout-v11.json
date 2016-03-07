@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "F:\\app\\android\\moneybox\\moneybox\\sweet_alert\\build\\intermediates\\res\\merged\\debug\\layout-v11\\abc_screen_content_include.xml",
+        "source": "F:\\app\\android\\moneybox\\moneybox\\sweet_alert\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.0\\res\\layout-v11\\abc_screen_content_include.xml"
+    },
+    {
+        "merged": "F:\\app\\app\\android\\moneybox\\moneybox\\sweet_alert\\build\\intermediates\\res\\merged\\debug\\layout-v11\\abc_screen_content_include.xml",
+        "source": "F:\\app\\app\\android\\moneybox\\moneybox\\sweet_alert\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.0\\res\\layout-v11\\abc_screen_content_include.xml"
+    }
+]

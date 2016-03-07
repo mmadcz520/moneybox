@@ -3,11 +3,13 @@ package com.changtou.moneybox.module.page;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +25,7 @@ import com.changtou.moneybox.module.widget.ExImageSwitcher;
 import com.changtou.moneybox.module.widget.RoundProgressBar;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
+import com.tencent.weibo.sdk.android.network.HttpReq;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -65,12 +68,24 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
     private String amount = "";
     private String minamount = "";
 
+    private String syje_money="";
+
+    private String xg;
+
     private String allInvest = "";
     private String leiji = "";
 
     private TextView mQtjeTextView = null;
 
-    private String[] mDetails = new String[4];
+    private TextView mLijinInText = null;
+
+    private FrameLayout mlijinlayout = null;
+
+    private String[] mDetails = new String[6];
+
+    private String mProType = "";
+
+    private boolean isHasProd = false;
 
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -88,7 +103,10 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
         mTimeLimit = (TextView)mView.findViewById(R.id.homepage_timelimit);
         mProductTitle = (TextView)mView.findViewById(R.id.homepage_title_text);
         mInvestPercent = (CountView)mView.findViewById(R.id.invest_progress_percent);
+        mLijinInText = (TextView)mView.findViewById(R.id.homepage_invest_lijininterest);
         mInvestNum = (TextView)mView.findViewById(R.id.invest_progress_num);
+
+        mlijinlayout = (FrameLayout)mView.findViewById(R.id.homepage_invest_lijinlayout);
 
         mQtjeTextView = (TextView)mView.findViewById(R.id.invest_progress_qtje);
 
@@ -101,12 +119,29 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
         {
             public void onClick(View v)
             {
+                if(!isHasProd)
+                {
+                    Toast.makeText(HomeFragment.this.getActivity(),"暂无可投产品,敬请期待!", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
                 //
                 if(BaseApplication.getInstance().isUserLogin())
                 {
                     Intent intent = new Intent(HomeFragment.this.getActivity(), ProductDetailsActivity.class);
                     intent.putExtra("id", productId);
-                    intent.putExtra("type", 0);
+                    if(mProType.equals("长投宝"))
+                    {
+                        intent.putExtra("type", 0);
+                    }
+                    else if(mProType.equals("站内转让"))
+                    {
+                        intent.putExtra("type", 1);
+                    }
+                    else if(mProType.equals("普通投资"))
+                    {
+                        intent.putExtra("type", 2);
+                    }
                     startActivity(intent);
                 }
                 else
@@ -142,7 +177,7 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
      * @param object  返回的转化对象
      * @param reqType 请求的唯一识别
      */
-    public void onSuccess(String content, Object object, int reqType)
+    public void onSuccess(String content, Object object, HttpReq reqType)
     {
         if (reqType == HttpRequst.REQ_TYPE_PRODUCT_HOME)
         {
@@ -153,9 +188,13 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
                 JSONObject obj1 = array.getJSONObject(0);
                 JSONArray appRecomm = obj1.getJSONArray("AppRecomm");
 
+                Log.e("CT_MONEY", appRecomm.toString());
+
                 if(appRecomm.length() > 0) {
 
+                    isHasProd = true;
                     JSONObject appObject = appRecomm.getJSONObject(0);
+
                     productId = appObject.getString("id");
                     jd = appObject.getDouble("jd") * 100;
                     projectname = appObject.getString("projectname");
@@ -164,11 +203,24 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
                     syje = appObject.getString("syje");
                     amount = appObject.getString("amount");
                     minamount = appObject.getString("minamount");
+                    mProType = appObject.getString("type");
+
+                    syje_money = appObject.optString("syje_money");
+                    xg = appObject.optString("xg");
 
                     mInvestProgress.setProgress((int) jd);
+                    double lijininterest = appObject.optDouble("lijininterest");
+                    mLijinInText.setText(lijininterest + "%礼金变现");
 
-                    mInvestSum.setText(allInvest);
-                    mMakeMoney.setText(leiji);
+                    if(lijininterest > 0)
+                    {
+                        mlijinlayout.setVisibility(View.VISIBLE);
+                    }
+
+//                    mInvestSum.setText(allInvest);
+//                    mMakeMoney.setText(leiji);
+
+                    Log.e("CT_MONEY", interest);
 
                     mProductTitle.setText(projectname);
                     mIcomeText.setText(interest);
@@ -176,38 +228,42 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
                     mTimeLimit.setText(maturity);
                     mInvestPercent.showPercentWithAnimation((float) jd);
                     mInvestNum.setText("￥" + syje + "/" + amount);
-                    mQtjeTextView.setText(minamount + "起投 | " + "每人限购100万元");
+                    mQtjeTextView.setText(minamount + "起投 | " + "融资金额" + amount);
                     mInvestBtn.setEnabled(true);
                     mInvestBtn.setText("立即投资");
-
-                    mPullToRefreshScrollView.onRefreshComplete();
 
                     mDetails[0] = projectname;
                     mDetails[1] = maturity;
                     mDetails[2] = interest + "%";
-                    mDetails[3] = syje;
-
-                    JSONObject obj2 = array.getJSONObject(1);
-                    allInvest = obj2.getString("allInvest");
-
-                    JSONObject obj3 = array.getJSONObject(3);
-                    leiji = obj3.getString("leiji");
-
+                    mDetails[3] = syje_money;
+                    mDetails[4] = minamount;
+                    mDetails[5] = xg;
                 }
                 else
                 {
                     mInvestBtn.setEnabled(false);
                     mInvestBtn.setText("敬请期待");
+                    mQtjeTextView.setText("敬请期待");
+                    mProductTitle.setText("敬请期待");
+
+                    isHasProd = false;
                 }
 
+                JSONObject obj2 = array.getJSONObject(3);
+                allInvest = obj2.getString("leiji");
+
+                JSONObject obj3 = array.getJSONObject(2);
+                leiji = obj3.getString("beifujin");
+
+                mMakeMoney.setText(allInvest);
+                mInvestSum.setText(leiji);
+
+                mPullToRefreshScrollView.onRefreshComplete();
             }
             catch (Exception e)
             {
-
+                e.printStackTrace();
             }
-
-
-
         }
 
         if(reqType == HttpRequst.REQ_TYPE_PRODUCT_BANNER)
@@ -236,7 +292,7 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
             }
             catch (Exception e)
             {
-
+                e.printStackTrace();
             }
         }
     }
@@ -248,7 +304,7 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
      */
     public void onFailure(Throwable error, String content, int reqType)
     {
-        Toast.makeText(this.getActivity(), "网络连接超时", Toast.LENGTH_LONG).show();
+        Toast.makeText(this.getActivity(), "首页数据加载错误", Toast.LENGTH_LONG).show();
     }
 
     public void onRefresh(PullToRefreshBase refreshView) {
@@ -281,19 +337,26 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
 //        startActivity(intent);
 
         Intent intent = new Intent(this.getActivity(), ConfirmActivity.class);
-
         intent.putExtra("details",mDetails);
         intent.putExtra("id",id);
-        intent.putExtra("type",0);
+        if(mProType.equals("长投宝"))
+        {
+            intent.putExtra("type", 0);
+        }
+        else if(mProType.equals("站内转让"))
+        {
+            intent.putExtra("type", 1);
+        }
+        else if(mProType.equals("普通投资"))
+        {
+            intent.putExtra("type", 2);
+        }
 
         startActivity(intent);
-
     }
 
     public void requestHomePage()
     {
-//        mZProgressHUD.show();
-
         sendRequest(HttpRequst.REQ_TYPE_PRODUCT_HOME,
                 HttpRequst.getInstance().getUrl(HttpRequst.REQ_TYPE_PRODUCT_HOME),
                 mParams,
